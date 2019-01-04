@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.sz.gcyh.KSHongBao">
+
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="com.android.launcher.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+    <application
+        android:name="com.guochuang.mimedia.app.App"
+        android:icon="@mipmap/app_icon"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        tools:replace="android:icon,android:theme">
+        <activity
+            android:name="com.guochuang.mimedia.ui.activity.WelcomeActivity"
+            android:theme="@style/FullScreenTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.guochuang.mimedia.ui.activity.MainActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"></activity>
+        <activity android:name="com.guochuang.mimedia.ui.activity.InfoDetailActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.InfoSearchActivity" />
+        <activity
+            android:name="com.guochuang.mimedia.ui.activity.EditRedbagActivity"
+            android:launchMode="singleTask" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.TempActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.MapPickActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.RedbagJoinedActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.RecommendFanActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.RecommendAgentActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.MyKsbActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.SquareActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.CityActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.CityDetailActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.PurchaseActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.RedbagBenefitActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.BidPriceActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.OperationCenterActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.IncomeStatisticsActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.IncomeDetailActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.FansDetailActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.RecommendDetailActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.ShareBenefitDetailActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.RedbagDynamicActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.MyCollectActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.MyCommentActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.SafeCenterActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.IdentifyActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.IdentifyResultActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.CardAddActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.CardListActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.MyAlipayActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.MyWechatActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.LoginPwdActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.TradePwdActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.MessageActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.SettingActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.SetNickNameActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.SetInviterActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.RedbagRainActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.WelfareActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.FeedbackActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.WebActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.EditBoardActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.SquareDetailActivity" />
+        <activity
+            android:name="com.guochuang.mimedia.ui.activity.LuckyActivity"
+            android:theme="@style/Transparent" />
+        <activity
+            android:name="com.guochuang.mimedia.ui.activity.ShareActivity"
+            android:theme="@style/TransTheme" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.UserStatisticsActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.IncreaseDetailActivity" />
+        <activity
+            android:name="com.guochuang.mimedia.ui.activity.UpgradeAgentActivity"
+            android:theme="@style/TransTheme" />
+        <activity
+            android:name="com.guochuang.mimedia.ui.activity.ImageActivity"
+            android:theme="@style/TransTheme" />
+        <activity
+            android:name="com.guochuang.mimedia.ui.activity.ImagePreviewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        //图片选择Activity
+        <activity
+            android:name="com.donkingliang.imageselector.ImageSelectorActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        //图片预览Activity
+        <activity
+            android:name="com.donkingliang.imageselector.PreviewActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        //图片剪切Activity
+        <activity
+            android:name="com.donkingliang.imageselector.ClipImageActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        //导航页
+        <activity
+            android:name="com.guochuang.mimedia.ui.activity.GuideActivity"
+            android:theme="@style/FullScreenTheme" />
+
+        // 登录页
+        <activity
+            android:name="com.guochuang.mimedia.ui.activity.LoginActivity"
+            android:theme="@style/FullScreenTheme" />
+
+        // 忘记密码
+        <activity android:name="com.guochuang.mimedia.ui.activity.ForgetActivity" />
+
+        // 绑定手机号
+        <activity android:name="com.guochuang.mimedia.ui.activity.BindingPhoneAcitivity" />
+
+        // 注册
+        <activity android:name="com.guochuang.mimedia.ui.activity.RegisterActivity" />
+
+        // 红包详情界面
+        <activity
+            android:name="com.guochuang.mimedia.ui.activity.RedbagDetailActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        // 城主-竞购大厅
+        <activity android:name="com.guochuang.mimedia.ui.activity.CityBidHallActivity" />
+
+        // 城主-我的城市
+        <activity android:name="com.guochuang.mimedia.ui.activity.MyCityActivity" />
+
+        // 城主-竞购记录
+        <activity android:name="com.guochuang.mimedia.ui.activity.CityBidRecordActivity" />
+
+        // 我的KSB-KSB转换
+        <activity android:name="com.guochuang.mimedia.ui.activity.MyKsbTransferActivity" />
+
+        // 我的KSB-KSB明细
+        <activity android:name="com.guochuang.mimedia.ui.activity.MyKsbDetailsActivity" />
+
+        // 我的KSB-KSB转换记录
+        <activity android:name="com.guochuang.mimedia.ui.activity.MyKsbTransRecActivity" />
+
+        // 我的KSB-转赠
+        <activity android:name="com.guochuang.mimedia.ui.activity.MyKsbGrantActivity" />
+
+        // 我的KSB-转赠记录
+        <activity android:name="com.guochuang.mimedia.ui.activity.MyKsbGrantRecActivity" />
+
+        // 广告信息获取service
+        <service android:name="com.guochuang.mimedia.app.AdInfoService" />
+
+        <!-- Android 7.0 文件共享配置，必须配置 -->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote"></service>
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="aeRbIwXkYhnf0EhDCdDdKawty66CujoY" />
+
+        <!-- Required SDK核心功能 -->
+        <receiver
+            android:name="cn.jpush.android.service.AlarmReceiver"
+            android:exported="false" />
+
+        <!-- Jpush相关配置 -->
+        <service
+            android:name="cn.jpush.android.service.PushService"
+            android:process=":multiprocess"
+            tools:node="replace"></service>
+
+        <activity
+            android:name="cn.jiguang.share.android.ui.JiguangShellActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            tools:node="replace">
+
+            <!-- Optional QQ分享回调 -->
+            <!-- scheme为“tencent”前缀再加上QQ开发者应用的appID；例如appID为123456，则scheme＝“tencent123456” -->
+            <intent-filter>
+                <data android:scheme="tencent1106935446" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <!-- Optional 新浪微博分享回调 -->
+            <intent-filter>
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <!-- Optional 新浪微博私信回调 -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="sinaweibo"
+                    android:scheme="jsharesdk" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name="cn.jpush.android.service.DataProvider"
+            android:authorities="${applicationId}.DataProvider"
+            android:exported="true"
+            tools:node="replace" />
+
+        <!--bd_ssp-->
+        <provider
+            android:name="com.baidu.mobads.openad.FileProvider"
+            android:authorities="${packageName}.bd.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/bd_file_paths" />
+        </provider>
+
+        <receiver
+            android:name="com.guochuang.mimedia.app.MyReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" /> <!-- Required  用户注册SDK的intent -->
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" /> <!-- Required  用户接收SDK消息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" /> <!-- Required  用户接收SDK通知栏信息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" /> <!-- Required  用户打开自定义通知栏的intent -->
+                <action android:name="cn.jpush.android.intent.CONNECTION" /> <!-- 接收网络变化 连接/断开 since 1.6.3 -->
+                <category android:name="${applicationId}" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="com.sz.gcyh.KSHongBao.wxapi.WXEntryActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <activity
+            android:name="com.sz.gcyh.KSHongBao.wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop" />
+
+        <!--Vungle Activities-->
+        <activity
+            android:name="com.vungle.warren.ui.VungleActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+
+        <activity
+            android:name="com.vungle.warren.ui.VungleFlexViewActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <!--gdt-->
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <service
+            android:name="com.qq.e.comm.DownloadService"
+            android:exported="false" />
+
+        <activity
+            android:name="com.qq.e.ads.ADActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name="com.qq.e.ads.PortraitADActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.qq.e.ads.LandscapeADActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape" />
+
+        <!--bd_ssp-->
+        <activity
+            android:name="com.baidu.mobads.AppActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <meta-data
+            android:name="JPUSH_CHANNEL"
+            android:value="developer-default"
+            tools:node="replace" />
+        <!-- Required. AppKey copied from Portal -->
+        <meta-data
+            android:name="JPUSH_APPKEY"
+            android:value="e5746293850e854f49e10a76"
+            tools:node="replace" />
+        <meta-data
+            android:name="android.notch_support"
+            android:value="true" />
+        <!--适配小米（xiaomi）刘海屏-->
+        <meta-data
+            android:name="notch.config"
+            android:value="portrait|landscape" />
+
+        <!--&lt;!&ndash;bd_ssp&ndash;&gt;-->
+        <!--<meta-data-->
+        <!--android:name="BaiduMobAd_APP_ID"-->
+        <!--android:value="c8a9f32f" />-->
+
+    </application>
+
+</manifest>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/space12"
+    android:paddingBottom="@dimen/space12"
+    android:background="@color/bg_white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/space15"
+        android:paddingRight="@dimen/space15"
+        android:paddingTop="@dimen/space12"
+        android:layout_marginBottom="@dimen/space10">
+
+        <TextView
+            android:id="@+id/tv_comment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="@dimen/space20"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/textfont16" />
+
+        <TextView
+            android:id="@+id/tv_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delete_comment"
+            android:textColor="@color/text_red"
+            android:textSize="@dimen/textfont14" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/space15"
+        android:paddingRight="@dimen/space15"
+        android:paddingTop="@dimen/space12"
+        android:paddingBottom="@dimen/space12"
+        android:background="@color/bg_gray">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:visibility="visible">
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/textfont14"/>
+        <LinearLayout
+            android:id="@+id/lin_content_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space8"
+            android:visibility="visible">
+            <ImageView
+                android:id="@+id/iv_image_1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/space80"
+                android:layout_weight="1" />
+            <ImageView
+                android:id="@+id/iv_image_2"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/space80"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/space8" />
+            <ImageView
+                android:id="@+id/iv_image_3"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/space80"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/space8" />
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="@dimen/space8">
+    <TextView
+        android:id="@+id/tv_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_gray"
+        android:textSize="@dimen/textfont10" />
+        <TextView
+            android:id="@+id/tv_comment_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:drawableLeft="@drawable/ic_list_comment"
+            android:drawablePadding="@dimen/space3"
+            android:layout_marginLeft="@dimen/space10"
+            android:textSize="@dimen/textfont10"
+            android:textColor="@color/text_gray" />
+    </LinearLayout>
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/iv_right_image"
+        android:layout_width="@dimen/space120"
+        android:layout_height="@dimen/space80"
+        android:layout_marginLeft="@dimen/space8"
+        android:visibility="gone"/>
+    </LinearLayout>
+</LinearLayout>

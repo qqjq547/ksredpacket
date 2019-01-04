@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/space15">
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:orientation="vertical">
+     <TextView
+         android:id="@+id/tv_all"
+         android:layout_width="match_parent"
+         android:layout_height="@dimen/space36"
+         android:gravity="center"
+         android:background="@drawable/bg_dialog_white"
+         android:textSize="@dimen/textfont14"
+         android:textColor="@color/text_black"
+         android:text="@string/check_all"
+         />
+     <android.support.v7.widget.RecyclerView
+         android:id="@+id/rv_city"
+         android:layout_width="match_parent"
+         android:layout_height="440dp"
+         android:background="@drawable/bg_dialog_white"
+         android:layout_marginTop="@dimen/space10"
+         android:nestedScrollingEnabled="false">
+     </android.support.v7.widget.RecyclerView>
+     </LinearLayout>
+</LinearLayout>

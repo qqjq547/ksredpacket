@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+    <include layout="@layout/layout_title"/>
+    <RadioGroup
+        android:id="@+id/rg_nav"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space32"
+        android:layout_marginTop="@dimen/space12"
+        android:layout_marginLeft="@dimen/space15"
+        android:layout_marginRight="@dimen/space15"
+        android:layout_centerInParent="true"
+        android:background="@drawable/bg_income_nav"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbtn_redbag"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_collect_left_selector"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/redbag"
+            android:textColor="@color/collect_tab_text_selector"
+            android:textSize="@dimen/textfont15"></RadioButton>
+
+        <RadioButton
+            android:id="@+id/rbtn_info"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_collect_right_selector"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/tab_info"
+            android:textColor="@color/collect_tab_text_selector"
+            android:textSize="@dimen/textfont15"></RadioButton>
+    </RadioGroup>
+    <FrameLayout
+        android:id="@+id/fl_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
+</LinearLayout>

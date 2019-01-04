@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/space15" >
+  <ImageView
+      android:id="@+id/iv_avatar"
+      android:layout_width="@dimen/space40"
+      android:layout_height="@dimen/space40" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/space15"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/textfont16" />
+        <LinearLayout
+            android:id="@+id/lin_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space8">
+            <ImageView
+                android:id="@+id/iv_content_image"
+                android:layout_width="@dimen/space100"
+                android:layout_height="@dimen/space100"
+                android:layout_marginRight="@dimen/space15"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_content_title"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textSize="@dimen/textfont13"
+                android:textColor="@color/text_black"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space8">
+                    <TextView
+                        android:id="@+id/tv_watch"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:drawableLeft="@drawable/ic_info_my_watch"
+                        android:drawablePadding="@dimen/space3"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/textfont10" />
+                    <TextView
+                        android:id="@+id/tv_comment"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:drawableLeft="@drawable/ic_info_my_comment"
+                        android:drawablePadding="@dimen/space3"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/textfont10" />
+                    <TextView
+                        android:id="@+id/tv_zan"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:drawableLeft="@drawable/ic_info_my_zan"
+                        android:drawablePadding="@dimen/space3"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/textfont10" />
+                    <TextView
+                        android:id="@+id/tv_fav"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:drawableLeft="@drawable/ic_info_my_collect"
+                        android:drawablePadding="@dimen/space3"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/textfont10" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

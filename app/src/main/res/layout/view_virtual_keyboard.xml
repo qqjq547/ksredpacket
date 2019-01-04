@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/bg_white">
+
+
+        <RelativeLayout
+            android:id="@+id/layoutBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space10">
+
+            <ImageView
+                android:id="@+id/imgBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/space5"
+                android:text="@string/input_safe_pass"
+                android:textColor="@color/text_drak_black"
+                android:textSize="@dimen/textfont16" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imgBack"
+                android:layout_marginLeft="@dimen/space10"
+                android:layout_marginRight="@dimen/space10"
+                android:layout_marginTop="@dimen/space15">
+
+                <com.guochuang.mimedia.view.CodeView
+                    android:id="@+id/alter_login_pay_pass_cv"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space60"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
+                    app:length="6"
+                    app:showType="password"
+                    app:textSize="@dimen/textfont30" />
+
+                <TextView
+                    android:id="@+id/alter_login_pay_pass_forget_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@+id/alter_login_pay_pass_cv"
+                    android:layout_below="@+id/alter_login_pay_pass_cv"
+                    android:paddingTop="@dimen/space10"
+                    android:paddingBottom="@dimen/space10"
+                    android:text="@string/forget_safe_pass"
+                    android:textColor="@color/text_blue"
+                    android:textSize="@dimen/textfont12" />
+            </RelativeLayout>
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space1"
+        android:background="@color/bg_gray"
+        />
+    <GridView
+        android:id="@+id/gv_keybord"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space200"
+        android:background="@color/bg_gray"
+        android:horizontalSpacing="@dimen/space1"
+        android:numColumns="3"
+        android:verticalSpacing="@dimen/space1" />
+</LinearLayout>

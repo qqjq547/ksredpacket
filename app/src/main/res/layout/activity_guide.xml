@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v4.view.ViewPager>
+
+    <TextView
+        android:id="@+id/tv_guide_into"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/space36"
+        android:gravity="center"
+        android:background="@drawable/bg_btn_guide_start"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/space20"
+        android:paddingLeft="@dimen/space20"
+        android:paddingRight="@dimen/space20"
+        android:textSize="@dimen/textfont14"
+        android:textColor="@color/text_white"
+        android:text="@string/guide_start"
+        android:visibility="gone"/>
+
+
+    <LinearLayout
+        android:id="@+id/ll_guide_location"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space10"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/space5"
+        android:layout_marginBottom="@dimen/space70"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <View
+            android:layout_width="@dimen/space10"
+            android:layout_height="@dimen/space10"
+            android:background="@drawable/ic_guide_dot_selector"/>
+        <View
+            android:layout_width="@dimen/space10"
+            android:layout_height="@dimen/space10"
+            android:layout_marginLeft="@dimen/space16"
+            android:background="@drawable/ic_guide_dot_selector"/>
+        <View
+            android:layout_width="@dimen/space10"
+            android:layout_height="@dimen/space10"
+            android:layout_marginLeft="@dimen/space16"
+            android:background="@drawable/ic_guide_dot_selector"/>
+    </LinearLayout>
+</RelativeLayout>

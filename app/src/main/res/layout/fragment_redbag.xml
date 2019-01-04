@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:id="@+id/lin_title"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:background="@color/bg_title">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height">
+
+      <TextView
+          android:id="@+id/tv_title"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerInParent="true"
+          android:drawableLeft="@drawable/ic_ksb"
+          android:drawablePadding="@dimen/space8"
+          android:textColor="@color/text_black"
+          android:textSize="@dimen/textfont18" />
+      <TextView
+          android:id="@+id/tv_text"
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:paddingLeft="@dimen/space15"
+          android:paddingRight="@dimen/space15"
+          android:gravity="center"
+          android:layout_alignParentRight="true"
+          android:textColor="@color/text_black"
+          android:textSize="@dimen/textfont14" />
+    </RelativeLayout>
+    <include layout="@layout/layout_divide_deep_line"/>
+  </LinearLayout>
+  <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/mv_redbag"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.baidu.mapapi.map.MapView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+      <FrameLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/space15"
+          android:layout_marginTop="@dimen/space32">
+
+        <LinearLayout
+            android:id="@+id/lin_city_owner"
+            android:layout_width="@dimen/space113"
+            android:layout_height="@dimen/space30"
+            android:layout_marginLeft="@dimen/space30"
+            android:layout_marginTop="@dimen/space18"
+            android:background="@drawable/bg_city_owner"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/space10"
+            android:paddingRight="@dimen/space30">
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/city_owner"
+              android:textColor="@color/text_black"
+              android:textSize="@dimen/textfont12" />
+
+          <TextView
+              android:id="@+id/tv_city_owner"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:ellipsize="end"
+              android:lines="1"
+              android:maxWidth="@dimen/space100"
+              android:paddingLeft="@dimen/space5"
+              android:paddingRight="@dimen/space5"
+              android:textColor="@color/text_black"
+              android:textSize="@dimen/textfont9" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="@dimen/space45"
+            android:layout_height="@dimen/space55"
+            android:background="@drawable/ic_crown"
+            android:paddingLeft="@dimen/space9"
+            android:paddingTop="@dimen/space16">
+
+          <com.guochuang.mimedia.view.HexagonImageView
+              android:id="@+id/hiv_avatar"
+              android:layout_width="35dp"
+              android:layout_height="37dp"
+              app:civ_border_width="0dp" />
+        </FrameLayout>
+      </FrameLayout>
+
+      <TextView
+          android:id="@+id/tv_upgrade_agent"
+          android:layout_width="wrap_content"
+          android:layout_height="@dimen/space30"
+          android:layout_marginLeft="@dimen/space25"
+          android:layout_marginTop="@dimen/space16"
+          android:background="@drawable/bg_agent"
+          android:drawableLeft="@drawable/ic_upgrade_agent"
+          android:drawablePadding="@dimen/space9"
+          android:gravity="center"
+          android:paddingLeft="@dimen/space9"
+          android:paddingRight="@dimen/space9"
+          android:text="@string/upgrade_agent"
+          android:textColor="@color/text_black"
+          android:textSize="@dimen/textfont12"
+          android:visibility="gone" />
+    </LinearLayout>
+    <ImageView
+      android:id="@+id/tv_start"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal|bottom"
+      android:layout_marginBottom="@dimen/space28"
+      android:src="@drawable/ic_redbag_edit"/>
+    <ImageView
+        android:id="@+id/iv_refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom"
+        android:layout_marginBottom="@dimen/space12"
+        android:layout_marginRight="@dimen/space15"
+        android:src="@drawable/ic_redbag_refresh"/>
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical">
+          <LinearLayout
+              android:id="@+id/lin_notice"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/bg_trans_light"
+              android:orientation="horizontal"
+              android:paddingLeft="@dimen/space15"
+              android:paddingTop="@dimen/space4"
+              android:paddingRight="@dimen/space15"
+              android:paddingBottom="@dimen/space4">
+
+              <ImageView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center_vertical"
+                  android:layout_marginRight="@dimen/space4"
+                  android:src="@drawable/ic_redbag_notice" />
+
+              <com.guochuang.mimedia.view.ScrollTextView
+                  android:id="@+id/stv_notice"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center_vertical"
+                  android:ellipsize="marquee"
+                  android:marqueeRepeatLimit="marquee_forever"
+                  android:singleLine="true"
+                  android:textColor="@color/text_notice"
+                  android:textSize="@dimen/textfont14" />
+          </LinearLayout>
+          <android.support.v4.widget.NestedScrollView
+              android:id="@+id/nsv_honey"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/bg_trans_light"
+              android:visibility="visible">
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:gravity="center_horizontal">
+                  <android.support.v7.widget.RecyclerView
+                      android:id="@+id/rv_honey"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content">
+                  </android.support.v7.widget.RecyclerView>
+                  <TextView
+                      android:id="@+id/tv_vote"
+                      android:layout_width="@dimen/space120"
+                      android:layout_height="@dimen/space30"
+                      android:layout_marginTop="@dimen/space20"
+                      android:gravity="center"
+                      android:background="@drawable/bg_btn_red"
+                      android:textSize="@dimen/textfont14"
+                      android:textColor="@color/text_white"
+                      android:text="@string/i_want_show_ad"/>
+                  <ImageView
+                      android:id="@+id/id_arrow"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="@dimen/space10"
+                      android:layout_marginBottom="@dimen/space10"
+                      android:src="@drawable/ic_arrow_down_selector"/>
+              </LinearLayout>
+          </android.support.v4.widget.NestedScrollView>
+      </LinearLayout>
+  </FrameLayout>
+</LinearLayout>

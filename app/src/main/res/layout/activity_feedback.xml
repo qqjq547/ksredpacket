@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_gray"
+    android:orientation="vertical">
+<include layout="@layout/layout_title"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/bg_white">
+    <EditText
+        android:id="@+id/et_content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space85"
+        android:background="@null"
+        android:paddingLeft="@dimen/space15"
+        android:paddingRight="@dimen/space15"
+        android:paddingTop="@dimen/space10"
+        android:paddingBottom="@dimen/space10"
+        android:gravity="start"
+        android:textSize="@dimen/textfont14"
+        android:textColor="@color/text_black"
+        android:hint="@string/advise_feedback_hint"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_picture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add_pic"/>
+    <include layout="@layout/layout_divide_deep_line"/>
+
+     <TextView
+         android:id="@+id/tv_confirm"
+         android:layout_width="match_parent"
+         android:layout_height="@dimen/space45"
+         android:layout_marginTop="@dimen/space50"
+         android:layout_marginBottom="@dimen/space40"
+         android:layout_marginLeft="@dimen/space15"
+         android:layout_marginRight="@dimen/space15"
+         android:background="@drawable/bg_btn_red"
+         android:gravity="center"
+         android:textColor="@color/text_white"
+         android:textSize="@dimen/textfont15"
+         android:text="@string/confirm"/>
+    </LinearLayout>
+</LinearLayout>

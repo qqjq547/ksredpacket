@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_block"
+    android:orientation="vertical"
+    android:layout_marginLeft="@dimen/space5"
+    android:layout_marginRight="@dimen/space5"
+    android:padding="@dimen/space15">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space10">
+
+        <TextView
+            android:id="@+id/tv_city_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_city_bid_hall_loca"
+            android:drawablePadding="@dimen/space5"
+            android:gravity="center_vertical"
+            android:textColor="@color/text_drak_black"
+            android:textSize="@dimen/textfont16" />
+
+        <!--<TextView-->
+        <!--android:id="@+id/tv_buy_time"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:text="123"-->
+        <!--android:textColor="@color/text_drak_black"-->
+        <!--android:textSize="@dimen/textfont12" />-->
+    </RelativeLayout>
+
+    <View
+        style="@style/bottom_line"
+        android:layout_marginTop="@dimen/space20" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/space10"
+        android:layout_marginTop="@dimen/space10">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space20"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg_city_bid_hall_city_none" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space10"
+                android:text="@string/city_bid_hall_no_land"
+                android:textSize="@dimen/textfont12" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/space10"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/city_bid_hall_bid_price"
+                android:textColor="@color/text_time"
+                android:textSize="@dimen/textfont16" />
+
+            <TextView
+                android:id="@+id/tv_bid_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space10"
+                android:text="@string/insert_yuan"
+                android:textColor="@color/text_city_yellow"
+                android:textSize="@dimen/textfont18" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

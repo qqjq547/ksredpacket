@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_version_update"
+    android:paddingLeft="@dimen/space10"
+    android:paddingRight="@dimen/space10">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+    </Space>
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginLeft="@dimen/space30"
+        android:layout_marginRight="@dimen/space30"
+        android:textColor="#5a5a5a"
+        android:textSize="@dimen/textfont14"
+        android:scrollbars="vertical">
+
+    </TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divide_h"
+        android:background="@color/bg_divide"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space50">
+        <TextView
+            android:id="@+id/tv_refuse"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="@dimen/textfont16"
+            android:textColor="@color/text_gray"
+            android:text="@string/cruel_refuse"/>
+        <View
+            android:id="@+id/v_divide"
+            android:layout_width="@dimen/divide_h"
+            android:layout_height="match_parent"
+            android:background="@color/bg_divide"/>
+        <TextView
+            android:id="@+id/tv_update"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="@dimen/textfont16"
+            android:textColor="@color/text_red"
+            android:text="@string/upgrade_now"/>
+    </LinearLayout>
+    </LinearLayout>

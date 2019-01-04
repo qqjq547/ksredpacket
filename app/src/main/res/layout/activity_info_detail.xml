@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/lin_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_title"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="@dimen/title_height"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_back" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/textfont18" />
+
+            <ImageView
+                android:id="@+id/iv_image"
+                android:layout_width="@dimen/title_height"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_more" />
+        </LinearLayout>
+
+        <include layout="@layout/layout_divide_deep_line" />
+    </LinearLayout>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/srl_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/nsv_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <WebView
+                    android:id="@+id/wv_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"></WebView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_zan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_zan_selector"
+                        android:drawablePadding="@dimen/space5"
+                        android:paddingBottom="@dimen/space10"
+                        android:paddingLeft="@dimen/space15"
+                        android:paddingRight="@dimen/space15"
+                        android:paddingTop="@dimen/space10"
+                        android:textColor="@color/text_gray" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/lin_ad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/lin_comment_head"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/space20"
+                    android:layout_marginTop="@dimen/space15"
+                    android:gravity="center">
+
+                    <View
+                        android:layout_width="@dimen/space20"
+                        android:layout_height="@dimen/space1"
+                        android:background="@color/bg_black" />
+
+                    <TextView
+                        android:id="@+id/tv_comment_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/space15"
+                        android:layout_marginRight="@dimen/space15"
+                        android:gravity="center"
+                        android:text="@string/recent_comment"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/textfont16" />
+
+                    <View
+                        android:layout_width="@dimen/space20"
+                        android:layout_height="@dimen/space1"
+                        android:background="@color/bg_black" />
+                </LinearLayout>
+
+                <include layout="@layout/layout_divide_deep_line" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_reply"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"></android.support.v7.widget.RecyclerView>
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    <include layout="@layout/layout_comments" />
+</LinearLayout>

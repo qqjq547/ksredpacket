@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="260dp"
+    android:layout_height="315dp"
+    android:background="@drawable/bg_redbag_benefit">
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="@dimen/space15"
+        android:textColor="@color/text_black"
+        android:textSize="@dimen/textfont12"/>
+    <include layout="@layout/layout_divide_deep_line"/>
+    <TextView
+        android:id="@+id/tv_sure"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space40"
+        android:gravity="center"
+        android:textSize="@dimen/textfont16"
+        android:textColor="@color/text_black"
+        android:text="@string/i_known"/>
+</LinearLayout>
+</LinearLayout>

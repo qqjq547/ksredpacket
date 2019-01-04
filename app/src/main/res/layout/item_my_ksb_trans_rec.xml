@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/space5"
+    android:layout_marginLeft="@dimen/space10"
+    android:layout_marginRight="@dimen/space10"
+    android:layout_marginTop="@dimen/space5"
+    android:background="@drawable/bg_white_block"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="@dimen/space0"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/text_drak_black"
+        android:textSize="@dimen/textfont14" />
+
+    <TextView
+        android:id="@+id/tv_poundage"
+        android:layout_width="@dimen/space0"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/text_drak_black"
+        android:textSize="@dimen/textfont14" />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="@dimen/space0"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/space17"
+        android:layout_marginTop="@dimen/space17"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/text_drak_black"
+        android:textSize="@dimen/textfont14" />
+
+    <TextView
+        android:id="@+id/tv_state"
+        android:layout_width="@dimen/space0"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/text_drak_black"
+        android:textSize="@dimen/textfont14" />
+</LinearLayout>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/space5"
+    android:layout_marginLeft="@dimen/space10"
+    android:layout_marginRight="@dimen/space10"
+    android:background="@drawable/bg_white_block"
+    android:padding="@dimen/space15">
+
+    <TextView
+        android:id="@+id/tv_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/format_ksb"
+        android:textColor="@color/text_city_yellow"
+        android:textSize="@dimen/textfont16" />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tv_num"
+        android:layout_alignParentRight="true"
+        android:text="2018-01-01 00:00:01"
+        android:textColor="@color/text_gray"
+        android:textSize="@dimen/textfont12" />
+
+    <TextView
+        android:id="@+id/tv_your_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_num"
+        android:layout_marginTop="@dimen/space15"
+        android:text="@string/my_ksb_ksb_grant_record_your"
+        android:textSize="@dimen/textfont12" />
+
+    <TextView
+        android:id="@+id/tv_your"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tv_your_hint"
+        android:layout_toRightOf="@+id/tv_your_hint"
+        android:text="12312312312323"
+        android:textColor="@color/text_gray"
+        android:textSize="@dimen/textfont12" />
+</RelativeLayout>

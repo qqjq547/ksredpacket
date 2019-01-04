@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_white"
+    >
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_red_oval" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/title_height">
+
+        <ImageView
+            android:id="@+id/iv_my_header"
+            android:layout_width="@dimen/space65"
+            android:layout_height="@dimen/space65"
+            android:layout_marginTop="@dimen/space22"
+            android:layout_gravity="center"
+             />
+
+        <TextView
+            android:id="@+id/tv_my_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/space10"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/textfont19" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_my"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space140"
+            android:layout_marginLeft="@dimen/space10"
+            android:layout_marginRight="@dimen/space10"
+            android:layout_marginTop="@dimen/space30"
+            android:nestedScrollingEnabled="false"/>
+
+        <LinearLayout
+            android:id="@+id/ll_my_lamp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space10"
+            android:layout_marginTop="@dimen/space5"
+            android:layout_marginBottom="@dimen/space5"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <View
+                android:layout_width="@dimen/space10"
+                android:layout_height="@dimen/space10"
+                android:background="@drawable/ic_my_dot_selector"/>
+            <View
+                android:layout_width="@dimen/space10"
+                android:layout_height="@dimen/space10"
+                android:layout_marginLeft="@dimen/space12"
+                android:background="@drawable/ic_my_dot_selector"/>
+            <View
+                android:layout_width="@dimen/space10"
+                android:layout_height="@dimen/space10"
+                android:layout_marginLeft="@dimen/space12"
+                android:background="@drawable/ic_my_dot_selector"
+                android:visibility="gone"/>
+        </LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space10"
+            android:layout_marginRight="@dimen/space10"
+            android:background="@drawable/bg_white_block"
+            android:padding="@dimen/space15"
+            android:nestedScrollingEnabled="false">
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
+</RelativeLayout>
+</android.support.v4.widget.NestedScrollView>
+    <LinearLayout
+        android:id="@+id/lin_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height">
+
+            <ImageView
+                android:id="@+id/iv_setting"
+                android:layout_width="@dimen/title_height"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="0dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_my_setting" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/text_yellow"
+                android:textSize="@dimen/textfont18" />
+
+            <ImageView
+                android:id="@+id/iv_message"
+                android:layout_width="@dimen/title_height"
+                android:layout_alignParentRight="true"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_my_message"/>
+        </RelativeLayout>
+    </LinearLayout>
+</FrameLayout>

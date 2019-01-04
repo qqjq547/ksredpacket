@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/space30"
+    android:paddingRight="@dimen/space30"
+    android:orientation="vertical"
+    android:background="@color/bg_white">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space10">
+    </android.support.v7.widget.RecyclerView>
+    <include layout="@layout/layout_divide_deep_line"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space12"
+        android:layout_marginBottom="@dimen/space90"
+        android:gravity="center_vertical">
+        <LinearLayout
+            android:id="@+id/lin_start_date"
+            android:layout_width="@dimen/space100"
+            android:layout_height="@dimen/space30"
+            android:background="@drawable/bg_income_time"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/tv_start_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textfont12"
+                android:textColor="@color/text_black"
+                android:text="2018-01-01"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/space5"
+                android:src="@drawable/ic_arrow_down_black"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="@dimen/space20"
+            android:layout_height="@dimen/divide_h"
+            android:background="@color/bg_black"
+            android:layout_marginLeft="@dimen/space5"
+            android:layout_marginRight="@dimen/space5"/>
+        <LinearLayout
+            android:id="@+id/lin_end_date"
+            android:layout_width="@dimen/space100"
+            android:layout_height="@dimen/space30"
+            android:background="@drawable/bg_income_time"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/tv_end_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textfont12"
+                android:textColor="@color/text_black"
+                android:text="2018-01-01"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/space5"
+                android:src="@drawable/ic_arrow_down_black"/>
+        </LinearLayout>
+        <View
+            android:layout_width="61dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+        <TextView
+            android:id="@+id/tv_sure"
+            android:layout_width="@dimen/space50"
+            android:layout_height="@dimen/space30"
+            android:background="@drawable/bg_btn_red"
+            android:textSize="@dimen/textfont12"
+            android:textColor="@color/text_white"
+            android:gravity="center"
+            android:text="@string/ensure"/>
+    </LinearLayout>
+</LinearLayout>
+
+    <View
+        android:id="@+id/lin_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

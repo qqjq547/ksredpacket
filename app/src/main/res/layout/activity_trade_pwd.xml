@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_gray"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space30"
+            android:layout_marginTop="@dimen/space30"
+            android:src="@drawable/ic_mobile" />
+
+        <TextView
+            android:id="@+id/tv_mobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space30"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/textfont18" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_white"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/space15"
+            android:paddingRight="@dimen/space15">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space50"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/image_vertify_code"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont15" />
+
+                <EditText
+                    android:id="@+id/et_image_vertify_code"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/transparent"
+                    android:hint="@string/pls_input_image_vertify_code"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:paddingBottom="@dimen/space10"
+                    android:paddingLeft="@dimen/space15"
+                    android:paddingRight="@dimen/space15"
+                    android:paddingTop="@dimen/space10"
+                    android:textSize="@dimen/textfont14" />
+
+                <ImageView
+                    android:id="@+id/iv_image_vertify_code"
+                    android:layout_width="@dimen/space96"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/space10"
+                    android:scaleType="fitXY" />
+            </LinearLayout>
+
+            <include layout="@layout/layout_divide_deep_line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space50"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/msg_vertify_code"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont15" />
+
+                <EditText
+                    android:id="@+id/et_msg_vertify_code"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/transparent"
+                    android:digits="@string/input_password_type"
+                    android:hint="@string/pls_input_msg_vertify_code"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:paddingBottom="@dimen/space10"
+                    android:paddingLeft="@dimen/space15"
+                    android:paddingRight="@dimen/space15"
+                    android:paddingTop="@dimen/space10"
+                    android:textSize="@dimen/textfont14" />
+
+                <TextView
+                    android:id="@+id/tv_get_vertify_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/get_vertify_code"
+                    android:textColor="@color/text_blue"
+                    android:textSize="@dimen/textfont15" />
+            </LinearLayout>
+
+            <include layout="@layout/layout_divide_deep_line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space50"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/new_trade_pwd"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont15" />
+
+                <EditText
+                    android:id="@+id/et_new_trade_pwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/transparent"
+                    android:hint="@string/pls_input_new_trade_pwd"
+                    android:inputType="numberPassword"
+                    android:maxLength="6"
+                    android:maxLines="1"
+                    android:paddingBottom="@dimen/space10"
+                    android:paddingLeft="@dimen/space15"
+                    android:paddingRight="@dimen/space15"
+                    android:paddingTop="@dimen/space10"
+                    android:textSize="@dimen/textfont14" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_sure"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space45"
+            android:layout_marginLeft="@dimen/space15"
+            android:layout_marginRight="@dimen/space15"
+            android:layout_marginTop="@dimen/space50"
+            android:background="@drawable/bg_btn_gray_selector"
+            android:gravity="center"
+            android:text="@string/confirm"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/textfont15" />
+    </LinearLayout>
+</LinearLayout>

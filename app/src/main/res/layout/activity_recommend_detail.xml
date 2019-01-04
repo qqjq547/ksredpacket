@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+  <include layout="@layout/layout_title"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_recommend_detail_banner" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/space15"
+                android:layout_marginTop="-40dp"
+                android:layout_marginRight="@dimen/space15"
+                android:background="@drawable/bg_white_block"
+                android:padding="@dimen/space10">
+
+                <LinearLayout
+                    android:id="@+id/lin_agent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/space10"
+                    android:paddingTop="@dimen/space24"
+                    android:paddingRight="@dimen/space10"
+                    android:paddingBottom="@dimen/space24">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/direct_agent"
+                        android:textColor="@color/text_gray_drak"
+                        android:textSize="@dimen/textfont16" />
+
+                    <TextView
+                        android:id="@+id/tv_agent_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space25"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/textfont18"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lin_fans"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/space10"
+                    android:paddingTop="@dimen/space24"
+                    android:paddingRight="@dimen/space10"
+                    android:paddingBottom="@dimen/space24">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/direct_fans"
+                        android:textColor="@color/text_gray_drak"
+                        android:textSize="@dimen/textfont16" />
+
+                    <TextView
+                        android:id="@+id/tv_fans"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space25"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/textfont18"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lin_undirect"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/space10"
+                    android:paddingTop="@dimen/space24"
+                    android:paddingRight="@dimen/space10"
+                    android:paddingBottom="@dimen/space24">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/market_num"
+                        android:textColor="@color/text_gray_drak"
+                        android:textSize="@dimen/textfont16" />
+
+                    <TextView
+                        android:id="@+id/tv_undirect_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space25"
+                        android:textColor="@color/text_gray_drak"
+                        android:textSize="@dimen/textfont18"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/space15"
+                android:layout_marginRight="@dimen/space15"
+                android:background="@drawable/bg_white_block"
+                android:padding="@dimen/space15">
+            <RadioGroup
+                android:id="@+id/rg_nav"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space45"
+                android:background="@drawable/bg_income_nav"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/lin_direct_agent"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/income_left_selector"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="@dimen/space5"
+                        android:text="@string/direct_agent"
+                        android:textColor="@color/income_tab_text_selector"
+                        android:textSize="@dimen/textfont16" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lin_direct_fans"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/income_right_selector"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="@dimen/space5"
+                        android:text="@string/direct_fans"
+                        android:textColor="@color/income_tab_text_selector"
+                        android:textSize="@dimen/textfont16" />
+                </LinearLayout>
+            </RadioGroup>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/space5"
+                    android:paddingRight="@dimen/space5"
+                    android:paddingTop="@dimen/space10"
+                    android:paddingBottom="@dimen/space10">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/textfont14"
+                        android:text="@string/user"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/textfont14"
+                        android:text="@string/register_time"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/textfont14"
+                        android:text="@string/share_benefit_ksb"/>
+                </LinearLayout>
+                <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                    android:id="@+id/srl_refresh"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="@dimen/space5"
+                        android:paddingRight="@dimen/space5">
+                    </android.support.v7.widget.RecyclerView>
+                </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+            </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+</LinearLayout>

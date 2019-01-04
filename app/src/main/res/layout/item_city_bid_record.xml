@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_block"
+    android:orientation="vertical"
+    android:padding="@dimen/space15">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space10"
+        android:layout_marginBottom="@dimen/space20">
+
+        <TextView
+            android:id="@+id/tv_city_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_city_bid_hall_loca"
+            android:drawablePadding="@dimen/space5"
+            android:gravity="center_vertical"
+            android:textColor="@color/text_drak_black"
+            android:textSize="@dimen/textfont16" />
+
+        <TextView
+            android:id="@+id/tv_buy_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/text_drak_black"
+            android:textSize="@dimen/textfont12" />
+    </RelativeLayout>
+
+    <include layout="@layout/layout_divide_deep_line"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/space15"
+        android:layout_marginTop="@dimen/space10"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="@dimen/space0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:id="@+id/rl_left_bg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:paddingBottom="@dimen/space10">
+
+                <ImageView
+                    android:id="@+id/iv_left_bg"
+                    android:layout_width="@dimen/space61"
+                    android:layout_height="@dimen/space83"
+                    android:src="@drawable/bg_city_bid_hall_left" />
+
+                <ImageView
+                    android:id="@+id/iv_left_header"
+                    android:layout_width="@dimen/space61"
+                    android:layout_height="@dimen/space61"
+                    android:layout_alignBottom="@+id/iv_left_bg"
+                    android:layout_alignLeft="@+id/iv_left_bg"
+                    android:layout_alignRight="@+id/iv_left_bg"
+                    android:padding="@dimen/space2" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_left_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/rl_left_bg"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/bg_city_bid_hall_left_ribbon"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/tv_left_user_name"
+                    android:layout_width="@dimen/space60"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="center_horizontal"
+                    android:maxLines="1"
+                    android:layout_marginTop="@dimen/space2"
+                    android:textColor="@color/text_city_bid_hall_left_price"
+                    android:textSize="@dimen/textfont12" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_left_price_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_left_user_name"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/space10"
+                android:text="@string/city_bid_hall_now_price"
+                android:textColor="@color/text_time"
+                android:textSize="@dimen/textfont12" />
+
+            <TextView
+                android:id="@+id/tv_left_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_left_price_name"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/space10"
+                android:gravity="center"
+                android:textColor="@color/text_city_yellow"
+                android:textSize="@dimen/textfont18" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_premium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/bg_city_bid_hall_center_price"
+                android:drawablePadding="@dimen/space5"
+                android:gravity="center_vertical"
+                android:text="@string/format_premium"
+                android:textColor="@color/text_drak_black"
+                android:textSize="@dimen/textfont12" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space5"
+                android:src="@drawable/bg_city_bid_hall_center_arrow" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="@dimen/space0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:id="@+id/rl_right_bg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:paddingBottom="@dimen/space10">
+
+                <ImageView
+                    android:id="@+id/iv_right_bg"
+                    android:layout_width="@dimen/space61"
+                    android:layout_height="@dimen/space83"
+                    android:src="@drawable/bg_city_bid_hall_right" />
+
+                <ImageView
+                    android:id="@+id/iv_right_header"
+                    android:layout_width="@dimen/space61"
+                    android:layout_height="@dimen/space61"
+                    android:layout_alignBottom="@+id/iv_right_bg"
+                    android:layout_alignLeft="@+id/iv_right_bg"
+                    android:layout_alignRight="@+id/iv_right_bg"
+                    android:padding="@dimen/space2" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_right_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/rl_right_bg"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/bg_city_bid_hall_right_ribbon"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/tv_right_user_name"
+                    android:layout_width="@dimen/space60"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space2"
+                    android:ellipsize="end"
+                    android:gravity="center_horizontal"
+                    android:maxLines="1"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/textfont12" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_right_price_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_right_user_name"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/space10"
+                android:text="@string/city_bid_hall_original_price"
+                android:textColor="@color/text_time"
+                android:textSize="@dimen/textfont12" />
+
+            <TextView
+                android:id="@+id/tv_right_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_right_price_name"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/space10"
+                android:gravity="center"
+                android:text="@string/insert_yuan"
+                android:textColor="@color/text_city_yellow"
+                android:textSize="@dimen/textfont18" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <View
+        style="@style/bottom_line"
+        android:layout_marginTop="@dimen/space15" />
+
+    <TextView
+        android:id="@+id/tv_time_go"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space10"
+        android:textColor="@color/text_drak_black"
+        android:textSize="@dimen/textfont12" />
+</LinearLayout>

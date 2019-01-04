@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_title_text" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/space15"
+        android:layout_marginRight="@dimen/space15"
+        android:layout_marginTop="@dimen/space10"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.guochuang.mimedia.view.ClearEditText
+                android:id="@+id/et_city_bid_hall_query"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_city_bid_hall_query_gray"
+                android:drawableLeft="@drawable/ic_search"
+                android:drawablePadding="@dimen/space6"
+                android:gravity="center_vertical"
+                android:hint="@string/city_bid_hall_query_hint"
+                android:imeOptions="actionSearch"
+                android:lines="1"
+                android:padding="@dimen/space10"
+                android:singleLine="true"
+                android:textSize="@dimen/textfont12" />
+
+            <TextView
+                android:id="@+id/tv_city_bid_hall_query_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/space18"
+                android:padding="@dimen/space10"
+                android:text="@string/search"
+                android:textColor="@color/text_drak_black" />
+        </LinearLayout>
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_city_bid_hall_hot_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/space10"
+                android:paddingTop="@dimen/space10"
+                android:text="@string/city_bid_hall_hot_city"
+                android:textColor="@color/text_drak_black"
+                android:textSize="@dimen/textfont12" />
+
+            <TextView
+                android:id="@+id/tv_city_bid_hall_no_land"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/space15"
+                android:layout_toRightOf="@+id/tv_city_bid_hall_hot_city"
+                android:paddingBottom="@dimen/space10"
+                android:paddingTop="@dimen/space10"
+                android:text="@string/city_bid_hall_no_land"
+                android:textColor="@color/text_drak_black"
+                android:textSize="@dimen/textfont12" />
+
+            <TextView
+                android:id="@+id/tv_city_bid_hall_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/space15"
+                android:layout_toRightOf="@+id/tv_city_bid_hall_no_land"
+                android:drawablePadding="@dimen/space5"
+                android:drawableRight="@drawable/ic_city_bid_hall_price_defult"
+                android:paddingBottom="@dimen/space10"
+                android:paddingTop="@dimen/space10"
+                android:text="@string/city_bid_hall_price"
+                android:textColor="@color/text_drak_black"
+                android:textSize="@dimen/textfont12" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
+
+                <View
+                    style="@style/centre_line"
+                    android:layout_gravity="center_vertical" />
+
+                <TextView
+                    android:id="@+id/tv_city_bid_hall_screen_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/space15"
+                    android:drawablePadding="@dimen/space5"
+                    android:drawableRight="@drawable/ic_city_bid_hall_screen_off"
+                    android:paddingBottom="@dimen/space10"
+                    android:paddingTop="@dimen/space10"
+                    android:text="@string/city_bid_hall_screen_city"
+                    android:textColor="@color/text_drak_black"
+                    android:textSize="@dimen/textfont12" />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/rv_city_bid_hall_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/space10"
+        android:layout_marginLeft="@dimen/space5"
+        android:layout_marginRight="@dimen/space5">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_city_bid_hall"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</LinearLayout>

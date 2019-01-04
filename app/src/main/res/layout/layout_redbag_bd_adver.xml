@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/rlTemplate1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ebf1be">
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="8dp" />
+
+        <TextView
+            android:id="@+id/iv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_toRightOf="@id/iv_icon"
+            android:textColor="#000"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/iv_main"
+            android:layout_width="300dp"
+            android:layout_height="250dp"
+            android:layout_below="@id/iv_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:scaleType="fitCenter" />
+
+        <ImageView
+            android:id="@+id/iv_baidulogo"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@id/iv_main" />
+
+        <ImageView
+            android:id="@+id/iv_adlogo"
+            android:layout_width="25dp"
+            android:layout_height="13dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@id/iv_main" />
+    </RelativeLayout>
+</LinearLayout>

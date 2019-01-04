@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/space20"
+    android:gravity="center">
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/textfont14"
+        android:textColor="@color/text_white" />
+    <TextView
+        android:id="@+id/tv_ksb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space10"
+        android:textSize="@dimen/textfont19"
+        android:textStyle="bold"
+        android:textColor="@color/text_rain_gold" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space28"
+        android:src="@drawable/bg_rain_gold"/>
+    <TextView
+        android:id="@+id/tv_sure"
+        android:layout_width="@dimen/space85"
+        android:layout_height="@dimen/space24"
+        android:gravity="center"
+        android:background="@drawable/bg_btn_rain_result"
+        android:layout_marginTop="@dimen/space32"
+        android:textColor="@color/text_white"
+        android:textSize="@dimen/textfont13"
+        android:text="@string/i_known"/>
+
+</LinearLayout>

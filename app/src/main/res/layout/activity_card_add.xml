@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_gray"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/space10"
+            android:paddingLeft="@dimen/space15"
+            android:paddingRight="@dimen/space15"
+            android:paddingTop="@dimen/space10"
+            android:text="@string/add_card_notice"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/textfont13" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_white"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/space15"
+            android:paddingRight="@dimen/space15">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space50"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bankcard_name"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont15" />
+
+                <EditText
+                    android:id="@+id/et_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/transparent"
+                    android:gravity="right"
+                    android:hint="@string/pls_input_name"
+                    android:inputType="text"
+                    android:maxLength="10"
+                    android:maxLines="1"
+                    android:paddingBottom="@dimen/space10"
+                    android:paddingTop="@dimen/space10"
+                    android:textSize="@dimen/textfont14" />
+            </LinearLayout>
+
+            <include layout="@layout/layout_divide_deep_line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space50"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bankcard_number"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont15" />
+
+                <EditText
+                    android:id="@+id/et_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/transparent"
+                    android:gravity="right"
+                    android:hint="@string/pls_input_card_number"
+                    android:inputType="number"
+                    android:maxLength="25"
+                    android:maxLines="1"
+                    android:paddingBottom="@dimen/space10"
+                    android:paddingTop="@dimen/space10"
+                    android:textSize="@dimen/textfont14" />
+            </LinearLayout>
+
+            <include layout="@layout/layout_divide_deep_line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space50"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bankcard_mobile"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont15" />
+
+                <EditText
+                    android:id="@+id/et_mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/transparent"
+                    android:gravity="right"
+                    android:hint="@string/pls_input_card_mobile"
+                    android:inputType="number"
+                    android:maxLength="11"
+                    android:maxLines="1"
+                    android:paddingBottom="@dimen/space10"
+                    android:paddingTop="@dimen/space10"
+                    android:textSize="@dimen/textfont14" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/textfont15"
+            android:layout_marginRight="@dimen/space15"
+            android:layout_marginTop="@dimen/space50">
+
+            <TextView
+                android:id="@+id/tv_delete"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/space45"
+                android:layout_marginRight="@dimen/space25"
+                android:layout_weight="1"
+                android:background="@drawable/bg_btn_gray"
+                android:gravity="center"
+                android:text="@string/delete"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/textfont15" />
+
+            <TextView
+                android:id="@+id/tv_ensure"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/space45"
+                android:layout_weight="1"
+                android:background="@drawable/bg_btn_red"
+                android:gravity="center"
+                android:text="@string/confirm"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/textfont15" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

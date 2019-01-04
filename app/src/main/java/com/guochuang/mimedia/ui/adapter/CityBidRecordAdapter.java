@@ -1,0 +1,36 @@
+package com.guochuang.mimedia.ui.adapter;
+
+import android.app.backup.BackupHelper;
+import android.media.Image;
+import android.support.annotation.Nullable;
+import android.widget.ImageView;
+
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
+import com.sz.gcyh.KSHongBao.R;
+import com.guochuang.mimedia.mvp.model.CityBidRecord;
+import com.guochuang.mimedia.tools.glide.GlideImgManager;
+
+import java.util.List;
+
+public class CityBidRecordAdapter extends BaseQuickAdapter<CityBidRecord, BaseViewHolder> {
+    public CityBidRecordAdapter(@Nullable List<CityBidRecord> data) {
+        super(R.layout.item_city_bid_record, data);
+    }
+
+    @Override
+    protected void convert(BaseViewHolder helper, CityBidRecord item) {
+         helper.setText(R.id.tv_city_name,item.getWhereRegion());
+         helper.setText(R.id.tv_buy_time,item.getCreateDate());
+         GlideImgManager.loadCircleImage(mContext,item.getCurrentAvatar(),(ImageView) helper.getView(R.id.iv_left_header));
+        helper.setText(R.id.tv_left_user_name,item.getCurrentNickName());
+        helper.setText(R.id.tv_left_price,String.format(mContext.getString(R.string.format_yuan),item.getCurrentMoney()));
+        helper.setText(R.id.tv_premium,String.format(mContext.getString(R.string.format_premium),item.getPremium()));
+
+        GlideImgManager.loadCircleImage(mContext,item.getFormerAvatar(),(ImageView) helper.getView(R.id.iv_right_header));
+        helper.setText(R.id.tv_right_user_name,item.getFormerNickName());
+        helper.setText(R.id.tv_right_price,String.format(mContext.getString(R.string.format_yuan),item.getFormerMoney()));
+        helper.setText(R.id.tv_time_go,String.format(mContext.getString(R.string.format_appointment_time),item.getAppointmentDate()));
+    }
+
+}

@@ -1,0 +1,564 @@
+package com.guochuang.mimedia.ui.fragment;
+
+import android.Manifest;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.annotation.NonNull;
+import android.support.v4.widget.NestedScrollView;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.baidu.location.BDAbstractLocationListener;
+import com.baidu.location.BDLocation;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.CoordType;
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.CircleOptions;
+import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.Marker;
+import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.map.Stroke;
+import com.baidu.mapapi.model.LatLng;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.guochuang.mimedia.app.App;
+import com.guochuang.mimedia.base.MvpFragment;
+import com.guochuang.mimedia.mvp.model.HomeRegion;
+import com.guochuang.mimedia.mvp.model.MyKsb;
+import com.guochuang.mimedia.mvp.model.Redbag;
+import com.guochuang.mimedia.mvp.model.RedbagDetail;
+import com.guochuang.mimedia.mvp.presenter.RedbagPresenter;
+import com.guochuang.mimedia.mvp.view.RedbagView;
+import com.guochuang.mimedia.tools.CommonUtil;
+import com.guochuang.mimedia.tools.Constant;
+import com.guochuang.mimedia.tools.IntentUtils;
+import com.guochuang.mimedia.tools.LogUtil;
+import com.guochuang.mimedia.tools.PrefUtil;
+import com.guochuang.mimedia.tools.antishake.AntiShake;
+import com.guochuang.mimedia.tools.glide.GlideImgManager;
+import com.guochuang.mimedia.ui.activity.CityActivity;
+import com.guochuang.mimedia.ui.activity.MainActivity;
+import com.guochuang.mimedia.ui.activity.ShareActivity;
+import com.guochuang.mimedia.ui.activity.SquareActivity;
+import com.guochuang.mimedia.ui.activity.UpgradeAgentActivity;
+import com.guochuang.mimedia.ui.adapter.HoneyAdapter;
+import com.guochuang.mimedia.ui.dialog.OpenRedbagDialog;
+import com.guochuang.mimedia.ui.dialog.RedbagTypeDialog;
+import com.guochuang.mimedia.view.GridItemDecoration;
+import com.guochuang.mimedia.view.HexagonImageView;
+import com.guochuang.mimedia.view.ScrollTextView;
+import com.sz.gcyh.KSHongBao.R;
+import com.tbruyelle.rxpermissions.RxPermissions;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
+import rx.functions.Action1;
+
+public class RedbagFragment extends MvpFragment<RedbagPresenter> implements RedbagView {
+
+    @BindView(R.id.tv_start)
+    ImageView tvStart;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
+    @BindView(R.id.tv_text)
+    TextView tvText;
+    @BindView(R.id.mv_redbag)
+    MapView mvRedbag;
+    @BindView(R.id.lin_notice)
+    LinearLayout linNotice;
+    @BindView(R.id.stv_notice)
+    ScrollTextView stvNotice;
+    @BindView(R.id.tv_city_owner)
+    TextView tvCityOwner;
+    @BindView(R.id.lin_city_owner)
+    LinearLayout linCityOwner;
+    @BindView(R.id.hiv_avatar)
+    HexagonImageView hivAvatar;
+    @BindView(R.id.iv_refresh)
+    ImageView ivRefresh;
+    @BindView(R.id.tv_upgrade_agent)
+    TextView tvUpgradeAgent;
+    @BindView(R.id.rv_honey)
+    RecyclerView rvHoney;
+    @BindView(R.id.tv_vote)
+    TextView tvVote;
+    @BindView(R.id.id_arrow)
+    ImageView idArrow;
+    @BindView(R.id.nsv_honey)
+    NestedScrollView nsvHoney;
+
+    TextView tvScope;
+    BaiduMap bm;
+    LocationClient mLocationClient;
+    LocationClientOption option;
+    OpenRedbagDialog openRedbagDialog;
+    Redbag redbag;
+    List<OverlayOptions> poolOptions = new ArrayList<>();
+    List<OverlayOptions> locOptions = new ArrayList<>();
+    Marker optMarker;
+    HomeRegion homeRegion;
+    int kilometre = 1000;
+    boolean isDelay = false;//标记延时的这个时间段
+    boolean isFirstLocation = true;
+    View vScope;
+    Animation rotateAnim;
+    List<String> honeyArr=new ArrayList<>();
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            isDelay = false;
+            mLocationClient.start();
+        }
+    };
+
+
+
+    @Override
+    protected RedbagPresenter createPresenter() {
+        return new RedbagPresenter(this);
+    }
+
+    @Override
+    public int getLayout() {
+        return R.layout.fragment_redbag;
+    }
+
+    @Override
+    public void initViewAndData() {
+        tvText.setText(R.string.square);
+        if (App.getInstance().getUserInfo() != null) {
+            tvTitle.setText(getPref().getString(PrefUtil.COIN, ""));
+        }
+        bm = mvRedbag.getMap();
+        mvRedbag.showZoomControls(false);
+        mvRedbag.showScaleControl(false);
+        mvRedbag.removeViewAt(1);
+        vScope = LayoutInflater.from(getContext()).inflate(R.layout.layout_redpacket_scope, null);
+        tvScope = vScope.findViewById(R.id.tv_scope);
+        new RxPermissions(getActivity()).request(
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+        ).subscribe(new Action1<Boolean>() {
+            @Override
+            public void call(Boolean aBoolean) {
+                if (aBoolean) {//全部授权
+                    startLocation();
+                }
+            }
+        });
+        setUserRole(getPref().getInt(PrefUtil.USER_ROLE, Constant.USER_ROLE_FANS));
+        kilometre = getPref().getInt(PrefUtil.KILOMETRE, 1000);
+        mvpPresenter.getWalletCoinAndMoney();
+        mvpPresenter.getScrollBar();
+        mvpPresenter.getUserRole();
+        bm.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                optMarker = marker;
+                Bundle mb = marker.getExtraInfo();
+                switch (mb.getString(Constant.RED_PACKET_TYPE)) {
+                    case Constant.TYPE_NOW:
+                        break;
+                    case Constant.TYPE_SHARE:
+                        startActivity(new Intent(getActivity(), ShareActivity.class));
+                        break;
+                    case Constant.TYPE_REDBAG:
+                        redbag = (Redbag) mb.getSerializable(Constant.RED_PACKET_DATA);
+                        if (redbag == null) {
+                            showShortToast(R.string.not_find_redbag_data);
+                            return false;
+                        }
+                        if (openRedbagDialog == null) {
+                            openRedbagDialog = new OpenRedbagDialog(getContext());
+                            openRedbagDialog.setOnOpenResultListener(new OpenRedbagDialog.OnOpenResultListener() {
+                                @Override
+                                public void onOpenResult(String password) {
+                                    optMarker.remove();
+                                    showLoadingDialog(null);
+                                    if (redbag.getRoleType().equals(Constant.ROLETYPE_SYSTEM)) {
+                                        mvpPresenter.redPacketOpen(getPref().getLatitude(), getPref().getLongitude(), redbag.getUuid());
+                                    } else {
+                                        mvpPresenter.redPacketPoolOpen(getPref().getLatitude(), getPref().getLongitude(), redbag.getUuid(), password);
+                                    }
+
+                                }
+                            });
+                        }
+                        LogUtil.d(redbag.toString());
+                        openRedbagDialog.setRedbag(redbag);
+                        openRedbagDialog.show();
+                        break;
+                }
+                return false;
+            }
+        });
+        sethoneyData();
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mvRedbag.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mvRedbag.onResume();
+        if (mLocationClient != null) {
+            if (!TextUtils.isEmpty(getPref().getLatitude())) {
+                mvpPresenter.getHomeRegion(getPref().getLatitude(), getPref().getLongitude());
+            }
+            onHiddenChanged(false);
+        }
+        mvpPresenter.getKilometre();
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            mvpPresenter.getWalletCoinAndMoney();
+            if (mLocationClient != null) {
+                if (!isDelay) {
+                    handler.sendEmptyMessage(0);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mvRedbag.onPause();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mvRedbag.onDestroy();
+    }
+    @OnClick({R.id.tv_text, R.id.lin_city_owner, R.id.hiv_avatar, R.id.tv_start, R.id.iv_refresh, R.id.tv_upgrade_agent,R.id.tv_vote, R.id.id_arrow})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.tv_text:
+                startActivity(new Intent(getActivity(), SquareActivity.class));
+                break;
+            case R.id.lin_city_owner:
+            case R.id.hiv_avatar:
+                startActivity(new Intent(getActivity(), CityActivity.class));
+                break;
+            case R.id.tv_start:
+                new RedbagTypeDialog(getActivity(), new RedbagTypeDialog.OnItemClickListener() {
+                    @Override
+                    public void onRandom() {
+                        IntentUtils.startEditRedbagActivity(getActivity(), Constant.RED_PACKET_TYPE_RANDOM);
+                    }
+
+                    @Override
+                    public void onPassword() {
+                        IntentUtils.startEditRedbagActivity(getActivity(), Constant.RED_PACKET_TYPE_PASSWORD);
+                    }
+
+                    @Override
+                    public void onLucky() {
+                        IntentUtils.startEditRedbagActivity(getActivity(), Constant.RED_PACKET_TYPE_LUCKY);
+                    }
+                }).show();
+                break;
+            case R.id.iv_refresh:
+                if (AntiShake.check(view.getId()))
+                    return;
+                if (mLocationClient != null) {
+                    startAnim();
+                    handler.removeMessages(0);
+                    handler.sendEmptyMessage(0);
+                    mvpPresenter.getHomeRegion(getPref().getLatitude(), getPref().getLongitude());
+                    mvpPresenter.getKilometre();
+                }
+                break;
+            case R.id.tv_upgrade_agent:
+                startActivity(new Intent(getActivity(), UpgradeAgentActivity.class));
+                break;
+            case R.id.tv_vote:
+                break;
+            case R.id.id_arrow:
+                break;
+        }
+    }
+
+    public void startLocation() {
+        if (mLocationClient == null) {
+            mLocationClient = new LocationClient(App.getInstance());
+            option = new LocationClientOption();
+            option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
+            option.setCoorType(String.valueOf(CoordType.BD09LL));
+//            option.setScanSpan(3000);
+            option.setOpenGps(true);
+            option.setLocationNotify(false);
+            option.setIgnoreKillProcess(false);
+            option.setEnableSimulateGps(false);
+            mLocationClient.setLocOption(option);
+            mLocationClient.registerLocationListener(locationListener);
+            //开启定位
+        }
+        mLocationClient.start();
+    }
+
+    BDAbstractLocationListener locationListener = new BDAbstractLocationListener() {
+        @Override
+        public void onReceiveLocation(BDLocation bdLocation) {
+            LogUtil.d(bdLocation.getLongitude() + "=" + bdLocation.getLatitude());
+            mLocationClient.stop();
+            if ("4.9E-324".equals(String.valueOf(bdLocation.getLatitude()))) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startLocation();
+                    }
+                }, 1000);
+                return;
+            }
+            getPref().setString(PrefUtil.LATITUDE, String.valueOf(bdLocation.getLatitude()));
+            getPref().setString(PrefUtil.LONGITUDE, String.valueOf(bdLocation.getLongitude()));
+            if (isFirstLocation) {
+                isFirstLocation = false;
+                mvpPresenter.getHomeRegion(getPref().getLatitude(), getPref().getLongitude());
+            }
+            if (!isHidden() && isResumed()) {
+                isDelay = true;
+                handler.sendEmptyMessageDelayed(0, 30000);
+            }
+            mvpPresenter.redPacketGet(String.valueOf(bdLocation.getLatitude()), String.valueOf(bdLocation.getLongitude()));
+            mvpPresenter.getLocationRedabg(String.valueOf(bdLocation.getLatitude()), String.valueOf(bdLocation.getLongitude()));
+            LatLng ll = new LatLng(bdLocation.getLatitude(),
+                    bdLocation.getLongitude());
+            MapStatus.Builder builder = new MapStatus.Builder();
+            builder.target(ll).zoom(CommonUtil.getLevel(kilometre));
+            bm.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
+
+
+            LatLng point = new LatLng(bdLocation.getLatitude(), bdLocation.getLongitude());
+            //构建Marker图标
+            BitmapDescriptor bitmap = BitmapDescriptorFactory
+                    .fromResource(R.drawable.ic_location);
+            bm.clear();
+            Bundle nowbundle = new Bundle();
+            nowbundle.putString(Constant.RED_PACKET_TYPE, Constant.TYPE_NOW);
+            //构建MarkerOption，用于在地图上添加Marker
+            OverlayOptions option = new MarkerOptions()
+                    .position(point)
+                    .icon(bitmap).extraInfo(nowbundle);
+            //在地图上添加Marker，并显示
+            bm.addOverlay(option);
+
+            OverlayOptions ooCircle = new CircleOptions().fillColor(0x1ebababa)
+                    .center(new LatLng(bdLocation.getLatitude(), bdLocation.getLongitude())).stroke(new Stroke(1, 0xff9f9f9f))
+                    .radius(kilometre);
+            bm.addOverlay(ooCircle);
+            if (isAdded()) {
+                tvScope.setText(String.format(getString(R.string.format_mill_unit), kilometre));
+            }
+            Bundle sharebundle = new Bundle();
+            sharebundle.putString(Constant.RED_PACKET_TYPE, Constant.TYPE_SHARE);
+            OverlayOptions shareOption = new MarkerOptions().
+                    position(new LatLng(bdLocation.getLatitude() - (kilometre * 0.00001), bdLocation.getLongitude())).
+                    icon(BitmapDescriptorFactory
+                            .fromView(vScope)).extraInfo(sharebundle);
+            bm.addOverlay(shareOption);
+        }
+    };
+
+    @Override
+    public void setSystemRedbag(List<Redbag> data) {
+        closeAnim();
+        if (data != null) {
+            addMarker(data, poolOptions);
+        }
+    }
+
+    @Override
+    public void setLocationRedbag(List<Redbag> data) {
+        closeAnim();
+        if (data != null) {
+            addMarker(data, locOptions);
+        }
+    }
+
+    @Override
+    public void setRedbagDetail(RedbagDetail redbagDetail) {
+        closeLoadingDialog();
+        if (redbagDetail != null) {
+            IntentUtils.startRedbagDetailActivity(getActivity(), redbagDetail, redbag.getUuid(), redbag.getRoleType());
+        }
+    }
+
+    @Override
+    public void setCoinAndMoney(MyKsb data) {
+        tvTitle.setText(String.valueOf(data.getCoin()));
+        getPref().setString(PrefUtil.COIN, String.valueOf(data.getCoin()));
+        getPref().setString(PrefUtil.MONEY, String.valueOf(data.getMoney()));
+    }
+
+    @Override
+    public void setScrollbar(List<String> data) {
+        if (data == null || data.size() == 0) {
+            linNotice.setVisibility(View.GONE);
+            return;
+        }
+        stvNotice.setScroll(true);
+        stvNotice.setTextSpeed(5);
+        stvNotice.setTextSize(CommonUtil.sp2px(getContext(), 13));
+        stvNotice.setTextColor(getResources().getColor(R.color.text_notice));
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < data.size(); i++) {
+            builder.append(data.get(i));
+            for (int j = 0; j < 30; j++) {
+                builder.append("  ");
+            }
+        }
+        stvNotice.setText(builder.toString());
+    }
+
+    @Override
+    public void setUserRole(Integer data) {
+        if (data != null) {
+            getPref().setInt(PrefUtil.USER_ROLE, 0);
+            if (data.intValue() >= Constant.USER_ROLE_AGENT) {
+                tvUpgradeAgent.setVisibility(View.GONE);
+            } else {
+                tvUpgradeAgent.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
+    @Override
+    public void setHomeRegion(HomeRegion data) {
+        if (data != null && data != homeRegion) {
+            homeRegion = data;
+            GlideImgManager.loadImage(getActivity(), data.getAvatar(), hivAvatar);
+            tvCityOwner.setText(data.getNickName());
+        }
+    }
+
+    @Override
+    public void setKilometre(Integer data) {
+        if (data != null & data.intValue() != kilometre) {
+            kilometre = data;
+            getPref().setInt(PrefUtil.KILOMETRE, kilometre);
+            if (tvScope != null) {
+                tvScope.setText(String.format(getString(R.string.format_mill_unit), kilometre));
+            }
+        }
+    }
+
+    @Override
+    public void setError(String msg) {
+        closeLoadingDialog();
+        closeAnim();
+        ((MainActivity) getActivity()).setError(msg);
+    }
+
+    public void addMarker(List<Redbag> redbagList, List<OverlayOptions> options) {
+//        LogUtil.d("redbagList="+redbagList.size());
+        options.clear();
+        for (int i = 0; i < redbagList.size(); i++) {
+            BitmapDescriptor bitmap;
+            Bundle bundle = new Bundle();
+            switch (redbagList.get(i).getRoleType()) {
+                case Constant.ROLETYPE_SYSTEM:
+                    bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_map_redbag_system);
+                    break;
+                case Constant.ROLETYPE_MERCHANT:
+                    bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_map_redbag_shop);
+                    break;
+                case Constant.ROLETYPE_PERSON:
+                    if (redbagList.get(i).getType().equals(Constant.RED_PACKET_TYPE_RANDOM)) {
+                        bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_map_redbag_person);
+                    } else if (redbagList.get(i).getType().equals(Constant.RED_PACKET_TYPE_PASSWORD)) {
+                        bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_map_redbag_pwd);
+                    } else {
+                        bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_map_redbag_person);
+                    }
+                    break;
+                case Constant.ROLETYPE_ADMIN:
+                    bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_map_redbag_shop);
+                    break;
+                default:
+                    bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_map_redbag_system);
+                    break;
+            }
+            bundle.putSerializable(Constant.RED_PACKET_TYPE, Constant.TYPE_REDBAG);
+            bundle.putSerializable(Constant.RED_PACKET_DATA, redbagList.get(i));
+            OverlayOptions option = new MarkerOptions()
+                    .position(new LatLng(Double.parseDouble(redbagList.get(i).getLatitude()),
+                            Double.parseDouble(redbagList.get(i).getLongitude())))
+                    .icon(bitmap).extraInfo(bundle)
+                    .animateType(MarkerOptions.MarkerAnimateType.grow);
+            options.add(option);
+        }
+        bm.addOverlays(options);
+    }
+
+    public void refreshWallet() {
+        mvpPresenter.getWalletCoinAndMoney();
+    }
+
+    public void refreshUserRole() {
+        mvpPresenter.getUserRole();
+    }
+
+    public void startAnim() {
+        if (rotateAnim == null) {
+            rotateAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.refresh_rotate);
+            LinearInterpolator lin = new LinearInterpolator();
+            rotateAnim.setInterpolator(lin);
+            ivRefresh.startAnimation(rotateAnim);
+        }
+    }
+
+    public void closeAnim() {
+        if (rotateAnim != null) {
+            rotateAnim.cancel();
+            rotateAnim = null;
+        }
+    }
+    public void sethoneyData(){
+        honeyArr=new ArrayList<>();
+        for (int i=0;i<20;i++){
+            honeyArr.add("tag="+i);
+        }
+        rvHoney.setLayoutManager(new GridLayoutManager(getContext(),4));
+        rvHoney.addItemDecoration(new GridItemDecoration(4,10,true));
+        HoneyAdapter honeyAdapter=new HoneyAdapter(honeyArr);
+        honeyAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        rvHoney.setAdapter(honeyAdapter);
+    }
+}

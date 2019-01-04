@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+   <include layout="@layout/layout_title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_gray"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space15"
+            android:background="@color/bg_white"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space45"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/space15"
+                android:paddingRight="@dimen/space15">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/contribution_value"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont14" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tv_contribution_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_city_yellow"
+                    android:textSize="@dimen/textfont14" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divide_h"
+                android:layout_marginLeft="@dimen/space15"
+                android:layout_marginRight="@dimen/space15"
+                android:background="@color/bg_divide" />
+
+            <LinearLayout
+                android:id="@+id/lin_avatar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space45"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/space15"
+                android:paddingRight="@dimen/space15">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/headimage"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont14" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/iv_avatar"
+                    android:layout_width="@dimen/space30"
+                    android:layout_height="@dimen/space30"
+                    android:scaleType="fitXY"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/ic_arrow_right"
+                    android:drawablePadding="@dimen/space10" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divide_h"
+                android:layout_marginLeft="@dimen/space15"
+                android:layout_marginRight="@dimen/space15"
+                android:background="@color/bg_divide" />
+
+            <LinearLayout
+                android:id="@+id/lin_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space45"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/space15"
+                android:paddingRight="@dimen/space15">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nickname"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont14" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tv_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont14"
+                    android:drawableRight="@drawable/ic_arrow_right"
+                    android:drawablePadding="@dimen/space10" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divide_h"
+                android:layout_marginLeft="@dimen/space15"
+                android:layout_marginRight="@dimen/space15"
+                android:background="@color/bg_divide" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space45"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/space15"
+                android:paddingRight="@dimen/space15">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/recommend_code"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont14" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tv_recommend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont14" />
+
+                <TextView
+                    android:id="@+id/tv_copy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/space10"
+                    android:text="@string/copy"
+                    android:textColor="@color/text_blue"
+                    android:textSize="@dimen/textfont14" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divide_h"
+                android:layout_marginLeft="@dimen/space15"
+                android:layout_marginRight="@dimen/space15"
+                android:background="@color/bg_divide" />
+            <LinearLayout
+                android:id="@+id/lin_inviter"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space45"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/space15"
+                android:paddingRight="@dimen/space15">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/inviter"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont14" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+                <TextView
+                    android:id="@+id/tv_inviter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
+                <ImageView
+                    android:id="@+id/iv_inviter_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_arrow_right" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space15"
+            android:background="@color/bg_white"
+            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/lin_feedback"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space45"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/space15"
+                android:paddingRight="@dimen/space15">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/advise_feedback"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont14" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:drawableRight="@drawable/ic_arrow_right"
+                    android:drawablePadding="@dimen/space10" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_exit"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space45"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/space50"
+            android:layout_marginLeft="@dimen/space15"
+            android:layout_marginRight="@dimen/space15"
+            android:background="@drawable/bg_btn_red"
+            android:textSize="@dimen/textfont15"
+            android:textColor="@color/text_white"
+            android:text="@string/safe_exit"/>
+    </LinearLayout>
+</LinearLayout>

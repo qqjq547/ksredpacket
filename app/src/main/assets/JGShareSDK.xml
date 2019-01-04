@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DevInfor>
+
+    <!-- 如果不需要支持某平台，可缺省该平台的配置-->
+    <!-- 各个平台的KEY仅供DEMO演示，开发者要集成发布需要改成自己的KEY-->
+
+    <SinaWeibo
+        AppKey="655296366"
+        AppSecret="540481d2d0a685707b15cb90fdd69b6a"
+        RedirectUrl="https://www.jiguang.cn"/>
+
+    <QQ
+        AppId="1106947833"
+        AppKey="uQKqQRGQUutXrBhi"/>
+
+    <Wechat
+        AppId="wx3f027d9298bbbed4"
+        AppSecret="b363ae9da8805dc8e539a0337f453470"/>
+
+</DevInfor>

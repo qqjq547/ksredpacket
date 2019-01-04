@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_upgrade_agent" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        android:layout_marginTop="@dimen/space20">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/title_height"
+            android:layout_height="match_parent"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_back_white" />
+
+
+        <TextView
+            android:id="@+id/tv_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:paddingLeft="@dimen/space15"
+            android:paddingRight="@dimen/space15"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/textfont14" />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/tv_upgrade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="@dimen/space40"
+        android:layout_marginLeft="@dimen/space30"
+        android:layout_marginRight="@dimen/space30"
+        android:background="@drawable/bg_btn_upgrade_agent"
+        android:gravity="center"
+        android:padding="@dimen/space5"
+        android:text="@string/become_agent"
+        android:textColor="#4E1292"
+        android:textSize="@dimen/textfont22"
+        android:textStyle="bold" />
+</FrameLayout>

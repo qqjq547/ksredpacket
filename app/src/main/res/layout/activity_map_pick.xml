@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/lin_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/bg_title">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height"
+            android:gravity="center_vertical"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="@dimen/title_height"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_back" />
+            <com.guochuang.mimedia.view.ClearEditText
+                android:id="@+id/et_search"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/space32"
+                android:layout_weight="1"
+                android:lines="1"
+                android:layout_marginRight="@dimen/space10"
+                android:paddingLeft="@dimen/space16"
+                android:paddingRight="@dimen/space16"
+                android:drawableLeft="@drawable/ic_search"
+                android:drawablePadding="@dimen/space5"
+                android:singleLine="true"
+                android:imeOptions="actionSearch"
+                android:background="@drawable/bg_search_gray"
+                android:textSize="@dimen/textfont13"
+                android:hint="@string/search_location"/>
+
+            <TextView
+                android:id="@+id/tv_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/space15"
+                android:paddingRight="@dimen/space15"
+                android:gravity="center"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/textfont15"
+                android:text="@string/confirm"/>
+        </LinearLayout>
+        <include layout="@layout/layout_divide_deep_line"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_above="@+id/rv_search"
+                android:layout_weight="1">
+
+                <com.baidu.mapapi.map.MapView
+                    android:id="@+id/mv_pick"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_location"
+                    android:translationY="-20dp" />
+
+                <ImageView
+                    android:id="@+id/iv_location"
+                    android:layout_width="@dimen/space30"
+                    android:layout_height="@dimen/space30"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="@dimen/space7"
+                    android:src="@drawable/ic_locate" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_detail"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_alignParentBottom="true"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/space10">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/current_select_address"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/textfont16" />
+
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="left"
+                        android:maxLines="1"
+                        android:textColor="@color/text_city_yellow"
+                        android:textSize="@dimen/textfont16" />
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </android.support.v7.widget.RecyclerView>
+            </LinearLayout>
+        </LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_white"
+            android:visibility="gone">
+        </android.support.v7.widget.RecyclerView>
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lin_city_none"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:visibility="visible">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_white_block"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/space15"
+        android:paddingLeft="@dimen/space15"
+        android:paddingRight="@dimen/space15"
+        android:paddingTop="@dimen/space15">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space10">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_city_bid_hall_loca"
+                android:drawablePadding="@dimen/space5"
+                android:gravity="center_vertical"
+                android:text="@string/cur_area"
+                android:textColor="@color/text_drak_black"
+                android:textSize="@dimen/textfont16" />
+
+            <TextView
+                android:id="@+id/tv_city_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/text_drak_black"
+                android:textSize="@dimen/textfont16" />
+        </RelativeLayout>
+
+        <View
+            style="@style/bottom_line"
+            android:layout_marginTop="@dimen/space20" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/space10"
+            android:layout_marginTop="@dimen/space10"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg_city_bid_hall_city_none" />
+
+            <TextView
+                android:id="@+id/tv_bid_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space10"
+                android:text="@string/format_yuan"
+                android:textColor="@color/text_city_yellow"
+                android:textSize="@dimen/textfont18" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_bid_share_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="@dimen/space10"
+            android:text="@string/city_bid_hall_none_share_hint"
+            android:textColor="@color/text_drak_black"
+            android:textSize="@dimen/textfont14" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/space15"
+        android:background="@drawable/bg_btn_red"
+        android:gravity="center"
+        android:padding="@dimen/space15"
+        android:text="@string/buy_city_owner"
+        android:textColor="@color/text_white"
+        android:textSize="@dimen/textfont18" />
+</LinearLayout>

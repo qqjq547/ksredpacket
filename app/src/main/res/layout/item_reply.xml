@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/space15"
+    android:paddingRight="@dimen/space15"
+    android:paddingTop="@dimen/space5"
+    android:paddingBottom="@dimen/space5">
+<ImageView
+    android:id="@+id/iv_avatar"
+    android:layout_width="@dimen/space28"
+    android:layout_height="@dimen/space28" />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginLeft="@dimen/space6"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space6"
+            android:textColor="@color/text_blue"
+            android:textSize="@dimen/textfont14"
+            android:text="叫什么用户名呢"/>
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space10"
+            android:text="很好，很好，很好"
+            android:textSize="@dimen/textfont13" />
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           android:layout_marginTop="@dimen/space9"
+            android:layout_marginBottom="@dimen/space5"
+            android:textSize="@dimen/textfont8"
+            android:textColor="@color/text_gray"
+            android:text="11:22"/>
+
+    </LinearLayout>
+</LinearLayout>
