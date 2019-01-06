@@ -448,6 +448,7 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
             @Override
             public boolean onLongClick(View v) {
                 CommonUtil.copyMsg(RedbagDetailActivity.this, tvContent.getText().toString().trim());
+                showShortToast(R.string.copy_success);
                 return false;
             }
         });

@@ -1,7 +1,10 @@
 package com.guochuang.mimedia.ui.activity;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -9,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.guochuang.mimedia.tools.LogUtil;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.BasePresenter;
@@ -21,9 +25,13 @@ import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.guochuang.mimedia.ui.dialog.ShareDialog;
 
+import java.io.File;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
 public class ShareActivity extends MvpActivity<SharePresenter> implements ShareView {
     @BindView(R.id.fl_content)
@@ -63,7 +71,7 @@ public class ShareActivity extends MvpActivity<SharePresenter> implements ShareV
             case R.id.tv_share_friend:
                 String url=App.getInstance().getUserInfo().getTwoDimensional();
                 if (!TextUtils.isEmpty(url))
-                    showShare();
+                    dealBitmap();
                 break;
         }
     }
@@ -82,14 +90,23 @@ public class ShareActivity extends MvpActivity<SharePresenter> implements ShareV
      showShortToast(msg);
     }
     private Bitmap getViewBitmap(View view) {
-        view.setDrawingCacheEnabled(true);
-        Bitmap shareBitmap = Bitmap.createBitmap(view.getDrawingCache());
-        view.setDrawingCacheEnabled(false);
-        return shareBitmap;
+        Bitmap screenshot = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(screenshot);
+        view.draw(c);
+        return screenshot;
     }
-    public void showShare(){
-        ShareDialog shareDialog=new ShareDialog(this);
-        shareDialog.setBitmap(getViewBitmap(flContent));
+    public void dealBitmap(){
+        Bitmap bitmap= getViewBitmap(flContent);
+        if (bitmap==null){
+            showShortToast(R.string.cant_get_qrcode);
+            return;
+        }
+        File file= CommonUtil.saveBitmap(bitmap,Constant.COMMON_PATH+File.separator+"qrcode.png");
+        share(file);
+    }
+    public void share(File file){
+        ShareDialog shareDialog=new ShareDialog(ShareActivity.this);
+        shareDialog.setImagePath(file.getAbsolutePath());
         shareDialog.setOnShareResultListener(new ShareDialog.OnShareResultListener() {
             @Override
             public void onSuccess(String platform) {

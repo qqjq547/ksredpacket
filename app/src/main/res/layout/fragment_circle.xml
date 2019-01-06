@@ -26,9 +26,14 @@
 
     <include layout="@layout/layout_divide_deep_line" />
   </LinearLayout>
+  <com.scwang.smartrefresh.layout.SmartRefreshLayout
+      android:id="@+id/srl_refresh"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
   <WebView
       android:id="@+id/wv_circle"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:scrollbars="vertical"></WebView>
+  </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

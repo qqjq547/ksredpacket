@@ -181,6 +181,8 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                                 intent.putExtra(Constant.RECOMMENDDATA,recommendData);
                                 startActivity(intent);
                             }
+                        }else {
+                            mvpPresenter.getRecommendData();
                         }
                         break;
                     case R.drawable.ic_my_city:
@@ -239,6 +241,8 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                             intent.putExtra(Constant.RECOMMENDDATA,recommendData);
                             startActivity(intent);
                         }
+                    }else {
+                        mvpPresenter.getRecommendData();
                     }
                     break;
             }

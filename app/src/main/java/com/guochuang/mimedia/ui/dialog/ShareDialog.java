@@ -54,7 +54,7 @@ public class ShareDialog extends Dialog {
     String url;
     String imageUrl;
     boolean report=false;
-    Bitmap bitmap;
+    String imagePath;
 
     OnShareResultListener onShareResultListener;
     public interface OnShareResultListener{
@@ -83,8 +83,8 @@ public class ShareDialog extends Dialog {
             tvReport.setVisibility(View.GONE);
         }
     }
-    public void setBitmap(Bitmap bitmap) {
-        this.bitmap = bitmap;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
         tvQq.setVisibility(View.GONE);
         tvSinaweibo.setVisibility(View.GONE);
     }
@@ -149,9 +149,9 @@ public class ShareDialog extends Dialog {
     private void showShare(final String platform) {
         if (JShareInterface.isClientValid(platform)) {
             final ShareParams shareParams = new ShareParams();
-            if (bitmap!=null){
+            if (!TextUtils.isEmpty(imagePath)){
                 shareParams.setShareType(Platform.SHARE_IMAGE);
-                shareParams.setImageData(bitmap);
+                shareParams.setImagePath(imagePath);
                 JShareInterface.share(platform, shareParams, shareActionListener);
                 return;
             }

@@ -20,6 +20,9 @@ import com.guochuang.mimedia.tools.AdCollectionView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.LogUtil;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
@@ -32,6 +35,8 @@ public class WebActivity extends MvpActivity {
     TextView tvTitle;
     @BindView(R.id.tv_text)
     TextView tvText;
+    @BindView(R.id.srl_refresh)
+    SmartRefreshLayout srlRefresh;
     @BindView(R.id.wv_content)
     WebView wvContent;
     @BindView(R.id.lin_title)
@@ -76,11 +81,19 @@ public class WebActivity extends MvpActivity {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 tvTitle.setText(view.getTitle());
+                srlRefresh.finishRefresh();
             }
         });
         wvContent.addJavascriptInterface(new JSInterface(this),"browserController");
         wvContent.loadUrl(CommonUtil.getTimeStampUrl(url));
-
+        srlRefresh.setEnableLoadmore(false);
+        srlRefresh.setEnableRefresh(true);
+        srlRefresh.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                wvContent.reload();
+            }
+        });
     }
 
     @OnClick({R.id.iv_back,R.id.tv_text})

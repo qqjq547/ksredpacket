@@ -129,7 +129,7 @@ public class IdentifyActivity extends MvpActivity<IdentifyPresenter> implements 
                                 Bitmap faceBmp = BitmapFactory.decodeByteArray(idCardResult.getIdCardInfo().getImageFrontside(), 0,
                                         idCardResult.getIdCardInfo().getImageFrontside().length);
                                 ivCard.setImageBitmap(faceBmp);
-                                file = CommonUtil.saveBitmap(faceBmp, Environment.getExternalStorageDirectory() + "/certifi" + System.currentTimeMillis() + ".png");
+                                file = CommonUtil.saveBitmap(faceBmp, Constant.COMMON_PATH +File.separator + System.currentTimeMillis() + ".png");
                                 IdentifyActivity.this.idCardResult = idCardResult;
                                 if (idCardResult == null) {
                                     return;

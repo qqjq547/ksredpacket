@@ -16,14 +16,18 @@ import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.ui.activity.CityActivity;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.sz.gcyh.KSHongBao.R;
 import butterknife.BindView;
 
-@SuppressLint("JavascriptInterface")
 public class GameFragment extends MvpFragment {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
+    @BindView(R.id.srl_refresh)
+    SmartRefreshLayout srlRefresh;
     @BindView(R.id.wv_game)
     WebView wvGame;
 
@@ -59,11 +63,20 @@ public class GameFragment extends MvpFragment {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-//                tvTitle.setText(view.getTitle());
+                tvTitle.setText(view.getTitle());
+                srlRefresh.finishRefresh();
             }
         });
         wvGame.addJavascriptInterface(new GameInterface(), "browserController");
         wvGame.loadUrl(CommonUtil.getTimeStampUrl(Constant.URL_MIWAN));
+        srlRefresh.setEnableLoadmore(false);
+        srlRefresh.setEnableRefresh(true);
+        srlRefresh.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                wvGame.reload();
+            }
+        });
     }
 
     private class GameInterface {

@@ -15,6 +15,9 @@ import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.ui.activity.CityActivity;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.sz.gcyh.KSHongBao.R;
 import butterknife.BindView;
 
@@ -22,7 +25,8 @@ public class CircleFragment extends MvpFragment {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
-
+    @BindView(R.id.srl_refresh)
+    SmartRefreshLayout srlRefresh;
     @BindView(R.id.wv_circle)
     WebView wvCircle;
 
@@ -60,10 +64,19 @@ public class CircleFragment extends MvpFragment {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 tvTitle.setText(view.getTitle());
+                srlRefresh.finishRefresh();
             }
         });
         wvCircle.addJavascriptInterface(new circleInterface(), "browserController");
         wvCircle.loadUrl(CommonUtil.getTimeStampUrl(Constant.URL_TRADINGAREA));
+        srlRefresh.setEnableLoadmore(false);
+        srlRefresh.setEnableRefresh(true);
+        srlRefresh.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                wvCircle.reload();
+            }
+        });
     }
 
     private class circleInterface {
@@ -78,7 +91,6 @@ public class CircleFragment extends MvpFragment {
         }
         @JavascriptInterface
         public void openWin(String openUrl){
-            LogUtil.d("openUrl="+openUrl);
             IntentUtils.startWebActivity(getActivity(),"",openUrl);
         }
     }
