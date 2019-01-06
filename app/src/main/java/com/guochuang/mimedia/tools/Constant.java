@@ -18,6 +18,8 @@ public class Constant {
      */
     public static final boolean isDebug = (BuildConfig.ENV == 0);
     public static final int HTTP_STATUS_OK = 1;
+    public static final int HTTP_STATUS_FORCE_LOGIN = 1007;
+    public static final int HTTP_STATUS_REDBAD_INVALID = 10012;
     public static final String PARAMS_H_TIME = "h-time";
     public static final String PARAMS_H_TENANT_CODE = "h-tenant-code";
     public static final String PARAMS_H_API_TOEKN = "h-api-token";
@@ -201,7 +203,6 @@ public class Constant {
     public static final int USER_ROLE_MANAGER = 2;
     public static final int USER_ROLE_CHIEF = 3;
     public static final int USER_ROLE_STAR_CHIEF = 4;
-    public static final int CODE_FORCE_LOGIN = 1007;
     public static final int MAX_PICK_PICTURE = 6;
 
 

@@ -98,28 +98,7 @@ public class MyKsbTransferActivity extends MvpActivity<KsbTransferPresenter> imp
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//                if (charSequence.toString().contains(".")) {
-//                    if (charSequence.length() - 1 - charSequence.toString().indexOf(".") > 2) {
-//                        charSequence = charSequence.toString().subSequence(0,
-//                                charSequence.toString().indexOf(".") + 3);
-//                        etPrice.setText(charSequence);
-//                        etPrice.setSelection(charSequence.length());
-//                    }
-//                }
-//                if (charSequence.toString().trim().substring(0).equals(".")) {
-//                    charSequence = "0" + charSequence;
-//                    etPrice.setText(charSequence);
-//                    etPrice.setSelection(2);
-//                }
 //
-//                if (charSequence.toString().startsWith("0")
-//                        && charSequence.toString().trim().length() > 1) {
-//                    if (!charSequence.toString().substring(1, 2).equals(".")) {
-//                        etPrice.setText(charSequence.subSequence(0, 1));
-//                        etPrice.setSelection(1);
-//                        return;
-//                    }
-//                }
             }
 
             @Override
@@ -135,25 +114,17 @@ public class MyKsbTransferActivity extends MvpActivity<KsbTransferPresenter> imp
                 if (Double.parseDouble(etPrice.getText().toString()) >= Double.parseDouble(myKsb.getMoney())) {
                     double surplus = Double.parseDouble(myKsb.getMoney()) % ksbTransfer.getIncrease();
                     if (surplus != 0) {
-                        if (ksbTransfer.getIncrease() > 1) {
-                            etPrice.setText(String.valueOf(DoubleUtil.mul(Double.parseDouble(myKsb.getMoney()),ksbTransfer.getIncrease())));
-                        } else {
-                            etPrice.setText(String.valueOf(Double.parseDouble(myKsb.getMoney()) - surplus));
-                        }
+                        etPrice.setText(String.valueOf((int)(Double.parseDouble(myKsb.getMoney()) - surplus)));
                     }
                 } else {
                     double surplus = Double.parseDouble(etPrice.getText().toString()) % ksbTransfer.getIncrease();
                     if (surplus != 0) {
-                        if (ksbTransfer.getIncrease() > 1) {
-                            etPrice.setText(String.valueOf(DoubleUtil.mul(Double.parseDouble(etPrice.getText().toString()),ksbTransfer.getIncrease())));
-                        } else {
-                            etPrice.setText(String.valueOf(Double.parseDouble(etPrice.getText().toString()) - surplus));
-                        }
+                        etPrice.setText(String.valueOf((int)(Double.parseDouble(etPrice.getText().toString()) - surplus)));
                     }
                 }
                 tvKsbEquivalence.setText(String.valueOf(DoubleUtil.divide(Double.parseDouble(etPrice.getText().toString()),Double.parseDouble(myKsb.getKsbPrice()))));
                 llPoundage.setVisibility(View.VISIBLE);
-                tvPoundage.setText(String.valueOf(DoubleUtil.mul(ksbTransfer.getPoundageRate(),Double.parseDouble(editable.toString()))));
+                tvPoundage.setText(String.valueOf(DoubleUtil.mul(ksbTransfer.getPoundageRate(),Double.parseDouble(etPrice.getText().toString()))));
                 etPrice.setSelection(etPrice.getText().toString().length());
             }
         });
@@ -181,11 +152,7 @@ public class MyKsbTransferActivity extends MvpActivity<KsbTransferPresenter> imp
                 if (myKsb != null&&ksbTransfer!=null) {
                     double surplus = Double.parseDouble(myKsb.getMoney()) % ksbTransfer.getIncrease();
                     if (surplus != 0) {
-                        if (ksbTransfer.getIncrease() > 1) {
-                            etPrice.setText(String.valueOf(DoubleUtil.mul(Double.parseDouble(myKsb.getMoney()),ksbTransfer.getIncrease())));
-                        } else {
-                            etPrice.setText(String.valueOf(Double.parseDouble(myKsb.getMoney()) - surplus));
-                        }
+                        etPrice.setText(String.valueOf((int)(Double.parseDouble(myKsb.getMoney()) - surplus)));
                     }
                 }
                 break;

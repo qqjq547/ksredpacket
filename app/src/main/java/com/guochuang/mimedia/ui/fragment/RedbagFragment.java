@@ -486,6 +486,11 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
         ((MainActivity) getActivity()).setError(msg);
     }
 
+    @Override
+    public void setRedbagInvalid() {
+        ivRefresh.callOnClick();
+    }
+
     public void addMarker(List<Redbag> redbagList, List<OverlayOptions> options) {
 //        LogUtil.d("redbagList="+redbagList.size());
         options.clear();
