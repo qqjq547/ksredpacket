@@ -29,6 +29,9 @@ public class MyKsbTransRecAdapter extends BaseQuickAdapter<MyKsbTransRec, BaseVi
             case 2:
                 helper.setText(R.id.tv_state, mContext.getResources().getString(R.string.no_pass));
                 break;
+            case 3:
+                helper.setText(R.id.tv_state, mContext.getResources().getString(R.string.has_refund));
+                break;
         }
     }
 }
