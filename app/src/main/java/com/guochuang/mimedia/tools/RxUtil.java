@@ -45,7 +45,7 @@ public class RxUtil {
                     @Override
                     public Observable<T> call(HttpResponse<T> tHttpResponse) {
                         int code = tHttpResponse.getCode();
-                        if (code==Constant.CODE_FORCE_LOGIN){
+                        if (code==Constant.HTTP_STATUS_FORCE_LOGIN){
                             App.getInstance().forceLogin();
                             return null;
                         }
@@ -67,7 +67,7 @@ public class RxUtil {
                     @Override
                     public Observable<com.guochuang.mimedia.http.response.HttpResponse> call(com.guochuang.mimedia.http.response.HttpResponse tHttpResponse) {
                         int code = tHttpResponse.getCode();
-                        if (code==Constant.CODE_FORCE_LOGIN){
+                        if (code==Constant.HTTP_STATUS_FORCE_LOGIN){
                             App.getInstance().forceLogin();
                             return null;
                         }

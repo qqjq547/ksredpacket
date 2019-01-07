@@ -144,7 +144,7 @@
               android:id="@+id/lin_notice"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:background="@color/bg_trans_light"
+              android:background="@color/bg_trans_white"
               android:orientation="horizontal"
               android:paddingLeft="@dimen/space15"
               android:paddingTop="@dimen/space4"
@@ -169,41 +169,7 @@
                   android:textColor="@color/text_notice"
                   android:textSize="@dimen/textfont14" />
           </LinearLayout>
-          <android.support.v4.widget.NestedScrollView
-              android:id="@+id/nsv_honey"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="@color/bg_trans_light"
-              android:visibility="gone">
-              <LinearLayout
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="vertical"
-                  android:gravity="center_horizontal">
-                  <android.support.v7.widget.RecyclerView
-                      android:id="@+id/rv_honey"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content">
-                  </android.support.v7.widget.RecyclerView>
-                  <TextView
-                      android:id="@+id/tv_vote"
-                      android:layout_width="@dimen/space120"
-                      android:layout_height="@dimen/space30"
-                      android:layout_marginTop="@dimen/space20"
-                      android:gravity="center"
-                      android:background="@drawable/bg_btn_red"
-                      android:textSize="@dimen/textfont14"
-                      android:textColor="@color/text_white"
-                      android:text="@string/i_want_show_ad"/>
-                  <ImageView
-                      android:id="@+id/id_arrow"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_marginTop="@dimen/space10"
-                      android:layout_marginBottom="@dimen/space10"
-                      android:src="@drawable/ic_arrow_down_selector"/>
-              </LinearLayout>
-          </android.support.v4.widget.NestedScrollView>
+
       </LinearLayout>
   </FrameLayout>
 </LinearLayout>

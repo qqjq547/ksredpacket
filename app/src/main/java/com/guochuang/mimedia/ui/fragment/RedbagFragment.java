@@ -101,14 +101,6 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     ImageView ivRefresh;
     @BindView(R.id.tv_upgrade_agent)
     TextView tvUpgradeAgent;
-    @BindView(R.id.rv_honey)
-    RecyclerView rvHoney;
-    @BindView(R.id.tv_vote)
-    TextView tvVote;
-    @BindView(R.id.id_arrow)
-    ImageView idArrow;
-    @BindView(R.id.nsv_honey)
-    NestedScrollView nsvHoney;
 
     TextView tvScope;
     BaiduMap bm;
@@ -125,7 +117,6 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     boolean isFirstLocation = true;
     View vScope;
     Animation rotateAnim;
-    List<String> honeyArr=new ArrayList<>();
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -219,7 +210,6 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                 return false;
             }
         });
-        sethoneyData();
     }
 
     @Override
@@ -265,7 +255,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
         super.onDestroyView();
         mvRedbag.onDestroy();
     }
-    @OnClick({R.id.tv_text, R.id.lin_city_owner, R.id.hiv_avatar, R.id.tv_start, R.id.iv_refresh, R.id.tv_upgrade_agent,R.id.tv_vote, R.id.id_arrow})
+    @OnClick({R.id.tv_text, R.id.lin_city_owner, R.id.hiv_avatar, R.id.tv_start, R.id.iv_refresh, R.id.tv_upgrade_agent})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_text:
@@ -306,10 +296,6 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                 break;
             case R.id.tv_upgrade_agent:
                 startActivity(new Intent(getActivity(), UpgradeAgentActivity.class));
-                break;
-            case R.id.tv_vote:
-                break;
-            case R.id.id_arrow:
                 break;
         }
     }
@@ -486,6 +472,11 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
         ((MainActivity) getActivity()).setError(msg);
     }
 
+    @Override
+    public void setRedbagInvalid() {
+        ivRefresh.callOnClick();
+    }
+
     public void addMarker(List<Redbag> redbagList, List<OverlayOptions> options) {
 //        LogUtil.d("redbagList="+redbagList.size());
         options.clear();
@@ -549,16 +540,5 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
             rotateAnim.cancel();
             rotateAnim = null;
         }
-    }
-    public void sethoneyData(){
-        honeyArr=new ArrayList<>();
-        for (int i=0;i<20;i++){
-            honeyArr.add("tag="+i);
-        }
-        rvHoney.setLayoutManager(new GridLayoutManager(getContext(),4));
-        rvHoney.addItemDecoration(new GridItemDecoration(4,10,true));
-        HoneyAdapter honeyAdapter=new HoneyAdapter(honeyArr);
-        honeyAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
-        rvHoney.setAdapter(honeyAdapter);
     }
 }

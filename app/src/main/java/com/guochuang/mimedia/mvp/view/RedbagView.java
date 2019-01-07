@@ -21,6 +21,6 @@ public interface RedbagView {
     void setHomeRegion(HomeRegion data);
     void setKilometre(Integer data);
     void setError(String msg);
-
+    void setRedbagInvalid();
 
 }

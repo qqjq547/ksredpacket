@@ -27,6 +27,7 @@
     <string name="apply_for">申请中</string>
     <string name="paymented">已打款</string>
     <string name="no_pass">不通过</string>
+    <string name="has_refund">已退款</string>
 
     <string name="content_login_agreenment">注册即表示已阅读并同意&lt;font color=#ff3b3b&gt;&lt;u&gt;用户协议&lt;/u&gt;&lt;/font&gt;</string>
     <string name="type_login_wx">微信登录</string>
@@ -200,7 +201,7 @@
     <string name="redbag_benfit">红包收益</string>
     <string name="buy_price_benfit">竞购溢价</string>
     <string name="redbag_benfit_detail">红包收益>></string>
-    <string name="buy_record_arrow">竞购记录>></string>
+    <string name="bid_price_arrow">竞购溢价>></string>
     <string name="buy_hall">竞购大厅</string>
     <string name="format_buy_city">竞购得%s城主</string>
     <string name="cur_area">所在区域</string>

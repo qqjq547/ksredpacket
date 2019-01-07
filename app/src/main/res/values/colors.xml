@@ -64,6 +64,7 @@
     <color name="bg_city_bid_hall_right_gray">#bfbdbd</color>
     <color name="bg_rain">#e84047</color>
     <color name="bg_active">#86e0de</color>
+    <color name="bg_trans_white">#e6ffffff</color>
 
     <color name="record_progress_bg">#47000000</color> <!-- 40%不透明度 -->
     <color name="record_progress">#fb792b</color>

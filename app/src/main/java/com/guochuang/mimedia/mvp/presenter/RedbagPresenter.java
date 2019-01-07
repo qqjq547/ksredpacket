@@ -9,6 +9,7 @@ import com.guochuang.mimedia.mvp.model.MyKsb;
 import com.guochuang.mimedia.mvp.model.Redbag;
 import com.guochuang.mimedia.mvp.model.RedbagDetail;
 import com.guochuang.mimedia.mvp.view.RedbagView;
+import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.RxUtil;
 
 import java.util.List;
@@ -71,6 +72,9 @@ public class RedbagPresenter extends BasePresenter<RedbagView> {
             @Override
             public void onFailure(ApiException exception) {
                 mvpView.setError(exception.getMessage());
+                if (exception.getStatusCode()==Constant.HTTP_STATUS_REDBAD_INVALID){
+                  mvpView.setRedbagInvalid();
+                }
 
             }
 
@@ -90,6 +94,9 @@ public class RedbagPresenter extends BasePresenter<RedbagView> {
             @Override
             public void onFailure(ApiException exception) {
                 mvpView.setError(exception.getMessage());
+                if (exception.getStatusCode()==Constant.HTTP_STATUS_REDBAD_INVALID){
+                    mvpView.setRedbagInvalid();
+                }
 
             }
 

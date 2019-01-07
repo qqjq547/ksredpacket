@@ -433,7 +433,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                         List<String> pics=Arrays.asList(TextUtils.split(temp.getPicture(),","));
                         addPicture(pics);
                     }
-                    etAmout.setText(String.valueOf(temp.getMoney()));
+                    etAmout.setText(String.valueOf((int)temp.getMoney()));
                     etCount.setText(String.valueOf(temp.getQuantity()));
                     areaType=temp.getAreaType();
                     kilometer=temp.getKilometre();
