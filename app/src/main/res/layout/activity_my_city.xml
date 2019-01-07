@@ -126,7 +126,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/space20"
-                                android:text="@string/buy_record_arrow"
+                                android:text="@string/bid_price_arrow"
                                 android:textColor="@color/text_blue"
                                 android:textSize="@dimen/textfont14" />
                         </LinearLayout>
