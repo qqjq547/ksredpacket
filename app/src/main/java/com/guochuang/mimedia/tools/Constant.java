@@ -37,6 +37,7 @@ public class Constant {
     public static final int REQUEST_COLLECT = 10;
     public static final int REQUEST_TRANSFER = 11;
     public static final int REQUEST_GRANT = 12;
+    public static final int REQUEST_PICK_ICON = 13;
 
 
     public static final String TITLE = "title";

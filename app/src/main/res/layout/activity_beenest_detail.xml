@@ -23,25 +23,31 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/space15"
-        android:layout_marginRight="@dimen/space15"
-        android:layout_marginTop="-60dp"
+        android:layout_marginTop="-50dp"
         android:orientation="vertical">
     <LinearLayout
         android:id="@+id/lin_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/space15"
+        android:layout_marginLeft="@dimen/space10"
+        android:layout_marginRight="@dimen/space10"
+        android:paddingLeft="@dimen/space15"
+        android:paddingRight="@dimen/space15"
+        android:paddingTop="@dimen/space10"
+        android:paddingBottom="@dimen/space10"
         android:orientation="vertical"
         android:background="@drawable/bg_white_block">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/space40"
+        android:gravity="center_vertical">
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="0dp"
-            android:layout_height="@dimen/space40"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:lines="1"
+            android:ellipsize="end"
             android:textSize="@dimen/textfont15"
             android:textColor="@color/text_black"
             android:text="xxxxx"/>
@@ -61,6 +67,14 @@
             android:textColor="@color/text_black"
             android:textSize="@dimen/textfont14"
             android:text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"/>
+        <TextView
+            android:id="@+id/tv_check_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:textColor="@color/text_blue"
+            android:textSize="@dimen/textfont14"
+            android:text="@string/check_all"/>
         <TextView
             android:id="@+id/tv_url"
             android:layout_width="wrap_content"
@@ -84,7 +98,8 @@
          <ImageView
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:src="@drawable/ic_location"/>
+             android:padding="@dimen/space5"
+             android:src="@drawable/ic_address"/>
             <TextView
                 android:id="@+id/tv_address"
                 android:layout_width="0dp"
@@ -117,7 +132,7 @@
                 android:paddingTop="@dimen/space5"
                 android:paddingBottom="@dimen/space5"
                 android:gravity="center"
-                android:drawableLeft="@drawable/ic_location"
+                android:drawableLeft="@drawable/ic_bee_mobile"
                 android:drawablePadding="@dimen/space10"
                 android:textSize="@dimen/textfont15"
                 android:textColor="@color/text_black"
@@ -135,7 +150,7 @@
                 android:paddingTop="@dimen/space5"
                 android:paddingBottom="@dimen/space5"
                 android:gravity="center"
-                android:drawableLeft="@drawable/ic_location"
+                android:drawableLeft="@drawable/ic_bee_wechat"
                 android:drawablePadding="@dimen/space10"
                 android:textSize="@dimen/textfont15"
                 android:textColor="@color/text_black"
@@ -153,7 +168,7 @@
                 android:paddingTop="@dimen/space5"
                 android:paddingBottom="@dimen/space5"
                 android:gravity="center"
-                android:drawableLeft="@drawable/ic_location"
+                android:drawableLeft="@drawable/ic_bee_weibo"
                 android:drawablePadding="@dimen/space10"
                 android:textSize="@dimen/textfont15"
                 android:textColor="@color/text_black"
@@ -164,6 +179,8 @@
             android:id="@+id/rv_picture"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space15"
+            android:layout_marginRight="@dimen/space15"
             android:layout_marginTop="@dimen/space5"
             android:nestedScrollingEnabled="false">
         </android.support.v7.widget.RecyclerView>

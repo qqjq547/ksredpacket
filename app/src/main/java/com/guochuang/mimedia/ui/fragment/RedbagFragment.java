@@ -56,6 +56,7 @@ import com.guochuang.mimedia.tools.antishake.AntiShake;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.guochuang.mimedia.ui.activity.BeeNestActivity;
 import com.guochuang.mimedia.ui.activity.CityActivity;
+import com.guochuang.mimedia.ui.activity.EditAdActivity;
 import com.guochuang.mimedia.ui.activity.MainActivity;
 import com.guochuang.mimedia.ui.activity.ShareActivity;
 import com.guochuang.mimedia.ui.activity.SquareActivity;
@@ -559,7 +560,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
 
             @Override
             public void onSendAd() {
-//                startActivity(new Intent(getActivity(),BeeNestActivity.class));
+                startActivity(new Intent(getActivity(),EditAdActivity.class));
             }
         });
     }

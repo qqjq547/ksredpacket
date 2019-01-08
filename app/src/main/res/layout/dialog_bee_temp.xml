@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="216dp"
+    android:layout_height="238dp"
+    android:orientation="vertical"
+    android:background="@drawable/bg_bee_temp">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="@dimen/space120"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/textfont14"
+            android:text="@string/bee_temp_tip"/>
+        <TextView
+            android:id="@+id/tv_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space35"
+            android:layout_marginLeft="@dimen/space20"
+            android:layout_marginRight="@dimen/space20"
+            android:layout_marginBottom="@dimen/space15"
+            android:gravity="center"
+            android:textSize="@dimen/textfont14"
+            android:textColor="@color/text_white"
+            android:background="@drawable/bg_btn_red"
+            android:text="@string/i_known"/>
+    </LinearLayout>
+</LinearLayout>

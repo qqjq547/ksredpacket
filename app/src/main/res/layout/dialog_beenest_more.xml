@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:paddingLeft="@dimen/space15"
+    android:paddingRight="@dimen/space15">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_dialog_white"
+        android:paddingLeft="@dimen/space5">
+        <TextView
+            android:id="@+id/tv_this_ad"
+            style="@style/dialog_more_item"
+            android:drawableTop="@drawable/ic_this_ad"
+            android:text="@string/bid_this_ad"/>
+        <TextView
+            android:id="@+id/tv_other_ad"
+            style="@style/dialog_more_item"
+            android:drawableTop="@drawable/ic_other_ad"
+            android:text="@string/bid_other_ad"/>
+        <TextView
+            android:id="@+id/tv_report"
+            style="@style/dialog_more_item"
+            android:drawableTop="@drawable/ic_report_ad"
+            android:text="@string/report"/>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_close"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_dialog_white"
+        android:layout_marginTop="@dimen/space10"
+        android:layout_marginBottom="@dimen/space10"
+        android:gravity="center"
+        android:paddingTop="@dimen/space15"
+        android:paddingBottom="@dimen/space15"
+        android:textColor="@color/text_black"
+        android:textSize="@dimen/textfont15"
+        android:text="@string/cancel"/>
+
+</LinearLayout>

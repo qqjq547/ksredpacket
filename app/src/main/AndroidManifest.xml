@@ -96,6 +96,7 @@
         <activity android:name="com.guochuang.mimedia.ui.activity.EditBoardActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.SquareDetailActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.BeeNestActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.EditAdActivity" />
         <activity
             android:name="com.guochuang.mimedia.ui.activity.LuckyActivity"
             android:theme="@style/Transparent" />
