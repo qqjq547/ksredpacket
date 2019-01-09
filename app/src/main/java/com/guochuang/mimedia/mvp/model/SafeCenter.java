@@ -82,6 +82,8 @@ public class SafeCenter {
         private String idCard;
         private String idCardPicture;
         private String realName;
+        private int auditStatus;
+        private String auditDescription;
 
         public String getIdCard() {
             return idCard;
@@ -105,6 +107,22 @@ public class SafeCenter {
 
         public void setRealName(String realName) {
             this.realName = realName;
+        }
+
+        public int getAuditStatus() {
+            return auditStatus;
+        }
+
+        public void setAuditStatus(int auditStatus) {
+            this.auditStatus = auditStatus;
+        }
+
+        public String getAuditDescription() {
+            return auditDescription;
+        }
+
+        public void setAuditDescription(String auditDescription) {
+            this.auditDescription = auditDescription;
         }
     }
 }

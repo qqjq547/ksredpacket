@@ -38,6 +38,7 @@
                 android:src="@drawable/bg_identify_card" />
 
             <TextView
+                android:id="@+id/tv_notice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space15"

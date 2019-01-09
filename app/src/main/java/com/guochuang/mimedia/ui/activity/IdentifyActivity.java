@@ -49,6 +49,8 @@ public class IdentifyActivity extends MvpActivity<IdentifyPresenter> implements 
     TextView tvSubmit;
     @BindView(R.id.ll_name_and_number)
     LinearLayout llNameAndNumber;
+    @BindView(R.id.tv_notice)
+    TextView tvNotice;
 
     File file;
     IDCardResult idCardResult;
@@ -66,6 +68,8 @@ public class IdentifyActivity extends MvpActivity<IdentifyPresenter> implements 
     @Override
     public void initViewAndData() {
         tvTitle.setText(R.string.identification);
+        String desp=getIntent().getStringExtra(Constant.DESCRIPTION);
+        tvNotice.setText(desp);
         setStatusbar(R.color.bg_red, false);
         tvSubmit.setEnabled(false);
     }

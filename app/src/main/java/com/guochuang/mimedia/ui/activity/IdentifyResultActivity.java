@@ -63,11 +63,11 @@ public class IdentifyResultActivity extends MvpActivity<IdentifyResultPresenter>
         if (data!=null){
             etName.setText(data.getRealName());
             etNumber.setText(data.getIdCard());
-//            if (true){
-//                ivInreview.setVisibility(View.VISIBLE);
-//            }else {
-//                ivInreview.setVisibility(View.GONE);
-//            }
+            if (data.getAuditStatus()==0){
+                ivInreview.setVisibility(View.VISIBLE);
+            }else {
+                ivInreview.setVisibility(View.GONE);
+            }
         }
     }
 
