@@ -16,9 +16,9 @@
     <ImageView
         android:id="@+id/iv_background"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:adjustViewBounds="true"
-        android:scaleType="centerInside"
+        android:scaleType="centerCrop"
         android:src="@drawable/bg_recommend_agent_banner"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -127,14 +127,15 @@
                 android:id="@+id/tv_call"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/space12"
-                android:paddingRight="@dimen/space12"
+                android:background="@drawable/bg_white_block_corner"
+                android:paddingLeft="@dimen/space15"
+                android:paddingRight="@dimen/space15"
                 android:paddingTop="@dimen/space5"
                 android:paddingBottom="@dimen/space5"
                 android:gravity="center"
                 android:drawableLeft="@drawable/ic_bee_mobile"
                 android:drawablePadding="@dimen/space10"
-                android:textSize="@dimen/textfont15"
+                android:textSize="@dimen/textfont14"
                 android:textColor="@color/text_black"
                 android:text="@string/call"/>
             <Space
@@ -145,14 +146,15 @@
                 android:id="@+id/tv_wechat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/space12"
-                android:paddingRight="@dimen/space12"
+                android:background="@drawable/bg_white_block_corner"
+                android:paddingLeft="@dimen/space15"
+                android:paddingRight="@dimen/space15"
                 android:paddingTop="@dimen/space5"
                 android:paddingBottom="@dimen/space5"
                 android:gravity="center"
                 android:drawableLeft="@drawable/ic_bee_wechat"
                 android:drawablePadding="@dimen/space10"
-                android:textSize="@dimen/textfont15"
+                android:textSize="@dimen/textfont14"
                 android:textColor="@color/text_black"
                 android:text="@string/copy"/>
             <Space
@@ -163,14 +165,15 @@
                 android:id="@+id/tv_weibo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/space12"
-                android:paddingRight="@dimen/space12"
+                android:background="@drawable/bg_white_block_corner"
+                android:paddingLeft="@dimen/space15"
+                android:paddingRight="@dimen/space15"
                 android:paddingTop="@dimen/space5"
                 android:paddingBottom="@dimen/space5"
                 android:gravity="center"
                 android:drawableLeft="@drawable/ic_bee_weibo"
                 android:drawablePadding="@dimen/space10"
-                android:textSize="@dimen/textfont15"
+                android:textSize="@dimen/textfont14"
                 android:textColor="@color/text_black"
                 android:text="@string/copy"/>
         </LinearLayout>

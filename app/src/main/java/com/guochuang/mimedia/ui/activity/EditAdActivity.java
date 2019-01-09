@@ -182,6 +182,7 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
                 onBackPressed();
                 break;
             case R.id.tv_text:
+                startActivity(new Intent(this,BeeNestTempActivity.class));
                 break;
             case R.id.lin_picture:
                 RxPermissions rxPermissions=new RxPermissions(EditAdActivity.this);

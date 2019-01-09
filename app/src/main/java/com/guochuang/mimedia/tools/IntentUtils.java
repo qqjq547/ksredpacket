@@ -205,17 +205,17 @@ public class IntentUtils {
         intent.putExtra(Constant.ISAGENT,isAgent);
         activity.startActivity(intent);
     }
-    public static void startImagePreviewActivity(Context context, int position, String... urls) {
-        Intent intent = new Intent(context, ImagePreviewActivity.class);
+    public static void startImagePreviewActivity(Activity activity, int position, String... urls) {
+        Intent intent = new Intent(activity, ImagePreviewActivity.class);
         intent.putExtra(Constant.ARGS_ARRAY, urls);
         intent.putExtra(Constant.ARGS_POSITION, position);
-        context.startActivity(intent);
+        activity.startActivity(intent);
     }
 
-    public static void startImagePreviewActivity(Context context, int position, ArrayList<String> urls) {
-        Intent intent = new Intent(context, ImagePreviewActivity.class);
+    public static void startImagePreviewActivity(Activity activity, int position, ArrayList<String> urls) {
+        Intent intent = new Intent(activity, ImagePreviewActivity.class);
         intent.putExtra(Constant.ARGS_LIST, urls);
         intent.putExtra(Constant.ARGS_POSITION, position);
-        context.startActivity(intent);
+        activity.startActivity(intent);
     }
 }

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_white">
+    <include layout="@layout/layout_title"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vp_temp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+            </android.support.v4.view.ViewPager>
+            <LinearLayout
+                android:id="@+id/lin_indicate"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space10"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/space20"
+                android:layout_marginBottom="@dimen/space20">
+            </LinearLayout>
+            <Button
+                android:id="@+id/btn_use_temp"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="260dp"
+                android:layout_height="@dimen/space45"
+                android:background="@drawable/bg_btn_red"
+                android:textSize="@dimen/textfont15"
+                android:textColor="@color/text_white"
+                android:text="@string/use_temp"
+                android:visibility="gone"/>
+            <Button
+                android:id="@+id/btn_delete"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="260dp"
+                android:layout_height="@dimen/space45"
+                android:layout_marginTop="@dimen/space20"
+                android:layout_marginBottom="@dimen/space15"
+                android:background="@drawable/bg_btn_delete"
+                android:textSize="@dimen/textfont15"
+                android:textColor="@color/text_red"
+                android:text="@string/delete_temp"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_total"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/textfont13"
+            android:textColor="@color/text_black"
+            android:paddingTop="@dimen/space7"
+            android:paddingBottom="@dimen/space7"
+            android:background="#ccffffff"/>
+    </FrameLayout>
+</LinearLayout>
