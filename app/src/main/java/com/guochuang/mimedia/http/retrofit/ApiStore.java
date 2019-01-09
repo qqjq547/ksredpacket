@@ -1011,6 +1011,15 @@ public interface ApiStore {
     );
     @GET
     Observable<ResponseBody> downloadPicture(@Url String fileUrl);
+
+    @FormUrlEncoded
+    @POST("/api/v1/user/name_auth/manual_audit")
+    Observable<HttpResponse<Integer>> manualAudit(
+            @Field("realName") String realName,
+            @Field("idCard") String idCard,
+            @Field("idCardPicture") String idCardPicture,
+            @Field("idCardBackPicture") String idCardBackPicture
+    );
     @FormUrlEncoded
     @POST("/api/v1/activity/beehiveDetails/appCreateOrder")
     Observable<HttpResponse<Order>> appCreateOrder(

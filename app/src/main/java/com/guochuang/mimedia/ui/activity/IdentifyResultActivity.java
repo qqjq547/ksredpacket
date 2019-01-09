@@ -25,6 +25,9 @@ public class IdentifyResultActivity extends MvpActivity<IdentifyResultPresenter>
     EditText etName;
     @BindView(R.id.et_number)
     EditText etNumber;
+    @BindView(R.id.iv_inreview)
+    ImageView ivInreview;
+
 
     @Override
     protected IdentifyResultPresenter createPresenter() {
@@ -60,6 +63,11 @@ public class IdentifyResultActivity extends MvpActivity<IdentifyResultPresenter>
         if (data!=null){
             etName.setText(data.getRealName());
             etNumber.setText(data.getIdCard());
+//            if (true){
+//                ivInreview.setVisibility(View.VISIBLE);
+//            }else {
+//                ivInreview.setVisibility(View.GONE);
+//            }
         }
     }
 

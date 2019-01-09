@@ -97,7 +97,9 @@ public class IdentifyActivity extends MvpActivity<IdentifyPresenter> implements 
                 }
                 break;
             case R.id.tv_identity_custom:
-                startActivity(new Intent(this,IdentifyCustomActivity.class));
+                Intent intent=getIntent();
+                intent.setClass(this,IdentifyCustomActivity.class);
+                startActivity(intent);
                 finish();
                 break;
         }

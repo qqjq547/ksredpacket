@@ -40,6 +40,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.OnClick;
 import rx.functions.Action1;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
 public class IdentifyCustomActivity extends MvpActivity<IdentifyCustomPresenter> implements IdentifyCustomView {
     @BindView(R.id.iv_back)
@@ -127,13 +129,50 @@ public class IdentifyCustomActivity extends MvpActivity<IdentifyCustomPresenter>
                     showShortToast(R.string.number_pic_cant_empty);
                 }else {
                     showLoadingDialog(null);
-                    mvpPresenter.fileUpload(Constant.BUSSINESSTYPE_ID_CARD, new File(frontPath),true);
+                    if (TextUtils.isEmpty(frontUrl)){
+                        mvpPresenter.fileUpload(Constant.BUSSINESSTYPE_ID_CARD, new File(frontPath),true);
+                    }else if(TextUtils.isEmpty(backUrl)){
+                        mvpPresenter.fileUpload(Constant.BUSSINESSTYPE_ID_CARD, new File(frontPath),false);
+                    }else {
+                        mvpPresenter.manualAudit(name,number,frontUrl,backUrl);
+                    }
+
                 }
                 break;
 
         }
     }
+   public void compress(File file, final boolean isFront){
+       Luban.with(this)
+               .load(file)
+               .ignoreBy(500)
+               .setTargetDir(Constant.COMPRESS_DIR_PATH)
+               .setCompressListener(new OnCompressListener() {
+                   @Override
+                   public void onStart() {
 
+                   }
+
+                   @Override
+                   public void onSuccess(File file) {
+                       if (isFront) {
+                           frontPath = file.getAbsolutePath();
+                           GlideImgManager.loadImage(IdentifyCustomActivity.this, file, ivCardFront);
+                           frontUrl = null;
+                       }else {
+                           backPath = file.getAbsolutePath();
+                           GlideImgManager.loadImage(IdentifyCustomActivity.this, file, ivCardBack);
+                           backUrl = null;
+                       }
+                   }
+
+                   @Override
+                   public void onError(Throwable e) {
+                       closeLoadingDialog();
+                       showShortToast(e.getMessage());
+                   }
+               }).launch();
+   }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
@@ -141,20 +180,20 @@ public class IdentifyCustomActivity extends MvpActivity<IdentifyCustomPresenter>
             switch (requestCode) {
                 case Constant.REQUEST_CARD_FRONT:
                     ArrayList<String> images1 = intent.getStringArrayListExtra(ImageSelectorUtils.SELECT_RESULT);
-                    GlideImgManager.loadImage(this,new File(images1.get(0)),ivCardFront);
+                    compress(new File(images1.get(0)),true);
                     break;
                 case Constant.REQUEST_CARD_BACK:
                     ArrayList<String> images2 = intent.getStringArrayListExtra(ImageSelectorUtils.SELECT_RESULT);
-                    GlideImgManager.loadImage(this,new File(images2.get(0)),ivCardBack);
+                    compress(new File(images2.get(0)),false);
                     break;
             }
         }
     }
 
     @Override
-    public void setData(String data) {
+    public void setData(Integer data) {
         closeLoadingDialog();
-        showShortToast(getResources().getString(R.string.success));
+        startActivity(new Intent(this,IdentifyResultActivity.class));
         setResult(RESULT_OK);
         finish();
     }
@@ -169,13 +208,15 @@ public class IdentifyCustomActivity extends MvpActivity<IdentifyCustomPresenter>
     public void setUploadData(UploadFile data, boolean isFront) {
         if (isFront){
             frontUrl=data.getUrl();
-            mvpPresenter.fileUpload(Constant.BUSSINESSTYPE_ID_CARD, new File(backPath),false);
+            if (TextUtils.isEmpty(backUrl)){
+                mvpPresenter.fileUpload(Constant.BUSSINESSTYPE_ID_CARD, new File(backPath),false);
+            }else {
+                mvpPresenter.manualAudit(name,number,frontUrl,backUrl);
+            }
         }else {
             backUrl=data.getUrl();
-            closeLoadingDialog();
-//            mvpPresenter.userNameAuthAuth();
+            mvpPresenter.manualAudit(name,number,frontUrl,backUrl);
         }
-
     }
 
 

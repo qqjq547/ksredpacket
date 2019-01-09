@@ -20,16 +20,16 @@ public class IdentifyCustomPresenter extends BasePresenter<IdentifyCustomView> {
         attachView(view);
     }
 
-    public void userNameAuthAuth(
+    public void manualAudit(
             String realName,
             String idCard,
             String idCardPicture,
-            String vendorResponse
+            String idCardBackPicture
     ) {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                userNameAuthAuth(realName, idCard, idCardPicture, vendorResponse)), new ApiCallback<String>() {
+                manualAudit(realName, idCard, idCardPicture, idCardBackPicture)), new ApiCallback<Integer>() {
             @Override
-            public void onSuccess(String data) {
+            public void onSuccess(Integer data) {
                 mvpView.setData(data);
 
             }
@@ -69,30 +69,4 @@ public class IdentifyCustomPresenter extends BasePresenter<IdentifyCustomView> {
             }
         });
     }
-
-//    public void ocrIdCard(
-//            File file
-//    ) {
-//        RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), file);
-//        MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
-//        addSubscription(RxUtil.createBaseObservable(ApiClient.getInstance().newInstance(ApiClient.OCR_ID_CARD).
-//                ocrIdCard(KeyUtil.API_KEY, KeyUtil.API_SECRET, body)), new ApiCallback<MegviiSerach>() {
-//            @Override
-//            public void onSuccess(MegviiSerach data) {
-//                mvpView.setOCRData(data);
-//
-//            }
-//
-//            @Override
-//            public void onFailure(ApiException exception) {
-//                mvpView.setOCRError(exception.getMessage());
-//
-//            }
-//
-//            @Override
-//            public void onFinish() {
-//
-//            }
-//        });
-//    }
 }
