@@ -95,6 +95,7 @@
         <activity android:name="com.guochuang.mimedia.ui.activity.WebActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.EditBoardActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.SquareDetailActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.IdentifyCustomActivity" />
         <activity
             android:name="com.guochuang.mimedia.ui.activity.LuckyActivity"
             android:theme="@style/Transparent" />

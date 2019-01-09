@@ -37,7 +37,8 @@ public class Constant {
     public static final int REQUEST_COLLECT = 10;
     public static final int REQUEST_TRANSFER = 11;
     public static final int REQUEST_GRANT = 12;
-
+    public static final int REQUEST_CARD_FRONT = 13;
+    public static final int REQUEST_CARD_BACK = 14;
 
     public static final String TITLE = "title";
     public static final String ARTICLEUUID = "articleUuid";

@@ -15,7 +15,10 @@
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             android:src="@drawable/bg_identify_top" />
-
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space160">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -29,9 +32,16 @@
                android:orientation="vertical"
                android:layout_gravity="center_horizontal"
                android:gravity="center"
-               android:layout_marginTop="@dimen/space160">
+               >
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginBottom="@dimen/space32"
+                   android:text="@string/msg_finish_time"
+                   android:textColor="@color/text_black"
+                   android:textSize="@dimen/textfont14" />
             <ImageView
-                android:id="@+id/iv_card"
+                android:id="@+id/iv_card_front"
                 android:layout_width="210dp"
                 android:layout_height="143dp"
                 android:scaleType="fitXY"
@@ -41,17 +51,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space15"
-                android:text="@string/upload_identify_pic"
-                android:textColor="@color/text_red"
+                android:layout_marginBottom="@dimen/space24"
+                android:text="@string/identify_pic_front"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/textfont14" />
+               <ImageView
+                   android:id="@+id/iv_card_back"
+                   android:layout_width="210dp"
+                   android:layout_height="143dp"
+                   android:scaleType="fitXY"
+                   android:src="@drawable/bg_identify_card_back" />
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="@dimen/space15"
+                   android:text="@string/identify_pic_back"
+                   android:textColor="@color/text_black"
+                   android:textSize="@dimen/textfont14" />
            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/space50"
+                android:layout_marginBottom="@dimen/space45"
                 android:layout_marginLeft="@dimen/space15"
                 android:layout_marginRight="@dimen/space15"
-                android:layout_marginTop="@dimen/space50"
+                android:layout_marginTop="@dimen/space45"
                 android:gravity="bottom"
                 android:orientation="vertical">
 
@@ -63,7 +89,7 @@
                     android:focusableInTouchMode="false"
                     android:gravity="center_vertical"
                     android:orientation="vertical"
-                    android:visibility="invisible">
+                    android:visibility="visible">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -131,23 +157,15 @@
                     android:id="@+id/tv_submit"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/space45"
+                    android:layout_marginTop="@dimen/space45"
                     android:background="@drawable/bg_btn_gray_selector"
                     android:gravity="center"
                     android:text="@string/submit"
                     android:textColor="@color/text_white"
                     android:textSize="@dimen/textfont15" />
-                <TextView
-                    android:id="@+id/tv_identity_custom"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/space20"
-                    android:layout_marginBottom="@dimen/space10"
-                    android:textColor="@color/text_blue"
-                    android:textSize="@dimen/textfont13"
-                    android:text="@string/identity_custom"/>
             </LinearLayout>
         </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
     </FrameLayout>
 
     <LinearLayout

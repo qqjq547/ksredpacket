@@ -47,14 +47,6 @@ public class IdentifyActivity extends MvpActivity<IdentifyPresenter> implements 
     EditText etNumber;
     @BindView(R.id.tv_submit)
     TextView tvSubmit;
-    @BindView(R.id.tv_name)
-    TextView tvName;
-    @BindView(R.id.tv_number)
-    TextView tvNumber;
-    @BindView(R.id.ll_identify)
-    LinearLayout llIdentify;
-    @BindView(R.id.fl_no_identify)
-    FrameLayout flNoIdentify;
     @BindView(R.id.ll_name_and_number)
     LinearLayout llNameAndNumber;
 
@@ -78,7 +70,7 @@ public class IdentifyActivity extends MvpActivity<IdentifyPresenter> implements 
         tvSubmit.setEnabled(false);
     }
 
-    @OnClick({R.id.iv_back, R.id.iv_card,R.id.lin_content,R.id.tv_submit})
+    @OnClick({R.id.iv_back, R.id.iv_card,R.id.lin_content,R.id.tv_submit,R.id.tv_identity_custom})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -103,6 +95,10 @@ public class IdentifyActivity extends MvpActivity<IdentifyPresenter> implements 
                     showLoadingDialog(null);
                     mvpPresenter.fileUpload(Constant.BUSSINESSTYPE_ID_CARD, file);
                 }
+                break;
+            case R.id.tv_identity_custom:
+                startActivity(new Intent(this,IdentifyCustomActivity.class));
+                finish();
                 break;
         }
     }
