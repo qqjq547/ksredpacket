@@ -1,5 +1,6 @@
 package com.guochuang.mimedia.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -107,7 +108,7 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
                 new BeeNestDialog(this).setOnItemClikListener(new BeeNestDialog.OnItemClikListener() {
                     @Override
                     public void onBidThis() {
-
+                       startActivity(new Intent(BeeNestActivity.this,BidBrandActivity.class));
                     }
 
                     @Override

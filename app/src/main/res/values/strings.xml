@@ -572,5 +572,12 @@
     <string name="bid_other_ad">竞拍其他广告</string>
     <string name="report">举报</string>
     <string name="bee_temp_tip">保存模板后，可以选择该模板发广告</string>
+    <string name="equal_bid">竞购等值</string>
+    <string name="buy_price">竞购价</string>
+    <string name="current_price">当前价</string>
+    <string name="unit_yuan_day">元/天</string>
+    <string name="brand_bid_agreement">《竞购协议》</string>
+    <string name="buy_right_now">立即购买</string>
+    <string name="history_vote">历史投放</string>
 
 </resources>

@@ -76,6 +76,7 @@ public class Constant {
 
     public static final String FORMAT_DATE_SIMPLE = "yyyy-MM-dd";
     public static final String FORMAT_DATE = "yyyy-MM-dd HH:mm:ss";
+    public static final String FORMAT_MONTH = "yyyy-MM";
 
     public static final String TYPE_REPORT_INFORMATION = "informationReport";
     public static final String TYPE_REPORT_REDPACKET = "redPacketReport";

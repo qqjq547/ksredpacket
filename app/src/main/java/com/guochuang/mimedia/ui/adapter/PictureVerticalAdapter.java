@@ -7,7 +7,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
-import com.guochuang.mimedia.view.SquareImageView;
 import com.sz.gcyh.KSHongBao.R;
 
 import java.util.List;

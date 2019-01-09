@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+<include layout="@layout/layout_title_text"/>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_white_block"
+            android:layout_margin="@dimen/space10"
+            android:padding="@dimen/space5">
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+               <ImageView
+                   android:id="@+id/iv_last"
+                   android:layout_width="@dimen/space50"
+                   android:layout_height="@dimen/space50"
+                   android:padding="@dimen/space10"
+                   android:src="@drawable/ic_month_last"/>
+               <TextView
+                   android:id="@+id/tv_month"
+                   android:layout_width="0dp"
+                   android:layout_height="match_parent"
+                   android:layout_weight="1"
+                   android:gravity="center"
+                   android:textColor="@color/text_black"
+                   android:textSize="@dimen/textfont16" />
+               <ImageView
+                   android:id="@+id/iv_next"
+                   android:layout_width="@dimen/space50"
+                   android:layout_height="@dimen/space50"
+                   android:padding="@dimen/space10"
+                   android:src="@drawable/ic_month_next"/>
+           </LinearLayout>
+            <include layout="@layout/layout_divide_deep_line"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/week_style"
+                    android:text="一" />
+                <View
+                    android:layout_width="@dimen/divide_h"
+                    android:layout_height="match_parent"
+                    android:background="@color/bg_divide"/>
+                <TextView
+                    style="@style/week_style"
+                    android:text="二"/>
+                <View
+                    android:layout_width="@dimen/divide_h"
+                    android:layout_height="match_parent"
+                    android:background="@color/bg_divide"/>
+                <TextView
+                    style="@style/week_style"
+                    android:text="三" />
+                <View
+                    android:layout_width="@dimen/divide_h"
+                    android:layout_height="match_parent"
+                    android:background="@color/bg_divide"/>
+                <TextView
+                    style="@style/week_style"
+                    android:text="四" />
+                <View
+                    android:layout_width="@dimen/divide_h"
+                    android:layout_height="match_parent"
+                    android:background="@color/bg_divide"/>
+                <TextView
+                    style="@style/week_style"
+                    android:text="五" />
+                <View
+                    android:layout_width="@dimen/divide_h"
+                    android:layout_height="match_parent"
+                    android:background="@color/bg_divide"/>
+                <TextView
+                    style="@style/week_style"
+                    android:text="六" />
+                <View
+                    android:layout_width="@dimen/divide_h"
+                    android:layout_height="match_parent"
+                    android:background="@color/bg_divide"/>
+                <TextView
+                    style="@style/week_style"
+                    android:text="日" />
+            </LinearLayout>
+            <include layout="@layout/layout_divide_deep_line"/>
+            <com.guochuang.mimedia.tools.calendar.CalendarDateView
+                android:id="@+id/cdv_month"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_white_block"
+            android:layout_margin="@dimen/space10"
+            android:paddingTop="@dimen/space5"
+            android:paddingBottom="@dimen/space5"
+            android:paddingLeft="@dimen/space15"
+            android:paddingRight="@dimen/space15">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space45"
+                android:gravity="center_vertical">
+                <TextView
+                    android:id="@+id/tv_buy_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont14" />
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:id="@+id/tv_bid_record"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textColor="@color/text_blue"
+                    android:textSize="@dimen/textfont14"
+                    android:text="@string/buy_record"/>
+            </LinearLayout>
+            <include layout="@layout/layout_divide_deep_line"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space45"
+                android:gravity="center_vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont14"
+                    android:text="@string/current_price"/>
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/tv_current_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/text_city_yellow"
+                    android:textSize="@dimen/textfont14" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont14"
+                    android:text="@string/unit_yuan_day"/>
+            </LinearLayout>
+            <include layout="@layout/layout_divide_deep_line"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space45"
+                android:gravity="center_vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont14"
+                    android:text="@string/buy_price"/>
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/tv_bid_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/text_city_yellow"
+                    android:textSize="@dimen/textfont14" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont14"
+                    android:text="@string/unit_yuan_day"/>
+            </LinearLayout>
+            <include layout="@layout/layout_divide_deep_line"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space45"
+                android:gravity="center_vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont14"
+                    android:text="@string/my_ksb"/>
+                <TextView
+                    android:id="@+id/tv_my_ksb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/space10"
+                    android:gravity="center"
+                    android:textColor="@color/text_city_yellow"
+                    android:textSize="@dimen/textfont14" />
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont14"
+                    android:text="@string/equal_bid"/>
+                <TextView
+                    android:id="@+id/tv_equal_ksb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/space5"
+                    android:layout_marginRight="@dimen/space5"
+                    android:gravity="center"
+                    android:textColor="@color/text_city_yellow"
+                    android:textSize="@dimen/textfont14" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont14"
+                    android:text="@string/ksb"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/space30"
+            android:gravity="center_vertical">
+
+            <CheckBox
+                android:id="@+id/cb_obey_rule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableLeft="@drawable/ic_check_selector"
+                android:drawablePadding="@dimen/space10"
+                android:padding="@dimen/space3"
+                android:text="@string/has_read_and_agree"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/textfont13" />
+
+            <TextView
+                android:id="@+id/tv_rule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/brand_bid_agreement"
+                android:textColor="@color/text_blue"
+                android:textSize="@dimen/textfont14" />
+        </LinearLayout>
+        <Button
+            android:id="@+id/btn_buy"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space45"
+            android:layout_margin="@dimen/space15"
+            android:background="@drawable/bg_btn_red"
+            android:text="@string/buy_right_now"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/textfont15" />
+    </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

@@ -91,7 +91,6 @@ public class HoneyCombView extends LinearLayout {
         appbar.addOnOffsetChangedListener(new AppBarStateChangeListener() {
             @Override
             public void onStateChanged(AppBarLayout appBarLayout, AppBarStateChangeListener.State state) {
-                LogUtil.d(state.name());
                 if (state == State.EXPANDED) {
                     showExpand(false);
                     //展开状态
