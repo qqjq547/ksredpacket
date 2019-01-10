@@ -55,7 +55,7 @@
         <item name="android:paddingBottom">@dimen/space5</item>
     </style>
     <style name="TabLayoutTextStyle">
-        <item name="android:textSize">@dimen/textfont18</item>
+        <item name="android:textSize">@dimen/textfont15</item>
     </style>
     
     <style name="centre_line">

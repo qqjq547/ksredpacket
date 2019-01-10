@@ -32,7 +32,7 @@
     <color name="text_city_yellow">#ff7519</color>
     <color name="text_redbag_name">#ffc518</color>
     <color name="text_share_btn">#8015cf</color>
-    purple
+    <color name="bg_sky_blue">#3097d2</color>
 
     <color name="bg_theme">#ffffff</color>
     <color name="bg_gray">#eeeeee</color>

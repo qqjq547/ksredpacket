@@ -580,4 +580,22 @@
     <string name="buy_right_now">立即购买</string>
     <string name="history_vote">历史投放</string>
     <string name="ad_temp">广告模板</string>
+    <string-array name="ad_nav">
+        <item>全部</item>
+        <item>待投放</item>
+        <item>投放中</item>
+        <item>已投放</item>
+    </string-array>
+    <string name="my_ad">我的广告</string>
+    <string name="my_bid_buy">我的竞购</string>
+    <string name="ad_amount">广告数量</string>
+    <string name="voting">投放中</string>
+    <string name="amount_yuan">金额(元)</string>
+    <string name="show_num">展示量</string>
+    <string name="click_num">点击量</string>
+    <string name="collect_num">收藏量</string>
+    <string name="check_ad">查看广告</string>
+    <string name="waiting_vote">待投放</string>
+    <string name="vote_going">投放中</string>
+    <string name="has_vote">已投放</string>
 </resources>

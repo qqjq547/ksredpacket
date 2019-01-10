@@ -99,6 +99,8 @@
         <activity android:name="com.guochuang.mimedia.ui.activity.EditAdActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.BidBrandActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.BeeNestTempActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.MyAdActivity" />
+
         <activity
             android:name="com.guochuang.mimedia.ui.activity.LuckyActivity"
             android:theme="@style/Transparent" />

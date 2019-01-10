@@ -94,6 +94,8 @@
     <dimen name="space280">280dp</dimen>
     <dimen name="space300">300dp</dimen>
     <dimen name="space428">428dp</dimen>
+    <dimen name="anti_space100">-100dp</dimen>
+
     <dimen name="ugc_progress_cursor">2dp</dimen>
     <dimen name="ugc_progress_min_pos">2dp</dimen>
     <dimen name="ugc_progress_divider">1dp</dimen>

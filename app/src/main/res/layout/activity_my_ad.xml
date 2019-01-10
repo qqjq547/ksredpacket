@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
   <include layout="@layout/layout_title_text"/>
     <LinearLayout
@@ -12,16 +12,20 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/bg_recommend_banner"
+            android:src="@drawable/bg_my_ad_banner"
             android:scaleType="fitXY"
             android:adjustViewBounds="true"/>
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/anti_space100">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="-40dp"
-            android:layout_marginLeft="@dimen/space15"
-            android:layout_marginRight="@dimen/space15"
+            android:layout_marginLeft="@dimen/space10"
+            android:layout_marginRight="@dimen/space10"
             android:padding="@dimen/space10"
             android:background="@drawable/bg_white_block">
 
@@ -43,7 +47,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="广告数量"
+                        android:text="@string/ad_amount"
                         android:textColor="@color/text_black"
                         android:textSize="@dimen/textfont16" />
 
@@ -52,7 +56,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space16"
-                        android:text="300"
                         android:textColor="@color/text_black"
                         android:textSize="@dimen/textfont18"
                         android:textStyle="bold" />
@@ -72,7 +75,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="投放中"
+                        android:text="@string/voting"
                         android:textColor="@color/text_black"
                         android:textSize="@dimen/textfont16" />
 
@@ -81,7 +84,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space16"
-                        android:text="300"
                         android:textColor="@color/text_black"
                         android:textSize="@dimen/textfont18"
                         android:textStyle="bold" />
@@ -101,7 +103,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="金额(元)"
+                        android:text="@string/amount_yuan"
                         android:textColor="@color/text_black"
                         android:textSize="@dimen/textfont16" />
 
@@ -110,14 +112,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space16"
-                        android:text="300"
                         android:textColor="@color/text_black"
                         android:textSize="@dimen/textfont18"
                         android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
 
-            <view
+            <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/divide_h"
                 android:layout_marginLeft="@dimen/space10"
@@ -141,7 +142,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/textfont16"
                         android:textColor="@color/text_black"
-                        android:text="展示量"/>
+                        android:text="@string/show_num"/>
                     <TextView
                         android:id="@+id/tv_show_num"
                         android:layout_width="wrap_content"
@@ -149,8 +150,7 @@
                         android:layout_marginTop="@dimen/space16"
                         android:textSize="@dimen/textfont18"
                         android:textStyle="bold"
-                        android:textColor="@color/text_black"
-                        android:text="300"/>
+                        android:textColor="@color/text_black" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="0dp"
@@ -167,7 +167,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/textfont16"
                         android:textColor="@color/text_black"
-                        android:text="点击量"/>
+                        android:text="@string/click_num"/>
                     <TextView
                         android:id="@+id/tv_click_num"
                         android:layout_width="wrap_content"
@@ -175,8 +175,7 @@
                         android:layout_marginTop="@dimen/space16"
                         android:textSize="@dimen/textfont18"
                         android:textStyle="bold"
-                        android:textColor="@color/text_black"
-                        android:text="300"/>
+                        android:textColor="@color/text_black" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="0dp"
@@ -193,7 +192,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/textfont16"
                         android:textColor="@color/text_black"
-                        android:text="收藏量"/>
+                        android:text="@string/collect_num"/>
                     <TextView
                         android:id="@+id/tv_collect_num"
                         android:layout_width="wrap_content"
@@ -201,14 +200,32 @@
                         android:layout_marginTop="@dimen/space16"
                         android:textSize="@dimen/textfont18"
                         android:textStyle="bold"
-                        android:textColor="@color/text_black"
-                        android:text="300"/>
+                        android:textColor="@color/text_black" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-     <TableLayout
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content">
-     </TableLayout>
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tb_list"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tablayout_height"
+                android:layout_marginLeft="@dimen/space15"
+                android:layout_marginRight="@dimen/space15"
+                app:tabPadding="@dimen/space10"
+                android:background="@color/bg_white"
+                android:layout_gravity="bottom"
+                app:layout_collapseMode="pin"
+                app:tabMode="fixed"
+                app:layout_scrollFlags="scroll"
+                app:tabTextAppearance="@style/TabLayoutTextStyle"
+                app:tabIndicatorColor="@color/bg_red"
+                app:tabIndicatorHeight="@dimen/space2"
+                app:tabSelectedTextColor="@color/text_red"
+                app:tabTextColor="@color/text_black"/>
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vp_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </android.support.v4.view.ViewPager>
+    </LinearLayout>
     </LinearLayout>
 </LinearLayout>
