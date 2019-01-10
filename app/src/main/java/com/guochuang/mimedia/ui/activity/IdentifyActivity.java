@@ -51,6 +51,9 @@ public class IdentifyActivity extends MvpActivity<IdentifyPresenter> implements 
     LinearLayout llNameAndNumber;
     @BindView(R.id.tv_notice)
     TextView tvNotice;
+    @BindView(R.id.tv_errmsg)
+    TextView tvErrmsg;
+
 
     File file;
     IDCardResult idCardResult;
@@ -69,7 +72,7 @@ public class IdentifyActivity extends MvpActivity<IdentifyPresenter> implements 
     public void initViewAndData() {
         tvTitle.setText(R.string.identification);
         String desp=getIntent().getStringExtra(Constant.DESCRIPTION);
-        tvNotice.setText(desp);
+        tvErrmsg.setText(desp);
         setStatusbar(R.color.bg_red, false);
         tvSubmit.setEnabled(false);
     }

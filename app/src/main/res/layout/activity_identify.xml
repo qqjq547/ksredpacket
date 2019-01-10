@@ -30,6 +30,13 @@
                android:layout_gravity="center_horizontal"
                android:gravity="center"
                android:layout_marginTop="@dimen/space160">
+               <TextView
+                   android:id="@+id/tv_errmsg"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginBottom="@dimen/space10"
+                   android:textColor="@color/text_red"
+                   android:textSize="@dimen/textfont14" />
             <ImageView
                 android:id="@+id/iv_card"
                 android:layout_width="210dp"
