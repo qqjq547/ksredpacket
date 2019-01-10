@@ -313,7 +313,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
         String fileName=split[split.length-1];
         final String dirPath=Constant.COMMON_PATH;
         final String apkPath=dirPath+File.separator+fileName;
-        new File(apkPath).mkdir();
+        new File(dirPath).mkdir();
         if (new File(apkPath).exists()){
             CommonUtil.installApk(this,apkPath);
             return;
