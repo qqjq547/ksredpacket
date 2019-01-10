@@ -309,15 +309,6 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
         }
     }
     private void startUpgrade(String downloadUrl) {
-        String[] split=downloadUrl.split(File.separator);
-        String fileName=split[split.length-1];
-        final String dirPath=Constant.COMMON_PATH;
-        final String apkPath=dirPath+File.separator+fileName;
-        new File(dirPath).mkdirs();
-        if (new File(apkPath).exists()){
-            CommonUtil.installApk(this,apkPath);
-            return;
-        }
         AllenVersionChecker
                 .getInstance()
                 .downloadOnly(UIData.create().setDownloadUrl(downloadUrl))
