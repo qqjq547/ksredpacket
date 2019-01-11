@@ -64,9 +64,14 @@ public class MyAdAdapter extends BaseQuickAdapter<MyAd,BaseViewHolder> {
                 position(new LatLng(113.822728,22.630487)).
                 icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location));
         bm.addOverlay(titleOo);
-//        MapStatus.Builder builder = new MapStatus.Builder();
-//        builder.target(new LatLng(113.822728,22.630487)).zoom(15f);
-//        bm.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
+        MapStatus.Builder builder = new MapStatus.Builder();
+        builder.target(new LatLng(113.822728,22.630487)).zoom(15f);
+        bm.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
+    }
+
+    @Override
+    public void onViewAttachedToWindow(BaseViewHolder holder) {
+        super.onViewAttachedToWindow(holder);
     }
 
     @Override

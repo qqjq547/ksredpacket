@@ -33,12 +33,12 @@ public class ApiClient {
     public static String TEST_URL="https://test_gateway.guochuangyuanhe.com/";
     public static String RELEASE_URL="https://api.guochuangyuanhe.com/";
     public static String HTML_URL=
-//            Constant.isDebug ?
-//            "http://120.77.110.100/":
+            Constant.isDebug ?
+            "http://120.77.110.100/":
             "https://www.guochuangyuanhe.com/";
     public static String API_SERVER_URL =
-//            Constant.isDebug ?
-//                    TEST_URL:
+            Constant.isDebug ?
+                    TEST_URL:
                     RELEASE_URL;
 
     public static Retrofit Retrofit(final String baseUrl) {

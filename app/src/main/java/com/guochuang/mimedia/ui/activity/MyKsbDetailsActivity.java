@@ -85,7 +85,7 @@ public class MyKsbDetailsActivity extends MvpActivity<MyKsbDetailsPresenter> imp
 
             }
         });
-        myKsbDetailsAdapter.openLoadAnimation();
+        myKsbDetailsAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         View emptyView=getLayoutInflater().inflate(R.layout.layout_empty,null);
         myKsbDetailsAdapter.setEmptyView(emptyView);
         rvKsb.setLayoutManager(new LinearLayoutManager(this, OrientationHelper.VERTICAL, false));

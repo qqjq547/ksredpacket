@@ -578,7 +578,7 @@
     <string name="unit_yuan_day">元/天</string>
     <string name="brand_bid_agreement">《竞购协议》</string>
     <string name="buy_right_now">立即购买</string>
-    <string name="history_vote">历史投放</string>
+    <string name="history_put">历史投放</string>
     <string name="ad_temp">广告模板</string>
     <string-array name="ad_nav">
         <item>全部</item>
@@ -598,4 +598,8 @@
     <string name="waiting_vote">待投放</string>
     <string name="vote_going">投放中</string>
     <string name="has_vote">已投放</string>
+    <string name="format_price_and_total">%d元/天(共%d元)</string>
+    <string name="format_time_to_time">%s~%s</string>
+    <string name="ad_bid">广告竞拍</string>
+    <string name="bid_history">竞购历史</string>
 </resources>

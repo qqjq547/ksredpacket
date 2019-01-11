@@ -18,6 +18,7 @@ import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.RegionCore;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.ui.activity.CityActivity;
+import com.guochuang.mimedia.ui.activity.MyAdActivity;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.MvpFragment;
@@ -267,7 +268,9 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
     }
 
     @OnClick({R.id.iv_setting,
-            R.id.iv_message})
+            R.id.iv_message,
+            R.id.tv_ad_bid,
+            R.id.tv_my_ad})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_setting:
@@ -275,6 +278,12 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                 break;
             case R.id.iv_message:
                 startActivity(new Intent(getActivity(), MessageActivity.class));
+                break;
+            case R.id.tv_ad_bid:
+                startActivity(new Intent(getActivity(), OperationCenterActivity.class));
+                break;
+            case R.id.tv_my_ad:
+                startActivity(new Intent(getActivity(), MyAdActivity.class));
                 break;
         }
     }

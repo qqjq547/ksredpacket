@@ -74,6 +74,47 @@
                 android:background="@drawable/ic_my_dot_selector"
                 android:visibility="gone"/>
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space15"
+            android:layout_marginRight="@dimen/space15">
+            <TextView
+                android:id="@+id/tv_ad_bid"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_white_block"
+                android:paddingLeft="@dimen/space15"
+                android:paddingRight="@dimen/space15"
+                android:paddingTop="@dimen/space20"
+                android:paddingBottom="@dimen/space20"
+                android:drawableLeft="@drawable/ic_my_ad_bid"
+                android:drawablePadding="@dimen/space10"
+                android:textSize="@dimen/textfont18"
+                android:textColor="@color/text_black"
+                android:text="@string/ad_bid">
+            </TextView>
+            <TextView
+                android:id="@+id/tv_my_ad"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/space5"
+                android:background="@drawable/bg_white_block"
+                android:paddingLeft="@dimen/space15"
+                android:paddingRight="@dimen/space15"
+                android:paddingTop="@dimen/space20"
+                android:paddingBottom="@dimen/space20"
+                android:drawableLeft="@drawable/ic_my_ad"
+                android:drawablePadding="@dimen/space10"
+                android:textSize="@dimen/textfont18"
+                android:textColor="@color/text_black"
+                android:text="@string/my_ad">
+            </TextView>
+        </LinearLayout>
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_menu"
             android:layout_width="match_parent"

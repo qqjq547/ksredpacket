@@ -100,6 +100,8 @@
         <activity android:name="com.guochuang.mimedia.ui.activity.BidBrandActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.BeeNestTempActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.MyAdActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.HistoryPutActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.BidHistoryActivity" />
 
         <activity
             android:name="com.guochuang.mimedia.ui.activity.LuckyActivity"

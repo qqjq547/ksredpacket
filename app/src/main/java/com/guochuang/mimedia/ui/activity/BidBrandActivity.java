@@ -1,6 +1,6 @@
 package com.guochuang.mimedia.ui.activity;
 
-import android.os.Bundle;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +12,6 @@ import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
-import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.tools.calendar.CaledarAdapter;
 import com.guochuang.mimedia.tools.calendar.CalendarBean;
 import com.guochuang.mimedia.tools.calendar.CalendarDateView;
@@ -26,7 +25,6 @@ import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class BidBrandActivity extends MvpActivity {
@@ -76,7 +74,7 @@ public class BidBrandActivity extends MvpActivity {
 
     @Override
     public void initViewAndData() {
-        tvText.setText(R.string.history_vote);
+        tvText.setText(R.string.history_put);
         dateFormat = new SimpleDateFormat(Constant.FORMAT_MONTH);
         tvMonth.setText(dateFormat.format(new Date()));
         initMarkData();
@@ -139,6 +137,7 @@ public class BidBrandActivity extends MvpActivity {
                 onBackPressed();
                 break;
             case R.id.tv_text:
+                startActivity(new Intent(this,HistoryPutActivity.class));
                 break;
             case R.id.iv_last:
                 cdvMonth.setCurrentItem(cdvMonth.getCurrentItem()-1);
