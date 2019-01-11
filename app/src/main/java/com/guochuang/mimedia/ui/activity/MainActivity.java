@@ -309,34 +309,31 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
         }
     }
     private void startUpgrade(String downloadUrl) {
-        String[] split=downloadUrl.split(File.separator);
-        String fileName=split[split.length-1];
-        final String dirPath=Constant.COMMON_PATH;
-        final String apkPath=dirPath+File.separator+fileName;
-        new File(apkPath).mkdir();
-        if (new File(apkPath).exists()){
-            CommonUtil.installApk(this,apkPath);
+        if(TextUtils.isEmpty(downloadUrl)){
             return;
         }
-        AllenVersionChecker
-                .getInstance()
-                .downloadOnly(UIData.create().setDownloadUrl(downloadUrl))
-                .setDirectDownload(true)
-                .setForceRedownload(false)
-                .setCustomDownloadingDialogListener(new CustomDownloadingDialogListener() {
-                    @Override
-                    public Dialog getCustomDownloadingDialog(Context context, int progress, UIData versionBundle) {
-                        UpgradeDialog downloadDialog=new UpgradeDialog(context);
-                        return downloadDialog;
-                    }
-                    @Override
-                    public void updateUI(Dialog dialog, int progress, UIData versionBundle) {
-                        ProgressBar progressBar = dialog.findViewById(R.id.pb_upgrade);
-                        progressBar.setProgress(progress);
-                    }
-                })
-                .executeMission(this);
-
+        if (downloadUrl.endsWith(".apk")){
+            AllenVersionChecker
+                    .getInstance()
+                    .downloadOnly(UIData.create().setDownloadUrl(downloadUrl))
+                    .setDirectDownload(true)
+                    .setForceRedownload(false)
+                    .setCustomDownloadingDialogListener(new CustomDownloadingDialogListener() {
+                        @Override
+                        public Dialog getCustomDownloadingDialog(Context context, int progress, UIData versionBundle) {
+                            UpgradeDialog downloadDialog=new UpgradeDialog(context);
+                            return downloadDialog;
+                        }
+                        @Override
+                        public void updateUI(Dialog dialog, int progress, UIData versionBundle) {
+                            ProgressBar progressBar = dialog.findViewById(R.id.pb_upgrade);
+                            progressBar.setProgress(progress);
+                        }
+                    })
+                    .executeMission(this);
+        }else if(downloadUrl.contains(".html")){
+            IntentUtils.startOutWebActivity(this,downloadUrl);
+        }
     }
     public void setMsgDotView(){
         if (badgeView==null)

@@ -309,6 +309,7 @@
     <string name="format_get_ksb">获得%sKSB</string>
     <string name="redbag">红包</string>
     <string name="identification">实名认证</string>
+    <string name="identity_custom">人工审核</string>
     <string name="my_weixin">我的微信</string>
     <string name="my_zfb">我的支付宝</string>
     <string name="my_bankcard">我的银行卡</string>
@@ -317,8 +318,10 @@
     <string name="finger_pwd">指纹解锁</string>
     <string name="gesture_pwd">手势密码</string>
     <string name="update_gesture_pwd">修改手势密码</string>
+    <string name="in_review">审核中</string>
     <string name="has_identify">已实名</string>
     <string name="has_unidentify">未实名</string>
+    <string name="review_fail">审核失败</string>
     <string name="has_bind">已绑定</string>
     <string name="has_unbind">未绑定</string>
     <string name="format_bankcard">%d张银行卡</string>
@@ -543,6 +546,14 @@
     <string name="loading_video">正在加载视频</string>
     <string name="i_want_show_ad">我要投广告</string>
     <string name="cant_get_qrcode">无法获得图片</string>
+    <string name="identify_pic_front">身份证正面照</string>
+    <string name="identify_pic_back">身份证反面照</string>
+    <string name="msg_finish_time">信息交付预计1~2个工作日内完成审核</string>
+    <string name="front_pic_cant_empty">身份证正面照片不能为空</string>
+    <string name="back_pic_cant_empty">身份证反面照片不能为空</string>
+    <string name="name_cant_empty">身份证姓名不能为空</string>
+    <string name="number_pic_cant_empty">身份证号码不能为空</string>
+
     <string name="navigation">导航</string>
     <string name="call">拨打</string>
     <string name="save_ad_temp">保存为广告模板</string>

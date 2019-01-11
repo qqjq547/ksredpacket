@@ -90,10 +90,15 @@ public class SafeCenterActivity extends MvpActivity<SafeCenterPresenter> impleme
                 break;
             case R.id.lin_identity:
                 if (safeCenter != null) {
-                    if (getPref().getInt(PrefUtil.IDENTITY, 0) == 0) {
+                    if (safeCenter.getNameAuthInfo() == null) {
                         startActivityForResult(new Intent(this, IdentifyActivity.class), Constant.REFRESH);
                     } else {
-                        startActivity(new Intent(this, IdentifyResultActivity.class));
+                        if (safeCenter.getNameAuthInfo().getAuditStatus()==Constant.STATUS_AUDIT_FAIL){
+                            String desp=safeCenter.getNameAuthInfo().getAuditDescription();
+                            startActivityForResult(new Intent(this, IdentifyActivity.class).putExtra(Constant.DESCRIPTION,desp), Constant.REFRESH);
+                        }else {
+                            startActivity(new Intent(this, IdentifyResultActivity.class));
+                        }
                     }
                 }
                 break;
@@ -166,12 +171,22 @@ public class SafeCenterActivity extends MvpActivity<SafeCenterPresenter> impleme
     public void setData(SafeCenter data) {
         closeLoadingDialog();
         this.safeCenter = data;
-        if (data.getNameAuthInfo() == null || TextUtils.isEmpty(data.getNameAuthInfo().getRealName())) {
+        if (data.getNameAuthInfo() == null) {
             tvIdentity.setText(R.string.has_unidentify);
             getPref().setInt(PrefUtil.IDENTITY, 0);
         } else {
-            tvIdentity.setText(R.string.has_identify);
-            getPref().setInt(PrefUtil.IDENTITY, 1);
+            //审核中
+            if (safeCenter.getNameAuthInfo().getAuditStatus()==Constant.STATUS_AUDIT_FAIL){
+                tvIdentity.setText(R.string.review_fail);
+                getPref().setInt(PrefUtil.IDENTITY, 0);
+            }else if(safeCenter.getNameAuthInfo().getAuditStatus()==Constant.STATUS_AUDIT_INREVIEW){
+                tvIdentity.setText(R.string.in_review);
+                getPref().setInt(PrefUtil.IDENTITY, 0);
+            }else if(safeCenter.getNameAuthInfo().getAuditStatus()==Constant.STATUS_AUDIT_PASS){
+                tvIdentity.setText(R.string.has_identify);
+                getPref().setInt(PrefUtil.IDENTITY, 1);
+            }
+
         }
 //        if (redbagDetail.getHasWechat() > 0) {
 //            tvMyWeixin.setText(R.string.has_bind);

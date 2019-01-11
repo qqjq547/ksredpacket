@@ -37,7 +37,9 @@ public class Constant {
     public static final int REQUEST_COLLECT = 10;
     public static final int REQUEST_TRANSFER = 11;
     public static final int REQUEST_GRANT = 12;
-    public static final int REQUEST_PICK_ICON = 13;
+    public static final int REQUEST_CARD_FRONT = 13;
+    public static final int REQUEST_CARD_BACK = 14;
+    public static final int REQUEST_PICK_ICON = 15;
 
 
     public static final String TITLE = "title";
@@ -73,6 +75,8 @@ public class Constant {
     public static final String TIME_TYPE = "time_type";
     public static final String ISAGENT = "isAgent";
     public static final String PAYNUMBER = "payNumber";
+    public static final String DESCRIPTION = "description";
+
 
     public static final String FORMAT_DATE_SIMPLE = "yyyy-MM-dd";
     public static final String FORMAT_DATE = "yyyy-MM-dd HH:mm:ss";
@@ -206,6 +210,13 @@ public class Constant {
     public static final int USER_ROLE_CHIEF = 3;
     public static final int USER_ROLE_STAR_CHIEF = 4;
     public static final int MAX_PICK_PICTURE = 6;
+    //审核中
+    public static final int STATUS_AUDIT_INREVIEW=0;
+    //审核通过
+    public static final int STATUS_AUDIT_PASS=1;
+    //审核失败
+    public static final int STATUS_AUDIT_FAIL=2;
+
 
 
 

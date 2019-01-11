@@ -47,16 +47,13 @@ public class IdentifyActivity extends MvpActivity<IdentifyPresenter> implements 
     EditText etNumber;
     @BindView(R.id.tv_submit)
     TextView tvSubmit;
-    @BindView(R.id.tv_name)
-    TextView tvName;
-    @BindView(R.id.tv_number)
-    TextView tvNumber;
-    @BindView(R.id.ll_identify)
-    LinearLayout llIdentify;
-    @BindView(R.id.fl_no_identify)
-    FrameLayout flNoIdentify;
     @BindView(R.id.ll_name_and_number)
     LinearLayout llNameAndNumber;
+    @BindView(R.id.tv_notice)
+    TextView tvNotice;
+    @BindView(R.id.tv_errmsg)
+    TextView tvErrmsg;
+
 
     File file;
     IDCardResult idCardResult;
@@ -74,11 +71,13 @@ public class IdentifyActivity extends MvpActivity<IdentifyPresenter> implements 
     @Override
     public void initViewAndData() {
         tvTitle.setText(R.string.identification);
+        String desp=getIntent().getStringExtra(Constant.DESCRIPTION);
+        tvErrmsg.setText(desp);
         setStatusbar(R.color.bg_red, false);
         tvSubmit.setEnabled(false);
     }
 
-    @OnClick({R.id.iv_back, R.id.iv_card,R.id.lin_content,R.id.tv_submit})
+    @OnClick({R.id.iv_back, R.id.iv_card,R.id.lin_content,R.id.tv_submit,R.id.tv_identity_custom})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -103,6 +102,12 @@ public class IdentifyActivity extends MvpActivity<IdentifyPresenter> implements 
                     showLoadingDialog(null);
                     mvpPresenter.fileUpload(Constant.BUSSINESSTYPE_ID_CARD, file);
                 }
+                break;
+            case R.id.tv_identity_custom:
+                Intent intent=getIntent();
+                intent.setClass(this,IdentifyCustomActivity.class);
+                startActivity(intent);
+                finish();
                 break;
         }
     }
