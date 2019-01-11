@@ -152,10 +152,7 @@ public class RedbagBenefitActivity extends MvpActivity<RedbagBenefitPresenter> i
                 srlRefresh.setEnableLoadmore(true);
             }
             if (data.getMap()!=null){
-                if (data.getMap() instanceof RedbagTotalBenefit){
-                    LogUtil.d(((RedbagTotalBenefit) data.getMap()).getTotalCoin());
-                    tvBenefit.setText(((RedbagTotalBenefit) data.getMap()).getTotalCoin());
-                }
+                tvBenefit.setText(data.getMap().getTotalCoin());
             }
         }
     }

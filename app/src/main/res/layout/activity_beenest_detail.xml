@@ -16,9 +16,10 @@
     <ImageView
         android:id="@+id/iv_background"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/space200"
         android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         android:src="@drawable/bg_recommend_agent_banner"/>
     <LinearLayout
         android:layout_width="match_parent"

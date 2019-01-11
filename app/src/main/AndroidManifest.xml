@@ -103,7 +103,8 @@
         <activity android:name="com.guochuang.mimedia.ui.activity.MyAdActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.HistoryPutActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.BidHistoryActivity" />
-
+        <activity android:name="com.guochuang.mimedia.ui.activity.AdBidActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.MyBidActivity" />
         <activity
             android:name="com.guochuang.mimedia.ui.activity.LuckyActivity"
             android:theme="@style/Transparent" />

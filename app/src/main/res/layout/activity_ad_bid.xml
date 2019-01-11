@@ -2,6 +2,37 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+   <include layout="@layout/layout_title_text"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.baidu.mapapi.map.MapView
+            android:id="@+id/mv_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </com.baidu.mapapi.map.MapView>
+        <TextView
+            android:id="@+id/tv_my_ad"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/space36"
+            android:layout_marginBottom="@dimen/space30"
+            android:gravity="center"
+            android:layout_gravity="bottom|center_horizontal"
+            android:drawableLeft="@drawable/ic_ad"
+            android:drawablePadding="@dimen/space10"
+            android:background="@drawable/bg_btn_ad"
+            android:textSize="@dimen/textfont14"
+            android:textColor="@color/text_white"
+            android:text="@string/my_ad"/>
+        <ImageView
+            android:id="@+id/iv_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_ad_location"
+            android:layout_gravity="right|bottom"
+            android:layout_marginRight="@dimen/space10"
+            android:layout_marginBottom="@dimen/space130"/>
+    </FrameLayout>
 </LinearLayout>

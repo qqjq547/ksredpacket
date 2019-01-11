@@ -113,7 +113,7 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
 
                     @Override
                     public void onBidOther() {
-                        startActivity(new Intent(BeeNestActivity.this,MyAdActivity.class));
+                        startActivity(new Intent(BeeNestActivity.this,AdBidActivity.class));
                     }
 
                     @Override

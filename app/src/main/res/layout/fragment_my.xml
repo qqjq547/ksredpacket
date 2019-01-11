@@ -79,8 +79,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/space15"
             android:layout_marginRight="@dimen/space15">
-            <TextView
-                android:id="@+id/tv_ad_bid"
+
+            <LinearLayout
+                android:id="@+id/lin_ad_bid"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -89,15 +90,22 @@
                 android:paddingLeft="@dimen/space15"
                 android:paddingRight="@dimen/space15"
                 android:paddingTop="@dimen/space20"
-                android:paddingBottom="@dimen/space20"
-                android:drawableLeft="@drawable/ic_my_ad_bid"
-                android:drawablePadding="@dimen/space10"
-                android:textSize="@dimen/textfont18"
-                android:textColor="@color/text_black"
-                android:text="@string/ad_bid">
-            </TextView>
-            <TextView
-                android:id="@+id/tv_my_ad"
+                android:paddingBottom="@dimen/space20">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_my_ad_bid"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/space10"
+                    android:textSize="@dimen/textfont18"
+                    android:textColor="@color/text_black"
+                    android:text="@string/ad_bid"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_my_ad"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -107,13 +115,19 @@
                 android:paddingLeft="@dimen/space15"
                 android:paddingRight="@dimen/space15"
                 android:paddingTop="@dimen/space20"
-                android:paddingBottom="@dimen/space20"
-                android:drawableLeft="@drawable/ic_my_ad"
-                android:drawablePadding="@dimen/space10"
-                android:textSize="@dimen/textfont18"
-                android:textColor="@color/text_black"
-                android:text="@string/my_ad">
-            </TextView>
+                android:paddingBottom="@dimen/space20">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_my_ad"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/space10"
+                    android:textSize="@dimen/textfont18"
+                    android:textColor="@color/text_black"
+                    android:text="@string/my_ad"/>
+            </LinearLayout>
         </LinearLayout>
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_menu"

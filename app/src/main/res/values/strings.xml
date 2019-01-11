@@ -613,4 +613,7 @@
     <string name="format_time_to_time">%s~%s</string>
     <string name="ad_bid">广告竞拍</string>
     <string name="bid_history">竞购历史</string>
+    <string name="bid_explain">竞拍说明</string>
+    <string name="done_times">成交次数</string>
+    <string name="bid_times">竞购次数</string>
 </resources>
