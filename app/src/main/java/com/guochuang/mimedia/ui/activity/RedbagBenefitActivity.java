@@ -93,7 +93,7 @@ public class RedbagBenefitActivity extends MvpActivity<RedbagBenefitPresenter> i
                 mvpPresenter.getRedbagBenefit(1,Constant.PAGE_SIZE,cityName,districtName);
             }
         });
-        mvpPresenter.getBidPrice();
+//        mvpPresenter.getBidPrice();
         mvpPresenter.getRedbagBenefit(curPage,Constant.PAGE_SIZE,cityName,districtName);
     }
 
@@ -152,9 +152,8 @@ public class RedbagBenefitActivity extends MvpActivity<RedbagBenefitPresenter> i
                 srlRefresh.setEnableLoadmore(true);
             }
             if (data.getMap()!=null){
-                if (data.getMap() instanceof RedbagTotalBenefit){
-                    LogUtil.d(((RedbagTotalBenefit) data.getMap()).getTotalCoin());
-                    tvBenefit.setText(((RedbagTotalBenefit) data.getMap()).getTotalCoin());
+                if (data.getMap().containsKey(Constant.MAP_KEY_TOTALCOIN)){
+                    tvBenefit.setText(String.valueOf(data.getMap().get(Constant.MAP_KEY_TOTALCOIN)));
                 }
             }
         }

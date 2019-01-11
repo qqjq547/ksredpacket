@@ -214,7 +214,5 @@ public class Constant {
     //审核失败
     public static final int STATUS_AUDIT_FAIL=2;
 
-
-
-
+    public static final String MAP_KEY_TOTALCOIN = "totalCoin";
 }

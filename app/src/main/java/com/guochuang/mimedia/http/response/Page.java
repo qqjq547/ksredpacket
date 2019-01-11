@@ -1,6 +1,9 @@
 package com.guochuang.mimedia.http.response;
 
+import com.guochuang.mimedia.mvp.model.RedbagTotalBenefit;
+
 import java.util.List;
+import java.util.Map;
 
 public class Page<T> {
 
@@ -16,7 +19,7 @@ public class Page<T> {
     private int pageSize;
     private int totalCount;
     private int totalPage;
-    private Object map;
+    private Map<String,Object> map;
     private List<T> dataList;
 
     public int getCurrentPage() {
@@ -59,11 +62,11 @@ public class Page<T> {
         this.dataList = dataList;
     }
 
-    public Object getMap() {
+    public Map<String,Object> getMap() {
         return map;
     }
 
-    public void setMap(Object map) {
+    public void setMap(Map<String,Object> map) {
         this.map = map;
     }
 }
