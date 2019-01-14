@@ -71,6 +71,9 @@ public class BeeNestTempFragment extends MvpFragment {
 
     @Override
     public void initViewAndData() {
+        if (adapter!=null){
+            return;
+        }
         pictureArr.add("https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2774071914,778442818&fm=173&app=25&f=JPEG?w=640&h=400&s=FDB83BD10E76448043A0F550030040F3");
         pictureArr.add("https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=3253348826,163743007&fm=173&app=25&f=JPEG?w=405&h=300&s=3DA5CB1540027F41048008CD0300E0A1");
         pictureArr.add("https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=2669277608,2915862647&fm=173&app=25&f=JPEG?w=400&h=427&s=6E230FC306CA50F49994BCF803001011");

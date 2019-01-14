@@ -616,4 +616,7 @@
     <string name="bid_explain">竞拍说明</string>
     <string name="done_times">成交次数</string>
     <string name="bid_times">竞购次数</string>
+    <string name="format_count_ad_temp">共%d个广告模板</string>
+    <string name="next_start_bid_time">下期开始竞拍时间：</string>
+
 </resources>

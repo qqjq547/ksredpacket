@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="216dp"
-    android:layout_height="238dp"
+    android:layout_width="223dp"
+    android:layout_height="254dp"
     android:orientation="vertical"
     android:background="@drawable/bg_bee_temp">
     <View
@@ -36,4 +39,5 @@
             android:background="@drawable/bg_btn_red"
             android:text="@string/i_known"/>
     </LinearLayout>
+</LinearLayout>
 </LinearLayout>

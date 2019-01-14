@@ -353,8 +353,10 @@
                     <ImageView
                         android:id="@+id/iv_temp_tip"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/space5"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="@dimen/space5"
+                        android:paddingRight="@dimen/space5"
+                        android:scaleType="centerInside"
                         android:src="@drawable/ic_temp_tip"/>
                 </LinearLayout>
                 <LinearLayout

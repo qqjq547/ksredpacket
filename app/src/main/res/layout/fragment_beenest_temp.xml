@@ -19,8 +19,8 @@
                 android:id="@+id/iv_background"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:scaleType="centerCrop"
+                android:minHeight="@dimen/space250"
+                android:scaleType="fitXY"
                 android:src="@drawable/bg_recommend_agent_banner"/>
                 <TextView
                     android:id="@+id/tv_temp_name"

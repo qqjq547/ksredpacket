@@ -33,6 +33,7 @@ import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.Redbag;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
+import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.tools.antishake.AntiShake;
@@ -134,6 +135,7 @@ public class AdBidActivity extends MvpActivity {
                 onBackPressed();
                 break;
             case R.id.tv_text:
+                IntentUtils.startWebActivity(this,null,Constant.URL_FENGCHAO_JINGPAI);
                 break;
             case R.id.tv_my_ad:
                 startActivity(new Intent(this,MyAdActivity.class));
@@ -181,7 +183,7 @@ public class AdBidActivity extends MvpActivity {
             LatLng point = new LatLng(bdLocation.getLatitude(), bdLocation.getLongitude());
             //构建Marker图标
             BitmapDescriptor bitmap = BitmapDescriptorFactory
-                    .fromResource(R.drawable.ic_location);
+                    .fromResource(R.drawable.ic_bid_location);
             bm.clear();
             Bundle nowbundle = new Bundle();
             nowbundle.putString(Constant.RED_PACKET_TYPE, Constant.TYPE_NOW);

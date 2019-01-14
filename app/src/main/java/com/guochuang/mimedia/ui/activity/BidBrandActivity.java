@@ -1,17 +1,21 @@
 package com.guochuang.mimedia.ui.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
+import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.calendar.CaledarAdapter;
 import com.guochuang.mimedia.tools.calendar.CalendarBean;
 import com.guochuang.mimedia.tools.calendar.CalendarDateView;
@@ -25,6 +29,7 @@ import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class BidBrandActivity extends MvpActivity {
@@ -61,6 +66,22 @@ public class BidBrandActivity extends MvpActivity {
     CheckBox cbObeyRule;
     @BindView(R.id.tv_rule)
     TextView tvRule;
+    @BindView(R.id.lin_edit)
+    LinearLayout linEdit;
+    @BindView(R.id.iv_avatar)
+    ImageView ivAvatar;
+    @BindView(R.id.tv_nick_name)
+    TextView tvNickName;
+    @BindView(R.id.tv_price)
+    TextView tvPrice;
+    @BindView(R.id.tv_next_bid_time)
+    TextView tvNextBidTime;
+    @BindView(R.id.lin_result)
+    LinearLayout linResult;
+    @BindView(R.id.lin_ensure)
+    LinearLayout linRnsure;
+    @BindView(R.id.btn_buy)
+    Button btnBuy;
 
     @Override
     protected BasePresenter createPresenter() {
@@ -130,24 +151,26 @@ public class BidBrandActivity extends MvpActivity {
         hotArr.add("2019-01-08");
     }
 
-    @OnClick({R.id.iv_back, R.id.tv_text, R.id.iv_last, R.id.iv_next,R.id.tv_bid_record, R.id.tv_rule,R.id.btn_buy})
+    @OnClick({R.id.iv_back, R.id.tv_text, R.id.iv_last, R.id.iv_next, R.id.tv_bid_record, R.id.tv_rule, R.id.btn_buy})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
                 onBackPressed();
                 break;
             case R.id.tv_text:
-                startActivity(new Intent(this,HistoryPutActivity.class));
+                startActivity(new Intent(this, HistoryPutActivity.class));
                 break;
             case R.id.iv_last:
-                cdvMonth.setCurrentItem(cdvMonth.getCurrentItem()-1);
+                cdvMonth.setCurrentItem(cdvMonth.getCurrentItem() - 1);
                 break;
             case R.id.iv_next:
-                cdvMonth.setCurrentItem(cdvMonth.getCurrentItem()+1);
+                cdvMonth.setCurrentItem(cdvMonth.getCurrentItem() + 1);
                 break;
             case R.id.tv_bid_record:
+                startActivity(new Intent(this, BidHistoryActivity.class));
                 break;
             case R.id.tv_rule:
+                IntentUtils.startWebActivity(this,null,Constant.URL_FENGCHAO_JINGGOU);
                 break;
             case R.id.btn_buy:
                 break;

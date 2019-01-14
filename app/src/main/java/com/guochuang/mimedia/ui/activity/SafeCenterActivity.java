@@ -8,8 +8,12 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.tools.WxLogin;
+import com.guochuang.mimedia.tools.pay.AliPay;
+import com.guochuang.mimedia.tools.pay.AuthResult;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
@@ -131,7 +135,18 @@ public class SafeCenterActivity extends MvpActivity<SafeCenterPresenter> impleme
                         showShortToast(R.string.pls_identity_first);
                         startActivityForResult(new Intent(this, IdentifyActivity.class), Constant.REFRESH);
                     } else {
-                        startActivityForResult(new Intent(this, MyAlipayActivity.class), Constant.REFRESH);
+//                        startActivityForResult(new Intent(this, MyAlipayActivity.class), Constant.REFRESH);
+                        AliPay.getInstance().auth(this, "", new AliPay.OnAuthResultListener() {
+                            @Override
+                            public void onSuccess(AuthResult result) {
+                                LogUtil.d(result.getAlipayOpenId());
+                            }
+
+                            @Override
+                            public void onFail(String errmsg) {
+                                showShortToast(errmsg);
+                            }
+                        });
                     }
                 }
                 break;

@@ -105,6 +105,8 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
     String adMobile;
     String adArea;
     String adAddress;
+    String latitude;
+    String longitude;
 
     String url;
     String urlName;
@@ -202,6 +204,13 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
                 });
                 break;
             case R.id.tv_area:
+                new RxPermissions(this).request(Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_FINE_LOCATION).subscribe(new Action1<Boolean>() {
+                    @Override
+                    public void call(Boolean aBoolean) {
+                        startActivityForResult(new Intent(EditAdActivity.this, MapPickActivity.class),Constant.REQUEST_GET_LOCATION);
+                    }
+                });
                 break;
             case R.id.tv_link:
                 if (linLink.getVisibility()==View.GONE){
@@ -216,7 +225,7 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
                 new BeeTempDialog(this).show();
                 break;
             case R.id.tv_rule:
-                IntentUtils.startWebActivity(this, tvRule.getText().toString(),Constant.URL_SEND_REDBAG);
+                IntentUtils.startWebActivity(this,null,Constant.URL_FENGCHAO_BANNER);
                 break;
             case R.id.btn_confirm:
                 if (picUrlArr.size()==0){
@@ -315,6 +324,11 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
                     String path = iconArr.get(0);
                     showLoadingDialog(null);
                     mvpPresenter.fileUpload(Constant.BUSSINESSTYPE_RED_AVATAR, new File(path),true);
+                    break;
+                case Constant.REQUEST_GET_LOCATION:
+                    latitude=String.valueOf(intent.getDoubleExtra(Constant.LATITUDE,0));
+                    longitude=String.valueOf(intent.getDoubleExtra(Constant.LONGITUDE,0));
+                    tvArea.setText(intent.getStringExtra(Constant.NAME));
                     break;
                 case Constant.REQUEST_TEMPLATE:
 //                    RedbagTemp temp=(RedbagTemp)intent.getSerializableExtra(Constant.TEMPLATE);

@@ -86,7 +86,7 @@ public class BeeNestTempActivity extends MvpActivity {
 
     public void setData(List<RedbagTemp> data){
         this.tempArr=data;
-        tvTotal.setText(String.format(getString(R.string.format_count_redbag_temp_password),tempArr.size()));
+        tvTotal.setText(String.format(getString(R.string.format_count_ad_temp),tempArr.size()));
         fragments=new BeeNestTempFragment[tempArr.size()];
         views=new ImageView[tempArr.size()];
         linIndicate.removeAllViews();

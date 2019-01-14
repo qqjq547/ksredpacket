@@ -136,6 +136,11 @@
             </LinearLayout>
             <include layout="@layout/layout_divide_deep_line"/>
             <LinearLayout
+                android:id="@+id/lin_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/space45"
                 android:gravity="center_vertical">
@@ -239,7 +244,66 @@
                     android:textSize="@dimen/textfont14"
                     android:text="@string/ksb"/>
             </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/lin_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/space15"
+                    android:paddingBottom="@dimen/space15">
+            <ImageView
+                    android:id="@+id/iv_avatar"
+                    android:layout_width="@dimen/space63"
+                    android:layout_height="@dimen/space63" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/space10">
+                    <TextView
+                        android:id="@+id/tv_nick_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/textfont16"
+                        android:text="xxxxxxxxxx"/>
+                    <TextView
+                        android:id="@+id/tv_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space10"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/textfont14"
+                        android:text="@string/format_price_and_total"/>
+                </LinearLayout>
+                <ImageView
+                    android:layout_width="@dimen/space63"
+                    android:layout_height="@dimen/space63"
+                    android:src="@drawable/ic_has_deal"/>
+            </LinearLayout>
+            <include layout="@layout/layout_divide_deep_line"/>
+            <TextView
+                android:id="@+id/tv_next_bid_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/space10"
+                android:paddingBottom="@dimen/space10"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/textfont13"
+                android:text="@string/next_start_bid_time"/>
         </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/lin_ensure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -277,6 +341,7 @@
             android:text="@string/buy_right_now"
             android:textColor="@color/text_white"
             android:textSize="@dimen/textfont15" />
+    </LinearLayout>
     </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </LinearLayout>
