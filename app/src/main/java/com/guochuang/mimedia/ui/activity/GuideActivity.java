@@ -1,27 +1,20 @@
 package com.guochuang.mimedia.ui.activity;
 
 import android.content.Intent;
-import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.guochuang.mimedia.ui.activity.user.LoginActivity;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
-import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.ui.adapter.MyViewPagerAdapter;
 
-import java.util.ArrayList;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 
 public class GuideActivity extends MvpActivity implements View.OnClickListener {

@@ -6,14 +6,12 @@ import android.support.v4.view.ViewPager;
 import android.widget.TextView;
 
 import com.sz.gcyh.KSHongBao.R;
-import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpFragment;
 import com.guochuang.mimedia.mvp.model.Category;
 import com.guochuang.mimedia.mvp.presenter.InfoPresenter;
 import com.guochuang.mimedia.mvp.view.InfoView;
-import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
-import com.guochuang.mimedia.ui.activity.InfoSearchActivity;
+import com.guochuang.mimedia.ui.activity.info.InfoSearchActivity;
 import com.guochuang.mimedia.ui.adapter.MyFragmentPagerAdapter;
 
 import java.util.List;

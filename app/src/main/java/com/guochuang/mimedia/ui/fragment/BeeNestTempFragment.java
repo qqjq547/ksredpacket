@@ -1,14 +1,8 @@
 package com.guochuang.mimedia.ui.fragment;
 
-import android.app.Activity;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,20 +11,13 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpFragment;
 import com.guochuang.mimedia.tools.IntentUtils;
-import com.guochuang.mimedia.ui.activity.CityDetailActivity;
-import com.guochuang.mimedia.ui.activity.EditBoardActivity;
 import com.guochuang.mimedia.ui.adapter.PictureAdapter;
-import com.guochuang.mimedia.ui.adapter.PictureVerticalAdapter;
 import com.guochuang.mimedia.view.GridItemDecoration;
-import com.guochuang.mimedia.view.VerticalDecoration;
 import com.sz.gcyh.KSHongBao.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 public class BeeNestTempFragment extends MvpFragment {
     @BindView(R.id.iv_background)

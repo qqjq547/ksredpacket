@@ -1,6 +1,5 @@
 package com.guochuang.mimedia.ui.fragment;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.webkit.JavascriptInterface;
@@ -14,8 +13,7 @@ import com.guochuang.mimedia.base.MvpFragment;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.IntentUtils;
-import com.guochuang.mimedia.tools.LogUtil;
-import com.guochuang.mimedia.ui.activity.CityActivity;
+import com.guochuang.mimedia.ui.activity.city.CityActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;

@@ -1,17 +1,13 @@
 package com.guochuang.mimedia.ui.fragment;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.sz.gcyh.KSHongBao.R;
-import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpFragment;
 import com.guochuang.mimedia.mvp.model.DrawStatistics;
 import com.guochuang.mimedia.mvp.model.RedbagReceived;
@@ -19,9 +15,7 @@ import com.guochuang.mimedia.mvp.presenter.ReceivedRedbagPresenter;
 import com.guochuang.mimedia.mvp.view.ReceiveRedbagView;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.IntentUtils;
-import com.guochuang.mimedia.ui.activity.MessageActivity;
 import com.guochuang.mimedia.ui.adapter.ReceiveRedbagAdapter;
-import com.guochuang.mimedia.ui.adapter.RedbagBenefitAdapter;
 import com.guochuang.mimedia.view.VerticalDecoration;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -31,9 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 public class ReceiveRedbagFragment extends MvpFragment<ReceivedRedbagPresenter> implements ReceiveRedbagView {
 

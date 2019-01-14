@@ -6,27 +6,17 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.widget.LinearLayout;
 
-import com.baidu.mobads.SplashAd;
-import com.baidu.mobads.SplashAdListener;
-import com.google.gson.Gson;
 import com.guochuang.mimedia.app.AdInfoService;
 import com.guochuang.mimedia.base.MvpActivity;
-import com.guochuang.mimedia.mvp.model.UserLogin;
 import com.guochuang.mimedia.mvp.presenter.WelcomePresenter;
 import com.guochuang.mimedia.mvp.view.WelcomeView;
 import com.guochuang.mimedia.tools.AdCollectionView;
-import com.guochuang.mimedia.tools.CommonUtil;
-import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.tools.PrefUtil;
-import com.qq.e.ads.splash.SplashAD;
-import com.qq.e.ads.splash.SplashADListener;
-import com.qq.e.comm.util.AdError;
+import com.guochuang.mimedia.ui.activity.user.BindingPhoneAcitivity;
+import com.guochuang.mimedia.ui.activity.user.LoginActivity;
 import com.sz.gcyh.KSHongBao.R;
 
-import java.util.Random;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class WelcomeActivity extends MvpActivity<WelcomePresenter> implements WelcomeView {
 

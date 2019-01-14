@@ -8,16 +8,13 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.sz.gcyh.KSHongBao.R;
-import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.MvpFragment;
 import com.guochuang.mimedia.http.response.Page;
 import com.guochuang.mimedia.mvp.model.RedbagRecord;
-import com.guochuang.mimedia.mvp.model.UserLogin;
 import com.guochuang.mimedia.mvp.presenter.SendRedbagPresenter;
 import com.guochuang.mimedia.mvp.view.SendRedbagView;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.IntentUtils;
-import com.guochuang.mimedia.ui.activity.MessageActivity;
 import com.guochuang.mimedia.ui.adapter.SendRedbagAdapter;
 import com.guochuang.mimedia.view.VerticalDecoration;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;

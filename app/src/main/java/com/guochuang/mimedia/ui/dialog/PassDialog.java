@@ -1,13 +1,9 @@
 package com.guochuang.mimedia.ui.dialog;
 
-import android.app.Activity;
-import android.app.ActivityManager;
 import android.app.Dialog;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,16 +15,14 @@ import android.widget.ImageView;
 
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.MvpActivity;
-import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.PrefUtil;
-import com.guochuang.mimedia.ui.activity.IdentifyActivity;
-import com.guochuang.mimedia.ui.activity.TradePwdActivity;
+import com.guochuang.mimedia.ui.activity.user.IdentifyActivity;
+import com.guochuang.mimedia.ui.activity.user.TradePwdActivity;
 import com.guochuang.mimedia.ui.adapter.KeyBoardAdapter;
 import com.guochuang.mimedia.view.CodeView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
