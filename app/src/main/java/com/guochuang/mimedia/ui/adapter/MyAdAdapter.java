@@ -53,35 +53,20 @@ public class MyAdAdapter extends BaseQuickAdapter<MyAd,BaseViewHolder> {
             helper.setBackgroundColor(R.id.v_line,mContext.getResources().getColor(R.color.text_gray));
             helper.setTextColor(R.id.tv_time,mContext.getResources().getColor(R.color.text_gray));
         }
-        helper.addOnClickListener(R.id.tv_edit);
+//        helper.addOnClickListener(R.id.tv_edit);
 //        113.822728=22.630487
-        TextureMapView mapView=helper.getView(R.id.mv_location);
+        MapView mapView=helper.getView(R.id.mv_location);
         BaiduMap bm = mapView.getMap();
         mapView.showZoomControls(false);
         mapView.showScaleControl(false);
         mapView.removeViewAt(1);
-        OverlayOptions titleOo = new MarkerOptions().
-                position(new LatLng(113.822728,22.630487)).
-                icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location));
-        bm.addOverlay(titleOo);
-        MapStatus.Builder builder = new MapStatus.Builder();
-        builder.target(new LatLng(113.822728,22.630487)).zoom(15f);
-        bm.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
-    }
+//        OverlayOptions titleOo = new MarkerOptions().
+//                position(new LatLng(113.822728,22.630487)).
+//                icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location));
+//        bm.addOverlay(titleOo);
+//        MapStatus.Builder builder = new MapStatus.Builder();
+//        builder.target(new LatLng(113.822728,22.630487)).zoom(15f);
+//        bm.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
 
-    @Override
-    public void onViewAttachedToWindow(BaseViewHolder holder) {
-        super.onViewAttachedToWindow(holder);
-    }
-
-    @Override
-    public void onViewRecycled(@NonNull BaseViewHolder holder) {
-        super.onViewRecycled(holder);
-
-    }
-
-    @Override
-    public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return super.onCreateViewHolder(parent, viewType);
     }
 }

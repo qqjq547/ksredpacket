@@ -34,11 +34,11 @@ public class ApiClient {
     public static String RELEASE_URL="https://api.guochuangyuanhe.com/";
     public static String HTML_URL=
             Constant.isDebug ?
-            "http://120.77.110.100/":
+            getDebuHtmlHost():
             "https://www.guochuangyuanhe.com/";
     public static String API_SERVER_URL =
             Constant.isDebug ?
-                    TEST_URL:
+                    getDebugHost():
                     RELEASE_URL;
 
     public static Retrofit Retrofit(final String baseUrl) {
@@ -129,5 +129,25 @@ public class ApiClient {
             e.printStackTrace();
         }
         return ssfFactory;
+    }
+    public static String getDebugHost(){
+        int debugHost=PrefUtil.getInstance().getInt(PrefUtil.DEBUGHOST,0);
+        switch (debugHost){
+            case 0://测试host
+                return TEST_URL;
+            case 1://生产host
+                return RELEASE_URL;
+        }
+        return "";
+    }
+    public static String getDebuHtmlHost(){
+        int debugHost=PrefUtil.getInstance().getInt(PrefUtil.DEBUGHOST,0);
+        switch (debugHost){
+            case 0://测试host
+                return "http://120.77.110.100/";
+            case 1://生产host
+                return "https://www.guochuangyuanhe.com/";
+        }
+        return "";
     }
 }

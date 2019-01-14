@@ -84,6 +84,7 @@ public class Constant {
 
     public static final String TYPE_REPORT_INFORMATION = "informationReport";
     public static final String TYPE_REPORT_REDPACKET = "redPacketReport";
+    public static final String TYPE_BEENEST_REPORT = "beenestReport";
 
     //资讯详情
     public static final String URL_INFOMATION_DETAIL = ApiClient.HTML_URL+"information/detail/index.htm";

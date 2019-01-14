@@ -7,7 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.mvp.model.InfoItem;
+import com.guochuang.mimedia.mvp.model.InfoItem_;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.MvpFragment;
 import com.guochuang.mimedia.http.response.Page;
@@ -25,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import io.objectbox.Box;
 
 public class InfoListFragment extends MvpFragment<InfoListPresenter> implements InfoListView {
     @BindView(R.id.srl_refresh)
@@ -37,6 +40,7 @@ public class InfoListFragment extends MvpFragment<InfoListPresenter> implements 
 
     int curPage=1;
     int categoryId=0;
+    Box<InfoItem> box;
 
     @Override
     protected InfoListPresenter createPresenter() {
@@ -57,6 +61,8 @@ public class InfoListFragment extends MvpFragment<InfoListPresenter> implements 
         if (infoAdapter!=null){
             return;
         }
+        box =App.getInstance().getBoxStore().boxFor(InfoItem.class);
+        infoItems.addAll(box.find(InfoItem_.categoryId,categoryId));
         infoAdapter=new InfoAdapter(infoItems);
         infoAdapter.setEmptyView(getLayoutInflater().inflate(R.layout.layout_empty,null));
         infoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -84,7 +90,7 @@ public class InfoListFragment extends MvpFragment<InfoListPresenter> implements 
                 mvpPresenter.getRecommendList(1,Constant.PAGE_SIZE,categoryId);
             }
         });
-        mvpPresenter.getRecommendList(curPage,Constant.PAGE_SIZE,categoryId);
+//        mvpPresenter.getRecommendList(curPage,Constant.PAGE_SIZE,categoryId);
     }
 
     @Override
@@ -94,6 +100,8 @@ public class InfoListFragment extends MvpFragment<InfoListPresenter> implements 
         curPage=data.getCurrentPage();
         if (curPage==1){
             infoItems.clear();
+            box.remove(box.find(InfoItem_.categoryId,categoryId));
+            box.put(data.getDataList());
         }
         infoItems.addAll(data.getDataList());
         infoAdapter.notifyDataSetChanged();
