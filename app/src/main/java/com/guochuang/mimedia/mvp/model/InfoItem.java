@@ -1,5 +1,9 @@
 package com.guochuang.mimedia.mvp.model;
 
+import io.objectbox.annotation.Entity;
+import io.objectbox.annotation.Id;
+
+@Entity
 public class InfoItem {
 
     /**
@@ -10,20 +14,22 @@ public class InfoItem {
      * praiseNumber : 0
      * title : string
      */
-
-    private int articleId;
+    @Id
+    long id;
+    private long articleId;
     private String author;
     private int commentNumber;
     private String picture;
     private int praiseNumber;
     private String title;
     private String articleUuid;
+    private int categoryId;
 
-    public int getArticleId() {
+    public long getArticleId() {
         return articleId;
     }
 
-    public void setArticleId(int articleId) {
+    public void setArticleId(long articleId) {
         this.articleId = articleId;
     }
 
@@ -73,5 +79,13 @@ public class InfoItem {
 
     public void setArticleUuid(String articleUuid) {
         this.articleUuid = articleUuid;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 }

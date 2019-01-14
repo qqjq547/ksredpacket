@@ -271,7 +271,7 @@
     <string name="share_benefit_ksb">分润(KSB)</string>
     <string name="fans_detail">粉丝明细</string>
     <string name="recommend_detail">推荐明细</string>
-    <string name="direct_agent">直招代理商</string>
+    <string name="direct_agent">直招代理</string>
     <string name="direct_fans">直招粉丝</string>
     <string name="market_num">市场数</string>
 
@@ -537,6 +537,7 @@
     <string name="check_redbag_detail">查看红包详情 >></string>
     <string name="dev_version">开发版</string>
     <string name="test_version">测试版</string>
+    <string name="release_version">生产版</string>
     <string name="active_hongycomb">激活蜂窝</string>
     <string name="hongycomb_agreement">《蜂窝规则》</string>、
     <string name="save_local">保存到本地</string>
@@ -553,5 +554,5 @@
     <string name="back_pic_cant_empty">身份证反面照片不能为空</string>
     <string name="name_cant_empty">身份证姓名不能为空</string>
     <string name="number_pic_cant_empty">身份证号码不能为空</string>
-
+    <string name="click_refresh">点击重试</string>
 </resources>

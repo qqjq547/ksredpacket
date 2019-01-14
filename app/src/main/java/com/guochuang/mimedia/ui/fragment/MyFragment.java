@@ -18,6 +18,7 @@ import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.RegionCore;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.ui.activity.CityActivity;
+import com.guochuang.mimedia.ui.dialog.SheetDialog;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.MvpFragment;
@@ -106,11 +107,19 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
 
     @Override
     public void initViewAndData() {
-        if (ApiClient.API_SERVER_URL.equals(ApiClient.DEV_URL)){
-            tvTitle.setText(R.string.dev_version);
-        }else if(ApiClient.API_SERVER_URL.equals(ApiClient.TEST_URL)){
-            tvTitle.setText(R.string.test_version);
+        if (Constant.isDebug){
+            tvTitle.setVisibility(View.VISIBLE);
+            if (ApiClient.API_SERVER_URL.equals(ApiClient.DEV_URL)){
+                tvTitle.setText(R.string.dev_version);
+            }else if(ApiClient.API_SERVER_URL.equals(ApiClient.TEST_URL)){
+                tvTitle.setText(R.string.test_version);
+            }else if(ApiClient.API_SERVER_URL.equals(ApiClient.RELEASE_URL)){
+                tvTitle.setText(R.string.release_version);
+            }
+        }else {
+           tvTitle.setVisibility(View.GONE);
         }
+
         LayoutInflater inflater = LayoutInflater.from(getActivity());
         ksbView = inflater.inflate(R.layout.layout_my_ksb, null);
         ksbView.setOnClickListener(pageOnClickListener);
@@ -267,7 +276,8 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
     }
 
     @OnClick({R.id.iv_setting,
-            R.id.iv_message})
+            R.id.iv_message,
+            R.id.tv_title})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_setting:
@@ -275,6 +285,27 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                 break;
             case R.id.iv_message:
                 startActivity(new Intent(getActivity(), MessageActivity.class));
+                break;
+            case R.id.tv_title:
+                List<String> itemArr=new ArrayList<>();
+                itemArr.add(getString(R.string.test_version));
+                itemArr.add(getString(R.string.release_version));
+                SheetDialog sheetDialog=new SheetDialog(getActivity(), itemArr, new SheetDialog.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        App.getInstance().forceLogin();
+                        switch (position) {
+                            case 0:
+                                getPref().setInt(PrefUtil.DEBUGHOST, 0);
+                                break;
+                            case 1:
+                                getPref().setInt(PrefUtil.DEBUGHOST, 1);
+                                break;
+                        }
+                        App.getInstance().finishActivity();
+                    }
+                });
+                sheetDialog.show();
                 break;
         }
     }

@@ -3,6 +3,8 @@ package com.guochuang.mimedia.ui.fragment;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sz.gcyh.KSHongBao.R;
@@ -29,6 +31,9 @@ public class InfoFragment extends MvpFragment<InfoPresenter> implements InfoView
     TextView tvSearch;
     @BindView(R.id.vp_info)
     ViewPager vpInfo;
+    @BindView(R.id.lin_empty)
+    LinearLayout linEmpty;
+
 
     InfoListFragment[] fragments;
 
@@ -48,13 +53,25 @@ public class InfoFragment extends MvpFragment<InfoPresenter> implements InfoView
     }
 
 
-    @OnClick(R.id.tv_search)
-    public void onViewClicked() {
-        startActivity(new Intent(getActivity(),InfoSearchActivity.class));
+    @OnClick({R.id.tv_search,R.id.tv_refresh})
+    public void onViewClicked(View view) {
+        switch (view.getId()){
+            case R.id.tv_search:
+                startActivity(new Intent(getActivity(),InfoSearchActivity.class));
+                break;
+            case R.id.tv_refresh:
+                showLoadingDialog(null);
+                mvpPresenter.categoryGet(Constant.SYSTEM_CODE,Constant.TYPE_INFOMATION);
+                break;
+        }
+
     }
 
     @Override
     public void setData(List<Category> data) {
+        closeLoadingDialog();
+        linEmpty.setVisibility(View.GONE);
+        vpInfo.setVisibility(View.VISIBLE);
         if (data.size()>0){
             fragments=new InfoListFragment[data.size()];
             String[] titles=new String[data.size()];
@@ -71,13 +88,9 @@ public class InfoFragment extends MvpFragment<InfoPresenter> implements InfoView
 
     @Override
     public void setError(String msg) {
+        closeLoadingDialog();
        showShortToast(msg);
-//        fragments=new InfoListFragment[1];
-//        String[] titles=new String[1];
-//        fragments[0]=new InfoListFragment();
-//        fragments[0].setCategoryId(2);
-//        titles[0]="本地";
-//        vpInfo.setAdapter(new MyFragmentPagerAdapter(getChildFragmentManager(),fragments,titles));
-//        tlTitle.setupWithViewPager(vpInfo);
+        linEmpty.setVisibility(View.VISIBLE);
+        vpInfo.setVisibility(View.GONE);
     }
 }
