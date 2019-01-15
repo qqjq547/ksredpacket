@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/bg_gray">
    <include layout="@layout/layout_title"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/space15"
+        android:paddingRight="@dimen/space15"
+        android:layout_marginTop="@dimen/space12"
+        android:background="@color/bg_white">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/space45"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/space15">
+            android:gravity="center_vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -23,20 +27,17 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:paddingLeft="@dimen/space15"
-                android:paddingRight="@dimen/space15"
                 android:gravity="right|center_vertical"
                 android:background="@color/transparent"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/textfont14"
                 android:hint="@string/input_received_person_name"/>
         </LinearLayout>
-        <include layout="@layout/layout_divide_deep_line"/>
+        <include layout="@layout/layout_divide_deep_line" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/space45"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/space15">
+            android:gravity="center_vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -48,8 +49,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:paddingLeft="@dimen/space15"
-                android:paddingRight="@dimen/space15"
                 android:gravity="right|center_vertical"
                 android:background="@color/transparent"
                 android:textColor="@color/text_black"
@@ -60,8 +59,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/space45"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/space15">
+            android:gravity="center_vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -73,9 +71,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:paddingLeft="@dimen/space15"
-                android:paddingRight="@dimen/space15"
-                android:drawablePadding="@dimen/space5"
+                android:drawablePadding="@dimen/space10"
                 android:drawableRight="@drawable/ic_arrow_right"
                 android:gravity="right|center_vertical"
                 android:background="@color/transparent"
@@ -90,8 +86,6 @@
             android:layout_height="@dimen/space80"
             android:background="@color/transparent"
             android:gravity="start"
-            android:paddingLeft="@dimen/space15"
-            android:paddingRight="@dimen/space15"
             android:paddingTop="@dimen/space10"
             android:paddingBottom="@dimen/space10"
             android:textSize="@dimen/textfont14"
@@ -99,17 +93,20 @@
             android:hint="@string/address_hint"
             />
         <include layout="@layout/layout_divide_deep_line"/>
-
+    </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/space15"
+            android:paddingRight="@dimen/space15"
+            android:layout_marginTop="@dimen/space12"
+            android:background="@color/bg_white">
             <include layout="@layout/layout_divide_deep_line"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/space45"
-                android:gravity="center_vertical"
-                android:paddingLeft="@dimen/space15">
+                android:gravity="center_vertical">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -123,12 +120,10 @@
                 <CheckBox
                     android:id="@+id/cb_default"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:button="@drawable/bg_check_green_selector"
-                    android:paddingLeft="@dimen/space15"
                     android:gravity="right|center_vertical" />
             </LinearLayout>
-            <include layout="@layout/layout_divide_deep_line"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -144,9 +139,9 @@
             android:layout_marginTop="@dimen/space50"
             android:layout_marginLeft="@dimen/space15"
             android:layout_marginRight="@dimen/space15"
-            android:background="@drawable/bg_btn_gray"
+            android:background="#dddddd"
             android:textSize="@dimen/textfont15"
-            android:textColor="@color/text_white"
+            android:textColor="@color/text_gray_drak"
             android:text="@string/delete"/>
         <TextView
             android:id="@+id/tv_confirm"
@@ -155,12 +150,11 @@
             android:layout_weight="1"
             android:gravity="center"
             android:layout_marginTop="@dimen/space50"
-            android:layout_marginLeft="@dimen/space15"
             android:layout_marginRight="@dimen/space15"
             android:background="@drawable/bg_btn_red"
             android:textSize="@dimen/textfont15"
             android:textColor="@color/text_white"
             android:text="@string/confirm"/>
         </LinearLayout>
-    </LinearLayout>
+
 </LinearLayout>

@@ -29,8 +29,10 @@ public class AddressAdapter extends BaseQuickAdapter<String,BaseViewHolder> {
             }else {
                 helper.setGone(R.id.iv_check,false);
             }
+            helper.setGone(R.id.iv_edit,false);
         }else {
             helper.setGone(R.id.iv_check,false);
+            helper.setGone(R.id.iv_edit,true);
         }
 
     }
