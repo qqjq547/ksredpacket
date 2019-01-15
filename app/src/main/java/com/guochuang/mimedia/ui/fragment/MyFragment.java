@@ -18,6 +18,7 @@ import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.RegionCore;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.ui.activity.CityActivity;
+import com.guochuang.mimedia.ui.activity.treasure.MyTreasureActivity;
 import com.guochuang.mimedia.ui.dialog.SheetDialog;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.app.App;
@@ -282,6 +283,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         switch (view.getId()) {
             case R.id.iv_setting:
                 startActivity(new Intent(getActivity(), SettingActivity.class));
+//                startActivity(new Intent(getActivity(),MyTreasureActivity.class));
                 break;
             case R.id.iv_message:
                 startActivity(new Intent(getActivity(), MessageActivity.class));

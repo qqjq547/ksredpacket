@@ -39,6 +39,7 @@ public class Constant {
     public static final int REQUEST_GRANT = 12;
     public static final int REQUEST_CARD_FRONT = 13;
     public static final int REQUEST_CARD_BACK = 14;
+    public static final int REQUEST_ADD_ADDRESS = 15;
 
     public static final String TITLE = "title";
     public static final String ARTICLEUUID = "articleUuid";
@@ -74,7 +75,7 @@ public class Constant {
     public static final String ISAGENT = "isAgent";
     public static final String PAYNUMBER = "payNumber";
     public static final String DESCRIPTION = "description";
-
+    public static final String ADDRESS_MODE = "address_mode";
 
     public static final String FORMAT_DATE_SIMPLE = "yyyy-MM-dd";
     public static final String FORMAT_DATE = "yyyy-MM-dd HH:mm:ss";
@@ -215,4 +216,12 @@ public class Constant {
     public static final int STATUS_AUDIT_FAIL=2;
 
     public static final String MAP_KEY_TOTALCOIN = "totalCoin";
+
+    //查看
+    public static final int MODE_ADDRESS_CHECK=0;
+    //编辑
+    public static final int MODE_ADDRESS_EDIT=1;
+    //选择
+    public static final int MODE_ADDRESS_SELECT=2;
+
 }

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+<include layout="@layout/layout_title"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/space15"
+            android:paddingTop="@dimen/space10"
+            android:paddingRight="@dimen/space15"
+            android:paddingBottom="@dimen/space10">
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/iv_icon"
+                android:layout_width="@dimen/space80"
+                android:layout_height="@dimen/space80"
+                android:src="@mipmap/app_icon" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/space15"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="收货地址："
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont14" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space12"
+                    android:text="xxxxxxxxxxxxxxxxxxxxxxx"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont14" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+            <TextView
+                android:layout_width="@dimen/space80"
+                android:layout_height="@dimen/space24"
+                android:layout_marginTop="@dimen/space5"
+                android:background="@color/bg_gray_light"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:lines="1"
+                android:text="xxxxx期"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/textfont14" />
+        </LinearLayout>
+        <include layout="@layout/layout_divide_deep_line"/>
+        <LinearLayout
+            android:id="@+id/lin_not_send"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:visibility="gone">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space30"
+                android:drawableTop="@mipmap/app_icon"
+                android:drawablePadding="@dimen/space10"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/textfont14"
+                android:text="@string/waiting_send_good"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/lin_has_send"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space30"
+                android:drawableTop="@mipmap/app_icon"
+                android:drawablePadding="@dimen/space10"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/textfont14"
+                android:text="@string/has_send_good"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space10">
+                <TextView
+                    android:id="@+id/tv_express"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tv_copy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/space10"
+                    android:textSize="@dimen/textfont14"
+                    android:textColor="@color/text_blue"
+                    android:text="@string/copy"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

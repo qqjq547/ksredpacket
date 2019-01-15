@@ -555,4 +555,28 @@
     <string name="name_cant_empty">身份证姓名不能为空</string>
     <string name="number_pic_cant_empty">身份证号码不能为空</string>
     <string name="click_refresh">点击重试</string>
+    <string name="express_info">快递信息</string>
+    <string name="showlist">晒单</string>
+    <string name="format_lucky_number">幸运号码：%s</string>
+    <string name="format_join_people">参与：%s人次</string>
+    <string name="format_peroid">%s期</string>
+    <string name="showlist_hint">分享自己的喜悦吧</string>
+    <string name="has_send_good">已发货</string>
+    <string name="waiting_send_good">待发货</string>
+    <string name="received_address">收货地址</string>
+    <string name="address_hint">详细地址，如道路、门牌号、小区、楼栋号等</string>
+    <string name="received_person_name">收货人姓名</string>
+    <string name="input_received_person_name">请输入收货人姓名</string>
+    <string name="phone_number">手机号码</string>
+    <string name="input_phone_number">请输入手机号码</string>
+    <string name="locate_area">所在区域</string>
+    <string name="pls_select_area">请选择所在区域</string>
+    <string name="setup_default_address">设为默认地址</string>
+    <string name="default_address">默认</string>
+    <string name="my_treasure">我的夺宝</string>
+    <string name="has_sell_all">已售罄，幸运号生成中..</string>
+    <string name="format_progress">进度：d%</string>
+    <string name="perfect_address">完善收货地址</string>
+
+
 </resources>
