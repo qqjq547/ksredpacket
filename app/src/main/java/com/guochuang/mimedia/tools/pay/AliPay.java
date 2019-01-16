@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.alipay.sdk.app.PayTask;
 import com.guochuang.mimedia.ui.activity.EditRedbagActivity;
+import com.sz.gcyh.KSHongBao.R;
 import com.sz.gcyh.KSHongBao.wxapi.WXPayEntryActivity;
 
 import java.util.Map;
@@ -33,7 +34,7 @@ public class AliPay {
                         String resultInfo = payResult.getResult();// 同步返回需要验证的信息
                         String resultStatus = payResult.getResultStatus();
                         boolean success=TextUtils.equals(resultStatus, "9000");
-                        listener.onResult(success,resultInfo);
+                        listener.onResult(success,activity.getString(R.string.pay_fail));
                     }
                 });
             }
