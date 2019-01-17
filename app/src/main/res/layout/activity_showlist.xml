@@ -14,7 +14,12 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:paddingLeft="@dimen/space15"
-            android:paddingRight="@dimen/space15">
+            android:paddingRight="@dimen/space15"
+            android:layout_marginLeft="@dimen/space10"
+            android:layout_marginRight="@dimen/space10"
+            android:background="@drawable/bg_white_block"
+            android:paddingTop="@dimen/space10"
+            android:paddingBottom="@dimen/space10">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -34,7 +39,6 @@
                         android:layout_height="@dimen/space24"
                         android:layout_marginTop="@dimen/space10"
                         android:gravity="center"
-                        android:background="@drawable/bg_gray"
                         android:textSize="@dimen/textfont12"
                         android:textColor="@color/text_black"
                         android:text="@string/format_peroid"/>
@@ -67,7 +71,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right"
-                                android:src="@mipmap/app_icon"/>
+                                android:src="@drawable/ic_get_award"/>
                             <TextView
                                 android:id="@+id/tv_award_number"
                                 android:layout_width="wrap_content"
@@ -101,13 +105,15 @@
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-        <include layout="@layout/layout_divide_deep_line"/>
         <LinearLayout
             android:id="@+id/lin_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@color/bg_white"
+            android:background="@drawable/bg_white_block"
+            android:padding="@dimen/space15"
+            android:layout_marginLeft="@dimen/space10"
+            android:layout_marginRight="@dimen/space10"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:visibility="visible">

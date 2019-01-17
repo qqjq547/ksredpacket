@@ -1,6 +1,7 @@
 package com.guochuang.mimedia.ui.activity.treasure;
 
 import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -15,8 +16,13 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.donkingliang.imageselector.utils.ImageSelector;
+import com.donkingliang.imageselector.utils.ImageSelectorUtils;
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
+import com.guochuang.mimedia.mvp.model.BoardDetail;
+import com.guochuang.mimedia.mvp.model.UploadFile;
+import com.guochuang.mimedia.mvp.presenter.ShowListPresenter;
+import com.guochuang.mimedia.mvp.view.ShowListView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.IntentUtils;
@@ -28,6 +34,7 @@ import com.guochuang.mimedia.view.GridItemDecoration;
 import com.sz.gcyh.KSHongBao.R;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,8 +42,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.functions.Action1;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
-public class ShowListActivity extends MvpActivity {
+public class ShowListActivity extends MvpActivity<ShowListPresenter> implements ShowListView {
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.tv_title)
@@ -80,8 +89,8 @@ public class ShowListActivity extends MvpActivity {
 
     PictureAdapter adapter;
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    protected ShowListPresenter createPresenter() {
+        return new ShowListPresenter(this);
     }
 
     @Override
@@ -164,7 +173,126 @@ public class ShowListActivity extends MvpActivity {
                 onBackPressed();
                 break;
             case R.id.tv_confirm:
+                content=etContent.getText().toString();
+                if (picUrlArr.size()==0){
+                    waitUpload = (ArrayList<String>) pictureArr.clone();
+                    waitUpload.remove(null);
+                }
+                if (TextUtils.isEmpty(content)){
+                    showShortToast(R.string.pls_input_feedback_content);
+                }else {
+                    if (waitUpload.size()>0){
+                        picUrlArr.clear();
+                        showLoadingDialog(R.string.upload_picture);
+                        new File(Constant.COMPRESS_DIR_PATH).mkdirs();
+                        uploadFile();
+                    }else {
+//                        addNotice();
+                    }
+                }
                 break;
         }
+    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case Constant.REQUEST_PICK_PICTURE:
+                    ArrayList<String> images = intent.getStringArrayListExtra(ImageSelectorUtils.SELECT_RESULT);
+                    addPicture(images);
+                    break;
+            }
+        }
+    }
+    private void addPicture(List<String> filepath){
+        pictureArr.remove(null);
+        pictureArr.addAll(filepath);
+        if (pictureArr.size()<Constant.MAX_PICK_PICTURE){
+            pictureArr.add(null);
+        }else {
+            pictureArr.subList(0,Constant.MAX_PICK_PICTURE-1);
+        }
+        pictureAdapter.notifyDataSetChanged();
+    }
+    public void uploadFile(){
+        if (waitUpload.get(0).startsWith("http")){
+            picUrlArr.add(waitUpload.get(0));
+            waitUpload.remove(0);
+            if (waitUpload.size()>0) {
+                uploadFile();
+            }else {
+                closeLoadingDialog();
+//                addNotice();
+            }
+            return;
+        }
+        if (TextUtils.isEmpty(waitUpload.get(0))){
+            setUploadFile(null);
+            return;
+        }
+        File file=new File(waitUpload.get(0));
+        Luban.with(this)
+                .load(file)
+                .ignoreBy(300)
+                .setTargetDir(Constant.COMPRESS_DIR_PATH)
+                .setCompressListener(new OnCompressListener() {
+                    @Override
+                    public void onStart() {
+
+                    }
+
+                    @Override
+                    public void onSuccess(File file) {
+                        mvpPresenter.fileUpload(Constant.BUSSINESSTYPE_RED_PACKET,file);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        closeLoadingDialog();
+                        showShortToast(e.getMessage());
+                    }
+                }).launch();
+    }
+
+    @Override
+    public void setUploadFile(UploadFile data) {
+        waitUpload.remove(0);
+        if (data!=null){
+            picUrlArr.add(data.getUrl());
+        }
+        if (waitUpload.size() > 0) {
+            uploadFile();
+        } else {
+            closeLoadingDialog();
+//            addNotice();
+        }
+    }
+    @Override
+    public void setNotice(Boolean data) {
+        closeLoadingDialog();
+        showShortToast(R.string.setting_success);
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    @Override
+    public void getNotice(BoardDetail detail) {
+        closeLoadingDialog();
+        if (detail!=null){
+//            this.detail=detail;
+            etContent.setText(detail.getContent());
+            pictureArr.clear();
+            picUrlArr.clear();
+            if (detail.getPicture()==null||detail.getPicture().size()==0){
+                addPicture(new ArrayList<String >());
+            }else {
+                addPicture(detail.getPicture());
+            }
+        }
+    }
+    @Override
+    public void setError(String msg) {
+        closeLoadingDialog();
+        showShortToast(msg);
     }
 }

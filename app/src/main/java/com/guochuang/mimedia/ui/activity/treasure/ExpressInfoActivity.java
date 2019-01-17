@@ -30,6 +30,10 @@ public class ExpressInfoActivity extends MvpActivity {
     TextView tvCopy;
     @BindView(R.id.lin_has_send)
     LinearLayout linHasSend;
+    @BindView(R.id.tv_address)
+    TextView tvAddress;
+    @BindView(R.id.tv_period)
+    TextView tvPeriod;
 
     @Override
     protected BasePresenter createPresenter() {
@@ -43,7 +47,7 @@ public class ExpressInfoActivity extends MvpActivity {
 
     @Override
     public void initViewAndData() {
-       tvTitle.setText(R.string.express_info);
+        tvTitle.setText(R.string.express_info);
 
     }
 
@@ -54,9 +58,10 @@ public class ExpressInfoActivity extends MvpActivity {
                 onBackPressed();
                 break;
             case R.id.tv_copy:
-                CommonUtil.copyMsg(this,tvExpress.getText().toString());
+                CommonUtil.copyMsg(this, tvExpress.getText().toString());
                 showShortToast(R.string.copy_success);
                 break;
         }
     }
 }
+

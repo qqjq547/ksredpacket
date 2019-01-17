@@ -577,6 +577,7 @@
     <string name="has_sell_all">已售罄，幸运号生成中..</string>
     <string name="format_progress">进度：d%</string>
     <string name="perfect_address">完善收货地址</string>
+    <string name="receive_address"> 收货地址：</string>
 
 
 </resources>

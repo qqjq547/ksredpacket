@@ -14,10 +14,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_marginLeft="@dimen/space10"
+            android:layout_marginRight="@dimen/space10"
             android:paddingLeft="@dimen/space15"
             android:paddingTop="@dimen/space10"
             android:paddingRight="@dimen/space15"
-            android:paddingBottom="@dimen/space10">
+            android:paddingBottom="@dimen/space10"
+            android:background="@drawable/bg_white_block">
           <LinearLayout
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
@@ -37,15 +40,15 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="收货地址："
+                    android:text="@string/receive_address"
                     android:textColor="@color/text_black"
                     android:textSize="@dimen/textfont14" />
 
                 <TextView
+                    android:id="@+id/tv_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space12"
-                    android:text="xxxxxxxxxxxxxxxxxxxxxxx"
                     android:textColor="@color/text_black"
                     android:textSize="@dimen/textfont14" />
             </LinearLayout>
@@ -54,6 +57,7 @@
 
 
             <TextView
+                android:id="@+id/tv_period"
                 android:layout_width="@dimen/space80"
                 android:layout_height="@dimen/space24"
                 android:layout_marginTop="@dimen/space5"
@@ -61,7 +65,6 @@
                 android:ellipsize="end"
                 android:gravity="center"
                 android:lines="1"
-                android:text="xxxxx期"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/textfont14" />
         </LinearLayout>
@@ -76,11 +79,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space30"
-                android:drawableTop="@mipmap/app_icon"
-                android:drawablePadding="@dimen/space10"
+                android:layout_marginTop="@dimen/space50"
+                android:drawableTop="@drawable/ic_send_good_waiting"
+                android:drawablePadding="@dimen/space20"
                 android:textColor="@color/text_black"
-                android:textSize="@dimen/textfont14"
+                android:textSize="@dimen/textfont18"
                 android:text="@string/waiting_send_good"/>
         </LinearLayout>
         <LinearLayout
@@ -92,11 +95,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space30"
-                android:drawableTop="@mipmap/app_icon"
-                android:drawablePadding="@dimen/space10"
+                android:layout_marginTop="@dimen/space50"
+                android:gravity="center"
+                android:drawableTop="@drawable/ic_send_good_done"
+                android:drawablePadding="@dimen/space20"
                 android:textColor="@color/text_black"
-                android:textSize="@dimen/textfont14"
+                android:textSize="@dimen/textfont18"
                 android:text="@string/has_send_good"/>
             <LinearLayout
                 android:layout_width="wrap_content"

@@ -33,6 +33,7 @@ public class MyTreasureAdapter extends BaseQuickAdapter<String,BaseViewHolder> {
                helper.setGone(R.id.tv_has_selle_all,false);
                helper.setGone(R.id.tv_waiting_send,false);
                helper.addOnClickListener(R.id.tv_address);
+               helper.setImageResource(R.id.iv_award,R.drawable.ic_get_award);
                break;
            case "2"://可购买状态，显示进度和参与人次。
                helper.setGone(R.id.lin_address,false);
@@ -51,6 +52,7 @@ public class MyTreasureAdapter extends BaseQuickAdapter<String,BaseViewHolder> {
                helper.setGone(R.id.tv_waiting_send,false);
                helper.addOnClickListener(R.id.tv_comment);
                helper.addOnClickListener(R.id.tv_express);
+               helper.setImageResource(R.id.iv_award,R.drawable.ic_not_award);
                break;
            case "4"://虚拟商品获奖显示幸运号、参与人次、参与时间、发放状态
                helper.setGone(R.id.lin_address,false);
@@ -59,6 +61,7 @@ public class MyTreasureAdapter extends BaseQuickAdapter<String,BaseViewHolder> {
                helper.setGone(R.id.lin_progress,false);
                helper.setGone(R.id.tv_has_selle_all,false);
                helper.setGone(R.id.tv_waiting_send,true);
+               helper.setGone(R.id.iv_award,false);
                break;
        }
     }
