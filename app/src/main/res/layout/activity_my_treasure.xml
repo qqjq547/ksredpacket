@@ -10,7 +10,9 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_treasure"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/space10"
+            android:layout_marginRight="@dimen/space10">
         </android.support.v7.widget.RecyclerView>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

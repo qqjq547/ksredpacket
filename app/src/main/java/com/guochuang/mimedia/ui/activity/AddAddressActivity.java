@@ -1,6 +1,7 @@
 package com.guochuang.mimedia.ui.activity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.tools.Constant;
+import com.guochuang.mimedia.ui.dialog.SelectAreaDialog;
 import com.sz.gcyh.KSHongBao.R;
 
 import butterknife.BindView;
@@ -37,6 +39,7 @@ public class AddAddressActivity extends MvpActivity {
     TextView tvConfirm;
 
     int mode=Constant.MODE_ADDRESS_CHECK;
+    SelectAreaDialog selectAreaDialog;
 
     @Override
     protected BasePresenter createPresenter() {
@@ -66,6 +69,21 @@ public class AddAddressActivity extends MvpActivity {
                 onBackPressed();
                 break;
             case R.id.tv_area:
+                if (selectAreaDialog==null) {
+                    selectAreaDialog = new SelectAreaDialog(this);
+                    selectAreaDialog.setOnSelectListener(new SelectAreaDialog.OnSelectListener() {
+                        @Override
+                        public void onResult(String province, String city, String area) {
+                            if (TextUtils.equals(province,city)){
+                                tvArea.setText(province+area);
+                            }else {
+                                tvArea.setText(province+city+area);
+                            }
+                        }
+
+                    });
+                }
+                selectAreaDialog.show();
                 break;
             case R.id.tv_delete:
                 break;

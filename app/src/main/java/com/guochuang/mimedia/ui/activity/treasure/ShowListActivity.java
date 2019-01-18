@@ -106,6 +106,7 @@ public class ShowListActivity extends MvpActivity<ShowListPresenter> implements 
     }
    public void initEdit(){
        linEdit.setVisibility(View.VISIBLE);
+       tvConfirm.setVisibility(View.VISIBLE);
        linResult.setVisibility(View.GONE);
        rvPicture.setLayoutManager(new GridLayoutManager(this,3));
        rvPicture.addItemDecoration(new GridItemDecoration(3,CommonUtil.dip2px(this,10),false));
@@ -153,6 +154,7 @@ public class ShowListActivity extends MvpActivity<ShowListPresenter> implements 
    }
    public void initResult(){
         linEdit.setVisibility(View.GONE);
+        tvConfirm.setVisibility(View.GONE);
         linResult.setVisibility(View.VISIBLE);
        rvImage.setLayoutManager(new GridLayoutManager(this,3));
        rvImage.addItemDecoration(new GridItemDecoration(3,CommonUtil.dip2px(this,5),true));

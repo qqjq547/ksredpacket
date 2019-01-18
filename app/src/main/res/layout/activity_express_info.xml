@@ -16,10 +16,10 @@
             android:orientation="vertical"
             android:layout_marginLeft="@dimen/space10"
             android:layout_marginRight="@dimen/space10"
-            android:paddingLeft="@dimen/space15"
-            android:paddingTop="@dimen/space10"
-            android:paddingRight="@dimen/space15"
-            android:paddingBottom="@dimen/space10"
+            android:paddingLeft="@dimen/space25"
+            android:paddingTop="@dimen/space20"
+            android:paddingRight="@dimen/space25"
+            android:paddingBottom="@dimen/space20"
             android:background="@drawable/bg_white_block">
           <LinearLayout
               android:layout_width="match_parent"
@@ -40,7 +40,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/receive_address"
+                    android:text="@string/receive_address_"
                     android:textColor="@color/text_black"
                     android:textSize="@dimen/textfont14" />
 
@@ -61,14 +61,12 @@
                 android:layout_width="@dimen/space80"
                 android:layout_height="@dimen/space24"
                 android:layout_marginTop="@dimen/space5"
-                android:background="@color/bg_gray_light"
                 android:ellipsize="end"
                 android:gravity="center"
                 android:lines="1"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/textfont14" />
         </LinearLayout>
-        <include layout="@layout/layout_divide_deep_line"/>
         <LinearLayout
             android:id="@+id/lin_not_send"
             android:layout_width="match_parent"

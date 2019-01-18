@@ -53,7 +53,6 @@ public class MyTreasureActivity extends MvpActivity {
     public void initViewAndData() {
         tvTitle.setText(R.string.my_treasure);
         rvTreasure.setLayoutManager(new LinearLayoutManager(this,OrientationHelper.VERTICAL,false));
-        rvTreasure.addItemDecoration(new VerticalDecoration(this));
         dataArr.add("0");
         dataArr.add("1");
         dataArr.add("2");
