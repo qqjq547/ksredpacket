@@ -9,52 +9,61 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingLeft="@dimen/space15"
-            android:paddingRight="@dimen/space15"
             android:layout_marginLeft="@dimen/space10"
             android:layout_marginRight="@dimen/space10"
             android:background="@drawable/bg_white_block"
-            android:paddingTop="@dimen/space10"
-            android:paddingBottom="@dimen/space10">
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/space25"
+            android:paddingTop="@dimen/space20"
+            android:paddingRight="@dimen/space25"
+            android:paddingBottom="@dimen/space20">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/space10"
                 android:paddingBottom="@dimen/space10">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <ImageView
                         android:id="@+id/iv_icon"
-                        android:layout_width="@dimen/space65"
-                        android:layout_height="@dimen/space65"
-                        android:src="@mipmap/app_icon"/>
+                        android:layout_width="@dimen/space80"
+                        android:layout_height="@dimen/space80"
+                        android:src="@mipmap/app_icon" />
+
                     <TextView
-                        android:layout_width="@dimen/space65"
+                        android:layout_width="@dimen/space80"
                         android:layout_height="@dimen/space24"
                         android:layout_marginTop="@dimen/space10"
                         android:gravity="center"
-                        android:textSize="@dimen/textfont12"
+                        android:text="@string/format_peroid"
                         android:textColor="@color/text_black"
-                        android:text="@string/format_peroid"/>
+                        android:textSize="@dimen/textfont12" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="@dimen/space10">
+                    android:layout_marginLeft="@dimen/space10"
+                    android:orientation="vertical">
+
                     <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/space65" >
+                        android:layout_height="@dimen/space80">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical">
+
                             <TextView
                                 android:id="@+id/tv_name"
                                 android:layout_width="match_parent"
@@ -62,96 +71,106 @@
                                 android:textColor="@color/text_black"
                                 android:textSize="@dimen/textfont14" />
                         </LinearLayout>
+
                         <FrameLayout
                             android:id="@+id/fl_award"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
+
                             <ImageView
                                 android:id="@+id/iv_award"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right"
-                                android:src="@drawable/ic_get_award"/>
+                                android:src="@drawable/ic_get_award" />
+
                             <TextView
                                 android:id="@+id/tv_award_number"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
+                                android:text="@string/format_lucky_number"
                                 android:textColor="@color/text_black"
-                                android:textSize="@dimen/textfont14"
-                                android:text="@string/format_lucky_number"/>
+                                android:textSize="@dimen/textfont14" />
                         </FrameLayout>
                     </FrameLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space10">
+
                         <TextView
                             android:id="@+id/tv_people_time"
                             android:layout_width="wrap_content"
                             android:layout_height="@dimen/space24"
                             android:gravity="center"
-                            android:textSize="@dimen/textfont12"
+                            android:text="@string/format_join_people"
                             android:textColor="@color/text_black"
-                            android:text="@string/format_join_people"/>
+                            android:textSize="@dimen/textfont12" />
+
                         <TextView
                             android:id="@+id/tv_joined_time"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/space24"
                             android:gravity="center_vertical|right"
-                            android:textSize="@dimen/textfont12"
-                            android:textColor="@color/text_black" />
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/textfont12" />
                     </LinearLayout>
+
                 </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/lin_edit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/bg_white_block"
-            android:padding="@dimen/space15"
-            android:layout_marginLeft="@dimen/space10"
-            android:layout_marginRight="@dimen/space10"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:visibility="visible">
-            <EditText
-                android:id="@+id/et_content"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/space85"
-                android:background="@null"
-                android:paddingLeft="@dimen/space15"
-                android:paddingRight="@dimen/space15"
-                android:paddingTop="@dimen/space10"
-                android:paddingBottom="@dimen/space10"
-                android:gravity="start"
-                android:textSize="@dimen/textfont14"
-                android:textColor="@color/text_black"
-                android:hint="@string/showlist_hint"/>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_picture"
+
+            <LinearLayout
+                android:id="@+id/lin_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_add_pic">
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical"
+                android:visibility="visible">
 
-            </android.support.v7.widget.RecyclerView>
-            <include layout="@layout/layout_divide_deep_line"/>
-            <TextView
-                android:id="@+id/tv_confirm"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/space45"
-                android:layout_marginLeft="@dimen/space15"
-                android:layout_marginTop="@dimen/space50"
-                android:layout_marginRight="@dimen/space15"
-                android:layout_marginBottom="@dimen/space40"
-                android:background="@drawable/bg_btn_red"
-                android:gravity="center"
-                android:text="@string/confirm"
-                android:textColor="@color/text_white"
-                android:textSize="@dimen/textfont15" />
+                <include layout="@layout/layout_divide_deep_line" />
+
+                <EditText
+                    android:id="@+id/et_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space85"
+                    android:background="@null"
+                    android:gravity="start"
+                    android:hint="@string/showlist_hint"
+                    android:paddingLeft="@dimen/space15"
+                    android:paddingTop="@dimen/space10"
+                    android:paddingRight="@dimen/space15"
+                    android:paddingBottom="@dimen/space10"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont14" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_picture"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_add_pic">
+
+                </android.support.v7.widget.RecyclerView>
+
+            </LinearLayout>
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space45"
+            android:layout_marginLeft="@dimen/space15"
+            android:layout_marginTop="@dimen/space50"
+            android:layout_marginRight="@dimen/space15"
+            android:layout_marginBottom="@dimen/space40"
+            android:background="@drawable/bg_btn_red"
+            android:gravity="center"
+            android:text="@string/confirm"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/textfont15" />
+
         <LinearLayout
             android:id="@+id/lin_result"
             android:layout_width="match_parent"
@@ -176,6 +195,7 @@
                 android:layout_marginTop="@dimen/space10"
                 android:layout_marginRight="@dimen/space10"
                 android:nestedScrollingEnabled="false" />
+
         </LinearLayout>
 
     </LinearLayout>

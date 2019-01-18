@@ -40,7 +40,7 @@
                 android:layout_marginLeft="@dimen/space15"
                 android:paddingLeft="@dimen/space10"
                 android:paddingRight="@dimen/space10"
-                android:background="@drawable/bg_btn_red_corner"
+                android:background="@drawable/bg_default"
                 android:textSize="@dimen/textfont12"
                 android:textColor="@color/text_city_yellow"
                 android:text="@string/default_address"/>

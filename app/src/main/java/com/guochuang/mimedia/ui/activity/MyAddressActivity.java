@@ -65,7 +65,6 @@ public class MyAddressActivity extends MvpActivity {
             tvAdd.setVisibility(View.GONE);
         }
         rvAddress.setLayoutManager(new LinearLayoutManager(this,OrientationHelper.VERTICAL,false));
-        rvAddress.addItemDecoration(new VerticalDecoration(this));
         dataArr.add("");
         dataArr.add("");
         dataArr.add("");
