@@ -10,6 +10,7 @@ public class BidPrice {
      */
 
     private String coin;
+    private String principalCoin;
     private String createDate;
     private String type;
     private String whereRegion;
@@ -44,5 +45,13 @@ public class BidPrice {
 
     public void setWhereRegion(String whereRegion) {
         this.whereRegion = whereRegion;
+    }
+
+    public String getPrincipalCoin() {
+        return principalCoin;
+    }
+
+    public void setPrincipalCoin(String principalCoin) {
+        this.principalCoin = principalCoin;
     }
 }

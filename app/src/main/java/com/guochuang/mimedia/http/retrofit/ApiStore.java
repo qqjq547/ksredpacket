@@ -836,13 +836,16 @@ public interface ApiStore {
     @GET("/api/v1/user/invite/direct_agent_list")
     Observable<HttpResponse<Page<RecommedUser>>> getDirectAgent(
             @Query("currentPage") int currentPage,
-            @Query("pageSize") Integer pageSize
+            @Query("pageSize") Integer pageSize,
+            @Query("sort") String sort
     );
 
     @GET("/api/v1/user/invite/direct_fans_list")
     Observable<HttpResponse<Page<RecommedUser>>> getDirectFans(
             @Query("currentPage") int currentPage,
-            @Query("pageSize") Integer pageSize
+            @Query("pageSize") Integer pageSize,
+            @Query("sort") String sort
+
     );
 
     @GET("/api/v1/redpacket/user_draw_statistics/get")

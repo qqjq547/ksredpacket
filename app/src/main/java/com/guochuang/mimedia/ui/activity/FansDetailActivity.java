@@ -61,15 +61,15 @@ public class FansDetailActivity extends MvpActivity<FansPresenter> implements Fa
         srlRefresh.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                mvpPresenter.getFans(curPage+1,Constant.PAGE_SIZE);
+                mvpPresenter.getFans(curPage+1,Constant.PAGE_SIZE,Constant.SORT_DEFAULT);
             }
 
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                mvpPresenter.getFans(1,Constant.PAGE_SIZE);
+                mvpPresenter.getFans(1,Constant.PAGE_SIZE,Constant.SORT_DEFAULT);
             }
         });
-        mvpPresenter.getFans(1,Constant.PAGE_SIZE);
+        mvpPresenter.getFans(1,Constant.PAGE_SIZE,Constant.SORT_DEFAULT);
     }
 
 

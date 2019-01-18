@@ -11,6 +11,8 @@ public class RecommedUser {
     private String bonus;
     private String nickName;
     private String registerDate;
+    private String mobile;
+    private String avatar;
 
     public String getBonus() {
         return bonus;
@@ -34,5 +36,21 @@ public class RecommedUser {
 
     public void setRegisterDate(String registerDate) {
         this.registerDate = registerDate;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }

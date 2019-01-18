@@ -353,7 +353,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                         if (TextUtils.isEmpty(password)) {
                             showShortToast(R.string.word_not_empty);
                             return;
-                        } else if (password.length() < 4 || password.length() > 20) {
+                        } else if (password.length() < 2 || password.length() > 20) {
                             showShortToast(R.string.word_length_limit);
                             return;
                         }

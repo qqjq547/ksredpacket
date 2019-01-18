@@ -16,8 +16,9 @@ public class BuyPriceAdapter extends BaseQuickAdapter<BidPrice,BaseViewHolder> {
     }
     @Override
     protected void convert(BaseViewHolder helper, BidPrice item) {
-         helper.setText(R.id.tv_name,item.getWhereRegion()+mContext.getString(R.string.bid_price));
+         helper.setText(R.id.tv_name,item.getWhereRegion());
          helper.setText(R.id.tv_time,item.getCreateDate());
-         helper.setText(R.id.tv_money,item.getCoin());
+         helper.setText(R.id.tv_money,mContext.getString(R.string.out_price)+" "+item.getCoin());
+         helper.setText(R.id.tv_principal,mContext.getString(R.string.principal)+" "+item.getPrincipalCoin());
     }
 }

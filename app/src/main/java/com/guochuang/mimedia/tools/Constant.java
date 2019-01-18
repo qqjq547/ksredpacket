@@ -224,4 +224,11 @@ public class Constant {
     //选择
     public static final int MODE_ADDRESS_SELECT=2;
 
+    public static final int TRANSFER_WXPAY = 2;
+    public static final int TRANSFER_ALIPAY = 3;
+    public static final int TRANSFER_BANKCARD = 4;
+
+    public static final String SORT_DEFAULT="DEFAULT";
+    public static final String SORT_ASC="ASC";
+    public static final String SORT_DESC="DESC";
 }

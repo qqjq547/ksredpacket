@@ -217,6 +217,7 @@ public class CityBidHallActivity extends MvpActivity<CityBidHallPresenter> imple
                     return;
                 }
                 searchType = 1;
+                currentPage = 1;
                 seartch();
                 break;
             case R.id.tv_city_bid_hall_hot_city:

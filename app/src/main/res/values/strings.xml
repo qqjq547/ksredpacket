@@ -381,7 +381,7 @@
     <string name="link_url_cant_empty">链接地址不能为空</string>
     <string name="agree_rule">请同意广告规则</string>
     <string name="word_not_empty">口令不能为空</string>
-    <string name="word_length_limit">口令长度为4到20位</string>
+    <string name="word_length_limit">口令长度为2到20位</string>
     <string name="bind_success">绑定成功</string>
     <string name="input_safe_pass">输入交易密码</string>
     <string name="forget_safe_pass">忘记交易密码</string>
@@ -577,7 +577,11 @@
     <string name="has_sell_all">已售罄，幸运号生成中..</string>
     <string name="format_progress">进度：d%</string>
     <string name="perfect_address">完善收货地址</string>
-    <string name="receive_address"> 收货地址：</string>
+    <string name="receive_address_">收货地址：</string>
+    <string name="add_received_address">添加收货地址</string>
+    <string name="pls_select">请选择</string>
+    <string name="out_price">溢价</string>
+    <string name="principal">本金</string>
 
 
 </resources>

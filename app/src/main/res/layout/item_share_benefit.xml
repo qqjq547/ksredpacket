@@ -3,32 +3,41 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/space15"
+    android:orientation="vertical"
     android:background="@drawable/bg_white_block">
-<LinearLayout
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_weight="1"
-    android:orientation="vertical">
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/textfont14"
-        android:textColor="@color/text_black"/>
-    <TextView
-        android:id="@+id/tv_time"
-        android:layout_width="wrap_content"
+        android:lines="1"
+        android:ellipsize="end"
+        android:textColor="@color/text_drak_black"
+        android:textSize="@dimen/textfont14" />
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/space10"
-        android:textColor="@color/text_gray"
-        android:textSize="@dimen/textfont12" />
-</LinearLayout>
-    <TextView
-        android:id="@+id/tv_ksb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="@dimen/textfont16"
-        android:textColor="@color/text_city_yellow"
-        android:text="@string/format_ksb"/>
+        android:gravity="bottom"
+        android:layout_marginTop="@dimen/space12">
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_gray"
+            android:textSize="@dimen/textfont12" />
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/tv_ksb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="@dimen/textfont16"
+            android:textColor="@color/text_city_yellow"
+            android:text="@string/format_ksb"/>
+    </LinearLayout>
+
 </LinearLayout>
