@@ -268,6 +268,8 @@
     <string name="pls_select_date">请选择日期</string>
     <string name="user">用户</string>
     <string name="register_time">注册时间</string>
+    <string name="upgrade_time">升级时间</string>
+
     <string name="share_benefit_ksb">分润(KSB)</string>
     <string name="fans_detail">粉丝明细</string>
     <string name="recommend_detail">推荐明细</string>

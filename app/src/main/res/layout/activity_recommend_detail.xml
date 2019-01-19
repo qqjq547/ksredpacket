@@ -178,6 +178,7 @@
                         android:textSize="@dimen/textfont14"
                         android:text="@string/user"/>
                     <TextView
+                        android:id="@+id/tv_head_time"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"

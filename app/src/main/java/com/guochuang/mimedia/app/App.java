@@ -25,6 +25,7 @@ import com.guochuang.mimedia.tools.PrefUtil;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import cn.jiguang.share.android.api.JShareInterface;
@@ -76,6 +77,8 @@ public class App extends Application {
             SDKInitializer.setCoordType(CoordType.BD09LL);
             wxapi = WXAPIFactory.createWXAPI(this,"wx3f027d9298bbbed4", true);
             wxapi.registerApp("wx3f027d9298bbbed4");
+            new File(Constant.COMPRESS_DIR_PATH).mkdirs();
+            new File(Constant.COMMON_PATH).mkdirs();
         }
     public static App getInstance(){
         return instance;

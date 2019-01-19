@@ -65,6 +65,8 @@ public class RecommendDetailActivity extends MvpActivity<RecommendDetailPresente
     SmartRefreshLayout srlRefresh;
     @BindView(R.id.iv_arrow)
     ImageView ivArrow;
+    @BindView(R.id.tv_head_time)
+    TextView tvHeadTime;
 
     List<RecommedUser> itemArr=new ArrayList<>();
     RecommendDetailAdapter adapter;
@@ -174,9 +176,11 @@ public class RecommendDetailActivity extends MvpActivity<RecommendDetailPresente
         if (pos==0){
             linDirectAgent.setSelected(true);
             linDirectFans.setSelected(false);
+            tvHeadTime.setText(R.string.upgrade_time);
         }else {
             linDirectAgent.setSelected(false);
             linDirectFans.setSelected(true);
+            tvHeadTime.setText(R.string.register_time);
         }
         if (curTab==0) {
             mvpPresenter.getDirectAgent(1, Constant.PAGE_SIZE,sort);
