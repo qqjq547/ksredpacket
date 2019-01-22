@@ -65,6 +65,7 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
     long regionId=0;
     int payType=0;
     int payNumber=0;
+    int buySurplus=0;
     @Override
     protected PurchasePresenter createPresenter() {
         return new PurchasePresenter(this);
@@ -82,6 +83,7 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
         regionId=getIntent().getLongExtra(Constant.REGIONID,0);
         acountKsb=getPref().getString(PrefUtil.COIN,"");
         payNumber=getIntent().getIntExtra(Constant.PAYNUMBER,0);
+        buySurplus=getIntent().getIntExtra(Constant.BUY_SURPLUS,0);
         if (purchaseType==Constant.TYPE_PURCHASE_REGION){
             tvTitle.setText(R.string.buy_city_owner);
             tvAgreement.setText(R.string.city_buy_agreement);
@@ -91,6 +93,9 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
         }else if(purchaseType==Constant.TYPE_PURCHASE_HONEYCOMB){
             tvTitle.setText(R.string.bug_honycomb);
             tvAgreement.setText(R.string.hongycomb_agreement);
+        }else if(purchaseType==Constant.TYPE_PURCHASE_SNATCH){
+            tvTitle.setText(R.string.buy_snatch);
+            tvAgreement.setText(R.string.snatch_agreement);
         }
         tvAmount.setText(String.valueOf(money));
         rbtnKsbpay.setText(String.format(getString(R.string.format_yuan),String.valueOf(money)));
@@ -111,6 +116,8 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
                 }else if(purchaseType==Constant.TYPE_PURCHASE_AGENT){
                     IntentUtils.startWebActivity(this,getString(R.string.agent_agreement),Constant.URL_AGREEMENT_AGENT);
                 }else if(purchaseType==Constant.TYPE_PURCHASE_HONEYCOMB){
+                    IntentUtils.startWebActivity(this,getString(R.string.hongycomb_agreement),Constant.URL_HONYCOMB_RULE);
+                }else if(purchaseType==Constant.TYPE_PURCHASE_SNATCH){
                     IntentUtils.startWebActivity(this,getString(R.string.hongycomb_agreement),Constant.URL_HONYCOMB_RULE);
                 }
                 break;
@@ -160,6 +167,8 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
             mvpPresenter.upgradeAgent(Constant.CHANNEL_CODE_ANDROID,payType, Double.parseDouble(money),safetyCode);
         }else if(purchaseType==Constant.TYPE_PURCHASE_HONEYCOMB){
             mvpPresenter.appCreateOrder(Constant.CHANNEL_CODE_ANDROID,payNumber,payType,getPref().getLongitude(),getPref().getLatitude(),safetyCode);
+        }else if(purchaseType==Constant.TYPE_PURCHASE_SNATCH){
+
         }
     }
     public void setKsbText(){

@@ -85,7 +85,7 @@ public class ShowListActivity extends MvpActivity<ShowListPresenter> implements 
     PickImageAdapter pictureAdapter;
     List<String> waitUpload=new ArrayList<>();
     List<String> picUrlArr=new ArrayList<>();
-
+    long snatchShowId;
 
     PictureAdapter adapter;
     @Override
@@ -101,8 +101,12 @@ public class ShowListActivity extends MvpActivity<ShowListPresenter> implements 
     @Override
     public void initViewAndData() {
         tvTitle.setText(R.string.showlist);
-        initEdit();
-
+        snatchShowId=getIntent().getLongExtra(Constant.SNATCHSHOWID,0);
+        if (snatchShowId>0){
+            initResult();
+        }else {
+            initEdit();
+        }
     }
    public void initEdit(){
        linEdit.setVisibility(View.VISIBLE);

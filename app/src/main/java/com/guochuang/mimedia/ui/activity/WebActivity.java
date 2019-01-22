@@ -162,6 +162,15 @@ public class WebActivity extends MvpActivity {
             });
         }
         @JavascriptInterface
+        public void payment(final double money,final int number,final long snatchId,final boolean isPacketTail){
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    IntentUtils.startPurchaseActivity(WebActivity.this,Constant.TYPE_PURCHASE_SNATCH,snatchId,number,String.valueOf(money),isPacketTail?1:0);
+                }
+            });
+        }
+        @JavascriptInterface
         public void playVideo(){
             runOnUiThread(new Runnable() {
                 @Override

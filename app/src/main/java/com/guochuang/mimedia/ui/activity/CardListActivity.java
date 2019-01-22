@@ -57,6 +57,7 @@ public class CardListActivity extends MvpActivity<CardListPresenter> implements 
         rvCard.setLayoutManager(new LinearLayoutManager(this, OrientationHelper.VERTICAL, false));
         rvCard.addItemDecoration(new VerticalDecoration(this, R.drawable.bg_divide_card));
         adapter = new CardListAdapter(cardLists);
+        adapter.setEmptyView(getLayoutInflater().inflate(R.layout.layout_empty,null));
         adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override

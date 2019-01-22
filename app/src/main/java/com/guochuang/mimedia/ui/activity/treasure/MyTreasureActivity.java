@@ -1,6 +1,7 @@
 package com.guochuang.mimedia.ui.activity.treasure;
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,10 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
+import com.guochuang.mimedia.http.response.Page;
+import com.guochuang.mimedia.mvp.model.Snatch;
+import com.guochuang.mimedia.mvp.presenter.MyTreasurePresenter;
+import com.guochuang.mimedia.mvp.view.MyTreasureView;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.ui.activity.MyAddressActivity;
 import com.guochuang.mimedia.ui.adapter.AddressAdapter;
@@ -27,7 +32,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class MyTreasureActivity extends MvpActivity {
+public class MyTreasureActivity extends MvpActivity<MyTreasurePresenter> implements MyTreasureView {
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.tv_title)
@@ -38,10 +43,11 @@ public class MyTreasureActivity extends MvpActivity {
     SmartRefreshLayout srlRefresh;
 
     MyTreasureAdapter adapter;
-    List<String> dataArr=new ArrayList<>();
+    List<Snatch> dataArr=new ArrayList<>();
+    int curPage=1;
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    protected MyTreasurePresenter createPresenter() {
+        return new MyTreasurePresenter(this);
     }
 
     @Override
@@ -53,25 +59,23 @@ public class MyTreasureActivity extends MvpActivity {
     public void initViewAndData() {
         tvTitle.setText(R.string.my_treasure);
         rvTreasure.setLayoutManager(new LinearLayoutManager(this,OrientationHelper.VERTICAL,false));
-        dataArr.add("0");
-        dataArr.add("1");
-        dataArr.add("2");
-        dataArr.add("3");
-        dataArr.add("4");
         adapter=new MyTreasureAdapter(dataArr);
         adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                Snatch snatch=dataArr.get(position);
                 switch (view.getId()){
                     case R.id.tv_address:
-                        startActivity(new Intent(MyTreasureActivity.this,MyAddressActivity.class).putExtra(Constant.ADDRESS_MODE,Constant.MODE_ADDRESS_SELECT));
+                        if (snatch.getShowAddress()==1) {
+                            startActivityForResult(new Intent(MyTreasureActivity.this, MyAddressActivity.class), Constant.REQUEST_PICK_ADDRESS);
+                        }
                         break;
                     case R.id.tv_comment:
-                        startActivity(new Intent(MyTreasureActivity.this,ShowListActivity.class));
+                        startActivityForResult(new Intent(MyTreasureActivity.this, ShowListActivity.class).putExtra(Constant.SNATCHSHOWID,snatch.getSnatchShowId()),Constant.REQUEST_SET_SHOWLIST);
                         break;
                     case R.id.tv_express:
-                        startActivity(new Intent(MyTreasureActivity.this,ExpressInfoActivity.class));
+                        startActivity(new Intent(MyTreasureActivity.this,ExpressInfoActivity.class).putExtra(Constant.SNATCHID,snatch.getSnatchId()));
                         break;
                 }
             }
@@ -82,18 +86,53 @@ public class MyTreasureActivity extends MvpActivity {
         srlRefresh.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-
+              mvpPresenter.getRecordList(curPage+1,Constant.PAGE_SIZE);
             }
 
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-
+                mvpPresenter.getRecordList(1,Constant.PAGE_SIZE);
             }
         });
-
+        mvpPresenter.getRecordList(1,Constant.PAGE_SIZE);
     }
     @OnClick(R.id.iv_back)
     public void onViewClicked() {
         onBackPressed();
+    }
+
+    @Override
+    public void setData(Page<Snatch> data) {
+        srlRefresh.finishRefresh();
+        srlRefresh.finishLoadmore();
+        curPage = data.getCurrentPage();
+        if (curPage == 1) {
+            dataArr.clear();
+        }
+        if (data.getDataList() != null) {
+            dataArr.addAll(data.getDataList());
+        }
+        adapter.notifyDataSetChanged();
+        if (data.getCurrentPage() >= data.getTotalPage()) {
+            srlRefresh.setEnableLoadmore(false);
+        } else {
+            srlRefresh.setEnableLoadmore(true);
+        }
+    }
+
+    @Override
+    public void setError(String msg) {
+        srlRefresh.finishRefresh();
+        srlRefresh.finishLoadmore();
+        closeLoadingDialog();
+        showShortToast(msg);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==RESULT_OK){
+            mvpPresenter.getRecordList(1,Constant.PAGE_SIZE);
+        }
     }
 }

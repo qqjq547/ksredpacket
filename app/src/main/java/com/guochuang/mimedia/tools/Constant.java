@@ -40,6 +40,8 @@ public class Constant {
     public static final int REQUEST_CARD_FRONT = 13;
     public static final int REQUEST_CARD_BACK = 14;
     public static final int REQUEST_ADD_ADDRESS = 15;
+    public static final int REQUEST_PICK_ADDRESS = 16;
+    public static final int REQUEST_SET_SHOWLIST = 17;
 
     public static final String TITLE = "title";
     public static final String ARTICLEUUID = "articleUuid";
@@ -75,7 +77,12 @@ public class Constant {
     public static final String ISAGENT = "isAgent";
     public static final String PAYNUMBER = "payNumber";
     public static final String DESCRIPTION = "description";
-    public static final String ADDRESS_MODE = "address_mode";
+    public static final String SNATCHID = "snatchId";
+    public static final String ADDRESS = "address";
+    public static final String BUY_SURPLUS = "buySurplus";
+    public static final String SNATCHSHOWID = "snatchShowId";
+
+
 
     public static final String FORMAT_DATE_SIMPLE = "yyyy-MM-dd";
     public static final String FORMAT_DATE = "yyyy-MM-dd HH:mm:ss";
@@ -165,6 +172,7 @@ public class Constant {
     public static final int TYPE_PURCHASE_REGION = 1;
     public static final int TYPE_PURCHASE_AGENT = 2;
     public static final int TYPE_PURCHASE_HONEYCOMB = 3;
+    public static final int TYPE_PURCHASE_SNATCH = 4;
 
     public static final String RAIN_DURATION = "duration";
     public static final String RAIN_COUNT = "count";
@@ -216,13 +224,6 @@ public class Constant {
     public static final int STATUS_AUDIT_FAIL=2;
 
     public static final String MAP_KEY_TOTALCOIN = "totalCoin";
-
-    //查看
-    public static final int MODE_ADDRESS_CHECK=0;
-    //编辑
-    public static final int MODE_ADDRESS_EDIT=1;
-    //选择
-    public static final int MODE_ADDRESS_SELECT=2;
 
     public static final int TRANSFER_WXPAY = 2;
     public static final int TRANSFER_ALIPAY = 3;

@@ -3,6 +3,7 @@ package com.guochuang.mimedia.http.retrofit;
 import com.guochuang.mimedia.http.response.HttpResponse;
 import com.guochuang.mimedia.http.response.Page;
 import com.guochuang.mimedia.mvp.model.AdInfo;
+import com.guochuang.mimedia.mvp.model.Address;
 import com.guochuang.mimedia.mvp.model.AlipayAccout;
 import com.guochuang.mimedia.mvp.model.Area;
 import com.guochuang.mimedia.mvp.model.BenefitType;
@@ -66,6 +67,7 @@ import com.guochuang.mimedia.mvp.model.Redbag;
 import com.guochuang.mimedia.mvp.model.SafeCenter;
 import com.guochuang.mimedia.mvp.model.SetUpUser;
 import com.guochuang.mimedia.mvp.model.ShareBenefit;
+import com.guochuang.mimedia.mvp.model.Snatch;
 import com.guochuang.mimedia.mvp.model.Square;
 import com.guochuang.mimedia.mvp.model.UploadFile;
 import com.guochuang.mimedia.mvp.model.UserInfo;
@@ -1032,6 +1034,53 @@ public interface ApiStore {
             @Field("longitude") String longitude,
             @Field("latitude") String latitude,
             @Field("safetyCode") String safetyCode
+    );
+    @FormUrlEncoded
+    @POST("/api/v1/user/userAddress/add")
+    Observable<HttpResponse<Boolean>> userAddressAdd(
+            @Field("trackName") String trackName,
+            @Field("trackMobile") String trackMobile,
+            @Field("province") String province,
+            @Field("city") String city,
+            @Field("district") String district,
+            @Field("address") String address,
+            @Field("isDefault") int isDefault
+    );
+    @FormUrlEncoded
+    @POST("/api/v1/user/userAddress/del")
+    Observable<HttpResponse<Boolean>> userAddressDel(
+            @Field("userAddressUuid") String userAddressUuid
+    );
+    @FormUrlEncoded
+    @POST("/api/v1/user/userAddress/update")
+    Observable<HttpResponse<Boolean>> userAddressUpdate(
+            @Field("userAddressUuid") String userAddressUuid,
+            @Field("trackName") String trackName,
+            @Field("trackMobile") String trackMobile,
+            @Field("province") String province,
+            @Field("city") String city,
+            @Field("district") String district,
+            @Field("address") String address
+    );
+    @GET("/api/v1/user/userAddress/pagelist")
+    Observable<HttpResponse<Page<Address>>> userAddressList(
+            @Query("currentPage") int currentPage,
+            @Query("pageSize") int pageSize
+    );
+    @GET("/api/v1/activity/snatchRecord/pageSnatchRecordlist")
+    Observable<HttpResponse<Page<Snatch>>> getSnatchRecordlist(
+            @Query("currentPage") int currentPage,
+            @Query("pageSize") int pageSize
+    );
+    @FormUrlEncoded
+    @POST("/api/v1/activity/snatchAddress/setSnatchwinAddress")
+    Observable<HttpResponse<Boolean>> setWinAddress(
+            @Field("snatchId") long snatchId,
+            @Field("userAddressUuid") String userAddressUuid
+    );
+    @GET("/api/v1/activity/snatchAddress/querySnatchwinAddress")
+    Observable<HttpResponse<Snatch>> getSnatchDetail(
+            @Query("snatchId") long currentPage
     );
 
 }

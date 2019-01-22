@@ -18,6 +18,7 @@ import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.RegionCore;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.ui.activity.CityActivity;
+import com.guochuang.mimedia.ui.activity.MyAddressActivity;
 import com.guochuang.mimedia.ui.activity.treasure.MyTreasureActivity;
 import com.guochuang.mimedia.ui.dialog.SheetDialog;
 import com.sz.gcyh.KSHongBao.R;
@@ -170,6 +171,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         itemArr.add(new MyMenuItem(R.drawable.ic_my_collection, R.string.text_my_collection));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_comments, R.string.text_my_comments));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_safe, R.string.text_my_safe));
+        itemArr.add(new MyMenuItem(R.drawable.ic_my_address, R.string.text_my_address));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_help, R.string.text_my_help));
         rvMenu.setLayoutManager(new GridLayoutManager(getActivity(), 4));
         menuAdapter = new MyMenuAdapter(itemArr);
@@ -212,6 +214,9 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                         break;
                     case R.drawable.ic_my_safe:
                         startActivity(new Intent(getActivity(), SafeCenterActivity.class));
+                        break;
+                    case R.drawable.ic_my_address:
+                        startActivity(new Intent(getActivity(), MyAddressActivity.class));
                         break;
                     case R.drawable.ic_my_help:
                         IntentUtils.startWebActivity(getActivity(),getString(R.string.help_center),Constant.URL_HELP_CENTER);
@@ -282,8 +287,8 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_setting:
-                startActivity(new Intent(getActivity(), SettingActivity.class));
-//                startActivity(new Intent(getActivity(),MyTreasureActivity.class));
+//                startActivity(new Intent(getActivity(), SettingActivity.class));
+                startActivity(new Intent(getActivity(),MyTreasureActivity.class));
                 break;
             case R.id.iv_message:
                 startActivity(new Intent(getActivity(), MessageActivity.class));

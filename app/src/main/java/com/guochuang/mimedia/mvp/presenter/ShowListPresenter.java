@@ -46,27 +46,8 @@ public class ShowListPresenter extends BasePresenter<ShowListView> {
             }
         });
     }
-
     public void addRegioNotice(long regionId,String content,String picture,String urlName,String url){
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().addRegioNotice(regionId,content,picture,urlName,url)), new ApiCallback<Boolean>() {
-            @Override
-            public void onSuccess(Boolean data) {
-                mvpView.setNotice(data);
-            }
-
-            @Override
-            public void onFailure(ApiException exception) {
-                mvpView.setError(exception.getMessage());
-            }
-
-            @Override
-            public void onFinish() {
-
-            }
-        });
-    }
-    public void updateRegioNotice(long regionId,String content,String picture,String urlName,String url){
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().updateRegioNotice(regionId,content,picture,urlName,url)), new ApiCallback<Boolean>() {
             @Override
             public void onSuccess(Boolean data) {
                 mvpView.setNotice(data);
