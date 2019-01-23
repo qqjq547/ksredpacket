@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.Snatch;
+import com.guochuang.mimedia.mvp.model.SnatchAddress;
 import com.guochuang.mimedia.mvp.presenter.ExpressInfoPresenter;
 import com.guochuang.mimedia.mvp.view.ExpressInfoView;
 import com.guochuang.mimedia.tools.CommonUtil;
@@ -76,7 +77,7 @@ public class ExpressInfoActivity extends MvpActivity<ExpressInfoPresenter> imple
     }
 
     @Override
-    public void setData(Snatch data) {
+    public void setData(SnatchAddress data) {
         closeLoadingDialog();
         GlideImgManager.loadImage(this,data.getSnatchImg(),ivIcon);
         tvAddress.setText(snatch.getProvince()+snatch.getCity()+snatch.getDistrict()+snatch.getAddress());

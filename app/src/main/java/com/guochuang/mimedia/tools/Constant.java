@@ -24,7 +24,9 @@ public class Constant {
     public static final String PARAMS_H_TENANT_CODE = "h-tenant-code";
     public static final String PARAMS_H_API_TOEKN = "h-api-token";
     public static final String PARAMS_H_NONCE = "h-nonce";
-
+    public static final String PARAMS_H_SYSTEM_CODE = "h-system-code";
+    public static final String PARAMS_H_VERSION = "h-version";
+    public static final String PARAMS_H_SIGN = "h-sign";
     public static final int PAGE_SIZE = 10;
     public static final int REQUEST_GET_LOCATION = 3;
     public static final int REQUEST_DEFAULT = 0;
@@ -124,6 +126,11 @@ public class Constant {
     public static final String URL_MY_ORDER = ApiClient.HTML_URL+"project/html/myOrder.html";
     //蜂窝规则
     public static final String URL_HONYCOMB_RULE = ApiClient.HTML_URL+"project/html/rule/fengwoRule.html";
+    //夺宝规则
+    public static final String URL_DUOBAO_RULE = ApiClient.HTML_URL+"project/html/rule/duobaoRule.html";
+    //夺宝详情
+    public static final String URL_DUOBAO_DETAIL = ApiClient.HTML_URL+"project/html/duobao/details.html?snatchId=";
+
 
     public static final String REGEX_WEBURL = "http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?";
     public static final String COMPRESS_DIR_PATH = App.getInstance().getExternalCacheDir() + File.separator + "kshb";
@@ -133,6 +140,7 @@ public class Constant {
      */
     public static final String CAPTCHA = "";
     public static final String TENANTCODE = "gcyh";
+    public static final String H_SYSTEM_CODE = "android";
     public static final String SYSTEM_CODE = "kuaishou";
     public static final String SYSTEM_CODE_ANDROID = "Android";
     public static final String TYPE_INFOMATION = "information";
@@ -141,7 +149,6 @@ public class Constant {
 
     public static final String NATION_CODE = "86";
     public static final int LOGIN_TYPE = 1;
-    public static final String REGISTER_TYPE = "1";
     public static final String REGISTER_CAPTCHA_IMA = "register";
     public static final String FORGET_RESET_CAPTCHA_IMA = "forgetReset";
     public static final String SAFE_RESET_CAPTCHA_IMA = "safeReset";

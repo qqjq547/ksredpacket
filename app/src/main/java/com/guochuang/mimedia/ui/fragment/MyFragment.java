@@ -287,8 +287,8 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_setting:
-//                startActivity(new Intent(getActivity(), SettingActivity.class));
-                startActivity(new Intent(getActivity(),MyTreasureActivity.class));
+                startActivity(new Intent(getActivity(), SettingActivity.class));
+//                startActivity(new Intent(getActivity(),MyTreasureActivity.class));
                 break;
             case R.id.iv_message:
                 startActivity(new Intent(getActivity(), MessageActivity.class));

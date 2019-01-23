@@ -1,6 +1,7 @@
 package com.guochuang.mimedia.mvp.view;
 
 import com.guochuang.mimedia.mvp.model.BoardDetail;
+import com.guochuang.mimedia.mvp.model.SnatchShow;
 import com.guochuang.mimedia.mvp.model.UploadFile;
 
 /**
@@ -9,8 +10,8 @@ import com.guochuang.mimedia.mvp.model.UploadFile;
 
 public interface ShowListView {
     void setUploadFile(UploadFile data);
-    void setNotice(Boolean data);
-    void getNotice(BoardDetail detail);
+    void setShowList(Boolean data);
+    void getShowList(SnatchShow detail);
     void setError(String msg);
 
 }

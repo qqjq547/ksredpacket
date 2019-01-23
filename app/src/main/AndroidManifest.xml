@@ -340,7 +340,7 @@
 
         <meta-data
             android:name="JPUSH_CHANNEL"
-            android:value="developer-default"
+            android:value="default"
             tools:node="replace" />
         <!-- Required. AppKey copied from Portal -->
         <meta-data

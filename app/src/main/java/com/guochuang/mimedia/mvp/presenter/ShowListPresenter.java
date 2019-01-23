@@ -5,12 +5,14 @@ import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.BoardDetail;
+import com.guochuang.mimedia.mvp.model.SnatchShow;
 import com.guochuang.mimedia.mvp.model.UploadFile;
 import com.guochuang.mimedia.mvp.view.EditBoardView;
 import com.guochuang.mimedia.mvp.view.ShowListView;
 import com.guochuang.mimedia.tools.RxUtil;
 
 import java.io.File;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -46,11 +48,11 @@ public class ShowListPresenter extends BasePresenter<ShowListView> {
             }
         });
     }
-    public void addRegioNotice(long regionId,String content,String picture,String urlName,String url){
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().addRegioNotice(regionId,content,picture,urlName,url)), new ApiCallback<Boolean>() {
+    public void addSnatchShow(long snatchId,String content,List<String> imgs){
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().addSnatchShow(snatchId,content,imgs)), new ApiCallback<Boolean>() {
             @Override
             public void onSuccess(Boolean data) {
-                mvpView.setNotice(data);
+                mvpView.setShowList(data);
             }
 
             @Override
@@ -64,11 +66,11 @@ public class ShowListPresenter extends BasePresenter<ShowListView> {
             }
         });
     }
-    public void getRegioNotice(long regionId){
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getRegioNotice(regionId)), new ApiCallback<BoardDetail>() {
+    public void getSnatchShow(long snatchShowId){
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().querySnatchShow(snatchShowId)), new ApiCallback<SnatchShow>() {
             @Override
-            public void onSuccess(BoardDetail data) {
-                mvpView.getNotice(data);
+            public void onSuccess(SnatchShow data) {
+                mvpView.getShowList(data);
             }
 
             @Override

@@ -561,7 +561,9 @@
     <string name="express_info">快递信息</string>
     <string name="showlist">晒单</string>
     <string name="lucky_number">幸运号码：</string>
-    <string name="join_people">参与：%s人次</string>
+    <string name="join_people_before">参与：</string>
+    <string name="join_people_after">人次</string>
+
     <string name="format_peroid">%s期</string>
     <string name="showlist_hint">分享自己的喜悦吧</string>
     <string name="has_send_good">已发货</string>
@@ -595,4 +597,5 @@
     <string name="update_address_success">更新地址成功</string>
     <string name="buy_snatch">夺宝</string>
     <string name="snatch_agreement">《夺宝协议》</string>
+    <string name="goto_pay">去支付</string>
 </resources>

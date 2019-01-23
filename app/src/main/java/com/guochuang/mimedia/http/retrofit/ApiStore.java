@@ -68,6 +68,8 @@ import com.guochuang.mimedia.mvp.model.SafeCenter;
 import com.guochuang.mimedia.mvp.model.SetUpUser;
 import com.guochuang.mimedia.mvp.model.ShareBenefit;
 import com.guochuang.mimedia.mvp.model.Snatch;
+import com.guochuang.mimedia.mvp.model.SnatchAddress;
+import com.guochuang.mimedia.mvp.model.SnatchShow;
 import com.guochuang.mimedia.mvp.model.Square;
 import com.guochuang.mimedia.mvp.model.UploadFile;
 import com.guochuang.mimedia.mvp.model.UserInfo;
@@ -1079,8 +1081,30 @@ public interface ApiStore {
             @Field("userAddressUuid") String userAddressUuid
     );
     @GET("/api/v1/activity/snatchAddress/querySnatchwinAddress")
-    Observable<HttpResponse<Snatch>> getSnatchDetail(
+    Observable<HttpResponse<SnatchAddress>> getSnatchDetail(
             @Query("snatchId") long currentPage
     );
-
+    @FormUrlEncoded
+    @POST("/api/v1/activity/snatchShow/add")
+    Observable<HttpResponse<Boolean>> addSnatchShow(
+            @Field("snatchId") long snatchId,
+            @Field("content") String content,
+            @Field("imgs") List<String> imgs
+    );
+    @GET("/api/v1/activity/snatchShow/queryShow")
+    Observable<HttpResponse<SnatchShow>> querySnatchShow(
+            @Query("baseSnatchShowId") long baseSnatchShowId
+    );
+    @FormUrlEncoded
+    @POST("/api/v1/activity/snatch/create_order")
+    Observable<HttpResponse<Order>> createSnatchOrder(
+            @Field("channelCode") String channelCode,
+            @Field("payType") int payType,
+            @Field("snatchId") long snatchId,
+            @Field("buySurplus") int buySurplus,
+            @Field("buyCount") int buyCount,
+            @Field("longitude") String longitude,
+            @Field("latitude") String latitude,
+            @Field("safetyCode") String safetyCode
+    );
 }

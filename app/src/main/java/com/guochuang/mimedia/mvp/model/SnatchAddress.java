@@ -1,6 +1,6 @@
 package com.guochuang.mimedia.mvp.model;
 
-public class Snatch {
+public class SnatchAddress {
 
     /**
      * address : string
@@ -8,26 +8,16 @@ public class Snatch {
      * district : string
      * expressCode : string
      * expressName : string
-     * isShow : 0
-     * isWin : 0
-     * luckNum : string
-     * payDate : 2019-01-22T06:44:17.979Z
-     * payNum : 0
      * province : string
-     * rate : 0
-     * showAddress : 0
      * snatchId : 0
      * snatchImg : string
      * snatchName : string
      * snatchPeriods : string
-     * snatchShowId : 0
-     * snatchWinId : 0
      * status : 0
      * tenantCode : string
      * trackMobile : string
      * trackName : string
      * trackNum : string
-     * type : 0
      */
 
     private String address;
@@ -35,26 +25,16 @@ public class Snatch {
     private String district;
     private String expressCode;
     private String expressName;
-    private int isShow;
-    private int isWin;
-    private String luckNum;
-    private String payDate;
-    private int payNum;
     private String province;
-    private double rate;
-    private int showAddress;
-    private int snatchId;
+    private long snatchId;
     private String snatchImg;
     private String snatchName;
     private String snatchPeriods;
-    private long snatchShowId;
-    private int snatchWinId;
     private int status;
     private String tenantCode;
     private String trackMobile;
     private String trackName;
     private String trackNum;
-    private int type;
 
     public String getAddress() {
         return address;
@@ -96,46 +76,6 @@ public class Snatch {
         this.expressName = expressName;
     }
 
-    public int getIsShow() {
-        return isShow;
-    }
-
-    public void setIsShow(int isShow) {
-        this.isShow = isShow;
-    }
-
-    public int getIsWin() {
-        return isWin;
-    }
-
-    public void setIsWin(int isWin) {
-        this.isWin = isWin;
-    }
-
-    public String getLuckNum() {
-        return luckNum;
-    }
-
-    public void setLuckNum(String luckNum) {
-        this.luckNum = luckNum;
-    }
-
-    public String getPayDate() {
-        return payDate;
-    }
-
-    public void setPayDate(String payDate) {
-        this.payDate = payDate;
-    }
-
-    public int getPayNum() {
-        return payNum;
-    }
-
-    public void setPayNum(int payNum) {
-        this.payNum = payNum;
-    }
-
     public String getProvince() {
         return province;
     }
@@ -144,27 +84,11 @@ public class Snatch {
         this.province = province;
     }
 
-    public double getRate() {
-        return rate;
-    }
-
-    public void setRate(double rate) {
-        this.rate = rate;
-    }
-
-    public int getShowAddress() {
-        return showAddress;
-    }
-
-    public void setShowAddress(int showAddress) {
-        this.showAddress = showAddress;
-    }
-
-    public int getSnatchId() {
+    public long getSnatchId() {
         return snatchId;
     }
 
-    public void setSnatchId(int snatchId) {
+    public void setSnatchId(long snatchId) {
         this.snatchId = snatchId;
     }
 
@@ -190,22 +114,6 @@ public class Snatch {
 
     public void setSnatchPeriods(String snatchPeriods) {
         this.snatchPeriods = snatchPeriods;
-    }
-
-    public long getSnatchShowId() {
-        return snatchShowId;
-    }
-
-    public void setSnatchShowId(long snatchShowId) {
-        this.snatchShowId = snatchShowId;
-    }
-
-    public int getSnatchWinId() {
-        return snatchWinId;
-    }
-
-    public void setSnatchWinId(int snatchWinId) {
-        this.snatchWinId = snatchWinId;
     }
 
     public int getStatus() {
@@ -246,13 +154,5 @@ public class Snatch {
 
     public void setTrackNum(String trackNum) {
         this.trackNum = trackNum;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
     }
 }

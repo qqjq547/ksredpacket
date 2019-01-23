@@ -83,15 +83,23 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right"
                                 android:src="@drawable/ic_get_award" />
-
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/lucky_number"
+                                android:textColor="@color/text_black"
+                                android:textSize="@dimen/textfont14" />
                             <TextView
                                 android:id="@+id/tv_award_number"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="bottom"
-                                android:text="@string/format_lucky_number"
-                                android:textColor="@color/text_black"
+                                android:textColor="@color/text_red"
                                 android:textSize="@dimen/textfont14" />
+                            </LinearLayout>
                         </FrameLayout>
                     </FrameLayout>
 
@@ -99,16 +107,27 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space10">
-
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/space24"
+                            android:gravity="center"
+                            android:text="@string/join_people_before"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/textfont12" />
                         <TextView
                             android:id="@+id/tv_people_time"
                             android:layout_width="wrap_content"
                             android:layout_height="@dimen/space24"
                             android:gravity="center"
-                            android:text="@string/format_join_people"
+                            android:textColor="@color/text_red"
+                            android:textSize="@dimen/textfont12" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/space24"
+                            android:gravity="center"
+                            android:text="@string/join_people_after"
                             android:textColor="@color/text_black"
                             android:textSize="@dimen/textfont12" />
-
                         <TextView
                             android:id="@+id/tv_joined_time"
                             android:layout_width="match_parent"

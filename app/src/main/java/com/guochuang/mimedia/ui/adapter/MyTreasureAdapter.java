@@ -25,22 +25,24 @@ public class MyTreasureAdapter extends BaseQuickAdapter<Snatch,BaseViewHolder> {
         helper.setText(R.id.tv_peroid,String.format(mContext.getString(R.string.format_peroid),item.getSnatchPeriods()));
         helper.setText(R.id.tv_name,item.getSnatchName());
         helper.setText(R.id.tv_award_number,item.getLuckNum());
-        helper.setText(R.id.tv_people_time,item.getPayNum());
+        helper.setText(R.id.tv_people_time,String.valueOf(item.getPayNum()));
         helper.setText(R.id.tv_joined_time,item.getPayDate());
        switch (item.getStatus()){
            case 1://1售卖中
                helper.setGone(R.id.tv_address,false);
+               helper.setGone(R.id.tv_pay,false);
                helper.setGone(R.id.lin_comment,false);
                helper.setGone(R.id.fl_award,false);
                helper.setGone(R.id.lin_progress,true);
                helper.setGone(R.id.tv_has_selle_all,false);
                helper.setGone(R.id.tv_waiting_send,false);
-               helper.setText(R.id.tv_progress,String.valueOf(item.getRate()));
+               helper.setText(R.id.tv_progress,String.valueOf((int)(item.getRate()*100))+mContext.getString(R.string.percent));
                ProgressBar pb=helper.getView(R.id.pb_progress);
-               pb.setProgress(item.getRate());
+               pb.setProgress((int)(item.getRate()*100));
                break;
            case 2://2售罄等待开奖
                helper.setGone(R.id.tv_address,false);
+               helper.setGone(R.id.tv_pay,false);
                helper.setGone(R.id.lin_comment,false);
                helper.setGone(R.id.fl_award,false);
                helper.setGone(R.id.lin_progress,false);
@@ -48,6 +50,7 @@ public class MyTreasureAdapter extends BaseQuickAdapter<Snatch,BaseViewHolder> {
                helper.setGone(R.id.tv_waiting_send,false);
                break;
            case 3://3已开奖
+               helper.setGone(R.id.tv_pay,false);
                helper.setGone(R.id.lin_comment,false);
                helper.setGone(R.id.fl_award,true);
                helper.setGone(R.id.lin_progress,false);
@@ -76,6 +79,7 @@ public class MyTreasureAdapter extends BaseQuickAdapter<Snatch,BaseViewHolder> {
                break;
            case 4://4已发货
                helper.setGone(R.id.tv_address,false);
+               helper.setGone(R.id.tv_pay,false);
                helper.setGone(R.id.lin_comment,true);
                helper.setGone(R.id.fl_award,true);
                helper.setGone(R.id.lin_progress,false);
@@ -101,6 +105,7 @@ public class MyTreasureAdapter extends BaseQuickAdapter<Snatch,BaseViewHolder> {
                break;
            case 5://5结束
                helper.setGone(R.id.tv_address,false);
+               helper.setGone(R.id.tv_pay,false);
                helper.setGone(R.id.lin_comment,true);
                helper.setGone(R.id.fl_award,true);
                helper.setGone(R.id.lin_progress,false);

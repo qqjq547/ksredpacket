@@ -11,6 +11,7 @@ public interface PurchaseView {
     void setBuyCity(String data);
     void setUpgradeAgent(Order data);
     void setBuyHonyComb(Order data);
+    void setSnatch(Order data);
     void setPayResult(CalValue data);
     void setError(String msg);
 

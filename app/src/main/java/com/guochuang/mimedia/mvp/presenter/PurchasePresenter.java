@@ -76,6 +76,26 @@ public class PurchasePresenter extends BasePresenter<PurchaseView> {
             }
         });
     }
+    public void createSnatchOrder(String channelCode,int payType,long snatchId,int buySurplus,int buyCount,String longitude,String latitude,String safetyCode){
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().createSnatchOrder(channelCode,payType,snatchId,buySurplus,buyCount,longitude,latitude,safetyCode)), new ApiCallback<Order>() {
+            @Override
+            public void onSuccess(Order data) {
+                mvpView.setSnatch(data);
+
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setError(exception.getMessage());
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
     public void calValue(double numericalValue,int type){
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().calValue(numericalValue,type)), new ApiCallback<CalValue>() {
             @Override

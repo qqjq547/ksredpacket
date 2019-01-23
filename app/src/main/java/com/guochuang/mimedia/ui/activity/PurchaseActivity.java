@@ -14,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-
 import com.guochuang.mimedia.tools.DialogBuilder;
 import com.guochuang.mimedia.tools.GsonUtil;
 import com.guochuang.mimedia.tools.LogUtil;
@@ -66,6 +65,7 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
     int payType=0;
     int payNumber=0;
     int buySurplus=0;
+    long snatchId=0;
     @Override
     protected PurchasePresenter createPresenter() {
         return new PurchasePresenter(this);
@@ -84,6 +84,7 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
         acountKsb=getPref().getString(PrefUtil.COIN,"");
         payNumber=getIntent().getIntExtra(Constant.PAYNUMBER,0);
         buySurplus=getIntent().getIntExtra(Constant.BUY_SURPLUS,0);
+        snatchId=getIntent().getLongExtra(Constant.SNATCHID,0);
         if (purchaseType==Constant.TYPE_PURCHASE_REGION){
             tvTitle.setText(R.string.buy_city_owner);
             tvAgreement.setText(R.string.city_buy_agreement);
@@ -118,7 +119,7 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
                 }else if(purchaseType==Constant.TYPE_PURCHASE_HONEYCOMB){
                     IntentUtils.startWebActivity(this,getString(R.string.hongycomb_agreement),Constant.URL_HONYCOMB_RULE);
                 }else if(purchaseType==Constant.TYPE_PURCHASE_SNATCH){
-                    IntentUtils.startWebActivity(this,getString(R.string.hongycomb_agreement),Constant.URL_HONYCOMB_RULE);
+                    IntentUtils.startWebActivity(this,getString(R.string.snatch_agreement),Constant.URL_DUOBAO_RULE);
                 }
                 break;
             case R.id.bt_ensure:
@@ -168,7 +169,7 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
         }else if(purchaseType==Constant.TYPE_PURCHASE_HONEYCOMB){
             mvpPresenter.appCreateOrder(Constant.CHANNEL_CODE_ANDROID,payNumber,payType,getPref().getLongitude(),getPref().getLatitude(),safetyCode);
         }else if(purchaseType==Constant.TYPE_PURCHASE_SNATCH){
-
+            mvpPresenter.createSnatchOrder(Constant.CHANNEL_CODE_ANDROID,payType,snatchId,buySurplus,payNumber,getPref().getLongitude(),getPref().getLatitude(),safetyCode);
         }
     }
     public void setKsbText(){
@@ -284,6 +285,15 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
 
     @Override
     public void setBuyHonyComb(Order data) {
+        closeLoadingDialog();
+        if (data!=null){
+            payResult(data);
+        }else {
+            showShortToast(R.string.can_get_order);
+        }
+    }
+    @Override
+    public void setSnatch(Order data) {
         closeLoadingDialog();
         if (data!=null){
             payResult(data);

@@ -2,7 +2,6 @@ package com.guochuang.mimedia.ui.activity.treasure;
 
 import android.Manifest;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,17 +16,14 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.donkingliang.imageselector.utils.ImageSelector;
 import com.donkingliang.imageselector.utils.ImageSelectorUtils;
-import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
-import com.guochuang.mimedia.mvp.model.BoardDetail;
+import com.guochuang.mimedia.mvp.model.SnatchShow;
 import com.guochuang.mimedia.mvp.model.UploadFile;
 import com.guochuang.mimedia.mvp.presenter.ShowListPresenter;
 import com.guochuang.mimedia.mvp.view.ShowListView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.IntentUtils;
-import com.guochuang.mimedia.ui.activity.CityDetailActivity;
-import com.guochuang.mimedia.ui.activity.EditBoardActivity;
 import com.guochuang.mimedia.ui.adapter.PickImageAdapter;
 import com.guochuang.mimedia.ui.adapter.PictureAdapter;
 import com.guochuang.mimedia.view.GridItemDecoration;
@@ -36,10 +32,10 @@ import com.tbruyelle.rxpermissions.RxPermissions;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.functions.Action1;
 import top.zibin.luban.Luban;
@@ -82,10 +78,12 @@ public class ShowListActivity extends MvpActivity<ShowListPresenter> implements 
     String picture;
     String content;
     ArrayList<String> pictureArr=new ArrayList<>();
+
     PickImageAdapter pictureAdapter;
-    List<String> waitUpload=new ArrayList<>();
-    List<String> picUrlArr=new ArrayList<>();
+    ArrayList<String> waitUpload=new ArrayList<>();
+    ArrayList<String> picUrlArr=new ArrayList<>();
     long snatchShowId;
+    long snatchId;
 
     PictureAdapter adapter;
     @Override
@@ -101,6 +99,7 @@ public class ShowListActivity extends MvpActivity<ShowListPresenter> implements 
     @Override
     public void initViewAndData() {
         tvTitle.setText(R.string.showlist);
+        snatchId=getIntent().getLongExtra(Constant.SNATCHID,0);
         snatchShowId=getIntent().getLongExtra(Constant.SNATCHSHOWID,0);
         if (snatchShowId>0){
             initResult();
@@ -113,14 +112,14 @@ public class ShowListActivity extends MvpActivity<ShowListPresenter> implements 
        tvConfirm.setVisibility(View.VISIBLE);
        linResult.setVisibility(View.GONE);
        rvPicture.setLayoutManager(new GridLayoutManager(this,3));
-       rvPicture.addItemDecoration(new GridItemDecoration(3,CommonUtil.dip2px(this,10),false));
+       rvPicture.addItemDecoration(new GridItemDecoration(3,CommonUtil.dip2px(this,5),false));
        rvPicture.setItemAnimator(new DefaultItemAnimator());
-       pictureArr.add(null);
-       pictureAdapter=new PickImageAdapter(pictureArr);
+       picUrlArr.add(null);
+       pictureAdapter=new PickImageAdapter(picUrlArr);
        pictureAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
            @Override
            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-               if (TextUtils.isEmpty(pictureArr.get(position))){
+               if (TextUtils.isEmpty(picUrlArr.get(position))){
                    RxPermissions rxPermissions=new RxPermissions(ShowListActivity.this);
                    rxPermissions.request(Manifest.permission.CAMERA,Manifest.permission.READ_EXTERNAL_STORAGE).subscribe(new Action1<Boolean>() {
                        @Override
@@ -129,7 +128,7 @@ public class ShowListActivity extends MvpActivity<ShowListPresenter> implements 
                                ImageSelector.builder()
                                        .useCamera(true)
                                        .setSingle(false)
-                                       .setMaxSelectCount(Constant.MAX_PICK_PICTURE-pictureArr.size()+1)
+                                       .setMaxSelectCount(Constant.MAX_PICK_PICTURE-picUrlArr.size()+1)
                                        .start(ShowListActivity.this, Constant.REQUEST_PICK_PICTURE);
                            }else {
                                showShortToast(R.string.get_pic_permission);
@@ -137,7 +136,7 @@ public class ShowListActivity extends MvpActivity<ShowListPresenter> implements 
                        }
                    });
                }else {
-                   ArrayList<String> selectArr=(ArrayList<String>)pictureArr.clone();
+                   ArrayList<String> selectArr=(ArrayList<String>)picUrlArr.clone();
                    selectArr.remove(null);
                    IntentUtils.startImagePreviewActivity(ShowListActivity.this,position,selectArr);
                }
@@ -146,10 +145,10 @@ public class ShowListActivity extends MvpActivity<ShowListPresenter> implements 
        pictureAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
            @Override
            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-               pictureArr.remove(position);
+               picUrlArr.remove(position);
                pictureAdapter.notifyItemRemoved(position);
-               if (!pictureArr.contains(null)){
-                   pictureArr.add(null);
+               if (!picUrlArr.contains(null)){
+                   picUrlArr.add(null);
                }
                adapter.notifyDataSetChanged();
            }
@@ -170,6 +169,8 @@ public class ShowListActivity extends MvpActivity<ShowListPresenter> implements 
            }
        });
        rvImage.setAdapter(adapter);
+       showLoadingDialog(null);
+       mvpPresenter.getSnatchShow(snatchShowId);
    }
 
     @OnClick({R.id.iv_back, R.id.tv_confirm})
@@ -181,7 +182,7 @@ public class ShowListActivity extends MvpActivity<ShowListPresenter> implements 
             case R.id.tv_confirm:
                 content=etContent.getText().toString();
                 if (picUrlArr.size()==0){
-                    waitUpload = (ArrayList<String>) pictureArr.clone();
+                    waitUpload = (ArrayList<String>) picUrlArr.clone();
                     waitUpload.remove(null);
                 }
                 if (TextUtils.isEmpty(content)){
@@ -193,7 +194,7 @@ public class ShowListActivity extends MvpActivity<ShowListPresenter> implements 
                         new File(Constant.COMPRESS_DIR_PATH).mkdirs();
                         uploadFile();
                     }else {
-//                        addNotice();
+                        addShowList();
                     }
                 }
                 break;
@@ -211,12 +212,12 @@ public class ShowListActivity extends MvpActivity<ShowListPresenter> implements 
         }
     }
     private void addPicture(List<String> filepath){
-        pictureArr.remove(null);
-        pictureArr.addAll(filepath);
-        if (pictureArr.size()<Constant.MAX_PICK_PICTURE){
-            pictureArr.add(null);
+        picUrlArr.remove(null);
+        picUrlArr.addAll(filepath);
+        if (picUrlArr.size()<Constant.MAX_PICK_PICTURE){
+            picUrlArr.add(null);
         }else {
-            pictureArr.subList(0,Constant.MAX_PICK_PICTURE-1);
+            picUrlArr.subList(0,Constant.MAX_PICK_PICTURE-1);
         }
         pictureAdapter.notifyDataSetChanged();
     }
@@ -228,7 +229,7 @@ public class ShowListActivity extends MvpActivity<ShowListPresenter> implements 
                 uploadFile();
             }else {
                 closeLoadingDialog();
-//                addNotice();
+                addShowList();
             }
             return;
         }
@@ -259,7 +260,10 @@ public class ShowListActivity extends MvpActivity<ShowListPresenter> implements 
                     }
                 }).launch();
     }
-
+    public void addShowList(){
+        showLoadingDialog(null);
+        mvpPresenter.addSnatchShow(snatchId,content,picUrlArr);
+    }
     @Override
     public void setUploadFile(UploadFile data) {
         waitUpload.remove(0);
@@ -270,30 +274,27 @@ public class ShowListActivity extends MvpActivity<ShowListPresenter> implements 
             uploadFile();
         } else {
             closeLoadingDialog();
-//            addNotice();
+            addShowList();
         }
     }
     @Override
-    public void setNotice(Boolean data) {
+    public void setShowList(Boolean data) {
         closeLoadingDialog();
-        showShortToast(R.string.setting_success);
+        showShortToast(R.string.publish_success);
         setResult(RESULT_OK);
         finish();
     }
 
     @Override
-    public void getNotice(BoardDetail detail) {
+    public void getShowList(SnatchShow snatchShow) {
         closeLoadingDialog();
-        if (detail!=null){
-//            this.detail=detail;
-            etContent.setText(detail.getContent());
+        if (snatchShow!=null){
+            etContent.setText(snatchShow.getContent());
             pictureArr.clear();
-            picUrlArr.clear();
-            if (detail.getPicture()==null||detail.getPicture().size()==0){
-                addPicture(new ArrayList<String >());
-            }else {
-                addPicture(detail.getPicture());
+            if (snatchShow.getImgs()!=null){
+                pictureArr.addAll(snatchShow.getImgs());
             }
+            adapter.notifyDataSetChanged();
         }
     }
     @Override

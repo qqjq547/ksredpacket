@@ -40,7 +40,9 @@
         android:layout_marginLeft="@dimen/space10">
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/space80" >
+            android:layout_height="@dimen/space80"
+            android:paddingTop="@dimen/space10"
+            android:paddingBottom="@dimen/space10">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -113,8 +115,9 @@
             <LinearLayout
                 android:id="@+id/lin_progress"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="bottom">
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:gravity="center_vertical">
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -135,8 +138,9 @@
                 <ProgressBar
                     android:id="@+id/pb_progress"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/space10"
                     android:layout_weight="1"
+                    android:progressDrawable="@drawable/bg_snatch_progress"
                     style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                     android:progress="0"
                     />
@@ -146,13 +150,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space10">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/space24"
                 android:gravity="center"
                 android:textSize="@dimen/textfont12"
                 android:textColor="@color/text_black"
-                android:text="@string/join_people"/>
+                android:text="@string/join_people_before"/>
             <TextView
                 android:id="@+id/tv_people_time"
                 android:layout_width="wrap_content"
@@ -161,12 +168,20 @@
                 android:textSize="@dimen/textfont12"
                 android:textColor="@color/text_red" />
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/space24"
+                android:gravity="center"
+                android:textSize="@dimen/textfont12"
+                android:textColor="@color/text_black"
+                android:text="@string/join_people_after"/>
+            </LinearLayout>
+            <TextView
                 android:id="@+id/tv_joined_time"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/space24"
                 android:gravity="center_vertical|right"
                 android:textSize="@dimen/textfont12"
-                android:textColor="@color/text_black"
+                android:textColor="@color/text_gray"
                 android:text=""/>
         </LinearLayout>
     </LinearLayout>
@@ -180,6 +195,14 @@
             android:textColor="@color/text_blue"
             android:textSize="@dimen/textfont14"
             android:text="@string/perfect_address"/>
+    <TextView
+        android:id="@+id/tv_pay"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space40"
+        android:gravity="center"
+        android:textColor="@color/text_blue"
+        android:textSize="@dimen/textfont14"
+        android:text="@string/goto_pay"/>
     <LinearLayout
         android:id="@+id/lin_comment"
         android:layout_width="match_parent"

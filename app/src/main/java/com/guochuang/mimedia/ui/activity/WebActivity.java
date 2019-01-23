@@ -20,6 +20,7 @@ import com.guochuang.mimedia.tools.AdCollectionView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.LogUtil;
+import com.guochuang.mimedia.ui.activity.treasure.MyTreasureActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -96,19 +97,11 @@ public class WebActivity extends MvpActivity {
         });
     }
 
-    @OnClick({R.id.iv_back,R.id.tv_text})
+    @OnClick({R.id.iv_back})
     public void onViewClicked(View view) {
         switch (view.getId()){
             case R.id.iv_back:
                 onBackPressed();
-                break;
-            case R.id.tv_text:
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        IntentUtils.startWebActivity(WebActivity.this,getString(R.string.hongycomb_agreement),Constant.URL_HONYCOMB_RULE);
-                    }
-                });
                 break;
         }
     }
@@ -162,15 +155,6 @@ public class WebActivity extends MvpActivity {
             });
         }
         @JavascriptInterface
-        public void payment(final double money,final int number,final long snatchId,final boolean isPacketTail){
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    IntentUtils.startPurchaseActivity(WebActivity.this,Constant.TYPE_PURCHASE_SNATCH,snatchId,number,String.valueOf(money),isPacketTail?1:0);
-                }
-            });
-        }
-        @JavascriptInterface
         public void playVideo(){
             runOnUiThread(new Runnable() {
                 @Override
@@ -216,6 +200,12 @@ public class WebActivity extends MvpActivity {
                 @Override
                 public void run() {
                     tvText.setText(R.string.rule);
+                    tvText.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            IntentUtils.startWebActivity(WebActivity.this,getString(R.string.hongycomb_agreement),Constant.URL_HONYCOMB_RULE);
+                        }
+                    });
                 }
             });
         }
@@ -232,13 +222,54 @@ public class WebActivity extends MvpActivity {
                 }
             });
         }
+        @JavascriptInterface
+        public void payment(final double money,final int number,final long snatchId,final boolean isPacketTail){
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    IntentUtils.startPurchaseActivity(WebActivity.this,Constant.TYPE_PURCHASE_SNATCH,snatchId,number,String.valueOf(money),isPacketTail?1:0);
+                }
+            });
+        }
+        @JavascriptInterface
+        public void goTreasure(){
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    startActivity(new Intent(WebActivity.this,MyTreasureActivity.class));
+                }
+            });
+        }
+        @JavascriptInterface
+        public void rightTitle(final String title, final String url){
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    tvText.setText(title);
+                    tvText.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            IntentUtils.startWebActivity(WebActivity.this,title,url);
+                        }
+                    });
+                }
+            });
+        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode==RESULT_OK&&requestCode==Constant.REQUEST_PURCHASE){
-            wvContent.loadUrl("javascript:slef.activationSuccess()");
+        if (resultCode==RESULT_OK){
+            switch (requestCode){
+                case Constant.REQUEST_PURCHASE:
+                    wvContent.loadUrl("javascript:slef.activationSuccess()");
+                    wvContent.reload();
+                    break;
+                    default:
+                        wvContent.reload();
+                        break;
+            }
         }
     }
 }

@@ -17,6 +17,7 @@ import com.guochuang.mimedia.mvp.model.Snatch;
 import com.guochuang.mimedia.mvp.presenter.MyTreasurePresenter;
 import com.guochuang.mimedia.mvp.view.MyTreasureView;
 import com.guochuang.mimedia.tools.Constant;
+import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.ui.activity.MyAddressActivity;
 import com.guochuang.mimedia.ui.adapter.AddressAdapter;
 import com.guochuang.mimedia.ui.adapter.MyTreasureAdapter;
@@ -75,9 +76,15 @@ public class MyTreasureActivity extends MvpActivity<MyTreasurePresenter> impleme
                         startActivityForResult(new Intent(MyTreasureActivity.this, ShowListActivity.class).putExtra(Constant.SNATCHSHOWID,snatch.getSnatchShowId()),Constant.REQUEST_SET_SHOWLIST);
                         break;
                     case R.id.tv_express:
-                        startActivity(new Intent(MyTreasureActivity.this,ExpressInfoActivity.class).putExtra(Constant.SNATCHID,snatch.getSnatchId()));
+                        startActivity(new Intent(MyTreasureActivity.this, ExpressInfoActivity.class).putExtra(Constant.SNATCHID, snatch.getSnatchId()));
                         break;
                 }
+            }
+        });
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                IntentUtils.startWebActivity(MyTreasureActivity.this,"",Constant.URL_DUOBAO_DETAIL+dataArr.get(position).getSnatchId());
             }
         });
         rvTreasure.setAdapter(adapter);
@@ -132,7 +139,7 @@ public class MyTreasureActivity extends MvpActivity<MyTreasurePresenter> impleme
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode==RESULT_OK){
-            mvpPresenter.getRecordList(1,Constant.PAGE_SIZE);
+            srlRefresh.autoRefresh();
         }
     }
 }
