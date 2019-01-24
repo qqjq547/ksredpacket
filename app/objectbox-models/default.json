@@ -130,9 +130,53 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "7:3125605018086260858",
+      "lastPropertyId": "9:3011359122129484010",
+      "name": "InfoItem",
+      "properties": [
+        {
+          "id": "1:6438984524987422374",
+          "name": "id"
+        },
+        {
+          "id": "2:2833781878844176284",
+          "name": "articleId"
+        },
+        {
+          "id": "3:6588736811947428420",
+          "name": "author"
+        },
+        {
+          "id": "4:2335865124523046942",
+          "name": "commentNumber"
+        },
+        {
+          "id": "5:4042887819954389",
+          "name": "picture"
+        },
+        {
+          "id": "6:1459167640420046660",
+          "name": "praiseNumber"
+        },
+        {
+          "id": "7:1926871982921048256",
+          "name": "title"
+        },
+        {
+          "id": "8:6754160938977836949",
+          "name": "articleUuid"
+        },
+        {
+          "id": "9:3011359122129484010",
+          "name": "categoryId"
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "6:2797818763336825693",
+  "lastEntityId": "7:3125605018086260858",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",

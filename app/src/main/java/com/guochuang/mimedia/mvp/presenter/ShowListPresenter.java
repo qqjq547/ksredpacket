@@ -48,7 +48,7 @@ public class ShowListPresenter extends BasePresenter<ShowListView> {
             }
         });
     }
-    public void addSnatchShow(long snatchId,String content,List<String> imgs){
+    public void addSnatchShow(long snatchId,String content,String imgs){
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().addSnatchShow(snatchId,content,imgs)), new ApiCallback<Boolean>() {
             @Override
             public void onSuccess(Boolean data) {
@@ -66,8 +66,8 @@ public class ShowListPresenter extends BasePresenter<ShowListView> {
             }
         });
     }
-    public void getSnatchShow(long snatchShowId){
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().querySnatchShow(snatchShowId)), new ApiCallback<SnatchShow>() {
+    public void getSnatchShow(long snatchRecordId){
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().querySnatchShow(snatchRecordId)), new ApiCallback<SnatchShow>() {
             @Override
             public void onSuccess(SnatchShow data) {
                 mvpView.getShowList(data);

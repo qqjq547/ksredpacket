@@ -1,10 +1,12 @@
 package com.guochuang.mimedia.ui.activity.treasure;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,11 +15,15 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.http.response.Page;
+import com.guochuang.mimedia.mvp.model.Order;
 import com.guochuang.mimedia.mvp.model.Snatch;
 import com.guochuang.mimedia.mvp.presenter.MyTreasurePresenter;
 import com.guochuang.mimedia.mvp.view.MyTreasureView;
 import com.guochuang.mimedia.tools.Constant;
+import com.guochuang.mimedia.tools.GsonUtil;
 import com.guochuang.mimedia.tools.IntentUtils;
+import com.guochuang.mimedia.tools.pay.AliPay;
+import com.guochuang.mimedia.tools.pay.WxPay;
 import com.guochuang.mimedia.ui.activity.MyAddressActivity;
 import com.guochuang.mimedia.ui.adapter.AddressAdapter;
 import com.guochuang.mimedia.ui.adapter.MyTreasureAdapter;
@@ -69,14 +75,22 @@ public class MyTreasureActivity extends MvpActivity<MyTreasurePresenter> impleme
                 switch (view.getId()){
                     case R.id.tv_address:
                         if (snatch.getShowAddress()==1) {
-                            startActivityForResult(new Intent(MyTreasureActivity.this, MyAddressActivity.class), Constant.REQUEST_PICK_ADDRESS);
+                            startActivityForResult(new Intent(MyTreasureActivity.this, MyAddressActivity.class).putExtra(Constant.SNATCHID,snatch.getSnatchId()), Constant.REQUEST_PICK_ADDRESS);
                         }
                         break;
                     case R.id.tv_comment:
-                        startActivityForResult(new Intent(MyTreasureActivity.this, ShowListActivity.class).putExtra(Constant.SNATCHSHOWID,snatch.getSnatchShowId()),Constant.REQUEST_SET_SHOWLIST);
+                        startActivityForResult(new Intent(MyTreasureActivity.this, ShowListActivity.class).putExtra(Constant.SNATCH,snatch),Constant.REQUEST_SET_SHOWLIST);
                         break;
                     case R.id.tv_express:
                         startActivity(new Intent(MyTreasureActivity.this, ExpressInfoActivity.class).putExtra(Constant.SNATCHID, snatch.getSnatchId()));
+                        break;
+                    case R.id.lin_join_people_time:
+                        IntentUtils.startWebActivity(MyTreasureActivity.this,"",Constant.URL_DUOBAO_TREASURE_NUMBER+snatch.getSnatchRecordId());
+                        break;
+                    case R.id.tv_pay:
+                        String orderStr="";
+                        Order order=GsonUtil.GsonToBean(orderStr,Order.class);
+                        payResult(order,0);
                         break;
                 }
             }
@@ -142,4 +156,32 @@ public class MyTreasureActivity extends MvpActivity<MyTreasurePresenter> impleme
             srlRefresh.autoRefresh();
         }
     }
+    public void payResult(Order order,int payType){
+        switch (payType){
+        case  Constant.PAY_TYPE_WXPAY:
+            if (TextUtils.isEmpty(order.getVendorResponse())){
+                showShortToast(R.string.can_get_order);
+                return;
+            }
+            WxPay.getInstance().pay(order.getVendorResponse(), new WxPay.OnResultListener() {
+                @Override
+                public void onResult(boolean success, String errMsg) {
+                    srlRefresh.autoRefresh();
+                }
+            });
+            break;
+        case  Constant.PAY_TYPE_ALIPAY:
+            if (TextUtils.isEmpty(order.getVendorResponse())){
+                showShortToast(R.string.can_get_order);
+                return;
+            }
+            AliPay.getInstance().pay(this, order.getVendorResponse(), new AliPay.OnResultListener() {
+                @Override
+                public void onResult(boolean success, String errMsg) {
+                    srlRefresh.autoRefresh();
+                }
+            });
+            break;
+    }
+}
 }

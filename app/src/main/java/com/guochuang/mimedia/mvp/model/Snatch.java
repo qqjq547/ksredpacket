@@ -1,6 +1,8 @@
 package com.guochuang.mimedia.mvp.model;
 
-public class Snatch {
+import java.io.Serializable;
+
+public class Snatch implements Serializable {
 
     /**
      * address : string
@@ -43,7 +45,7 @@ public class Snatch {
     private String province;
     private double rate;
     private int showAddress;
-    private int snatchId;
+    private long snatchId;
     private String snatchImg;
     private String snatchName;
     private String snatchPeriods;
@@ -55,6 +57,8 @@ public class Snatch {
     private String trackName;
     private String trackNum;
     private int type;
+    private int isPay;
+    private long snatchRecordId;
 
     public String getAddress() {
         return address;
@@ -160,11 +164,11 @@ public class Snatch {
         this.showAddress = showAddress;
     }
 
-    public int getSnatchId() {
+    public long getSnatchId() {
         return snatchId;
     }
 
-    public void setSnatchId(int snatchId) {
+    public void setSnatchId(long snatchId) {
         this.snatchId = snatchId;
     }
 
@@ -254,5 +258,21 @@ public class Snatch {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public int getIsPay() {
+        return isPay;
+    }
+
+    public void setIsPay(int isPay) {
+        this.isPay = isPay;
+    }
+
+    public long getSnatchRecordId() {
+        return snatchRecordId;
+    }
+
+    public void setSnatchRecordId(long snatchRecordId) {
+        this.snatchRecordId = snatchRecordId;
     }
 }

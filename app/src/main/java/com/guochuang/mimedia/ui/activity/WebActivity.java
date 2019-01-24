@@ -227,7 +227,7 @@ public class WebActivity extends MvpActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    IntentUtils.startPurchaseActivity(WebActivity.this,Constant.TYPE_PURCHASE_SNATCH,snatchId,number,String.valueOf(money),isPacketTail?1:0);
+                    IntentUtils.startPurchaseActivity(WebActivity.this,Constant.TYPE_PURCHASE_SNATCH,snatchId,number,String.valueOf(money));
                 }
             });
         }

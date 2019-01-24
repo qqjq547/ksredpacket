@@ -1089,11 +1089,11 @@ public interface ApiStore {
     Observable<HttpResponse<Boolean>> addSnatchShow(
             @Field("snatchId") long snatchId,
             @Field("content") String content,
-            @Field("imgs") List<String> imgs
+            @Field("imgs") String imgs
     );
     @GET("/api/v1/activity/snatchShow/queryShow")
     Observable<HttpResponse<SnatchShow>> querySnatchShow(
-            @Query("baseSnatchShowId") long baseSnatchShowId
+            @Query("snatchRecordId") long snatchRecordId
     );
     @FormUrlEncoded
     @POST("/api/v1/activity/snatch/create_order")
@@ -1101,7 +1101,6 @@ public interface ApiStore {
             @Field("channelCode") String channelCode,
             @Field("payType") int payType,
             @Field("snatchId") long snatchId,
-            @Field("buySurplus") int buySurplus,
             @Field("buyCount") int buyCount,
             @Field("longitude") String longitude,
             @Field("latitude") String latitude,

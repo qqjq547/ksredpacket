@@ -81,7 +81,7 @@
     <string name="pls_select_report_content">请选择举报内容</string>
     <string name="format_reading_awara">阅读资讯获得%sKSB</string>
 
-    <string name="word_tip">红包发布8分钟内，只有输入正确的口令才能收红包</string>
+    <string name="word_tip">红包发布24小时内，只有输入正确的口令才能收红包</string>
     <string name="word_item_name">口令</string>
     <string name="word_item_hint">输入口令</string>
     <string name="amout_tip">附近的人可随机领取该红包</string>

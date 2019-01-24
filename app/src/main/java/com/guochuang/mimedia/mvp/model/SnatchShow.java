@@ -4,8 +4,10 @@ import java.util.List;
 
 public class SnatchShow {
 
+
     /**
      * content : string
+     * createDate : 2019-01-24T09:10:27.512Z
      * imgs : ["string"]
      * isAdd : 0
      * isWin : 0
@@ -22,12 +24,13 @@ public class SnatchShow {
      */
 
     private String content;
+    private String createDate;
     private int isAdd;
     private int isWin;
     private String luckNum;
     private int payNum;
     private String productUuid;
-    private long snatchId;
+    private int snatchId;
     private String snatchImg;
     private String snatchName;
     private String snatchNums;
@@ -42,6 +45,14 @@ public class SnatchShow {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
     }
 
     public int getIsAdd() {
@@ -84,11 +95,11 @@ public class SnatchShow {
         this.productUuid = productUuid;
     }
 
-    public long getSnatchId() {
+    public int getSnatchId() {
         return snatchId;
     }
 
-    public void setSnatchId(long snatchId) {
+    public void setSnatchId(int snatchId) {
         this.snatchId = snatchId;
     }
 

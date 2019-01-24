@@ -41,7 +41,7 @@ public class ExpressInfoActivity extends MvpActivity<ExpressInfoPresenter> imple
     TextView tvAddress;
     @BindView(R.id.tv_period)
     TextView tvPeriod;
-    Snatch snatch;
+    SnatchAddress snatch;
     long snatchId;
     @Override
     protected ExpressInfoPresenter createPresenter() {
@@ -79,21 +79,26 @@ public class ExpressInfoActivity extends MvpActivity<ExpressInfoPresenter> imple
     @Override
     public void setData(SnatchAddress data) {
         closeLoadingDialog();
-        GlideImgManager.loadImage(this,data.getSnatchImg(),ivIcon);
-        tvAddress.setText(snatch.getProvince()+snatch.getCity()+snatch.getDistrict()+snatch.getAddress());
-        if (snatch.getType()==1&&snatch.getStatus()>=4){
-            linHasSend.setVisibility(View.VISIBLE);
-            linNotSend.setVisibility(View.GONE);
-            if (TextUtils.isEmpty(snatch.getExpressCode())){
-                tvCopy.setVisibility(View.GONE);
+        if (data!=null){
+            snatch=data;
+            tvPeriod.setText(String.format(getString(R.string.format_peroid),snatch.getSnatchPeriods()));
+            GlideImgManager.loadImage(this,data.getSnatchImg(),ivIcon);
+            tvAddress.setText(snatch.getProvince()+snatch.getCity()+snatch.getDistrict()+snatch.getAddress());
+            if (snatch.getStatus()>=4){
+                linHasSend.setVisibility(View.VISIBLE);
+                linNotSend.setVisibility(View.GONE);
+                if (TextUtils.isEmpty(snatch.getExpressCode())){
+                    tvCopy.setVisibility(View.GONE);
+                }else {
+                    tvCopy.setVisibility(View.VISIBLE);
+                }
+                tvExpress.setText(snatch.getExpressName()+"  "+snatch.getExpressCode());
             }else {
-                tvCopy.setVisibility(View.VISIBLE);
+                linHasSend.setVisibility(View.GONE);
+                linNotSend.setVisibility(View.VISIBLE);
             }
-            tvExpress.setText(snatch.getExpressName()+"  "+snatch.getExpressCode());
-        }else {
-            linHasSend.setVisibility(View.GONE);
-            linNotSend.setVisibility(View.VISIBLE);
         }
+
     }
 
     @Override

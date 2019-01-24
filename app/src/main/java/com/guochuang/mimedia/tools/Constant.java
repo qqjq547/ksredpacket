@@ -80,9 +80,8 @@ public class Constant {
     public static final String PAYNUMBER = "payNumber";
     public static final String DESCRIPTION = "description";
     public static final String SNATCHID = "snatchId";
+    public static final String SNATCH = "snatch";
     public static final String ADDRESS = "address";
-    public static final String BUY_SURPLUS = "buySurplus";
-    public static final String SNATCHSHOWID = "snatchShowId";
 
 
 
@@ -130,6 +129,8 @@ public class Constant {
     public static final String URL_DUOBAO_RULE = ApiClient.HTML_URL+"project/html/rule/duobaoRule.html";
     //夺宝详情
     public static final String URL_DUOBAO_DETAIL = ApiClient.HTML_URL+"project/html/duobao/details.html?snatchId=";
+
+    public static final String URL_DUOBAO_TREASURE_NUMBER = ApiClient.HTML_URL+"project/html/duobao/treasureNumber.html?type=false&snatchRecordId=";
 
 
     public static final String REGEX_WEBURL = "http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?";
