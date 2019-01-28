@@ -41,7 +41,6 @@ import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
-import com.guochuang.mimedia.tools.BDMapUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.tools.PrefUtil;

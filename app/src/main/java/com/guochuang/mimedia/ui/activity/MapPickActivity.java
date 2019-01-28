@@ -38,7 +38,6 @@ import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.LogUtil;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.MvpActivity;
-import com.guochuang.mimedia.tools.BDMapUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.ui.adapter.PoiInfoAdapter;
 import com.guochuang.mimedia.ui.adapter.SuggestionInfoAdapter;

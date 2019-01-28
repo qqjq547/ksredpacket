@@ -154,7 +154,7 @@ public class TencentAd {
                 .build());
         nativeExpressAD.loadAD(1);
     }
-    public void showBanner(Context context,ViewGroup viewGroup,ViewGroup.LayoutParams lp,String placeId,OnShowResultListener listener){
+    public void showBanner(Context context,ViewGroup viewGroup,ViewGroup.LayoutParams lp,String placeId,final OnShowResultListener listener){
         BannerView bannerView = new BannerView((Activity) context, ADSize.BANNER,appId, placeId);
         bannerView.setRefresh(30);
         bannerView.setADListener(new AbstractBannerADListener() {
@@ -173,7 +173,7 @@ public class TencentAd {
         viewGroup.addView(bannerView, lp);
         bannerView.loadAD();
     }
-    public void showVideo(Context context, final ViewGroup viewGroup, String appId, String locationId,OnShowResultListener listener){
+    public void showVideo(Context context, final ViewGroup viewGroup, String appId, String locationId,final OnShowResultListener listener){
         NativeExpressAD nativeExpressAD = new NativeExpressAD(
                 context,
                 new com.qq.e.ads.nativ.ADSize(com.qq.e.ads.nativ.ADSize.FULL_WIDTH, com.qq.e.ads.nativ.ADSize.AUTO_HEIGHT),

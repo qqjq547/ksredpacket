@@ -46,7 +46,7 @@ public class VungleAd {
 
    }
 
-    public void showVideo(OnVideoShowResultListener listener) {
+    public void showVideo(final OnVideoShowResultListener listener) {
         try {
             if (Vungle.canPlayAd(adId)) {
                 new Handler().postDelayed(new Runnable() {
