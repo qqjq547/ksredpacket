@@ -59,6 +59,7 @@ import com.guochuang.mimedia.ui.activity.MainActivity;
 import com.guochuang.mimedia.ui.activity.ShareActivity;
 import com.guochuang.mimedia.ui.activity.SquareActivity;
 import com.guochuang.mimedia.ui.activity.UpgradeAgentActivity;
+import com.guochuang.mimedia.ui.activity.WebActivity;
 import com.guochuang.mimedia.ui.adapter.HoneyAdapter;
 import com.guochuang.mimedia.ui.dialog.OpenRedbagDialog;
 import com.guochuang.mimedia.ui.dialog.RedbagTypeDialog;
@@ -259,7 +260,8 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_text:
-                startActivity(new Intent(getActivity(), SquareActivity.class));
+//                startActivity(new Intent(getActivity(), SquareActivity.class));
+                IntentUtils.startWebActivity(getActivity(),"xxx","file:///android_asset/html/duobao/index.html");
                 break;
             case R.id.lin_city_owner:
             case R.id.hiv_avatar:

@@ -1106,4 +1106,9 @@ public interface ApiStore {
             @Field("latitude") String latitude,
             @Field("safetyCode") String safetyCode
     );
+    @GET("/api/v1/activity/snatch/get_vendor_pay")
+    Observable<HttpResponse<Order>> getOrderVendor(
+            @Query("orderId") long orderId
+    );
+
 }

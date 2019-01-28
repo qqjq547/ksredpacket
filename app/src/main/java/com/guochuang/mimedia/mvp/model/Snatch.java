@@ -59,6 +59,7 @@ public class Snatch implements Serializable {
     private int type;
     private int isPay;
     private long snatchRecordId;
+    private long orderId;
 
     public String getAddress() {
         return address;
@@ -274,5 +275,13 @@ public class Snatch implements Serializable {
 
     public void setSnatchRecordId(long snatchRecordId) {
         this.snatchRecordId = snatchRecordId;
+    }
+
+    public long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(long orderId) {
+        this.orderId = orderId;
     }
 }

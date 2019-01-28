@@ -11,6 +11,7 @@ import com.baidu.mapapi.SDKInitializer;
 import com.guochuang.mimedia.mvp.model.MyObjectBox;
 import com.guochuang.mimedia.mvp.model.UserInfo;
 import com.guochuang.mimedia.tools.Constant;
+import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.ui.activity.LoginActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreater;
@@ -24,6 +25,7 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.guochuang.mimedia.tools.PrefUtil;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+import com.tencent.smtt.sdk.QbSdk;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -79,6 +81,17 @@ public class App extends Application {
             wxapi.registerApp("wx3f027d9298bbbed4");
             new File(Constant.COMPRESS_DIR_PATH).mkdirs();
             new File(Constant.COMMON_PATH).mkdirs();
+            QbSdk.preInit(this, new QbSdk.PreInitCallback() {
+                @Override
+                public void onCoreInitFinished() {
+                    LogUtil.d("onCoreInitFinished");
+                }
+
+                @Override
+                public void onViewInitFinished() {
+                    LogUtil.d("onViewInitFinished");
+                }
+            });
         }
     public static App getInstance(){
         return instance;

@@ -6,6 +6,7 @@ import com.guochuang.mimedia.http.response.Page;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.Address;
+import com.guochuang.mimedia.mvp.model.Order;
 import com.guochuang.mimedia.mvp.model.Snatch;
 import com.guochuang.mimedia.mvp.view.MyAddressView;
 import com.guochuang.mimedia.mvp.view.MyTreasureView;
@@ -36,4 +37,25 @@ public class MyTreasurePresenter extends BasePresenter<MyTreasureView> {
             }
         });
     }
+    public void getOrderVendor(long orderId) {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
+                getOrderVendor(orderId)), new ApiCallback<Order>() {
+            @Override
+            public void onSuccess(Order data) {
+                mvpView.setVendor(data);
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setError(exception.getMessage());
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
+
 }

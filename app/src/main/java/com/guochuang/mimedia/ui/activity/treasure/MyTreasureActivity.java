@@ -88,9 +88,8 @@ public class MyTreasureActivity extends MvpActivity<MyTreasurePresenter> impleme
                         IntentUtils.startWebActivity(MyTreasureActivity.this,"",Constant.URL_DUOBAO_TREASURE_NUMBER+snatch.getSnatchRecordId());
                         break;
                     case R.id.tv_pay:
-                        String orderStr="";
-                        Order order=GsonUtil.GsonToBean(orderStr,Order.class);
-                        payResult(order,0);
+                        showLoadingDialog(null);
+                        mvpPresenter.getOrderVendor(snatch.getOrderId());
                         break;
                 }
             }
@@ -107,7 +106,7 @@ public class MyTreasureActivity extends MvpActivity<MyTreasurePresenter> impleme
         srlRefresh.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-              mvpPresenter.getRecordList(curPage+1,Constant.PAGE_SIZE);
+               mvpPresenter.getRecordList(curPage+1,Constant.PAGE_SIZE);
             }
 
             @Override
@@ -138,6 +137,14 @@ public class MyTreasureActivity extends MvpActivity<MyTreasurePresenter> impleme
             srlRefresh.setEnableLoadmore(false);
         } else {
             srlRefresh.setEnableLoadmore(true);
+        }
+    }
+
+    @Override
+    public void setVendor(Order data) {
+        closeLoadingDialog();
+        if (data!=null){
+            payResult(data,Constant.PAY_TYPE_ALIPAY);
         }
     }
 

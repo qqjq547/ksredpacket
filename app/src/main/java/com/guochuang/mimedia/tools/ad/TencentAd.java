@@ -23,12 +23,18 @@ import java.util.List;
 
 public class TencentAd {
     private NativeExpressADView nativeExpressADView;
-    public void showSplash(Context context,ViewGroup viewGroup, String appid, String locationId, final AdCollection.onShowResultListener listener){
-        SplashAD splashAD = new SplashAD((Activity) context, viewGroup, appid, locationId, new SplashADListener() {
+    private String appId;
+
+    public TencentAd(String appId) {
+        this.appId = appId;
+    }
+
+    public void showSplash(Context context, ViewGroup viewGroup, String placeId, final OnShowResultListener listener){
+        SplashAD splashAD = new SplashAD((Activity) context, viewGroup, appId, placeId, new SplashADListener() {
             @Override
             public void onADDismissed() {
                 if (listener != null) {
-                    listener.onShowSuccess();
+                    listener.onDismiss();
                 }
             }
 
@@ -41,7 +47,9 @@ public class TencentAd {
 
             @Override
             public void onADPresent() {
-
+                if (listener != null) {
+                    listener.onShowSuccess();
+                }
             }
 
             @Override
@@ -60,15 +68,94 @@ public class TencentAd {
             }
         });
     }
-    public void showBanner(Context context,ViewGroup viewGroup,String appId,String locationId,final AdCollection.onShowResultListener listener){
-        DisplayMetrics dm = new DisplayMetrics();
-        ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(dm);
-        int winW = dm.widthPixels;
-        int winH = dm.heightPixels;
-        int width = Math.min(winW, winH);
-        int height = width / 20 * 3;
-        ViewGroup.LayoutParams rllp = new ViewGroup.LayoutParams(width, height);
-        BannerView bannerView = new BannerView((Activity) context, ADSize.BANNER,appId, locationId);
+    public void showInterstitial(Context context, final ViewGroup viewGroup, String placeId, final OnShowResultListener listener){
+        NativeExpressAD nativeExpressAD = new NativeExpressAD(
+                context,
+                new com.qq.e.ads.nativ.ADSize(com.qq.e.ads.nativ.ADSize.FULL_WIDTH, com.qq.e.ads.nativ.ADSize.AUTO_HEIGHT),
+                appId,
+                placeId,
+                new NativeExpressAD.NativeExpressADListener() {
+                    @Override
+                    public void onADLoaded(List<NativeExpressADView> list) {
+                        // 释放前一个 NativeExpressADView 的资源
+                        if (listener!=null) {
+                            listener.onShowSuccess();
+                        }
+                        if (nativeExpressADView != null) {
+                            nativeExpressADView.destroy();
+                        }
+                        // 3.返回数据后，SDK 会返回可以用于展示 NativeExpressADView 列表
+                        nativeExpressADView = list.get(0);
+                        nativeExpressADView.render();
+                        if (viewGroup.getChildCount() > 0) {
+                            viewGroup.removeAllViews();
+                        }
+
+                        // 需要保证 View 被绘制的时候是可见的，否则将无法产生曝光和收益。
+                        viewGroup.addView(nativeExpressADView);
+                        nativeExpressADView.render();
+                    }
+
+                    @Override
+                    public void onRenderFail(NativeExpressADView nativeExpressADView) {
+                        if (listener!=null) {
+                            listener.onFailed("");
+                        }
+                    }
+
+                    @Override
+                    public void onRenderSuccess(NativeExpressADView nativeExpressADView) {
+
+                    }
+
+                    @Override
+                    public void onADExposure(NativeExpressADView nativeExpressADView) {
+
+                    }
+
+                    @Override
+                    public void onADClicked(NativeExpressADView nativeExpressADView) {
+
+                    }
+
+                    @Override
+                    public void onADClosed(NativeExpressADView nativeExpressADView) {
+                        if (viewGroup != null && viewGroup.getChildCount() > 0) {
+                            viewGroup.removeAllViews();
+                        }
+                        if (listener!=null) {
+                            listener.onDismiss();
+                        }
+                    }
+
+                    @Override
+                    public void onADLeftApplication(NativeExpressADView nativeExpressADView) {
+
+                    }
+
+                    @Override
+                    public void onADOpenOverlay(NativeExpressADView nativeExpressADView) {
+
+                    }
+
+                    @Override
+                    public void onADCloseOverlay(NativeExpressADView nativeExpressADView) {
+
+                    }
+
+                    @Override
+                    public void onNoAD(AdError adError) {
+                       listener.onFailed(adError.getErrorMsg());
+                    }
+                });
+        nativeExpressAD.setVideoOption(new VideoOption.Builder()
+                .setAutoPlayPolicy(VideoOption.AutoPlayPolicy.WIFI) // WIFI 环境下可以自动播放视频
+                .setAutoPlayMuted(true) // 自动播放时为静音
+                .build());
+        nativeExpressAD.loadAD(1);
+    }
+    public void showBanner(Context context,ViewGroup viewGroup,ViewGroup.LayoutParams lp,String placeId,OnShowResultListener listener){
+        BannerView bannerView = new BannerView((Activity) context, ADSize.BANNER,appId, placeId);
         bannerView.setRefresh(30);
         bannerView.setADListener(new AbstractBannerADListener() {
             @Override
@@ -83,10 +170,10 @@ public class TencentAd {
                 listener.onShowSuccess();
             }
         });
-        viewGroup.addView(bannerView, rllp);
+        viewGroup.addView(bannerView, lp);
         bannerView.loadAD();
     }
-    public void showVideo(Context context, final ViewGroup viewGroup, String appId, String locationId,final AdCollection.onShowResultListener listener){
+    public void showVideo(Context context, final ViewGroup viewGroup, String appId, String locationId,OnShowResultListener listener){
         NativeExpressAD nativeExpressAD = new NativeExpressAD(
                 context,
                 new com.qq.e.ads.nativ.ADSize(com.qq.e.ads.nativ.ADSize.FULL_WIDTH, com.qq.e.ads.nativ.ADSize.AUTO_HEIGHT),
@@ -95,60 +182,15 @@ public class TencentAd {
                 new NativeExpressAD.NativeExpressADListener() {
                     @Override
                     public void onADLoaded(List<NativeExpressADView> list) {
+                        if (listener!=null){
+                            listener.onShowSuccess();
+                        }
                         // 释放前一个 NativeExpressADView 的资源
                         if (nativeExpressADView != null) {
                             nativeExpressADView.destroy();
                         }
                         // 3.返回数据后，SDK 会返回可以用于展示 NativeExpressADView 列表
                         nativeExpressADView = list.get(0);
-                        if (nativeExpressADView.getBoundData().getAdPatternType() == AdPatternType.NATIVE_VIDEO) {
-                            nativeExpressADView.setMediaListener(new NativeExpressMediaListener() {
-                                @Override
-                                public void onVideoInit(NativeExpressADView nativeExpressADView) {
-
-                                }
-
-                                @Override
-                                public void onVideoLoading(NativeExpressADView nativeExpressADView) {
-
-                                }
-
-                                @Override
-                                public void onVideoReady(NativeExpressADView nativeExpressADView, long l) {
-
-                                }
-
-                                @Override
-                                public void onVideoStart(NativeExpressADView nativeExpressADView) {
-
-                                }
-
-                                @Override
-                                public void onVideoPause(NativeExpressADView nativeExpressADView) {
-
-                                }
-
-                                @Override
-                                public void onVideoComplete(NativeExpressADView nativeExpressADView) {
-
-                                }
-
-                                @Override
-                                public void onVideoError(NativeExpressADView nativeExpressADView, AdError adError) {
-
-                                }
-
-                                @Override
-                                public void onVideoPageOpen(NativeExpressADView nativeExpressADView) {
-
-                                }
-
-                                @Override
-                                public void onVideoPageClose(NativeExpressADView nativeExpressADView) {
-
-                                }
-                            });
-                        }
                         nativeExpressADView.render();
                         if (viewGroup.getChildCount() > 0) {
                             viewGroup.removeAllViews();
@@ -167,8 +209,7 @@ public class TencentAd {
 
                     @Override
                     public void onRenderSuccess(NativeExpressADView nativeExpressADView) {
-                        if (listener!=null)
-                            listener.onShowSuccess();
+
                     }
 
                     @Override
@@ -185,6 +226,9 @@ public class TencentAd {
                     public void onADClosed(NativeExpressADView nativeExpressADView) {
                         if (viewGroup != null && viewGroup.getChildCount() > 0) {
                             viewGroup.removeAllViews();
+                        }
+                        if (listener!=null){
+                            listener.onDismiss();
                         }
                     }
 

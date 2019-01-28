@@ -303,11 +303,6 @@
             android:name="notch.config"
             android:value="portrait|landscape" />
 
-        <!--&lt;!&ndash;bd_ssp&ndash;&gt;-->
-        <!--<meta-data-->
-        <!--android:name="BaiduMobAd_APP_ID"-->
-        <!--android:value="c8a9f32f" />-->
-
     </application>
 
 </manifest>
