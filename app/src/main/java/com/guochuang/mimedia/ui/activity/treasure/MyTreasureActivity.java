@@ -144,7 +144,7 @@ public class MyTreasureActivity extends MvpActivity<MyTreasurePresenter> impleme
     public void setVendor(Order data) {
         closeLoadingDialog();
         if (data!=null){
-            payResult(data,Constant.PAY_TYPE_ALIPAY);
+            payResult(data,data.getPayType());
         }
     }
 
