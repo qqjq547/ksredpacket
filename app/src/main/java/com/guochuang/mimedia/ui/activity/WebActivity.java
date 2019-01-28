@@ -58,6 +58,7 @@ public class WebActivity extends MvpActivity {
     public void initViewAndData() {
         String title = getIntent().getStringExtra(Constant.TITLE);
         String url = getIntent().getStringExtra(Constant.URL);
+        LogUtil.d(url);
         tvTitle.setText(title);
         wvContent.getSettings().setJavaScriptEnabled(true);
         wvContent.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
