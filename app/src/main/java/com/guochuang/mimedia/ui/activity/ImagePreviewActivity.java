@@ -1,7 +1,9 @@
 package com.guochuang.mimedia.ui.activity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -141,6 +143,8 @@ public class ImagePreviewActivity extends MvpActivity<ImagePreviewPresneter> imp
                       String filePath=Constant.COMMON_PATH +File.separator+ System.currentTimeMillis() + ".png";
                       CommonUtil.saveBitmap(data,filePath);
                       showShortToast(R.string.save_image_success);
+                      Uri uri = Uri.fromFile(new File(filePath));
+                      sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
                   }else {
                       showShortToast(R.string.get_permission);
                   }

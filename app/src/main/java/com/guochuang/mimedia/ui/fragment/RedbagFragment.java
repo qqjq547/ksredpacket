@@ -211,6 +211,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                 return false;
             }
         });
+        setUserRole(getPref().getInt(PrefUtil.USER_ROLE,0));
     }
 
     @Override
@@ -260,8 +261,8 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_text:
-//                startActivity(new Intent(getActivity(), SquareActivity.class));
-                IntentUtils.startWebActivity(getActivity(),"xxx","file:///android_asset/html/duobao/index.html");
+                startActivity(new Intent(getActivity(), SquareActivity.class));
+//                IntentUtils.startWebActivity(getActivity(),"xxx","file:///android_asset/html/duobao/index.html");
                 break;
             case R.id.lin_city_owner:
             case R.id.hiv_avatar:

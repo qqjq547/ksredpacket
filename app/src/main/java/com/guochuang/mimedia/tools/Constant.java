@@ -128,9 +128,9 @@ public class Constant {
     //夺宝规则
     public static final String URL_DUOBAO_RULE = ApiClient.HTML_URL+"project/html/rule/duobaoRule.html";
     //夺宝详情
-    public static final String URL_DUOBAO_DETAIL = ApiClient.HTML_URL+"project/html/duobao/details.html?snatchId=";
+    public static final String URL_DUOBAO_DETAIL = ApiClient.HTML_URL+"project/html/fengwo/index.html#/treasureDetails?snatchId=";
 
-    public static final String URL_DUOBAO_TREASURE_NUMBER = ApiClient.HTML_URL+"project/html/duobao/treasureNumber.html?type=false&snatchRecordId=";
+    public static final String URL_DUOBAO_TREASURE_NUMBER = ApiClient.HTML_URL+"project/html/fengwo/index.html#/treasureNumber?type=false&snatchRecordId=";
 
 
     public static final String REGEX_WEBURL = "http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?";

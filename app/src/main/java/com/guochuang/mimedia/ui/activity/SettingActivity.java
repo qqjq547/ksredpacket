@@ -58,6 +58,8 @@ public class SettingActivity extends MvpActivity<SettingPresenter> implements Se
     ImageView ivInviterArrow;
     @BindView(R.id.tv_copy)
     TextView tvCopy;
+    @BindView(R.id.tv_version)
+    TextView tvVersion;
     @BindView(R.id.lin_feedback)
     LinearLayout linFeedback;
     UserInfo userInfo;
@@ -84,6 +86,7 @@ public class SettingActivity extends MvpActivity<SettingPresenter> implements Se
             tvNickname.setText(userInfo.getNickName());
             tvRecommend.setText(userInfo.getInviteCode());
         }
+        tvVersion.setText(CommonUtil.getVersionName(this));
         showLoadingDialog(null);
         mvpPresenter.getSetupInfo();
     }
