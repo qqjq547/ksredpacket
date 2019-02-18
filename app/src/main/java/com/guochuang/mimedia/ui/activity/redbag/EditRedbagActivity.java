@@ -160,7 +160,6 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                 tvTitle.setText(R.string.password_redbag);
                 linWord.setVisibility(View.VISIBLE);
                 cbSaveTemp.setText(R.string.save_password_temp);
-                scopeArr=Arrays.asList(getResources().getStringArray(R.array.redbag_scope_password));
                 break;
             case Constant.RED_PACKET_TYPE_LUCKY:
                 tvTitle.setText(R.string.lucky_redbag);
@@ -354,7 +353,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                         if (TextUtils.isEmpty(password)) {
                             showShortToast(R.string.word_not_empty);
                             return;
-                        } else if (password.length() < 4 || password.length() > 20) {
+                        } else if (password.length() < 2 || password.length() > 20) {
                             showShortToast(R.string.word_length_limit);
                             return;
                         }

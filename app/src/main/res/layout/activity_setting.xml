@@ -209,6 +209,111 @@
             android:background="@color/bg_white"
             android:orientation="vertical">
             <LinearLayout
+                android:id="@+id/lin_sound"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space45"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/space15"
+                android:paddingRight="@dimen/space15">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/audio_quality"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont14" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+               <CheckBox
+                   android:id="@+id/cb_sound"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:button="@null"
+                   android:background="@drawable/bg_check_green_selector"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divide_h"
+                android:layout_marginLeft="@dimen/space15"
+                android:layout_marginRight="@dimen/space15"
+                android:background="@color/bg_divide" />
+            <LinearLayout
+                android:id="@+id/lin_version"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space45"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/space15"
+                android:paddingRight="@dimen/space15">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/current_version"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont14" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tv_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:gravity="center"
+                    android:textSize="@dimen/textfont14"
+                    android:textColor="@color/text_black"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divide_h"
+                android:layout_marginLeft="@dimen/space15"
+                android:layout_marginRight="@dimen/space15"
+                android:background="@color/bg_divide" />
+            <LinearLayout
+                android:id="@+id/lin_clean"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space45"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/space15"
+                android:paddingRight="@dimen/space15">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cache_cleanup"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont14" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+                <TextView
+                    android:id="@+id/tv_cache_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont14" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/space45"
+                    android:drawableRight="@drawable/ic_arrow_right"
+                    android:drawablePadding="@dimen/space10" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divide_h"
+                android:layout_marginLeft="@dimen/space15"
+                android:layout_marginRight="@dimen/space15"
+                android:background="@color/bg_divide" />
+            <LinearLayout
                 android:id="@+id/lin_feedback"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/space45"
@@ -234,7 +339,6 @@
                     android:drawableRight="@drawable/ic_arrow_right"
                     android:drawablePadding="@dimen/space10" />
             </LinearLayout>
-
         </LinearLayout>
         <TextView
             android:id="@+id/tv_exit"

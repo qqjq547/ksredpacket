@@ -6,6 +6,7 @@ public class Order {
     private String vendorResponse;
     private String resultCode;
     private String redPacketUuid;
+    private int payType;
 
     public String getOrderNumber() {
         return orderNumber;
@@ -37,5 +38,13 @@ public class Order {
 
     public void setRedPacketUuid(String redPacketUuid) {
         this.redPacketUuid = redPacketUuid;
+    }
+
+    public int getPayType() {
+        return payType;
+    }
+
+    public void setPayType(int payType) {
+        this.payType = payType;
     }
 }

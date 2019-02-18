@@ -4,6 +4,7 @@ import android.support.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.guochuang.mimedia.tools.Constant;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.mvp.model.MyKsbTransRec;
 
@@ -16,6 +17,17 @@ public class MyKsbTransRecAdapter extends BaseQuickAdapter<MyKsbTransRec, BaseVi
 
     @Override
     protected void convert(BaseViewHolder helper, MyKsbTransRec item) {
+        switch (item.getPayType()){
+            case Constant.TRANSFER_WXPAY:
+                helper.setImageResource(R.id.iv_icon,R.drawable.ic_wechat_small);
+                break;
+            case Constant.TRANSFER_ALIPAY:
+                helper.setImageResource(R.id.iv_icon,R.drawable.ic_alipay_small);
+                break;
+            case Constant.TRANSFER_BANKCARD:
+                helper.setImageResource(R.id.iv_icon,R.drawable.ic_bankcard_small);
+                break;
+        }
         helper.setText(R.id.tv_price, item.getMoney());
         helper.setText(R.id.tv_poundage, item.getPoundage());
         helper.setText(R.id.tv_time, item.getCreateDate());

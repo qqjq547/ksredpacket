@@ -39,8 +39,8 @@ public class RecommendDetailPresenter extends BasePresenter<RecommendDetailView>
             }
         });
     }
-    public void getDirectAgent(int currentPage,int pageSize){
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getDirectAgent(currentPage,pageSize)), new ApiCallback<Page<RecommedUser>>() {
+    public void getDirectAgent(int currentPage,int pageSize,String sort){
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getDirectAgent(currentPage,pageSize,sort)), new ApiCallback<Page<RecommedUser>>() {
             @Override
             public void onSuccess(Page<RecommedUser> data) {
                 mvpView.setRecommendUser(data);
@@ -59,8 +59,8 @@ public class RecommendDetailPresenter extends BasePresenter<RecommendDetailView>
             }
         });
     }
-    public void getDirectFans(int currentPage,int pageSize){
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getDirectFans(currentPage,pageSize)), new ApiCallback<Page<RecommedUser>>() {
+    public void getDirectFans(int currentPage,int pageSize,String sort){
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getDirectFans(currentPage,pageSize,sort)), new ApiCallback<Page<RecommedUser>>() {
             @Override
             public void onSuccess(Page<RecommedUser> data) {
                 mvpView.setRecommendUser(data);

@@ -40,7 +40,7 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
     @Override
     public void onResp(BaseResp resp) {
         boolean success=resp.errCode==BaseResp.ErrCode.ERR_OK;
-        WxPay.getInstance().getOnResultListener().onResult(success,resp.errStr);
+        WxPay.getInstance().getOnResultListener().onResult(success,getString(R.string.pay_fail));
         finish();
     }
 }

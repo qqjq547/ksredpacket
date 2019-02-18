@@ -2,6 +2,8 @@ package com.guochuang.mimedia.http.retrofit;
 
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.PrefUtil;
+import com.sz.gcyh.KSHongBao.BuildConfig;
+
 import java.io.IOException;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
@@ -51,11 +53,17 @@ public class ApiClient {
                 String h_time = String.valueOf(System.currentTimeMillis());
                 String h_tenant_code = Constant.TENANTCODE;
                 String h_nonce = UUID.randomUUID().toString();
+                String h_system_code = Constant.H_SYSTEM_CODE;
+                String h_version = BuildConfig.VERSION_NAME;
+                String h_sign = "";
                 request = request.newBuilder()
                         .addHeader(Constant.PARAMS_H_API_TOEKN, h_api_token)
                         .addHeader(Constant.PARAMS_H_TIME, h_time)
                         .addHeader(Constant.PARAMS_H_TENANT_CODE, h_tenant_code)
                         .addHeader(Constant.PARAMS_H_NONCE, h_nonce)
+                        .addHeader(Constant.PARAMS_H_SYSTEM_CODE, h_system_code)
+                        .addHeader(Constant.PARAMS_H_VERSION, h_version)
+                        .addHeader(Constant.PARAMS_H_SIGN, h_sign)
                         .build();
                 return chain.proceed(request);
             }

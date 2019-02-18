@@ -24,7 +24,9 @@ public class Constant {
     public static final String PARAMS_H_TENANT_CODE = "h-tenant-code";
     public static final String PARAMS_H_API_TOEKN = "h-api-token";
     public static final String PARAMS_H_NONCE = "h-nonce";
-
+    public static final String PARAMS_H_SYSTEM_CODE = "h-system-code";
+    public static final String PARAMS_H_VERSION = "h-version";
+    public static final String PARAMS_H_SIGN = "h-sign";
     public static final int PAGE_SIZE = 10;
     public static final int REQUEST_GET_LOCATION = 3;
     public static final int REQUEST_DEFAULT = 0;
@@ -39,8 +41,9 @@ public class Constant {
     public static final int REQUEST_GRANT = 12;
     public static final int REQUEST_CARD_FRONT = 13;
     public static final int REQUEST_CARD_BACK = 14;
-    public static final int REQUEST_PICK_ICON = 15;
-
+    public static final int REQUEST_ADD_ADDRESS = 15;
+    public static final int REQUEST_PICK_ADDRESS = 16;
+    public static final int REQUEST_SET_SHOWLIST = 17;
 
     public static final String TITLE = "title";
     public static final String ARTICLEUUID = "articleUuid";
@@ -76,15 +79,17 @@ public class Constant {
     public static final String ISAGENT = "isAgent";
     public static final String PAYNUMBER = "payNumber";
     public static final String DESCRIPTION = "description";
+    public static final String SNATCHID = "snatchId";
+    public static final String SNATCH = "snatch";
+    public static final String ADDRESS = "address";
+
 
 
     public static final String FORMAT_DATE_SIMPLE = "yyyy-MM-dd";
     public static final String FORMAT_DATE = "yyyy-MM-dd HH:mm:ss";
-    public static final String FORMAT_MONTH = "yyyy-MM";
 
     public static final String TYPE_REPORT_INFORMATION = "informationReport";
     public static final String TYPE_REPORT_REDPACKET = "redPacketReport";
-    public static final String TYPE_BEENEST_REPORT = "beenestReport";
 
     //资讯详情
     public static final String URL_INFOMATION_DETAIL = ApiClient.HTML_URL+"information/detail/index.htm";
@@ -111,21 +116,22 @@ public class Constant {
     //公告消息
     public static final String URL_NOTICE_DETAIL = ApiClient.HTML_URL+"project/html/notice.html";
     //帮助中心
-    public static final String URL_HELP_CENTER = ApiClient.HTML_URL+"project/html/helpCenter.html";
+    public static final String URL_HELP_CENTER = ApiClient.HTML_URL+"project/html/fengwo/index.html#/helpCente";
     //商圈
     public static final String URL_TRADINGAREA = ApiClient.HTML_URL+"project/html/shangquan/index.html";
     //蜜玩
-    public static final String URL_MIWAN = ApiClient.HTML_URL+"project/html/miWan.html";
+    public static final String URL_MIWAN = ApiClient.HTML_URL+"project/html/fengwo/index.html#miWan";
     //我的订单
-    public static final String URL_MY_ORDER = ApiClient.HTML_URL+"project/html/myOrder.html";
+    public static final String URL_MY_ORDER = ApiClient.HTML_URL+"project/html/fengwo/index.html#/myOrder";
     //蜂窝规则
     public static final String URL_HONYCOMB_RULE = ApiClient.HTML_URL+"project/html/rule/fengwoRule.html";
-    //广告投放协议
-    public static final String URL_FENGCHAO_BANNER = ApiClient.HTML_URL+"project/html/rule/fengchao/banner.html";
-    //竞购协议
-    public static final String URL_FENGCHAO_JINGGOU = ApiClient.HTML_URL+"project/html/rule/fengchao/jinggou.html";
-    //竞拍说明
-    public static final String URL_FENGCHAO_JINGPAI = ApiClient.HTML_URL+"project/html/rule/fengchao/jingpai.html";
+    //夺宝规则
+    public static final String URL_DUOBAO_RULE = ApiClient.HTML_URL+"project/html/rule/duobaoRule.html";
+    //夺宝详情
+    public static final String URL_DUOBAO_DETAIL = ApiClient.HTML_URL+"project/html/fengwo/index.html#/treasureDetails?snatchId=";
+    //我的夺宝
+    public static final String URL_DUOBAO_TREASURE_NUMBER = ApiClient.HTML_URL+"project/html/fengwo/index.html#/treasureNumber?type=false&snatchRecordId=";
+
 
     public static final String REGEX_WEBURL = "http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?";
     public static final String COMPRESS_DIR_PATH = App.getInstance().getExternalCacheDir() + File.separator + "kshb";
@@ -135,6 +141,7 @@ public class Constant {
      */
     public static final String CAPTCHA = "";
     public static final String TENANTCODE = "gcyh";
+    public static final String H_SYSTEM_CODE = "android";
     public static final String SYSTEM_CODE = "kuaishou";
     public static final String SYSTEM_CODE_ANDROID = "Android";
     public static final String TYPE_INFOMATION = "information";
@@ -143,7 +150,6 @@ public class Constant {
 
     public static final String NATION_CODE = "86";
     public static final int LOGIN_TYPE = 1;
-    public static final String REGISTER_TYPE = "1";
     public static final String REGISTER_CAPTCHA_IMA = "register";
     public static final String FORGET_RESET_CAPTCHA_IMA = "forgetReset";
     public static final String SAFE_RESET_CAPTCHA_IMA = "safeReset";
@@ -174,6 +180,7 @@ public class Constant {
     public static final int TYPE_PURCHASE_REGION = 1;
     public static final int TYPE_PURCHASE_AGENT = 2;
     public static final int TYPE_PURCHASE_HONEYCOMB = 3;
+    public static final int TYPE_PURCHASE_SNATCH = 4;
 
     public static final String RAIN_DURATION = "duration";
     public static final String RAIN_COUNT = "count";
@@ -225,4 +232,12 @@ public class Constant {
     public static final int STATUS_AUDIT_FAIL=2;
 
     public static final String MAP_KEY_TOTALCOIN = "totalCoin";
+
+    public static final int TRANSFER_WXPAY = 2;
+    public static final int TRANSFER_ALIPAY = 3;
+    public static final int TRANSFER_BANKCARD = 4;
+
+    public static final String SORT_DEFAULT="DEFAULT";
+    public static final String SORT_ASC="ASC";
+    public static final String SORT_DESC="DESC";
 }

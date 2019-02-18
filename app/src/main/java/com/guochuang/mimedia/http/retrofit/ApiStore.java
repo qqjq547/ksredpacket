@@ -3,6 +3,7 @@ package com.guochuang.mimedia.http.retrofit;
 import com.guochuang.mimedia.http.response.HttpResponse;
 import com.guochuang.mimedia.http.response.Page;
 import com.guochuang.mimedia.mvp.model.AdInfo;
+import com.guochuang.mimedia.mvp.model.Address;
 import com.guochuang.mimedia.mvp.model.AlipayAccout;
 import com.guochuang.mimedia.mvp.model.Area;
 import com.guochuang.mimedia.mvp.model.BenefitType;
@@ -66,6 +67,9 @@ import com.guochuang.mimedia.mvp.model.Redbag;
 import com.guochuang.mimedia.mvp.model.SafeCenter;
 import com.guochuang.mimedia.mvp.model.SetUpUser;
 import com.guochuang.mimedia.mvp.model.ShareBenefit;
+import com.guochuang.mimedia.mvp.model.Snatch;
+import com.guochuang.mimedia.mvp.model.SnatchAddress;
+import com.guochuang.mimedia.mvp.model.SnatchShow;
 import com.guochuang.mimedia.mvp.model.Square;
 import com.guochuang.mimedia.mvp.model.UploadFile;
 import com.guochuang.mimedia.mvp.model.UserInfo;
@@ -836,13 +840,16 @@ public interface ApiStore {
     @GET("/api/v1/user/invite/direct_agent_list")
     Observable<HttpResponse<Page<RecommedUser>>> getDirectAgent(
             @Query("currentPage") int currentPage,
-            @Query("pageSize") Integer pageSize
+            @Query("pageSize") Integer pageSize,
+            @Query("sort") String sort
     );
 
     @GET("/api/v1/user/invite/direct_fans_list")
     Observable<HttpResponse<Page<RecommedUser>>> getDirectFans(
             @Query("currentPage") int currentPage,
-            @Query("pageSize") Integer pageSize
+            @Query("pageSize") Integer pageSize,
+            @Query("sort") String sort
+
     );
 
     @GET("/api/v1/redpacket/user_draw_statistics/get")
@@ -1029,6 +1036,79 @@ public interface ApiStore {
             @Field("longitude") String longitude,
             @Field("latitude") String latitude,
             @Field("safetyCode") String safetyCode
+    );
+    @FormUrlEncoded
+    @POST("/api/v1/user/userAddress/add")
+    Observable<HttpResponse<Boolean>> userAddressAdd(
+            @Field("trackName") String trackName,
+            @Field("trackMobile") String trackMobile,
+            @Field("province") String province,
+            @Field("city") String city,
+            @Field("district") String district,
+            @Field("address") String address,
+            @Field("isDefault") int isDefault
+    );
+    @FormUrlEncoded
+    @POST("/api/v1/user/userAddress/del")
+    Observable<HttpResponse<Boolean>> userAddressDel(
+            @Field("userAddressUuid") String userAddressUuid
+    );
+    @FormUrlEncoded
+    @POST("/api/v1/user/userAddress/update")
+    Observable<HttpResponse<Boolean>> userAddressUpdate(
+            @Field("userAddressUuid") String userAddressUuid,
+            @Field("trackName") String trackName,
+            @Field("trackMobile") String trackMobile,
+            @Field("province") String province,
+            @Field("city") String city,
+            @Field("district") String district,
+            @Field("address") String address
+    );
+    @GET("/api/v1/user/userAddress/pagelist")
+    Observable<HttpResponse<Page<Address>>> userAddressList(
+            @Query("currentPage") int currentPage,
+            @Query("pageSize") int pageSize
+    );
+    @GET("/api/v1/activity/snatchRecord/pageSnatchRecordlist")
+    Observable<HttpResponse<Page<Snatch>>> getSnatchRecordlist(
+            @Query("currentPage") int currentPage,
+            @Query("pageSize") int pageSize
+    );
+    @FormUrlEncoded
+    @POST("/api/v1/activity/snatchAddress/setSnatchwinAddress")
+    Observable<HttpResponse<Boolean>> setWinAddress(
+            @Field("snatchId") long snatchId,
+            @Field("userAddressUuid") String userAddressUuid
+    );
+    @GET("/api/v1/activity/snatchAddress/querySnatchwinAddress")
+    Observable<HttpResponse<SnatchAddress>> getSnatchDetail(
+            @Query("snatchId") long currentPage
+    );
+    @FormUrlEncoded
+    @POST("/api/v1/activity/snatchShow/add")
+    Observable<HttpResponse<Boolean>> addSnatchShow(
+            @Field("snatchId") long snatchId,
+            @Field("content") String content,
+            @Field("imgs") String imgs
+    );
+    @GET("/api/v1/activity/snatchShow/queryShow")
+    Observable<HttpResponse<SnatchShow>> querySnatchShow(
+            @Query("snatchRecordId") long snatchRecordId
+    );
+    @FormUrlEncoded
+    @POST("/api/v1/activity/snatch/create_order")
+    Observable<HttpResponse<Order>> createSnatchOrder(
+            @Field("channelCode") String channelCode,
+            @Field("payType") int payType,
+            @Field("snatchId") long snatchId,
+            @Field("buyCount") int buyCount,
+            @Field("longitude") String longitude,
+            @Field("latitude") String latitude,
+            @Field("safetyCode") String safetyCode
+    );
+    @GET("/api/v1/activity/snatch/get_vendor_pay")
+    Observable<HttpResponse<Order>> getOrderVendor(
+            @Query("orderId") long orderId
     );
 
 }

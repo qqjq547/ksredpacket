@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.antishake.AntiShake;
 import com.sz.gcyh.KSHongBao.R;
@@ -190,7 +191,7 @@ public class RegisterActivity extends MvpActivity<RegisterPresenter> implements 
                         etPhone.getText().toString(),
                         etVerify.getText().toString(),
                         etPassword.getText().toString(),
-                        Constant.REGISTER_TYPE,
+                        CommonUtil.getAppMetaData(this,"JPUSH_CHANNEL"),
                         "");
                 break;
         }

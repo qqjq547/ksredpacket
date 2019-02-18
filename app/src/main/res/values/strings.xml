@@ -81,7 +81,7 @@
     <string name="pls_select_report_content">请选择举报内容</string>
     <string name="format_reading_awara">阅读资讯获得%sKSB</string>
 
-    <string name="word_tip">红包发布8分钟内，只有输入正确的口令才能收红包</string>
+    <string name="word_tip">红包发布24小时内，只有输入正确的口令才能收红包</string>
     <string name="word_item_name">口令</string>
     <string name="word_item_hint">输入口令</string>
     <string name="amout_tip">附近的人可随机领取该红包</string>
@@ -156,6 +156,7 @@
     <string name="text_my_collection">我的收藏</string>
     <string name="text_my_comments">我的评论</string>
     <string name="text_my_safe">安全中心</string>
+    <string name="text_my_address">收货地址</string>
     <string name="text_my_help">帮助中心</string>
     <string name="text_my_welfare">我的福利</string>
 
@@ -268,6 +269,8 @@
     <string name="pls_select_date">请选择日期</string>
     <string name="user">用户</string>
     <string name="register_time">注册时间</string>
+    <string name="upgrade_time">升级时间</string>
+
     <string name="share_benefit_ksb">分润(KSB)</string>
     <string name="fans_detail">粉丝明细</string>
     <string name="recommend_detail">推荐明细</string>
@@ -381,7 +384,7 @@
     <string name="link_url_cant_empty">链接地址不能为空</string>
     <string name="agree_rule">请同意广告规则</string>
     <string name="word_not_empty">口令不能为空</string>
-    <string name="word_length_limit">口令长度为4到20位</string>
+    <string name="word_length_limit">口令长度为2到20位</string>
     <string name="bind_success">绑定成功</string>
     <string name="input_safe_pass">输入交易密码</string>
     <string name="forget_safe_pass">忘记交易密码</string>
@@ -435,6 +438,8 @@
     <string name="recommend_code">推荐码</string>
     <string name="help_center">帮助中心</string>
     <string name="advise_feedback">意见反馈</string>
+    <string name="current_version">当前版本</string>
+    <string name="cache_cleanup">缓存清理</string>
     <string name="setting">设置</string>
     <string name="copy_success">复制成功</string>
     <string name="safe_exit">安全退出</string>
@@ -539,7 +544,7 @@
     <string name="test_version">测试版</string>
     <string name="release_version">生产版</string>
     <string name="active_hongycomb">激活蜂窝</string>
-    <string name="hongycomb_agreement">《蜂窝规则》</string>、
+    <string name="hongycomb_agreement">《蜂窝规则》</string>
     <string name="save_local">保存到本地</string>
     <string name="save_image_success">保存成功</string>
     <string name="get_permission">请先设置权限</string>
@@ -554,71 +559,47 @@
     <string name="back_pic_cant_empty">身份证反面照片不能为空</string>
     <string name="name_cant_empty">身份证姓名不能为空</string>
     <string name="number_pic_cant_empty">身份证号码不能为空</string>
-
-    <string name="navigation">导航</string>
-    <string name="call">拨打</string>
-    <string name="save_ad_temp">保存为广告模板</string>
-    <string name="ad_agreement">《广告投放协议》</string>
-    <string name="edit_ad">编辑广告</string>
-    <string name="ad_brand">广告牌</string>
-    <string name="short_ad_msg">简短广告语</string>
-    <string name="short_ad_hint">建议是体现功能的简短话语</string>
-    <string name="picture">图片</string>
-    <string name="ad_content_page">广告内页</string>
-    <string name="introduce_yourself">介绍一下自己吧...</string>
-    <string name="title">标题</string>
-    <string name="pls_input_title">请输入标题</string>
-    <string name="relate_mobile">联系电话</string>
-    <string name="pls_input_relate_phone">请输入联系电话（选填）</string>
-    <string name="local_area">所在地区</string>
-    <string name="address_option">(地址选填)</string>
-    <string name="detail_address">详细地址</string>
-    <string name="detail_address_hint">如道路，门牌号，小区，楼栋号等</string>
-    <string name="short_msg_cant_empty">广告语不能为空</string>
-    <string name="brand_icon_cant_empty">广告牌图标不能为空</string>
-    <string name="content_cant_empty">内容不能为空</string>
-    <string name="title_cant_empty">标题不能为空</string>
-    <string name="area_cant_empty">区域不能为空</string>
-    <string name="agree_agreement">请同意广告协议</string>
-    <string name="bid_this_ad">竞拍该广告</string>
-    <string name="bid_other_ad">竞拍其他广告</string>
-    <string name="report">举报</string>
-    <string name="bee_temp_tip">保存模板后，可以选择该模板发广告</string>
-    <string name="equal_bid">竞购等值</string>
-    <string name="buy_price">竞购价</string>
-    <string name="current_price">当前价</string>
-    <string name="unit_yuan_day">元/天</string>
-    <string name="brand_bid_agreement">《竞购协议》</string>
-    <string name="buy_right_now">立即购买</string>
-    <string name="history_put">历史投放</string>
-    <string name="ad_temp">广告模板</string>
-    <string-array name="ad_nav">
-        <item>全部</item>
-        <item>待投放</item>
-        <item>投放中</item>
-        <item>已投放</item>
-    </string-array>
-    <string name="my_ad">我的广告</string>
-    <string name="my_bid_buy">我的竞购</string>
-    <string name="ad_amount">广告数量</string>
-    <string name="voting">投放中</string>
-    <string name="amount_yuan">金额(元)</string>
-    <string name="show_num">展示量</string>
-    <string name="click_num">点击量</string>
-    <string name="collect_num">收藏量</string>
-    <string name="check_ad">查看广告</string>
-    <string name="waiting_vote">待投放</string>
-    <string name="vote_going">投放中</string>
-    <string name="has_vote">已投放</string>
-    <string name="format_price_and_total">%d元/天(共%d元)</string>
-    <string name="format_time_to_time">%s~%s</string>
-    <string name="ad_bid">广告竞拍</string>
-    <string name="bid_history">竞购历史</string>
-    <string name="bid_explain">竞拍说明</string>
-    <string name="done_times">成交次数</string>
-    <string name="bid_times">竞购次数</string>
-    <string name="format_count_ad_temp">共%d个广告模板</string>
-    <string name="next_start_bid_time">下期开始竞拍时间：</string>
     <string name="click_refresh">点击重试</string>
+    <string name="express_info">快递信息</string>
+    <string name="showlist">晒单</string>
+    <string name="lucky_number">幸运号码：</string>
+    <string name="join_people_before">参与：</string>
+    <string name="join_people_after">人次</string>
 
+    <string name="format_peroid">%s期</string>
+    <string name="showlist_hint">分享自己的喜悦吧</string>
+    <string name="has_send_good">已发货</string>
+    <string name="waiting_send_good">待发放</string>
+    <string name="received_address">收货地址</string>
+    <string name="address_hint">详细地址，如道路、门牌号、小区、楼栋号等</string>
+    <string name="received_person_name">收货人姓名</string>
+    <string name="input_received_person_name">请输入收货人姓名</string>
+    <string name="phone_number">手机号码</string>
+    <string name="input_phone_number">请输入手机号码</string>
+    <string name="locate_area">所在区域</string>
+    <string name="pls_select_area">请选择所在区域</string>
+    <string name="setup_default_address">设为默认地址</string>
+    <string name="default_address">默认</string>
+    <string name="my_treasure">我的夺宝</string>
+    <string name="has_sell_all">已售罄，幸运号生成中..</string>
+    <string name="progress">进度：</string>
+    <string name="perfect_address">完善收货地址</string>
+    <string name="receive_address_">收货地址：</string>
+    <string name="add_received_address">添加收货地址</string>
+    <string name="pls_select">请选择</string>
+    <string name="out_price">溢价</string>
+    <string name="principal">本金</string>
+    <string name="name_not_empty">名字不能为空</string>
+    <string name="mobile_not_empty">手机号码不能为空</string>
+    <string name="address_not_empty">地址不能为空</string>
+    <string name="address_detail_not_empty">详细地址不能为空</string>
+    <string name="ensure_delete_address">确认删除该地址</string>
+    <string name="add_address_success">增加地址成功</string>
+    <string name="del_address_success">删除地址成功</string>
+    <string name="update_address_success">更新地址成功</string>
+    <string name="buy_snatch">夺宝</string>
+    <string name="snatch_agreement">《夺宝协议》</string>
+    <string name="goto_pay">去支付</string>
+    <string name="cache_has_clear">缓存已清理</string>
+    <string name="audio_quality">音效</string>
 </resources>

@@ -63,12 +63,18 @@ public class RecommendDetailActivity extends MvpActivity<RecommendDetailPresente
     RecyclerView rvDetail;
     @BindView(R.id.srl_refresh)
     SmartRefreshLayout srlRefresh;
+    @BindView(R.id.iv_arrow)
+    ImageView ivArrow;
+    @BindView(R.id.tv_head_time)
+    TextView tvHeadTime;
 
     List<RecommedUser> itemArr=new ArrayList<>();
     RecommendDetailAdapter adapter;
     int curTab=-1;
     int curPage=1;
     RecommendData data;
+    String sort=Constant.SORT_DEFAULT;
+
 
     @Override
     protected RecommendDetailPresenter createPresenter() {
@@ -101,18 +107,18 @@ public class RecommendDetailActivity extends MvpActivity<RecommendDetailPresente
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
                 if (curTab==0) {
-                    mvpPresenter.getDirectAgent(curPage + 1, Constant.PAGE_SIZE);
+                    mvpPresenter.getDirectAgent(curPage + 1, Constant.PAGE_SIZE,sort);
                 }else {
-                    mvpPresenter.getDirectFans(curPage + 1, Constant.PAGE_SIZE);
+                    mvpPresenter.getDirectFans(curPage + 1, Constant.PAGE_SIZE,sort);
                 }
             }
 
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
                 if (curTab==0) {
-                    mvpPresenter.getDirectAgent(1, Constant.PAGE_SIZE);
+                    mvpPresenter.getDirectAgent(1, Constant.PAGE_SIZE,sort);
                 }else {
-                    mvpPresenter.getDirectFans(1, Constant.PAGE_SIZE);
+                    mvpPresenter.getDirectFans(1, Constant.PAGE_SIZE,sort);
                 }
             }
         });
@@ -121,7 +127,7 @@ public class RecommendDetailActivity extends MvpActivity<RecommendDetailPresente
     }
 
 
-    @OnClick({R.id.iv_back, R.id.lin_agent, R.id.lin_fans, R.id.lin_undirect, R.id.lin_direct_agent, R.id.lin_direct_fans})
+    @OnClick({R.id.iv_back, R.id.lin_agent, R.id.lin_fans, R.id.lin_undirect, R.id.lin_direct_agent, R.id.lin_direct_fans,R.id.lin_benefit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -139,6 +145,27 @@ public class RecommendDetailActivity extends MvpActivity<RecommendDetailPresente
             case R.id.lin_direct_fans:
                 setSelected(1);
                 break;
+            case R.id.lin_benefit:
+                switch (sort){
+                    case Constant.SORT_DEFAULT:
+                        sort=Constant.SORT_DESC;
+                        ivArrow.setImageResource(R.drawable.ic_arrow_benefit_down);
+                        break;
+                    case Constant.SORT_DESC:
+                        sort=Constant.SORT_ASC;
+                        ivArrow.setImageResource(R.drawable.ic_arrow_benefit_up);
+                        break;
+                    case Constant.SORT_ASC:
+                        sort=Constant.SORT_DEFAULT;
+                        ivArrow.setImageResource(R.drawable.ic_arrow_benefit);
+                        break;
+                }
+                if (curTab==0) {
+                    mvpPresenter.getDirectAgent(1, Constant.PAGE_SIZE,sort);
+                }else {
+                    mvpPresenter.getDirectFans(1, Constant.PAGE_SIZE,sort);
+                }
+                break;
         }
     }
     public void setSelected(int pos){
@@ -149,14 +176,16 @@ public class RecommendDetailActivity extends MvpActivity<RecommendDetailPresente
         if (pos==0){
             linDirectAgent.setSelected(true);
             linDirectFans.setSelected(false);
+            tvHeadTime.setText(R.string.upgrade_time);
         }else {
             linDirectAgent.setSelected(false);
             linDirectFans.setSelected(true);
+            tvHeadTime.setText(R.string.register_time);
         }
         if (curTab==0) {
-            mvpPresenter.getDirectAgent(1, Constant.PAGE_SIZE);
+            mvpPresenter.getDirectAgent(1, Constant.PAGE_SIZE,sort);
         }else {
-            mvpPresenter.getDirectFans(1, Constant.PAGE_SIZE);
+            mvpPresenter.getDirectFans(1, Constant.PAGE_SIZE,sort);
         }
     }
 

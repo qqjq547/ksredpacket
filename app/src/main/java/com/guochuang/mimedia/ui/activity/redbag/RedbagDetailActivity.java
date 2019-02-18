@@ -1,4 +1,4 @@
-package com.guochuang.mimedia.ui.activity.redbag;
+package com.guochuang.mimedia.ui.activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;
@@ -21,7 +21,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.mvp.model.PictureBean;
 import com.guochuang.mimedia.mvp.model.RedbagInfo;
 import com.guochuang.mimedia.tools.AdCollectionView;
-import com.guochuang.mimedia.ui.activity.ShareActivity;
+import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.view.BadgeView;
 import com.qq.e.ads.nativ.NativeExpressADView;
 import com.sz.gcyh.KSHongBao.R;
@@ -469,7 +469,9 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                 tvNotice.setVisibility(View.GONE);
                 rlValue.setVisibility(View.VISIBLE);
                 sendBroadcast(new Intent(Constant.ACTION_CHANGE_COIN));
-                CommonUtil.playRing(this, R.raw.gold);
+                if (getPref().getBoolean(PrefUtil.SOUNDSWITCH,true)){
+                    CommonUtil.playRing(this, R.raw.gold);
+                }
             } else {
                 tvNotice.setText(redbagDetail.getReason());
                 tvNotice.setVisibility(View.VISIBLE);

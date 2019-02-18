@@ -55,29 +55,6 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
     @Override
     public void initViewAndData() {
     }
-
-    @Override
-    public void setLoginData(String data) {
-        closeLoadingDialog();
-        UserLogin userLogin = new Gson().fromJson(CommonUtil.baseDecrypt(data.split("\\.")[1]), UserLogin.class);
-        getPref().setString(PrefUtil.USER_TOKEN, data);
-        if (TextUtils.isEmpty(userLogin.getMobile())) {
-            Intent intent = new Intent(this, BindingPhoneAcitivity.class);
-            startActivity(intent);
-            finish();
-        } else {
-            getPref().setString(PrefUtil.MOBILE, userLogin.getMobile());
-            IntentUtils.startMainActivity(this, true);
-            finish();
-        }
-    }
-
-    @Override
-    public void setLoginError(String msg) {
-        closeLoadingDialog();
-        showShortToast(msg);
-    }
-
     @OnClick({R.id.tv_login_confirm,
             R.id.tv_login_register,
             R.id.tv_login_forget,
@@ -158,5 +135,26 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
             return false;
         }
         return true;
+    }
+    @Override
+    public void setLoginData(String data) {
+        closeLoadingDialog();
+        UserLogin userLogin = new Gson().fromJson(CommonUtil.baseDecrypt(data.split("\\.")[1]), UserLogin.class);
+        getPref().setString(PrefUtil.USER_TOKEN, data);
+        if (TextUtils.isEmpty(userLogin.getMobile())) {
+            Intent intent = new Intent(this, BindingPhoneAcitivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            getPref().setString(PrefUtil.MOBILE, userLogin.getMobile());
+            IntentUtils.startMainActivity(this, true);
+            finish();
+        }
+    }
+
+    @Override
+    public void setLoginError(String msg) {
+        closeLoadingDialog();
+        showShortToast(msg);
     }
 }

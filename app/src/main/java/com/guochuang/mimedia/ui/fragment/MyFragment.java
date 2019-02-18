@@ -2,11 +2,13 @@ package com.guochuang.mimedia.ui.fragment;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,10 +17,9 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.RegionCore;
 import com.guochuang.mimedia.tools.IntentUtils;
-import com.guochuang.mimedia.ui.activity.beenest.AdBidActivity;
-import com.guochuang.mimedia.ui.activity.city.CityActivity;
-import com.guochuang.mimedia.ui.activity.beenest.MyAdActivity;
-import com.guochuang.mimedia.ui.adapter.BottomWithdrawalAdapter;
+import com.guochuang.mimedia.ui.activity.CityActivity;
+import com.guochuang.mimedia.ui.activity.MyAddressActivity;
+import com.guochuang.mimedia.ui.activity.treasure.MyTreasureActivity;
 import com.guochuang.mimedia.ui.dialog.SheetDialog;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.app.App;
@@ -33,17 +34,18 @@ import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.tools.ScaleTransformer;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
-import com.guochuang.mimedia.ui.activity.user.MessageActivity;
-import com.guochuang.mimedia.ui.activity.user.MyCollectActivity;
-import com.guochuang.mimedia.ui.activity.user.MyCommentActivity;
-import com.guochuang.mimedia.ui.activity.user.MyKsbActivity;
-import com.guochuang.mimedia.ui.activity.operation.OperationCenterActivity;
-import com.guochuang.mimedia.ui.activity.user.RecommendAgentActivity;
-import com.guochuang.mimedia.ui.activity.user.RecommendFanActivity;
-import com.guochuang.mimedia.ui.activity.redbag.RedbagDynamicActivity;
-import com.guochuang.mimedia.ui.activity.user.SafeCenterActivity;
-import com.guochuang.mimedia.ui.activity.user.SettingActivity;
-import com.guochuang.mimedia.ui.activity.user.WelfareActivity;
+import com.guochuang.mimedia.ui.activity.MessageActivity;
+import com.guochuang.mimedia.ui.activity.MyCityActivity;
+import com.guochuang.mimedia.ui.activity.MyCollectActivity;
+import com.guochuang.mimedia.ui.activity.MyCommentActivity;
+import com.guochuang.mimedia.ui.activity.MyKsbActivity;
+import com.guochuang.mimedia.ui.activity.OperationCenterActivity;
+import com.guochuang.mimedia.ui.activity.RecommendAgentActivity;
+import com.guochuang.mimedia.ui.activity.RecommendFanActivity;
+import com.guochuang.mimedia.ui.activity.RedbagDynamicActivity;
+import com.guochuang.mimedia.ui.activity.SafeCenterActivity;
+import com.guochuang.mimedia.ui.activity.SettingActivity;
+import com.guochuang.mimedia.ui.activity.WelfareActivity;
 import com.guochuang.mimedia.ui.adapter.MyMenuAdapter;
 import com.guochuang.mimedia.ui.adapter.MyViewPagerAdapter;
 import com.guochuang.mimedia.view.BadgeView;
@@ -54,6 +56,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
 
@@ -168,6 +171,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         itemArr.add(new MyMenuItem(R.drawable.ic_my_collection, R.string.text_my_collection));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_comments, R.string.text_my_comments));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_safe, R.string.text_my_safe));
+        itemArr.add(new MyMenuItem(R.drawable.ic_my_address, R.string.text_my_address));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_help, R.string.text_my_help));
         rvMenu.setLayoutManager(new GridLayoutManager(getActivity(), 4));
         menuAdapter = new MyMenuAdapter(itemArr);
@@ -210,6 +214,9 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                         break;
                     case R.drawable.ic_my_safe:
                         startActivity(new Intent(getActivity(), SafeCenterActivity.class));
+                        break;
+                    case R.drawable.ic_my_address:
+                        startActivity(new Intent(getActivity(), MyAddressActivity.class));
                         break;
                     case R.drawable.ic_my_help:
                         IntentUtils.startWebActivity(getActivity(),getString(R.string.help_center),Constant.URL_HELP_CENTER);
@@ -276,8 +283,6 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
 
     @OnClick({R.id.iv_setting,
             R.id.iv_message,
-            R.id.lin_ad_bid,
-            R.id.lin_my_ad,
             R.id.tv_title})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -286,12 +291,6 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                 break;
             case R.id.iv_message:
                 startActivity(new Intent(getActivity(), MessageActivity.class));
-                break;
-            case R.id.lin_ad_bid:
-                startActivity(new Intent(getActivity(), AdBidActivity.class));
-                break;
-            case R.id.lin_my_ad:
-                startActivity(new Intent(getActivity(), MyAdActivity.class));
                 break;
             case R.id.tv_title:
                 List<String> itemArr=new ArrayList<>();

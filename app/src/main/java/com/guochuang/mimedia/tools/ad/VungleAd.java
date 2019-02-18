@@ -1,5 +1,8 @@
 package com.guochuang.mimedia.tools.ad;
 
+import android.content.Context;
+import android.os.Handler;
+
 import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.tools.LogUtil;
 import com.vungle.warren.AdConfig;
@@ -12,55 +15,88 @@ public class VungleAd {
    public static final String appId = "5c2303fdd71d110017b40171";
    public static final String adId="DEFAULT-5224715";
 
-    public void init(){
-        if (!Vungle.isInitialized()){
-            Vungle.init(appId, App.getInstance(), new InitCallback() {
-                @Override
-                public void onSuccess() {
-                   init();
-                }
+   public VungleAd(Context context){
+       Vungle.init(appId,context, new InitCallback() {
+           @Override
+           public void onSuccess() {
+               if (Vungle.isInitialized()) {
+                   Vungle.loadAd(adId, new LoadAdCallback() {
+                       @Override
+                       public void onAdLoad(String s) {
 
-                @Override
-                public void onError(Throwable throwable) {
+                       }
 
-                }
+                       @Override
+                       public void onError(String s, Throwable throwable) {
 
-                @Override
-                public void onAutoCacheAdAvailable(String s) {
+                       }
+                   });
+               }
+           }
 
-                }
-            });
-        }else {
-            if (!Vungle.canPlayAd(adId)) {
+           @Override
+           public void onError(Throwable throwable) {
+           }
+
+           @Override
+           public void onAutoCacheAdAvailable(String s) {
+               LogUtil.d("onAutoCacheAdAvailable");
+           }
+       });
+
+   }
+
+    public void showVideo(final OnVideoShowResultListener listener) {
+        try {
+            if (Vungle.canPlayAd(adId)) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Vungle.playAd(adId, new AdConfig(), new PlayAdCallback() {
+                            @Override
+                            public void onAdStart(String s) {
+
+                            }
+
+                            @Override
+                            public void onAdEnd(String placementReferenceId, boolean completed, boolean isCTAClicked) {
+                                if (completed) {
+                                    if (listener != null) {
+                                        listener.onVideoFinish();
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onError(String s, Throwable throwable) {
+                                if (listener != null) {
+                                    listener.onFailed(s + throwable.getMessage());
+                                }
+                            }
+                        });
+                    }
+                }, 500);
+
+            } else {
                 Vungle.loadAd(adId, new LoadAdCallback() {
                     @Override
                     public void onAdLoad(String s) {
-                      show();
+                        showVideo(listener);
                     }
+
                     @Override
                     public void onError(String s, Throwable throwable) {
-
+                        if (listener != null) {
+                            listener.onFailed(s + throwable.getMessage());
+                        }
                     }
                 });
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (listener != null) {
+                listener.onFailed(e.getMessage());
+            }
         }
-    }
-    public void show(){
-        Vungle.playAd(adId, new AdConfig(), new PlayAdCallback() {
-            @Override
-            public void onAdStart(String s) {
-
-            }
-
-            @Override
-            public void onAdEnd(String s, boolean b, boolean b1) {
-
-            }
-
-            @Override
-            public void onError(String s, Throwable throwable) {
-
-            }
-        });
     }
 }

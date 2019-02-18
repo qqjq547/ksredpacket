@@ -13,8 +13,8 @@ public class FansPresenter extends BasePresenter<FansView> {
     public FansPresenter(FansView view) {
         attachView(view);
     }
-    public void getFans(int currentPage,int pageSize){
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getDirectFans(currentPage,pageSize)), new ApiCallback<Page<RecommedUser>>() {
+    public void getFans(int currentPage,int pageSize,String sort){
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getDirectFans(currentPage,pageSize,sort)), new ApiCallback<Page<RecommedUser>>() {
             @Override
             public void onSuccess(Page<RecommedUser> data) {
                 mvpView.setData(data);

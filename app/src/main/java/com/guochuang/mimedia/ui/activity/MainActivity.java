@@ -317,7 +317,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
                     .getInstance()
                     .downloadOnly(UIData.create().setDownloadUrl(downloadUrl))
                     .setDirectDownload(true)
-                    .setForceRedownload(false)
+                    .setForceRedownload(true)
                     .setCustomDownloadingDialogListener(new CustomDownloadingDialogListener() {
                         @Override
                         public Dialog getCustomDownloadingDialog(Context context, int progress, UIData versionBundle) {

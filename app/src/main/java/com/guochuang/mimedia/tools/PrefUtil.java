@@ -27,6 +27,7 @@ public class PrefUtil {
     public static final String MSGISNEW = "msgIsNew";
     public static final String KILOMETRE = "kilometre";
     public static final String DEBUGHOST = "debugHost";
+    public static final String SOUNDSWITCH = "sound_switch";
     // 广告相关信息存储
     public static final String ADVER_MESSAGE = "adverMessage";
     public static final String UPGRADE_NOTICE = "upgrade_notice";
