@@ -6,12 +6,17 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.donkingliang.imageselector.utils.ImageSelector;
 import com.donkingliang.imageselector.utils.ImageSelectorUtils;
+import com.guochuang.mimedia.tools.CacheUtil;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.MvpActivity;
@@ -62,6 +67,11 @@ public class SettingActivity extends MvpActivity<SettingPresenter> implements Se
     TextView tvVersion;
     @BindView(R.id.lin_feedback)
     LinearLayout linFeedback;
+    @BindView(R.id.tv_cache_size)
+    TextView tvCacheSize;
+    @BindView(R.id.cb_sound)
+    CheckBox cbSound;
+
     UserInfo userInfo;
     String path;
     String avatarPath;
@@ -89,14 +99,36 @@ public class SettingActivity extends MvpActivity<SettingPresenter> implements Se
         tvVersion.setText(CommonUtil.getVersionName(this));
         showLoadingDialog(null);
         mvpPresenter.getSetupInfo();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    final String size=CacheUtil.getTotalCacheSize(SettingActivity.this);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            tvCacheSize.setText(size);
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+        cbSound.setChecked(getPref().getBoolean(PrefUtil.SOUNDSWITCH,true));
+        cbSound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                getPref().setBoolean(PrefUtil.SOUNDSWITCH,b);
+            }
+        });
     }
 
-    @OnClick({R.id.iv_back, R.id.lin_avatar, R.id.lin_nickname, R.id.tv_copy, R.id.lin_inviter, R.id.lin_feedback, R.id.tv_exit})
+    @OnClick({R.id.iv_back, R.id.lin_avatar, R.id.lin_nickname, R.id.tv_copy, R.id.lin_inviter, R.id.lin_feedback,R.id.lin_clean, R.id.tv_exit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
                 onBackPressed();
-
                 break;
             case R.id.lin_avatar:
                 RxPermissions rxPermissions = new RxPermissions(SettingActivity.this);
@@ -130,6 +162,17 @@ public class SettingActivity extends MvpActivity<SettingPresenter> implements Se
                 break;
             case R.id.lin_feedback:
                 startActivity(new Intent(this, FeedbackActivity.class));
+                break;
+            case R.id.lin_clean:
+                CacheUtil.clearAllCache(this);
+                CookieSyncManager.createInstance(this);
+                CookieManager.getInstance().removeAllCookie();
+                showShortToast(R.string.cache_has_clear);
+                try {
+                    tvCacheSize.setText(CacheUtil.getTotalCacheSize(this));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 break;
             case R.id.tv_exit:
                 new DialogBuilder(this)

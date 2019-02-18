@@ -439,6 +439,7 @@
     <string name="help_center">帮助中心</string>
     <string name="advise_feedback">意见反馈</string>
     <string name="current_version">当前版本</string>
+    <string name="cache_cleanup">缓存清理</string>
     <string name="setting">设置</string>
     <string name="copy_success">复制成功</string>
     <string name="safe_exit">安全退出</string>
@@ -599,4 +600,6 @@
     <string name="buy_snatch">夺宝</string>
     <string name="snatch_agreement">《夺宝协议》</string>
     <string name="goto_pay">去支付</string>
+    <string name="cache_has_clear">缓存已清理</string>
+    <string name="audio_quality">音效</string>
 </resources>

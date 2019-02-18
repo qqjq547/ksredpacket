@@ -116,13 +116,13 @@ public class Constant {
     //公告消息
     public static final String URL_NOTICE_DETAIL = ApiClient.HTML_URL+"project/html/notice.html";
     //帮助中心
-    public static final String URL_HELP_CENTER = ApiClient.HTML_URL+"project/html/helpCenter.html";
+    public static final String URL_HELP_CENTER = ApiClient.HTML_URL+"project/html/fengwo/index.html#/helpCente";
     //商圈
     public static final String URL_TRADINGAREA = ApiClient.HTML_URL+"project/html/shangquan/index.html";
     //蜜玩
     public static final String URL_MIWAN = ApiClient.HTML_URL+"project/html/fengwo/index.html#miWan";
     //我的订单
-    public static final String URL_MY_ORDER = ApiClient.HTML_URL+"project/html/myOrder.html";
+    public static final String URL_MY_ORDER = ApiClient.HTML_URL+"project/html/fengwo/index.html#/myOrder";
     //蜂窝规则
     public static final String URL_HONYCOMB_RULE = ApiClient.HTML_URL+"project/html/rule/fengwoRule.html";
     //夺宝规则

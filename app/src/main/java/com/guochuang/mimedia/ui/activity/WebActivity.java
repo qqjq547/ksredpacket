@@ -256,7 +256,17 @@ public class WebActivity extends MvpActivity {
                 }
             });
         }
-    }
+        @JavascriptInterface
+        public void copyText(final String content){
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    CommonUtil.copyMsg(WebActivity.this,content);
+                    showShortToast(R.string.copy_success);
+                }
+            });
+        }
+      }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

@@ -119,6 +119,7 @@
                         android:button="@null"
                         android:drawableLeft="@drawable/ic_check_selector"
                         android:drawablePadding="@dimen/space10"
+                        android:checked="true"
                         android:padding="@dimen/space3"
                         android:text="@string/link_public_password"
                         android:textColor="@color/text_gray"
