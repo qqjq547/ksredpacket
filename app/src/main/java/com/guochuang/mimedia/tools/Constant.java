@@ -120,7 +120,7 @@ public class Constant {
     //商圈
     public static final String URL_TRADINGAREA = ApiClient.HTML_URL+"project/html/shangquan/index.html";
     //蜜玩
-    public static final String URL_MIWAN = ApiClient.HTML_URL+"project/html/miWan.html";
+    public static final String URL_MIWAN = ApiClient.HTML_URL+"project/html/fengwo/index.html#miWan";
     //我的订单
     public static final String URL_MY_ORDER = ApiClient.HTML_URL+"project/html/myOrder.html";
     //蜂窝规则
@@ -129,7 +129,7 @@ public class Constant {
     public static final String URL_DUOBAO_RULE = ApiClient.HTML_URL+"project/html/rule/duobaoRule.html";
     //夺宝详情
     public static final String URL_DUOBAO_DETAIL = ApiClient.HTML_URL+"project/html/fengwo/index.html#/treasureDetails?snatchId=";
-
+    //我的夺宝
     public static final String URL_DUOBAO_TREASURE_NUMBER = ApiClient.HTML_URL+"project/html/fengwo/index.html#/treasureNumber?type=false&snatchRecordId=";
 
 
