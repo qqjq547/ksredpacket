@@ -41,6 +41,7 @@ public class Constant {
     public static final int REQUEST_GRANT = 12;
     public static final int REQUEST_CARD_FRONT = 13;
     public static final int REQUEST_CARD_BACK = 14;
+    public static final int REQUEST_PICK_ICON = 15;
     public static final int REQUEST_ADD_ADDRESS = 15;
     public static final int REQUEST_PICK_ADDRESS = 16;
     public static final int REQUEST_SET_SHOWLIST = 17;
@@ -87,9 +88,11 @@ public class Constant {
 
     public static final String FORMAT_DATE_SIMPLE = "yyyy-MM-dd";
     public static final String FORMAT_DATE = "yyyy-MM-dd HH:mm:ss";
+    public static final String FORMAT_MONTH = "yyyy-MM";
 
     public static final String TYPE_REPORT_INFORMATION = "informationReport";
     public static final String TYPE_REPORT_REDPACKET = "redPacketReport";
+    public static final String TYPE_BEENEST_REPORT = "beenestReport";
 
     //资讯详情
     public static final String URL_INFOMATION_DETAIL = ApiClient.HTML_URL+"information/detail/index.htm";
@@ -125,6 +128,14 @@ public class Constant {
     public static final String URL_MY_ORDER = ApiClient.HTML_URL+"project/html/fengwo/index.html#/myOrder";
     //蜂窝规则
     public static final String URL_HONYCOMB_RULE = ApiClient.HTML_URL+"project/html/rule/fengwoRule.html";
+    //广告投放协议
+    public static final String URL_FENGCHAO_BANNER = ApiClient.HTML_URL+"project/html/rule/fengchao/banner.html";
+    //竞购协议
+    public static final String URL_FENGCHAO_JINGGOU = ApiClient.HTML_URL+"project/html/rule/fengchao/jinggou.html";
+    //竞拍说明
+    public static final String URL_FENGCHAO_JINGPAI = ApiClient.HTML_URL+"project/html/rule/fengchao/jingpai.html";
+    //显示地图网页
+    public static final String URL_BMAP_URL = ApiClient.HTML_URL+"project/html/fengwo/index.html#/BMapComponent";
     //夺宝规则
     public static final String URL_DUOBAO_RULE = ApiClient.HTML_URL+"project/html/rule/duobaoRule.html";
     //夺宝详情
@@ -150,6 +161,7 @@ public class Constant {
 
     public static final String NATION_CODE = "86";
     public static final int LOGIN_TYPE = 1;
+    public static final String REGISTER_TYPE = "1";
     public static final String REGISTER_CAPTCHA_IMA = "register";
     public static final String FORGET_RESET_CAPTCHA_IMA = "forgetReset";
     public static final String SAFE_RESET_CAPTCHA_IMA = "safeReset";

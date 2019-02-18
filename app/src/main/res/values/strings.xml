@@ -566,6 +566,71 @@
     <string name="join_people_before">参与：</string>
     <string name="join_people_after">人次</string>
 
+    <string name="navigation">导航</string>
+    <string name="call">拨打</string>
+    <string name="save_ad_temp">保存为广告模板</string>
+    <string name="ad_agreement">《广告投放协议》</string>
+    <string name="edit_ad">编辑广告</string>
+    <string name="ad_brand">广告牌</string>
+    <string name="short_ad_msg">简短广告语</string>
+    <string name="short_ad_hint">建议是体现功能的简短话语</string>
+    <string name="picture">图片</string>
+    <string name="ad_content_page">广告内页</string>
+    <string name="introduce_yourself">介绍一下自己吧...</string>
+    <string name="title">标题</string>
+    <string name="pls_input_title">请输入标题</string>
+    <string name="relate_mobile">联系电话</string>
+    <string name="pls_input_relate_phone">请输入联系电话（选填）</string>
+    <string name="local_area">所在地区</string>
+    <string name="address_option">(地址选填)</string>
+    <string name="detail_address">详细地址</string>
+    <string name="detail_address_hint">如道路，门牌号，小区，楼栋号等</string>
+    <string name="short_msg_cant_empty">广告语不能为空</string>
+    <string name="brand_icon_cant_empty">广告牌图标不能为空</string>
+    <string name="content_cant_empty">内容不能为空</string>
+    <string name="title_cant_empty">标题不能为空</string>
+    <string name="area_cant_empty">区域不能为空</string>
+    <string name="agree_agreement">请同意广告协议</string>
+    <string name="bid_this_ad">竞拍该广告</string>
+    <string name="bid_other_ad">竞拍其他广告</string>
+    <string name="report">举报</string>
+    <string name="bee_temp_tip">保存模板后，可以选择该模板发广告</string>
+    <string name="equal_bid">竞购等值</string>
+    <string name="buy_price">竞购价</string>
+    <string name="current_price">当前价</string>
+    <string name="unit_yuan_day">元/天</string>
+    <string name="brand_bid_agreement">《竞购协议》</string>
+    <string name="buy_right_now">立即购买</string>
+    <string name="history_put">历史投放</string>
+    <string name="ad_temp">广告模板</string>
+    <string-array name="ad_nav">
+        <item>全部</item>
+        <item>待投放</item>
+        <item>投放中</item>
+        <item>已投放</item>
+    </string-array>
+    <string name="my_ad">我的广告</string>
+    <string name="my_bid_buy">我的竞购</string>
+    <string name="ad_amount">广告数量</string>
+    <string name="voting">投放中</string>
+    <string name="amount_yuan">金额(元)</string>
+    <string name="show_num">展示量</string>
+    <string name="click_num">点击量</string>
+    <string name="collect_num">收藏量</string>
+    <string name="check_ad">查看广告</string>
+    <string name="waiting_vote">待投放</string>
+    <string name="vote_going">投放中</string>
+    <string name="has_vote">已投放</string>
+    <string name="format_price_and_total">%d元/天(共%d元)</string>
+    <string name="format_time_to_time">%s~%s</string>
+    <string name="ad_bid">广告竞拍</string>
+    <string name="bid_history">竞购历史</string>
+    <string name="bid_explain">竞拍说明</string>
+    <string name="done_times">成交次数</string>
+    <string name="bid_times">竞购次数</string>
+    <string name="format_count_ad_temp">共%d个广告模板</string>
+    <string name="next_start_bid_time">下期开始竞拍时间：</string>
+
     <string name="format_peroid">%s期</string>
     <string name="showlist_hint">分享自己的喜悦吧</string>
     <string name="has_send_good">已发货</string>

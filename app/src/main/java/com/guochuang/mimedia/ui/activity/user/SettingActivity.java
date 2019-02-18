@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.donkingliang.imageselector.utils.ImageSelector;
 import com.donkingliang.imageselector.utils.ImageSelectorUtils;
 import com.guochuang.mimedia.tools.CacheUtil;
+import com.guochuang.mimedia.tools.PrefUtil;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.MvpActivity;

@@ -21,7 +21,7 @@ import com.guochuang.mimedia.ui.activity.redbag.LuckyActivity;
 import com.guochuang.mimedia.ui.activity.MainActivity;
 import com.guochuang.mimedia.ui.activity.PurchaseActivity;
 import com.guochuang.mimedia.ui.activity.user.RecommendDetailActivity;
-import com.guochuang.mimedia.ui.activity.redbag.RedbagDetailActivity;
+import com.guochuang.mimedia.ui.activity.RedbagDetailActivity;
 import com.guochuang.mimedia.ui.activity.redbag.RedbagJoinedActivity;
 import com.guochuang.mimedia.ui.activity.redbag.RedbagRainActivity;
 import com.guochuang.mimedia.ui.activity.redbag.SquareDetailActivity;

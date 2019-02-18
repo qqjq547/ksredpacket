@@ -12,7 +12,7 @@ import com.guochuang.mimedia.mvp.model.MyObjectBox;
 import com.guochuang.mimedia.mvp.model.UserInfo;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.LogUtil;
-import com.guochuang.mimedia.ui.activity.LoginActivity;
+import com.guochuang.mimedia.ui.activity.user.LoginActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreater;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreater;

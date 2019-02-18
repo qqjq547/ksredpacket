@@ -69,7 +69,7 @@ public class ExpressInfoActivity extends MvpActivity<ExpressInfoPresenter> imple
                 break;
             case R.id.tv_copy:
                 if (snatch!=null) {
-                    CommonUtil.copyMsg(this, snatch.getExpressCode());
+                    CommonUtil.copyMsg(this, snatch.getTrackNum());
                     showShortToast(R.string.copy_success);
                 }
                 break;
@@ -87,12 +87,12 @@ public class ExpressInfoActivity extends MvpActivity<ExpressInfoPresenter> imple
             if (snatch.getStatus()>=4){
                 linHasSend.setVisibility(View.VISIBLE);
                 linNotSend.setVisibility(View.GONE);
-                if (TextUtils.isEmpty(snatch.getExpressCode())){
+                if (TextUtils.isEmpty(snatch.getTrackNum())){
                     tvCopy.setVisibility(View.GONE);
                 }else {
                     tvCopy.setVisibility(View.VISIBLE);
                 }
-                tvExpress.setText(snatch.getExpressName()+"  "+snatch.getExpressCode());
+                tvExpress.setText(snatch.getExpressName()+"  "+snatch.getTrackNum());
             }else {
                 linHasSend.setVisibility(View.GONE);
                 linNotSend.setVisibility(View.VISIBLE);
