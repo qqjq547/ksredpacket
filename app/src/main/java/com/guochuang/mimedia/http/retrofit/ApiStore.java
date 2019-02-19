@@ -37,6 +37,8 @@ import com.guochuang.mimedia.mvp.model.NameAuthAndSafety;
 import com.guochuang.mimedia.mvp.model.NameAuthGet;
 import com.guochuang.mimedia.mvp.model.CommentInfo;
 import com.guochuang.mimedia.mvp.model.CommentRedbag;
+import com.guochuang.mimedia.mvp.model.NestInfoLimit;
+import com.guochuang.mimedia.mvp.model.NestTemplate;
 import com.guochuang.mimedia.mvp.model.Order;
 import com.guochuang.mimedia.mvp.model.QrCode;
 import com.guochuang.mimedia.mvp.model.RainMsg;
@@ -1110,5 +1112,38 @@ public interface ApiStore {
     Observable<HttpResponse<Order>> getOrderVendor(
             @Query("orderId") long orderId
     );
+
+    @GET("/api/v1/nest_info/delete_template")
+    Observable<HttpResponse<Boolean>> deleteNestTemplate(
+            @Query("nestTemplateId") long nestTemplateId
+    );
+    @FormUrlEncoded
+    @POST("/api/v1/nest_info/edit")
+    Observable<HttpResponse<Boolean>> nesteEdit(
+            @Query("nestInfoId") long nestInfoId,
+            @Query("nestLocationId") long nestLocationId,
+            @Query("nestTimeInfoId") long nestTimeInfoId,
+            @Query("shortMsg") String shortMsg,
+            @Query("coverPicture") String coverPicture,
+            @Query("introduction") String introduction,
+            @Query("pictures") String pictures,
+            @Query("title") String title,
+            @Query("contactPhone") String contactPhone,
+            @Query("address") String address,
+            @Query("addressDetail") String addressDetail,
+            @Query("addressLat") String addressLat,
+            @Query("addressLng") String addressLng,
+            @Query("linkText") String linkText,
+            @Query("linkUrl") String linkUrl,
+            @Query("wechat") String wechat,
+            @Query("weibo") String weibo,
+            @Query("isSaveTemplate") String isSaveTemplate
+    );
+    @GET("/api/v1/nest_info/limit")
+    Observable<HttpResponse<NestInfoLimit>> nesteEdit();
+
+    @GET("/api/v1/nest_info/limit")
+    Observable<HttpResponse<List<NestTemplate>>> nesteTemplateList();
+
 
 }
