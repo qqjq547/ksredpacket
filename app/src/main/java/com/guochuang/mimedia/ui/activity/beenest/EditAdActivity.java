@@ -19,6 +19,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.donkingliang.imageselector.utils.ImageSelector;
 import com.donkingliang.imageselector.utils.ImageSelectorUtils;
 import com.guochuang.mimedia.base.MvpActivity;
+import com.guochuang.mimedia.mvp.model.NestInfoLimit;
 import com.guochuang.mimedia.mvp.model.RedbagTemp;
 import com.guochuang.mimedia.mvp.model.UploadFile;
 import com.guochuang.mimedia.mvp.presenter.EditAdPresenter;
@@ -94,6 +95,9 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
     @BindView(R.id.nsv_content)
     NestedScrollView nsvContent;
 
+    long nestInfoId;
+    long nestLocationId;
+    long nestTimeInfoId;
     String shortMsg;
     String iconUrl;
     String content;
@@ -110,6 +114,10 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
     String wechat;
     String microblog;
     int isSaveTemplate=0;
+
+    int maxPicture=Constant.MAX_PICK_PICTURE;
+    int maxTemplate=5;
+    int currentTemplateCount=0;
     List<String> waitUpload=new ArrayList<>();
     List<String> picUrlArr=new ArrayList<>();
     ArrayList<String> pictureArr=new ArrayList<>();
@@ -172,6 +180,8 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
             }
         });
         rvPicture.setAdapter(pictureAdapter);
+        mvpPresenter.nesteLimit();
+        mvpPresenter.nesteTemplateCount();
     }
 
     @OnClick({R.id.iv_back, R.id.tv_text,R.id.lin_picture, R.id.tv_area,R.id.tv_link, R.id.tv_rule,R.id.iv_temp_tip,R.id.btn_confirm})
@@ -265,7 +275,7 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
                         new File(Constant.COMPRESS_DIR_PATH).mkdirs();
                         uploadFile();
                     }else {
-//                        selectPayType();
+                        editNestAd();
                     }
                 }
                 break;
@@ -281,7 +291,7 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
             }else {
                 closeLoadingDialog();
                 //上传图片结束，开始提交表单
-//                selectPayType();
+                editNestAd();
             }
             return;
         }
@@ -378,10 +388,17 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
         }
         pictureAdapter.notifyDataSetChanged();
     }
+    public void editNestAd(){
+        showLoadingDialog(null);
+        picture=TextUtils.join(",",picUrlArr);
+        mvpPresenter.editNestAd(nestInfoId,nestLocationId,nestTimeInfoId,shortMsg,iconUrl,content,picture,adTitle,adMobile,adAddress,adArea
+        ,latitude,longitude,urlName,url,wechat,microblog,isSaveTemplate);
+    }
 
     @Override
-    public void setData(String data) {
-
+    public void setData(Boolean data) {
+        closeLoadingDialog();
+        showShortToast(R.string.publish_success);
     }
 
     @Override
@@ -399,18 +416,35 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
             uploadFile();
         }else {
             closeLoadingDialog();
-//            selectPayType();
+            editNestAd();
         }
     }
+
     @Override
     public void setUploadfail(String msg) {
-        showShortToast(R.string.upload_picture_fail);
         closeLoadingDialog();
+        showShortToast(R.string.upload_picture_fail);
+
     }
 
     @Override
-    public void setTempData(List<RedbagTemp> data) {
+    public void setLimit(NestInfoLimit data) {
+        maxPicture=data.getPictureCount();
+        maxTemplate=data.getTemplateCount();
+        setTempState();
+    }
 
+    @Override
+    public void setTemplateCount(Integer data) {
+        currentTemplateCount=data;
+        setTempState();
+    }
+    public void setTempState(){
+        if (currentTemplateCount<maxTemplate){
+            cbSaveTemp.setVisibility(View.VISIBLE);
+        }else {
+            cbSaveTemp.setVisibility(View.GONE);
+        }
     }
 
     @Override

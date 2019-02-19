@@ -1,6 +1,5 @@
-package com.guochuang.mimedia.ui.activity;
+package com.guochuang.mimedia.ui.activity.user;
 
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
@@ -8,7 +7,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.Address;
 import com.guochuang.mimedia.mvp.presenter.AddAddressPresenter;
@@ -19,7 +17,6 @@ import com.guochuang.mimedia.ui.dialog.SelectAreaDialog;
 import com.sz.gcyh.KSHongBao.R;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class AddAddressActivity extends MvpActivity<AddAddressPresenter> implements AddAddressView {
