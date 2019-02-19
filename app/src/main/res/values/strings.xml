@@ -667,4 +667,5 @@
     <string name="goto_pay">去支付</string>
     <string name="cache_has_clear">缓存已清理</string>
     <string name="audio_quality">音效</string>
+    <string name="goto_add">去添加</string>
 </resources>

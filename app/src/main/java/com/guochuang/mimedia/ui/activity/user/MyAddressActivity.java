@@ -1,4 +1,4 @@
-package com.guochuang.mimedia.ui.activity;
+package com.guochuang.mimedia.ui.activity.user;
 
 import android.content.Intent;
 import android.support.annotation.Nullable;
@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.http.response.Page;
 import com.guochuang.mimedia.mvp.model.Address;
@@ -18,7 +17,6 @@ import com.guochuang.mimedia.mvp.presenter.MyAddressPresenter;
 import com.guochuang.mimedia.mvp.view.MyAddressView;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.ui.adapter.AddressAdapter;
-import com.guochuang.mimedia.view.VerticalDecoration;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;

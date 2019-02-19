@@ -37,6 +37,7 @@ import com.guochuang.mimedia.mvp.model.NameAuthAndSafety;
 import com.guochuang.mimedia.mvp.model.NameAuthGet;
 import com.guochuang.mimedia.mvp.model.CommentInfo;
 import com.guochuang.mimedia.mvp.model.CommentRedbag;
+import com.guochuang.mimedia.mvp.model.NestAuctionMsg;
 import com.guochuang.mimedia.mvp.model.NestInfoLimit;
 import com.guochuang.mimedia.mvp.model.NestTemplate;
 import com.guochuang.mimedia.mvp.model.Order;
@@ -1137,13 +1138,22 @@ public interface ApiStore {
             @Query("linkUrl") String linkUrl,
             @Query("wechat") String wechat,
             @Query("weibo") String weibo,
-            @Query("isSaveTemplate") String isSaveTemplate
+            @Query("isSaveTemplate") int isSaveTemplate
     );
     @GET("/api/v1/nest_info/limit")
-    Observable<HttpResponse<NestInfoLimit>> nesteEdit();
+    Observable<HttpResponse<NestInfoLimit>> nesteLimit();
 
-    @GET("/api/v1/nest_info/limit")
+    @GET("/api/v1/nest_info/template_count")
+    Observable<HttpResponse<Integer>> nesteTemplateCount();
+
+    @GET("/api/v1/nest_info/template_list")
     Observable<HttpResponse<List<NestTemplate>>> nesteTemplateList();
+
+    @GET("/api/v1/nest_time_auction/get")
+    Observable<HttpResponse<NestAuctionMsg>> nestAuctionMsg();
+
+    @GET("/api/v1/nest_time_auction/list")
+    Observable<HttpResponse<Page<NestAuctionMsg>>> nestAuctionList();
 
 
 }

@@ -2,24 +2,26 @@ package com.guochuang.mimedia.ui.fragment;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
+import com.guochuang.mimedia.mvp.model.NestAuctionMsg;
 import com.guochuang.mimedia.mvp.model.RegionCore;
+import com.guochuang.mimedia.tools.DialogBuilder;
 import com.guochuang.mimedia.tools.IntentUtils;
+import com.guochuang.mimedia.ui.activity.beenest.AdBidActivity;
+import com.guochuang.mimedia.ui.activity.beenest.MyAdActivity;
 import com.guochuang.mimedia.ui.activity.city.CityActivity;
-import com.guochuang.mimedia.ui.activity.MyAddressActivity;
-import com.guochuang.mimedia.ui.activity.treasure.MyTreasureActivity;
+import com.guochuang.mimedia.ui.activity.user.MyAddressActivity;
 import com.guochuang.mimedia.ui.dialog.SheetDialog;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.app.App;
@@ -35,7 +37,6 @@ import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.tools.ScaleTransformer;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.guochuang.mimedia.ui.activity.user.MessageActivity;
-import com.guochuang.mimedia.ui.activity.user.MyCityActivity;
 import com.guochuang.mimedia.ui.activity.user.MyCollectActivity;
 import com.guochuang.mimedia.ui.activity.user.MyCommentActivity;
 import com.guochuang.mimedia.ui.activity.user.MyKsbActivity;
@@ -56,7 +57,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
 
@@ -279,10 +279,13 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
     public void onResume() {
         super.onResume();
         setUpUser();
+        mvpPresenter.getAuctionMsg();
     }
 
     @OnClick({R.id.iv_setting,
             R.id.iv_message,
+            R.id.lin_ad_bid,
+            R.id.lin_my_ad,
             R.id.tv_title})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -291,6 +294,12 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                 break;
             case R.id.iv_message:
                 startActivity(new Intent(getActivity(), MessageActivity.class));
+                break;
+            case R.id.lin_ad_bid:
+                startActivity(new Intent(getActivity(), AdBidActivity.class));
+                break;
+            case R.id.lin_my_ad:
+                startActivity(new Intent(getActivity(), MyAdActivity.class));
                 break;
             case R.id.tv_title:
                 List<String> itemArr=new ArrayList<>();
@@ -373,6 +382,22 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
             llMyLamp.getChildAt(2).setVisibility(View.VISIBLE);
             itemArr.add(0,new MyMenuItem(R.drawable.ic_my_operate_center, R.string.operation_center));
             menuAdapter.notifyItemInserted(0);
+        }
+    }
+
+    @Override
+    public void setAuctionMsg(NestAuctionMsg data) {
+        if (data!=null&&!TextUtils.isEmpty(data.getShowMsg())){
+            new DialogBuilder(getContext())
+            .setMessage(data.getShowMsg())
+            .setNegativeButton(R.string.cancel,null)
+            .setPositiveButton(R.string.goto_add,new View.OnClickListener(){
+                @Override
+                public void onClick(View view) {
+                  startActivity(new Intent(getActivity(),MyAdActivity.class));
+                }
+            })
+            .create().show();
         }
     }
 

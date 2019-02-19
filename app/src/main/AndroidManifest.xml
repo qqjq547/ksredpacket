@@ -94,6 +94,11 @@
         <activity android:name="com.guochuang.mimedia.ui.activity.city.EditBoardActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.redbag.SquareDetailActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.user.IdentifyCustomActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.user.MyAddressActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.user.AddAddressActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.treasure.MyTreasureActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.treasure.ShowListActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.treasure.ExpressInfoActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.beenest.BeeNestActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.beenest.EditAdActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.beenest.BidBrandActivity" />

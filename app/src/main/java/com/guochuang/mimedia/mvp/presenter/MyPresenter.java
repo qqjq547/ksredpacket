@@ -4,6 +4,7 @@ import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
+import com.guochuang.mimedia.mvp.model.NestAuctionMsg;
 import com.guochuang.mimedia.mvp.model.RecommendData;
 import com.guochuang.mimedia.mvp.model.RegionCore;
 import com.guochuang.mimedia.mvp.model.UserInfo;
@@ -38,6 +39,25 @@ public class MyPresenter extends BasePresenter<MyView> {
             @Override
             public void onSuccess(RegionCore data) {
                 mvpView.setRegionCoreData(data);
+
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setError(exception.getMessage());
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
+    public void getAuctionMsg(){
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().nestAuctionMsg()), new ApiCallback<NestAuctionMsg>() {
+            @Override
+            public void onSuccess(NestAuctionMsg data) {
+                mvpView.setAuctionMsg(data);
 
             }
 

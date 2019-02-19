@@ -8,10 +8,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
-import com.guochuang.mimedia.mvp.model.RedbagTemp;
+import com.guochuang.mimedia.mvp.model.NestTemplate;
+import com.guochuang.mimedia.mvp.presenter.BeeNestTempPresneter;
+import com.guochuang.mimedia.mvp.view.BeeNestTempView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.DialogBuilder;
@@ -24,11 +24,13 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class BeeNestTempActivity extends MvpActivity {
+public class BeeNestTempActivity extends MvpActivity<BeeNestTempPresneter> implements BeeNestTempView {
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.tv_title)
     TextView tvTitle;
+    @BindView(R.id.lin_empty)
+    LinearLayout linEmpty;
     @BindView(R.id.vp_temp)
     ViewPager vpTemp;
     @BindView(R.id.lin_indicate)
@@ -40,13 +42,13 @@ public class BeeNestTempActivity extends MvpActivity {
     @BindView(R.id.tv_total)
     TextView tvTotal;
 
-    List<RedbagTemp> tempArr=new ArrayList<>();
+    List<NestTemplate> tempArr=new ArrayList<>();
     BeeNestTempFragment[] fragments;
     ImageView[] views;
     boolean isDeleteOperated=false;//是否有删除模板
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    protected BeeNestTempPresneter createPresenter() {
+        return new BeeNestTempPresneter(this);
     }
 
     @Override
@@ -57,12 +59,8 @@ public class BeeNestTempActivity extends MvpActivity {
     @Override
     public void initViewAndData() {
         tvTitle.setText(R.string.ad_temp);
-//        showLoadingDialog(null);
-        List<RedbagTemp> dataArr=new ArrayList<>();
-        dataArr.add(new RedbagTemp());
-        dataArr.add(new RedbagTemp());
-        dataArr.add(new RedbagTemp());
-        setData(dataArr);
+        showLoadingDialog(null);
+        mvpPresenter.getTempList();
     }
     public void setSelectIndicate(int position){
         for (int i=0;i<views.length;i++){
@@ -84,15 +82,14 @@ public class BeeNestTempActivity extends MvpActivity {
         }
     }
 
-    public void setData(List<RedbagTemp> data){
-        this.tempArr=data;
+    public void setData(){
         tvTotal.setText(String.format(getString(R.string.format_count_ad_temp),tempArr.size()));
         fragments=new BeeNestTempFragment[tempArr.size()];
         views=new ImageView[tempArr.size()];
         linIndicate.removeAllViews();
         for (int i=0;i<tempArr.size();i++){
             fragments[i]=new BeeNestTempFragment();
-//            fragments[i].setTemp(tempArr.get(i));
+            fragments[i].setTemp(tempArr.get(i));
             views[i]=new ImageView(this);
             LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
             int margin=CommonUtil.dip2px(this,5);
@@ -128,6 +125,40 @@ public class BeeNestTempActivity extends MvpActivity {
             }
         });
     }
+
+    @Override
+    public void setData(List<NestTemplate> data) {
+        closeLoadingDialog();
+        this.tempArr=data;
+        if (data!=null&&data.size()>0) {
+            linEmpty.setVisibility(View.GONE);
+            vpTemp.setVisibility(View.VISIBLE);
+            tempArr.addAll(data);
+            setData();
+        }
+        setEmptyView();
+    }
+
+    private void setEmptyView(){
+        if (tempArr!=null&&tempArr.size()>0){
+            btnUseTemp.setVisibility(View.VISIBLE);
+            btnDelete.setVisibility(View.VISIBLE);
+        }else {
+            linEmpty.setVisibility(View.VISIBLE);
+            vpTemp.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void setDelete(Boolean data) {
+        isDeleteOperated=true;
+        closeLoadingDialog();
+        showShortToast(R.string.delete_success);
+        tempArr.remove(vpTemp.getCurrentItem());
+        setData();
+        setEmptyView();
+    }
+
     @OnClick({R.id.iv_back, R.id.btn_use_temp, R.id.btn_delete})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -149,10 +180,17 @@ public class BeeNestTempActivity extends MvpActivity {
                             @Override
                             public void onClick(View v) {
                                 showLoadingDialog(null);
-//                                mvpPresenter.deleteTemplate(tempArr.get(vpTemp.getCurrentItem()).getId());
+                                mvpPresenter.deleteTemplate(tempArr.get(vpTemp.getCurrentItem()).getNestTemplateId());
                             }
                         }).create().show();
                 break;
         }
+    }
+
+
+    @Override
+    public void setError(String msg) {
+      closeLoadingDialog();
+      showLoadingDialog(R.string.delete_success);
     }
 }

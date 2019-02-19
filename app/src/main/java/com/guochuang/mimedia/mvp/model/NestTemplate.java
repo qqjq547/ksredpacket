@@ -1,8 +1,9 @@
 package com.guochuang.mimedia.mvp.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class NestTemplate {
+public class NestTemplate implements Serializable {
 
     /**
      * address : string
@@ -20,11 +21,11 @@ public class NestTemplate {
      * wechat : string
      * weibo : string
      */
-
+    private long nestTemplateId;
     private String address;
     private String addressDetail;
-    private double addressLat;
-    private double addressLng;
+    private String addressLat;
+    private String addressLng;
     private String contactPhone;
     private String coverPicture;
     private String introduction;
@@ -35,6 +36,17 @@ public class NestTemplate {
     private String wechat;
     private String weibo;
     private List<String> pictureList;
+
+    public NestTemplate() {
+    }
+
+    public long getNestTemplateId() {
+        return nestTemplateId;
+    }
+
+    public void setNestTemplateId(long nestTemplateId) {
+        this.nestTemplateId = nestTemplateId;
+    }
 
     public String getAddress() {
         return address;
@@ -52,19 +64,19 @@ public class NestTemplate {
         this.addressDetail = addressDetail;
     }
 
-    public double getAddressLat() {
+    public String getAddressLat() {
         return addressLat;
     }
 
-    public void setAddressLat(double addressLat) {
+    public void setAddressLat(String addressLat) {
         this.addressLat = addressLat;
     }
 
-    public double getAddressLng() {
+    public String getAddressLng() {
         return addressLng;
     }
 
-    public void setAddressLng(double addressLng) {
+    public void setAddressLng(String addressLng) {
         this.addressLng = addressLng;
     }
 
