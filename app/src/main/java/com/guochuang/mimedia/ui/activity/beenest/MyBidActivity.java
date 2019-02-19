@@ -8,10 +8,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.http.response.Page;
 import com.guochuang.mimedia.mvp.model.NestAuctionRecord;
+import com.guochuang.mimedia.mvp.model.NestHistory;
 import com.guochuang.mimedia.mvp.model.Square;
 import com.guochuang.mimedia.mvp.presenter.MyBidPresenter;
 import com.guochuang.mimedia.mvp.view.MyBidView;
@@ -66,6 +68,8 @@ public class MyBidActivity extends MvpActivity<MyBidPresenter> implements MyBidV
     public void initViewAndData() {
         tvTitle.setText(R.string.my_bid_buy);
         adapter=new MyBidAdapter(dataArr);
+        adapter.setEmptyView(getLayoutInflater().inflate(R.layout.layout_empty,null));
+        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         rvRecord.setLayoutManager(new LinearLayoutManager(this,OrientationHelper.VERTICAL,false));
         rvRecord.setAdapter(adapter);
         srlRefresh.setEnableRefresh(true);
@@ -93,18 +97,18 @@ public class MyBidActivity extends MvpActivity<MyBidPresenter> implements MyBidV
     public void setData(Page<NestAuctionRecord> data) {
         srlRefresh.finishRefresh();
         srlRefresh.finishLoadmore();
-        if (data!=null) {
-            curPage = data.getCurrentPage();
-            if (curPage == 1) {
-                dataArr.clear();
-            }
+        curPage = data.getCurrentPage();
+        if (curPage == 1) {
+            dataArr.clear();
+        }
+        if (data.getDataList() != null) {
             dataArr.addAll(data.getDataList());
-            adapter.notifyDataSetChanged();
-            if (data.getCurrentPage() >= data.getTotalPage()) {
-                srlRefresh.setEnableLoadmore(false);
-            } else {
-                srlRefresh.setEnableLoadmore(true);
-            }
+        }
+        adapter.notifyDataSetChanged();
+        if (data.getCurrentPage() >= data.getTotalPage()) {
+            srlRefresh.setEnableLoadmore(false);
+        } else {
+            srlRefresh.setEnableLoadmore(true);
         }
     }
 
@@ -112,6 +116,7 @@ public class MyBidActivity extends MvpActivity<MyBidPresenter> implements MyBidV
     public void setError(String msg) {
         srlRefresh.finishRefresh();
         srlRefresh.finishLoadmore();
+        closeLoadingDialog();
         showShortToast(msg);
     }
 }

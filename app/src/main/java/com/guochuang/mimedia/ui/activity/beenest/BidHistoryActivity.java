@@ -9,6 +9,11 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
+import com.guochuang.mimedia.http.response.Page;
+import com.guochuang.mimedia.mvp.model.NestHistory;
+import com.guochuang.mimedia.mvp.presenter.BidHistoryPresneter;
+import com.guochuang.mimedia.mvp.view.BidHistoryView;
+import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.ui.adapter.BidHistoryAdapter;
 import com.guochuang.mimedia.ui.adapter.HistoryPutAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -22,7 +27,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class BidHistoryActivity extends MvpActivity {
+public class BidHistoryActivity extends MvpActivity<BidHistoryPresneter> implements BidHistoryView {
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.tv_title)
@@ -33,12 +38,13 @@ public class BidHistoryActivity extends MvpActivity {
     SmartRefreshLayout srlRefresh;
 
     BidHistoryAdapter adapter;
-    List<String> dataArr=new ArrayList<>();
+    List<NestHistory> dataArr=new ArrayList<>();
     int curPage=1;
+    long nestLocationId;
 
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    protected BidHistoryPresneter createPresenter() {
+        return new BidHistoryPresneter(this);
     }
 
     @Override
@@ -49,10 +55,6 @@ public class BidHistoryActivity extends MvpActivity {
     @Override
     public void initViewAndData() {
           tvTitle.setText(R.string.bid_history);
-          dataArr.add("1");
-          dataArr.add("2");
-          dataArr.add("3");
-          dataArr.add("4");
         rvHistory.setLayoutManager(new LinearLayoutManager(this,OrientationHelper.VERTICAL,false));
         adapter=new BidHistoryAdapter(dataArr);
         adapter.setEmptyView(getLayoutInflater().inflate(R.layout.layout_empty,null));
@@ -63,44 +65,46 @@ public class BidHistoryActivity extends MvpActivity {
         srlRefresh.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-
+                mvpPresenter.getNestHistory(nestLocationId,curPage+1,Constant.PAGE_SIZE);
             }
 
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-
+                mvpPresenter.getNestHistory(nestLocationId,1,Constant.PAGE_SIZE);
             }
         });
+        mvpPresenter.getNestHistory(nestLocationId,curPage,Constant.PAGE_SIZE);
     }
     @OnClick(R.id.iv_back)
     public void onViewClicked() {
         onBackPressed();
     }
-//
-//    @Override
-//    public void setData(Page<String> data) {
-//        srlRefresh.finishRefresh();
-//        srlRefresh.finishLoadmore();
-//        curPage = data.getCurrentPage();
-//        if (curPage == 1) {
-//            dataArr.clear();
-//        }
-//        if (data.getDataList() != null) {
-//            dataArr.addAll(data.getDataList());
-//        }
-//        adapter.notifyDataSetChanged();
-//        if (data.getCurrentPage() >= data.getTotalPage()) {
-//            srlRefresh.setEnableLoadmore(false);
-//        } else {
-//            srlRefresh.setEnableLoadmore(true);
-//        }
-//    }
-//
-//    @Override
-//    public void setError(String msg) {
-//        srlRefresh.finishRefresh();
-//        srlRefresh.finishLoadmore();
-//        closeLoadingDialog();
-//        showShortToast(msg);
-//    }
+
+
+    @Override
+    public void setData(Page<NestHistory> data) {
+        srlRefresh.finishRefresh();
+        srlRefresh.finishLoadmore();
+        curPage = data.getCurrentPage();
+        if (curPage == 1) {
+            dataArr.clear();
+        }
+        if (data.getDataList() != null) {
+            dataArr.addAll(data.getDataList());
+        }
+        adapter.notifyDataSetChanged();
+        if (data.getCurrentPage() >= data.getTotalPage()) {
+            srlRefresh.setEnableLoadmore(false);
+        } else {
+            srlRefresh.setEnableLoadmore(true);
+        }
+    }
+
+    @Override
+    public void setError(String msg) {
+        srlRefresh.finishRefresh();
+        srlRefresh.finishLoadmore();
+        closeLoadingDialog();
+        showShortToast(msg);
+    }
 }

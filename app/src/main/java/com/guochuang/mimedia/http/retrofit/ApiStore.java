@@ -28,6 +28,7 @@ import com.guochuang.mimedia.mvp.model.LuckyConfig;
 import com.guochuang.mimedia.mvp.model.LuckyResult;
 import com.guochuang.mimedia.mvp.model.MegviiSerach;
 import com.guochuang.mimedia.mvp.model.Message;
+import com.guochuang.mimedia.mvp.model.MyAd;
 import com.guochuang.mimedia.mvp.model.MyKsb;
 import com.guochuang.mimedia.mvp.model.MyKsbGrantRec;
 import com.guochuang.mimedia.mvp.model.MyKsbTransRec;
@@ -39,6 +40,7 @@ import com.guochuang.mimedia.mvp.model.CommentInfo;
 import com.guochuang.mimedia.mvp.model.CommentRedbag;
 import com.guochuang.mimedia.mvp.model.NestAuctionMsg;
 import com.guochuang.mimedia.mvp.model.NestAuctionRecord;
+import com.guochuang.mimedia.mvp.model.NestHistory;
 import com.guochuang.mimedia.mvp.model.NestInfoLimit;
 import com.guochuang.mimedia.mvp.model.NestTemplate;
 import com.guochuang.mimedia.mvp.model.Order;
@@ -1115,12 +1117,12 @@ public interface ApiStore {
             @Query("orderId") long orderId
     );
 
-    @GET("/api/v1/nest_info/delete_template")
+    @GET("/api/v1/nest/nest_info/delete_template")
     Observable<HttpResponse<Boolean>> deleteNestTemplate(
             @Query("nestTemplateId") long nestTemplateId
     );
     @FormUrlEncoded
-    @POST("/api/v1/nest_info/edit")
+    @POST("/api/v1/nest/nest_info/edit")
     Observable<HttpResponse<Boolean>> nesteEdit(
             @Field("nestInfoId") long nestInfoId,
             @Field("nestLocationId") long nestLocationId,
@@ -1141,24 +1143,35 @@ public interface ApiStore {
             @Field("weibo") String weibo,
             @Field("isSaveTemplate") int isSaveTemplate
     );
-    @GET("/api/v1/nest_info/limit")
+    @GET("/api/v1/nest/nest_info/limit")
     Observable<HttpResponse<NestInfoLimit>> nesteLimit();
 
-    @GET("/api/v1/nest_info/template_count")
+    @GET("/api/v1/nest/nest_info/template_count")
     Observable<HttpResponse<Integer>> nesteTemplateCount();
 
-    @GET("/api/v1/nest_info/template_list")
+    @GET("/api/v1/nest/nest_info/template_list")
     Observable<HttpResponse<List<NestTemplate>>> nesteTemplateList();
 
-    @GET("/api/v1/nest_time_auction/get")
+    @GET("/api/v1/nest/nest_time_auction/get")
     Observable<HttpResponse<NestAuctionMsg>> nestAuctionMsg();
 
-    @GET("/api/v1/nest_time_auction/list")
+    @GET("/api/v1/nest/nest_time_auction/list")
     Observable<HttpResponse<Page<NestAuctionRecord>>> nestAuctionList(
             @Query("nestTimeInfoId") long nestTimeInfoId,
             @Query("currentPage") int currentPage,
             @Query("pageSize") int pageSize
-
+    );
+    @GET("/api/v1/nest/nest_success/history")
+    Observable<HttpResponse<Page<NestHistory>>> nestHistoryList(
+            @Query("nestLocationId") long nestLocationId,
+            @Query("currentPage") int currentPage,
+            @Query("pageSize") int pageSize
+    );
+    @GET("/api/v1/nest/nest_success/my_list")
+    Observable<HttpResponse<Page<MyAd>>> nestMyList(
+            @Query("status") Integer status,
+            @Query("currentPage") int currentPage,
+            @Query("pageSize") int pageSize
     );
 
 

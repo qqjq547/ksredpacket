@@ -191,6 +191,6 @@ public class BeeNestTempActivity extends MvpActivity<BeeNestTempPresneter> imple
     @Override
     public void setError(String msg) {
       closeLoadingDialog();
-      showLoadingDialog(R.string.delete_success);
+      showShortToast(msg);
     }
 }

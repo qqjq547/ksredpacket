@@ -621,7 +621,7 @@
     <string name="waiting_vote">待投放</string>
     <string name="vote_going">投放中</string>
     <string name="has_vote">已投放</string>
-    <string name="format_price_and_total">%d元/天(共%d元)</string>
+    <string name="format_price_and_total">%s元/天(共%s元)</string>
     <string name="format_time_to_time">%s~%s</string>
     <string name="ad_bid">广告竞拍</string>
     <string name="bid_history">竞购历史</string>

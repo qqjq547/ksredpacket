@@ -60,8 +60,11 @@ public class MyAdActivity extends MvpActivity {
         String[] titleArr = getResources().getStringArray(R.array.ad_nav);
         fragments[0] = new AdListFragment();
         fragments[1] = new AdListFragment();
+        fragments[1].setStatus(0);
         fragments[2] = new AdListFragment();
+        fragments[2].setStatus(1);
         fragments[3] = new AdListFragment();
+        fragments[3].setStatus(2);
         pagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), fragments, titleArr);
         vpContent.setAdapter(pagerAdapter);
         tbList.setupWithViewPager(vpContent);

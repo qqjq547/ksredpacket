@@ -1,19 +1,12 @@
 package com.guochuang.mimedia.ui.adapter;
 
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.view.ViewGroup;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 
 import com.baidu.mapapi.map.BaiduMap;
-import com.baidu.mapapi.map.BitmapDescriptorFactory;
-import com.baidu.mapapi.map.MapStatus;
-import com.baidu.mapapi.map.MapStatusUpdate;
-import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.map.MarkerOptions;
-import com.baidu.mapapi.map.OverlayOptions;
-import com.baidu.mapapi.map.TextureMapView;
-import com.baidu.mapapi.model.LatLng;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.guochuang.mimedia.mvp.model.MyAd;
@@ -28,7 +21,23 @@ public class MyAdAdapter extends BaseQuickAdapter<MyAd,BaseViewHolder> {
 
     @Override
     protected void convert(BaseViewHolder helper, MyAd item) {
-        if (item.getState()==0){
+        helper.setText(R.id.tv_time,String.format(mContext.getString(R.string.format_time_to_time),item.getStartDate(),item.getEndDate()));
+        String priceStr=String.format(mContext.getString(R.string.format_price_and_total),item.getUnitPrice(),item.getTotalPrice());
+        SpannableStringBuilder builder=new SpannableStringBuilder(priceStr);
+        String dayprice=String.valueOf(item.getUnitPrice());
+        int dayIndex = priceStr.indexOf(dayprice);
+        builder.setSpan(new ForegroundColorSpan(mContext.getResources().getColor(R.color.text_red)), dayIndex, dayIndex + dayprice.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        String totalprice=String.valueOf(item.getTotalPrice());
+        int totalIndex = priceStr.lastIndexOf(totalprice);
+        builder.setSpan(new ForegroundColorSpan(mContext.getResources().getColor(R.color.text_red)), totalIndex, totalIndex + totalprice.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        helper.setText(R.id.tv_price,builder);
+
+        helper.addOnClickListener(R.id.tv_edit);
+        helper.setText(R.id.tv_show_num,String.valueOf(item.getNestStatisticsResDto().getShowQuantity()));
+        helper.setText(R.id.tv_click_num,String.valueOf(item.getNestStatisticsResDto().getClickQuantity()));
+        helper.setText(R.id.tv_collect_num,String.valueOf(item.getNestStatisticsResDto().getFavoriteQuantity()));
+
+        if (item.getStatus().equals("0")){
             helper.setGone(R.id.lin_info,false);
             helper.setGone(R.id.lin_data,false);
             helper.setText(R.id.tv_edit,R.string.edit_ad);
@@ -36,7 +45,7 @@ public class MyAdAdapter extends BaseQuickAdapter<MyAd,BaseViewHolder> {
             helper.setTextColor(R.id.tv_status,mContext.getResources().getColor(R.color.bg_sky_blue));
             helper.setBackgroundColor(R.id.v_line,mContext.getResources().getColor(R.color.bg_sky_blue));
             helper.setTextColor(R.id.tv_time,mContext.getResources().getColor(R.color.text_black));
-        }else if(item.getState()==1){
+        }else if(item.getStatus().equals("1")){
             helper.setGone(R.id.lin_info,true);
             helper.setGone(R.id.lin_data,false);
             helper.setText(R.id.tv_edit,R.string.edit_ad);
@@ -44,7 +53,7 @@ public class MyAdAdapter extends BaseQuickAdapter<MyAd,BaseViewHolder> {
             helper.setTextColor(R.id.tv_status,mContext.getResources().getColor(R.color.text_city_yellow));
             helper.setBackgroundColor(R.id.v_line,mContext.getResources().getColor(R.color.text_city_yellow));
             helper.setTextColor(R.id.tv_time,mContext.getResources().getColor(R.color.text_black));
-        }else if(item.getState()==2){
+        }else if(item.getStatus().equals("2")){
             helper.setGone(R.id.lin_info,true);
             helper.setGone(R.id.lin_data,true);
             helper.setText(R.id.tv_edit,R.string.check_ad);

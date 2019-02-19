@@ -7,9 +7,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpFragment;
+import com.guochuang.mimedia.http.response.Page;
 import com.guochuang.mimedia.mvp.model.MyAd;
+import com.guochuang.mimedia.mvp.presenter.MyAdPresneter;
+import com.guochuang.mimedia.mvp.view.MyAdView;
+import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.ui.activity.beenest.BidBrandActivity;
 import com.guochuang.mimedia.ui.adapter.MyAdAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -22,18 +25,20 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class AdListFragment extends MvpFragment {
+public class AdListFragment extends MvpFragment<MyAdPresneter> implements MyAdView {
 
     @BindView(R.id.srl_refresh)
     SmartRefreshLayout srlRefresh;
     @BindView(R.id.rv_ad)
     RecyclerView rvAd;
-    MyAdAdapter adAdapter;
-    List<MyAd> myAdArr=new ArrayList<>();
+    MyAdAdapter adapter;
+    List<MyAd> dataArr =new ArrayList<>();
+    Integer status;
+    int curPage=1;
 
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    protected MyAdPresneter createPresenter() {
+        return new MyAdPresneter(this);
     }
 
     @Override
@@ -43,38 +48,62 @@ public class AdListFragment extends MvpFragment {
 
     @Override
     public void initViewAndData() {
-       rvAd.setLayoutManager(new LinearLayoutManager(getActivity(),OrientationHelper.VERTICAL,false));
-        MyAd myAd=new MyAd();
-        myAd.setState(0);
-        MyAd myAd1=new MyAd();
-        myAd1.setState(1);
-        MyAd myAd2=new MyAd();
-        myAd2.setState(2);
-        myAdArr.add(myAd);
-        myAdArr.add(myAd1);
-        myAdArr.add(myAd2);
-        adAdapter=new MyAdAdapter(myAdArr);
-        adAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
-        adAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        rvAd.setLayoutManager(new LinearLayoutManager(getActivity(),OrientationHelper.VERTICAL,false));
+        adapter =new MyAdAdapter(dataArr);
+        adapter.setEmptyView(getLayoutInflater().inflate(R.layout.layout_empty,null));
+        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 startActivity(new Intent(getActivity(),BidBrandActivity.class));
             }
         });
-        rvAd.setAdapter(adAdapter);
+        rvAd.setAdapter(adapter);
         srlRefresh.setEnableRefresh(true);
         srlRefresh.setEnableLoadmore(true);
         srlRefresh.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-
+                mvpPresenter.getMyAdList(status,curPage+1,Constant.PAGE_SIZE);
             }
 
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-
+                mvpPresenter.getMyAdList(status,1,Constant.PAGE_SIZE);
             }
         });
+        mvpPresenter.getMyAdList(status,curPage,Constant.PAGE_SIZE);
     }
 
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    @Override
+    public void setData(Page<MyAd> data) {
+        srlRefresh.finishRefresh();
+        srlRefresh.finishLoadmore();
+        curPage = data.getCurrentPage();
+        if (curPage == 1) {
+            dataArr.clear();
+        }
+        if (data.getDataList() != null) {
+            dataArr.addAll(data.getDataList());
+        }
+        adapter.notifyDataSetChanged();
+        if (data.getCurrentPage() >= data.getTotalPage()) {
+            srlRefresh.setEnableLoadmore(false);
+        } else {
+            srlRefresh.setEnableLoadmore(true);
+        }
+    }
+
+    @Override
+    public void setError(String msg) {
+        srlRefresh.finishRefresh();
+        srlRefresh.finishLoadmore();
+        closeLoadingDialog();
+        showShortToast(msg);
+    }
 }
