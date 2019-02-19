@@ -1,9 +1,7 @@
-package com.guochuang.mimedia.ui.activity;
+package com.guochuang.mimedia.ui.activity.common;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
@@ -18,24 +16,16 @@ import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
 import com.baidu.mapapi.map.BaiduMap;
-import com.baidu.mapapi.map.BitmapDescriptor;
-import com.baidu.mapapi.map.BitmapDescriptorFactory;
-import com.baidu.mapapi.map.CircleOptions;
 import com.baidu.mapapi.map.MapPoi;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.map.MarkerOptions;
-import com.baidu.mapapi.map.OverlayOptions;
-import com.baidu.mapapi.map.Stroke;
 import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.search.sug.SuggestionResult;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.mvp.model.GeoCode;
 import com.guochuang.mimedia.mvp.presenter.MapPickPresenter;
 import com.guochuang.mimedia.mvp.view.MapPickView;
 import com.guochuang.mimedia.tools.CommonUtil;
-import com.guochuang.mimedia.tools.LogUtil;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.tools.Constant;
@@ -43,14 +33,12 @@ import com.guochuang.mimedia.ui.adapter.PoiInfoAdapter;
 import com.guochuang.mimedia.ui.adapter.SuggestionInfoAdapter;
 import com.guochuang.mimedia.view.ClearEditText;
 import com.guochuang.mimedia.view.VerticalDecoration;
-import com.tbruyelle.rxpermissions.RxPermissions;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import rx.functions.Action1;
 
 public class MapPickActivity extends MvpActivity<MapPickPresenter> implements MapPickView {
     @BindView(R.id.iv_back)

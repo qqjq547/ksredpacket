@@ -27,7 +27,7 @@ import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
-import com.guochuang.mimedia.ui.activity.MapPickActivity;
+import com.guochuang.mimedia.ui.activity.common.MapPickActivity;
 import com.guochuang.mimedia.ui.adapter.PickImageAdapter;
 import com.guochuang.mimedia.ui.dialog.BeeTempDialog;
 import com.guochuang.mimedia.view.GridItemDecoration;

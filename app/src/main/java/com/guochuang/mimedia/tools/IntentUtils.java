@@ -8,24 +8,24 @@ import android.net.Uri;
 
 import com.guochuang.mimedia.mvp.model.RecommendData;
 import com.guochuang.mimedia.mvp.model.RedbagDetail;
-import com.guochuang.mimedia.ui.activity.ImagePreviewActivity;
+import com.guochuang.mimedia.ui.activity.common.ImagePreviewActivity;
 import com.guochuang.mimedia.ui.activity.user.CardAddActivity;
 import com.guochuang.mimedia.ui.activity.city.CityBidRecordActivity;
 import com.guochuang.mimedia.ui.activity.city.CityDetailActivity;
 import com.guochuang.mimedia.ui.activity.redbag.EditRedbagActivity;
-import com.guochuang.mimedia.ui.activity.ImageActivity;
+import com.guochuang.mimedia.ui.activity.common.ImageActivity;
 import com.guochuang.mimedia.ui.activity.operation.IncomeDetailActivity;
 import com.guochuang.mimedia.ui.activity.operation.IncreaseDetailActivity;
 import com.guochuang.mimedia.ui.activity.info.InfoDetailActivity;
 import com.guochuang.mimedia.ui.activity.redbag.LuckyActivity;
 import com.guochuang.mimedia.ui.activity.MainActivity;
-import com.guochuang.mimedia.ui.activity.PurchaseActivity;
+import com.guochuang.mimedia.ui.activity.common.PurchaseActivity;
 import com.guochuang.mimedia.ui.activity.user.RecommendDetailActivity;
 import com.guochuang.mimedia.ui.activity.RedbagDetailActivity;
 import com.guochuang.mimedia.ui.activity.redbag.RedbagJoinedActivity;
 import com.guochuang.mimedia.ui.activity.redbag.RedbagRainActivity;
 import com.guochuang.mimedia.ui.activity.redbag.SquareDetailActivity;
-import com.guochuang.mimedia.ui.activity.WebActivity;
+import com.guochuang.mimedia.ui.activity.common.WebActivity;
 
 import java.util.ArrayList;
 

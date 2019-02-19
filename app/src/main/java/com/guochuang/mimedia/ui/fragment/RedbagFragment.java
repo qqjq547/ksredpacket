@@ -6,14 +6,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
-import android.support.v4.widget.NestedScrollView;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
@@ -38,7 +33,6 @@ import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.Stroke;
 import com.baidu.mapapi.model.LatLng;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.MvpFragment;
 import com.guochuang.mimedia.mvp.model.HomeRegion;
@@ -54,17 +48,17 @@ import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.tools.antishake.AntiShake;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
+import com.guochuang.mimedia.ui.activity.beenest.BeeNestActivity;
+import com.guochuang.mimedia.ui.activity.beenest.EditAdActivity;
 import com.guochuang.mimedia.ui.activity.city.CityActivity;
 import com.guochuang.mimedia.ui.activity.MainActivity;
-import com.guochuang.mimedia.ui.activity.ShareActivity;
+import com.guochuang.mimedia.ui.activity.common.ShareActivity;
 import com.guochuang.mimedia.ui.activity.redbag.SquareActivity;
 import com.guochuang.mimedia.ui.activity.user.UpgradeAgentActivity;
-import com.guochuang.mimedia.ui.activity.WebActivity;
-import com.guochuang.mimedia.ui.adapter.HoneyAdapter;
 import com.guochuang.mimedia.ui.dialog.OpenRedbagDialog;
 import com.guochuang.mimedia.ui.dialog.RedbagTypeDialog;
-import com.guochuang.mimedia.view.GridItemDecoration;
 import com.guochuang.mimedia.view.HexagonImageView;
+import com.guochuang.mimedia.view.HoneyCombView;
 import com.guochuang.mimedia.view.ScrollTextView;
 import com.sz.gcyh.KSHongBao.R;
 import com.tbruyelle.rxpermissions.RxPermissions;
@@ -73,9 +67,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import rx.functions.Action1;
 
 public class RedbagFragment extends MvpFragment<RedbagPresenter> implements RedbagView {
@@ -102,6 +94,8 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     ImageView ivRefresh;
     @BindView(R.id.tv_upgrade_agent)
     TextView tvUpgradeAgent;
+    @BindView(R.id.hcv_ad)
+    HoneyCombView hcvAd;
 
     TextView tvScope;
     BaiduMap bm;
@@ -212,6 +206,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
             }
         });
         setUserRole(getPref().getInt(PrefUtil.USER_ROLE,0));
+        sethoneyData();
     }
 
     @Override
@@ -543,5 +538,23 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
             rotateAnim.cancel();
             rotateAnim = null;
         }
+    }
+    public void sethoneyData(){
+        hcvAd.setVisibility(View.VISIBLE);
+        List<String> honeyArr=new ArrayList<>();
+        for (int i=0;i<20;i++){
+            honeyArr.add("tag="+i);
+        }
+        hcvAd.setData(honeyArr, new HoneyCombView.OnMenuClickListener() {
+            @Override
+            public void onClick(String data) {
+                startActivity(new Intent(getActivity(),BeeNestActivity.class));
+            }
+
+            @Override
+            public void onSendAd() {
+                startActivity(new Intent(getActivity(),EditAdActivity.class));
+            }
+        });
     }
 }

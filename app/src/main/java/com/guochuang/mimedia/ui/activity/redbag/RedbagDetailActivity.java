@@ -22,6 +22,7 @@ import com.guochuang.mimedia.mvp.model.PictureBean;
 import com.guochuang.mimedia.mvp.model.RedbagInfo;
 import com.guochuang.mimedia.tools.AdCollectionView;
 import com.guochuang.mimedia.tools.PrefUtil;
+import com.guochuang.mimedia.ui.activity.common.ShareActivity;
 import com.guochuang.mimedia.view.BadgeView;
 import com.qq.e.ads.nativ.NativeExpressADView;
 import com.sz.gcyh.KSHongBao.R;

@@ -1,4 +1,4 @@
-package com.guochuang.mimedia.ui.activity;
+package com.guochuang.mimedia.ui.activity.common;
 
 import android.text.TextUtils;
 import android.view.View;

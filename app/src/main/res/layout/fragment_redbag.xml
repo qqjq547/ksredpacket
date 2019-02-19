@@ -172,7 +172,8 @@
           <com.guochuang.mimedia.view.HoneyCombView
               android:id="@+id/hcv_ad"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:visibility="gone">
           </com.guochuang.mimedia.view.HoneyCombView>
 
       </LinearLayout>

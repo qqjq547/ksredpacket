@@ -30,7 +30,7 @@ import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.DialogBuilder;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
-import com.guochuang.mimedia.ui.activity.ShareActivity;
+import com.guochuang.mimedia.ui.activity.common.ShareActivity;
 import com.guochuang.mimedia.ui.adapter.RedbagReplyAdapter;
 import com.guochuang.mimedia.ui.dialog.InputDialog;
 import com.guochuang.mimedia.view.BadgeView;
