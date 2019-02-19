@@ -38,6 +38,7 @@ import com.guochuang.mimedia.mvp.model.NameAuthGet;
 import com.guochuang.mimedia.mvp.model.CommentInfo;
 import com.guochuang.mimedia.mvp.model.CommentRedbag;
 import com.guochuang.mimedia.mvp.model.NestAuctionMsg;
+import com.guochuang.mimedia.mvp.model.NestAuctionRecord;
 import com.guochuang.mimedia.mvp.model.NestInfoLimit;
 import com.guochuang.mimedia.mvp.model.NestTemplate;
 import com.guochuang.mimedia.mvp.model.Order;
@@ -1121,24 +1122,24 @@ public interface ApiStore {
     @FormUrlEncoded
     @POST("/api/v1/nest_info/edit")
     Observable<HttpResponse<Boolean>> nesteEdit(
-            @Query("nestInfoId") long nestInfoId,
-            @Query("nestLocationId") long nestLocationId,
-            @Query("nestTimeInfoId") long nestTimeInfoId,
-            @Query("shortMsg") String shortMsg,
-            @Query("coverPicture") String coverPicture,
-            @Query("introduction") String introduction,
-            @Query("pictures") String pictures,
-            @Query("title") String title,
-            @Query("contactPhone") String contactPhone,
-            @Query("address") String address,
-            @Query("addressDetail") String addressDetail,
-            @Query("addressLat") String addressLat,
-            @Query("addressLng") String addressLng,
-            @Query("linkText") String linkText,
-            @Query("linkUrl") String linkUrl,
-            @Query("wechat") String wechat,
-            @Query("weibo") String weibo,
-            @Query("isSaveTemplate") int isSaveTemplate
+            @Field("nestInfoId") long nestInfoId,
+            @Field("nestLocationId") long nestLocationId,
+            @Field("nestTimeInfoId") long nestTimeInfoId,
+            @Field("shortMsg") String shortMsg,
+            @Field("coverPicture") String coverPicture,
+            @Field("introduction") String introduction,
+            @Field("pictures") String pictures,
+            @Field("title") String title,
+            @Field("contactPhone") String contactPhone,
+            @Field("address") String address,
+            @Field("addressDetail") String addressDetail,
+            @Field("addressLat") String addressLat,
+            @Field("addressLng") String addressLng,
+            @Field("linkText") String linkText,
+            @Field("linkUrl") String linkUrl,
+            @Field("wechat") String wechat,
+            @Field("weibo") String weibo,
+            @Field("isSaveTemplate") int isSaveTemplate
     );
     @GET("/api/v1/nest_info/limit")
     Observable<HttpResponse<NestInfoLimit>> nesteLimit();
@@ -1153,7 +1154,12 @@ public interface ApiStore {
     Observable<HttpResponse<NestAuctionMsg>> nestAuctionMsg();
 
     @GET("/api/v1/nest_time_auction/list")
-    Observable<HttpResponse<Page<NestAuctionMsg>>> nestAuctionList();
+    Observable<HttpResponse<Page<NestAuctionRecord>>> nestAuctionList(
+            @Query("nestTimeInfoId") long nestTimeInfoId,
+            @Query("currentPage") int currentPage,
+            @Query("pageSize") int pageSize
+
+    );
 
 
 }

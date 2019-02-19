@@ -10,6 +10,12 @@ import android.widget.TextView;
 
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
+import com.guochuang.mimedia.http.response.Page;
+import com.guochuang.mimedia.mvp.model.NestAuctionRecord;
+import com.guochuang.mimedia.mvp.model.Square;
+import com.guochuang.mimedia.mvp.presenter.MyBidPresenter;
+import com.guochuang.mimedia.mvp.view.MyBidView;
+import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.ui.adapter.MyBidAdapter;
 import com.guochuang.mimedia.ui.adapter.PictureVerticalAdapter;
 import com.guochuang.mimedia.view.VerticalDecoration;
@@ -25,7 +31,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MyBidActivity extends MvpActivity {
+public class MyBidActivity extends MvpActivity<MyBidPresenter> implements MyBidView {
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.tv_title)
@@ -42,11 +48,13 @@ public class MyBidActivity extends MvpActivity {
     SmartRefreshLayout srlRefresh;
 
     MyBidAdapter adapter;
-    List<String> dataArr=new ArrayList<>();
+    List<NestAuctionRecord> dataArr=new ArrayList<>();
+    int curPage=1;
+    long nestTimeInfoId;
 
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    protected MyBidPresenter createPresenter() {
+        return new MyBidPresenter(this);
     }
 
     @Override
@@ -57,10 +65,6 @@ public class MyBidActivity extends MvpActivity {
     @Override
     public void initViewAndData() {
         tvTitle.setText(R.string.my_bid_buy);
-        dataArr.add("");
-        dataArr.add("");
-        dataArr.add("");
-        dataArr.add("");
         adapter=new MyBidAdapter(dataArr);
         rvRecord.setLayoutManager(new LinearLayoutManager(this,OrientationHelper.VERTICAL,false));
         rvRecord.setAdapter(adapter);
@@ -69,18 +73,45 @@ public class MyBidActivity extends MvpActivity {
         srlRefresh.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-
+                mvpPresenter.getAuctionList(nestTimeInfoId,curPage+1,Constant.PAGE_SIZE);
             }
 
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-
+                mvpPresenter.getAuctionList(nestTimeInfoId,1,Constant.PAGE_SIZE);
             }
         });
+        mvpPresenter.getAuctionList(nestTimeInfoId,curPage,Constant.PAGE_SIZE);
     }
 
     @OnClick(R.id.iv_back)
     public void onViewClicked() {
         onBackPressed();
+    }
+
+    @Override
+    public void setData(Page<NestAuctionRecord> data) {
+        srlRefresh.finishRefresh();
+        srlRefresh.finishLoadmore();
+        if (data!=null) {
+            curPage = data.getCurrentPage();
+            if (curPage == 1) {
+                dataArr.clear();
+            }
+            dataArr.addAll(data.getDataList());
+            adapter.notifyDataSetChanged();
+            if (data.getCurrentPage() >= data.getTotalPage()) {
+                srlRefresh.setEnableLoadmore(false);
+            } else {
+                srlRefresh.setEnableLoadmore(true);
+            }
+        }
+    }
+
+    @Override
+    public void setError(String msg) {
+        srlRefresh.finishRefresh();
+        srlRefresh.finishLoadmore();
+        showShortToast(msg);
     }
 }
