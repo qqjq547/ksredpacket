@@ -4,12 +4,15 @@ import android.support.annotation.Nullable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
+import android.webkit.WebView;
 
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MapView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.guochuang.mimedia.mvp.model.MyAd;
+import com.guochuang.mimedia.tools.CommonUtil;
+import com.guochuang.mimedia.tools.Constant;
 import com.sz.gcyh.KSHongBao.R;
 
 import java.util.List;
@@ -37,7 +40,7 @@ public class MyAdAdapter extends BaseQuickAdapter<MyAd,BaseViewHolder> {
         helper.setText(R.id.tv_click_num,String.valueOf(item.getNestStatisticsResDto().getClickQuantity()));
         helper.setText(R.id.tv_collect_num,String.valueOf(item.getNestStatisticsResDto().getFavoriteQuantity()));
 
-        if (item.getStatus().equals("0")){
+        if (item.getStatus().equals("0")){ //待投放
             helper.setGone(R.id.lin_info,false);
             helper.setGone(R.id.lin_data,false);
             helper.setText(R.id.tv_edit,R.string.edit_ad);
@@ -45,7 +48,7 @@ public class MyAdAdapter extends BaseQuickAdapter<MyAd,BaseViewHolder> {
             helper.setTextColor(R.id.tv_status,mContext.getResources().getColor(R.color.bg_sky_blue));
             helper.setBackgroundColor(R.id.v_line,mContext.getResources().getColor(R.color.bg_sky_blue));
             helper.setTextColor(R.id.tv_time,mContext.getResources().getColor(R.color.text_black));
-        }else if(item.getStatus().equals("1")){
+        }else if(item.getStatus().equals("1")){ //投放中
             helper.setGone(R.id.lin_info,true);
             helper.setGone(R.id.lin_data,false);
             helper.setText(R.id.tv_edit,R.string.edit_ad);
@@ -53,7 +56,7 @@ public class MyAdAdapter extends BaseQuickAdapter<MyAd,BaseViewHolder> {
             helper.setTextColor(R.id.tv_status,mContext.getResources().getColor(R.color.text_city_yellow));
             helper.setBackgroundColor(R.id.v_line,mContext.getResources().getColor(R.color.text_city_yellow));
             helper.setTextColor(R.id.tv_time,mContext.getResources().getColor(R.color.text_black));
-        }else if(item.getStatus().equals("2")){
+        }else if(item.getStatus().equals("2")){//投放结束
             helper.setGone(R.id.lin_info,true);
             helper.setGone(R.id.lin_data,true);
             helper.setText(R.id.tv_edit,R.string.check_ad);
@@ -62,20 +65,10 @@ public class MyAdAdapter extends BaseQuickAdapter<MyAd,BaseViewHolder> {
             helper.setBackgroundColor(R.id.v_line,mContext.getResources().getColor(R.color.text_gray));
             helper.setTextColor(R.id.tv_time,mContext.getResources().getColor(R.color.text_gray));
         }
-//        helper.addOnClickListener(R.id.tv_edit);
-//        113.822728=22.630487
-        MapView mapView=helper.getView(R.id.mv_location);
-        BaiduMap bm = mapView.getMap();
-        mapView.showZoomControls(false);
-        mapView.showScaleControl(false);
-        mapView.removeViewAt(1);
-//        OverlayOptions titleOo = new MarkerOptions().
-//                position(new LatLng(113.822728,22.630487)).
-//                icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location));
-//        bm.addOverlay(titleOo);
-//        MapStatus.Builder builder = new MapStatus.Builder();
-//        builder.target(new LatLng(113.822728,22.630487)).zoom(15f);
-//        bm.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
+        WebView wvMap=helper.getView(R.id.wv_map);
+        CommonUtil.initH5WebView(mContext,wvMap);
+        wvMap.loadUrl(Constant.URL_BMAP_URL+"?lng=116.40387397&lat=39.91488908");
+//        wvMap.loadUrl(Constant.URL_BMAP_URL+"?lng="+item.getLng()+"&lat="+item.getLat());
 
     }
 }

@@ -6,11 +6,15 @@
     android:orientation="vertical"
     android:padding="@dimen/space10"
     android:background="@drawable/bg_white_block">
-<com.baidu.mapapi.map.TextureMapView
-    android:id="@+id/mv_location"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+<WebView
+    android:id="@+id/wv_map"
     android:layout_width="match_parent"
     android:layout_height="@dimen/space150">
-</com.baidu.mapapi.map.TextureMapView>
+</WebView>
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/lin_info"
         android:layout_width="match_parent"

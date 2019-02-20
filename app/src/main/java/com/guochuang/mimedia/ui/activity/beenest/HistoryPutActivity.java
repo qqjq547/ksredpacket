@@ -10,7 +10,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.http.response.Page;
+import com.guochuang.mimedia.mvp.model.NestHistory;
 import com.guochuang.mimedia.mvp.model.RecommedUser;
+import com.guochuang.mimedia.mvp.presenter.HistoryPutPresneter;
+import com.guochuang.mimedia.mvp.view.HistoryPutView;
 import com.guochuang.mimedia.ui.adapter.HistoryPutAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -23,7 +26,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class HistoryPutActivity extends MvpActivity {
+public class HistoryPutActivity extends MvpActivity<HistoryPutPresneter> implements HistoryPutView {
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.tv_title)
@@ -34,12 +37,13 @@ public class HistoryPutActivity extends MvpActivity {
     SmartRefreshLayout srlRefresh;
 
     HistoryPutAdapter adapter;
-    List<String> dataArr=new ArrayList<>();
+    List<NestHistory> dataArr=new ArrayList<>();
     int curPage=1;
 
+
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    protected HistoryPutPresneter createPresenter() {
+        return new HistoryPutPresneter(this);
     }
 
     @Override
@@ -50,10 +54,6 @@ public class HistoryPutActivity extends MvpActivity {
     @Override
     public void initViewAndData() {
           tvTitle.setText(R.string.history_put);
-          dataArr.add("1");
-          dataArr.add("2");
-          dataArr.add("3");
-          dataArr.add("4");
         rvHistory.setLayoutManager(new LinearLayoutManager(this,OrientationHelper.VERTICAL,false));
         adapter=new HistoryPutAdapter(dataArr);
         adapter.setEmptyView(getLayoutInflater().inflate(R.layout.layout_empty,null));
@@ -77,31 +77,32 @@ public class HistoryPutActivity extends MvpActivity {
     public void onViewClicked() {
         onBackPressed();
     }
-//
-//    @Override
-//    public void setData(Page<String> data) {
-//        srlRefresh.finishRefresh();
-//        srlRefresh.finishLoadmore();
-//        curPage = data.getCurrentPage();
-//        if (curPage == 1) {
-//            dataArr.clear();
-//        }
-//        if (data.getDataList() != null) {
-//            dataArr.addAll(data.getDataList());
-//        }
-//        adapter.notifyDataSetChanged();
-//        if (data.getCurrentPage() >= data.getTotalPage()) {
-//            srlRefresh.setEnableLoadmore(false);
-//        } else {
-//            srlRefresh.setEnableLoadmore(true);
-//        }
-//    }
-//
-//    @Override
-//    public void setError(String msg) {
-//        srlRefresh.finishRefresh();
-//        srlRefresh.finishLoadmore();
-//        closeLoadingDialog();
-//        showShortToast(msg);
-//    }
+
+
+    @Override
+    public void setData(Page<NestHistory> data) {
+        srlRefresh.finishRefresh();
+        srlRefresh.finishLoadmore();
+        curPage = data.getCurrentPage();
+        if (curPage == 1) {
+            dataArr.clear();
+        }
+        if (data.getDataList() != null) {
+            dataArr.addAll(data.getDataList());
+        }
+        adapter.notifyDataSetChanged();
+        if (data.getCurrentPage() >= data.getTotalPage()) {
+            srlRefresh.setEnableLoadmore(false);
+        } else {
+            srlRefresh.setEnableLoadmore(true);
+        }
+    }
+
+    @Override
+    public void setError(String msg) {
+        srlRefresh.finishRefresh();
+        srlRefresh.finishLoadmore();
+        closeLoadingDialog();
+        showShortToast(msg);
+    }
 }

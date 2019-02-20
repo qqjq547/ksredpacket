@@ -696,7 +696,7 @@ public class CommonUtil {
         activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
         return screenHeight * 2 / 3 > rect.bottom;
     }
-    public static void initH5WebView(final Activity activity,WebView webView) {
+    public static void initH5WebView(final Context context,WebView webView) {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         webView.getSettings().setLoadWithOverviewMode(true);
@@ -716,7 +716,7 @@ public class CommonUtil {
                                 Uri.parse(url));
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                                 | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        activity.startActivity(intent);
+                        context.startActivity(intent);
                     } catch (Exception e) {
                         // 防止没有安装的情况
                         e.printStackTrace();
@@ -737,7 +737,8 @@ public class CommonUtil {
             public void onDownloadStart(String s, String s1, String s2, String s3, long l) {
                 Uri uri = Uri.parse(s);
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                activity.startActivity(intent);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
             }
         });
     }
