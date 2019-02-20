@@ -41,6 +41,7 @@ import com.guochuang.mimedia.mvp.model.CommentRedbag;
 import com.guochuang.mimedia.mvp.model.NestAd;
 import com.guochuang.mimedia.mvp.model.NestAuctionMsg;
 import com.guochuang.mimedia.mvp.model.NestAuctionRecord;
+import com.guochuang.mimedia.mvp.model.NestFavorite;
 import com.guochuang.mimedia.mvp.model.NestHistory;
 import com.guochuang.mimedia.mvp.model.NestHomeAd;
 import com.guochuang.mimedia.mvp.model.NestInfoLimit;
@@ -1205,4 +1206,8 @@ public interface ApiStore {
             @Field("type") String type
     );
 
+    @GET("/api/v1/information/favorite/my_favorite")
+    Observable<HttpResponse<Page<NestFavorite>>> getNestAdFavorite(
+            @Query("currentPage") int currentPage,
+            @Query("pageSize") int pageSize);
 }

@@ -33,10 +33,21 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/bg_collect_right_selector"
+            android:background="@drawable/bg_collect_middle_selector"
             android:button="@null"
             android:gravity="center"
             android:text="@string/tab_info"
+            android:textColor="@color/collect_tab_text_selector"
+            android:textSize="@dimen/textfont15"></RadioButton>
+        <RadioButton
+            android:id="@+id/rbtn_ad"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_collect_right_selector"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/ad"
             android:textColor="@color/collect_tab_text_selector"
             android:textSize="@dimen/textfont15"></RadioButton>
     </RadioGroup>

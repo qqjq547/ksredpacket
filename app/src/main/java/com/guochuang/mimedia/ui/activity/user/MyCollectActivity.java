@@ -10,6 +10,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.guochuang.mimedia.ui.fragment.CollectNestAdFragment;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
@@ -32,7 +33,7 @@ public class MyCollectActivity extends MvpActivity {
     @BindView(R.id.rg_nav)
     RadioGroup rgNav;
     int currentId = -1;
-    Fragment[] fragments = new Fragment[2];
+    Fragment[] fragments = new Fragment[3];
 
     @Override
     protected BasePresenter createPresenter() {
@@ -49,6 +50,7 @@ public class MyCollectActivity extends MvpActivity {
         tvTitle.setText(R.string.text_my_collection);
         fragments[0] = new CollectRedbagFragment();
         fragments[1] = new CollectInfoFragment();
+        fragments[3] = new CollectNestAdFragment();
         rgNav.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
@@ -58,6 +60,9 @@ public class MyCollectActivity extends MvpActivity {
                         break;
                     case R.id.rbtn_info:
                         selectTab(1);
+                        break;
+                    case R.id.rbtn_ad:
+                        selectTab(2);
                         break;
                 }
             }
