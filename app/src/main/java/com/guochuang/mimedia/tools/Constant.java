@@ -83,6 +83,8 @@ public class Constant {
     public static final String SNATCHID = "snatchId";
     public static final String SNATCH = "snatch";
     public static final String ADDRESS = "address";
+    public static final String NESTINFOID = "nestInfoId";
+
 
 
 
@@ -252,4 +254,7 @@ public class Constant {
     public static final String SORT_DEFAULT="DEFAULT";
     public static final String SORT_ASC="ASC";
     public static final String SORT_DESC="DESC";
+
+    public static final String AD_TYPE_DETAIL = "detail";
+    public static final String AD_TYPE_EDIT = "edit";
 }

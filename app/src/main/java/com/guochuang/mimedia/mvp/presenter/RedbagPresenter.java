@@ -6,6 +6,7 @@ import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.HomeRegion;
 import com.guochuang.mimedia.mvp.model.MyKsb;
+import com.guochuang.mimedia.mvp.model.NestHomeAd;
 import com.guochuang.mimedia.mvp.model.Redbag;
 import com.guochuang.mimedia.mvp.model.RedbagDetail;
 import com.guochuang.mimedia.mvp.view.RedbagView;
@@ -211,5 +212,23 @@ public class RedbagPresenter extends BasePresenter<RedbagView> {
             }
         });
     }
+    public void getHomeAd(String latitude,String longitude) {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
+                getHomeAd(latitude,longitude)), new ApiCallback<List<NestHomeAd>>() {
+            @Override
+            public void onSuccess(List<NestHomeAd> data) {
+                mvpView.setHomeAd(data);
+            }
 
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setError(exception.getMessage());
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
 }

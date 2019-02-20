@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.guochuang.mimedia.mvp.model.NestHomeAd;
 import com.guochuang.mimedia.tools.AppBarStateChangeListener;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.IntentUtils;
@@ -43,8 +44,8 @@ public class HoneyCombView extends LinearLayout {
     @BindView(R.id.iv_arrow)
     ImageView ivArrow;
      boolean isExpand=false;
-     List<String> dataArr=new ArrayList<>();
-     List<List<String>> allData=new ArrayList<>();
+     List<NestHomeAd> dataArr=new ArrayList<>();
+     List<List<NestHomeAd>> allData=new ArrayList<>();
      HoneyAdapter honeyAdapter;
      int currentRow=0;
     int totalRow=0;
@@ -62,7 +63,7 @@ public class HoneyCombView extends LinearLayout {
          }
      };
     public interface OnMenuClickListener{
-         void onClick(String data);
+         void onClick(NestHomeAd data);
          void onSendAd();
      }
     OnMenuClickListener onMenuClickListener;
@@ -105,7 +106,7 @@ public class HoneyCombView extends LinearLayout {
         });
     }
 
-    public void setData(List<String> data, final OnMenuClickListener onMenuClickListener){
+    public void setData(List<NestHomeAd> data, final OnMenuClickListener onMenuClickListener){
         this.dataArr=data;
         this.onMenuClickListener=onMenuClickListener;
         totalRow=(data.size()/4)+(data.size()%4>0?1:0);
@@ -151,7 +152,7 @@ public class HoneyCombView extends LinearLayout {
             handler.sendEmptyMessageDelayed(0,delayTime);
             isExpand=false;
         }else {
-            List<String> expandList=new ArrayList<>();
+            List<NestHomeAd> expandList=new ArrayList<>();
             expandList.addAll(dataArr);
             expandList.removeAll(allData.get(currentRow));
             expandList.addAll(0,allData.get(currentRow));
@@ -162,7 +163,7 @@ public class HoneyCombView extends LinearLayout {
     }
     public void setCollse(){
         tvVote.setVisibility(GONE);
-        List<String> expandList=new ArrayList<>();
+        List<NestHomeAd> expandList=new ArrayList<>();
         expandList.addAll(dataArr);
         expandList.removeAll(allData.get(currentRow));
         expandList.addAll(allData.get(currentRow));

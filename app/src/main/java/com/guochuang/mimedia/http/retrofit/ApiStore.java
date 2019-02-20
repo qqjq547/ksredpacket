@@ -38,9 +38,11 @@ import com.guochuang.mimedia.mvp.model.NameAuthAndSafety;
 import com.guochuang.mimedia.mvp.model.NameAuthGet;
 import com.guochuang.mimedia.mvp.model.CommentInfo;
 import com.guochuang.mimedia.mvp.model.CommentRedbag;
+import com.guochuang.mimedia.mvp.model.NestAd;
 import com.guochuang.mimedia.mvp.model.NestAuctionMsg;
 import com.guochuang.mimedia.mvp.model.NestAuctionRecord;
 import com.guochuang.mimedia.mvp.model.NestHistory;
+import com.guochuang.mimedia.mvp.model.NestHomeAd;
 import com.guochuang.mimedia.mvp.model.NestInfoLimit;
 import com.guochuang.mimedia.mvp.model.NestTemplate;
 import com.guochuang.mimedia.mvp.model.Order;
@@ -1174,5 +1176,33 @@ public interface ApiStore {
             @Query("pageSize") int pageSize
     );
 
+    @GET("/api/v1/nest/nest_info/get_home")
+    Observable<HttpResponse<List<NestHomeAd>>> getHomeAd(
+            @Query("latitude") String latitude,
+            @Query("longitude") String longitude
+    );
+
+    @GET("/api/v1/nest/nest_info/get")
+    Observable<HttpResponse<NestAd>> getNestAd(
+            @Query("nestInfoId") long nestInfoId,
+            @Query("type") String type
+    );
+    @FormUrlEncoded
+    @POST("/api/v1/nest/nest_info/favorite")
+    Observable<HttpResponse<Boolean>> nestAddFavorite(
+            @Field("nestInfoId") long nestInfoId);
+
+    @FormUrlEncoded
+    @POST("/api/v1/nest/nest_info/cancel_favorite")
+    Observable<HttpResponse<Boolean>> nestDelFavorite(
+            @Field("nestInfoId") long nestInfoId);
+
+    @FormUrlEncoded
+    @POST("/api/v1/nest/nest_info/report")
+    Observable<HttpResponse<Boolean>> nestReport(
+            @Field("nestInfoId") long nestInfoId,
+            @Field("content") String content,
+            @Field("type") String type
+    );
 
 }

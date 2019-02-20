@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.DictionaryType;
 import com.guochuang.mimedia.mvp.model.InfoDetail;
+import com.guochuang.mimedia.mvp.model.NestAd;
 import com.guochuang.mimedia.mvp.presenter.BeeNestPresenter;
 import com.guochuang.mimedia.mvp.view.BeeNestView;
 import com.guochuang.mimedia.tools.CommonUtil;
@@ -21,6 +22,7 @@ import com.guochuang.mimedia.tools.DialogBuilder;
 import com.guochuang.mimedia.tools.GuideHelper;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.ToastUtil;
+import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.guochuang.mimedia.ui.adapter.PictureVerticalAdapter;
 import com.guochuang.mimedia.ui.dialog.BeeNestDialog;
 import com.guochuang.mimedia.ui.dialog.ReportDialog;
@@ -68,6 +70,8 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
     RecyclerView rvPicture;
     PictureVerticalAdapter adapter;
     List<String> pictureArr=new ArrayList<>();
+    long nestInfoId=0;
+    NestAd detail;
 
     @Override
     protected BeeNestPresenter createPresenter() {
@@ -81,15 +85,12 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
 
     @Override
     public void initViewAndData() {
-        tvTitle.setText("xxxxx");
+        nestInfoId=getIntent().getLongExtra(Constant.NESTINFOID,0);
+        showLoadingDialog(null);
+        mvpPresenter.getNestAd(nestInfoId,Constant.AD_TYPE_DETAIL);
+
         ivImage.setImageResource(R.drawable.ic_more);
-        pictureArr.add("https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2774071914,778442818&fm=173&app=25&f=JPEG?w=640&h=400&s=FDB83BD10E76448043A0F550030040F3");
-        pictureArr.add("https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=3253348826,163743007&fm=173&app=25&f=JPEG?w=405&h=300&s=3DA5CB1540027F41048008CD0300E0A1");
-        pictureArr.add("https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=2669277608,2915862647&fm=173&app=25&f=JPEG?w=400&h=427&s=6E230FC306CA50F49994BCF803001011");
-        adapter=new PictureVerticalAdapter(pictureArr);
-        rvPicture.setLayoutManager(new LinearLayoutManager(this,OrientationHelper.VERTICAL,false));
-        rvPicture.addItemDecoration(new VerticalDecoration(this,R.drawable.bg_city_divide));
-        rvPicture.setAdapter(adapter);
+
     }
 
 
@@ -119,13 +120,13 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
                 }).show();
                 break;
             case R.id.iv_fav:
-//                if (detail == null)
-//                    return;
-//                if (detail.getIsFavorited() == 0) {
-//                    mvpPresenter.favoriteAdd(articleUuid);
-//                } else {
-//                    mvpPresenter.favoriteDetele(articleUuid);
-//                }
+                if (detail == null)
+                    return;
+                if (detail.getIsCollection() == 0) {
+                    mvpPresenter.favoriteAdd(nestInfoId);
+                } else {
+                    mvpPresenter.favoriteDetele(nestInfoId);
+                }
                 break;
             case R.id.tv_url:
                 IntentUtils.startOutWebActivity(this, "");
@@ -134,10 +135,10 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
                 GuideHelper.guide(this,Double.parseDouble(getPref().getLatitude()),Double.parseDouble(getPref().getLongitude()));
                 break;
             case R.id.tv_call:
-                CommonUtil.callPhone(this,"120");
+                CommonUtil.callPhone(this,detail.getContactPhone());
                 break;
             case R.id.tv_wechat:
-                CommonUtil.copyMsg(this, tvWechat.getText().toString().trim());
+                CommonUtil.copyMsg(this, detail.getWechat());
                 new DialogBuilder(this)
                         .setTitle(R.string.tip)
                         .setMessage(R.string.copy_wechat)
@@ -155,7 +156,7 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
                         }).create().show();
                 break;
             case R.id.tv_weibo:
-                CommonUtil.copyMsg(this, tvWeibo.getText().toString().trim());
+                CommonUtil.copyMsg(this, detail.getWeibo());
                 new DialogBuilder(this)
                         .setTitle(R.string.tip)
                         .setMessage(R.string.copy_weibo)
@@ -176,8 +177,45 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
     }
 
     @Override
-    public void setData(InfoDetail data) {
-
+    public void setData(NestAd data) {
+        closeLoadingDialog();
+        this.detail=data;
+        tvTitle.setText(data.getTitle());
+        tvName.setText(data.getTitle());
+        GlideImgManager.loadImage(this,data.getCoverPicture(),ivBackground);
+        if (data.getIsCollection()>0){
+            ivFav.setImageResource(R.drawable.ic_fav_check);
+        }else {
+            ivFav.setImageResource(R.drawable.ic_fav_nor);
+        }
+         tvDesc.setText(data.getIntroduction());
+         if (TextUtils.isEmpty(data.getLinkText())||TextUtils.isEmpty(data.getLinkUrl())){
+             tvUrl.setVisibility(View.GONE);
+         }else {
+             tvUrl.setVisibility(View.VISIBLE);
+             tvUrl.setText(data.getLinkText());
+         }
+         tvAddress.setText(data.getAddress()+data.getAddressDetail());
+         if (TextUtils.isEmpty(data.getContactPhone())){
+             tvCall.setVisibility(View.GONE);
+         }else {
+             tvCall.setVisibility(View.VISIBLE);
+         }
+        if (TextUtils.isEmpty(data.getWechat())){
+            tvWechat.setVisibility(View.GONE);
+        }else {
+            tvWechat.setVisibility(View.VISIBLE);
+        }
+        if (TextUtils.isEmpty(data.getWeibo())){
+            tvWeibo.setVisibility(View.GONE);
+        }else {
+            tvWeibo.setVisibility(View.VISIBLE);
+        }
+        pictureArr.addAll(data.getPictureList());
+        adapter=new PictureVerticalAdapter(pictureArr);
+        rvPicture.setLayoutManager(new LinearLayoutManager(this,OrientationHelper.VERTICAL,false));
+        rvPicture.addItemDecoration(new VerticalDecoration(this,R.drawable.bg_city_divide));
+        rvPicture.setAdapter(adapter);
     }
 
     @Override
@@ -187,16 +225,16 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
     }
 
     @Override
-    public void addFavorite(Integer data) {
+    public void addFavorite(Boolean data) {
         ivFav.setSelected(true);
-//        detail.setIsFavorited(1);
+        detail.setIsCollection(1);
         ToastUtil.showSuccess(this, getString(R.string.collect_success), R.drawable.ic_done);
     }
 
     @Override
     public void deleteFavorite(Boolean data) {
         ivFav.setSelected(false);
-//        detail.setIsFavorited(0);
+        detail.setIsCollection(0);
         ToastUtil.showSuccess(this, getString(R.string.cancel_collect), R.drawable.ic_done);
     }
 
@@ -220,16 +258,11 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
                         codeArr.add(report.getName());
                     }
                     String type = TextUtils.join(",", codeArr);
-//                    mvpPresenter.reportAdd(articleUuid, content, type);
+                    mvpPresenter.reportAdd(nestInfoId, content, type);
                 }
             });
             reportDialog.show();
         }
-    }
-
-    @Override
-    public void shareAdd(Integer data) {
-
     }
 
 }

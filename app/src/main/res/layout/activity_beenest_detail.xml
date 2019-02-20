@@ -50,8 +50,7 @@
             android:lines="1"
             android:ellipsize="end"
             android:textSize="@dimen/textfont15"
-            android:textColor="@color/text_black"
-            android:text="xxxxx"/>
+            android:textColor="@color/text_black" />
         <ImageView
             android:id="@+id/iv_fav"
             android:layout_width="wrap_content"
@@ -67,7 +66,7 @@
             android:maxLines="3"
             android:textColor="@color/text_black"
             android:textSize="@dimen/textfont14"
-            android:text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"/>
+            android:text=""/>
         <TextView
             android:id="@+id/tv_check_all"
             android:layout_width="wrap_content"
@@ -89,7 +88,7 @@
             android:paddingTop="@dimen/space10"
             android:textColor="@color/text_white"
             android:textSize="@dimen/textfont14"
-            android:visibility="visible" />
+            android:visibility="gone" />
         <LinearLayout
             android:id="@+id/lin_location"
             android:layout_width="match_parent"
@@ -110,7 +109,7 @@
                 android:layout_marginRight="@dimen/space25"
                 android:textSize="@dimen/textfont16"
                 android:textColor="@color/text_black"
-                android:text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"/>
+                android:text=""/>
             <TextView
                 android:id="@+id/tv_navigation"
                 android:layout_width="wrap_content"

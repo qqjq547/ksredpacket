@@ -7,6 +7,7 @@ import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.DictionaryType;
 import com.guochuang.mimedia.mvp.model.InfoDetail;
+import com.guochuang.mimedia.mvp.model.NestAd;
 import com.guochuang.mimedia.mvp.model.Reply;
 import com.guochuang.mimedia.mvp.view.BeeNestView;
 import com.guochuang.mimedia.mvp.view.InfoDetailView;
@@ -22,10 +23,10 @@ public class BeeNestPresenter extends BasePresenter<BeeNestView> {
     public BeeNestPresenter(BeeNestView view) {
         attachView(view);
     }
-    public void beginRead(String articleUuid){
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().begin_read(articleUuid)), new ApiCallback<InfoDetail>() {
+    public void getNestAd(long nestInfoId,String type){
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getNestAd(nestInfoId,type)), new ApiCallback<NestAd>() {
             @Override
-            public void onSuccess(InfoDetail data) {
+            public void onSuccess(NestAd data) {
                 mvpView.setData(data);
 
             }
@@ -43,10 +44,10 @@ public class BeeNestPresenter extends BasePresenter<BeeNestView> {
         });
     }
 
-    public void favoriteAdd(String articleUuid){
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().favoriteAdd(articleUuid)), new ApiCallback<Integer>() {
+    public void favoriteAdd(long nestInfoId){
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().nestAddFavorite(nestInfoId)), new ApiCallback<Boolean>() {
             @Override
-            public void onSuccess(Integer data) {
+            public void onSuccess(Boolean data) {
                 mvpView.addFavorite(data);
 
             }
@@ -63,12 +64,11 @@ public class BeeNestPresenter extends BasePresenter<BeeNestView> {
             }
         });
     }
-    public void favoriteDetele(String articleUuid){
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().favoriteDelete(articleUuid)), new ApiCallback<Boolean>() {
+    public void favoriteDetele(long nestInfoId){
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().nestDelFavorite(nestInfoId)), new ApiCallback<Boolean>() {
             @Override
             public void onSuccess(Boolean data) {
                 mvpView.deleteFavorite(data);
-
             }
 
             @Override
@@ -83,8 +83,8 @@ public class BeeNestPresenter extends BasePresenter<BeeNestView> {
             }
         });
     }
-    public void reportAdd(String articleUuid,String content,String types){
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().reportAdd(articleUuid,content,types)), new ApiCallback<Integer>() {
+    public void reportAdd(long nestInfoId,String content,String types){
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().nestReport(nestInfoId,content,types)), new ApiCallback<Integer>() {
             @Override
             public void onSuccess(Integer data) {
                 mvpView.addReport(data);

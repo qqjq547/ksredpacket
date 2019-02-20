@@ -2,6 +2,7 @@ package com.guochuang.mimedia.mvp.view;
 
 import com.guochuang.mimedia.mvp.model.HomeRegion;
 import com.guochuang.mimedia.mvp.model.MyKsb;
+import com.guochuang.mimedia.mvp.model.NestHomeAd;
 import com.guochuang.mimedia.mvp.model.Redbag;
 import com.guochuang.mimedia.mvp.model.RedbagDetail;
 
@@ -20,6 +21,7 @@ public interface RedbagView {
     void setUserRole(Integer data);
     void setHomeRegion(HomeRegion data);
     void setKilometre(Integer data);
+    void setHomeAd(List<NestHomeAd> data);
     void setError(String msg);
     void setRedbagInvalid();
 

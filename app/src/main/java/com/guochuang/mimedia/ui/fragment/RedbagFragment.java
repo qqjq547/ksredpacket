@@ -37,6 +37,7 @@ import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.MvpFragment;
 import com.guochuang.mimedia.mvp.model.HomeRegion;
 import com.guochuang.mimedia.mvp.model.MyKsb;
+import com.guochuang.mimedia.mvp.model.NestHomeAd;
 import com.guochuang.mimedia.mvp.model.Redbag;
 import com.guochuang.mimedia.mvp.model.RedbagDetail;
 import com.guochuang.mimedia.mvp.presenter.RedbagPresenter;
@@ -206,7 +207,6 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
             }
         });
         setUserRole(getPref().getInt(PrefUtil.USER_ROLE,0));
-        sethoneyData();
     }
 
     @Override
@@ -335,6 +335,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
             if (isFirstLocation) {
                 isFirstLocation = false;
                 mvpPresenter.getHomeRegion(getPref().getLatitude(), getPref().getLongitude());
+                mvpPresenter.getHomeAd(getPref().getLatitude(), getPref().getLongitude());
             }
             if (!isHidden() && isResumed()) {
                 isDelay = true;
@@ -464,6 +465,13 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     }
 
     @Override
+    public void setHomeAd(List<NestHomeAd> data) {
+        if (data!=null&&data.size()>0){
+            sethoneyData(data);
+        }
+    }
+
+    @Override
     public void setError(String msg) {
         closeLoadingDialog();
         closeAnim();
@@ -539,16 +547,12 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
             rotateAnim = null;
         }
     }
-    public void sethoneyData(){
+    public void sethoneyData(List<NestHomeAd> honeyArr){
         hcvAd.setVisibility(View.VISIBLE);
-        List<String> honeyArr=new ArrayList<>();
-        for (int i=0;i<20;i++){
-            honeyArr.add("tag="+i);
-        }
         hcvAd.setData(honeyArr, new HoneyCombView.OnMenuClickListener() {
             @Override
-            public void onClick(String data) {
-                startActivity(new Intent(getActivity(),BeeNestActivity.class));
+            public void onClick(NestHomeAd data) {
+                startActivity(new Intent(getActivity(),BeeNestActivity.class).putExtra(Constant.NESTINFOID,data.getNestInfoId()));
             }
 
             @Override
