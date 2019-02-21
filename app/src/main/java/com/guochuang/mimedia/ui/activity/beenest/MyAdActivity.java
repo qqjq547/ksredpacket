@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
+import com.guochuang.mimedia.mvp.model.NestStatistics;
+import com.guochuang.mimedia.mvp.presenter.MyAdPresneter;
+import com.guochuang.mimedia.mvp.view.MyAdView;
 import com.guochuang.mimedia.ui.adapter.MyFragmentPagerAdapter;
 import com.guochuang.mimedia.ui.fragment.AdListFragment;
 import com.sz.gcyh.KSHongBao.R;
@@ -16,7 +19,7 @@ import com.sz.gcyh.KSHongBao.R;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class MyAdActivity extends MvpActivity {
+public class MyAdActivity extends MvpActivity<MyAdPresneter> implements MyAdView {
 
     MyFragmentPagerAdapter pagerAdapter;
     @BindView(R.id.iv_back)
@@ -44,8 +47,8 @@ public class MyAdActivity extends MvpActivity {
     AdListFragment[] fragments = new AdListFragment[4];
 
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    protected MyAdPresneter createPresenter() {
+        return new MyAdPresneter(this);
     }
 
     @Override
@@ -68,6 +71,7 @@ public class MyAdActivity extends MvpActivity {
         pagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), fragments, titleArr);
         vpContent.setAdapter(pagerAdapter);
         tbList.setupWithViewPager(vpContent);
+        mvpPresenter.getMyStatistics();
     }
 
     @OnClick({R.id.iv_back, R.id.tv_text})
@@ -80,5 +84,22 @@ public class MyAdActivity extends MvpActivity {
                 startActivity(new Intent(this,MyBidActivity.class));
                 break;
         }
+    }
+
+    @Override
+    public void setStatistics(NestStatistics data) {
+        if (data!=null){
+            tvAdCount.setText(String.valueOf(data.getAdNumber()));
+            tvAdShowing.setText(String.valueOf(data.getPutIn()));
+            tvAdMoney.setText(String.valueOf(data.getCountMoney()));
+            tvShowNum.setText(String.valueOf(data.getShowQuantity()));
+            tvClickNum.setText(String.valueOf(data.getClickQuantity()));
+            tvCollectNum.setText(String.valueOf(data.getFavoriteQuantity()));
+        }
+    }
+
+    @Override
+    public void setError(String msg) {
+        showShortToast(msg);
     }
 }

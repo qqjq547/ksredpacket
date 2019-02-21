@@ -7,21 +7,21 @@ import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.MyAd;
 import com.guochuang.mimedia.mvp.model.NestStatistics;
-import com.guochuang.mimedia.mvp.view.MyAdView;
+import com.guochuang.mimedia.mvp.view.AdListView;
 import com.guochuang.mimedia.tools.RxUtil;
 
-public class MyAdPresneter extends BasePresenter<MyAdView> {
+public class AdListPresneter extends BasePresenter<AdListView> {
 
-    public MyAdPresneter(MyAdView view) {
+    public AdListPresneter(AdListView view) {
         attachView(view);
     }
 
-    public void getMyStatistics(){
+    public void getMyAdList(Integer status,int currentPage,int pageSize){
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                getNestStatistics()), new ApiCallback<NestStatistics>() {
+                nestMyList(status,currentPage,pageSize)), new ApiCallback<Page<MyAd>>() {
             @Override
-            public void onSuccess(NestStatistics data) {
-                mvpView.setStatistics(data);
+            public void onSuccess(Page<MyAd> data) {
+                mvpView.setData(data);
             }
 
             @Override

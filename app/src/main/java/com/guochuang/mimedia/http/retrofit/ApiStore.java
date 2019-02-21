@@ -46,6 +46,7 @@ import com.guochuang.mimedia.mvp.model.NestHistory;
 import com.guochuang.mimedia.mvp.model.NestHomeAd;
 import com.guochuang.mimedia.mvp.model.NestInfoLimit;
 import com.guochuang.mimedia.mvp.model.NestLocation;
+import com.guochuang.mimedia.mvp.model.NestStatistics;
 import com.guochuang.mimedia.mvp.model.NestTemplate;
 import com.guochuang.mimedia.mvp.model.Order;
 import com.guochuang.mimedia.mvp.model.QrCode;
@@ -1216,4 +1217,7 @@ public interface ApiStore {
     Observable<HttpResponse<List<NestLocation>>> getNestSpot(
             @Query("latitude") String latitude,
             @Query("longitude") String longitude);
+
+    @GET("/api/v1/nest/nest_success/my_statistics")
+    Observable<HttpResponse<NestStatistics>> getNestStatistics();
 }
