@@ -19,13 +19,15 @@ import java.util.List;
 public class NestFavoriteAdapter extends BaseQuickAdapter<NestFavorite,BaseViewHolder> {
 
     public NestFavoriteAdapter(@Nullable List<NestFavorite> data) {
-        super(R.layout.item_info,data);
+        super(R.layout.item_nest_favorite,data);
     }
 
     @Override
     protected void convert(BaseViewHolder helper, NestFavorite item) {
-
-
+        GlideImgManager.loadCircleImage(mContext,item.getPublisherAvatar(),helper.getView(R.id.iv_avatar));
+        helper.setText(R.id.tv_nickname,item.getPublisherNickName());
+        helper.setText(R.id.tv_nickname,item.getShortMsg());
+        GlideImgManager.loadCircleImage(mContext,item.getCoverPicture(),helper.getView(R.id.iv_cover));
     }
 
 }

@@ -84,7 +84,7 @@ public class Constant {
     public static final String SNATCH = "snatch";
     public static final String ADDRESS = "address";
     public static final String NESTINFOID = "nestInfoId";
-
+    public static final String NESTLOCATIONID = "nestLocationId";
 
 
 
@@ -257,4 +257,6 @@ public class Constant {
 
     public static final String AD_TYPE_DETAIL = "detail";
     public static final String AD_TYPE_EDIT = "edit";
+    public static final String MAP_MARKER_SPOT = "spot";
+
 }

@@ -94,6 +94,7 @@ public class BidBrandActivity extends MvpActivity {
     @Override
     public void initViewAndData() {
         tvText.setText(R.string.history_put);
+        long nestLcationId=getIntent().getLongExtra(Constant.NESTLOCATIONID,0);
         dateFormat = new SimpleDateFormat(Constant.FORMAT_MONTH);
         tvMonth.setText(dateFormat.format(new Date()));
         initMarkData();

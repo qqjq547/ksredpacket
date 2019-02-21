@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,6 +27,9 @@ import com.baidu.mapapi.model.LatLng;
 import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
+import com.guochuang.mimedia.mvp.model.NestLocation;
+import com.guochuang.mimedia.mvp.presenter.AdBidPresneter;
+import com.guochuang.mimedia.mvp.view.AdBidView;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.LogUtil;
@@ -40,7 +44,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import rx.functions.Action1;
 
-public class AdBidActivity extends MvpActivity {
+public class AdBidActivity extends MvpActivity<AdBidPresneter> implements AdBidView {
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.tv_title)
@@ -60,8 +64,8 @@ public class AdBidActivity extends MvpActivity {
     List<OverlayOptions> adOptions = new ArrayList<>();
     List<LatLng> markerArr=new ArrayList<>();
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    protected AdBidPresneter createPresenter() {
+        return new AdBidPresneter(this);
     }
 
     @Override
@@ -92,7 +96,13 @@ public class AdBidActivity extends MvpActivity {
             @Override
             public boolean onMarkerClick(Marker marker) {
                 Bundle mb = marker.getExtraInfo();
-
+               String value=mb.getString(Constant.RED_PACKET_TYPE);
+               if (TextUtils.equals(value,Constant.MAP_MARKER_SPOT)){
+                   long nestLocationId=mb.getLong(Constant.NESTLOCATIONID,0);
+                   if(nestLocationId>0){
+                       startActivity(new Intent(AdBidActivity.this,BidBrandActivity.class).putExtra(Constant.NESTLOCATIONID,nestLocationId));
+                   }
+               }
                 return false;
             }
         });
@@ -165,6 +175,7 @@ public class AdBidActivity extends MvpActivity {
             if ("4.9E-324".equals(String.valueOf(bdLocation.getLatitude()))) {
                 return;
             }
+            mvpPresenter.getNestSpot(String.valueOf(bdLocation.getLatitude()),String.valueOf(getPref().getLongitude()));
             LatLng ll = new LatLng(bdLocation.getLatitude(),
                     bdLocation.getLongitude());
             MapStatus.Builder builder = new MapStatus.Builder();
@@ -185,25 +196,34 @@ public class AdBidActivity extends MvpActivity {
             //在地图上添加Marker，并显示
             bm.addOverlay(option);
 
-            for (int i=0;i<30;i++){
-                markerArr.add(new LatLng(bdLocation.getLatitude()-0.01d+(Math.random()*0.02d),bdLocation.getLongitude()-0.01d+(Math.random()*0.02d)));
-            }
-            addMarker(markerArr);
         }
     };
-    public void addMarker(List<LatLng> redbagList) {
+    public void addMarker(List<NestLocation> data) {
         adOptions.clear();
-        for (int i = 0; i < redbagList.size(); i++) {
+        for (int i = 0; i < data.size(); i++) {
             BitmapDescriptor bitmap;
             Bundle bundle = new Bundle();
             bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_ad_marker);
-            bundle.putSerializable(Constant.RED_PACKET_TYPE, Constant.TYPE_REDBAG);
+            bundle.putSerializable(Constant.RED_PACKET_TYPE, Constant.MAP_MARKER_SPOT);
+            bundle.putLong(Constant.NESTLOCATIONID,data.get(i).getNestLocationId());
             OverlayOptions option = new MarkerOptions()
-                    .position(redbagList.get(i))
+                    .position(new LatLng(data.get(i).getLatitude(),data.get(i).getLongitude()))
                     .icon(bitmap).extraInfo(bundle)
                     .animateType(MarkerOptions.MarkerAnimateType.grow);
             adOptions.add(option);
         }
         bm.addOverlays(adOptions);
+    }
+
+    @Override
+    public void setData(List<NestLocation> data) {
+        if (data!=null&&data.size()>0){
+            addMarker(data);
+        }
+    }
+
+    @Override
+    public void setError(String msg) {
+
     }
 }

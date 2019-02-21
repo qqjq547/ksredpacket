@@ -45,6 +45,7 @@ import com.guochuang.mimedia.mvp.model.NestFavorite;
 import com.guochuang.mimedia.mvp.model.NestHistory;
 import com.guochuang.mimedia.mvp.model.NestHomeAd;
 import com.guochuang.mimedia.mvp.model.NestInfoLimit;
+import com.guochuang.mimedia.mvp.model.NestLocation;
 import com.guochuang.mimedia.mvp.model.NestTemplate;
 import com.guochuang.mimedia.mvp.model.Order;
 import com.guochuang.mimedia.mvp.model.QrCode;
@@ -1210,4 +1211,9 @@ public interface ApiStore {
     Observable<HttpResponse<Page<NestFavorite>>> getNestAdFavorite(
             @Query("currentPage") int currentPage,
             @Query("pageSize") int pageSize);
+
+    @GET("/api/v1/nest/nest_location/get_spot")
+    Observable<HttpResponse<List<NestLocation>>> getNestSpot(
+            @Query("latitude") String latitude,
+            @Query("longitude") String longitude);
 }
