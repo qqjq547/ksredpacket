@@ -2,7 +2,10 @@ package com.guochuang.mimedia.http.retrofit;
 
 import android.support.v4.util.ArrayMap;
 
+import com.baidu.location.Jni;
 import com.guochuang.mimedia.tools.Constant;
+import com.guochuang.mimedia.tools.JniUtil;
+import com.guochuang.mimedia.tools.JsonUtil;
 import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.tools.StringUtil;
 import com.sz.gcyh.KSHongBao.BuildConfig;
@@ -62,20 +65,21 @@ public class ApiClient {
                 String h_nonce = UUID.randomUUID().toString();
                 String h_system_code = Constant.H_SYSTEM_CODE;
                 String h_version = BuildConfig.VERSION_NAME;
-
-                Map<String,String> map=new ArrayMap<>();
-                if(request.body() instanceof FormBody){
-                    FormBody oldFormBody = (FormBody) request.body();
-                    for (int i=0;i<oldFormBody.size();i++){
-                        map.put(oldFormBody.name(i),oldFormBody.value(i));
-                    }
-                }else{
-                    HttpUrl httpUrl=request.url();
-                    Set<String> names=httpUrl.queryParameterNames();
-                    for (String key:names){
-                        map.put(key,httpUrl.queryParameter(key));
-                    }
-                String h_sign =  StringUtil.md5(StringUtil.toSort(map) + "&" + h_time + "&" + h_nonce + "&" + StringUtil.getNor());;
+                String h_sign ="";
+//                Map<String,String> map=new ArrayMap<>();
+//                if(request.body() instanceof FormBody){
+//                    FormBody oldFormBody = (FormBody) request.body();
+//                    for (int i=0;i<oldFormBody.size();i++){
+//                        map.put(oldFormBody.name(i),oldFormBody.value(i));
+//                    }eshare
+//                }else {
+//                    HttpUrl httpUrl = request.url();
+//                    Set<String> names = httpUrl.queryParameterNames();
+//                    for (String key : names) {
+//                        map.put(key, httpUrl.queryParameter(key));
+//                    }
+//                }
+//                 h_sign =  StringUtil.md5(StringUtil.toSort(map) + "&" + h_time + "&" + h_nonce + "&" + JniUtil.getSign());;
                 request = request.newBuilder()
                         .addHeader(Constant.PARAMS_H_API_TOEKN, h_api_token)
                         .addHeader(Constant.PARAMS_H_TIME, h_time)
@@ -85,8 +89,6 @@ public class ApiClient {
                         .addHeader(Constant.PARAMS_H_VERSION, h_version)
                         .addHeader(Constant.PARAMS_H_SIGN, h_sign)
                         .build();
-
-                }
                 return chain.proceed(request);
             }
         });

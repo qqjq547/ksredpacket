@@ -12,8 +12,10 @@ import com.guochuang.mimedia.http.response.Page;
 import com.guochuang.mimedia.mvp.model.MyAd;
 import com.guochuang.mimedia.mvp.presenter.MyAdPresneter;
 import com.guochuang.mimedia.mvp.view.MyAdView;
+import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
-import com.guochuang.mimedia.ui.activity.beenest.BidBrandActivity;
+import com.guochuang.mimedia.tools.IntentUtils;
+import com.guochuang.mimedia.ui.activity.beenest.BeeNestActivity;
 import com.guochuang.mimedia.ui.adapter.MyAdAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -52,11 +54,15 @@ public class AdListFragment extends MvpFragment<MyAdPresneter> implements MyAdVi
         adapter =new MyAdAdapter(dataArr);
         adapter.setEmptyView(getLayoutInflater().inflate(R.layout.layout_empty,null));
         adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
-        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(new Intent(getActivity(),BidBrandActivity.class));
+                MyAd myAd=dataArr.get(position);
+                if (myAd.getIsEdit()==0){
+                    IntentUtils.startEditAdActivity(getActivity(),myAd.getNestInfoId(),myAd.getNestLocationId(),myAd.getNestTimeInfoId());
+                }else {
+                    startActivity(new Intent(getActivity(),BeeNestActivity.class).putExtra(Constant.NESTINFOID,myAd.getNestInfoId()));
+                }
             }
         });
         rvAd.setAdapter(adapter);

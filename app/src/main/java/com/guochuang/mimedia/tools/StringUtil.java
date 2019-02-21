@@ -99,7 +99,9 @@ public class StringUtil {
             Object value = paramsMap.get(name);
             result.append(name).append("=").append(value).append("&");
         }
-        result.deleteCharAt(result.length() - 1);
+        if (nameList.size()>0) {
+            result.deleteCharAt(result.length() - 1);
+        }
         return result.toString();
     }
 
@@ -143,17 +145,13 @@ public class StringUtil {
     public static HashMap<String, String> getSign(HashMap<String, String> hm) {
         String time = System.currentTimeMillis() + "";
         String nonce = StringUtil.getUuid();
-        String sign = StringUtil.md5(StringUtil.toSort(hm) + "&" + time + "&" + nonce + "&" + StringUtil.getNor());
+        String sign = StringUtil.md5(StringUtil.toSort(hm) + "&" + time + "&" + nonce + "&" + JniUtil.getSign());
         HashMap<String, String> signHm = new HashMap<>();
         signHm.putAll(hm);
         signHm.put("h-sign", sign);
         signHm.put("h-time", time);
         signHm.put("h-nonce", nonce);
         return signHm;
-    }
-
-    public static String getNor() {
-        return new JniUtil().getSign();
     }
 
 }

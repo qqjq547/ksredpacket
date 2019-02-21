@@ -2,8 +2,8 @@ package com.guochuang.mimedia.tools;
 
 public class JniUtil {
     static {
-        System.loadLibrary("JniHash");
+        System.loadLibrary("JniUtil");
     }
 
-    public native String getSign();
+    public static native String getSign();
 }

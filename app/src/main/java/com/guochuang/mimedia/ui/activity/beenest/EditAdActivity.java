@@ -137,6 +137,8 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
     public void initViewAndData() {
         tvTitle.setText(R.string.edit_ad);
         tvText.setText(R.string.select_temp);
+        nestInfoId=getIntent().getLongExtra(Constant.NESTINFOID,0);
+        nestTimeInfoId=getIntent().getLongExtra(Constant.NESTTIMEINFOID,0);
         rvPicture.setLayoutManager(new GridLayoutManager(this,3));
         rvPicture.addItemDecoration(new GridItemDecoration(3,CommonUtil.dip2px(this,10),false));
         rvPicture.setItemAnimator(new DefaultItemAnimator());

@@ -36,11 +36,17 @@ public class MyAdAdapter extends BaseQuickAdapter<MyAd,BaseViewHolder> {
         helper.setText(R.id.tv_price,builder);
 
         helper.addOnClickListener(R.id.tv_edit);
-        helper.setText(R.id.tv_show_num,String.valueOf(item.getNestStatisticsResDto().getShowQuantity()));
-        helper.setText(R.id.tv_click_num,String.valueOf(item.getNestStatisticsResDto().getClickQuantity()));
-        helper.setText(R.id.tv_collect_num,String.valueOf(item.getNestStatisticsResDto().getFavoriteQuantity()));
+        if (item.getNestStatisticsResDto()==null){
+            helper.setText(R.id.tv_show_num,String.valueOf(0));
+            helper.setText(R.id.tv_click_num,String.valueOf(0));
+            helper.setText(R.id.tv_collect_num,String.valueOf(0));
+        }else {
+            helper.setText(R.id.tv_show_num,String.valueOf(item.getNestStatisticsResDto().getShowQuantity()));
+            helper.setText(R.id.tv_click_num,String.valueOf(item.getNestStatisticsResDto().getClickQuantity()));
+            helper.setText(R.id.tv_collect_num,String.valueOf(item.getNestStatisticsResDto().getFavoriteQuantity()));
+        }
 
-        if (item.getStatus().equals("0")){ //待投放
+        if (item.getStatus()==0){ //待投放
             helper.setGone(R.id.lin_info,false);
             helper.setGone(R.id.lin_data,false);
             helper.setText(R.id.tv_edit,R.string.edit_ad);
@@ -48,7 +54,7 @@ public class MyAdAdapter extends BaseQuickAdapter<MyAd,BaseViewHolder> {
             helper.setTextColor(R.id.tv_status,mContext.getResources().getColor(R.color.bg_sky_blue));
             helper.setBackgroundColor(R.id.v_line,mContext.getResources().getColor(R.color.bg_sky_blue));
             helper.setTextColor(R.id.tv_time,mContext.getResources().getColor(R.color.text_black));
-        }else if(item.getStatus().equals("1")){ //投放中
+        }else if(item.getStatus()==1){ //投放中
             helper.setGone(R.id.lin_info,true);
             helper.setGone(R.id.lin_data,false);
             helper.setText(R.id.tv_edit,R.string.edit_ad);
@@ -56,7 +62,7 @@ public class MyAdAdapter extends BaseQuickAdapter<MyAd,BaseViewHolder> {
             helper.setTextColor(R.id.tv_status,mContext.getResources().getColor(R.color.text_city_yellow));
             helper.setBackgroundColor(R.id.v_line,mContext.getResources().getColor(R.color.text_city_yellow));
             helper.setTextColor(R.id.tv_time,mContext.getResources().getColor(R.color.text_black));
-        }else if(item.getStatus().equals("2")){//投放结束
+        }else if(item.getStatus()==2){//投放结束
             helper.setGone(R.id.lin_info,true);
             helper.setGone(R.id.lin_data,true);
             helper.setText(R.id.tv_edit,R.string.check_ad);
@@ -67,8 +73,6 @@ public class MyAdAdapter extends BaseQuickAdapter<MyAd,BaseViewHolder> {
         }
         WebView wvMap=helper.getView(R.id.wv_map);
         CommonUtil.initH5WebView(mContext,wvMap);
-        wvMap.loadUrl(Constant.URL_BMAP_URL+"?lng=116.40387397&lat=39.91488908");
-//        wvMap.loadUrl(Constant.URL_BMAP_URL+"?lng="+item.getLng()+"&lat="+item.getLat());
-
+        wvMap.loadUrl(Constant.URL_BMAP_URL+"?lng="+item.getLng()+"&lat="+item.getLat());
     }
 }

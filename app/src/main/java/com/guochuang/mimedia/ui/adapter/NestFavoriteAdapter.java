@@ -24,10 +24,10 @@ public class NestFavoriteAdapter extends BaseQuickAdapter<NestFavorite,BaseViewH
 
     @Override
     protected void convert(BaseViewHolder helper, NestFavorite item) {
-        GlideImgManager.loadCircleImage(mContext,item.getPublisherAvatar(),helper.getView(R.id.iv_avatar));
+        GlideImgManager.loadCircleImage(mContext,item.getPublisherAvatar(),(ImageView) helper.getView(R.id.iv_avatar));
         helper.setText(R.id.tv_nickname,item.getPublisherNickName());
         helper.setText(R.id.tv_nickname,item.getShortMsg());
-        GlideImgManager.loadCircleImage(mContext,item.getCoverPicture(),helper.getView(R.id.iv_cover));
+        GlideImgManager.loadCircleImage(mContext,item.getCoverPicture(),(ImageView) helper.getView(R.id.iv_cover));
     }
 
 }

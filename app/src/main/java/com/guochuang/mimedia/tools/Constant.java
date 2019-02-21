@@ -85,6 +85,8 @@ public class Constant {
     public static final String ADDRESS = "address";
     public static final String NESTINFOID = "nestInfoId";
     public static final String NESTLOCATIONID = "nestLocationId";
+    public static final String NESTTIMEINFOID = "nestTimeInfoId";
+
 
 
 

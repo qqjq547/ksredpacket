@@ -8,6 +8,7 @@ import android.net.Uri;
 
 import com.guochuang.mimedia.mvp.model.RecommendData;
 import com.guochuang.mimedia.mvp.model.RedbagDetail;
+import com.guochuang.mimedia.ui.activity.beenest.EditAdActivity;
 import com.guochuang.mimedia.ui.activity.common.ImagePreviewActivity;
 import com.guochuang.mimedia.ui.activity.user.CardAddActivity;
 import com.guochuang.mimedia.ui.activity.city.CityBidRecordActivity;
@@ -223,6 +224,13 @@ public class IntentUtils {
         Intent intent = new Intent(activity, ImagePreviewActivity.class);
         intent.putExtra(Constant.ARGS_LIST, urls);
         intent.putExtra(Constant.ARGS_POSITION, position);
+        activity.startActivity(intent);
+    }
+    public static void startEditAdActivity(Activity activity, long nestInfoId,long nestLocationId,long nestTimeInfoId) {
+        Intent intent = new Intent(activity, EditAdActivity.class);
+        intent.putExtra(Constant.NESTINFOID, nestInfoId);
+        intent.putExtra(Constant.NESTLOCATIONID, nestLocationId);
+        intent.putExtra(Constant.NESTTIMEINFOID, nestTimeInfoId);
         activity.startActivity(intent);
     }
 }

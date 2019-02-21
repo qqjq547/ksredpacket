@@ -26,7 +26,7 @@ public class MyAd {
     private NestStatisticsResDtoBean nestStatisticsResDto;
     private int nestTimeInfoId;
     private String startDate;
-    private String status;
+    private int status;
     private String totalPrice;
     private String unitPrice;
 
@@ -102,11 +102,11 @@ public class MyAd {
         this.startDate = startDate;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

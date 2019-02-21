@@ -35,9 +35,16 @@ public class HistoryPutAdapter extends BaseQuickAdapter<NestHistory,BaseViewHold
         helper.setText(R.id.tv_price,builder);
 
         helper.setText(R.id.tv_time,String.format(mContext.getString(R.string.format_time_to_time),item.getStartDate(),item.getEndDate()));
-        helper.setText(R.id.tv_show_num,String.valueOf(item.getNestStatisticsResDto().getShowQuantity()));
-        helper.setText(R.id.tv_click_num,String.valueOf(item.getNestStatisticsResDto().getClickQuantity()));
-        helper.setText(R.id.tv_collect_num,String.valueOf(item.getNestStatisticsResDto().getFavoriteQuantity()));
+        if (item.getNestStatisticsResDto()==null){
+            helper.setText(R.id.tv_show_num,String.valueOf(0));
+            helper.setText(R.id.tv_click_num,String.valueOf(0));
+            helper.setText(R.id.tv_collect_num,String.valueOf(0));
+        }else {
+            helper.setText(R.id.tv_show_num,String.valueOf(item.getNestStatisticsResDto().getShowQuantity()));
+            helper.setText(R.id.tv_click_num,String.valueOf(item.getNestStatisticsResDto().getClickQuantity()));
+            helper.setText(R.id.tv_collect_num,String.valueOf(item.getNestStatisticsResDto().getFavoriteQuantity()));
+
+        }
 
     }
 }
