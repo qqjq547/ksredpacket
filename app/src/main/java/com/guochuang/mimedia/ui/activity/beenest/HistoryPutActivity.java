@@ -53,7 +53,7 @@ public class HistoryPutActivity extends MvpActivity<HistoryPutPresneter> impleme
 
     @Override
     public void initViewAndData() {
-          tvTitle.setText(R.string.history_put);
+        tvTitle.setText(R.string.history_put);
         rvHistory.setLayoutManager(new LinearLayoutManager(this,OrientationHelper.VERTICAL,false));
         adapter=new HistoryPutAdapter(dataArr);
         adapter.setEmptyView(getLayoutInflater().inflate(R.layout.layout_empty,null));

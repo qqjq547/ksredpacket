@@ -19,7 +19,7 @@ public class CollectNestAdPresenter extends BasePresenter<CollectNestAdView> {
     public CollectNestAdPresenter(CollectNestAdView view) {
         attachView(view);
     }
-    public void getInfoFavoriteList(int currentPage,int pageSize){
+    public void getNestAdFavorite(int currentPage,int pageSize){
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getNestAdFavorite(currentPage,pageSize)), new ApiCallback<Page<NestFavorite>>() {
             @Override
             public void onSuccess(Page<NestFavorite> data) {

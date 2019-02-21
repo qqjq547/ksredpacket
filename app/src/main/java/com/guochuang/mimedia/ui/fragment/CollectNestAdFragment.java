@@ -1,6 +1,7 @@
 package com.guochuang.mimedia.ui.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
@@ -18,6 +19,7 @@ import com.guochuang.mimedia.mvp.view.CollectNestAdView;
 import com.guochuang.mimedia.mvp.view.InfoListView;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.IntentUtils;
+import com.guochuang.mimedia.ui.activity.beenest.BeeNestActivity;
 import com.guochuang.mimedia.ui.adapter.InfoAdapter;
 import com.guochuang.mimedia.ui.adapter.NestFavoriteAdapter;
 import com.guochuang.mimedia.view.VerticalDecoration;
@@ -61,7 +63,7 @@ public class CollectNestAdFragment extends MvpFragment<CollectNestAdPresenter> i
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 NestFavorite item=itemArr.get(position);
-//                IntentUtils.startInfoDetailActivityForResult(getActivity(),item.getAuthor(),item.getArticleUuid(),position);
+                startActivity(new Intent(getActivity(),BeeNestActivity.class).putExtra(Constant.NESTINFOID,item.getNestInfoId()));
             }
         });
         rvList.setAdapter(adapter);
@@ -70,15 +72,15 @@ public class CollectNestAdFragment extends MvpFragment<CollectNestAdPresenter> i
         srlRefresh.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                mvpPresenter.getInfoFavoriteList(curPage+1,Constant.PAGE_SIZE);
+                mvpPresenter.getNestAdFavorite(curPage+1,Constant.PAGE_SIZE);
             }
 
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                mvpPresenter.getInfoFavoriteList(1,Constant.PAGE_SIZE);
+                mvpPresenter.getNestAdFavorite(1,Constant.PAGE_SIZE);
             }
         });
-        mvpPresenter.getInfoFavoriteList(curPage,Constant.PAGE_SIZE);
+        mvpPresenter.getNestAdFavorite(curPage,Constant.PAGE_SIZE);
     }
 
     @Override

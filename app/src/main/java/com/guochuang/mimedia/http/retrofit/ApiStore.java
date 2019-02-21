@@ -1206,7 +1206,7 @@ public interface ApiStore {
             @Field("type") String type
     );
 
-    @GET("/api/v1/information/favorite/my_favorite")
+    @GET("/api/v1/nest/nest_info/my_favorite")
     Observable<HttpResponse<Page<NestFavorite>>> getNestAdFavorite(
             @Query("currentPage") int currentPage,
             @Query("pageSize") int pageSize);

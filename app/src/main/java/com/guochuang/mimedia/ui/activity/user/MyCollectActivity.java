@@ -50,7 +50,7 @@ public class MyCollectActivity extends MvpActivity {
         tvTitle.setText(R.string.text_my_collection);
         fragments[0] = new CollectRedbagFragment();
         fragments[1] = new CollectInfoFragment();
-        fragments[3] = new CollectNestAdFragment();
+        fragments[2] = new CollectNestAdFragment();
         rgNav.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {

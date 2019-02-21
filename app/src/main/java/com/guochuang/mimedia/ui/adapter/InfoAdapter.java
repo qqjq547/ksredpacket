@@ -28,9 +28,12 @@ public class InfoAdapter extends BaseQuickAdapter<InfoItem,BaseViewHolder> {
             helper.setText(R.id.tv_title,item.getTitle());
         }else {
             int startIndex=item.getTitle().indexOf(keyWord);
-            SpannableString spanstr=new SpannableString(item.getTitle());
-            spanstr.setSpan(new ForegroundColorSpan(mContext.getResources().getColor(R.color.text_info_tab_select)),startIndex,startIndex+keyWord.length(),Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            helper.setText(R.id.tv_title,spanstr);
+            if (startIndex>=0){
+                SpannableString spanstr=new SpannableString(item.getTitle());
+                spanstr.setSpan(new ForegroundColorSpan(mContext.getResources().getColor(R.color.text_info_tab_select)),startIndex,startIndex+keyWord.length(),Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }else {
+                helper.setText(R.id.tv_title,item.getTitle());
+            }
         }
         helper.setText(R.id.tv_from,item.getAuthor());
         helper.setText(R.id.tv_comment_num,String.valueOf(item.getCommentNumber()));
