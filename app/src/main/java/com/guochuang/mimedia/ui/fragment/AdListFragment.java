@@ -10,12 +10,11 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.base.MvpFragment;
 import com.guochuang.mimedia.http.response.Page;
 import com.guochuang.mimedia.mvp.model.MyAd;
-import com.guochuang.mimedia.mvp.presenter.MyAdPresneter;
-import com.guochuang.mimedia.mvp.view.MyAdView;
-import com.guochuang.mimedia.tools.CommonUtil;
+import com.guochuang.mimedia.mvp.model.NestStatistics;
+import com.guochuang.mimedia.mvp.presenter.AdListPresneter;
+import com.guochuang.mimedia.mvp.view.AdListView;
 import com.guochuang.mimedia.tools.Constant;
-import com.guochuang.mimedia.tools.IntentUtils;
-import com.guochuang.mimedia.ui.activity.beenest.BeeNestActivity;
+import com.guochuang.mimedia.ui.activity.beenest.BidBrandActivity;
 import com.guochuang.mimedia.ui.adapter.MyAdAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -27,7 +26,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class AdListFragment extends MvpFragment<MyAdPresneter> implements MyAdView {
+public class AdListFragment extends MvpFragment<AdListPresneter> implements AdListView {
 
     @BindView(R.id.srl_refresh)
     SmartRefreshLayout srlRefresh;
@@ -39,8 +38,8 @@ public class AdListFragment extends MvpFragment<MyAdPresneter> implements MyAdVi
     int curPage=1;
 
     @Override
-    protected MyAdPresneter createPresenter() {
-        return new MyAdPresneter(this);
+    protected AdListPresneter createPresenter() {
+        return new AdListPresneter(this);
     }
 
     @Override
