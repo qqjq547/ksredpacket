@@ -48,6 +48,7 @@ import com.guochuang.mimedia.mvp.model.NestInfoLimit;
 import com.guochuang.mimedia.mvp.model.NestLocation;
 import com.guochuang.mimedia.mvp.model.NestStatistics;
 import com.guochuang.mimedia.mvp.model.NestTemplate;
+import com.guochuang.mimedia.mvp.model.NestTimeInfo;
 import com.guochuang.mimedia.mvp.model.Order;
 import com.guochuang.mimedia.mvp.model.QrCode;
 import com.guochuang.mimedia.mvp.model.RainMsg;
@@ -1225,4 +1226,17 @@ public interface ApiStore {
 
     @GET("/api/v1/nest/nest_success/my_statistics")
     Observable<HttpResponse<NestStatistics>> getNestStatistics();
+
+    @FormUrlEncoded
+    @POST("/api/v1/nest/timeInfo/buyNestTime")
+    Observable<HttpResponse<Boolean>> getBuyNestTime(
+            @Field("nestTimeInfoId") long nestTimeInfoId,
+            @Field("price") String price
+    );
+
+    @FormUrlEncoded
+    @POST("/api/v1/nest/timeInfo/queryNestTimeInfo")
+    Observable<HttpResponse<NestTimeInfo>> getNestTimeInfo(
+            @Field("nestLocationId") long nestLocationId
+    );
 }
