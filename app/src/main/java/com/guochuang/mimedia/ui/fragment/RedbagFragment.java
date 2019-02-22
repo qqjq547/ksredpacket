@@ -51,6 +51,7 @@ import com.guochuang.mimedia.tools.antishake.AntiShake;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.guochuang.mimedia.ui.activity.beenest.BeeNestActivity;
 import com.guochuang.mimedia.ui.activity.beenest.BidBrandActivity;
+import com.guochuang.mimedia.ui.activity.beenest.EditAdActivity;
 import com.guochuang.mimedia.ui.activity.city.CityActivity;
 import com.guochuang.mimedia.ui.activity.MainActivity;
 import com.guochuang.mimedia.ui.activity.common.ShareActivity;
@@ -256,8 +257,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_text:
-//                startActivity(new Intent(getActivity(), SquareActivity.class));
-                startActivity(new Intent(getActivity(), BidBrandActivity.class));
+                startActivity(new Intent(getActivity(), SquareActivity.class));
                 break;
             case R.id.lin_city_owner:
             case R.id.hiv_avatar:
@@ -558,7 +558,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
             @Override
             public void onSendAd() {
                 NestHomeAd firstAd=honeyArr.get(0);
-                IntentUtils.startEditAdActivity(getActivity(),firstAd.getNestInfoId(),firstAd.getNestLocationId(),firstAd.getNestTimeId(),false);
+                startActivity(new Intent(getActivity(),BidBrandActivity.class).putExtra(Constant.NESTLOCATIONID,firstAd.getNestLocationId()));
             }
         });
     }

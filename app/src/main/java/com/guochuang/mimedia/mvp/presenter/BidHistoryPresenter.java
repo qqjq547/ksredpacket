@@ -2,26 +2,29 @@ package com.guochuang.mimedia.mvp.presenter;
 
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.http.exception.ApiException;
-import com.guochuang.mimedia.http.response.HttpResponse;
+import com.guochuang.mimedia.http.response.Page;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.AdInfo;
+import com.guochuang.mimedia.mvp.model.NestAuctionRecord;
+import com.guochuang.mimedia.mvp.model.NestHistory;
 import com.guochuang.mimedia.mvp.view.AdInfoView;
+import com.guochuang.mimedia.mvp.view.BidHistoryView;
 import com.guochuang.mimedia.tools.GsonUtil;
 import com.guochuang.mimedia.tools.RxUtil;
 
-public class AdInfoPresneter extends BasePresenter<AdInfoView> {
+public class BidHistoryPresenter extends BasePresenter<BidHistoryView> {
 
-    public AdInfoPresneter(AdInfoView view) {
+    public BidHistoryPresenter(BidHistoryView view) {
         attachView(view);
     }
 
-    public void commonAdGetVedorAd(){
+    public void getNestAuctionHistory(long nestTimeId,int currentPage,int pageSize){
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                commonAdGetVedorAd()), new ApiCallback<AdInfo>() {
+                nestAuctionList(nestTimeId,currentPage,pageSize)), new ApiCallback<Page<NestAuctionRecord>>() {
             @Override
-            public void onSuccess(AdInfo data) {
-                mvpView.setData(GsonUtil.GsonString(data));
+            public void onSuccess(Page<NestAuctionRecord> data) {
+                mvpView.setData(data);
             }
 
             @Override

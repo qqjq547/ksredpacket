@@ -623,6 +623,7 @@
     <string name="has_vote">已投放</string>
     <string name="format_price_and_total">%s元/天(共%s元)</string>
     <string name="format_time_to_time">%s~%s</string>
+    <string name="format_time_and_count">%s~%s %d天</string>
     <string name="ad_bid">广告竞拍</string>
     <string name="bid_record">竞购记录</string>
     <string name="bid_explain">竞拍说明</string>

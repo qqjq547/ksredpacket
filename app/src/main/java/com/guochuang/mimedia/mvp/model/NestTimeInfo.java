@@ -10,7 +10,7 @@ public class NestTimeInfo {
      */
 
     private CurrentBean current;
-    private int ksb;
+    private double ksb;
     private NestBean nest;
     private String rate;
 
@@ -22,11 +22,11 @@ public class NestTimeInfo {
         this.current = current;
     }
 
-    public int getKsb() {
+    public double getKsb() {
         return ksb;
     }
 
-    public void setKsb(int ksb) {
+    public void setKsb(double ksb) {
         this.ksb = ksb;
     }
 

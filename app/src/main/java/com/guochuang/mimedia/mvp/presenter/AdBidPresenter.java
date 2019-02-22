@@ -2,28 +2,28 @@ package com.guochuang.mimedia.mvp.presenter;
 
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.http.exception.ApiException;
-import com.guochuang.mimedia.http.response.Page;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.AdInfo;
-import com.guochuang.mimedia.mvp.model.NestAuctionRecord;
-import com.guochuang.mimedia.mvp.model.NestHistory;
+import com.guochuang.mimedia.mvp.model.NestLocation;
+import com.guochuang.mimedia.mvp.view.AdBidView;
 import com.guochuang.mimedia.mvp.view.AdInfoView;
-import com.guochuang.mimedia.mvp.view.BidHistoryView;
 import com.guochuang.mimedia.tools.GsonUtil;
 import com.guochuang.mimedia.tools.RxUtil;
 
-public class BidHistoryPresneter extends BasePresenter<BidHistoryView> {
+import java.util.List;
 
-    public BidHistoryPresneter(BidHistoryView view) {
+public class AdBidPresenter extends BasePresenter<AdBidView> {
+
+    public AdBidPresenter(AdBidView view) {
         attachView(view);
     }
 
-    public void getNestAuctionHistory(long nestTimeId,int currentPage,int pageSize){
+    public void getNestSpot(String latitude,String longitude){
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                nestAuctionList(nestTimeId,currentPage,pageSize)), new ApiCallback<Page<NestAuctionRecord>>() {
+                getNestSpot(latitude,longitude)), new ApiCallback<List<NestLocation>>() {
             @Override
-            public void onSuccess(Page<NestAuctionRecord> data) {
+            public void onSuccess(List<NestLocation> data) {
                 mvpView.setData(data);
             }
 

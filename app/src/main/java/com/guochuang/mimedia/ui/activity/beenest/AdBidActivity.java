@@ -25,10 +25,9 @@ import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.guochuang.mimedia.app.App;
-import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.NestLocation;
-import com.guochuang.mimedia.mvp.presenter.AdBidPresneter;
+import com.guochuang.mimedia.mvp.presenter.AdBidPresenter;
 import com.guochuang.mimedia.mvp.view.AdBidView;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.IntentUtils;
@@ -44,7 +43,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import rx.functions.Action1;
 
-public class AdBidActivity extends MvpActivity<AdBidPresneter> implements AdBidView {
+public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidView {
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.tv_title)
@@ -64,8 +63,8 @@ public class AdBidActivity extends MvpActivity<AdBidPresneter> implements AdBidV
     List<OverlayOptions> adOptions = new ArrayList<>();
     List<LatLng> markerArr=new ArrayList<>();
     @Override
-    protected AdBidPresneter createPresenter() {
-        return new AdBidPresneter(this);
+    protected AdBidPresenter createPresenter() {
+        return new AdBidPresenter(this);
     }
 
     @Override

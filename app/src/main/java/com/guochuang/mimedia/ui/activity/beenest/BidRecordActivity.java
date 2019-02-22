@@ -10,7 +10,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.http.response.Page;
 import com.guochuang.mimedia.mvp.model.NestAuctionRecord;
-import com.guochuang.mimedia.mvp.presenter.BidHistoryPresneter;
+import com.guochuang.mimedia.mvp.presenter.BidHistoryPresenter;
 import com.guochuang.mimedia.mvp.view.BidHistoryView;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.ui.adapter.BidRecordAdapter;
@@ -25,7 +25,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class BidRecordActivity extends MvpActivity<BidHistoryPresneter> implements BidHistoryView {
+public class BidRecordActivity extends MvpActivity<BidHistoryPresenter> implements BidHistoryView {
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.tv_title)
@@ -41,8 +41,8 @@ public class BidRecordActivity extends MvpActivity<BidHistoryPresneter> implemen
     long nestTimeId;
 
     @Override
-    protected BidHistoryPresneter createPresenter() {
-        return new BidHistoryPresneter(this);
+    protected BidHistoryPresenter createPresenter() {
+        return new BidHistoryPresenter(this);
     }
 
     @Override

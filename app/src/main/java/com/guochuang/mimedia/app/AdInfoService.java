@@ -5,12 +5,12 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
-import com.guochuang.mimedia.mvp.presenter.AdInfoPresneter;
+import com.guochuang.mimedia.mvp.presenter.AdInfoPresenter;
 import com.guochuang.mimedia.mvp.view.AdInfoView;
 import com.guochuang.mimedia.tools.PrefUtil;
 
 public class AdInfoService extends Service {
-    AdInfoPresneter adInfoPresneter;
+    AdInfoPresenter adInfoPresenter;
 
     @Nullable
     @Override
@@ -21,7 +21,7 @@ public class AdInfoService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        adInfoPresneter = new AdInfoPresneter(new AdInfoView() {
+        adInfoPresenter = new AdInfoPresenter(new AdInfoView() {
             @Override
             public void setData(String data) {
                 PrefUtil.getInstance().setString(PrefUtil.ADVER_MESSAGE, data);
@@ -33,7 +33,7 @@ public class AdInfoService extends Service {
 
             }
         });
-        adInfoPresneter.commonAdGetVedorAd();
+        adInfoPresenter.commonAdGetVedorAd();
     }
 
     @Override
@@ -43,8 +43,8 @@ public class AdInfoService extends Service {
 
     @Override
     public void onDestroy() {
-        if (adInfoPresneter != null) {
-            adInfoPresneter.detachView();
+        if (adInfoPresenter != null) {
+            adInfoPresenter.detachView();
         }
         super.onDestroy();
     }

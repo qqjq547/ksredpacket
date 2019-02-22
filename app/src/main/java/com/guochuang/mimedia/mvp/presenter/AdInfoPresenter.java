@@ -2,26 +2,26 @@ package com.guochuang.mimedia.mvp.presenter;
 
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.http.exception.ApiException;
-import com.guochuang.mimedia.http.response.Page;
+import com.guochuang.mimedia.http.response.HttpResponse;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
-import com.guochuang.mimedia.mvp.model.MyAd;
-import com.guochuang.mimedia.mvp.model.NestStatistics;
-import com.guochuang.mimedia.mvp.view.AdListView;
+import com.guochuang.mimedia.mvp.model.AdInfo;
+import com.guochuang.mimedia.mvp.view.AdInfoView;
+import com.guochuang.mimedia.tools.GsonUtil;
 import com.guochuang.mimedia.tools.RxUtil;
 
-public class AdListPresneter extends BasePresenter<AdListView> {
+public class AdInfoPresenter extends BasePresenter<AdInfoView> {
 
-    public AdListPresneter(AdListView view) {
+    public AdInfoPresenter(AdInfoView view) {
         attachView(view);
     }
 
-    public void getMyAdList(Integer status,int currentPage,int pageSize){
+    public void commonAdGetVedorAd(){
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                nestMyList(status,currentPage,pageSize)), new ApiCallback<Page<MyAd>>() {
+                commonAdGetVedorAd()), new ApiCallback<AdInfo>() {
             @Override
-            public void onSuccess(Page<MyAd> data) {
-                mvpView.setData(data);
+            public void onSuccess(AdInfo data) {
+                mvpView.setData(GsonUtil.GsonString(data));
             }
 
             @Override
@@ -35,5 +35,4 @@ public class AdListPresneter extends BasePresenter<AdListView> {
             }
         });
     }
-
 }

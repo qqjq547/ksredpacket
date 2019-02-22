@@ -10,13 +10,11 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.base.MvpFragment;
 import com.guochuang.mimedia.http.response.Page;
 import com.guochuang.mimedia.mvp.model.MyAd;
-import com.guochuang.mimedia.mvp.model.NestStatistics;
-import com.guochuang.mimedia.mvp.presenter.AdListPresneter;
+import com.guochuang.mimedia.mvp.presenter.AdListPresenter;
 import com.guochuang.mimedia.mvp.view.AdListView;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.ui.activity.beenest.BeeNestActivity;
-import com.guochuang.mimedia.ui.activity.beenest.BidBrandActivity;
 import com.guochuang.mimedia.ui.adapter.MyAdAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -28,7 +26,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class AdListFragment extends MvpFragment<AdListPresneter> implements AdListView {
+public class AdListFragment extends MvpFragment<AdListPresenter> implements AdListView {
 
     @BindView(R.id.srl_refresh)
     SmartRefreshLayout srlRefresh;
@@ -40,8 +38,8 @@ public class AdListFragment extends MvpFragment<AdListPresneter> implements AdLi
     int curPage=1;
 
     @Override
-    protected AdListPresneter createPresenter() {
-        return new AdListPresneter(this);
+    protected AdListPresenter createPresenter() {
+        return new AdListPresenter(this);
     }
 
     @Override
@@ -55,9 +53,9 @@ public class AdListFragment extends MvpFragment<AdListPresneter> implements AdLi
         adapter =new MyAdAdapter(dataArr);
         adapter.setEmptyView(getLayoutInflater().inflate(R.layout.layout_empty,null));
         adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
-        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 MyAd myAd=dataArr.get(position);
                 if (myAd.getIsEdit()==0){
                     startActivity(new Intent(getActivity(),BeeNestActivity.class).putExtra(Constant.NESTINFOID,myAd.getNestInfoId()));

@@ -101,10 +101,13 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
                 onBackPressed();
                 break;
             case R.id.iv_image:
+                if (detail==null){
+                    return;
+                }
                 new BeeNestDialog(this).setOnItemClikListener(new BeeNestDialog.OnItemClikListener() {
                     @Override
                     public void onBidThis() {
-                       startActivity(new Intent(BeeNestActivity.this,BidBrandActivity.class));
+                       startActivity(new Intent(BeeNestActivity.this,BidBrandActivity.class).putExtra(Constant.NESTLOCATIONID,detail.getNestLocationId()));
                     }
 
                     @Override
