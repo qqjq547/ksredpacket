@@ -1121,17 +1121,17 @@ public interface ApiStore {
     Observable<HttpResponse<Order>> getOrderVendor(
             @Query("orderId") long orderId
     );
-
-    @GET("/api/v1/nest/nest_info/delete_template")
+    @FormUrlEncoded
+    @POST("/api/v1/nest/nest_info/delete_template")
     Observable<HttpResponse<Boolean>> deleteNestTemplate(
-            @Query("nestTemplateId") long nestTemplateId
+            @Field("nestTemplateId") long nestTemplateId
     );
     @FormUrlEncoded
     @POST("/api/v1/nest/nest_info/edit")
     Observable<HttpResponse<Boolean>> nesteEdit(
             @Field("nestInfoId") long nestInfoId,
             @Field("nestLocationId") long nestLocationId,
-            @Field("nestTimeInfoId") long nestTimeInfoId,
+            @Field("nestTimeId") long nestTimeId,
             @Field("shortMsg") String shortMsg,
             @Field("coverPicture") String coverPicture,
             @Field("introduction") String introduction,
@@ -1162,7 +1162,12 @@ public interface ApiStore {
 
     @GET("/api/v1/nest/nest_time_auction/list")
     Observable<HttpResponse<Page<NestAuctionRecord>>> nestAuctionList(
-            @Query("nestTimeInfoId") long nestTimeInfoId,
+            @Query("nestTimeId") long nestTimeId,
+            @Query("currentPage") int currentPage,
+            @Query("pageSize") int pageSize
+    );
+    @GET("/api/v1/nest/nest_time_auction/my_list")
+    Observable<HttpResponse<Page<NestAuctionRecord>>> nestMyAuctionList(
             @Query("currentPage") int currentPage,
             @Query("pageSize") int pageSize
     );

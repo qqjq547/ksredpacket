@@ -84,9 +84,9 @@ public class BeeNestPresenter extends BasePresenter<BeeNestView> {
         });
     }
     public void reportAdd(long nestInfoId,String content,String types){
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().nestReport(nestInfoId,content,types)), new ApiCallback<Integer>() {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().nestReport(nestInfoId,content,types)), new ApiCallback<Boolean>() {
             @Override
-            public void onSuccess(Integer data) {
+            public void onSuccess(Boolean data) {
                 mvpView.addReport(data);
 
             }

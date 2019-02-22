@@ -14,6 +14,8 @@ import com.guochuang.mimedia.mvp.model.NestStatistics;
 import com.guochuang.mimedia.mvp.presenter.AdListPresneter;
 import com.guochuang.mimedia.mvp.view.AdListView;
 import com.guochuang.mimedia.tools.Constant;
+import com.guochuang.mimedia.tools.IntentUtils;
+import com.guochuang.mimedia.ui.activity.beenest.BeeNestActivity;
 import com.guochuang.mimedia.ui.activity.beenest.BidBrandActivity;
 import com.guochuang.mimedia.ui.adapter.MyAdAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -58,9 +60,13 @@ public class AdListFragment extends MvpFragment<AdListPresneter> implements AdLi
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 MyAd myAd=dataArr.get(position);
                 if (myAd.getIsEdit()==0){
-                    IntentUtils.startEditAdActivity(getActivity(),myAd.getNestInfoId(),myAd.getNestLocationId(),myAd.getNestTimeInfoId());
-                }else {
                     startActivity(new Intent(getActivity(),BeeNestActivity.class).putExtra(Constant.NESTINFOID,myAd.getNestInfoId()));
+                }else {
+                    if (myAd.getNestInfoId()==0){
+                        IntentUtils.startEditAdActivity(getActivity(),myAd.getNestInfoId(),myAd.getNestLocationId(),myAd.getNestTimeId(),false);
+                    }else {
+                        IntentUtils.startEditAdActivity(getActivity(),myAd.getNestInfoId(),myAd.getNestLocationId(),myAd.getNestTimeId(),true);
+                    }
                 }
             }
         });

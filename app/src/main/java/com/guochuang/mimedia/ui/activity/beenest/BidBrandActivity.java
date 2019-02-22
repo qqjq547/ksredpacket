@@ -80,6 +80,9 @@ public class BidBrandActivity extends MvpActivity {
     LinearLayout linRnsure;
     @BindView(R.id.btn_buy)
     Button btnBuy;
+    long nestInfoId;
+    long nestLocationId;
+    long nestTimeId;
 
     @Override
     protected BasePresenter createPresenter() {
@@ -94,7 +97,7 @@ public class BidBrandActivity extends MvpActivity {
     @Override
     public void initViewAndData() {
         tvText.setText(R.string.history_put);
-        long nestLcationId=getIntent().getLongExtra(Constant.NESTLOCATIONID,0);
+        long nestLocationId=getIntent().getLongExtra(Constant.NESTLOCATIONID,0);
         dateFormat = new SimpleDateFormat(Constant.FORMAT_MONTH);
         tvMonth.setText(dateFormat.format(new Date()));
         initMarkData();
@@ -166,7 +169,7 @@ public class BidBrandActivity extends MvpActivity {
                 cdvMonth.setCurrentItem(cdvMonth.getCurrentItem() + 1);
                 break;
             case R.id.tv_bid_record:
-                startActivity(new Intent(this, BidHistoryActivity.class));
+                startActivity(new Intent(this, BidRecordActivity.class));
                 break;
             case R.id.tv_rule:
                 IntentUtils.startWebActivity(this,null,Constant.URL_FENGCHAO_JINGGOU);

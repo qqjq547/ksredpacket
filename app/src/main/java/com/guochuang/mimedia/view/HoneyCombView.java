@@ -149,25 +149,30 @@ public class HoneyCombView extends LinearLayout {
         if (expand){
             handler.removeMessages(0);
             setCollse();
-            handler.sendEmptyMessageDelayed(0,delayTime);
+            if (allData.size()>1) {
+                handler.sendEmptyMessageDelayed(0, delayTime);
+            }
             isExpand=false;
         }else {
-            List<NestHomeAd> expandList=new ArrayList<>();
-            expandList.addAll(dataArr);
-            expandList.removeAll(allData.get(currentRow));
-            expandList.addAll(0,allData.get(currentRow));
-            honeyAdapter.setNewData(expandList);
+            if (allData.size()>1) {
+                List<NestHomeAd> expandList = new ArrayList<>();
+                expandList.addAll(dataArr);
+                expandList.removeAll(allData.get(currentRow));
+                expandList.addAll(0, allData.get(currentRow));
+                honeyAdapter.setNewData(expandList);
+            }
             tvVote.setVisibility(VISIBLE);
             isExpand=true;
         }
     }
     public void setCollse(){
         tvVote.setVisibility(GONE);
-        List<NestHomeAd> expandList=new ArrayList<>();
-        expandList.addAll(dataArr);
-        expandList.removeAll(allData.get(currentRow));
-        expandList.addAll(allData.get(currentRow));
-        honeyAdapter.setNewData(expandList);
-
+        if (allData.size()>1) {
+            List<NestHomeAd> expandList = new ArrayList<>();
+            expandList.addAll(dataArr);
+            expandList.removeAll(allData.get(currentRow));
+            expandList.addAll(allData.get(currentRow));
+            honeyAdapter.setNewData(expandList);
+        }
     }
 }

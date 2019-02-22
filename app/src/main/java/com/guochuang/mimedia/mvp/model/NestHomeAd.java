@@ -6,14 +6,14 @@ public class NestHomeAd {
      * coverPicture : string
      * nestInfoId : 0
      * nestLocationId : 0
-     * nestTimeInfoId : 0
+     * nestTimeId : 0
      * shortMsg : string
      */
 
     private String coverPicture;
     private long nestInfoId;
     private long nestLocationId;
-    private long nestTimeInfoId;
+    private long nestTimeId;
     private String shortMsg;
 
     public String getCoverPicture() {
@@ -40,12 +40,12 @@ public class NestHomeAd {
         this.nestLocationId = nestLocationId;
     }
 
-    public long getNestTimeInfoId() {
-        return nestTimeInfoId;
+    public long getNestTimeId() {
+        return nestTimeId;
     }
 
-    public void setNestTimeInfoId(long nestTimeInfoId) {
-        this.nestTimeInfoId = nestTimeInfoId;
+    public void setNestTimeId(long nestTimeId) {
+        this.nestTimeId = nestTimeId;
     }
 
     public String getShortMsg() {

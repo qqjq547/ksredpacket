@@ -20,7 +20,7 @@ public class NestAd {
      * nestLocationLat : 0
      * nestLocationLng : 0
      * nestTemplateId : 0
-     * nestTimeInfoId : 0
+     * nestTimeId : 0
      * pictureList : ["string"]
      * shortMsg : string
      * title : string
@@ -30,8 +30,8 @@ public class NestAd {
 
     private String address;
     private String addressDetail;
-    private int addressLat;
-    private int addressLng;
+    private double addressLat;
+    private double addressLng;
     private String contactPhone;
     private String coverPicture;
     private String introduction;
@@ -40,10 +40,10 @@ public class NestAd {
     private String linkUrl;
     private long nestInfoId;
     private long nestLocationId;
-    private String nestLocationLat;
-    private String nestLocationLng;
+    private double nestLocationLat;
+    private double nestLocationLng;
     private long nestTemplateId;
-    private long nestTimeInfoId;
+    private long nestTimeId;
     private String shortMsg;
     private String title;
     private String wechat;
@@ -66,19 +66,19 @@ public class NestAd {
         this.addressDetail = addressDetail;
     }
 
-    public int getAddressLat() {
+    public double getAddressLat() {
         return addressLat;
     }
 
-    public void setAddressLat(int addressLat) {
+    public void setAddressLat(double addressLat) {
         this.addressLat = addressLat;
     }
 
-    public int getAddressLng() {
+    public double getAddressLng() {
         return addressLng;
     }
 
-    public void setAddressLng(int addressLng) {
+    public void setAddressLng(double addressLng) {
         this.addressLng = addressLng;
     }
 
@@ -146,19 +146,19 @@ public class NestAd {
         this.nestLocationId = nestLocationId;
     }
 
-    public String getNestLocationLat() {
+    public double getNestLocationLat() {
         return nestLocationLat;
     }
 
-    public void setNestLocationLat(String nestLocationLat) {
+    public void setNestLocationLat(double nestLocationLat) {
         this.nestLocationLat = nestLocationLat;
     }
 
-    public String getNestLocationLng() {
+    public double getNestLocationLng() {
         return nestLocationLng;
     }
 
-    public void setNestLocationLng(String nestLocationLng) {
+    public void setNestLocationLng(double nestLocationLng) {
         this.nestLocationLng = nestLocationLng;
     }
 
@@ -170,12 +170,12 @@ public class NestAd {
         this.nestTemplateId = nestTemplateId;
     }
 
-    public long getNestTimeInfoId() {
-        return nestTimeInfoId;
+    public long getNestTimeId() {
+        return nestTimeId;
     }
 
-    public void setNestTimeInfoId(long nestTimeInfoId) {
-        this.nestTimeInfoId = nestTimeInfoId;
+    public void setNestTimeId(long nestTimeId) {
+        this.nestTimeId = nestTimeId;
     }
 
     public String getShortMsg() {

@@ -5,10 +5,11 @@ public class NestAuctionRecord {
     /**
      * auctionDate : 2019-02-19T07:26:12.902Z
      * auctionNum : 0
+     * auctionStatus:
      * dayPrice : 0
      * dealNum : 0
      * endDate : 2019-02-19T07:26:12.902Z
-     * nestTimeInfoId : 0
+     * nestTimeId : 0
      * startDate : 2019-02-19T07:26:12.902Z
      * totalPrice : 0
      * userAvatar : string
@@ -18,15 +19,24 @@ public class NestAuctionRecord {
 
     private String auctionDate;
     private int auctionNum;
+    private int auctionStatus;
     private int dayPrice;
     private int dealNum;
     private String endDate;
-    private int nestTimeInfoId;
+    private int nestTimeId;
     private String startDate;
     private int totalPrice;
     private String userAvatar;
     private String userName;
     private String userUuid;
+
+    public int getAuctionStatus() {
+        return auctionStatus;
+    }
+
+    public void setAuctionStatus(int auctionStatus) {
+        this.auctionStatus = auctionStatus;
+    }
 
     public String getAuctionDate() {
         return auctionDate;
@@ -68,12 +78,12 @@ public class NestAuctionRecord {
         this.endDate = endDate;
     }
 
-    public int getNestTimeInfoId() {
-        return nestTimeInfoId;
+    public int getNestTimeId() {
+        return nestTimeId;
     }
 
-    public void setNestTimeInfoId(int nestTimeInfoId) {
-        this.nestTimeInfoId = nestTimeInfoId;
+    public void setNestTimeId(int nestTimeId) {
+        this.nestTimeId = nestTimeId;
     }
 
     public String getStartDate() {

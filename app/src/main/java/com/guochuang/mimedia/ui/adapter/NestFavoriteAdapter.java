@@ -11,6 +11,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.guochuang.mimedia.mvp.model.InfoItem;
 import com.guochuang.mimedia.mvp.model.NestFavorite;
+import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.sz.gcyh.KSHongBao.R;
 
@@ -26,8 +27,8 @@ public class NestFavoriteAdapter extends BaseQuickAdapter<NestFavorite,BaseViewH
     protected void convert(BaseViewHolder helper, NestFavorite item) {
         GlideImgManager.loadCircleImage(mContext,item.getPublisherAvatar(),(ImageView) helper.getView(R.id.iv_avatar));
         helper.setText(R.id.tv_nickname,item.getPublisherNickName());
-        helper.setText(R.id.tv_nickname,item.getShortMsg());
-        GlideImgManager.loadCircleImage(mContext,item.getCoverPicture(),(ImageView) helper.getView(R.id.iv_cover));
+        helper.setText(R.id.tv_content,item.getShortMsg());
+        GlideImgManager.loadCornerImage(mContext,item.getCoverPicture(),(ImageView) helper.getView(R.id.iv_cover),CommonUtil.dip2px(mContext,8));
     }
 
 }

@@ -105,7 +105,7 @@
         <activity android:name="com.guochuang.mimedia.ui.activity.beenest.BeeNestTempActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.beenest.MyAdActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.beenest.HistoryPutActivity" />
-        <activity android:name="com.guochuang.mimedia.ui.activity.beenest.BidHistoryActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.beenest.BidRecordActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.beenest.AdBidActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.beenest.MyBidActivity" />
         <activity

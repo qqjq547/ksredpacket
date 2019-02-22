@@ -19,8 +19,9 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.donkingliang.imageselector.utils.ImageSelector;
 import com.donkingliang.imageselector.utils.ImageSelectorUtils;
 import com.guochuang.mimedia.base.MvpActivity;
+import com.guochuang.mimedia.mvp.model.NestAd;
 import com.guochuang.mimedia.mvp.model.NestInfoLimit;
-import com.guochuang.mimedia.mvp.model.RedbagTemp;
+import com.guochuang.mimedia.mvp.model.NestTemplate;
 import com.guochuang.mimedia.mvp.model.UploadFile;
 import com.guochuang.mimedia.mvp.presenter.EditAdPresenter;
 import com.guochuang.mimedia.mvp.view.EditAdView;
@@ -97,7 +98,7 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
 
     long nestInfoId;
     long nestLocationId;
-    long nestTimeInfoId;
+    long nestTimeId;
     String shortMsg;
     String iconUrl;
     String content;
@@ -122,6 +123,7 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
     List<String> picUrlArr=new ArrayList<>();
     ArrayList<String> pictureArr=new ArrayList<>();
     PickImageAdapter pictureAdapter;
+    boolean isUpdate=false;
 
     @Override
     protected EditAdPresenter createPresenter() {
@@ -138,7 +140,9 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
         tvTitle.setText(R.string.edit_ad);
         tvText.setText(R.string.select_temp);
         nestInfoId=getIntent().getLongExtra(Constant.NESTINFOID,0);
-        nestTimeInfoId=getIntent().getLongExtra(Constant.NESTTIMEINFOID,0);
+        nestLocationId=getIntent().getLongExtra(Constant.NESTLOCATIONID,0);
+        nestTimeId=getIntent().getLongExtra(Constant.NESTTIMEID,0);
+        isUpdate=getIntent().getBooleanExtra(Constant.NESTUPDATE,false);
         rvPicture.setLayoutManager(new GridLayoutManager(this,3));
         rvPicture.addItemDecoration(new GridItemDecoration(3,CommonUtil.dip2px(this,10),false));
         rvPicture.setItemAnimator(new DefaultItemAnimator());
@@ -184,6 +188,11 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
         rvPicture.setAdapter(pictureAdapter);
         mvpPresenter.nesteLimit();
         mvpPresenter.nesteTemplateCount();
+        if (isUpdate) {
+            showLoadingDialog(null);
+            mvpPresenter.getNestAd(nestInfoId, Constant.AD_TYPE_EDIT);
+        }
+
     }
 
     @OnClick({R.id.iv_back, R.id.tv_text,R.id.lin_picture, R.id.tv_area,R.id.tv_link, R.id.tv_rule,R.id.iv_temp_tip,R.id.btn_confirm})
@@ -340,42 +349,38 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
                     tvArea.setText(intent.getStringExtra(Constant.NAME));
                     break;
                 case Constant.REQUEST_TEMPLATE:
-//                    RedbagTemp temp=(RedbagTemp)intent.getSerializableExtra(Constant.TEMPLATE);
-//                    mvpPresenter.getTemplate(redPacketType);
-//                    if (temp==null){
-//                        return;
-//                    }
-//                    etContent.setText(temp.getContent());
-//                    pictureArr.clear();
-//                    picUrlArr.clear();
-//                    if (TextUtils.isEmpty(temp.getPicture())){
-//                        addPicture(new ArrayList<String >());
-//                    }else {
-//                        List<String> pics=Arrays.asList(TextUtils.split(temp.getPicture(),","));
-//                        addPicture(pics);
-//                    }
-//                    etAmout.setText(String.valueOf((int)temp.getMoney()));
-//                    etCount.setText(String.valueOf(temp.getQuantity()));
-//                    areaType=temp.getAreaType();
-//                    kilometer=temp.getKilometre();
-//                    if (temp.getAreaType()<scopeArr.size()) {
-//                        tvScope.setText(scopeArr.get(temp.getAreaType()));
-//                    }
-//                    etWord.setText(temp.getPassword());
-//                    redbagLongitude=temp.getLongitude();
-//                    redbagLatitude=temp.getLatitude();
-//                    tvLocation.setText(temp.getCountryName()+temp.getProvinceName()+temp.getCityName()+temp.getDistrictName());
-//                    if (!TextUtils.isEmpty(temp.getUrlName())||!TextUtils.isEmpty(temp.getUrlName())||!TextUtils.isEmpty(temp.getWechat())||!TextUtils.isEmpty(temp.getMicroblog())){
-//                        linLink.setVisibility(View.VISIBLE);
-//                        tvLink.setText(R.string.pack_up);
-//                    }else {
-//                        linLink.setVisibility(View.GONE);
-//                        tvLink.setText(R.string.more);
-//                    }
-//                    etLinkName.setText(temp.getUrlName());
-//                    etLinkUrl.setText(temp.getUrl());
-//                    etLinkWechat.setText(temp.getWechat());
-//                    etLinkWeibo.setText(temp.getMicroblog());
+                    NestTemplate temp=(NestTemplate)intent.getSerializableExtra(Constant.TEMPLATE);
+                    mvpPresenter.nesteTemplateCount();
+                    if (temp==null){
+                        return;
+                    }
+                    etShortmsg.setText(temp.getShortMsg());
+                    iconUrl=temp.getCoverPicture();
+                    GlideImgManager.loadImage(this,temp.getCoverPicture(),ivPicture);
+                    pictureArr.clear();
+                    picUrlArr.clear();
+                    if (temp.getPictureList()==null){
+                        addPicture(new ArrayList<String >());
+                    }else {
+                        addPicture(temp.getPictureList());
+                    }
+                    etAdTitle.setText(temp.getTitle());
+                    etMobile.setText(temp.getContactPhone());
+                    tvArea.setText(temp.getAddress());
+                    etAddress.setText(temp.getAddressDetail());
+                    latitude=temp.getAddressLat();
+                    longitude=temp.getAddressLng();
+                    if (!TextUtils.isEmpty(temp.getLinkUrl())||!TextUtils.isEmpty(temp.getLinkText())||!TextUtils.isEmpty(temp.getWechat())||!TextUtils.isEmpty(temp.getWeibo())){
+                        linLink.setVisibility(View.VISIBLE);
+                        tvLink.setText(R.string.pack_up);
+                    }else {
+                        linLink.setVisibility(View.GONE);
+                        tvLink.setText(R.string.more);
+                    }
+                    etLinkName.setText(temp.getLinkText());
+                    etLinkUrl.setText(temp.getLinkUrl());
+                    etLinkWechat.setText(temp.getWechat());
+                    etLinkWeibo.setText(temp.getWeibo());
                     break;
             }
         }
@@ -393,8 +398,42 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
     public void editNestAd(){
         showLoadingDialog(null);
         picture=TextUtils.join(",",picUrlArr);
-        mvpPresenter.editNestAd(nestInfoId,nestLocationId,nestTimeInfoId,shortMsg,iconUrl,content,picture,adTitle,adMobile,adAddress,adArea
+        mvpPresenter.editNestAd(nestInfoId,nestLocationId,nestTimeId,shortMsg,iconUrl,content,picture,adTitle,adMobile,adAddress,adArea
         ,latitude,longitude,urlName,url,wechat,microblog,isSaveTemplate);
+    }
+
+    @Override
+    public void setAdData(NestAd data) {
+        closeLoadingDialog();
+        if (data!=null){
+            etShortmsg.setText(data.getShortMsg());
+            iconUrl=data.getCoverPicture();
+            GlideImgManager.loadImage(this,data.getCoverPicture(),ivPicture);
+            pictureArr.clear();
+            picUrlArr.clear();
+            if (data.getPictureList()==null){
+                addPicture(new ArrayList<String >());
+            }else {
+                addPicture(data.getPictureList());
+            }
+            etAdTitle.setText(data.getTitle());
+            etMobile.setText(data.getContactPhone());
+            tvArea.setText(data.getAddress());
+            etAddress.setText(data.getAddressDetail());
+            latitude=String.valueOf(data.getAddressLat());
+            longitude=String.valueOf(data.getAddressLng());
+            if (!TextUtils.isEmpty(data.getLinkUrl())||!TextUtils.isEmpty(data.getLinkText())||!TextUtils.isEmpty(data.getWechat())||!TextUtils.isEmpty(data.getWeibo())){
+                linLink.setVisibility(View.VISIBLE);
+                tvLink.setText(R.string.pack_up);
+            }else {
+                linLink.setVisibility(View.GONE);
+                tvLink.setText(R.string.more);
+            }
+            etLinkName.setText(data.getLinkText());
+            etLinkUrl.setText(data.getLinkUrl());
+            etLinkWechat.setText(data.getWechat());
+            etLinkWeibo.setText(data.getWeibo());
+        }
     }
 
     @Override

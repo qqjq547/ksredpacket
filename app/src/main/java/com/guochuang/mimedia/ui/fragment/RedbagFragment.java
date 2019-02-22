@@ -558,7 +558,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
             @Override
             public void onSendAd() {
                 NestHomeAd firstAd=honeyArr.get(0);
-                IntentUtils.startEditAdActivity(getActivity(),firstAd.getNestInfoId(),firstAd.getNestLocationId(),firstAd.getNestTimeInfoId());
+                IntentUtils.startEditAdActivity(getActivity(),firstAd.getNestInfoId(),firstAd.getNestLocationId(),firstAd.getNestTimeId(),false);
             }
         });
     }

@@ -52,7 +52,6 @@ public class MyBidActivity extends MvpActivity<MyBidPresenter> implements MyBidV
     MyBidAdapter adapter;
     List<NestAuctionRecord> dataArr=new ArrayList<>();
     int curPage=1;
-    long nestTimeInfoId;
 
     @Override
     protected MyBidPresenter createPresenter() {
@@ -77,15 +76,15 @@ public class MyBidActivity extends MvpActivity<MyBidPresenter> implements MyBidV
         srlRefresh.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                mvpPresenter.getAuctionList(nestTimeInfoId,curPage+1,Constant.PAGE_SIZE);
+                mvpPresenter.getMyAuctionList(curPage+1,Constant.PAGE_SIZE);
             }
 
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                mvpPresenter.getAuctionList(nestTimeInfoId,1,Constant.PAGE_SIZE);
+                mvpPresenter.getMyAuctionList(1,Constant.PAGE_SIZE);
             }
         });
-        mvpPresenter.getAuctionList(nestTimeInfoId,curPage,Constant.PAGE_SIZE);
+        mvpPresenter.getMyAuctionList(curPage,Constant.PAGE_SIZE);
     }
 
     @OnClick(R.id.iv_back)
@@ -103,6 +102,10 @@ public class MyBidActivity extends MvpActivity<MyBidPresenter> implements MyBidV
         }
         if (data.getDataList() != null) {
             dataArr.addAll(data.getDataList());
+            if (curPage==1&&dataArr.size()>0){
+                tvDoneTimes.setText(String.valueOf(dataArr.get(0).getDealNum()));
+                tvBidTimes.setText(String.valueOf(dataArr.get(0).getAuctionNum()));
+            }
         }
         adapter.notifyDataSetChanged();
         if (data.getCurrentPage() >= data.getTotalPage()) {

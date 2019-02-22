@@ -85,10 +85,8 @@ public class Constant {
     public static final String ADDRESS = "address";
     public static final String NESTINFOID = "nestInfoId";
     public static final String NESTLOCATIONID = "nestLocationId";
-    public static final String NESTTIMEINFOID = "nestTimeInfoId";
-
-
-
+    public static final String NESTTIMEID = "nestTimeId";
+    public static final String NESTUPDATE = "nestUpdate";
 
     public static final String FORMAT_DATE_SIMPLE = "yyyy-MM-dd";
     public static final String FORMAT_DATE = "yyyy-MM-dd HH:mm:ss";
@@ -96,7 +94,8 @@ public class Constant {
 
     public static final String TYPE_REPORT_INFORMATION = "informationReport";
     public static final String TYPE_REPORT_REDPACKET = "redPacketReport";
-    public static final String TYPE_BEENEST_REPORT = "beenestReport";
+    public static final String TYPE_NESTINFO_REPORT = "nestInfoReport";
+
 
     //资讯详情
     public static final String URL_INFOMATION_DETAIL = ApiClient.HTML_URL+"information/detail/index.htm";

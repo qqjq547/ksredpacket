@@ -14,6 +14,7 @@ import com.guochuang.mimedia.mvp.model.NestHistory;
 import com.guochuang.mimedia.mvp.model.RecommedUser;
 import com.guochuang.mimedia.mvp.presenter.HistoryPutPresneter;
 import com.guochuang.mimedia.mvp.view.HistoryPutView;
+import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.ui.adapter.HistoryPutAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -39,6 +40,7 @@ public class HistoryPutActivity extends MvpActivity<HistoryPutPresneter> impleme
     HistoryPutAdapter adapter;
     List<NestHistory> dataArr=new ArrayList<>();
     int curPage=1;
+    long nestLocationId;
 
 
     @Override
@@ -54,6 +56,7 @@ public class HistoryPutActivity extends MvpActivity<HistoryPutPresneter> impleme
     @Override
     public void initViewAndData() {
         tvTitle.setText(R.string.history_put);
+        nestLocationId=getIntent().getLongExtra(Constant.NESTLOCATIONID,0);
         rvHistory.setLayoutManager(new LinearLayoutManager(this,OrientationHelper.VERTICAL,false));
         adapter=new HistoryPutAdapter(dataArr);
         adapter.setEmptyView(getLayoutInflater().inflate(R.layout.layout_empty,null));
@@ -64,14 +67,15 @@ public class HistoryPutActivity extends MvpActivity<HistoryPutPresneter> impleme
         srlRefresh.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-
+                mvpPresenter.getHistoryPut(nestLocationId,curPage+1,Constant.PAGE_SIZE);
             }
 
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-
+                mvpPresenter.getHistoryPut(nestLocationId,1,Constant.PAGE_SIZE);
             }
         });
+        mvpPresenter.getHistoryPut(nestLocationId,curPage,Constant.PAGE_SIZE);
     }
     @OnClick(R.id.iv_back)
     public void onViewClicked() {

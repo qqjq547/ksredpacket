@@ -6,6 +6,7 @@ import com.guochuang.mimedia.http.response.Page;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.AdInfo;
+import com.guochuang.mimedia.mvp.model.NestAuctionRecord;
 import com.guochuang.mimedia.mvp.model.NestHistory;
 import com.guochuang.mimedia.mvp.view.AdInfoView;
 import com.guochuang.mimedia.mvp.view.BidHistoryView;
@@ -18,11 +19,11 @@ public class BidHistoryPresneter extends BasePresenter<BidHistoryView> {
         attachView(view);
     }
 
-    public void getNestHistory(long nestLocationId,int currentPage,int pageSize){
+    public void getNestAuctionHistory(long nestTimeId,int currentPage,int pageSize){
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                nestHistoryList(nestLocationId,currentPage,pageSize)), new ApiCallback<Page<NestHistory>>() {
+                nestAuctionList(nestTimeId,currentPage,pageSize)), new ApiCallback<Page<NestAuctionRecord>>() {
             @Override
-            public void onSuccess(Page<NestHistory> data) {
+            public void onSuccess(Page<NestAuctionRecord> data) {
                 mvpView.setData(data);
             }
 

@@ -1,6 +1,7 @@
 package com.guochuang.mimedia.mvp.view;
 
 import com.guochuang.mimedia.mvp.model.LuckyConfig;
+import com.guochuang.mimedia.mvp.model.NestAd;
 import com.guochuang.mimedia.mvp.model.NestInfoLimit;
 import com.guochuang.mimedia.mvp.model.RedbagTemp;
 import com.guochuang.mimedia.mvp.model.UploadFile;
@@ -12,6 +13,7 @@ import java.util.List;
  */
 
 public interface EditAdView {
+    void setAdData(NestAd data);
     void setData(Boolean data);
     void setIcon(UploadFile data);
     void setUploadFile(UploadFile data);

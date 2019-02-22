@@ -21,6 +21,7 @@ import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.DialogBuilder;
 import com.guochuang.mimedia.tools.GuideHelper;
 import com.guochuang.mimedia.tools.IntentUtils;
+import com.guochuang.mimedia.tools.TVCheckAll;
 import com.guochuang.mimedia.tools.ToastUtil;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.guochuang.mimedia.ui.adapter.PictureVerticalAdapter;
@@ -88,7 +89,6 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
         nestInfoId=getIntent().getLongExtra(Constant.NESTINFOID,0);
         showLoadingDialog(null);
         mvpPresenter.getNestAd(nestInfoId,Constant.AD_TYPE_DETAIL);
-
         ivImage.setImageResource(R.drawable.ic_more);
 
     }
@@ -115,7 +115,7 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
                     @Override
                     public void onReport() {
                         showLoadingDialog(null);
-                        mvpPresenter.dictionaryGet(Constant.TYPE_REPORT_INFORMATION);
+                        mvpPresenter.dictionaryGet(Constant.TYPE_NESTINFO_REPORT);
                     }
                 }).show();
                 break;
@@ -188,7 +188,7 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
         }else {
             ivFav.setImageResource(R.drawable.ic_fav_nor);
         }
-         tvDesc.setText(data.getIntroduction());
+         new TVCheckAll(this,tvDesc,data.getIntroduction(),3);
          if (TextUtils.isEmpty(data.getLinkText())||TextUtils.isEmpty(data.getLinkUrl())){
              tvUrl.setVisibility(View.GONE);
          }else {
@@ -226,20 +226,20 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
 
     @Override
     public void addFavorite(Boolean data) {
-        ivFav.setSelected(true);
+        ivFav.setImageResource(R.drawable.ic_fav_check);
         detail.setIsCollection(1);
         ToastUtil.showSuccess(this, getString(R.string.collect_success), R.drawable.ic_done);
     }
 
     @Override
     public void deleteFavorite(Boolean data) {
-        ivFav.setSelected(false);
+        ivFav.setImageResource(R.drawable.ic_fav_nor);
         detail.setIsCollection(0);
         ToastUtil.showSuccess(this, getString(R.string.cancel_collect), R.drawable.ic_done);
     }
 
     @Override
-    public void addReport(Integer data) {
+    public void addReport(Boolean data) {
         closeLoadingDialog();
         showShortToast(R.string.report_success);
     }

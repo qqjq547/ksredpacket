@@ -23,6 +23,7 @@ public class BeeTempDialog extends Dialog {
         setCancelable(true);
         View view = View.inflate(context, R.layout.dialog_bee_temp, null);
         setContentView(view);
+        ButterKnife.bind(this,view);
     }
 
 

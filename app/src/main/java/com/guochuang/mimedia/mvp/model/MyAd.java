@@ -10,7 +10,7 @@ public class MyAd {
      * nestInfoId : 0
      * nestLocationId : 0
      * nestStatisticsResDto : {"clickQuantity":0,"favoriteQuantity":0,"showQuantity":0}
-     * nestTimeInfoId : 0
+     * nestTimeId : 0
      * startDate : string
      * status : string
      * totalPrice : string
@@ -21,10 +21,10 @@ public class MyAd {
     private int isEdit;
     private String lat;
     private String lng;
-    private int nestInfoId;
-    private int nestLocationId;
+    private long nestInfoId;
+    private long nestLocationId;
     private NestStatisticsResDtoBean nestStatisticsResDto;
-    private int nestTimeInfoId;
+    private long nestTimeId;
     private String startDate;
     private int status;
     private String totalPrice;
@@ -62,15 +62,15 @@ public class MyAd {
         this.lng = lng;
     }
 
-    public int getNestInfoId() {
+    public long getNestInfoId() {
         return nestInfoId;
     }
 
-    public void setNestInfoId(int nestInfoId) {
+    public void setNestInfoId(long nestInfoId) {
         this.nestInfoId = nestInfoId;
     }
 
-    public int getNestLocationId() {
+    public long getNestLocationId() {
         return nestLocationId;
     }
 
@@ -86,12 +86,12 @@ public class MyAd {
         this.nestStatisticsResDto = nestStatisticsResDto;
     }
 
-    public int getNestTimeInfoId() {
-        return nestTimeInfoId;
+    public long getNestTimeId() {
+        return nestTimeId;
     }
 
-    public void setNestTimeInfoId(int nestTimeInfoId) {
-        this.nestTimeInfoId = nestTimeInfoId;
+    public void setNestTimeId(long nestTimeId) {
+        this.nestTimeId = nestTimeId;
     }
 
     public String getStartDate() {

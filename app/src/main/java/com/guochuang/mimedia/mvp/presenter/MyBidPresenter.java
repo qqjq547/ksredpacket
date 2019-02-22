@@ -14,9 +14,9 @@ public class MyBidPresenter extends BasePresenter<MyBidView> {
         attachView(view);
     }
 
-    public void getAuctionList(long nestTimeInfoId,int currentPage, int pageSize) {
+    public void getMyAuctionList(int currentPage, int pageSize) {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                nestAuctionList(nestTimeInfoId,currentPage,pageSize)), new ApiCallback<Page<NestAuctionRecord>>() {
+                nestMyAuctionList(currentPage,pageSize)), new ApiCallback<Page<NestAuctionRecord>>() {
             @Override
             public void onSuccess(Page<NestAuctionRecord> data) {
                 mvpView.setData(data);

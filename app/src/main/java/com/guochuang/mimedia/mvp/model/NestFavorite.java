@@ -10,7 +10,7 @@ public class NestFavorite {
      * introduction : string
      * ip : string
      * nestInfoId : 0
-     * nestTimeInfoId : 0
+     * nestTimeId : 0
      * publisherAvatar : string
      * publisherNickName : string
      * publisherUuid : string
@@ -28,7 +28,7 @@ public class NestFavorite {
     private String introduction;
     private String ip;
     private long nestInfoId;
-    private long nestTimeInfoId;
+    private long nestTimeId;
     private String publisherAvatar;
     private String publisherNickName;
     private String publisherUuid;
@@ -94,12 +94,12 @@ public class NestFavorite {
         this.nestInfoId = nestInfoId;
     }
 
-    public long getNestTimeInfoId() {
-        return nestTimeInfoId;
+    public long getNestTimeId() {
+        return nestTimeId;
     }
 
-    public void setNestTimeInfoId(long nestTimeInfoId) {
-        this.nestTimeInfoId = nestTimeInfoId;
+    public void setNestTimeId(long nestTimeId) {
+        this.nestTimeId = nestTimeId;
     }
 
     public String getPublisherAvatar() {

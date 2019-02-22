@@ -5,6 +5,7 @@ import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.LuckyConfig;
+import com.guochuang.mimedia.mvp.model.NestAd;
 import com.guochuang.mimedia.mvp.model.NestInfoLimit;
 import com.guochuang.mimedia.mvp.model.RedbagTemp;
 import com.guochuang.mimedia.mvp.model.UploadFile;
@@ -27,7 +28,26 @@ public class EditAdPresenter extends BasePresenter<EditAdView> {
     public EditAdPresenter(EditAdView view) {
         attachView(view);
     }
+    public void getNestAd(long nestInfoId,String type){
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getNestAd(nestInfoId,type)), new ApiCallback<NestAd>() {
+            @Override
+            public void onSuccess(NestAd data) {
+                mvpView.setAdData(data);
 
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setError(exception.getMessage());
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
     public void fileUpload(String businessType, File file, final boolean isIcon) {
         RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
@@ -56,7 +76,7 @@ public class EditAdPresenter extends BasePresenter<EditAdView> {
     public void editNestAd(
             long nestInfoId,
             long nestLocationId,
-            long nestTimeInfoId,
+            long nestTimeId,
             String shortMsg,
             String coverPicture,
             String introduction,
@@ -75,7 +95,7 @@ public class EditAdPresenter extends BasePresenter<EditAdView> {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().nesteEdit(
                 nestInfoId,
                 nestLocationId,
-                nestTimeInfoId,
+                nestTimeId,
                 shortMsg,
                 coverPicture,
                 introduction,

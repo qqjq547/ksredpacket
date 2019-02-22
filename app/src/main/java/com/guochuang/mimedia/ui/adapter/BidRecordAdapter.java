@@ -1,8 +1,6 @@
 package com.guochuang.mimedia.ui.adapter;
 
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
@@ -16,9 +14,9 @@ import com.sz.gcyh.KSHongBao.R;
 
 import java.util.List;
 
-public class MyBidAdapter extends BaseQuickAdapter<NestAuctionRecord,BaseViewHolder> {
-    public MyBidAdapter(@Nullable List<NestAuctionRecord> data) {
-        super(R.layout.item_my_bid,data);
+public class BidRecordAdapter extends BaseQuickAdapter<NestAuctionRecord,BaseViewHolder> {
+    public BidRecordAdapter(@Nullable List<NestAuctionRecord> data) {
+        super(R.layout.item_bid_record,data);
     }
 
     @Override
@@ -35,16 +33,12 @@ public class MyBidAdapter extends BaseQuickAdapter<NestAuctionRecord,BaseViewHol
                 break;
         }
         helper.setText(R.id.tv_name,item.getUserName());
-        helper.setText(R.id.tv_duration,String.format(mContext.getString(R.string.format_time_to_time),item.getStartDate(),item.getEndDate()));
-        String priceStr=String.format(mContext.getString(R.string.format_price_and_total),String.valueOf(item.getDayPrice()),String.valueOf(item.getTotalPrice()));
+        helper.setText(R.id.tv_time,item.getStartDate());
+        String priceStr=item.getDayPrice()+mContext.getString(R.string.unit_yuan_day);
         SpannableStringBuilder builder=new SpannableStringBuilder(priceStr);
         String dayprice=String.valueOf(item.getDayPrice());
         int dayIndex = priceStr.indexOf(dayprice);
         builder.setSpan(new ForegroundColorSpan(mContext.getResources().getColor(R.color.text_city_yellow)), dayIndex, dayIndex + dayprice.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        String totalprice=String.valueOf(item.getTotalPrice());
-        int totalIndex = priceStr.lastIndexOf(totalprice);
-        builder.setSpan(new ForegroundColorSpan(mContext.getResources().getColor(R.color.text_city_yellow)), totalIndex, totalIndex + totalprice.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         helper.setText(R.id.tv_price,builder);
-        helper.setText(R.id.tv_time,item.getAuctionDate());
     }
 }

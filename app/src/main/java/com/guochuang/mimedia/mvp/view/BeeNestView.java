@@ -13,6 +13,6 @@ public interface BeeNestView {
     void setError(String msg);
     void addFavorite(Boolean data);
     void deleteFavorite(Boolean data);
-    void addReport(Integer data);
+    void addReport(Boolean data);
     void getReportItem(List<DictionaryType> data);
 }

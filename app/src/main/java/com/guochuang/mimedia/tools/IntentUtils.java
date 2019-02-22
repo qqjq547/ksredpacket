@@ -226,11 +226,12 @@ public class IntentUtils {
         intent.putExtra(Constant.ARGS_POSITION, position);
         activity.startActivity(intent);
     }
-    public static void startEditAdActivity(Activity activity, long nestInfoId,long nestLocationId,long nestTimeInfoId) {
+    public static void startEditAdActivity(Activity activity, long nestInfoId,long nestLocationId,long nestTimeId,boolean update) {
         Intent intent = new Intent(activity, EditAdActivity.class);
         intent.putExtra(Constant.NESTINFOID, nestInfoId);
         intent.putExtra(Constant.NESTLOCATIONID, nestLocationId);
-        intent.putExtra(Constant.NESTTIMEINFOID, nestTimeInfoId);
+        intent.putExtra(Constant.NESTTIMEID, nestTimeId);
+        intent.putExtra(Constant.NESTUPDATE, update);
         activity.startActivity(intent);
     }
 }
