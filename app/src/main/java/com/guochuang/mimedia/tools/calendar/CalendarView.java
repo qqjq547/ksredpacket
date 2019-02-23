@@ -60,7 +60,11 @@ public class CalendarView extends ViewGroup {
         this.adapter = adapter;
     }
 
-    public void setData(List<CalendarBean> data,boolean isToday) {
+    public CaledarAdapter getAdapter() {
+        return adapter;
+    }
+
+    public void setData(List<CalendarBean> data, boolean isToday) {
         this.data = data;
         this.isToday=isToday;
         setItem();

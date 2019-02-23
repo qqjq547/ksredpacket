@@ -440,6 +440,8 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
     public void setData(Boolean data) {
         closeLoadingDialog();
         showShortToast(R.string.publish_success);
+        setResult(RESULT_OK,getIntent());
+        finish();
     }
 
     @Override

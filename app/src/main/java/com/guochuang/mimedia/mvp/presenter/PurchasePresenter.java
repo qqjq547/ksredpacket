@@ -96,6 +96,26 @@ public class PurchasePresenter extends BasePresenter<PurchaseView> {
             }
         });
     }
+    public void buyNestAd(String channelCode,int payType,long nestTimeInfoId,int price,String longitude,String latitude,String safetyCode){
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().buyNestTime(channelCode,payType,nestTimeInfoId,price,longitude,latitude,safetyCode)), new ApiCallback<Order>() {
+            @Override
+            public void onSuccess(Order data) {
+                mvpView.setBuyNestAd(data);
+
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setError(exception.getMessage());
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
     public void calValue(double numericalValue,int type){
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().calValue(numericalValue,type)), new ApiCallback<CalValue>() {
             @Override

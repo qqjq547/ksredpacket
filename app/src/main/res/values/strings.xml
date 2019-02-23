@@ -670,4 +670,8 @@
     <string name="audio_quality">音效</string>
     <string name="goto_add">去添加</string>
     <string name="ad">广告</string>
+    <string name="buy_nestad">竞购广告</string>
+    <string name="buy_price_not_empty">竞购价格不能为空</string>
+    <string name="buy_price_limit">竞购价格需要大于最大价格</string>
+    <string name="pls_agree_bid_agreement">请先同意竞购协议</string>
 </resources>

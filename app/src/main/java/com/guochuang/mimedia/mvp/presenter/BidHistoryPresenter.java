@@ -19,9 +19,9 @@ public class BidHistoryPresenter extends BasePresenter<BidHistoryView> {
         attachView(view);
     }
 
-    public void getNestAuctionHistory(long nestTimeId,int currentPage,int pageSize){
+    public void getNestAuctionHistory(long nestTimeInfoId,int currentPage,int pageSize){
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                nestAuctionList(nestTimeId,currentPage,pageSize)), new ApiCallback<Page<NestAuctionRecord>>() {
+                nestAuctionList(nestTimeInfoId,currentPage,pageSize)), new ApiCallback<Page<NestAuctionRecord>>() {
             @Override
             public void onSuccess(Page<NestAuctionRecord> data) {
                 mvpView.setData(data);

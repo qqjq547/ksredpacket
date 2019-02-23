@@ -123,8 +123,6 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
         }
     };
 
-
-
     @Override
     protected RedbagPresenter createPresenter() {
         return new RedbagPresenter(this);

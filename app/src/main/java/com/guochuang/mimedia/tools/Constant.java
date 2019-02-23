@@ -45,6 +45,7 @@ public class Constant {
     public static final int REQUEST_ADD_ADDRESS = 15;
     public static final int REQUEST_PICK_ADDRESS = 16;
     public static final int REQUEST_SET_SHOWLIST = 17;
+    public static final int REQUEST_EDIT_NESTAD = 18;
 
     public static final String TITLE = "title";
     public static final String ARTICLEUUID = "articleUuid";
@@ -86,7 +87,9 @@ public class Constant {
     public static final String NESTINFOID = "nestInfoId";
     public static final String NESTLOCATIONID = "nestLocationId";
     public static final String NESTTIMEID = "nestTimeId";
+    public static final String NESTTIMEINFOID = "nestTimeInfoId";
     public static final String NESTUPDATE = "nestUpdate";
+
 
     public static final String FORMAT_DATE_SIMPLE = "yyyy-MM-dd";
     public static final String FORMAT_DATE = "yyyy-MM-dd HH:mm:ss";
@@ -196,6 +199,7 @@ public class Constant {
     public static final int TYPE_PURCHASE_AGENT = 2;
     public static final int TYPE_PURCHASE_HONEYCOMB = 3;
     public static final int TYPE_PURCHASE_SNATCH = 4;
+    public static final int TYPE_PURCHASE_NESTAD = 5;
 
     public static final String RAIN_DURATION = "duration";
     public static final String RAIN_COUNT = "count";

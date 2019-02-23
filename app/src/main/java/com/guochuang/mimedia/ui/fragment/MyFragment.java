@@ -389,6 +389,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
     public void setAuctionMsg(NestAuctionMsg data) {
         if (data!=null&&!TextUtils.isEmpty(data.getShowMsg())){
             new DialogBuilder(getContext())
+             .setTitle(R.string.tip)
             .setMessage(data.getShowMsg())
             .setNegativeButton(R.string.cancel,null)
             .setPositiveButton(R.string.goto_add,new View.OnClickListener(){

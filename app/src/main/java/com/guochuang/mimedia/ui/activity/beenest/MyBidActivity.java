@@ -107,6 +107,7 @@ public class MyBidActivity extends MvpActivity<MyBidPresenter> implements MyBidV
                 tvBidTimes.setText(String.valueOf(dataArr.get(0).getAuctionNum()));
             }
         }
+
         adapter.notifyDataSetChanged();
         if (data.getCurrentPage() >= data.getTotalPage()) {
             srlRefresh.setEnableLoadmore(false);

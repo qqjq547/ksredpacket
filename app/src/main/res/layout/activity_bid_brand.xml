@@ -173,24 +173,23 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/space45"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/text_black"
                     android:textSize="@dimen/textfont14"
                     android:text="@string/buy_price"/>
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"/>
 
                 <EditText
                     android:id="@+id/et_bid_price"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:gravity="center_vertical|right"
-                    android:background="@color/transparent"
+                    android:background="@color/bg_white"
                     android:inputType="number"
                     android:textColor="@color/text_city_yellow"
                     android:textSize="@dimen/textfont14" />

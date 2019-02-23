@@ -1163,7 +1163,7 @@ public interface ApiStore {
 
     @GET("/api/v1/nest/nest_time_auction/list")
     Observable<HttpResponse<Page<NestAuctionRecord>>> nestAuctionList(
-            @Query("nestTimeId") long nestTimeId,
+            @Query("nestTimeInfoId") long nestTimeInfoId,
             @Query("currentPage") int currentPage,
             @Query("pageSize") int pageSize
     );
@@ -1229,9 +1229,14 @@ public interface ApiStore {
 
     @FormUrlEncoded
     @POST("/api/v1/nest/timeInfo/buyNestTime")
-    Observable<HttpResponse<Boolean>> getBuyNestTime(
+    Observable<HttpResponse<Boolean>> buyNestTime(
+            @Field("channelCode") String channelCode,
+            @Field("payType") int payType,
             @Field("nestTimeInfoId") long nestTimeInfoId,
-            @Field("price") String price
+            @Field("price") int price,
+            @Field("longitude") String longitude,
+            @Field("latitude") String latitude,
+            @Field("safetyCode") String safetyCode
     );
 
     @FormUrlEncoded

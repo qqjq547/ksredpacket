@@ -63,6 +63,7 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
     int payType=0;
     int payNumber=0;
     long snatchId=0;
+    long nestTimeInfoId=0;
     @Override
     protected PurchasePresenter createPresenter() {
         return new PurchasePresenter(this);
@@ -81,6 +82,7 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
         acountKsb=getPref().getString(PrefUtil.COIN,"");
         payNumber=getIntent().getIntExtra(Constant.PAYNUMBER,0);
         snatchId=getIntent().getLongExtra(Constant.SNATCHID,0);
+        nestTimeInfoId=getIntent().getLongExtra(Constant.NESTTIMEINFOID,0);
         if (purchaseType==Constant.TYPE_PURCHASE_REGION){
             tvTitle.setText(R.string.buy_city_owner);
             tvAgreement.setText(R.string.city_buy_agreement);
@@ -93,11 +95,15 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
         }else if(purchaseType==Constant.TYPE_PURCHASE_SNATCH){
             tvTitle.setText(R.string.buy_snatch);
             tvAgreement.setText(R.string.snatch_agreement);
+        }else if(purchaseType==Constant.TYPE_PURCHASE_NESTAD){
+            tvTitle.setText(R.string.buy_nestad);
+            tvAgreement.setText(R.string.brand_bid_agreement);
         }
         tvAmount.setText(String.valueOf(money));
         rbtnKsbpay.setText(String.format(getString(R.string.format_yuan),String.valueOf(money)));
         showLoadingDialog(null);
         mvpPresenter.calValue(Double.parseDouble(money),Constant.CAL_TYPE_COIN);
+
     }
 
 
@@ -116,7 +122,8 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
                     IntentUtils.startWebActivity(this,getString(R.string.hongycomb_agreement),Constant.URL_HONYCOMB_RULE);
                 }else if(purchaseType==Constant.TYPE_PURCHASE_SNATCH){
                     IntentUtils.startWebActivity(this,getString(R.string.snatch_agreement),Constant.URL_DUOBAO_RULE);
-                }
+                }else if(purchaseType==Constant.TYPE_PURCHASE_NESTAD){
+                    IntentUtils.startWebActivity(this,getString(R.string.brand_bid_agreement),Constant.URL_FENGCHAO_JINGGOU); }
                 break;
             case R.id.bt_ensure:
                 if (rbtnWxpay.isChecked()) {
@@ -166,6 +173,8 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
             mvpPresenter.appCreateOrder(Constant.CHANNEL_CODE_ANDROID,payNumber,payType,getPref().getLongitude(),getPref().getLatitude(),safetyCode);
         }else if(purchaseType==Constant.TYPE_PURCHASE_SNATCH){
             mvpPresenter.createSnatchOrder(Constant.CHANNEL_CODE_ANDROID,payType,snatchId,payNumber,getPref().getLongitude(),getPref().getLatitude(),safetyCode);
+        }else if(purchaseType==Constant.TYPE_PURCHASE_NESTAD){
+            mvpPresenter.buyNestAd(Constant.CHANNEL_CODE_ANDROID,payType,nestTimeInfoId,Integer.parseInt(money),getPref().getLongitude(),getPref().getLatitude(),safetyCode);
         }
     }
     public void setKsbText(){
@@ -290,6 +299,16 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
     }
     @Override
     public void setSnatch(Order data) {
+        closeLoadingDialog();
+        if (data!=null){
+            payResult(data);
+        }else {
+            showShortToast(R.string.can_get_order);
+        }
+    }
+
+    @Override
+    public void setBuyNestAd(Order data) {
         closeLoadingDialog();
         if (data!=null){
             payResult(data);

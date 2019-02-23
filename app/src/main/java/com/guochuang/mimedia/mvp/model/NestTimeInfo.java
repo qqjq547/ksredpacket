@@ -11,9 +11,18 @@ public class NestTimeInfo {
      */
 
     private CurrentBean current;
-    private double ksb;
+    private String ksb;
     private NextBean next;
     private String rate;
+    private int maxPrice;
+
+    public int getMaxPrice() {
+        return maxPrice;
+    }
+
+    public void setMaxPrice(int maxPrice) {
+        this.maxPrice = maxPrice;
+    }
 
     public CurrentBean getCurrent() {
         return current;
@@ -23,11 +32,11 @@ public class NestTimeInfo {
         this.current = current;
     }
 
-    public double getKsb() {
+    public String getKsb() {
         return ksb;
     }
 
-    public void setKsb(double ksb) {
+    public void setKsb(String ksb) {
         this.ksb = ksb;
     }
 

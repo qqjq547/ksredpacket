@@ -12,6 +12,7 @@ public interface PurchaseView {
     void setUpgradeAgent(Order data);
     void setBuyHonyComb(Order data);
     void setSnatch(Order data);
+    void setBuyNestAd(Order data);
     void setPayResult(CalValue data);
     void setError(String msg);
 

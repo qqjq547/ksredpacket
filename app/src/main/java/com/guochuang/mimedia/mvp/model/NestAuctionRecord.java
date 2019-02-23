@@ -23,7 +23,8 @@ public class NestAuctionRecord {
     private int dayPrice;
     private int dealNum;
     private String endDate;
-    private int nestTimeId;
+    private long nestTimeId;
+    private long nestTimeInfoId;
     private String startDate;
     private int totalPrice;
     private String userAvatar;
@@ -78,12 +79,20 @@ public class NestAuctionRecord {
         this.endDate = endDate;
     }
 
-    public int getNestTimeId() {
+    public long getNestTimeId() {
         return nestTimeId;
     }
 
-    public void setNestTimeId(int nestTimeId) {
+    public void setNestTimeId(long nestTimeId) {
         this.nestTimeId = nestTimeId;
+    }
+
+    public long getNestTimeInfoId() {
+        return nestTimeInfoId;
+    }
+
+    public void setNestTimeInfoId(long nestTimeInfoId) {
+        this.nestTimeInfoId = nestTimeInfoId;
     }
 
     public String getStartDate() {

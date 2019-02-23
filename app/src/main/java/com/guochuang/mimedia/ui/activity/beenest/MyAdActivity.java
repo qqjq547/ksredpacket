@@ -1,6 +1,7 @@
 package com.guochuang.mimedia.ui.activity.beenest;
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -12,6 +13,7 @@ import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.NestStatistics;
 import com.guochuang.mimedia.mvp.presenter.MyAdPresneter;
 import com.guochuang.mimedia.mvp.view.MyAdView;
+import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.ui.adapter.MyFragmentPagerAdapter;
 import com.guochuang.mimedia.ui.fragment.AdListFragment;
 import com.sz.gcyh.KSHongBao.R;
@@ -60,7 +62,11 @@ public class MyAdActivity extends MvpActivity<MyAdPresneter> implements MyAdView
     public void initViewAndData() {
         tvTitle.setText(R.string.my_ad);
         tvText.setText(R.string.my_bid_buy);
-        String[] titleArr = getResources().getStringArray(R.array.ad_nav);
+        setFragment();
+        mvpPresenter.getMyStatistics();
+    }
+
+    private void setFragment() {
         fragments[0] = new AdListFragment();
         fragments[1] = new AdListFragment();
         fragments[1].setStatus(0);
@@ -68,10 +74,10 @@ public class MyAdActivity extends MvpActivity<MyAdPresneter> implements MyAdView
         fragments[2].setStatus(1);
         fragments[3] = new AdListFragment();
         fragments[3].setStatus(2);
+        String[] titleArr = getResources().getStringArray(R.array.ad_nav);
         pagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), fragments, titleArr);
         vpContent.setAdapter(pagerAdapter);
         tbList.setupWithViewPager(vpContent);
-        mvpPresenter.getMyStatistics();
     }
 
     @OnClick({R.id.iv_back, R.id.tv_text})
@@ -101,5 +107,14 @@ public class MyAdActivity extends MvpActivity<MyAdPresneter> implements MyAdView
     @Override
     public void setError(String msg) {
         showShortToast(msg);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==RESULT_OK&&requestCode==Constant.REQUEST_EDIT_NESTAD){
+            setFragment();
+            mvpPresenter.getMyStatistics();
+        }
     }
 }

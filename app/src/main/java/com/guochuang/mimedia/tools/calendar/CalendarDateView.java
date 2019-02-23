@@ -70,7 +70,9 @@ public class CalendarDateView extends ViewPager {
         }
         setMeasuredDimension(widthMeasureSpec, MeasureSpec.makeMeasureSpec(calendarHeight, MeasureSpec.EXACTLY));
     }
-
+    public void update() {
+        initData();
+    }
     private void init() {
        final int[] dateArr= CalendarUtil.getYMD(new Date());
 

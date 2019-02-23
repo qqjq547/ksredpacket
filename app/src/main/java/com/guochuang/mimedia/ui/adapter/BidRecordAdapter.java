@@ -32,8 +32,8 @@ public class BidRecordAdapter extends BaseQuickAdapter<NestAuctionRecord,BaseVie
                 GlideImgManager.loadImage(mContext,R.drawable.ic_bid_done,(ImageView) helper.getView(R.id.iv_avatar));
                 break;
         }
-        helper.setText(R.id.tv_name,item.getUserName());
-        helper.setText(R.id.tv_time,item.getStartDate());
+        helper.setText(R.id.tv_nickname,item.getUserName());
+        helper.setText(R.id.tv_time,item.getAuctionDate());
         String priceStr=item.getDayPrice()+mContext.getString(R.string.unit_yuan_day);
         SpannableStringBuilder builder=new SpannableStringBuilder(priceStr);
         String dayprice=String.valueOf(item.getDayPrice());
