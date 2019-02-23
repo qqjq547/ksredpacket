@@ -2,16 +2,17 @@ package com.guochuang.mimedia.mvp.model;
 
 public class NestTimeInfo {
 
+
     /**
-     * current : {"day":0,"endTime":"2019-02-22T05:50:50.664Z","price":0,"sale":true,"saleStartTime":"2019-02-22T05:50:50.664Z","startTime":"2019-02-22T05:50:50.664Z"}
+     * current : {"day":0,"endTime":"2019-02-23T06:30:29.606Z","nestTimeInfoId":0,"nextTime":"2019-02-23T06:30:29.606Z","price":0,"sale":true,"saleStartTime":"2019-02-23T06:30:29.606Z","startTime":"2019-02-23T06:30:29.606Z","totalPrice":0,"userAvatar":"string","userName":"string"}
      * ksb : 0
-     * nest : {"day":0,"endTime":"2019-02-22T05:50:50.664Z","price":0,"sale":true,"saleStartTime":"2019-02-22T05:50:50.664Z","startTime":"2019-02-22T05:50:50.664Z"}
+     * next : {"day":0,"endTime":"2019-02-23T06:30:29.606Z","nestTimeInfoId":0,"nextTime":"2019-02-23T06:30:29.606Z","price":0,"sale":true,"saleStartTime":"2019-02-23T06:30:29.606Z","startTime":"2019-02-23T06:30:29.606Z","totalPrice":0,"userAvatar":"string","userName":"string"}
      * rate : string
      */
 
     private CurrentBean current;
     private double ksb;
-    private NestBean nest;
+    private NextBean next;
     private String rate;
 
     public CurrentBean getCurrent() {
@@ -30,12 +31,12 @@ public class NestTimeInfo {
         this.ksb = ksb;
     }
 
-    public NestBean getNest() {
-        return nest;
+    public NextBean getNext() {
+        return next;
     }
 
-    public void setNest(NestBean nest) {
-        this.nest = nest;
+    public void setNext(NextBean next) {
+        this.next = next;
     }
 
     public String getRate() {
@@ -49,19 +50,29 @@ public class NestTimeInfo {
     public static class CurrentBean {
         /**
          * day : 0
-         * endTime : 2019-02-22T05:50:50.664Z
+         * endTime : 2019-02-23T06:30:29.606Z
+         * nestTimeInfoId : 0
+         * nextTime : 2019-02-23T06:30:29.606Z
          * price : 0
          * sale : true
-         * saleStartTime : 2019-02-22T05:50:50.664Z
-         * startTime : 2019-02-22T05:50:50.664Z
+         * saleStartTime : 2019-02-23T06:30:29.606Z
+         * startTime : 2019-02-23T06:30:29.606Z
+         * totalPrice : 0
+         * userAvatar : string
+         * userName : string
          */
 
         private int day;
         private String endTime;
+        private long nestTimeInfoId;
+        private String nextTime;
         private int price;
         private boolean sale;
         private String saleStartTime;
         private String startTime;
+        private int totalPrice;
+        private String userAvatar;
+        private String userName;
 
         public int getDay() {
             return day;
@@ -77,6 +88,22 @@ public class NestTimeInfo {
 
         public void setEndTime(String endTime) {
             this.endTime = endTime;
+        }
+
+        public long getNestTimeInfoId() {
+            return nestTimeInfoId;
+        }
+
+        public void setNestTimeInfoId(long nestTimeInfoId) {
+            this.nestTimeInfoId = nestTimeInfoId;
+        }
+
+        public String getNextTime() {
+            return nextTime;
+        }
+
+        public void setNextTime(String nextTime) {
+            this.nextTime = nextTime;
         }
 
         public int getPrice() {
@@ -109,25 +136,59 @@ public class NestTimeInfo {
 
         public void setStartTime(String startTime) {
             this.startTime = startTime;
+        }
+
+        public int getTotalPrice() {
+            return totalPrice;
+        }
+
+        public void setTotalPrice(int totalPrice) {
+            this.totalPrice = totalPrice;
+        }
+
+        public String getUserAvatar() {
+            return userAvatar;
+        }
+
+        public void setUserAvatar(String userAvatar) {
+            this.userAvatar = userAvatar;
+        }
+
+        public String getUserName() {
+            return userName;
+        }
+
+        public void setUserName(String userName) {
+            this.userName = userName;
         }
     }
 
-    public static class NestBean {
+    public static class NextBean {
         /**
          * day : 0
-         * endTime : 2019-02-22T05:50:50.664Z
+         * endTime : 2019-02-23T06:30:29.606Z
+         * nestTimeInfoId : 0
+         * nextTime : 2019-02-23T06:30:29.606Z
          * price : 0
          * sale : true
-         * saleStartTime : 2019-02-22T05:50:50.664Z
-         * startTime : 2019-02-22T05:50:50.664Z
+         * saleStartTime : 2019-02-23T06:30:29.606Z
+         * startTime : 2019-02-23T06:30:29.606Z
+         * totalPrice : 0
+         * userAvatar : string
+         * userName : string
          */
 
         private int day;
         private String endTime;
+        private long nestTimeInfoId;
+        private String nextTime;
         private int price;
         private boolean sale;
         private String saleStartTime;
         private String startTime;
+        private int totalPrice;
+        private String userAvatar;
+        private String userName;
 
         public int getDay() {
             return day;
@@ -143,6 +204,22 @@ public class NestTimeInfo {
 
         public void setEndTime(String endTime) {
             this.endTime = endTime;
+        }
+
+        public long getNestTimeInfoId() {
+            return nestTimeInfoId;
+        }
+
+        public void setNestTimeInfoId(long nestTimeInfoId) {
+            this.nestTimeInfoId = nestTimeInfoId;
+        }
+
+        public String getNextTime() {
+            return nextTime;
+        }
+
+        public void setNextTime(String nextTime) {
+            this.nextTime = nextTime;
         }
 
         public int getPrice() {
@@ -175,6 +252,30 @@ public class NestTimeInfo {
 
         public void setStartTime(String startTime) {
             this.startTime = startTime;
+        }
+
+        public int getTotalPrice() {
+            return totalPrice;
+        }
+
+        public void setTotalPrice(int totalPrice) {
+            this.totalPrice = totalPrice;
+        }
+
+        public String getUserAvatar() {
+            return userAvatar;
+        }
+
+        public void setUserAvatar(String userAvatar) {
+            this.userAvatar = userAvatar;
+        }
+
+        public String getUserName() {
+            return userName;
+        }
+
+        public void setUserName(String userName) {
+            this.userName = userName;
         }
     }
 }
