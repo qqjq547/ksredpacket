@@ -5,7 +5,7 @@ import android.os.Bundle;
 import com.guochuang.mimedia.mvp.view.MainView;
 
 
-public abstract class MvpActivity<P extends BasePresenter> extends BaseActivity<BasePresenter<MainView>> {
+public abstract class MvpActivity<P extends BasePresenter> extends BaseActivity {
     protected P mvpPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

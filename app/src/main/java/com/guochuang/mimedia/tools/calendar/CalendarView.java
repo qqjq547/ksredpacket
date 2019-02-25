@@ -59,6 +59,9 @@ public class CalendarView extends ViewGroup {
     public void setAdapter(CaledarAdapter adapter) {
         this.adapter = adapter;
     }
+    public void updateView(){
+        setItem();
+    }
 
     public CaledarAdapter getAdapter() {
         return adapter;

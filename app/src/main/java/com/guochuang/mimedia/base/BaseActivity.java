@@ -29,7 +29,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
-public abstract class BaseActivity<M extends BasePresenter<MainView>> extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
     private CompositeSubscription mCompositeSubscription;
     private static PrefUtil pref;
     private Dialog proDialog;

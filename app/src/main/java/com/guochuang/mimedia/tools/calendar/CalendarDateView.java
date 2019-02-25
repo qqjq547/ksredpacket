@@ -2,6 +2,7 @@ package com.guochuang.mimedia.tools.calendar;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
@@ -71,7 +72,10 @@ public class CalendarDateView extends ViewPager {
         setMeasuredDimension(widthMeasureSpec, MeasureSpec.makeMeasureSpec(calendarHeight, MeasureSpec.EXACTLY));
     }
     public void update() {
-        initData();
+        cache.clear();
+        for (CalendarView calView:views.values()){
+            calView.updateView();
+        }
     }
     private void init() {
        final int[] dateArr= CalendarUtil.getYMD(new Date());
@@ -122,6 +126,9 @@ public class CalendarDateView extends ViewPager {
 
                 if (onItemClickListener != null) {
                     CalendarView view = views.get(position);
+                    if (view==null){
+                        return;
+                    }
                     Object[] obs = view.getSelect();
                     onItemClickListener.onItemClick((View) obs[0], (int) obs[1], (CalendarBean) obs[2]);
                 }

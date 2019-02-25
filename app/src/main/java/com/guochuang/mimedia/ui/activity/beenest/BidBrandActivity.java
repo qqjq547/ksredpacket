@@ -1,7 +1,6 @@
 package com.guochuang.mimedia.ui.activity.beenest;
 
 import android.content.Intent;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.Spannable;
@@ -94,7 +93,8 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
     Button btnBuy;
 
     SimpleDateFormat dateFormat;
-    List<String> auctionArr = new ArrayList<>();
+    List<String> currentArr = new ArrayList<>();
+    List<String> currentSelectArr = new ArrayList<>();
     List<String> hotArr = new ArrayList<>();
     long nestInfoId;
     long nestLocationId;
@@ -118,14 +118,22 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
     public void initViewAndData() {
         tvText.setText(R.string.history_put);
         nestLocationId = getIntent().getLongExtra(Constant.NESTLOCATIONID, 0);
+        tvTitle.setText(String.valueOf(nestLocationId));
         dateFormat = new SimpleDateFormat(Constant.FORMAT_MONTH);
         tvMonth.setText(dateFormat.format(new Date()));
         initAdapter();
         cdvMonth.setOnItemClickListener(new CalendarView.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int postion, CalendarBean bean) {
-                String dateStr = CommonUtil.dateToString(CalendarFactory.getCalendarByBean(bean).getTime(), Constant.FORMAT_MONTH);
-                tvMonth.setText(dateStr);
+                Date date=CalendarFactory.getCalendarByBean(bean).getTime();
+                String monthStr = CommonUtil.dateToString(date, Constant.FORMAT_MONTH);
+                tvMonth.setText(monthStr);
+                String dateStr= CommonUtil.dateToString(date, Constant.FORMAT_DATE_SIMPLE);
+                if (currentArr.contains(dateStr)){
+                    setInfo(timeInfo.getCurrent());
+                }else if (hotArr.contains(dateStr)){
+                    setInfo(timeInfo.getNext());
+                }
             }
         });
         etBidPrice.addTextChangedListener(new TextWatcher() {
@@ -161,7 +169,6 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
        caledarAdapter=new CaledarAdapter() {
            @Override
            public View getView(View convertView, ViewGroup parentView, CalendarBean bean) {
-               LogUtil.d("getView");
                if (convertView == null) {
                    convertView = LayoutInflater.from(parentView.getContext()).inflate(R.layout.item_brand_date, null);
                }
@@ -170,7 +177,7 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
                ImageView ivHot = convertView.findViewById(R.id.iv_hot);
                tvDate.setText(String.valueOf(bean.day));
                String dateStr = CommonUtil.dateToString(CalendarFactory.getCalendarByBean(bean).getTime(), Constant.FORMAT_DATE_SIMPLE);
-               if (auctionArr.contains(dateStr)) {
+               if (currentArr.contains(dateStr)) {
                    ivAuction.setVisibility(View.VISIBLE);
                } else {
                    ivAuction.setVisibility(View.GONE);
@@ -180,7 +187,11 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
                    tvDate.setBackgroundResource(R.drawable.bg_date_white);
                } else {
                    ivHot.setVisibility(View.GONE);
-                   tvDate.setBackgroundResource(R.drawable.bg_date_gray);
+                   if (currentSelectArr.contains(dateStr)){
+                       tvDate.setBackgroundResource(R.drawable.bg_date_yellow);
+                   }else {
+                       tvDate.setBackgroundResource(R.drawable.bg_date_gray);
+                   }
                }
                if (bean.mothFlag != 0) {
                    tvDate.setTextColor(getResources().getColor(R.color.text_gray));
@@ -240,18 +251,26 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
         if (data != null) {
             timeInfo = data;
             rate = Double.parseDouble(data.getRate());
-            NestTimeInfo.CurrentBean currentBean = data.getCurrent();
-            NestTimeInfo.NextBean nestBean = data.getNext();
+            NestTimeInfo.InfoBean currentBean = data.getCurrent();
+            NestTimeInfo.InfoBean nestBean = data.getNext();
             Calendar startCal = Calendar.getInstance();
             if (currentBean != null) {
                 startCal.setTime(CommonUtil.stringToDate(currentBean.getStartTime(), Constant.FORMAT_DATE_SIMPLE));
-                for (int i = 0; i < currentBean.getDay(); i++) {
+                for (int i = 0; i < nestBean.getDay(); i++) {
                     Calendar cal = Calendar.getInstance();
                     cal.setTime(startCal.getTime());
                     cal.add(Calendar.DATE, i);
-                    auctionArr.add(CommonUtil.dateToString(cal.getTime(), Constant.FORMAT_DATE_SIMPLE));
+                    currentArr.add(CommonUtil.dateToString(cal.getTime(), Constant.FORMAT_DATE_SIMPLE));
+                }
+                startCal.setTime(CommonUtil.stringToDate(currentBean.getSaleStartTime(), Constant.FORMAT_DATE_SIMPLE));
+                for (int i = 0; i <currentBean.getDay(); i++) {
+                    Calendar cal = Calendar.getInstance();
+                    cal.setTime(startCal.getTime());
+                    cal.add(Calendar.DATE, i);
+                    currentSelectArr.add(CommonUtil.dateToString(cal.getTime(), Constant.FORMAT_DATE_SIMPLE));
                 }
             }
+
             if (nestBean != null) {
                 startCal.setTime(CommonUtil.stringToDate(nestBean.getStartTime(), Constant.FORMAT_DATE_SIMPLE));
                 for (int i = 0; i < nestBean.getDay(); i++) {
@@ -261,42 +280,11 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
                     hotArr.add(CommonUtil.dateToString(cal.getTime(), Constant.FORMAT_DATE_SIMPLE));
                 }
             }
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    cdvMonth.update();
-                }
-            },2000);
-
-            if (data.getNext().isSale()) {
-                linEdit.setVisibility(View.VISIBLE);
-                linResult.setVisibility(View.GONE);
-                linRnsure.setVisibility(View.VISIBLE);
-                if (currentBean == null) {
-                    tvBuyTime.setText(null);
-                    tvCurrentPrice.setText(null);
-                } else {
-                    tvBuyTime.setText(String.format(getString(R.string.format_time_and_count), currentBean.getSaleStartTime(), currentBean.getEndTime(), currentBean.getDay()));
-                    tvCurrentPrice.setText(String.valueOf(data.getCurrent().getPrice()));
-                }
-                tvMyKsb.setText(String.valueOf(data.getKsb()));
-            } else {
-                linEdit.setVisibility(View.GONE);
-                linResult.setVisibility(View.VISIBLE);
-                linRnsure.setVisibility(View.GONE);
-                GlideImgManager.loadCircleImage(this, data.getNext().getUserAvatar(), ivAvatar);
-                tvNickName.setText(data.getNext().getUserName());
-                String priceStr = String.format(getString(R.string.format_price_and_total), String.valueOf(data.getNext().getPrice()), String.valueOf(data.getNext().getTotalPrice()));
-                SpannableStringBuilder builder = new SpannableStringBuilder(priceStr);
-                String dayprice = String.valueOf(data.getNext().getPrice());
-                int dayIndex = priceStr.indexOf(dayprice);
-                builder.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.text_city_yellow)), dayIndex, dayIndex + dayprice.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                String totalprice = String.valueOf(data.getNext().getTotalPrice());
-                int totalIndex = priceStr.lastIndexOf(totalprice);
-                builder.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.text_city_yellow)), totalIndex, totalIndex + totalprice.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                tvPrice.setText(builder);
-                tvNextBidTime.setText(getString(R.string.next_start_bid_time) + data.getNext().getNextTime());
-
+            cdvMonth.update();
+            if (data.getCurrent().isSale()&&!data.getNext().isSale()){//当期可卖，并且下期不可卖
+                setInfo(currentBean);
+            }else  {//显示下一期数据
+                setInfo(nestBean);
             }
 
         }
@@ -316,4 +304,31 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
             mvpPresenter.setNestTimeInfo(nestLocationId);
         }
     }
+    private void setInfo(NestTimeInfo.InfoBean infoBean){
+        tvBuyTime.setText(String.format(getString(R.string.format_time_and_count), infoBean.getSaleStartTime(), infoBean.getEndTime(), infoBean.getDay()));
+        if(infoBean.isSale()){//显示下一期数据
+        linEdit.setVisibility(View.VISIBLE);
+        linResult.setVisibility(View.GONE);
+        linRnsure.setVisibility(View.VISIBLE);
+        tvCurrentPrice.setText(String.valueOf(infoBean.getPrice()));
+        tvMyKsb.setText(String.valueOf(timeInfo.getKsb()));
+    } else {
+        linEdit.setVisibility(View.GONE);
+        linResult.setVisibility(View.VISIBLE);
+        linRnsure.setVisibility(View.GONE);
+        GlideImgManager.loadCircleImage(this, infoBean.getUserAvatar(), ivAvatar);
+        tvNickName.setText(infoBean.getUserName());
+        String priceStr = String.format(getString(R.string.format_price_and_total), String.valueOf(infoBean.getPrice()), String.valueOf(infoBean.getTotalPrice()));
+        SpannableStringBuilder builder = new SpannableStringBuilder(priceStr);
+        String dayprice = String.valueOf(infoBean.getPrice());
+        int dayIndex = priceStr.indexOf(dayprice);
+        builder.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.text_city_yellow)), dayIndex, dayIndex + dayprice.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        String totalprice = String.valueOf(infoBean.getTotalPrice());
+        int totalIndex = priceStr.lastIndexOf(totalprice);
+        builder.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.text_city_yellow)), totalIndex, totalIndex + totalprice.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        tvPrice.setText(builder);
+        tvNextBidTime.setText(getString(R.string.next_start_bid_time) + infoBean.getNextTime());
+    }
+    }
+
 }
