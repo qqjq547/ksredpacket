@@ -6,6 +6,7 @@ import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.CalValue;
 import com.guochuang.mimedia.mvp.model.Order;
+import com.guochuang.mimedia.mvp.model.PayConfig;
 import com.guochuang.mimedia.mvp.view.PurchaseView;
 import com.guochuang.mimedia.mvp.view.WelcomeView;
 import com.guochuang.mimedia.tools.RxUtil;
@@ -17,6 +18,24 @@ import com.guochuang.mimedia.tools.RxUtil;
 public class PurchasePresenter extends BasePresenter<PurchaseView> {
     public PurchasePresenter(PurchaseView view) {
         attachView(view);
+    }
+    public void getPayType(String bizType){
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getPayType(bizType)), new ApiCallback<PayConfig>() {
+            @Override
+            public void onSuccess(PayConfig data) {
+                mvpView.setConfig(data);
+            }
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setError(exception.getMessage());
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
     }
     public void buyCityOwner(long regionId,double money,int payType,String channelCode,String safetyCode){
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().buyCityOwner(regionId,money,payType,channelCode,safetyCode)), new ApiCallback<String>() {

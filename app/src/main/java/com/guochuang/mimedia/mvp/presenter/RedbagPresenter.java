@@ -231,4 +231,24 @@ public class RedbagPresenter extends BasePresenter<RedbagView> {
             }
         });
     }
+    public void userStatistics(String latitude,String longitude) {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
+                userStatistics(latitude,longitude)), new ApiCallback<String>() {
+            @Override
+            public void onSuccess(String data) {
+
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setError(exception.getMessage());
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
+
 }

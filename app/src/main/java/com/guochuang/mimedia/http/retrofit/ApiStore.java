@@ -50,6 +50,7 @@ import com.guochuang.mimedia.mvp.model.NestStatistics;
 import com.guochuang.mimedia.mvp.model.NestTemplate;
 import com.guochuang.mimedia.mvp.model.NestTimeInfo;
 import com.guochuang.mimedia.mvp.model.Order;
+import com.guochuang.mimedia.mvp.model.PayConfig;
 import com.guochuang.mimedia.mvp.model.QrCode;
 import com.guochuang.mimedia.mvp.model.RainMsg;
 import com.guochuang.mimedia.mvp.model.RainRecord;
@@ -946,6 +947,11 @@ public interface ApiStore {
             @Query("beginRegisterDate") String beginRegisterDate,
             @Query("endRegisterDate") String endRegisterDate
     );
+    @GET("/api/v1/user/user_statistic/statistic")
+    Observable<HttpResponse<UserStatistics>> userStatistics(
+            @Query("latitude") String latitude,
+            @Query("longitude") String longitude
+    );
 
     @GET("/api/v1/user/region_center/statistics")
     Observable<HttpResponse<IncomeStatistics>> getIncomeStatistics(
@@ -1229,7 +1235,7 @@ public interface ApiStore {
 
     @FormUrlEncoded
     @POST("/api/v1/nest/timeInfo/buyNestTime")
-    Observable<HttpResponse<Boolean>> buyNestTime(
+    Observable<HttpResponse<Order>> buyNestTime(
             @Field("channelCode") String channelCode,
             @Field("payType") int payType,
             @Field("nestTimeInfoId") long nestTimeInfoId,
@@ -1244,4 +1250,7 @@ public interface ApiStore {
     Observable<HttpResponse<NestTimeInfo>> getNestTimeInfo(
             @Field("nestLocationId") long nestLocationId
     );
+    @GET("/api/v1/order/order/get_pay_type")
+    Observable<HttpResponse<PayConfig>> getPayType(
+            @Query("bizType") String bizType);
 }

@@ -195,6 +195,7 @@ public class Constant {
     public static final int STATE_UN_GET = 2;
     public static final int STATE_HAS_EXPIRE = 3;
 
+    public static final int TYPE_PURCHASE_REDBAG = 0;
     public static final int TYPE_PURCHASE_REGION = 1;
     public static final int TYPE_PURCHASE_AGENT = 2;
     public static final int TYPE_PURCHASE_HONEYCOMB = 3;

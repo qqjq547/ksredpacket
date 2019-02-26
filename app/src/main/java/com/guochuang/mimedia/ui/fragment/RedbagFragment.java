@@ -334,6 +334,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                 isFirstLocation = false;
                 mvpPresenter.getHomeRegion(getPref().getLatitude(), getPref().getLongitude());
                 mvpPresenter.getHomeAd(getPref().getLatitude(), getPref().getLongitude());
+                mvpPresenter.userStatistics(getPref().getLatitude(), getPref().getLongitude());
             }
             if (!isHidden() && isResumed()) {
                 isDelay = true;

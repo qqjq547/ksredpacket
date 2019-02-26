@@ -13,6 +13,9 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import com.guochuang.mimedia.mvp.model.PayConfig;
+import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.DialogBuilder;
 import com.guochuang.mimedia.tools.GsonUtil;
 import com.guochuang.mimedia.tools.pay.AliPay;
@@ -103,6 +106,7 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
         rbtnKsbpay.setText(String.format(getString(R.string.format_yuan),String.valueOf(money)));
         showLoadingDialog(null);
         mvpPresenter.calValue(Double.parseDouble(money),Constant.CAL_TYPE_COIN);
+        mvpPresenter.getPayType(CommonUtil.getTypeParams(purchaseType));
 
     }
 
@@ -267,6 +271,29 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
                 break;
         }
     }
+
+    @Override
+    public void setConfig(PayConfig data) {
+        closeLoadingDialog();
+        rgWay.setVisibility(View.VISIBLE);
+        if (data.getAliPayType()==1){
+            rbtnAlipay.setVisibility(View.VISIBLE);
+        }else {
+            rbtnAlipay.setVisibility(View.GONE);
+        }
+        if (data.getWechatPayType()==1){
+            rbtnWxpay.setVisibility(View.VISIBLE);
+        }else {
+            rbtnWxpay.setVisibility(View.GONE);
+        }
+        if (data.getKsbPayType()==1){
+            rbtnKsbpay.setVisibility(View.VISIBLE);
+        }else {
+            rbtnKsbpay.setVisibility(View.GONE);
+        }
+
+    }
+
     @Override
     public void setBuyCity(String data) {
         closeLoadingDialog();
@@ -330,4 +357,5 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
         closeLoadingDialog();
         showShortToast(msg);
     }
+
 }

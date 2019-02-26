@@ -95,12 +95,11 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
     SimpleDateFormat dateFormat;
     List<String> currentArr = new ArrayList<>();
     List<String> currentSelectArr = new ArrayList<>();
-    List<String> hotArr = new ArrayList<>();
-    long nestInfoId;
+    List<String> nextArr = new ArrayList<>();
     long nestLocationId;
-    long nestTimeId;
     NestTimeInfo timeInfo;
     double rate;
+    NestTimeInfo.InfoBean curInfoBean;
 
     CaledarAdapter caledarAdapter;
 
@@ -131,7 +130,7 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
                 String dateStr= CommonUtil.dateToString(date, Constant.FORMAT_DATE_SIMPLE);
                 if (currentArr.contains(dateStr)){
                     setInfo(timeInfo.getCurrent());
-                }else if (hotArr.contains(dateStr)){
+                }else if (nextArr.contains(dateStr)){
                     setInfo(timeInfo.getNext());
                 }
             }
@@ -157,10 +156,12 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
                 if (timeInfo == null) {
                     return;
                 }
-                if (Double.parseDouble(text) > timeInfo.getMaxPrice()) {
+                double money=Double.parseDouble(text);
+                if (money > timeInfo.getMaxPrice()) {
                     etBidPrice.setText(String.valueOf(timeInfo.getMaxPrice()));
+                    return;
                 }
-                tvEqualKsb.setText(String.valueOf(DoubleUtil.mul(Double.parseDouble(text), rate)));
+                tvEqualKsb.setText(String.valueOf(DoubleUtil.divide(money*curInfoBean.getDay(),rate)));
             }
         });
         mvpPresenter.setNestTimeInfo(nestLocationId);
@@ -178,18 +179,27 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
                tvDate.setText(String.valueOf(bean.day));
                String dateStr = CommonUtil.dateToString(CalendarFactory.getCalendarByBean(bean).getTime(), Constant.FORMAT_DATE_SIMPLE);
                if (currentArr.contains(dateStr)) {
-                   ivAuction.setVisibility(View.VISIBLE);
-               } else {
-                   ivAuction.setVisibility(View.GONE);
-               }
-               if (hotArr.contains(dateStr)) {
-                   ivHot.setVisibility(View.VISIBLE);
-                   tvDate.setBackgroundResource(R.drawable.bg_date_white);
-               } else {
-                   ivHot.setVisibility(View.GONE);
-                   if (currentSelectArr.contains(dateStr)){
-                       tvDate.setBackgroundResource(R.drawable.bg_date_yellow);
+                   if (timeInfo.getCurrent().isSale()&&currentSelectArr.contains(dateStr)){
+                       ivAuction.setVisibility(View.GONE);
+                       ivHot.setVisibility(View.VISIBLE);
+                       if (timeInfo.getNext().isSale()){
+                           tvDate.setBackgroundResource(R.drawable.bg_date_yellow);
+                       }else {
+                           tvDate.setBackgroundResource(R.drawable.bg_date_white);
+                       }
                    }else {
+                       ivAuction.setVisibility(View.VISIBLE);
+                       ivHot.setVisibility(View.GONE);
+                       tvDate.setBackgroundResource(R.drawable.bg_date_gray);
+                   }
+               } else if(nextArr.contains(dateStr)){
+                   if (timeInfo.getNext().isSale()){
+                       ivAuction.setVisibility(View.GONE);
+                       ivHot.setVisibility(View.VISIBLE);
+                       tvDate.setBackgroundResource(R.drawable.bg_date_white);
+                   }else {
+                       ivAuction.setVisibility(View.VISIBLE);
+                       ivHot.setVisibility(View.GONE);
                        tvDate.setBackgroundResource(R.drawable.bg_date_gray);
                    }
                }
@@ -238,7 +248,8 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
                     if (price <= timeInfo.getNext().getPrice()) {
                         showShortToast(R.string.buy_price_limit);
                     } else {
-                        IntentUtils.startPurchaseActivity(this, Constant.TYPE_PURCHASE_NESTAD, timeInfo.getNext().getNestTimeInfoId(), bidPrice);
+                        String totalPrice=String.valueOf(price*curInfoBean.getDay());
+                        IntentUtils.startPurchaseActivity(this, Constant.TYPE_PURCHASE_NESTAD, timeInfo.getNext().getNestTimeInfoId(),totalPrice);
                     }
                 }
                 break;
@@ -277,7 +288,7 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
                     Calendar cal = Calendar.getInstance();
                     cal.setTime(startCal.getTime());
                     cal.add(Calendar.DATE, i);
-                    hotArr.add(CommonUtil.dateToString(cal.getTime(), Constant.FORMAT_DATE_SIMPLE));
+                    nextArr.add(CommonUtil.dateToString(cal.getTime(), Constant.FORMAT_DATE_SIMPLE));
                 }
             }
             cdvMonth.update();
@@ -305,6 +316,8 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
         }
     }
     private void setInfo(NestTimeInfo.InfoBean infoBean){
+        this.curInfoBean=infoBean;
+        etBidPrice.setText(etBidPrice.getText());
         tvBuyTime.setText(String.format(getString(R.string.format_time_and_count), infoBean.getSaleStartTime(), infoBean.getEndTime(), infoBean.getDay()));
         if(infoBean.isSale()){//显示下一期数据
         linEdit.setVisibility(View.VISIBLE);

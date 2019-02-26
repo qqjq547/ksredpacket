@@ -24,7 +24,8 @@
             android:layout_marginLeft="@dimen/space15"
             android:layout_marginRight="@dimen/space15"
             android:orientation="vertical"
-            android:background="@drawable/bg_white_purchase">
+            android:background="@drawable/bg_white_purchase"
+            android:visibility="invisible">
             <RadioButton
                 android:id="@+id/rbtn_alipay"
                 android:layout_width="match_parent"

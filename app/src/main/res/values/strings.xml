@@ -510,7 +510,7 @@
     <string name="share_friend">分享给好友</string>
     <string name="pls_select_pay_type">请选择支付方式</string>
     <string name="pls_select_agreement">请先同意协议</string>
-    <string name="pay_success">购买成功</string>
+    <string name="pay_success">支付成功</string>
     <string name="no_more_data">没有更多数据了</string>
     <string name="upgrade_agent">升级代理</string>
     <string name="become_agent">马上成为代理商</string>
@@ -646,7 +646,7 @@
     <string name="pls_select_area">请选择所在区域</string>
     <string name="setup_default_address">设为默认地址</string>
     <string name="default_address">默认</string>
-    <string name="my_treasure">我的夺宝</string>
+    <string name="my_treasure">我的淘区块</string>
     <string name="has_sell_all">已售罄，幸运号生成中..</string>
     <string name="progress">进度：</string>
     <string name="perfect_address">完善收货地址</string>
@@ -663,8 +663,8 @@
     <string name="add_address_success">增加地址成功</string>
     <string name="del_address_success">删除地址成功</string>
     <string name="update_address_success">更新地址成功</string>
-    <string name="buy_snatch">夺宝</string>
-    <string name="snatch_agreement">《夺宝协议》</string>
+    <string name="buy_snatch">淘区块</string>
+    <string name="snatch_agreement">《淘区块协议》</string>
     <string name="goto_pay">去支付</string>
     <string name="cache_has_clear">缓存已清理</string>
     <string name="audio_quality">音效</string>
@@ -672,6 +672,14 @@
     <string name="ad">广告</string>
     <string name="buy_nestad">竞购广告</string>
     <string name="buy_price_not_empty">竞购价格不能为空</string>
-    <string name="buy_price_limit">竞购价格需要大于最大价格</string>
+    <string name="buy_price_limit">竞购价格需要大于当前价格</string>
     <string name="pls_agree_bid_agreement">请先同意竞购协议</string>
+    <string-array name="params_pay_type">
+        <item>sendRedPacket</item>
+        <item>regionGame</item>
+        <item>upgradeAgent</item>
+        <item>beehiveGame</item>
+        <item>snatchActivity</item>
+        <item>nestActivity</item>
+    </string-array>
 </resources>

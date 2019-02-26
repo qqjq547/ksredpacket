@@ -5,6 +5,7 @@ import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.CalValue;
+import com.guochuang.mimedia.mvp.model.PayConfig;
 import com.guochuang.mimedia.mvp.view.PaySelectView;
 import com.guochuang.mimedia.mvp.view.WelcomeView;
 import com.guochuang.mimedia.tools.RxUtil;
@@ -27,6 +28,24 @@ public class PaySelectPresenter extends BasePresenter<PaySelectView> {
             @Override
             public void onFailure(ApiException exception) {
                 mvpView.setError(exception.getMessage());
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
+    public void getPayType(String bizType){
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getPayType(bizType)), new ApiCallback<PayConfig>() {
+            @Override
+            public void onSuccess(PayConfig data) {
+                mvpView.setConfig(data);
+            }
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setError(exception.getMessage());
+
             }
 
             @Override

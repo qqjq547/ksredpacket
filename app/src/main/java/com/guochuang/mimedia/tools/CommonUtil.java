@@ -49,6 +49,7 @@ import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.guochuang.mimedia.app.App;
 import com.sz.gcyh.KSHongBao.R;
 
 import java.io.BufferedOutputStream;
@@ -781,5 +782,30 @@ public class CommonUtil {
         }
        return url;
    }
+    public static String getTypeParams(int purchaseType){
+        String[] array=App.getInstance().getResources().getStringArray(R.array.params_pay_type);
+        String result=array[0];
+        switch (purchaseType){
+            case Constant.TYPE_PURCHASE_REDBAG:
+                result=array[0];
+                break;
+            case Constant.TYPE_PURCHASE_REGION:
+                result=array[1];
+                break;
+            case Constant.TYPE_PURCHASE_AGENT:
+                result=array[2];
+                break;
+            case Constant.TYPE_PURCHASE_HONEYCOMB:
+                result=array[3];
+                break;
+            case Constant.TYPE_PURCHASE_SNATCH:
+                result=array[4];
+                break;
+            case Constant.TYPE_PURCHASE_NESTAD:
+                result=array[5];
+                break;
+        }
+        return result;
+    }
 
 }

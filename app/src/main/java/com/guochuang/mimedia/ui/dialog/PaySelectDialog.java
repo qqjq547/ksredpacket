@@ -18,6 +18,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.guochuang.mimedia.mvp.model.PayConfig;
+import com.guochuang.mimedia.tools.CommonUtil;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.mvp.model.CalValue;
 import com.guochuang.mimedia.mvp.presenter.PaySelectPresenter;
@@ -73,6 +75,7 @@ public class PaySelectDialog extends Dialog implements PaySelectView {
         window.setContentView(view);
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         rgroupPay.clearCheck();
+        presenter.getPayType(CommonUtil.getTypeParams(Constant.TYPE_PURCHASE_REDBAG));
     }
 
     @Override
@@ -145,6 +148,28 @@ public class PaySelectDialog extends Dialog implements PaySelectView {
               rbtnKsbpay.setText(myKsb);
               rbtnKsbpay.setTextColor(getContext().getResources().getColor(R.color.text_gray));
               rbtnKsbpay.setEnabled(false);
+          }
+      }
+    }
+
+    @Override
+    public void setConfig(PayConfig data) {
+      if (data!=null){
+         rgroupPay.setVisibility(View.VISIBLE);
+         if (data.getWechatPayType()==1){
+             rbtnWxpay.setVisibility(View.VISIBLE);
+         }else {
+             rbtnWxpay.setVisibility(View.GONE);
+         }
+          if (data.getAliPayType()==1){
+              rbtnAlipay.setVisibility(View.VISIBLE);
+          }else {
+              rbtnAlipay.setVisibility(View.GONE);
+          }
+          if (data.getKsbPayType()==1){
+              rbtnKsbpay.setVisibility(View.VISIBLE);
+          }else {
+              rbtnKsbpay.setVisibility(View.GONE);
           }
       }
     }
