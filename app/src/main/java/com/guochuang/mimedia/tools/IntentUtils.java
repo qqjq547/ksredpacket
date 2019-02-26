@@ -167,11 +167,12 @@ public class IntentUtils {
         intent.putExtra(Constant.PAYNUMBER,payNumber);
         activity.startActivityForResult(intent,Constant.REQUEST_PURCHASE);
     }
-    public static void startPurchaseActivity(Activity activity, int purchaseType,long nestTimeInfoId,String money) {
+    public static void startPurchaseActivity(Activity activity, int purchaseType,long nestTimeInfoId,String money,int price) {
         Intent intent = new Intent(activity, PurchaseActivity.class);
         intent.putExtra(Constant.PURCHASE_TYPE,purchaseType);
         intent.putExtra(Constant.NESTTIMEINFOID,nestTimeInfoId);
         intent.putExtra(Constant.MONEY,money);
+        intent.putExtra(Constant.PRICE,price);
         activity.startActivityForResult(intent,Constant.REQUEST_PURCHASE);
     }
     public static void startRedbagJoinedActivity(Activity activity, String redPacketUuid,String avatar,String name,String ksb,String money,String areaType,String drawNumber,String total) {

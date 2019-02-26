@@ -89,7 +89,7 @@ public class Constant {
     public static final String NESTTIMEID = "nestTimeId";
     public static final String NESTTIMEINFOID = "nestTimeInfoId";
     public static final String NESTUPDATE = "nestUpdate";
-
+    public static final String PRICE = "price";
 
     public static final String FORMAT_DATE_SIMPLE = "yyyy-MM-dd";
     public static final String FORMAT_DATE = "yyyy-MM-dd HH:mm:ss";

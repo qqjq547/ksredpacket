@@ -248,8 +248,7 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
                     if (price <= timeInfo.getNext().getPrice()) {
                         showShortToast(R.string.buy_price_limit);
                     } else {
-                        String totalPrice=String.valueOf(price*curInfoBean.getDay());
-                        IntentUtils.startPurchaseActivity(this, Constant.TYPE_PURCHASE_NESTAD, timeInfo.getNext().getNestTimeInfoId(),totalPrice);
+                        IntentUtils.startPurchaseActivity(this, Constant.TYPE_PURCHASE_NESTAD, timeInfo.getNext().getNestTimeInfoId(),String.valueOf(price*curInfoBean.getDay()),price);
                     }
                 }
                 break;

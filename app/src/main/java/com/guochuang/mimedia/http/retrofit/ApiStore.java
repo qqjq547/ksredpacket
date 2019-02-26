@@ -1240,6 +1240,7 @@ public interface ApiStore {
             @Field("payType") int payType,
             @Field("nestTimeInfoId") long nestTimeInfoId,
             @Field("price") int price,
+            @Field("totalPrice") int totalPrice,
             @Field("longitude") String longitude,
             @Field("latitude") String latitude,
             @Field("safetyCode") String safetyCode
