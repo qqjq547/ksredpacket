@@ -18,8 +18,10 @@ import com.guochuang.mimedia.tools.AdCollectionView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.LogUtil;
+import com.guochuang.mimedia.ui.activity.treasure.MyTreasureActivity;
 import com.guochuang.mimedia.ui.activity.user.TradePwdActivity;
 import com.guochuang.mimedia.ui.activity.user.UpgradeAgentActivity;
+import com.guochuang.mimedia.ui.dialog.ShareDialog;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -42,6 +44,7 @@ public class WebActivity extends MvpActivity {
     @BindView(R.id.lin_title)
     LinearLayout linTitle;
     AdCollectionView adCollectionView;
+    String headRightType;
     @Override
     protected BasePresenter createPresenter() {
         return null;
@@ -103,12 +106,12 @@ public class WebActivity extends MvpActivity {
                 onBackPressed();
                 break;
             case R.id.tv_text:
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        IntentUtils.startWebActivity(WebActivity.this,getString(R.string.hongycomb_agreement),Constant.URL_HONYCOMB_RULE);
-                    }
-                });
+                if (headRightType.equals("rule")){//蜂窝规则
+                    IntentUtils.startWebActivity(WebActivity.this,getString(R.string.hongycomb_agreement),Constant.URL_HONYCOMB_RULE);
+                }else if(headRightType.equals("share")){//分享夺宝
+                    wvContent.loadUrl("javascript:slef.shareDetails()");
+                }
+
                 break;
         }
     }
@@ -129,6 +132,7 @@ public class WebActivity extends MvpActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    LogUtil.d("openUrl="+openUrl);
                     IntentUtils.startWebActivity(WebActivity.this,"",openUrl);
                 }
             });
@@ -202,12 +206,14 @@ public class WebActivity extends MvpActivity {
             });
         }
         @JavascriptInterface
-        public void rule(){
+        public void rule(final String type,final String title){
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    tvText.setText(R.string.rule);
+                    tvText.setText(title);
+                    headRightType =type;
                 }
+
             });
         }
         @JavascriptInterface
@@ -223,13 +229,90 @@ public class WebActivity extends MvpActivity {
                 }
             });
         }
+        @JavascriptInterface
+        public void payment(final double money,final int number,final long snatchId,final boolean isPacketTail){
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    IntentUtils.startPurchaseActivity(WebActivity.this,Constant.TYPE_PURCHASE_SNATCH,snatchId,number,String.valueOf(money));
+                }
+            });
+        }
+        @JavascriptInterface
+        public void goTreasure(){
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    startActivity(new Intent(WebActivity.this,MyTreasureActivity.class));
+                }
+            });
+        }
+        @JavascriptInterface
+        public void rightTitle(final String title, final String url){
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    tvText.setText(title);
+                    tvText.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            IntentUtils.startWebActivity(WebActivity.this,title,url);
+                        }
+                    });
+                }
+            });
+        }
+        @JavascriptInterface
+        public void copyText(final String content){
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    CommonUtil.copyMsg(WebActivity.this,content);
+                    showShortToast(R.string.copy_success);
+                }
+            });
+        }
+        @JavascriptInterface
+        public void shareDetails(final String shareImg,final String shareUrl,final String shareTitle){
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ShareDialog shareDialog=new ShareDialog(WebActivity.this,shareTitle,shareUrl,shareImg);
+                    shareDialog.setOnShareResultListener(new ShareDialog.OnShareResultListener() {
+                        @Override
+                        public void onSuccess(String platform) {
+
+                        }
+
+                        @Override
+                        public void onError(String errMsg) {
+                            showShortToast(errMsg);
+                        }
+
+                        @Override
+                        public void onCancel() {
+
+                        }
+                    });
+                    shareDialog.show();
+                }
+            });
+        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode==RESULT_OK&&requestCode==Constant.REQUEST_PURCHASE){
-            wvContent.loadUrl("javascript:slef.activationSuccess()");
+        if (resultCode==RESULT_OK){
+            switch (requestCode){
+                case Constant.REQUEST_PURCHASE:
+                    wvContent.loadUrl("javascript:slef.activationSuccess()");
+                    wvContent.reload();
+                    break;
+                    default:
+                        wvContent.reload();
+                        break;
+            }
         }
     }
 }

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -49,6 +50,7 @@ import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.tools.antishake.AntiShake;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
+import com.guochuang.mimedia.ui.activity.beenest.AdBidActivity;
 import com.guochuang.mimedia.ui.activity.beenest.BeeNestActivity;
 import com.guochuang.mimedia.ui.activity.beenest.BidBrandActivity;
 import com.guochuang.mimedia.ui.activity.beenest.EditAdActivity;
@@ -86,6 +88,8 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     LinearLayout linNotice;
     @BindView(R.id.stv_notice)
     ScrollTextView stvNotice;
+    @BindView(R.id.fl_city_owner)
+    FrameLayout flCityOwner;
     @BindView(R.id.tv_city_owner)
     TextView tvCityOwner;
     @BindView(R.id.lin_city_owner)
@@ -206,6 +210,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
             }
         });
         setUserRole(getPref().getInt(PrefUtil.USER_ROLE,0));
+        setHomeAd(new ArrayList<NestHomeAd>());
     }
 
     @Override
@@ -465,9 +470,20 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
 
     @Override
     public void setHomeAd(List<NestHomeAd> data) {
+        LinearLayout.LayoutParams lp=(LinearLayout.LayoutParams) flCityOwner.getLayoutParams();
+//        for (int i=0;i<8;i++){
+//            NestHomeAd ad=new NestHomeAd();
+//            ad.setCoverPicture("https://upload.jianshu.io/users/upload_avatars/4174308/540285e2-5be5-483a-9259-db485564a4b0.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96");
+//            ad.setShortMsg("name="+(i+1));
+//            data.add(ad);
+//        }
         if (data!=null&&data.size()>0){
+            lp.topMargin=CommonUtil.dip2px(getContext(),150);
             sethoneyData(data);
+        }else {
+            lp.topMargin=CommonUtil.dip2px(getContext(),30);
         }
+        flCityOwner.setLayoutParams(lp);
     }
 
     @Override
@@ -483,7 +499,6 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     }
 
     public void addMarker(List<Redbag> redbagList, List<OverlayOptions> options) {
-//        LogUtil.d("redbagList="+redbagList.size());
         options.clear();
         for (int i = 0; i < redbagList.size(); i++) {
             BitmapDescriptor bitmap;
@@ -556,8 +571,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
 
             @Override
             public void onSendAd() {
-                NestHomeAd firstAd=honeyArr.get(0);
-                startActivity(new Intent(getActivity(),BidBrandActivity.class).putExtra(Constant.NESTLOCATIONID,firstAd.getNestLocationId()));
+                startActivity(new Intent(getActivity(),AdBidActivity.class));
             }
         });
     }

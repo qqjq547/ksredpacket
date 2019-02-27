@@ -23,12 +23,16 @@
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical"
                                     >
+                                      <FrameLayout
+                                          android:layout_width="match_parent"
+                                          android:layout_height="wrap_content">
                                         <android.support.v7.widget.RecyclerView
                                             android:id="@+id/rv_honey"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:nestedScrollingEnabled="false">
                                         </android.support.v7.widget.RecyclerView>
+                                      </FrameLayout>
 
                                         <TextView
                                             android:id="@+id/tv_vote"

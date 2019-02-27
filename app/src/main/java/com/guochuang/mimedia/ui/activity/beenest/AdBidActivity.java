@@ -98,8 +98,10 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
                String value=mb.getString(Constant.RED_PACKET_TYPE);
                if (TextUtils.equals(value,Constant.MAP_MARKER_SPOT)){
                    long nestLocationId=mb.getLong(Constant.NESTLOCATIONID,0);
+                   String latitude=mb.getString(Constant.LATITUDE);
+                   String longitude=mb.getString(Constant.LONGITUDE);
                    if(nestLocationId>0){
-                       startActivity(new Intent(AdBidActivity.this,BidBrandActivity.class).putExtra(Constant.NESTLOCATIONID,nestLocationId));
+                       IntentUtils.startBidBrandActivity(AdBidActivity.this,nestLocationId,latitude,longitude);
                    }
                }
                 return false;
@@ -205,6 +207,8 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
             bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_ad_marker);
             bundle.putSerializable(Constant.RED_PACKET_TYPE, Constant.MAP_MARKER_SPOT);
             bundle.putLong(Constant.NESTLOCATIONID,data.get(i).getNestLocationId());
+            bundle.putString(Constant.LATITUDE,String.valueOf(data.get(i).getLatitude()));
+            bundle.putString(Constant.LONGITUDE,String.valueOf(data.get(i).getLongitude()));
             OverlayOptions option = new MarkerOptions()
                     .position(new LatLng(data.get(i).getLatitude(),data.get(i).getLongitude()))
                     .icon(bitmap).extraInfo(bundle)

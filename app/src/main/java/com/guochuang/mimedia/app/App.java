@@ -84,12 +84,12 @@ public class App extends Application {
             QbSdk.preInit(this, new QbSdk.PreInitCallback() {
                 @Override
                 public void onCoreInitFinished() {
-                    LogUtil.d("onCoreInitFinished");
+
                 }
 
                 @Override
                 public void onViewInitFinished() {
-                    LogUtil.d("onViewInitFinished");
+
                 }
             });
         }

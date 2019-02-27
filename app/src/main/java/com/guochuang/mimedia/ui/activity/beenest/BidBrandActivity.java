@@ -71,10 +71,6 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
     TextView tvMyKsb;
     @BindView(R.id.tv_equal_ksb)
     TextView tvEqualKsb;
-    @BindView(R.id.cb_obey_rule)
-    CheckBox cbObeyRule;
-    @BindView(R.id.tv_rule)
-    TextView tvRule;
     @BindView(R.id.lin_edit)
     LinearLayout linEdit;
     @BindView(R.id.iv_avatar)
@@ -96,6 +92,8 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
     List<String> currentArr = new ArrayList<>();
     List<String> currentSelectArr = new ArrayList<>();
     List<String> nextArr = new ArrayList<>();
+    String latitude;
+    String longitude;
     long nestLocationId;
     NestTimeInfo timeInfo;
     double rate;
@@ -117,6 +115,8 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
     public void initViewAndData() {
         tvText.setText(R.string.history_put);
         nestLocationId = getIntent().getLongExtra(Constant.NESTLOCATIONID, 0);
+        latitude=getIntent().getStringExtra(Constant.LATITUDE);
+        longitude=getIntent().getStringExtra(Constant.LONGITUDE);
         tvTitle.setText(String.valueOf(nestLocationId));
         dateFormat = new SimpleDateFormat(Constant.FORMAT_MONTH);
         tvMonth.setText(dateFormat.format(new Date()));
@@ -164,7 +164,7 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
                 tvEqualKsb.setText(String.valueOf(DoubleUtil.divide(money*curInfoBean.getDay(),rate)));
             }
         });
-        mvpPresenter.setNestTimeInfo(nestLocationId);
+        mvpPresenter.setNestTimeInfo(nestLocationId,latitude,longitude);
     }
    private void initAdapter(){
        caledarAdapter=new CaledarAdapter() {
@@ -214,7 +214,7 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
        cdvMonth.setAdapter(caledarAdapter);
    }
 
-    @OnClick({R.id.iv_back, R.id.tv_text, R.id.iv_last, R.id.iv_next, R.id.tv_bid_record, R.id.tv_rule, R.id.btn_buy})
+    @OnClick({R.id.iv_back, R.id.tv_text, R.id.iv_last, R.id.iv_next, R.id.tv_bid_record, R.id.btn_buy})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -230,25 +230,18 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
                 cdvMonth.setCurrentItem(cdvMonth.getCurrentItem() + 1);
                 break;
             case R.id.tv_bid_record:
-                startActivity(new Intent(this, BidRecordActivity.class).putExtra(Constant.NESTTIMEID, timeInfo.getCurrent().getNestTimeInfoId()));
-                break;
-            case R.id.tv_rule:
-                IntentUtils.startWebActivity(this, null, Constant.URL_FENGCHAO_JINGGOU);
+                startActivity(new Intent(this, BidRecordActivity.class).putExtra(Constant.NESTTIMEINFOID, curInfoBean.getNestTimeInfoId()));
                 break;
             case R.id.btn_buy:
-                if (!cbObeyRule.isChecked()) {
-                    showShortToast(R.string.pls_agree_bid_agreement);
-                    return;
-                }
                 String bidPrice = etBidPrice.getText().toString();
                 if (TextUtils.isEmpty(bidPrice)) {
                     showShortToast(R.string.buy_price_not_empty);
                 } else {
                     int price = Integer.parseInt(bidPrice);
-                    if (price <= timeInfo.getNext().getPrice()) {
+                    if (price <= curInfoBean.getPrice()) {
                         showShortToast(R.string.buy_price_limit);
                     } else {
-                        IntentUtils.startPurchaseActivity(this, Constant.TYPE_PURCHASE_NESTAD, timeInfo.getNext().getNestTimeInfoId(),String.valueOf(price*curInfoBean.getDay()),price);
+                        IntentUtils.startPurchaseActivity(this, Constant.TYPE_PURCHASE_NESTAD, curInfoBean.getNestTimeInfoId(),String.valueOf(price*curInfoBean.getDay()),price);
                     }
                 }
                 break;
@@ -311,7 +304,7 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == Constant.REQUEST_PURCHASE) {
             showLoadingDialog(null);
-            mvpPresenter.setNestTimeInfo(nestLocationId);
+            mvpPresenter.setNestTimeInfo(nestLocationId,latitude,longitude);
         }
     }
     private void setInfo(NestTimeInfo.InfoBean infoBean){

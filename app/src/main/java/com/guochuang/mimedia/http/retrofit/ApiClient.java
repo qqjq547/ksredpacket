@@ -6,11 +6,13 @@ import com.baidu.location.Jni;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.JniUtil;
 import com.guochuang.mimedia.tools.JsonUtil;
+import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.tools.StringUtil;
 import com.sz.gcyh.KSHongBao.BuildConfig;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -42,7 +44,7 @@ public class ApiClient {
     private ApiStore apiStores;
     public static OkHttpClient okHttpClient;
     public static String DEV_URL="http://dev.guochuangyuanhe.com:7005/";
-    public static String TEST_URL="https://test_gateway.guochuangyuanhe.com/";
+    public static String TEST_URL="https://test_gateway.guochuangyuanhe.com/";//http://192.168.0.112:7005/
     public static String RELEASE_URL="https://api.guochuangyuanhe.com/";
     public static String HTML_URL=
             Constant.isDebug ?
@@ -66,20 +68,26 @@ public class ApiClient {
                 String h_system_code = Constant.H_SYSTEM_CODE;
                 String h_version = BuildConfig.VERSION_NAME;
                 String h_sign ="";
-//                Map<String,String> map=new ArrayMap<>();
-//                if(request.body() instanceof FormBody){
-//                    FormBody oldFormBody = (FormBody) request.body();
-//                    for (int i=0;i<oldFormBody.size();i++){
-//                        map.put(oldFormBody.name(i),oldFormBody.value(i));
-//                    }eshare
-//                }else {
-//                    HttpUrl httpUrl = request.url();
-//                    Set<String> names = httpUrl.queryParameterNames();
-//                    for (String key : names) {
-//                        map.put(key, httpUrl.queryParameter(key));
-//                    }
-//                }
-//                 h_sign =  StringUtil.md5(StringUtil.toSort(map) + "&" + h_time + "&" + h_nonce + "&" + JniUtil.getSign());;
+                ArrayMap<String,String> map=new ArrayMap<>();
+                if(request.body() instanceof FormBody){
+                    FormBody oldFormBody = (FormBody) request.body();
+                    for (int i=0;i<oldFormBody.size();i++){
+                        map.put(oldFormBody.name(i),oldFormBody.value(i));
+                    }
+                }else {
+                    HttpUrl httpUrl = request.url();
+                    Set<String> names = httpUrl.queryParameterNames();
+                    for (String key : names) {
+                        map.put(key, httpUrl.queryParameter(key));
+                    }
+                }
+                map.put(Constant.PARAMS_H_TENANT_CODE, h_tenant_code);
+                map.put(Constant.PARAMS_H_TIME, h_time);
+                map.put(Constant.PARAMS_H_NONCE, h_nonce);
+                String secret=StringUtil.toSort(map)+"&secretValue=" + "*2f4961%8*5B588463bee04djDAed27";
+                h_sign =  StringUtil.md5(secret);
+                LogUtil.d("secret="+secret);
+                LogUtil.d("h_sign="+h_sign);
                 request = request.newBuilder()
                         .addHeader(Constant.PARAMS_H_API_TOEKN, h_api_token)
                         .addHeader(Constant.PARAMS_H_TIME, h_time)

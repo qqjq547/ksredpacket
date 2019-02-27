@@ -43,12 +43,12 @@ public class HoneyCombView extends LinearLayout {
     TextView tvVote;
     @BindView(R.id.iv_arrow)
     ImageView ivArrow;
-     boolean isExpand=false;
      List<NestHomeAd> dataArr=new ArrayList<>();
      List<List<NestHomeAd>> allData=new ArrayList<>();
      HoneyAdapter honeyAdapter;
      int currentRow=0;
     int totalRow=0;
+    boolean isExpand=false;
     static final int delayTime=5000;
      Handler handler=new Handler(){
          @Override
@@ -93,11 +93,11 @@ public class HoneyCombView extends LinearLayout {
             @Override
             public void onStateChanged(AppBarLayout appBarLayout, AppBarStateChangeListener.State state) {
                 if (state == State.EXPANDED) {
-                    showExpand(false);
+                    showExpand();
                     //展开状态
                 } else if (state == State.COLLAPSED) {
                     //折叠状态
-                    showExpand(true);
+                    setCollse();
                 } else {
                     //中间状态
 
@@ -128,7 +128,6 @@ public class HoneyCombView extends LinearLayout {
                 }
             }
         });
-        honeyAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM);
         rvHoney.setAdapter(honeyAdapter);
         appbar.setExpanded(false,true);
     }
@@ -136,8 +135,7 @@ public class HoneyCombView extends LinearLayout {
     public void onViewClicked(View view) {
         switch (view.getId()){
             case R.id.iv_arrow:
-                showExpand(isExpand);
-                appbar.setExpanded(isExpand,true);
+                appbar.setExpanded(!isExpand,true);
                 break;
             case R.id.tv_vote:
                 if (onMenuClickListener!=null)
@@ -145,34 +143,20 @@ public class HoneyCombView extends LinearLayout {
                 break;
         }
     }
-    public void showExpand(boolean expand){
-        if (expand){
-            handler.removeMessages(0);
-            setCollse();
-            if (allData.size()>1) {
-                handler.sendEmptyMessageDelayed(0, delayTime);
-            }
-            isExpand=false;
-        }else {
-            if (allData.size()>1) {
-                List<NestHomeAd> expandList = new ArrayList<>();
-                expandList.addAll(dataArr);
-                expandList.removeAll(allData.get(currentRow));
-                expandList.addAll(0, allData.get(currentRow));
-                honeyAdapter.setNewData(expandList);
-            }
-            tvVote.setVisibility(VISIBLE);
-            isExpand=true;
+    public void showExpand(){
+        if (allData.size()>1) {
+            honeyAdapter.setNewData(dataArr);
         }
+        tvVote.setVisibility(VISIBLE);
+        isExpand=true;
     }
     public void setCollse(){
         tvVote.setVisibility(GONE);
         if (allData.size()>1) {
-            List<NestHomeAd> expandList = new ArrayList<>();
-            expandList.addAll(dataArr);
-            expandList.removeAll(allData.get(currentRow));
-            expandList.addAll(allData.get(currentRow));
-            honeyAdapter.setNewData(expandList);
+            honeyAdapter.setNewData(allData.get(currentRow));
+            handler.removeMessages(0);
+            handler.sendEmptyMessageDelayed(0,delayTime);
         }
+        isExpand=false;
     }
 }

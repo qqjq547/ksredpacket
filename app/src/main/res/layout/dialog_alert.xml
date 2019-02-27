@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:gravity="center_horizontal"
@@ -21,11 +22,11 @@
         android:id="@+id/tv_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:minHeight="@dimen/space80"
+        android:gravity="center"
         android:padding="@dimen/space15"
         android:textSize="@dimen/textfont16"
-        android:textColor="@color/text_black" />
+        android:textColor="@color/text_black"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/divide_h"
@@ -36,12 +37,10 @@
         <TextView
             android:id="@+id/tv_negative"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/space48"
             android:layout_weight="1"
             android:background="@drawable/bg_btn_selector"
             android:gravity="center"
-            android:paddingTop="@dimen/space15"
-            android:paddingBottom="@dimen/space15"
             android:textSize="@dimen/textfont14"
             android:textColor="@color/text_black" />
         <View
@@ -52,12 +51,10 @@
         <TextView
             android:id="@+id/tv_positive"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/space48"
             android:layout_weight="1"
             android:background="@drawable/bg_btn_selector"
             android:gravity="center"
-            android:paddingTop="@dimen/space15"
-            android:paddingBottom="@dimen/space15"
             android:textSize="@dimen/textfont14"
             android:textColor="@color/text_black" />
     </LinearLayout>

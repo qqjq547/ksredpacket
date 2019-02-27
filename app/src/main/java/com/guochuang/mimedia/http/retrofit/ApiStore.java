@@ -1249,7 +1249,10 @@ public interface ApiStore {
     @FormUrlEncoded
     @POST("/api/v1/nest/timeInfo/queryNestTimeInfo")
     Observable<HttpResponse<NestTimeInfo>> getNestTimeInfo(
-            @Field("nestLocationId") long nestLocationId
+            @Field("nestLocationId") long nestLocationId,
+            @Field("locationLatitude") String locationLatitude,
+            @Field("locationLongitude") String locationLongitude
+
     );
     @GET("/api/v1/order/order/get_pay_type")
     Observable<HttpResponse<PayConfig>> getPayType(

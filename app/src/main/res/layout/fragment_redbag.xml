@@ -52,10 +52,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
       <FrameLayout
+          android:id="@+id/fl_city_owner"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginLeft="@dimen/space15"
-          android:layout_marginTop="@dimen/space180">
+          android:layout_marginTop="@dimen/space30">
 
         <LinearLayout
             android:id="@+id/lin_city_owner"

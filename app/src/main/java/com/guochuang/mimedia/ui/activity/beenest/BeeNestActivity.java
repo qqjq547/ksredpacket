@@ -107,7 +107,7 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
                 new BeeNestDialog(this).setOnItemClikListener(new BeeNestDialog.OnItemClikListener() {
                     @Override
                     public void onBidThis() {
-                       startActivity(new Intent(BeeNestActivity.this,BidBrandActivity.class).putExtra(Constant.NESTLOCATIONID,detail.getNestLocationId()));
+                        IntentUtils.startBidBrandActivity(BeeNestActivity.this,detail.getNestLocationId(),String.valueOf(detail.getNestLocationLat()),String.valueOf(detail.getNestLocationLng()));
                     }
 
                     @Override
