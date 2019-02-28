@@ -30,8 +30,6 @@ public class CalendarDateView extends ViewPager {
     HashMap<Integer, CalendarView> views = new HashMap<>();
     private CalendarView.OnItemClickListener onItemClickListener;
 
-    private LinkedList<CalendarView> cache = new LinkedList();
-
     private int MAXCOUNT=6;
 
 
@@ -72,7 +70,6 @@ public class CalendarDateView extends ViewPager {
         setMeasuredDimension(widthMeasureSpec, MeasureSpec.makeMeasureSpec(calendarHeight, MeasureSpec.EXACTLY));
     }
     public void update() {
-        cache.clear();
         for (CalendarView calView:views.values()){
             calView.updateView();
         }
@@ -94,12 +91,7 @@ public class CalendarDateView extends ViewPager {
             @Override
             public Object instantiateItem(ViewGroup container, final int position) {
 
-                CalendarView view;
-                if (!cache.isEmpty()) {
-                    view = cache.removeFirst();
-                } else {
-                    view = new CalendarView(container.getContext(), row);
-                }
+                CalendarView view = new CalendarView(container.getContext(), row);
 
                 view.setOnItemClickListener(onItemClickListener);
                 view.setAdapter(mAdapter);
@@ -114,7 +106,6 @@ public class CalendarDateView extends ViewPager {
             @Override
             public void destroyItem(ViewGroup container, int position, Object object) {
                 container.removeView((View) object);
-                cache.addLast((CalendarView) object);
                 views.remove(position);
             }
         });

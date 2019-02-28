@@ -10,6 +10,7 @@ import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
 import com.guochuang.mimedia.mvp.model.MyObjectBox;
 import com.guochuang.mimedia.mvp.model.UserInfo;
+import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.ui.activity.user.LoginActivity;
@@ -92,6 +93,7 @@ public class App extends Application {
 
                 }
             });
+
         }
     public static App getInstance(){
         return instance;

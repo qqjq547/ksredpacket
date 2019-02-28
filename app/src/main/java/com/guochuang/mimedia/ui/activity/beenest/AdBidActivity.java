@@ -17,6 +17,7 @@ import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapPoi;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
@@ -52,6 +53,8 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
     TextView tvText;
     @BindView(R.id.mv_content)
     MapView mvContent;
+    @BindView(R.id.tv_tip)
+    TextView tvTip;
     @BindView(R.id.tv_my_ad)
     TextView tvMyAd;
     @BindView(R.id.iv_location)
@@ -61,7 +64,7 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
     LocationClient mLocationClient;
     LocationClientOption option;
     List<OverlayOptions> adOptions = new ArrayList<>();
-    List<LatLng> markerArr=new ArrayList<>();
+    BDLocation currentLoc;
     @Override
     protected AdBidPresenter createPresenter() {
         return new AdBidPresenter(this);
@@ -91,10 +94,27 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
                 }
             }
         });
+        bm.setOnMapClickListener(new BaiduMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                toPosition(latLng);
+                showLoadingDialog(null);
+                mvpPresenter.getNestSpot(String.valueOf(latLng.latitude),String.valueOf(latLng.longitude));
+            }
+
+            @Override
+            public boolean onMapPoiClick(MapPoi mapPoi) {
+                toPosition(mapPoi.getPosition());
+                showLoadingDialog(null);
+                mvpPresenter.getNestSpot(String.valueOf(mapPoi.getPosition().latitude),String.valueOf(mapPoi.getPosition().longitude));
+                return true;
+            }
+        });
         bm.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
+
             @Override
             public boolean onMarkerClick(Marker marker) {
-                Bundle mb = marker.getExtraInfo();
+               Bundle mb = marker.getExtraInfo();
                String value=mb.getString(Constant.RED_PACKET_TYPE);
                if (TextUtils.equals(value,Constant.MAP_MARKER_SPOT)){
                    long nestLocationId=mb.getLong(Constant.NESTLOCATIONID,0);
@@ -107,6 +127,8 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
                 return false;
             }
         });
+
+        setTextMarquee(tvTip);
     }
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
@@ -182,12 +204,16 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
             MapStatus.Builder builder = new MapStatus.Builder();
             builder.target(ll).zoom(16f);
             bm.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
-
-            LatLng point = new LatLng(bdLocation.getLatitude(), bdLocation.getLongitude());
+            currentLoc=bdLocation;
+        }
+    };
+    public void addMarker(List<NestLocation> data) {
+        bm.clear();
+        if (currentLoc!=null) {
+            LatLng point = new LatLng(currentLoc.getLatitude(), currentLoc.getLongitude());
             //构建Marker图标
             BitmapDescriptor bitmap = BitmapDescriptorFactory
                     .fromResource(R.drawable.ic_bid_location);
-            bm.clear();
             Bundle nowbundle = new Bundle();
             nowbundle.putString(Constant.RED_PACKET_TYPE, Constant.TYPE_NOW);
             //构建MarkerOption，用于在地图上添加Marker
@@ -196,10 +222,7 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
                     .icon(bitmap).extraInfo(nowbundle);
             //在地图上添加Marker，并显示
             bm.addOverlay(option);
-
         }
-    };
-    public void addMarker(List<NestLocation> data) {
         adOptions.clear();
         for (int i = 0; i < data.size(); i++) {
             BitmapDescriptor bitmap;
@@ -220,6 +243,7 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
 
     @Override
     public void setData(List<NestLocation> data) {
+        closeLoadingDialog();
         if (data!=null&&data.size()>0){
             addMarker(data);
         }
@@ -227,6 +251,21 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
 
     @Override
     public void setError(String msg) {
-
+       closeLoadingDialog();
+       showShortToast(msg);
+    }
+    public static void setTextMarquee(TextView textView) {
+        if (textView != null) {
+            textView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+            textView.setSingleLine(true);
+            textView.setSelected(true);
+            textView.setFocusable(true);
+            textView.setFocusableInTouchMode(true);
+        }
+    }
+    private void toPosition(LatLng pt) {
+        MapStatus.Builder builder = new MapStatus.Builder();
+        builder.target(pt);
+        bm.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
     }
 }

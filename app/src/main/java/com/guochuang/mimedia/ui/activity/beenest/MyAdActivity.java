@@ -60,6 +60,7 @@ public class MyAdActivity extends MvpActivity<MyAdPresneter> implements MyAdView
 
     @Override
     public void initViewAndData() {
+        setStatusbar(R.color.bg_red,false);
         tvTitle.setText(R.string.my_ad);
         tvText.setText(R.string.my_bid_buy);
         setFragment();

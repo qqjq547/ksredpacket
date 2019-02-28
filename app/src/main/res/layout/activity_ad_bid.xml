@@ -14,6 +14,19 @@
             android:layout_height="match_parent">
         </com.baidu.mapapi.map.MapView>
         <TextView
+            android:id="@+id/tv_tip"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space28"
+            android:paddingLeft="@dimen/space15"
+            android:paddingRight="@dimen/space15"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/textfont14"
+            android:text="@string/bid_ad_tip"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:background="#ccf48036"/>
+        <TextView
             android:id="@+id/tv_my_ad"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/space36"

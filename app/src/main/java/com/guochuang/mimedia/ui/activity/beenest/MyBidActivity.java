@@ -17,6 +17,7 @@ import com.guochuang.mimedia.mvp.model.NestHistory;
 import com.guochuang.mimedia.mvp.model.Square;
 import com.guochuang.mimedia.mvp.presenter.MyBidPresenter;
 import com.guochuang.mimedia.mvp.view.MyBidView;
+import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.ui.adapter.MyBidAdapter;
 import com.guochuang.mimedia.ui.adapter.PictureVerticalAdapter;
@@ -65,6 +66,7 @@ public class MyBidActivity extends MvpActivity<MyBidPresenter> implements MyBidV
 
     @Override
     public void initViewAndData() {
+        setStatusbar(R.color.bg_red,false);
         tvTitle.setText(R.string.my_bid_buy);
         adapter=new MyBidAdapter(dataArr);
         adapter.setEmptyView(getLayoutInflater().inflate(R.layout.layout_empty,null));

@@ -176,6 +176,12 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
                TextView tvDate = convertView.findViewById(R.id.tv_date);
                ImageView ivAuction = convertView.findViewById(R.id.iv_auction);
                ImageView ivHot = convertView.findViewById(R.id.iv_hot);
+               if (bean.mothFlag != 0) {
+                   tvDate.setTextColor(getResources().getColor(R.color.text_gray));
+               } else {
+                   tvDate.setTextColor(getResources().getColor(R.color.text_black));
+               }
+
                tvDate.setText(String.valueOf(bean.day));
                String dateStr = CommonUtil.dateToString(CalendarFactory.getCalendarByBean(bean).getTime(), Constant.FORMAT_DATE_SIMPLE);
                if (currentArr.contains(dateStr)) {
@@ -184,6 +190,7 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
                        ivHot.setVisibility(View.VISIBLE);
                        if (timeInfo.getNext().isSale()){
                            tvDate.setBackgroundResource(R.drawable.bg_date_yellow);
+                           tvDate.setTextColor(getResources().getColor(R.color.text_white));
                        }else {
                            tvDate.setBackgroundResource(R.drawable.bg_date_white);
                        }
@@ -203,11 +210,7 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
                        tvDate.setBackgroundResource(R.drawable.bg_date_gray);
                    }
                }
-               if (bean.mothFlag != 0) {
-                   tvDate.setTextColor(getResources().getColor(R.color.text_gray));
-               } else {
-                   tvDate.setTextColor(getResources().getColor(R.color.text_black));
-               }
+
                return convertView;
            }
        };
@@ -230,18 +233,22 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
                 cdvMonth.setCurrentItem(cdvMonth.getCurrentItem() + 1);
                 break;
             case R.id.tv_bid_record:
-                startActivity(new Intent(this, BidRecordActivity.class).putExtra(Constant.NESTTIMEINFOID, curInfoBean.getNestTimeInfoId()));
+                if(curInfoBean!=null){
+                    startActivity(new Intent(this, BidRecordActivity.class).putExtra(Constant.NESTTIMEINFOID, curInfoBean.getNestTimeInfoId()));
+                }
                 break;
             case R.id.btn_buy:
-                String bidPrice = etBidPrice.getText().toString();
-                if (TextUtils.isEmpty(bidPrice)) {
-                    showShortToast(R.string.buy_price_not_empty);
-                } else {
-                    int price = Integer.parseInt(bidPrice);
-                    if (price <= curInfoBean.getPrice()) {
-                        showShortToast(R.string.buy_price_limit);
+                if (curInfoBean!=null) {
+                    String bidPrice = etBidPrice.getText().toString();
+                    if (TextUtils.isEmpty(bidPrice)) {
+                        showShortToast(R.string.buy_price_not_empty);
                     } else {
-                        IntentUtils.startPurchaseActivity(this, Constant.TYPE_PURCHASE_NESTAD, curInfoBean.getNestTimeInfoId(),String.valueOf(price*curInfoBean.getDay()),price);
+                        int price = Integer.parseInt(bidPrice);
+                        if (price <= curInfoBean.getPrice()) {
+                            showShortToast(R.string.buy_price_limit);
+                        } else {
+                            IntentUtils.startPurchaseActivity(this, Constant.TYPE_PURCHASE_NESTAD, curInfoBean.getNestTimeInfoId(), String.valueOf(price * curInfoBean.getDay()), price);
+                        }
                     }
                 }
                 break;

@@ -86,8 +86,6 @@ public class ApiClient {
                 map.put(Constant.PARAMS_H_NONCE, h_nonce);
                 String secret=StringUtil.toSort(map)+"&secretValue=" + "*2f4961%8*5B588463bee04djDAed27";
                 h_sign =  StringUtil.md5(secret);
-                LogUtil.d("secret="+secret);
-                LogUtil.d("h_sign="+h_sign);
                 request = request.newBuilder()
                         .addHeader(Constant.PARAMS_H_API_TOEKN, h_api_token)
                         .addHeader(Constant.PARAMS_H_TIME, h_time)

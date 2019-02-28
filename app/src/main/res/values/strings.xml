@@ -620,7 +620,8 @@
     <string name="check_ad">查看广告</string>
     <string name="waiting_vote">待投放</string>
     <string name="vote_going">投放中</string>
-    <string name="has_vote">已投放</string>
+    <string name="has_vote">投放结束</string>
+    <string name="ad_has_not_vote">广告未编辑</string>
     <string name="format_price_and_total">%s元/天(共%s元)</string>
     <string name="format_time_to_time">%s~%s</string>
     <string name="format_time_and_count">%s~%s %d天</string>
@@ -682,4 +683,6 @@
         <item>snatchActivity</item>
         <item>nestActivity</item>
     </string-array>
+    <string name="bid_ad_tip">您可拖动地图，点击要投放的区域，再选择对应的广告牌</string>
+
 </resources>

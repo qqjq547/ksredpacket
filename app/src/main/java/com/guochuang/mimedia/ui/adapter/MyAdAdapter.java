@@ -35,7 +35,6 @@ public class MyAdAdapter extends BaseQuickAdapter<MyAd,BaseViewHolder> {
         builder.setSpan(new ForegroundColorSpan(mContext.getResources().getColor(R.color.text_red)), totalIndex, totalIndex + totalprice.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         helper.setText(R.id.tv_price,builder);
 
-        helper.addOnClickListener(R.id.tv_edit);
         if (item.getNestStatisticsResDto()==null){
             helper.setText(R.id.tv_show_num,String.valueOf(0));
             helper.setText(R.id.tv_click_num,String.valueOf(0));
@@ -48,18 +47,26 @@ public class MyAdAdapter extends BaseQuickAdapter<MyAd,BaseViewHolder> {
 
         if (item.getStatus()==0){ //待投放
             helper.setText(R.id.tv_edit,R.string.edit_ad);
+            helper.addOnClickListener(R.id.tv_edit);
             helper.setText(R.id.tv_status,R.string.waiting_vote);
             helper.setTextColor(R.id.tv_status,mContext.getResources().getColor(R.color.bg_sky_blue));
             helper.setBackgroundColor(R.id.v_line,mContext.getResources().getColor(R.color.bg_sky_blue));
             helper.setTextColor(R.id.tv_time,mContext.getResources().getColor(R.color.text_black));
         }else if(item.getStatus()==1){ //投放中
             helper.setText(R.id.tv_edit,R.string.edit_ad);
+            helper.addOnClickListener(R.id.tv_edit);
             helper.setText(R.id.tv_status,R.string.vote_going);
             helper.setTextColor(R.id.tv_status,mContext.getResources().getColor(R.color.text_city_yellow));
             helper.setBackgroundColor(R.id.v_line,mContext.getResources().getColor(R.color.text_city_yellow));
             helper.setTextColor(R.id.tv_time,mContext.getResources().getColor(R.color.text_black));
         }else if(item.getStatus()==2){//投放结束
-            helper.setText(R.id.tv_edit,R.string.check_ad);
+            if (item.getNestInfoId()==0){//未投放广告的显示
+                helper.setText(R.id.tv_edit,R.string.ad_has_not_vote);
+                helper.setTextColor(R.id.tv_edit,mContext.getResources().getColor(R.color.text_gray));
+            }else {
+                helper.setText(R.id.tv_edit,R.string.check_ad);
+                helper.addOnClickListener(R.id.tv_edit);
+            }
             helper.setText(R.id.tv_status,R.string.has_vote);
             helper.setTextColor(R.id.tv_status,mContext.getResources().getColor(R.color.text_gray));
             helper.setBackgroundColor(R.id.v_line,mContext.getResources().getColor(R.color.text_gray));
@@ -67,6 +74,8 @@ public class MyAdAdapter extends BaseQuickAdapter<MyAd,BaseViewHolder> {
         }
         WebView wvMap=helper.getView(R.id.wv_map);
         CommonUtil.initH5WebView(mContext,wvMap);
+//        wvMap.loadUrl(Constant.URL_BMAP_URL+"?lat=22.630525&lng=113.822759");
+
         wvMap.loadUrl(Constant.URL_BMAP_URL+"?lng="+item.getLng()+"&lat="+item.getLat());
     }
 }

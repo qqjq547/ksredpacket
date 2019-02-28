@@ -63,6 +63,7 @@ public class MyTreasureActivity extends MvpActivity<MyTreasurePresenter> impleme
         rvTreasure.setLayoutManager(new LinearLayoutManager(this,OrientationHelper.VERTICAL,false));
         adapter=new MyTreasureAdapter(dataArr);
         adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        adapter.setEmptyView(getLayoutInflater().inflate(R.layout.layout_empty,null));
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
