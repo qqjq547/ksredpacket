@@ -89,7 +89,6 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
     boolean curRedbg = false;
     MainReceiver mainReceiver;
     boolean showErrorDelay=false;//是否正在延时显示错误toast
-    AdCollectionView adCollectionView;
 
     @Override
     protected MainPresenter createPresenter() {
@@ -217,7 +216,9 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
            final boolean isForce=data.getIsForce()>0;
            long time=getPref().getLong(PrefUtil.UPGRADE_NOTICE,0);
            if (isForce||(System.currentTimeMillis()-time>data.getRemindIntervalMinute()*60*1000)){
-               final VersionUpdateDialog versionUpdateDialog=new VersionUpdateDialog(this,data.getTitle().replace("\\n", "\n"),isForce);
+               String content=data.getTitle()+"\n"+data.getDescription();
+               content=content.replace("\\n", "\n");
+               final VersionUpdateDialog versionUpdateDialog=new VersionUpdateDialog(this,content,isForce);
                versionUpdateDialog.setOnResultListener(new VersionUpdateDialog.OnResultListener() {
                    @Override
                    public void onRefuse() {

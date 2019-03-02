@@ -151,12 +151,18 @@ public class HoneyCombView extends LinearLayout {
         isExpand=true;
     }
     public void setCollse(){
-        tvVote.setVisibility(GONE);
-        if (allData.size()>1) {
-            honeyAdapter.setNewData(allData.get(currentRow));
-            handler.removeMessages(0);
-            handler.sendEmptyMessageDelayed(0,delayTime);
-        }
-        isExpand=false;
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                tvVote.setVisibility(GONE);
+                if (allData.size()>1) {
+                    honeyAdapter.setNewData(allData.get(currentRow));
+                    handler.removeMessages(0);
+                    handler.sendEmptyMessageDelayed(0,delayTime);
+                }
+                isExpand=false;
+            }
+        },200);
+
     }
 }

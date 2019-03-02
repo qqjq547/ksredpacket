@@ -13,6 +13,7 @@ import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpFragment;
 import com.guochuang.mimedia.mvp.model.NestTemplate;
 import com.guochuang.mimedia.tools.IntentUtils;
+import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.guochuang.mimedia.ui.adapter.PictureAdapter;
 import com.guochuang.mimedia.view.GridItemDecoration;
 import com.sz.gcyh.KSHongBao.R;
@@ -65,6 +66,7 @@ public class BeeNestTempFragment extends MvpFragment {
         if (adapter!=null){
             return;
         }
+        GlideImgManager.loadImage(getContext(),template.getCoverPicture(),ivBackground);
         tvTempName.setText(template.getShortMsg());
         tvName.setText(template.getTitle());
         tvDesc.setText(template.getIntroduction());

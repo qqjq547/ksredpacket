@@ -87,6 +87,8 @@ public class MyBidActivity extends MvpActivity<MyBidPresenter> implements MyBidV
             }
         });
         mvpPresenter.getMyAuctionList(curPage,Constant.PAGE_SIZE);
+        tvDoneTimes.setText(String.valueOf(0));
+        tvBidTimes.setText(String.valueOf(0));
     }
 
     @OnClick(R.id.iv_back)

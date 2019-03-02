@@ -17,6 +17,7 @@ import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.InfoWindow;
 import com.baidu.mapapi.map.MapPoi;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
@@ -101,13 +102,12 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
                 showLoadingDialog(null);
                 mvpPresenter.getNestSpot(String.valueOf(latLng.latitude),String.valueOf(latLng.longitude));
             }
-
             @Override
             public boolean onMapPoiClick(MapPoi mapPoi) {
                 toPosition(mapPoi.getPosition());
                 showLoadingDialog(null);
                 mvpPresenter.getNestSpot(String.valueOf(mapPoi.getPosition().latitude),String.valueOf(mapPoi.getPosition().longitude));
-                return true;
+                return false;
             }
         });
         bm.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
@@ -124,7 +124,7 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
                        IntentUtils.startBidBrandActivity(AdBidActivity.this,nestLocationId,latitude,longitude);
                    }
                }
-                return false;
+                return true;
             }
         });
 

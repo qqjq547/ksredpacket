@@ -202,7 +202,7 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
                 onBackPressed();
                 break;
             case R.id.tv_text:
-                startActivity(new Intent(this,BeeNestTempActivity.class));
+                startActivityForResult(new Intent(this,BeeNestTempActivity.class),Constant.REQUEST_TEMPLATE);
                 break;
             case R.id.lin_picture:
                 RxPermissions rxPermissions=new RxPermissions(EditAdActivity.this);
@@ -278,6 +278,12 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
                     showShortToast(R.string.title_cant_empty);
                 }else if(TextUtils.isEmpty(adArea)){
                     showShortToast(R.string.area_cant_empty);
+                }else if(!TextUtils.isEmpty(url)&&TextUtils.isEmpty(urlName)){
+                    showShortToast(R.string.link_name_cant_empty);
+                }else if(!TextUtils.isEmpty(urlName)&&TextUtils.isEmpty(url)){
+                    showShortToast(R.string.link_url_cant_empty);
+                }else if(!TextUtils.isEmpty(url)&&!url.matches(Constant.REGEX_WEBURL)){
+                    showShortToast(R.string.link_format_error);
                 }else if(!cbObeyRule.isChecked()) {
                     showShortToast(R.string.agree_agreement);
                 }else {
@@ -364,6 +370,7 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
                     }else {
                         addPicture(temp.getPictureList());
                     }
+                    etContent.setText(temp.getIntroduction());
                     etAdTitle.setText(temp.getTitle());
                     etMobile.setText(temp.getContactPhone());
                     tvArea.setText(temp.getAddress());
@@ -398,7 +405,7 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
     public void editNestAd(){
         showLoadingDialog(null);
         picture=TextUtils.join(",",picUrlArr);
-        mvpPresenter.editNestAd(nestInfoId,nestLocationId,nestTimeId,shortMsg,iconUrl,content,picture,adTitle,adMobile,adAddress,adArea
+        mvpPresenter.editNestAd(nestInfoId,nestLocationId,nestTimeId,shortMsg,iconUrl,content,picture,adTitle,adMobile,adArea,adAddress
         ,latitude,longitude,urlName,url,wechat,microblog,isSaveTemplate);
     }
 
@@ -416,6 +423,7 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
             }else {
                 addPicture(data.getPictureList());
             }
+            etContent.setText(data.getIntroduction());
             etAdTitle.setText(data.getTitle());
             etMobile.setText(data.getContactPhone());
             tvArea.setText(data.getAddress());

@@ -30,6 +30,7 @@ public class NestAuctionRecord {
     private String userAvatar;
     private String userName;
     private String userUuid;
+    private long nestLocationId;
 
     public int getAuctionStatus() {
         return auctionStatus;
@@ -133,5 +134,13 @@ public class NestAuctionRecord {
 
     public void setUserUuid(String userUuid) {
         this.userUuid = userUuid;
+    }
+
+    public long getNestLocationId() {
+        return nestLocationId;
+    }
+
+    public void setNestLocationId(long nestLocationId) {
+        this.nestLocationId = nestLocationId;
     }
 }
