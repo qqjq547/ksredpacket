@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:background="@drawable/shape_bootm_rund">
+
+    <TextView
+        android:id="@+id/tv_phone"
+        android:padding="@dimen/dp_10"
+        android:layout_marginLeft="47dp"
+        android:layout_width="match_parent"
+        android:textSize="@dimen/sp_16"
+        android:textColor="#333333"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
