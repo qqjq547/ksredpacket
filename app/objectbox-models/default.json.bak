@@ -174,25 +174,9 @@
         }
       ],
       "relations": []
-    },
-    {
-      "id": "8:5787036842042446371",
-      "lastPropertyId": "2:5925327993593266516",
-      "name": "PhoneEntity",
-      "properties": [
-        {
-          "id": "1:8305205268882512818",
-          "name": "id"
-        },
-        {
-          "id": "2:5925327993593266516",
-          "name": "phone"
-        }
-      ],
-      "relations": []
     }
   ],
-  "lastEntityId": "8:5787036842042446371",
+  "lastEntityId": "7:3125605018086260858",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
