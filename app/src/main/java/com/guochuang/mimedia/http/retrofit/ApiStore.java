@@ -1119,6 +1119,7 @@ public interface ApiStore {
             @Field("channelCode") String channelCode,
             @Field("payType") int payType,
             @Field("snatchId") long snatchId,
+            @Field("unitPrice") int unitPrice,
             @Field("buyCount") int buyCount,
             @Field("longitude") String longitude,
             @Field("latitude") String latitude,

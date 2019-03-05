@@ -146,10 +146,11 @@ public class IntentUtils {
         intent.putExtra(Constant.REGIONID,regionId);
         activity.startActivity(intent);
     }
-    public static void startPurchaseActivity(Activity activity, int purchaseType,long snatchId,int payNumber,String money) {
+    public static void startPurchaseActivity(Activity activity, int purchaseType,long snatchId,int unitPrice,int payNumber,String money) {
         Intent intent = new Intent(activity, PurchaseActivity.class);
         intent.putExtra(Constant.PURCHASE_TYPE,purchaseType);
         intent.putExtra(Constant.SNATCHID,snatchId);
+        intent.putExtra(Constant.PRICE,unitPrice);
         intent.putExtra(Constant.PAYNUMBER,payNumber);
         intent.putExtra(Constant.MONEY,money);
         activity.startActivityForResult(intent,Constant.REQUEST_PURCHASE);

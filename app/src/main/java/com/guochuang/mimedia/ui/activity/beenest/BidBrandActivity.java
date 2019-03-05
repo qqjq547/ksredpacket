@@ -61,6 +61,8 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
     CalendarDateView cdvMonth;
     @BindView(R.id.tv_buy_time)
     TextView tvBuyTime;
+    @BindView(R.id.tv_buy_day_count)
+    TextView tvBuyDayCount;
     @BindView(R.id.tv_bid_record)
     TextView tvBidRecord;
     @BindView(R.id.tv_current_price)
@@ -98,8 +100,8 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
     NestTimeInfo timeInfo;
     double rate;
     NestTimeInfo.InfoBean curInfoBean;
-
     CaledarAdapter caledarAdapter;
+    boolean isSelectCur=true;//是否选择当期
 
     @Override
     protected BidBrandPresenter createPresenter() {
@@ -189,8 +191,13 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
                        if (currentSelectArr.contains(dateStr)){
                            ivHot.setVisibility(View.VISIBLE);
                            if (timeInfo.getNext().isSale()){
-                               tvDate.setBackgroundResource(R.drawable.bg_date_yellow);
-                               tvDate.setTextColor(getResources().getColor(R.color.text_white));
+                               if (isSelectCur){
+                                   tvDate.setBackgroundResource(R.drawable.bg_date_red);
+                                   tvDate.setTextColor(getResources().getColor(R.color.text_white));
+                               }else {
+                                   tvDate.setBackgroundResource(R.drawable.bg_date_yellow);
+                                   tvDate.setTextColor(getResources().getColor(R.color.text_white));
+                               }
                            }else {
                                tvDate.setBackgroundResource(R.drawable.bg_date_white);
                            }
@@ -207,7 +214,12 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
                    if (timeInfo.getNext().isSale()){
                        ivAuction.setVisibility(View.GONE);
                        ivHot.setVisibility(View.VISIBLE);
-                       tvDate.setBackgroundResource(R.drawable.bg_date_white);
+                       if (isSelectCur){
+                           tvDate.setBackgroundResource(R.drawable.bg_date_white);
+                       }else {//当期被选择
+                           tvDate.setBackgroundResource(R.drawable.bg_date_red);
+                           tvDate.setTextColor(getResources().getColor(R.color.text_white));
+                       }
                    }else {
                        ivAuction.setVisibility(View.VISIBLE);
                        ivHot.setVisibility(View.GONE);
@@ -322,8 +334,20 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
     }
     private void setInfo(NestTimeInfo.InfoBean infoBean){
         this.curInfoBean=infoBean;
+        if (curInfoBean.getNestTimeInfoId()==timeInfo.getCurrent().getNestTimeInfoId()){
+            if (!isSelectCur){
+                isSelectCur=true;
+                cdvMonth.update();
+            }
+        }else {
+            if (isSelectCur){
+                isSelectCur=false;
+                cdvMonth.update();
+            }
+        }
         etBidPrice.setText(etBidPrice.getText());
-        tvBuyTime.setText(String.format(getString(R.string.format_time_and_count), infoBean.getSaleStartTime(), infoBean.getEndTime(), infoBean.getDay()));
+        tvBuyTime.setText(String.format(getString(R.string.format_time_to_time), infoBean.getSaleStartTime(), infoBean.getEndTime()));
+        tvBuyDayCount.setText(String.format(getString(R.string.format_day_count), infoBean.getDay()));
         if(infoBean.isSale()){//显示下一期数据
         linEdit.setVisibility(View.VISIBLE);
         linResult.setVisibility(View.GONE);

@@ -103,7 +103,7 @@
     <string name="more_item_url">链接地址</string>
     <string name="more_item_wechat">微信号</string>
     <string name="more_item_weibo">微博号</string>
-    <string name="link_item_hint">例：http://www.baidu.com</string>
+    <string name="link_item_hint">例：http://www.baidu.com(选填)</string>
     <string name="pack_up">收起</string>
     <string name="more">更多</string>
     <string name="link_public_password">公开口令</string>
@@ -114,9 +114,9 @@
     <string name="redbag_rule">《快收红包广告规则》</string>
     <string name="add_money_to_redbag">塞钱进红包</string>
     <string name="get_pic_permission">请先设置相机和本地图片权限</string>
-    <string name="pls_input_link_name">请输入链接名称</string>
-    <string name="pls_input_wechat">请输入微信号</string>
-    <string name="pls_input_weibo">请输入微博号</string>
+    <string name="pls_input_link_name">请输入链接名称(选填)</string>
+    <string name="pls_input_wechat">请输入微信号(选填)</string>
+    <string name="pls_input_weibo">请输入微博号(选填)</string>
 
     <string name="random_redbag">随机红包</string>
     <string name="password_redbag">口令红包</string>
@@ -624,7 +624,7 @@
     <string name="ad_has_not_vote">广告未编辑</string>
     <string name="format_price_and_total">%s元/天(共%s元)</string>
     <string name="format_time_to_time">%s~%s</string>
-    <string name="format_time_and_count">%s~%s %d天</string>
+    <string name="format_day_count">%d天</string>
     <string name="ad_bid">广告竞购</string>
     <string name="bid_record">竞购记录</string>
     <string name="bid_explain">竞拍说明</string>
@@ -685,5 +685,7 @@
     </string-array>
     <string name="bid_ad_tip">您可拖动地图，点击要投放的区域，再选择对应的广告牌</string>
     <string name="ad_not_active">该广告尚未激活</string>
+    <string name="i_want_add_price">我要加价</string>
+
 
 </resources>

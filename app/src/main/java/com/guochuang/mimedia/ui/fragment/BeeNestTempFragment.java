@@ -1,9 +1,12 @@
 package com.guochuang.mimedia.ui.fragment;
 
+import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,6 +24,9 @@ import com.sz.gcyh.KSHongBao.R;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 
 public class BeeNestTempFragment extends MvpFragment {
     @BindView(R.id.iv_background)
@@ -55,9 +61,11 @@ public class BeeNestTempFragment extends MvpFragment {
     LinearLayout linWeibo;
 
     PictureAdapter adapter;
-    ArrayList<String> pictureArr=new ArrayList<>();
+    ArrayList<String> pictureArr = new ArrayList<>();
 
     NestTemplate template;
+    Unbinder unbinder;
+
     @Override
     protected BasePresenter createPresenter() {
         return null;
@@ -70,52 +78,58 @@ public class BeeNestTempFragment extends MvpFragment {
 
     @Override
     public void initViewAndData() {
-        if (adapter!=null){
+        if (adapter != null) {
             return;
         }
-        GlideImgManager.loadImage(getContext(),template.getCoverPicture(),ivBackground);
+        GlideImgManager.loadImage(getContext(), template.getCoverPicture(), ivBackground);
         tvTempName.setText(template.getShortMsg());
         tvName.setText(template.getTitle());
         tvDesc.setText(template.getIntroduction());
-        if (TextUtils.isEmpty(template.getLinkText())||TextUtils.isEmpty(template.getLinkUrl())){
+        if (TextUtils.isEmpty(template.getLinkText()) || TextUtils.isEmpty(template.getLinkUrl())) {
             tvUrl.setVisibility(View.GONE);
-        }else {
+        } else {
             tvUrl.setVisibility(View.VISIBLE);
             tvUrl.setText(template.getLinkText());
         }
-        tvAddress.setText(template.getAddress()+template.getAddressDetail());
-        if (TextUtils.isEmpty(template.getContactPhone())){
+        tvAddress.setText(template.getAddress() + template.getAddressDetail());
+        if (TextUtils.isEmpty(template.getContactPhone())) {
             linCall.setVisibility(View.GONE);
-        }else{
+        } else {
             linCall.setVisibility(View.VISIBLE);
             tvCall.setText(template.getContactPhone());
         }
-        if (TextUtils.isEmpty(template.getWechat())){
+        if (TextUtils.isEmpty(template.getWechat())) {
             linWechat.setVisibility(View.GONE);
-        }else {
+        } else {
             linWechat.setVisibility(View.VISIBLE);
             tvWechat.setText(template.getWechat());
         }
-        if (TextUtils.isEmpty(template.getWeibo())){
+        if (TextUtils.isEmpty(template.getWeibo())) {
             linWeibo.setVisibility(View.GONE);
-        }else {
+        } else {
             linWeibo.setVisibility(View.VISIBLE);
             tvWeibo.setText(template.getWeibo());
         }
-        adapter=new PictureAdapter(pictureArr);
+        adapter = new PictureAdapter(pictureArr);
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                IntentUtils.startImagePreviewActivity(getActivity(),position,pictureArr);
+                IntentUtils.startImagePreviewActivity(getActivity(), position, pictureArr);
             }
         });
-        rvPicture.setLayoutManager(new GridLayoutManager(getActivity(),3));
-        rvPicture.addItemDecoration(new GridItemDecoration(3,10,false));
+        rvPicture.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+        rvPicture.addItemDecoration(new GridItemDecoration(3, 10, false));
         rvPicture.setAdapter(adapter);
     }
-    public void setTemp(NestTemplate temp){
-        this.template=temp;
+
+    public void setTemp(NestTemplate temp) {
+        this.template = temp;
         pictureArr.addAll(temp.getPictureList());
     }
 
+
+    @OnClick(R.id.tv_url)
+    public void onViewClicked() {
+        IntentUtils.startOutWebActivity(getActivity(), template.getLinkUrl());
+    }
 }

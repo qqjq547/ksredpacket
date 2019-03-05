@@ -121,6 +121,21 @@ public class MyTreasureAdapter extends BaseQuickAdapter<Snatch,BaseViewHolder> {
                    helper.setGone(R.id.lin_comment,false);
                }
                break;
+           case 6://6到期未满
+                   helper.setGone(R.id.tv_pay,false);
+                   helper.setGone(R.id.iv_arrow,true);
+                   helper.addOnClickListener(R.id.lin_join_people_time);
+               helper.setImageResource(R.id.iv_award,R.drawable.ic_dateline_unsale);
+               helper.setGone(R.id.tv_address,false);
+               helper.setGone(R.id.lin_comment,false);
+               helper.setGone(R.id.fl_award,false);
+               helper.setGone(R.id.lin_progress,true);
+               helper.setGone(R.id.tv_has_selle_all,false);
+               helper.setGone(R.id.tv_waiting_send,false);
+               helper.setText(R.id.tv_progress,String.valueOf((int)(item.getRate()*100))+mContext.getString(R.string.percent));
+               ProgressBar pb1=helper.getView(R.id.pb_progress);
+               pb1.setProgress((int)(item.getRate()*100));
+               break;
        }
     }
 }

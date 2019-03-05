@@ -69,6 +69,7 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
     LocationClientOption option;
     List<OverlayOptions> adOptions = new ArrayList<>();
     BDLocation currentLoc;
+    BaiduMap.OnMarkerClickListener onMarkerClickListener;
     @Override
     protected AdBidPresenter createPresenter() {
         return new AdBidPresenter(this);
@@ -94,7 +95,13 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
             @Override
             public void call(Boolean aBoolean) {
                 if (aBoolean) {//全部授权
-                    startLocation();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            startLocation();
+                        }
+                    },500);
+
                 }
             }
         });
@@ -113,26 +120,26 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
                 return false;
             }
         });
-        bm.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
+        BaiduMap.OnMarkerClickListener onMarkerClickListener=new BaiduMap.OnMarkerClickListener() {
 
             @Override
             public boolean onMarkerClick(Marker marker) {
-               Bundle mb = marker.getExtraInfo();
-               String value=mb.getString(Constant.RED_PACKET_TYPE);
-               if (TextUtils.equals(value,Constant.MAP_MARKER_SPOT)){
-                   long nestLocationId=mb.getLong(Constant.NESTLOCATIONID,0);
-                   String latitude=mb.getString(Constant.LATITUDE);
-                   String longitude=mb.getString(Constant.LONGITUDE);
-                   if(nestLocationId>0){
-                       IntentUtils.startBidBrandActivity(AdBidActivity.this,nestLocationId,latitude,longitude);
-                   }else {
-                       showShortToast(R.string.ad_not_active);
-                   }
-               }
+                Bundle mb = marker.getExtraInfo();
+                String value=mb.getString(Constant.RED_PACKET_TYPE);
+                if (TextUtils.equals(value,Constant.MAP_MARKER_SPOT)){
+                    long nestLocationId=mb.getLong(Constant.NESTLOCATIONID,0);
+                    String latitude=mb.getString(Constant.LATITUDE);
+                    String longitude=mb.getString(Constant.LONGITUDE);
+                    if(nestLocationId>0){
+                        IntentUtils.startBidBrandActivity(AdBidActivity.this,nestLocationId,latitude,longitude);
+                    }else {
+                        showShortToast(R.string.ad_not_active);
+                    }
+                }
                 return true;
             }
-        });
-
+        };
+        bm.setOnMarkerClickListener(onMarkerClickListener);
         setTextMarquee(tvTip);
     }
     @Override
@@ -155,6 +162,8 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
     @Override
     public void onDestroy() {
         super.onDestroy();
+        bm.clear();
+        bm.removeMarkerClickListener(onMarkerClickListener);
         mvContent.onDestroy();
     }
     @OnClick({R.id.iv_back, R.id.tv_text, R.id.tv_my_ad, R.id.iv_location})

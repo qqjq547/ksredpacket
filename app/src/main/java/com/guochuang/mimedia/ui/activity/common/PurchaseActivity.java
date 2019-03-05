@@ -178,7 +178,7 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
         }else if(purchaseType==Constant.TYPE_PURCHASE_HONEYCOMB){
             mvpPresenter.appCreateOrder(Constant.CHANNEL_CODE_ANDROID,payNumber,payType,getPref().getLongitude(),getPref().getLatitude(),safetyCode);
         }else if(purchaseType==Constant.TYPE_PURCHASE_SNATCH){
-            mvpPresenter.createSnatchOrder(Constant.CHANNEL_CODE_ANDROID,payType,snatchId,payNumber,getPref().getLongitude(),getPref().getLatitude(),safetyCode);
+            mvpPresenter.createSnatchOrder(Constant.CHANNEL_CODE_ANDROID,payType,snatchId,price,payNumber,getPref().getLongitude(),getPref().getLatitude(),safetyCode);
         }else if(purchaseType==Constant.TYPE_PURCHASE_NESTAD){
             mvpPresenter.buyNestAd(Constant.CHANNEL_CODE_ANDROID,payType,nestTimeInfoId,price,Integer.parseInt(money),getPref().getLongitude(),getPref().getLatitude(),safetyCode);
         }
