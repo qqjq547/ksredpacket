@@ -181,18 +181,22 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
                } else {
                    tvDate.setTextColor(getResources().getColor(R.color.text_black));
                }
-
                tvDate.setText(String.valueOf(bean.day));
                String dateStr = CommonUtil.dateToString(CalendarFactory.getCalendarByBean(bean).getTime(), Constant.FORMAT_DATE_SIMPLE);
                if (currentArr.contains(dateStr)) {
-                   if (timeInfo.getCurrent().isSale()&&currentSelectArr.contains(dateStr)){
+                   if (timeInfo.getCurrent().isSale()){
                        ivAuction.setVisibility(View.GONE);
-                       ivHot.setVisibility(View.VISIBLE);
-                       if (timeInfo.getNext().isSale()){
-                           tvDate.setBackgroundResource(R.drawable.bg_date_yellow);
-                           tvDate.setTextColor(getResources().getColor(R.color.text_white));
+                       if (currentSelectArr.contains(dateStr)){
+                           ivHot.setVisibility(View.VISIBLE);
+                           if (timeInfo.getNext().isSale()){
+                               tvDate.setBackgroundResource(R.drawable.bg_date_yellow);
+                               tvDate.setTextColor(getResources().getColor(R.color.text_white));
+                           }else {
+                               tvDate.setBackgroundResource(R.drawable.bg_date_white);
+                           }
                        }else {
-                           tvDate.setBackgroundResource(R.drawable.bg_date_white);
+                           ivHot.setVisibility(View.GONE);
+                           tvDate.setBackgroundResource(R.drawable.bg_date_gray);
                        }
                    }else {
                        ivAuction.setVisibility(View.VISIBLE);
@@ -209,6 +213,8 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
                        ivHot.setVisibility(View.GONE);
                        tvDate.setBackgroundResource(R.drawable.bg_date_gray);
                    }
+               }else {
+                   tvDate.setBackgroundResource(R.drawable.bg_date_gray);
                }
 
                return convertView;

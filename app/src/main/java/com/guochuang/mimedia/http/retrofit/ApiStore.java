@@ -947,7 +947,7 @@ public interface ApiStore {
             @Query("beginRegisterDate") String beginRegisterDate,
             @Query("endRegisterDate") String endRegisterDate
     );
-    @GET("/api/v1/user/user_statistic/statistic")
+    @GET("/api/v1/user/user_statistic/statistics")
     Observable<HttpResponse<UserStatistics>> userStatistics(
             @Query("latitude") String latitude,
             @Query("longitude") String longitude

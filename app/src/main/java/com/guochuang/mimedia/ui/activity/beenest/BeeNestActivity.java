@@ -132,15 +132,23 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
                 }
                 break;
             case R.id.tv_url:
-                IntentUtils.startOutWebActivity(this, "");
+                if(detail==null)
+                    return;
+                IntentUtils.startOutWebActivity(this, detail.getLinkUrl());
                 break;
             case R.id.tv_navigation:
-                GuideHelper.guide(this,Double.parseDouble(getPref().getLatitude()),Double.parseDouble(getPref().getLongitude()));
+                if(detail==null)
+                    return;
+                    GuideHelper.guide(this, detail.getAddressLat(), detail.getAddressLng());
                 break;
             case R.id.tv_call:
-                CommonUtil.callPhone(this,detail.getContactPhone());
+                if(detail==null)
+                    return;
+                    CommonUtil.callPhone(this, detail.getContactPhone());
                 break;
             case R.id.tv_wechat:
+                if(detail==null)
+                    return;
                 CommonUtil.copyMsg(this, detail.getWechat());
                 new DialogBuilder(this)
                         .setTitle(R.string.tip)
@@ -159,6 +167,8 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
                         }).create().show();
                 break;
             case R.id.tv_weibo:
+                if(detail==null)
+                    return;
                 CommonUtil.copyMsg(this, detail.getWeibo());
                 new DialogBuilder(this)
                         .setTitle(R.string.tip)

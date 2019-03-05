@@ -36,6 +36,9 @@ import cn.jpush.android.api.JPushInterface;
 import io.objectbox.Box;
 import io.objectbox.BoxStore;
 
+/**
+ * dsf
+ */
 public class App extends Application {
         private static App instance;
         private ArrayList<Activity> activityList = new ArrayList<Activity>();

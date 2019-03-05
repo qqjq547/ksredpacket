@@ -607,7 +607,7 @@
         <item>全部</item>
         <item>待投放</item>
         <item>投放中</item>
-        <item>已投放</item>
+        <item>投放结束</item>
     </string-array>
     <string name="my_ad">我的广告</string>
     <string name="my_bid_buy">我的竞购</string>
@@ -625,7 +625,7 @@
     <string name="format_price_and_total">%s元/天(共%s元)</string>
     <string name="format_time_to_time">%s~%s</string>
     <string name="format_time_and_count">%s~%s %d天</string>
-    <string name="ad_bid">广告竞拍</string>
+    <string name="ad_bid">广告竞购</string>
     <string name="bid_record">竞购记录</string>
     <string name="bid_explain">竞拍说明</string>
     <string name="done_times">成交次数</string>
@@ -684,5 +684,6 @@
         <item>nestActivity</item>
     </string-array>
     <string name="bid_ad_tip">您可拖动地图，点击要投放的区域，再选择对应的广告牌</string>
+    <string name="ad_not_active">该广告尚未激活</string>
 
 </resources>

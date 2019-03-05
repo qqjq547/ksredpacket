@@ -13,6 +13,7 @@ import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpFragment;
 import com.guochuang.mimedia.mvp.model.NestTemplate;
 import com.guochuang.mimedia.tools.IntentUtils;
+import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.guochuang.mimedia.ui.adapter.PictureAdapter;
 import com.guochuang.mimedia.view.GridItemDecoration;
 import com.sz.gcyh.KSHongBao.R;
@@ -46,6 +47,13 @@ public class BeeNestTempFragment extends MvpFragment {
     LinearLayout linInfo;
     @BindView(R.id.rv_picture)
     RecyclerView rvPicture;
+    @BindView(R.id.lin_call)
+    LinearLayout linCall;
+    @BindView(R.id.lin_wechat)
+    LinearLayout linWechat;
+    @BindView(R.id.lin_weibo)
+    LinearLayout linWeibo;
+
     PictureAdapter adapter;
     ArrayList<String> pictureArr=new ArrayList<>();
 
@@ -65,6 +73,7 @@ public class BeeNestTempFragment extends MvpFragment {
         if (adapter!=null){
             return;
         }
+        GlideImgManager.loadImage(getContext(),template.getCoverPicture(),ivBackground);
         tvTempName.setText(template.getShortMsg());
         tvName.setText(template.getTitle());
         tvDesc.setText(template.getIntroduction());
@@ -75,9 +84,24 @@ public class BeeNestTempFragment extends MvpFragment {
             tvUrl.setText(template.getLinkText());
         }
         tvAddress.setText(template.getAddress()+template.getAddressDetail());
-        tvCall.setText(template.getContactPhone());
-        tvWechat.setText(template.getWechat());
-        tvWeibo.setText(template.getWeibo());
+        if (TextUtils.isEmpty(template.getContactPhone())){
+            linCall.setVisibility(View.GONE);
+        }else{
+            linCall.setVisibility(View.VISIBLE);
+            tvCall.setText(template.getContactPhone());
+        }
+        if (TextUtils.isEmpty(template.getWechat())){
+            linWechat.setVisibility(View.GONE);
+        }else {
+            linWechat.setVisibility(View.VISIBLE);
+            tvWechat.setText(template.getWechat());
+        }
+        if (TextUtils.isEmpty(template.getWeibo())){
+            linWeibo.setVisibility(View.GONE);
+        }else {
+            linWeibo.setVisibility(View.VISIBLE);
+            tvWeibo.setText(template.getWeibo());
+        }
         adapter=new PictureAdapter(pictureArr);
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
