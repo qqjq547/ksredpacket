@@ -273,11 +273,12 @@ public class WebActivity extends MvpActivity {
             });
         }
         @JavascriptInterface
-        public void shareDetails(final String shareImg,final String shareUrl,final String shareTitle){
+        public void shareDetails(final String shareImg,final String shareUrl,final String shareTitle,final String shareText){
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     ShareDialog shareDialog=new ShareDialog(WebActivity.this,shareTitle,shareUrl,shareImg);
+                    shareDialog.setContent(shareText);
                     shareDialog.setOnShareResultListener(new ShareDialog.OnShareResultListener() {
                         @Override
                         public void onSuccess(String platform) {

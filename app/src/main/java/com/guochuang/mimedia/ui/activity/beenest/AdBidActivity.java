@@ -3,6 +3,7 @@ package com.guochuang.mimedia.ui.activity.beenest;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.View;
@@ -24,6 +25,8 @@ import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.Overlay;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.guochuang.mimedia.app.App;
@@ -122,6 +125,8 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
                    String longitude=mb.getString(Constant.LONGITUDE);
                    if(nestLocationId>0){
                        IntentUtils.startBidBrandActivity(AdBidActivity.this,nestLocationId,latitude,longitude);
+                   }else {
+                       showShortToast(R.string.ad_not_active);
                    }
                }
                 return true;
@@ -198,13 +203,13 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
             if ("4.9E-324".equals(String.valueOf(bdLocation.getLatitude()))) {
                 return;
             }
-            mvpPresenter.getNestSpot(String.valueOf(bdLocation.getLatitude()),String.valueOf(getPref().getLongitude()));
             LatLng ll = new LatLng(bdLocation.getLatitude(),
                     bdLocation.getLongitude());
             MapStatus.Builder builder = new MapStatus.Builder();
             builder.target(ll).zoom(16f);
             bm.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
             currentLoc=bdLocation;
+            mvpPresenter.getNestSpot(String.valueOf(bdLocation.getLatitude()),String.valueOf(getPref().getLongitude()));
         }
     };
     public void addMarker(List<NestLocation> data) {

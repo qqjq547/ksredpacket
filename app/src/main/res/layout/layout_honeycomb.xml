@@ -15,24 +15,21 @@
                     android:id="@+id/collap"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="115dp"
+                    android:minHeight="120dp"
                     android:background="@color/bg_trans_white"
-                    app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed">
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical"
                                     >
-                                      <FrameLayout
-                                          android:layout_width="match_parent"
-                                          android:layout_height="wrap_content">
                                         <android.support.v7.widget.RecyclerView
                                             android:id="@+id/rv_honey"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
+                                            android:paddingTop="@dimen/space5"
                                             android:nestedScrollingEnabled="false">
                                         </android.support.v7.widget.RecyclerView>
-                                      </FrameLayout>
 
                                         <TextView
                                             android:id="@+id/tv_vote"

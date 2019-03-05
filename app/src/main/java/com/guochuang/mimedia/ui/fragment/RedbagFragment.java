@@ -293,6 +293,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                     handler.sendEmptyMessage(0);
                     mvpPresenter.getHomeRegion(getPref().getLatitude(), getPref().getLongitude());
                     mvpPresenter.getKilometre();
+                    mvpPresenter.getHomeAd(getPref().getLatitude(), getPref().getLongitude());
                 }
                 break;
             case R.id.tv_upgrade_agent:
@@ -471,7 +472,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     @Override
     public void setHomeAd(List<NestHomeAd> data) {
         LinearLayout.LayoutParams lp=(LinearLayout.LayoutParams) flCityOwner.getLayoutParams();
-//        for (int i=0;i<20;i++){
+//        for (int i=0;i<30;i++){
 //            NestHomeAd ad=new NestHomeAd();
 //            ad.setCoverPicture("https://upload.jianshu.io/users/upload_avatars/4174308/540285e2-5be5-483a-9259-db485564a4b0.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96");
 //            ad.setShortMsg("name="+(i+1));
