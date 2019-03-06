@@ -44,6 +44,7 @@ public class MyTreasureAdapter extends BaseQuickAdapter<Snatch,BaseViewHolder> {
                helper.setGone(R.id.lin_progress,true);
                helper.setGone(R.id.tv_has_selle_all,false);
                helper.setGone(R.id.tv_waiting_send,false);
+               helper.setGone(R.id.iv_out_date,false);
                helper.setText(R.id.tv_progress,String.valueOf((int)(item.getRate()*100))+mContext.getString(R.string.percent));
                ProgressBar pb=helper.getView(R.id.pb_progress);
                pb.setProgress((int)(item.getRate()*100));
@@ -58,6 +59,7 @@ public class MyTreasureAdapter extends BaseQuickAdapter<Snatch,BaseViewHolder> {
                helper.setGone(R.id.lin_progress,false);
                helper.setGone(R.id.tv_has_selle_all,true);
                helper.setGone(R.id.tv_waiting_send,false);
+               helper.setGone(R.id.iv_out_date,false);
                break;
            case 3://3已开奖
                helper.setGone(R.id.iv_arrow,true);
@@ -69,6 +71,7 @@ public class MyTreasureAdapter extends BaseQuickAdapter<Snatch,BaseViewHolder> {
                helper.setGone(R.id.lin_progress,false);
                helper.setGone(R.id.tv_has_selle_all,false);
                helper.setGone(R.id.tv_waiting_send,false);
+               helper.setGone(R.id.iv_out_date,false);
                if (item.getIsWin()==1){//是否中奖
                    helper.setImageResource(R.id.iv_award,R.drawable.ic_get_award);
                    if (item.getType()==1) {//实物
@@ -102,6 +105,7 @@ public class MyTreasureAdapter extends BaseQuickAdapter<Snatch,BaseViewHolder> {
                helper.setGone(R.id.lin_progress,false);
                helper.setGone(R.id.tv_has_selle_all,false);
                helper.setGone(R.id.tv_waiting_send,false);
+               helper.setGone(R.id.iv_out_date,false);
                if (item.getIsWin()==1){//是否中奖
                    helper.setImageResource(R.id.iv_award,R.drawable.ic_get_award);
                    if (item.getType()==1) {//实物,有快递信息
@@ -132,6 +136,7 @@ public class MyTreasureAdapter extends BaseQuickAdapter<Snatch,BaseViewHolder> {
                helper.setGone(R.id.lin_progress,true);
                helper.setGone(R.id.tv_has_selle_all,false);
                helper.setGone(R.id.tv_waiting_send,false);
+               helper.setGone(R.id.iv_out_date,true);
                helper.setText(R.id.tv_progress,String.valueOf((int)(item.getRate()*100))+mContext.getString(R.string.percent));
                ProgressBar pb1=helper.getView(R.id.pb_progress);
                pb1.setProgress((int)(item.getRate()*100));

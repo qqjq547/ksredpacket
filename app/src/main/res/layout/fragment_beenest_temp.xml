@@ -73,6 +73,7 @@
                         android:layout_marginTop="@dimen/space7"
                         android:textColor="@color/text_black"
                         android:textSize="@dimen/textfont14"
+                        android:gravity="center"
                         android:text=""/>
                     <TextView
                         android:id="@+id/tv_url"

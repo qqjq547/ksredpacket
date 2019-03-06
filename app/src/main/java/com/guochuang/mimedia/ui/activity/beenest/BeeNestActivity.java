@@ -24,6 +24,7 @@ import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.TVCheckAll;
 import com.guochuang.mimedia.tools.ToastUtil;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
+import com.guochuang.mimedia.ui.activity.MainActivity;
 import com.guochuang.mimedia.ui.adapter.PictureVerticalAdapter;
 import com.guochuang.mimedia.ui.dialog.BeeNestDialog;
 import com.guochuang.mimedia.ui.dialog.ReportDialog;
@@ -118,6 +119,7 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
 
                     @Override
                     public void onBidOther() {
+                        MainActivity.getInstance().clearMarker();
                         startActivity(new Intent(BeeNestActivity.this,AdBidActivity.class));
                     }
 
@@ -199,7 +201,7 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
     public void setData(NestAd data) {
         closeLoadingDialog();
         this.detail=data;
-        tvTitle.setText(data.getTitle());
+        tvTitle.setText(data.getShortMsg());
         tvName.setText(data.getTitle());
         GlideImgManager.loadImage(this,data.getCoverPicture(),ivBackground);
         if (data.getIsCollection()>0){
@@ -219,19 +221,16 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
             linCall.setVisibility(View.GONE);
         } else {
             linCall.setVisibility(View.VISIBLE);
-            tvCall.setText(data.getContactPhone());
         }
         if (TextUtils.isEmpty(data.getWechat())) {
             linWechat.setVisibility(View.GONE);
         } else {
             linWechat.setVisibility(View.VISIBLE);
-            tvWechat.setText(data.getWechat());
         }
         if (TextUtils.isEmpty(data.getWeibo())) {
             linWeibo.setVisibility(View.GONE);
         } else {
             linWeibo.setVisibility(View.VISIBLE);
-            tvWeibo.setText(data.getWeibo());
         }
         pictureArr.addAll(data.getPictureList());
         adapter=new PictureVerticalAdapter(pictureArr);

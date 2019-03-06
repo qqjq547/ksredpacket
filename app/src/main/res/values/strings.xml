@@ -628,7 +628,7 @@
     <string name="format_day_count">%d天</string>
     <string name="ad_bid">广告竞购</string>
     <string name="bid_record">竞购记录</string>
-    <string name="bid_explain">竞拍说明</string>
+    <string name="bid_explain">竞购说明</string>
     <string name="done_times">成交次数</string>
     <string name="bid_times">竞购次数</string>
     <string name="format_count_ad_temp">共%d个广告模板</string>

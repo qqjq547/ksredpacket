@@ -89,6 +89,11 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
     boolean curRedbg = false;
     MainReceiver mainReceiver;
     boolean showErrorDelay=false;//是否正在延时显示错误toast
+    private static MainActivity instance;
+
+    public static MainActivity getInstance() {
+        return instance;
+    }
 
     @Override
     protected MainPresenter createPresenter() {
@@ -102,6 +107,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
 
     @Override
     public void initViewAndData() {
+        instance=this;
         setStatusbar(R.color.bg_white,true);
         if (getIntent().getBooleanExtra(Constant.FROMLOGIN,true)){
             CommonUtil.syncCookie(this,ApiClient.HTML_URL);
@@ -179,6 +185,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
     @Override
     public void setUserInfo(UserInfo data) {
         App.getInstance().setUserInfo(data);
+        CommonUtil.syncCookie(this,ApiClient.HTML_URL);
         ((MyFragment)fragments[4]).setUpUser();
     }
 

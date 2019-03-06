@@ -27,6 +27,7 @@ public class Constant {
     public static final String PARAMS_H_SYSTEM_CODE = "h-system-code";
     public static final String PARAMS_H_VERSION = "h-version";
     public static final String PARAMS_H_SIGN = "h-sign";
+
     public static final int PAGE_SIZE = 10;
     public static final int REQUEST_GET_LOCATION = 3;
     public static final int REQUEST_DEFAULT = 0;
@@ -90,6 +91,7 @@ public class Constant {
     public static final String NESTTIMEINFOID = "nestTimeInfoId";
     public static final String NESTUPDATE = "nestUpdate";
     public static final String PRICE = "price";
+    public static final String INVITECODE = "inviteCode";
 
     public static final String FORMAT_DATE_SIMPLE = "yyyy-MM-dd";
     public static final String FORMAT_DATE = "yyyy-MM-dd HH:mm:ss";

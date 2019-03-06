@@ -166,8 +166,6 @@ public class SettingActivity extends MvpActivity<SettingPresenter> implements Se
                 break;
             case R.id.lin_clean:
                 CacheUtil.clearAllCache(this);
-                CookieSyncManager.createInstance(this);
-                CookieManager.getInstance().removeAllCookie();
                 showShortToast(R.string.cache_has_clear);
                 try {
                     tvCacheSize.setText(CacheUtil.getTotalCacheSize(this));

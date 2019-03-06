@@ -14,6 +14,7 @@ import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.tools.AdCollectionView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.IntentUtils;
@@ -230,7 +231,7 @@ public class WebActivity extends MvpActivity {
             });
         }
         @JavascriptInterface
-        public void payment(final double money,final int unitPrice,final int number,final long snatchId,final boolean isPacketTail){
+        public void payment(final double money,final int number,final long snatchId,final int unitPrice){
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -277,7 +278,8 @@ public class WebActivity extends MvpActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ShareDialog shareDialog=new ShareDialog(WebActivity.this,shareTitle,shareUrl,shareImg);
+                    String url=shareUrl+"?inviteCode="+App.getInstance().getUserInfo().getInviteCode();
+                    ShareDialog shareDialog=new ShareDialog(WebActivity.this,shareTitle,url,shareImg);
                     shareDialog.setContent(shareText);
                     shareDialog.setOnShareResultListener(new ShareDialog.OnShareResultListener() {
                         @Override

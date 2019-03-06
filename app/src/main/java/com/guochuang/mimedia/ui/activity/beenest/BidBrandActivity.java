@@ -195,8 +195,7 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
                                    tvDate.setBackgroundResource(R.drawable.bg_date_red);
                                    tvDate.setTextColor(getResources().getColor(R.color.text_white));
                                }else {
-                                   tvDate.setBackgroundResource(R.drawable.bg_date_yellow);
-                                   tvDate.setTextColor(getResources().getColor(R.color.text_white));
+                                   tvDate.setBackgroundResource(R.drawable.bg_date_white);
                                }
                            }else {
                                tvDate.setBackgroundResource(R.drawable.bg_date_white);

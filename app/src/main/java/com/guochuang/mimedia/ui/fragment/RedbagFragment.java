@@ -344,7 +344,6 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
             if (isFirstLocation) {
                 isFirstLocation = false;
                 mvpPresenter.getHomeRegion(getPref().getLatitude(), getPref().getLongitude());
-                mvpPresenter.getHomeAd(getPref().getLatitude(), getPref().getLongitude());
                 mvpPresenter.userStatistics(getPref().getLatitude(), getPref().getLongitude());
             }
             if (!isHidden() && isResumed()) {
@@ -353,6 +352,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
             }
             mvpPresenter.redPacketGet(String.valueOf(bdLocation.getLatitude()), String.valueOf(bdLocation.getLongitude()));
             mvpPresenter.getLocationRedabg(String.valueOf(bdLocation.getLatitude()), String.valueOf(bdLocation.getLongitude()));
+            mvpPresenter.getHomeAd(String.valueOf(bdLocation.getLatitude()), String.valueOf(bdLocation.getLongitude()));
             LatLng ll = new LatLng(bdLocation.getLatitude(),
                     bdLocation.getLongitude());
             MapStatus.Builder builder = new MapStatus.Builder();
@@ -397,8 +397,6 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
         if (data != null) {
             if (isVisible()) {
                 addMarker(data, poolOptions);
-            }else {
-                LogUtil.e("setSystemRedbag");
             }
         }
     }
@@ -409,8 +407,6 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
         if (data != null) {
             if (isVisible()) {
                 addMarker(data, locOptions);
-            }else {
-                LogUtil.e("setLocationRedbag");
             }
         }
     }
@@ -585,6 +581,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
 
             @Override
             public void onSendAd() {
+                clearMarker();
                 startActivity(new Intent(getActivity(),AdBidActivity.class));
             }
         });
