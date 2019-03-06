@@ -18,6 +18,7 @@ import com.guochuang.mimedia.mvp.model.NestAuctionMsg;
 import com.guochuang.mimedia.mvp.model.RegionCore;
 import com.guochuang.mimedia.tools.DialogBuilder;
 import com.guochuang.mimedia.tools.IntentUtils;
+import com.guochuang.mimedia.ui.activity.MainActivity;
 import com.guochuang.mimedia.ui.activity.beenest.AdBidActivity;
 import com.guochuang.mimedia.ui.activity.beenest.MyAdActivity;
 import com.guochuang.mimedia.ui.activity.city.CityActivity;
@@ -296,6 +297,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                 startActivity(new Intent(getActivity(), MessageActivity.class));
                 break;
             case R.id.lin_ad_bid:
+                ((MainActivity)getActivity()).clearMarker();
                 startActivity(new Intent(getActivity(), AdBidActivity.class));
                 break;
             case R.id.lin_my_ad:

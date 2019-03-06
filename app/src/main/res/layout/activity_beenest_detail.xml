@@ -112,6 +112,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space20"
             android:orientation="horizontal">
+            <LinearLayout
+                android:id="@+id/lin_call"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
             <TextView
                 android:id="@+id/tv_call"
                 android:layout_width="wrap_content"
@@ -127,10 +133,13 @@
                 android:textSize="@dimen/textfont14"
                 android:textColor="@color/text_black"
                 android:text="@string/call"/>
-            <Space
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/lin_wechat"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
             <TextView
                 android:id="@+id/tv_wechat"
                 android:layout_width="wrap_content"
@@ -146,10 +155,13 @@
                 android:textSize="@dimen/textfont14"
                 android:textColor="@color/text_black"
                 android:text="@string/copy"/>
-            <Space
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/lin_weibo"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
             <TextView
                 android:id="@+id/tv_weibo"
                 android:layout_width="wrap_content"
@@ -165,6 +177,7 @@
                 android:textSize="@dimen/textfont14"
                 android:textColor="@color/text_black"
                 android:text="@string/copy"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
         <android.support.v7.widget.RecyclerView

@@ -109,7 +109,6 @@ public class HoneyCombView extends LinearLayout {
     public void setData(List<NestHomeAd> data, final OnMenuClickListener onMenuClickListener){
         this.dataArr=data;
         this.onMenuClickListener=onMenuClickListener;
-        allData.clear();
         totalRow=(data.size()/4)+(data.size()%4>0?1:0);
        if (totalRow>0) {
            for (int i = 0; i < totalRow; i++) {

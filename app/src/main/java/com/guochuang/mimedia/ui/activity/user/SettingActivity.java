@@ -51,6 +51,10 @@ public class SettingActivity extends MvpActivity<SettingPresenter> implements Se
     LinearLayout linNickname;
     @BindView(R.id.tv_nickname)
     TextView tvNickname;
+    @BindView(R.id.lin_mobile)
+    LinearLayout linMobile;
+    @BindView(R.id.tv_mobile)
+    TextView tvMobile;
     @BindView(R.id.tv_recommend)
     TextView tvRecommend;
     @BindView(R.id.tv_inviter)
@@ -90,6 +94,7 @@ public class SettingActivity extends MvpActivity<SettingPresenter> implements Se
         if (userInfo!=null){
             GlideImgManager.loadCircleImage(this, userInfo.getAvatar(), ivAvatar);
             tvNickname.setText(userInfo.getNickName());
+            tvMobile.setText(userInfo.getMobile());
             tvRecommend.setText(userInfo.getInviteCode());
         }
         tvVersion.setText(CommonUtil.getVersionName(this));

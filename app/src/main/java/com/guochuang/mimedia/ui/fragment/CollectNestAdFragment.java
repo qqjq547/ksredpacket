@@ -67,7 +67,7 @@ public class CollectNestAdFragment extends MvpFragment<CollectNestAdPresenter> i
             }
         });
         rvList.setAdapter(adapter);
-        srlRefresh.setEnableRefresh(false);
+        srlRefresh.setEnableRefresh(true);
         srlRefresh.setEnableLoadmore(true);
         srlRefresh.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
             @Override

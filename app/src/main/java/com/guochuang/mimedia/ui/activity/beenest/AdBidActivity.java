@@ -95,13 +95,7 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
             @Override
             public void call(Boolean aBoolean) {
                 if (aBoolean) {//全部授权
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            startLocation();
-                        }
-                    },500);
-
+                    startLocation();
                 }
             }
         });
@@ -128,6 +122,7 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
                 String value=mb.getString(Constant.RED_PACKET_TYPE);
                 if (TextUtils.equals(value,Constant.MAP_MARKER_SPOT)){
                     long nestLocationId=mb.getLong(Constant.NESTLOCATIONID,0);
+//                    showShortToast("nestLocationId="+nestLocationId);
                     String latitude=mb.getString(Constant.LATITUDE);
                     String longitude=mb.getString(Constant.LONGITUDE);
                     if(nestLocationId>0){
@@ -231,7 +226,7 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
             Bundle nowbundle = new Bundle();
             nowbundle.putString(Constant.RED_PACKET_TYPE, Constant.TYPE_NOW);
             //构建MarkerOption，用于在地图上添加Marker
-            OverlayOptions option = new MarkerOptions()
+            MarkerOptions option = new MarkerOptions()
                     .position(point)
                     .icon(bitmap).extraInfo(nowbundle);
             //在地图上添加Marker，并显示
@@ -246,9 +241,9 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
             bundle.putLong(Constant.NESTLOCATIONID,data.get(i).getNestLocationId());
             bundle.putString(Constant.LATITUDE,String.valueOf(data.get(i).getLatitude()));
             bundle.putString(Constant.LONGITUDE,String.valueOf(data.get(i).getLongitude()));
-            OverlayOptions option = new MarkerOptions()
+            MarkerOptions option = new MarkerOptions()
                     .position(new LatLng(data.get(i).getLatitude(),data.get(i).getLongitude()))
-                    .icon(bitmap).extraInfo(bundle)
+                    .icon(bitmap).extraInfo(bundle).draggable(true)
                     .animateType(MarkerOptions.MarkerAnimateType.grow);
             adOptions.add(option);
         }

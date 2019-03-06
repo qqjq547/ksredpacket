@@ -118,12 +118,15 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     boolean isFirstLocation = true;
     View vScope;
     Animation rotateAnim;
+    BaiduMap.OnMarkerClickListener onMarkerClickListener;
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             isDelay = false;
-            mLocationClient.start();
+            if (isVisible()) {
+                mLocationClient.start();
+            }
         }
     };
 
@@ -168,7 +171,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
         mvpPresenter.getWalletCoinAndMoney();
         mvpPresenter.getScrollBar();
         mvpPresenter.getUserRole();
-        bm.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
+        onMarkerClickListener=new BaiduMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
                 optMarker = marker;
@@ -208,7 +211,8 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                 }
                 return false;
             }
-        });
+        };
+        bm.setOnMarkerClickListener(onMarkerClickListener);
         setUserRole(getPref().getInt(PrefUtil.USER_ROLE,0));
 //        setHomeAd(new ArrayList<NestHomeAd>());
     }
@@ -223,6 +227,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     public void onResume() {
         super.onResume();
         mvRedbag.onResume();
+        bm.setOnMarkerClickListener(onMarkerClickListener);
         if (mLocationClient != null) {
             if (!TextUtils.isEmpty(getPref().getLatitude())) {
                 mvpPresenter.getHomeRegion(getPref().getLatitude(), getPref().getLongitude());
@@ -390,7 +395,11 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     public void setSystemRedbag(List<Redbag> data) {
         closeAnim();
         if (data != null) {
-            addMarker(data, poolOptions);
+            if (isVisible()) {
+                addMarker(data, poolOptions);
+            }else {
+                LogUtil.e("setSystemRedbag");
+            }
         }
     }
 
@@ -398,7 +407,11 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     public void setLocationRedbag(List<Redbag> data) {
         closeAnim();
         if (data != null) {
-            addMarker(data, locOptions);
+            if (isVisible()) {
+                addMarker(data, locOptions);
+            }else {
+                LogUtil.e("setLocationRedbag");
+            }
         }
     }
 
@@ -575,5 +588,9 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                 startActivity(new Intent(getActivity(),AdBidActivity.class));
             }
         });
+    }
+    public void clearMarker(){
+        bm.removeMarkerClickListener(onMarkerClickListener);
+        bm.clear();
     }
 }

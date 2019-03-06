@@ -368,5 +368,9 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
             }
         }
     }
+    public void clearMarker(){
+        ((RedbagFragment)fragments[2]).clearMarker();
+    }
+
 }
 

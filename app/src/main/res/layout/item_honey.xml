@@ -4,7 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/space85"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center_horizontal|bottom">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space5"/>
     <com.guochuang.mimedia.view.SquareImageView
         android:id="@+id/iv_icon"
         android:layout_width="@dimen/space60"

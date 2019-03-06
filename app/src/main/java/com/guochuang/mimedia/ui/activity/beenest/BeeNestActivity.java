@@ -69,6 +69,12 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
     LinearLayout linInfo;
     @BindView(R.id.rv_picture)
     RecyclerView rvPicture;
+    @BindView(R.id.lin_call)
+    LinearLayout linCall;
+    @BindView(R.id.lin_wechat)
+    LinearLayout linWechat;
+    @BindView(R.id.lin_weibo)
+    LinearLayout linWeibo;
     PictureVerticalAdapter adapter;
     List<String> pictureArr=new ArrayList<>();
     long nestInfoId=0;
@@ -209,20 +215,23 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
              tvUrl.setText(data.getLinkText());
          }
          tvAddress.setText(data.getAddress()+data.getAddressDetail());
-         if (TextUtils.isEmpty(data.getContactPhone())){
-             tvCall.setVisibility(View.GONE);
-         }else {
-             tvCall.setVisibility(View.VISIBLE);
-         }
-        if (TextUtils.isEmpty(data.getWechat())){
-            tvWechat.setVisibility(View.GONE);
-        }else {
-            tvWechat.setVisibility(View.VISIBLE);
+        if (TextUtils.isEmpty(data.getContactPhone())) {
+            linCall.setVisibility(View.GONE);
+        } else {
+            linCall.setVisibility(View.VISIBLE);
+            tvCall.setText(data.getContactPhone());
         }
-        if (TextUtils.isEmpty(data.getWeibo())){
-            tvWeibo.setVisibility(View.GONE);
-        }else {
-            tvWeibo.setVisibility(View.VISIBLE);
+        if (TextUtils.isEmpty(data.getWechat())) {
+            linWechat.setVisibility(View.GONE);
+        } else {
+            linWechat.setVisibility(View.VISIBLE);
+            tvWechat.setText(data.getWechat());
+        }
+        if (TextUtils.isEmpty(data.getWeibo())) {
+            linWeibo.setVisibility(View.GONE);
+        } else {
+            linWeibo.setVisibility(View.VISIBLE);
+            tvWeibo.setText(data.getWeibo());
         }
         pictureArr.addAll(data.getPictureList());
         adapter=new PictureVerticalAdapter(pictureArr);

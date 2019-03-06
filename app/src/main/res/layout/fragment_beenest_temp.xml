@@ -21,8 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="@dimen/space250"
-                android:scaleType="fitXY"
-                android:src="@drawable/bg_recommend_agent_banner"/>
+                android:scaleType="fitXY" />
                 <TextView
                     android:id="@+id/tv_temp_name"
                     android:layout_width="@dimen/space200"
@@ -30,7 +29,7 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:background="@drawable/bg_bee_temp_name"
-                    android:textColor="@color/text_white"
+                    android:textColor="@color/text_black"
                     android:textSize="@dimen/textfont18"
                     android:text=""/>
             </FrameLayout>
@@ -86,7 +85,7 @@
                         android:paddingLeft="@dimen/space13"
                         android:paddingRight="@dimen/space13"
                         android:paddingTop="@dimen/space10"
-                        android:textColor="@color/text_white"
+                        android:textColor="@color/text_black"
                         android:textSize="@dimen/textfont14"
                         android:visibility="visible" />
                     <LinearLayout
@@ -176,8 +175,8 @@
                             android:paddingBottom="@dimen/space5"
                             android:gravity="center"
                             android:drawableLeft="@drawable/ic_bee_weibo"
-                            android:drawablePadding="@dimen/space12"
-                            android:textSize="@dimen/textfont15"
+                            android:drawablePadding="@dimen/space10"
+                            android:textSize="@dimen/space12"
                             android:textColor="@color/text_black"
                             android:text="@string/copy"/>
                         </LinearLayout>
