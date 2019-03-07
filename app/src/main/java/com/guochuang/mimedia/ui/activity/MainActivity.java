@@ -27,7 +27,10 @@ import com.allenliu.versionchecklib.callback.APKDownloadListener;
 import com.allenliu.versionchecklib.v2.AllenVersionChecker;
 import com.allenliu.versionchecklib.v2.builder.UIData;
 import com.allenliu.versionchecklib.v2.callback.CustomDownloadingDialogListener;
+import com.guochuang.mimedia.mvp.model.Remind;
 import com.guochuang.mimedia.tools.AdCollectionView;
+import com.guochuang.mimedia.tools.LogUtil;
+import com.guochuang.mimedia.ui.dialog.RemindDialog;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.MvpActivity;
@@ -219,6 +222,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
 
     @Override
     public void setVersion(final VersionMsg data) {
+        mvpPresenter.getRemind();
        if (data!=null){
            final boolean isForce=data.getIsForce()>0;
            long time=getPref().getLong(PrefUtil.UPGRADE_NOTICE,0);
@@ -271,6 +275,17 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
     public void setMessageIsNews(Boolean data) {
         getPref().setBoolean(PrefUtil.MSGISNEW,data);
         setMsgDotView();
+    }
+
+    @Override
+    public void setRemind(Remind data) {
+      if (data!=null){
+          long dateTime=getPref().getLong(PrefUtil.LAST_REMIND_TIME,0)+data.getIntervalMinute()*60000;
+          if (System.currentTimeMillis()>dateTime){
+              getPref().setLong(PrefUtil.LAST_REMIND_TIME,System.currentTimeMillis());
+              new RemindDialog(this,data.getPicture(),data.getLink()).show();
+          }
+      }
     }
 
 

@@ -31,6 +31,8 @@ public class PrefUtil {
     // 广告相关信息存储
     public static final String ADVER_MESSAGE = "adverMessage";
     public static final String UPGRADE_NOTICE = "upgrade_notice";
+    public static final String LAST_REMIND_TIME = "last_remind_time";
+
 
     public static void init(Context context) {
         preference = new PrefUtil(context);

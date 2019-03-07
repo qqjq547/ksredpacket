@@ -84,8 +84,10 @@ public class WebActivity extends MvpActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                tvTitle.setText(view.getTitle());
-                srlRefresh.finishRefresh();
+                if (wvContent.getProgress() == 100) {
+                    tvTitle.setText(view.getTitle());
+                    srlRefresh.finishRefresh();
+                }
             }
         });
         wvContent.addJavascriptInterface(new JSInterface(this),"browserController");
@@ -278,8 +280,8 @@ public class WebActivity extends MvpActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    String url=shareUrl+"?inviteCode="+App.getInstance().getUserInfo().getInviteCode();
-                    ShareDialog shareDialog=new ShareDialog(WebActivity.this,shareTitle,url,shareImg);
+                    LogUtil.d("shareUrl="+shareUrl);
+                    ShareDialog shareDialog=new ShareDialog(WebActivity.this,shareTitle,shareUrl,shareImg);
                     shareDialog.setContent(shareText);
                     shareDialog.setOnShareResultListener(new ShareDialog.OnShareResultListener() {
                         @Override

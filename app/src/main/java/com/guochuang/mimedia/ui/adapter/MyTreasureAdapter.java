@@ -8,6 +8,7 @@ import android.widget.ProgressBar;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.guochuang.mimedia.mvp.model.Snatch;
+import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.sz.gcyh.KSHongBao.R;
 
@@ -45,7 +46,7 @@ public class MyTreasureAdapter extends BaseQuickAdapter<Snatch,BaseViewHolder> {
                helper.setGone(R.id.tv_has_selle_all,false);
                helper.setGone(R.id.tv_waiting_send,false);
                helper.setGone(R.id.iv_out_date,false);
-               helper.setText(R.id.tv_progress,String.valueOf((int)(item.getRate()*100))+mContext.getString(R.string.percent));
+               helper.setText(R.id.tv_progress,String.valueOf((float) (item.getRate()*100))+mContext.getString(R.string.percent));
                ProgressBar pb=helper.getView(R.id.pb_progress);
                pb.setProgress((int)(item.getRate()*100));
                break;
@@ -137,7 +138,7 @@ public class MyTreasureAdapter extends BaseQuickAdapter<Snatch,BaseViewHolder> {
                helper.setGone(R.id.tv_has_selle_all,false);
                helper.setGone(R.id.tv_waiting_send,false);
                helper.setGone(R.id.iv_out_date,true);
-               helper.setText(R.id.tv_progress,String.valueOf((int)(item.getRate()*100))+mContext.getString(R.string.percent));
+               helper.setText(R.id.tv_progress,String.valueOf((float)(item.getRate()*100))+mContext.getString(R.string.percent));
                ProgressBar pb1=helper.getView(R.id.pb_progress);
                pb1.setProgress((int)(item.getRate()*100));
                break;

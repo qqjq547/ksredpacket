@@ -75,6 +75,7 @@ import com.guochuang.mimedia.mvp.model.RegionCore;
 import com.guochuang.mimedia.mvp.model.RegionCoreHome;
 import com.guochuang.mimedia.mvp.model.RegionDetail;
 import com.guochuang.mimedia.mvp.model.RegistUser;
+import com.guochuang.mimedia.mvp.model.Remind;
 import com.guochuang.mimedia.mvp.model.Reply;
 import com.guochuang.mimedia.mvp.model.Redbag;
 import com.guochuang.mimedia.mvp.model.SafeCenter;
@@ -1258,4 +1259,7 @@ public interface ApiStore {
     @GET("/api/v1/order/order/get_pay_type")
     Observable<HttpResponse<PayConfig>> getPayType(
             @Query("bizType") String bizType);
+
+    @GET("/api/v1/common/remind/get")
+    Observable<HttpResponse<Remind>> getRemind();
 }

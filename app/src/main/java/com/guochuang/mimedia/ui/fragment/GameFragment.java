@@ -13,6 +13,7 @@ import com.guochuang.mimedia.base.MvpFragment;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.IntentUtils;
+import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.ui.activity.city.CityActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -61,8 +62,10 @@ public class GameFragment extends MvpFragment {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                tvTitle.setText(view.getTitle());
-                srlRefresh.finishRefresh();
+                if (wvGame.getProgress() == 100) {
+                    tvTitle.setText(view.getTitle());
+                    srlRefresh.finishRefresh();
+                }
             }
         });
         wvGame.addJavascriptInterface(new GameInterface(), "browserController");

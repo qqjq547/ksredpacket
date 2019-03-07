@@ -62,8 +62,10 @@ public class CircleFragment extends MvpFragment {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                tvTitle.setText(view.getTitle());
-                srlRefresh.finishRefresh();
+                if (wvCircle.getProgress() == 100) {
+                    tvTitle.setText(view.getTitle());
+                    srlRefresh.finishRefresh();
+                }
             }
         });
         wvCircle.addJavascriptInterface(new circleInterface(), "browserController");

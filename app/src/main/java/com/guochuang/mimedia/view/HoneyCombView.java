@@ -161,7 +161,7 @@ public class HoneyCombView extends LinearLayout {
     public void setCollse(){
         tvVote.setVisibility(GONE);
         ivArrow.setImageResource(R.drawable.ic_double_arrow_down);
-        getHandler().postDelayed(new Runnable() {
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 if (allData.size()>1) {

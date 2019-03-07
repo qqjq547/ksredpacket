@@ -757,7 +757,7 @@ public class CommonUtil {
         cookieManager.setCookie(url, value2);
         String value3 = Constant.PARAMS_H_NONCE + "=" + h_nonce;
         cookieManager.setCookie(url, value3);
-        String value4 = Constant.INVITECODE + "=" + App.getInstance().getUserInfo();
+        String value4 = Constant.INVITECODE + "=" + (App.getInstance().getUserInfo()==null?"":App.getInstance().getUserInfo().getInviteCode());
         cookieManager.setCookie(url, value4);
         CookieSyncManager.getInstance().sync();
     }

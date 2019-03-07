@@ -2,6 +2,7 @@ package com.guochuang.mimedia.mvp.view;
 
 import com.guochuang.mimedia.mvp.model.NameAuthAndSafety;
 import com.guochuang.mimedia.mvp.model.RainMsg;
+import com.guochuang.mimedia.mvp.model.Remind;
 import com.guochuang.mimedia.mvp.model.UserInfo;
 import com.guochuang.mimedia.mvp.model.VersionMsg;
 
@@ -16,5 +17,6 @@ public interface MainView {
     void setVersion(VersionMsg data);
     void setNameAuthSafefy(NameAuthAndSafety data);
     void setMessageIsNews(Boolean data);
+    void setRemind(Remind data);
     void setError(String msg);
 }
