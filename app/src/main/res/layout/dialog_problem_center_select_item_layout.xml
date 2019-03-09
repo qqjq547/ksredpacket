@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/space15"
+    android:id="@+id/item_root"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:textSize="@dimen/sp_16"
+        android:text="A"/>
+
+
+    <EditText
+        android:id="@+id/et_contant"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:layout_marginLeft="@dimen/space10"
+        android:padding="@dimen/space10"
+        android:minLines="2"
+        android:maxLength="30"
+        android:hint="请输入问题的答案"
+        android:gravity="top"
+        android:background="@drawable/bg_gray_rect_line_shap"
+        android:layout_weight="1"/>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_select_root"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="@dimen/space10"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+
+
+    <TextView
+        android:id="@+id/tv_anser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:textSize="@dimen/sp_16"
+        android:text="答案"/>
+
+        <ImageView
+            android:id="@+id/iv_select_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/select_ok"/>
+
+    </RelativeLayout>
+</LinearLayout>

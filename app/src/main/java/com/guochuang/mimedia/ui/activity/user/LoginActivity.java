@@ -1,6 +1,8 @@
 package com.guochuang.mimedia.ui.activity.user;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.os.SystemClock;
 import android.support.v7.widget.ListPopupWindow;
 import android.text.Editable;
@@ -87,7 +89,10 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
         @Override
         public void keyBoardHide(int height) {
             SoftInputIsClose = true;
-            swichPopo();
+//            if(mIvSelectPhone.isEnabled()){
+//                swichPopo();
+//            }
+
 
         }
     };
@@ -234,6 +239,7 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_login_confirm:
+                savePhone();
                 if (AntiShake.check(view.getId()))
                     return;
                 if (!doCheck()) {
@@ -270,14 +276,22 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
             case R.id.iv_select_phone:
                 //判断软件盘状态
                 //dissmis 时间出、不超过多好毫秒这个contiun  记录dissmis 时间
+                GeneralUtil.hideSoftInputFromWindow(this);
                 if(SystemClock.currentThreadTimeMillis()-mDismissTime<20) {
                     return;
                 }
-                if (SoftInputIsClose) {
-                    swichPopo();
-                }
+                new Handler(){
+                    @Override
+                    public void handleMessage(Message msg) {
+                        super.handleMessage(msg);
+                        if (SoftInputIsClose) {
+                            swichPopo();
+                        }
+                    }
+                }.sendEmptyMessageDelayed(0,200);
 
-                GeneralUtil.hideSoftInputFromWindow(this);
+
+
 
                 break;
             case R.id.iv_login_wx:
@@ -345,7 +359,7 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
     @Override
     public void setLoginData(String data) {
         closeLoadingDialog();
-        savePhone();
+//        savePhone();
         UserLogin userLogin = new Gson().fromJson(CommonUtil.baseDecrypt(data.split("\\.")[1]), UserLogin.class);
         getPref().setString(PrefUtil.USER_TOKEN, data);
         if (TextUtils.isEmpty(userLogin.getMobile())) {

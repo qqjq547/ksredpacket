@@ -2,10 +2,13 @@ package com.guochuang.mimedia.ui.activity.redbag;
 
 import android.Manifest;
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -15,9 +18,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.dmcbig.mediapicker.PickerActivity;
+import com.dmcbig.mediapicker.PickerConfig;
 import com.donkingliang.imageselector.utils.ImageSelector;
 import com.donkingliang.imageselector.utils.ImageSelectorUtils;
 import com.guochuang.mimedia.mvp.model.LuckyConfig;
+import com.guochuang.mimedia.mvp.model.ProblemBean;
+import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.ui.activity.common.MapPickActivity;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.MvpActivity;
@@ -51,7 +58,13 @@ import rx.functions.Action1;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
+import com.dmcbig.mediapicker.entity.Media;
+
 public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> implements EditRedbagView {
+    private static final int OPEN_VIDEO_SELECT_CODE = 0x00001;
+    private static final int VIDEO_OPEN_CODE = 0x00005;
+    private static final int QUESTION_OPEN_CODE = 0x000135;
+
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.tv_title)
@@ -106,7 +119,13 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
     TextView tvRule;
     @BindView(R.id.btn_add)
     Button btnAdd;
-    ArrayList<String> pictureArr=new ArrayList<>();
+    @BindView(R.id.ll_set_problem)
+    LinearLayout mLlSetProblem;
+    @BindView(R.id.tv_problem_number)
+    TextView mTvProblemNumber;
+
+
+    ArrayList<String> pictureArr = new ArrayList<>();
     PickImageAdapter pictureAdapter;
 
     String redPacketType;
@@ -117,22 +136,25 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
     String content;
     String picture;
     String password;
-    double money=0d;
-    int quantity=0;
-    int areaType=0;
-    int kilometer=1;
+    double money = 0d;
+    int quantity = 0;
+    int areaType = 0;
+    int kilometer = 1;
     String url;
     String urlName;
     String wechat;
     String microblog;
-    int isPublicPassword=0;
-    int isSaveTemplate=0;
-    int payType=-1;
-    List<String> scopeArr=new ArrayList<>();
+    int isPublicPassword = 0;
+    int isSaveTemplate = 0;
+    int payType = -1;
+    List<String> scopeArr = new ArrayList<>();
 
-    List<String> waitUpload=new ArrayList<>();
-    List<String> picUrlArr=new ArrayList<>();
+    List<String> waitUpload = new ArrayList<>();
+    List<String> picUrlArr = new ArrayList<>();
     String redPacketUuid;
+    private ArrayList<Media> mSelect;
+
+    private ArrayList<ProblemBean> mProblemList = new ArrayList();
 
     @Override
     protected EditRedbagPresenter createPresenter() {
@@ -146,10 +168,11 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
 
     @Override
     public void initViewAndData() {
-        redPacketType=getIntent().getStringExtra(Constant.RED_PACKET_TYPE);
-        scopeArr=Arrays.asList(getResources().getStringArray(R.array.redbag_scope));
+        redPacketType = getIntent().getStringExtra(Constant.RED_PACKET_TYPE);
+        scopeArr = Arrays.asList(getResources().getStringArray(R.array.redbag_scope));
         tvScope.setText(scopeArr.get(0));
-        switch (redPacketType){
+        mLlSetProblem.setVisibility(View.GONE);
+        switch (redPacketType) {
             case Constant.RED_PACKET_TYPE_RANDOM:
                 tvTitle.setText(R.string.random_redbag);
                 linWord.setVisibility(View.GONE);
@@ -169,40 +192,72 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                 showLoadingDialog(null);
                 mvpPresenter.getLuckyConfig();
                 break;
+            case Constant.RED_PACKET_TYPE_VIDEO:
+                tvTitle.setText(R.string.video_redbag);
+                linWord.setVisibility(View.GONE);
+                cbPublicPassword.setVisibility(View.GONE);
+                cbSaveTemp.setText(R.string.save_video_temp);
+                mLlSetProblem.setVisibility(View.VISIBLE);
+                mTvProblemNumber.setText("请设置问题");
+
+                break;
+            case Constant.RED_PACKET_TYPE_QUESTION:
+                tvTitle.setText(R.string.questionnaire_redbag);
+                mLlSetProblem.setVisibility(View.VISIBLE);
+                mTvProblemNumber.setText("请设置问题");
+
+                break;
+
         }
-        latitude=getPref().getLatitude();
-        longitude=getPref().getLongitude();
-        redbagLatitude=latitude;
-        redbagLongitude=longitude;
+        latitude = getPref().getLatitude();
+        longitude = getPref().getLongitude();
+        redbagLatitude = latitude;
+        redbagLongitude = longitude;
         tvText.setText(R.string.select_temp);
-        rvPic.setLayoutManager(new GridLayoutManager(this,3));
-        rvPic.addItemDecoration(new GridItemDecoration(3,CommonUtil.dip2px(this,10),false));
+        rvPic.setLayoutManager(new GridLayoutManager(this, 3));
+        rvPic.addItemDecoration(new GridItemDecoration(3, CommonUtil.dip2px(this, 10), false));
         rvPic.setItemAnimator(new DefaultItemAnimator());
         pictureArr.add(null);
-        pictureAdapter=new PickImageAdapter(pictureArr);
+        pictureAdapter = new PickImageAdapter(pictureArr, redPacketType); //传入类型
         pictureAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                if (TextUtils.isEmpty(pictureArr.get(position))){
-                    RxPermissions rxPermissions=new RxPermissions(EditRedbagActivity.this);
-                    rxPermissions.request(Manifest.permission.CAMERA,Manifest.permission.READ_EXTERNAL_STORAGE).subscribe(new Action1<Boolean>() {
-                        @Override
-                        public void call(Boolean aBoolean) {
-                            if (aBoolean) {
-                                ImageSelector.builder()
-                                        .useCamera(true)
-                                        .setSingle(false)
-                                        .setMaxSelectCount(Constant.MAX_PICK_PICTURE-pictureArr.size()+1)
-                                        .start(EditRedbagActivity.this, Constant.REQUEST_PICK_PICTURE);
-                            }else {
-                                showShortToast(R.string.get_pic_permission);
+                if (TextUtils.isEmpty(pictureArr.get(position))) {
+                    if (Constant.RED_PACKET_TYPE_VIDEO.equals(redPacketType)) {
+                        //打开视频选择器
+                        go();
+                    } else {
+                        RxPermissions rxPermissions = new RxPermissions(EditRedbagActivity.this);
+                        rxPermissions.request(Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE).subscribe(new Action1<Boolean>() {
+                            @Override
+                            public void call(Boolean aBoolean) {
+                                if (aBoolean) {
+                                    ImageSelector.builder()
+                                            .useCamera(true)
+                                            .setSingle(false)
+                                            .setMaxSelectCount(Constant.MAX_PICK_PICTURE - pictureArr.size() + 1)
+                                            .start(EditRedbagActivity.this, Constant.REQUEST_PICK_PICTURE);
+                                } else {
+                                    showShortToast(R.string.get_pic_permission);
+                                }
                             }
-                        }
-                    });
-                }else {
-                    ArrayList<String> selectArr=(ArrayList<String>)pictureArr.clone();
+                        });
+                    }
+                } else {
+
+                    //判断类型
+                    ArrayList<String> selectArr = (ArrayList<String>) pictureArr.clone();
                     selectArr.remove(null);
-                    IntentUtils.startImagePreviewActivity(EditRedbagActivity.this,position,selectArr);
+                    if (Constant.RED_PACKET_TYPE_VIDEO.equals(redPacketType)) {
+                        //打開視頻預覽
+//                        Bundle bundle = new Bundle();
+//                        bundle.putStringArrayList(Constant.VIDEO_PATH_LIST, selectArr);
+                        startActivity(VideoPreviewActivity.class, null);
+
+                    } else {
+
+                        IntentUtils.startImagePreviewActivity(EditRedbagActivity.this, position, selectArr);
+                    }
                 }
             }
         });
@@ -211,7 +266,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 pictureArr.remove(position);
                 pictureAdapter.notifyItemRemoved(position);
-                if (!pictureArr.contains(null)){
+                if (!pictureArr.contains(null)) {
                     pictureArr.add(null);
                 }
                 adapter.notifyDataSetChanged();
@@ -221,17 +276,17 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
         mvpPresenter.getTemplate(redPacketType);
     }
 
-    public void showPayResult(boolean success,String errmsg){
-        if (success){
+    public void showPayResult(boolean success, String errmsg) {
+        if (success) {
             finish();
             showShortToast(R.string.publish_success);
-            if(TextUtils.equals(redPacketType,Constant.RED_PACKET_TYPE_LUCKY)) {
-                IntentUtils.startLuckyActivity(EditRedbagActivity.this,redPacketUuid);
+            if (TextUtils.equals(redPacketType, Constant.RED_PACKET_TYPE_LUCKY)) {
+                IntentUtils.startLuckyActivity(EditRedbagActivity.this, redPacketUuid);
             }
-        }else {
+        } else {
             new DialogBuilder(this)
                     .setTitle(R.string.tip)
-                    .setMessage(TextUtils.isEmpty(errmsg)?getString(R.string.pay_fail):errmsg)
+                    .setMessage(TextUtils.isEmpty(errmsg) ? getString(R.string.pay_fail) : errmsg)
                     .setPositiveButton(R.string.confirm, new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -241,7 +296,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
         }
     }
 
-    @OnClick({R.id.iv_back, R.id.tv_text, R.id.tv_link,R.id.lin_scope,R.id.lin_location,R.id.tv_rule, R.id.btn_add})
+    @OnClick({R.id.iv_back, R.id.tv_text, R.id.tv_link, R.id.lin_scope, R.id.lin_location, R.id.tv_rule, R.id.btn_add, R.id.ll_set_problem})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -249,39 +304,51 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                 break;
             case R.id.tv_text:
                 Intent intent = new Intent(this, TempActivity.class);
-                intent.putExtra(Constant.RED_PACKET_TYPE,redPacketType);
-                startActivityForResult(intent,Constant.REQUEST_TEMPLATE);
+                intent.putExtra(Constant.RED_PACKET_TYPE, redPacketType);
+                startActivityForResult(intent, Constant.REQUEST_TEMPLATE);
                 break;
             case R.id.tv_link:
-                if (linLink.getVisibility()==View.GONE){
+                if (linLink.getVisibility() == View.GONE) {
                     linLink.setVisibility(View.VISIBLE);
                     tvLink.setText(R.string.pack_up);
-                }else {
+                } else {
                     linLink.setVisibility(View.GONE);
                     tvLink.setText(R.string.more);
                 }
                 break;
+
+            case R.id.ll_set_problem:
+                //跳转设问题
+                Bundle bundle = new Bundle();
+                bundle.putParcelableArrayList(Constant.PROBLEMLIST_KEY, mProblemList);
+                bundle.putString(Constant.OPEN_VIDEOPROBLEMACTIVITY_TYPE, redPacketType);
+                if (Constant.RED_PACKET_TYPE_VIDEO.equals(redPacketType)) {
+                    startActivityForResult(VideoProblemActivity.class, bundle, VIDEO_OPEN_CODE);
+                } else {
+                    startActivityForResult(VideoProblemActivity.class, bundle, QUESTION_OPEN_CODE);
+                }
+                break;
             case R.id.lin_scope:
-                SheetDialog sheetDialog=new SheetDialog(this, scopeArr, new SheetDialog.OnItemClickListener() {
+                SheetDialog sheetDialog = new SheetDialog(this, scopeArr, new SheetDialog.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
-                        switch (position){
+                        switch (position) {
                             case 0:
-                                areaType=0;
-                                kilometer=1;
+                                areaType = 0;
+                                kilometer = 1;
                                 break;
                             case 1:
-                                areaType=0;
-                                kilometer=3;
+                                areaType = 0;
+                                kilometer = 3;
                                 break;
                             case 2:
-                                areaType=0;
-                                kilometer=5;
+                                areaType = 0;
+                                kilometer = 5;
                                 break;
-                                default:
-                                    areaType=position-2;
-                                    kilometer=0;
-                                    break;
+                            default:
+                                areaType = position - 2;
+                                kilometer = 0;
+                                break;
                         }
                         tvScope.setText(scopeArr.get(position));
                     }
@@ -289,67 +356,67 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                 sheetDialog.show();
                 break;
             case R.id.lin_location:
-                RxPermissions rxPermissions=new RxPermissions(this);
+                RxPermissions rxPermissions = new RxPermissions(this);
                 rxPermissions.request(Manifest.permission.ACCESS_COARSE_LOCATION,
-                                      Manifest.permission.ACCESS_FINE_LOCATION).subscribe(new Action1<Boolean>() {
+                        Manifest.permission.ACCESS_FINE_LOCATION).subscribe(new Action1<Boolean>() {
                     @Override
                     public void call(Boolean aBoolean) {
-                        startActivityForResult(new Intent(EditRedbagActivity.this, MapPickActivity.class),Constant.REQUEST_GET_LOCATION);
+                        startActivityForResult(new Intent(EditRedbagActivity.this, MapPickActivity.class), Constant.REQUEST_GET_LOCATION);
                     }
                 });
                 break;
             case R.id.tv_rule:
-                IntentUtils.startWebActivity(this, tvRule.getText().toString(),Constant.URL_SEND_REDBAG);
+                IntentUtils.startWebActivity(this, tvRule.getText().toString(), Constant.URL_SEND_REDBAG);
                 break;
             case R.id.btn_add:
-                content=etContent.getText().toString().trim();
-                if (picUrlArr.size()==0){
+                content = etContent.getText().toString().trim();
+                if (picUrlArr.size() == 0) {
                     waitUpload = (ArrayList<String>) pictureArr.clone();
                     waitUpload.remove(null);
                 }
-                password=etWord.getText().toString().trim();
-                String amountStr=etAmout.getText().toString().trim();
-                if(TextUtils.isEmpty(amountStr)){
-                    money=0d;
-                }else {
-                    money=Double.parseDouble(amountStr);
+                password = etWord.getText().toString().trim();
+                String amountStr = etAmout.getText().toString().trim();
+                if (TextUtils.isEmpty(amountStr)) {
+                    money = 0d;
+                } else {
+                    money = Double.parseDouble(amountStr);
                 }
 //                money=0.01d;
-                String countStr=etCount.getText().toString().trim();
-                if(TextUtils.isEmpty(countStr)){
-                    quantity=0;
-                }else {
-                    quantity=Integer.parseInt(countStr);
+                String countStr = etCount.getText().toString().trim();
+                if (TextUtils.isEmpty(countStr)) {
+                    quantity = 0;
+                } else {
+                    quantity = Integer.parseInt(countStr);
                 }
-                if (linLink.getVisibility()==View.VISIBLE) {
-                     urlName=etLinkName.getText().toString().trim();
-                     url = etLinkUrl.getText().toString().trim();
-                     wechat=etLinkWechat.getText().toString().trim();
-                     microblog=etLinkWeibo.getText().toString().trim();
-                }else {
-                    urlName=null;
+                if (linLink.getVisibility() == View.VISIBLE) {
+                    urlName = etLinkName.getText().toString().trim();
+                    url = etLinkUrl.getText().toString().trim();
+                    wechat = etLinkWechat.getText().toString().trim();
+                    microblog = etLinkWeibo.getText().toString().trim();
+                } else {
+                    urlName = null;
                     url = null;
-                    wechat=null;
-                    microblog=null;
+                    wechat = null;
+                    microblog = null;
                 }
-                isPublicPassword=cbPublicPassword.isChecked()?1:0;
-                isSaveTemplate=cbSaveTemp.isChecked()?1:0;
-                if (TextUtils.isEmpty(latitude)||TextUtils.isEmpty(longitude)){
+                isPublicPassword = cbPublicPassword.isChecked() ? 1 : 0;
+                isSaveTemplate = cbSaveTemp.isChecked() ? 1 : 0;
+                if (TextUtils.isEmpty(latitude) || TextUtils.isEmpty(longitude)) {
                     showShortToast(R.string.not_location_info);
-                }else if(money<=0){
+                } else if (money <= 0) {
                     showShortToast(R.string.pls_set_amount);
-                }else if(quantity<=0){
+                } else if (quantity <= 0) {
                     showShortToast(R.string.pls_set_redbag_num);
-                }else if(!TextUtils.isEmpty(url)&&TextUtils.isEmpty(urlName)){
+                } else if (!TextUtils.isEmpty(url) && TextUtils.isEmpty(urlName)) {
                     showShortToast(R.string.link_name_cant_empty);
-                }else if(!TextUtils.isEmpty(urlName)&&TextUtils.isEmpty(url)){
+                } else if (!TextUtils.isEmpty(urlName) && TextUtils.isEmpty(url)) {
                     showShortToast(R.string.link_url_cant_empty);
-                }else if(!TextUtils.isEmpty(url)&&!url.matches(Constant.REGEX_WEBURL)){
+                } else if (!TextUtils.isEmpty(url) && !url.matches(Constant.REGEX_WEBURL)) {
                     showShortToast(R.string.link_format_error);
-                }else if(!cbObeyRule.isChecked()){
+                } else if (!cbObeyRule.isChecked()) {
                     showShortToast(R.string.agree_rule);
-                }else {
-                    if (TextUtils.equals(redPacketType,Constant.RED_PACKET_TYPE_PASSWORD)){
+                } else {
+                    if (TextUtils.equals(redPacketType, Constant.RED_PACKET_TYPE_PASSWORD)) {
                         if (TextUtils.isEmpty(password)) {
                             showShortToast(R.string.word_not_empty);
                             return;
@@ -358,31 +425,42 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                             return;
                         }
                     }
-                    if (waitUpload.size()>0){
+                    if (waitUpload.size() > 0) {
                         showLoadingDialog(R.string.upload_picture);
                         new File(Constant.COMPRESS_DIR_PATH).mkdirs();
                         uploadFile();
-                    }else {
+                    } else {
                         selectPayType();
                     }
                 }
                 break;
         }
     }
-    public void uploadFile(){
+
+    public void uploadFile() {
         //如果是网络地址，则直接不上传,直接添加
-        if (waitUpload.get(0).startsWith("http")){
+        if (waitUpload.get(0).startsWith("http")) {
             picUrlArr.add(waitUpload.get(0));
             waitUpload.remove(0);
-            if (waitUpload.size()>0) {
+            if (waitUpload.size() > 0) {
                 uploadFile();
-            }else {
+            } else {
                 closeLoadingDialog();
                 selectPayType();
             }
             return;
         }
-        File file=new File(waitUpload.get(0));
+        File file = new File(waitUpload.get(0));
+        Log.e("uploadFile: ", "视频文件上传到服务器");
+
+
+        if (redPacketType.equals(Constant.RED_PACKET_TYPE_VIDEO)) {
+            //视频红包
+            mvpPresenter.videoFileUpload(Constant.BUSSINESSTYPE_RED_PACKET, file);
+            return;
+        }
+
+
         Luban.with(this)
                 .load(file)
                 .ignoreBy(300)
@@ -395,7 +473,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
 
                     @Override
                     public void onSuccess(File file) {
-                        mvpPresenter.fileUpload(Constant.BUSSINESSTYPE_RED_PACKET,file);
+                        mvpPresenter.fileUpload(Constant.BUSSINESSTYPE_RED_PACKET, file);
                     }
 
                     @Override
@@ -405,6 +483,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                     }
                 }).launch();
     }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         if (resultCode == RESULT_OK) {
@@ -414,40 +493,40 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                     addPicture(images);
                     break;
                 case Constant.REQUEST_GET_LOCATION:
-                    redbagLatitude=String.valueOf(intent.getDoubleExtra(Constant.LATITUDE,0));
-                    redbagLongitude=String.valueOf(intent.getDoubleExtra(Constant.LONGITUDE,0));
+                    redbagLatitude = String.valueOf(intent.getDoubleExtra(Constant.LATITUDE, 0));
+                    redbagLongitude = String.valueOf(intent.getDoubleExtra(Constant.LONGITUDE, 0));
                     tvLocation.setText(intent.getStringExtra(Constant.NAME));
                     break;
                 case Constant.REQUEST_TEMPLATE:
-                    RedbagTemp temp=(RedbagTemp)intent.getSerializableExtra(Constant.TEMPLATE);
+                    RedbagTemp temp = (RedbagTemp) intent.getSerializableExtra(Constant.TEMPLATE);
                     mvpPresenter.getTemplate(redPacketType);
-                    if (temp==null){
+                    if (temp == null) {
                         return;
                     }
                     etContent.setText(temp.getContent());
                     pictureArr.clear();
                     picUrlArr.clear();
-                    if (TextUtils.isEmpty(temp.getPicture())){
-                        addPicture(new ArrayList<String >());
-                    }else {
-                        List<String> pics=Arrays.asList(TextUtils.split(temp.getPicture(),","));
+                    if (TextUtils.isEmpty(temp.getPicture())) {
+                        addPicture(new ArrayList<String>());
+                    } else {
+                        List<String> pics = Arrays.asList(TextUtils.split(temp.getPicture(), ","));
                         addPicture(pics);
                     }
-                    etAmout.setText(String.valueOf((int)temp.getMoney()));
+                    etAmout.setText(String.valueOf((int) temp.getMoney()));
                     etCount.setText(String.valueOf(temp.getQuantity()));
-                    areaType=temp.getAreaType();
-                    kilometer=temp.getKilometre();
-                    if (temp.getAreaType()<scopeArr.size()) {
+                    areaType = temp.getAreaType();
+                    kilometer = temp.getKilometre();
+                    if (temp.getAreaType() < scopeArr.size()) {
                         tvScope.setText(scopeArr.get(temp.getAreaType()));
                     }
                     etWord.setText(temp.getPassword());
-                    redbagLongitude=temp.getLongitude();
-                    redbagLatitude=temp.getLatitude();
-                    tvLocation.setText(temp.getCountryName()+temp.getProvinceName()+temp.getCityName()+temp.getDistrictName());
-                    if (!TextUtils.isEmpty(temp.getUrlName())||!TextUtils.isEmpty(temp.getUrlName())||!TextUtils.isEmpty(temp.getWechat())||!TextUtils.isEmpty(temp.getMicroblog())){
+                    redbagLongitude = temp.getLongitude();
+                    redbagLatitude = temp.getLatitude();
+                    tvLocation.setText(temp.getCountryName() + temp.getProvinceName() + temp.getCityName() + temp.getDistrictName());
+                    if (!TextUtils.isEmpty(temp.getUrlName()) || !TextUtils.isEmpty(temp.getUrlName()) || !TextUtils.isEmpty(temp.getWechat()) || !TextUtils.isEmpty(temp.getMicroblog())) {
                         linLink.setVisibility(View.VISIBLE);
                         tvLink.setText(R.string.pack_up);
-                    }else {
+                    } else {
                         linLink.setVisibility(View.GONE);
                         tvLink.setText(R.string.more);
                     }
@@ -456,100 +535,142 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                     etLinkWechat.setText(temp.getWechat());
                     etLinkWeibo.setText(temp.getMicroblog());
                     break;
+
+                case VIDEO_OPEN_CODE:
+                    //视频回来
+                    ArrayList<ProblemBean> problemlist = intent.getParcelableArrayListExtra(Constant.问题数据集合);
+                    mProblemList.clear();
+                    mProblemList.addAll(problemlist);
+                    mTvProblemNumber.setText("已设置" + mProblemList.size() + "道题");
+                    break;
             }
         }
+
+
+        if (requestCode == OPEN_VIDEO_SELECT_CODE && resultCode == PickerConfig.RESULT_CODE) {
+            mSelect = intent.getParcelableArrayListExtra(PickerConfig.EXTRA_RESULT);
+            List<String> videoList = new ArrayList<>(1);
+            for (Media media : mSelect) {
+                Log.i("media", media.path);
+                Log.e("media", "s:" + media.size);
+                videoList.add(media.path);
+
+            }
+            addPicture(videoList);
+
+        }
     }
-    private void addPicture(List<String> filepath){
+
+    private void addPicture(List<String> filepath) {
         pictureArr.remove(null);
         pictureArr.addAll(filepath);
-        if (pictureArr.size()<Constant.MAX_PICK_PICTURE){
-            pictureArr.add(null);
-        }else {
-            pictureArr.subList(0,Constant.MAX_PICK_PICTURE-1);
+        //判断类别
+        if (Constant.RED_PACKET_TYPE_VIDEO.equals(redPacketType)) {
+            if (pictureArr.size() < Constant.MAX_VIDEO_PICTURE) {
+                pictureArr.add(null);
+            } else {
+                pictureArr.subList(0, Constant.MAX_VIDEO_PICTURE - 1);
+            }
+        } else {
+
+            if (pictureArr.size() < Constant.MAX_PICK_PICTURE) {
+                pictureArr.add(null);
+            } else {
+                pictureArr.subList(0, Constant.MAX_PICK_PICTURE - 1);
+            }
         }
+
+
         pictureAdapter.notifyDataSetChanged();
     }
-   public void selectPayType(){
-       picture=TextUtils.join(",",picUrlArr);
-       PaySelectDialog paySelectDialog = new PaySelectDialog(this, String.valueOf(money));
-       paySelectDialog.setOnResultListener(new PaySelectDialog.OnResultListener() {
-           @Override
-           public void onSelectItem(int postion) {
-               if (postion == 0) {
-                   payType = Constant.PAY_TYPE_WXPAY;
-               } else if (postion == 1) {
-                   payType = Constant.PAY_TYPE_ALIPAY;
-               } else {
-                   payType = Constant.PAY_TYPE_KSB;
-                   new PassDialog(EditRedbagActivity.this, new PassDialog.OnPassDialogListener() {
-                       @Override
-                       public void close() {
-                           selectPayType();
-                       }
 
-                       @Override
-                       public void go() {
+    public void selectPayType() {
+        picture = TextUtils.join(",", picUrlArr);
+        PaySelectDialog paySelectDialog = new PaySelectDialog(this, String.valueOf(money));
+        paySelectDialog.setOnResultListener(new PaySelectDialog.OnResultListener() {
+            @Override
+            public void onSelectItem(int postion) {
+                if (postion == 0) {
+                    payType = Constant.PAY_TYPE_WXPAY;
+                } else if (postion == 1) {
+                    payType = Constant.PAY_TYPE_ALIPAY;
+                } else {
+                    payType = Constant.PAY_TYPE_KSB;
+                    new PassDialog(EditRedbagActivity.this, new PassDialog.OnPassDialogListener() {
+                        @Override
+                        public void close() {
+                            selectPayType();
+                        }
 
-                       }
+                        @Override
+                        public void go() {
 
-                       @Override
-                       public void onNumFull(String code) {
-                           startPay(code);
-                       }
-                   }).show();
-                   return;
-               }
-               startPay(null);
-           }
-       });
-       paySelectDialog.show();
-}
-public void startPay(String safetyCode){
-    showLoadingDialog(null);
-    if (TextUtils.equals(redPacketType,Constant.RED_PACKET_TYPE_RANDOM)){
-        mvpPresenter.addRandomRedbag(latitude,longitude,redbagLatitude,redbagLongitude,content,picture,areaType,kilometer,money,quantity,urlName,url,wechat,microblog,isPublicPassword,isSaveTemplate,payType,Constant.CHANNEL_CODE_ANDROID,safetyCode);
-    }else if(TextUtils.equals(redPacketType,Constant.RED_PACKET_TYPE_PASSWORD)){
-        mvpPresenter.addPasswordRedbag(latitude,longitude,redbagLatitude,redbagLongitude,content,picture,areaType,kilometer,password,money,quantity,urlName,url,wechat,microblog,isPublicPassword,isSaveTemplate,payType,Constant.CHANNEL_CODE_ANDROID,safetyCode);
-    }else if(TextUtils.equals(redPacketType,Constant.RED_PACKET_TYPE_LUCKY)){
-        mvpPresenter.addLuckyRedbag(latitude,longitude,redbagLatitude,redbagLongitude,content,picture,areaType,kilometer,money,quantity,urlName,url,wechat,microblog,isPublicPassword,isSaveTemplate,payType,Constant.CHANNEL_CODE_ANDROID,safetyCode);
+                        }
+
+                        @Override
+                        public void onNumFull(String code) {
+                            startPay(code);
+                        }
+                    }).show();
+                    return;
+                }
+                startPay(null);
+            }
+        });
+        paySelectDialog.show();
     }
-}
+
+    public void startPay(String safetyCode) {
+        showLoadingDialog(null);
+        if (TextUtils.equals(redPacketType, Constant.RED_PACKET_TYPE_RANDOM)) {
+            mvpPresenter.addRandomRedbag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode);
+        } else if (TextUtils.equals(redPacketType, Constant.RED_PACKET_TYPE_PASSWORD)) {
+            mvpPresenter.addPasswordRedbag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, password, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode);
+        } else if (TextUtils.equals(redPacketType, Constant.RED_PACKET_TYPE_LUCKY)) {
+            mvpPresenter.addLuckyRedbag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode);
+        }else if(TextUtils.equals(redPacketType, Constant.RED_PACKET_TYPE_VIDEO)){
+            //picture 拼接的是视频地址
+            // TODO: 2019/3/9
+//            mvpPresenter.addVideoReabag(latitude,longitude,redbagLatitude,redbagLongitude,content,picture,areaType,kilometer,money,quantity,urlName,url,wechat,microblog,isPublicPassword,isSaveTemplate,payType, Constant.CHANNEL_CODE_ANDROID,safetyCode,);
+        }
+    }
+
     @Override
     public void setData(final String data) {
         closeLoadingDialog();
         if (!TextUtils.isEmpty(data)) {
-            Order order=GsonUtil.GsonToBean(data,Order.class);
-            redPacketUuid=order.getRedPacketUuid();
-            switch (payType){
-                case  Constant.PAY_TYPE_WXPAY:
-                    if (TextUtils.isEmpty(order.getVendorResponse())){
+            Order order = GsonUtil.GsonToBean(data, Order.class);
+            redPacketUuid = order.getRedPacketUuid();
+            switch (payType) {
+                case Constant.PAY_TYPE_WXPAY:
+                    if (TextUtils.isEmpty(order.getVendorResponse())) {
                         showShortToast(R.string.can_get_order);
                         return;
                     }
                     WxPay.getInstance().pay(order.getVendorResponse(), new WxPay.OnResultListener() {
                         @Override
                         public void onResult(boolean success, String errMsg) {
-                            showPayResult(success,errMsg);
+                            showPayResult(success, errMsg);
                         }
                     });
                     break;
-                case  Constant.PAY_TYPE_ALIPAY:
-                    if (TextUtils.isEmpty(order.getVendorResponse())){
+                case Constant.PAY_TYPE_ALIPAY:
+                    if (TextUtils.isEmpty(order.getVendorResponse())) {
                         showShortToast(R.string.can_get_order);
                         return;
                     }
                     AliPay.getInstance().pay(this, order.getVendorResponse(), new AliPay.OnResultListener() {
                         @Override
                         public void onResult(boolean success, String errMsg) {
-                            showPayResult(success,errMsg);
+                            showPayResult(success, errMsg);
                         }
                     });
                     break;
-                case  Constant.PAY_TYPE_KSB:
-                    showPayResult(true,null);
+                case Constant.PAY_TYPE_KSB:
+                    showPayResult(true, null);
                     break;
             }
-        }else {
+        } else {
             showShortToast(R.string.can_get_order);
         }
     }
@@ -558,21 +679,23 @@ public void startPay(String safetyCode){
     public void setUploadFile(UploadFile data) {
         waitUpload.remove(0);
         picUrlArr.add(data.getUrl());
-        if (waitUpload.size()>0) {
+        if (waitUpload.size() > 0) {
             uploadFile();
-        }else {
+        } else {
             closeLoadingDialog();
             selectPayType();
         }
     }
+
     @Override
     public void setUploadfail(String msg) {
-        showShortToast(R.string.upload_picture_fail);
+        showShortToast(msg);
         closeLoadingDialog();
     }
+
     @Override
     public void setTempData(List<RedbagTemp> data) {
-        if (data!=null) {
+        if (data != null) {
             if (data.size() >= 5) {
                 cbSaveTemp.setVisibility(View.GONE);
             } else {
@@ -584,17 +707,31 @@ public void startPay(String safetyCode){
     @Override
     public void setLuckyConfig(LuckyConfig data) {
         closeLoadingDialog();
-        if (data!=null){
+        if (data != null) {
             etAmout.setText(String.valueOf(data.getJoinMoney()));
             etAmout.setEnabled(false);
             etCount.setText(String.valueOf(data.getSendQuantity()));
             etCount.setEnabled(false);
         }
     }
+
     @Override
     public void setError(String msg) {
         closeLoadingDialog();
         showShortToast(msg);
+    }
+
+    /**
+     * 打开视频选择器
+     */
+    void go() {
+        Intent intent = new Intent(this, PickerActivity.class);
+        intent.putExtra(PickerConfig.SELECT_MODE, PickerConfig.PICKER_VIDEO);//default image and video (Optional)
+        long maxSize = 188743680L;//long long long
+        intent.putExtra(PickerConfig.MAX_SELECT_SIZE, maxSize); //default 180MB (Optional)
+        intent.putExtra(PickerConfig.MAX_SELECT_COUNT, 1);  //default 40 (Optional)
+        intent.putExtra(PickerConfig.DEFAULT_SELECTED_LIST, mSelect); // (Optional)
+        startActivityForResult(intent, OPEN_VIDEO_SELECT_CODE);
     }
 
 

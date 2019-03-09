@@ -26,6 +26,8 @@ public class RedbagTypeDialog extends Dialog {
         void onRandom();
         void onPassword();
         void onLucky();
+        void onVideo();
+        void onQuestion();
     }
     public RedbagTypeDialog(@NonNull Context context,OnItemClickListener onOpenResultListener) {
         super(context, R.style.dialog_bottom_full);
@@ -40,7 +42,7 @@ public class RedbagTypeDialog extends Dialog {
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
     }
 
-    @OnClick({R.id.lin_random, R.id.lin_password,R.id.lin_lucky, R.id.tv_cancel})
+    @OnClick({R.id.lin_random, R.id.lin_password,R.id.lin_lucky, R.id.tv_cancel,R.id.ll_video,R.id.ll_questionnaire})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.lin_random:
@@ -58,6 +60,18 @@ public class RedbagTypeDialog extends Dialog {
             case R.id.lin_lucky:
                 if (onOpenResultListener!=null){
                     onOpenResultListener.onLucky();
+                }
+                cancel();
+                break;
+            case R.id.ll_video:
+                if (onOpenResultListener!=null){
+                    onOpenResultListener.onVideo();
+                }
+                cancel();
+                break;
+            case R.id.ll_questionnaire:
+                if (onOpenResultListener!=null){
+                    onOpenResultListener.onQuestion();
                 }
                 cancel();
                 break;

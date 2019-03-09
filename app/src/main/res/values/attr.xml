@@ -28,4 +28,10 @@
     <declare-styleable name="CalendarDateView">
         <attr name="cbd_calendar_row"/>
     </declare-styleable>
+
+
+    <declare-styleable name="WrapEmptyRecyclerView">
+        <attr name="emptyPageLayout" format="reference" />
+    </declare-styleable>
+
 </resources>

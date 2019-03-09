@@ -147,7 +147,7 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
         rvPicture.addItemDecoration(new GridItemDecoration(3,CommonUtil.dip2px(this,10),false));
         rvPicture.setItemAnimator(new DefaultItemAnimator());
         pictureArr.add(null);
-        pictureAdapter=new PickImageAdapter(pictureArr);
+        pictureAdapter=new PickImageAdapter(pictureArr,null);
         pictureAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {

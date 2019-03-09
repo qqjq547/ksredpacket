@@ -209,6 +209,8 @@ public class Constant {
     public static final String RED_PACKET_TYPE_RANDOM = "random";
     public static final String RED_PACKET_TYPE_PASSWORD = "password";
     public static final String RED_PACKET_TYPE_LUCKY = "lucky";
+    public static final String RED_PACKET_TYPE_VIDEO = "video";
+    public static final String RED_PACKET_TYPE_QUESTION = "question";
 
     public static final String ROLETYPE_ADMIN = "admin";
     public static final String ROLETYPE_PERSON = "person";
@@ -244,6 +246,7 @@ public class Constant {
     public static final int USER_ROLE_CHIEF = 3;
     public static final int USER_ROLE_STAR_CHIEF = 4;
     public static final int MAX_PICK_PICTURE = 6;
+    public static final int MAX_VIDEO_PICTURE = 1;
     //审核中
     public static final int STATUS_AUDIT_INREVIEW=0;
     //审核通过
@@ -265,4 +268,9 @@ public class Constant {
     public static final String AD_TYPE_EDIT = "edit";
     public static final String MAP_MARKER_SPOT = "spot";
 
+    public static final String ACTIVTYPUTBUNDLEKEY = "openActivity_key";
+    public static final String VIDEO_PATH_LIST = "视频路径集合";
+    public static final String PROBLEMLIST_KEY = "问题集合";
+    public static final String OPEN_VIDEOPROBLEMACTIVITY_TYPE = "打开VideoProblemActivity的类型";
+    public static String 问题数据集合 = "问题数据集合";
 }

@@ -123,7 +123,7 @@ public class ShowListActivity extends MvpActivity<ShowListPresenter> implements 
        rvPicture.addItemDecoration(new GridItemDecoration(3,CommonUtil.dip2px(this,5),false));
        rvPicture.setItemAnimator(new DefaultItemAnimator());
        pictureArr.add(null);
-       pictureAdapter=new PickImageAdapter(pictureArr);
+       pictureAdapter=new PickImageAdapter(pictureArr,null);
        pictureAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
            @Override
            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {

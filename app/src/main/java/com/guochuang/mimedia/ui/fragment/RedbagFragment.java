@@ -282,6 +282,16 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                     public void onLucky() {
                         IntentUtils.startEditRedbagActivity(getActivity(), Constant.RED_PACKET_TYPE_LUCKY);
                     }
+
+                    @Override
+                    public void onVideo() {
+                        IntentUtils.startEditRedbagActivity(getActivity(), Constant.RED_PACKET_TYPE_VIDEO);
+                    }
+
+                    @Override
+                    public void onQuestion() {
+                        IntentUtils.startEditRedbagActivity(getActivity(), Constant.RED_PACKET_TYPE_QUESTION);
+                    }
                 }).show();
                 break;
             case R.id.iv_refresh:

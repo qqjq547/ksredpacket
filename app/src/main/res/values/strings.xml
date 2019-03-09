@@ -684,5 +684,8 @@
         <item>nestActivity</item>
     </string-array>
     <string name="bid_ad_tip">您可拖动地图，点击要投放的区域，再选择对应的广告牌</string>
+    <string name="video_redbag">视频红包</string>
+    <string name="questionnaire_redbag">问卷红包</string>
+    <string name="save_video_temp">保存为视频红包模板</string>
 
 </resources>

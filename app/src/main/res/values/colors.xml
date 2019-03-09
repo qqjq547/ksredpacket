@@ -78,5 +78,8 @@
     <color name="btn_cancel_color">#999999</color>
     <color name="btn_confirm_color">#303F9F</color>
     <color name="scan_bg">#7f000000</color>
+    <color name="white">#ffffff</color>
+    <color name="color_999999">#999999</color>
+    <color name="color_d2d3d5">#d2d3d5</color>
 
 </resources>

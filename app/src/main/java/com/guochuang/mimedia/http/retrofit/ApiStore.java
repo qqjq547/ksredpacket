@@ -1257,4 +1257,43 @@ public interface ApiStore {
     @GET("/api/v1/order/order/get_pay_type")
     Observable<HttpResponse<PayConfig>> getPayType(
             @Query("bizType") String bizType);
+
+
+
+    @FormUrlEncoded
+    @POST("/api/v1/redpacket/person_red_packet/add_video")
+    Observable<HttpResponse<String>> addVideoRedbag(
+            @Field("userLatitude") String userLatitude,
+            @Field("userLongitude") String userLongitude,
+            @Field("redPacketLatitude") String redPacketLatitude,
+            @Field("redPacketLongitude") String redPacketLongitude,
+            @Field("content") String content,
+            @Field("videoUrl") String videoUrl,
+            @Field("areaType") int areaType,
+            @Field("kilometer") int kilometer,
+            @Field("money") Double money,
+            @Field("quantity") int quantity,
+            @Field("urlName") String urlName,
+            @Field("url") String url,
+            @Field("wechat") String wechat,
+            @Field("microblog") String microblog,
+            @Field("isPublicPassword") int isPublicPassword,
+            @Field("isSaveTemplate") int isSaveTemplate,
+            @Field("payType") int payType,
+            @Field("channelCode") String channelCode,
+            @Field("safetyCode") String safetyCode,
+
+            @Field("surveyType") int surveyType,
+            @Field("addJsonList") String addJsonList
+
+
+    );
+
+
+
+
+
+
+
+
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/ll_fill_container"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/space15">
+    <EditText
+        android:id="@+id/et_content"
+        android:layout_width="match_parent"
+        android:gravity="top"
+        android:background="@drawable/bg_gray_rect_line_shap"
+        android:textSize="@dimen/sp_14"
+        android:textColor="#000000"
+        android:padding="@dimen/space10"
+        android:maxLength="30"
+        android:hint="请输入问题的答案"
+        android:layout_height="285dp" />
+
+
+</LinearLayout>

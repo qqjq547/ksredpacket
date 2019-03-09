@@ -2,6 +2,7 @@ package com.guochuang.mimedia.base;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -12,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import com.guochuang.mimedia.tools.Constant;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.mvp.view.MainView;
@@ -39,13 +41,27 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
         super.setContentView(layoutResID);
+        Intent intent = getIntent();
+
+
+        Bundle bundleExtra = intent.getBundleExtra(Constant.ACTIVTYPUTBUNDLEKEY);
+        paserIntent(bundleExtra);
+        paserIntent(intent);
+
+
+
         if (orientation!=null){
             setRequestedOrientation(orientation);
         }
         ButterKnife.bind(this);
         App.getInstance().addActivity(this);
     }
- 
+
+    protected abstract void paserIntent(Intent intent);
+
+
+    protected abstract void paserIntent(Bundle bundle);
+
     public void setOrientation(Integer orientation) {
         this.orientation = orientation;
     }
@@ -186,5 +202,29 @@ public abstract class BaseActivity extends AppCompatActivity {
                 .statusBarDarkFont(darkFont)
                 .fitsSystemWindows(true)
                 .init();
+    }
+
+
+    /**
+     * 跳转Activity
+     *
+     * @param clazz
+     * @param bundle
+     */
+    public void startActivity(Class<? extends Activity> clazz, Bundle bundle) {
+        Intent intent = new Intent(this, clazz);
+        if (bundle != null) {
+            intent.putExtra(Constant.ACTIVTYPUTBUNDLEKEY, bundle);
+        }
+        startActivity(intent);
+    }
+
+
+    public void startActivityForResult(Class<? extends Activity> clazz, Bundle bundle, int requestCode) {
+        Intent intent = new Intent(this, clazz);
+        if (bundle != null) {
+            intent.putExtra(Constant.ACTIVTYPUTBUNDLEKEY, bundle);
+        }
+        startActivityForResult(intent, requestCode);
     }
 }

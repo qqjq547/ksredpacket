@@ -81,6 +81,57 @@
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/textfont14" />
         </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_video"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/space50"
+            android:visibility="visible">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space40"
+                android:src="@drawable/ic_packet_lucky" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space15"
+                android:text="@string/video_redbag"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/textfont14" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_questionnaire"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/space50"
+            android:visibility="visible">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space40"
+                android:src="@drawable/ic_packet_lucky" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space15"
+                android:text="@string/questionnaire_redbag"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/textfont14" />
+        </LinearLayout>
+
     </LinearLayout>
     <View
         android:layout_width="match_parent"

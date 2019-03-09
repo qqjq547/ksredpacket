@@ -37,8 +37,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon,android:theme">
-        <activity android:name="com.guochuang.mimedia.ui.activity.WelcomeActivity"
-                  android:theme="@style/FullScreenTheme">
+        <!--<activity android:name="com.guochuang.mimedia.ui.activity.redbag.VideoProblemActivity">-->
+
+       <activity android:name="com.guochuang.mimedia.ui.activity.WelcomeActivity"
+            android:theme="@style/FullScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -361,6 +363,11 @@
         <meta-data
             android:name="notch.config"
             android:value="portrait|landscape" />
+
+
+        <!--视频问题界面-->
+        <activity android:name="com.guochuang.mimedia.ui.activity.redbag.VideoProblemActivity"/>
+        <activity android:name="com.guochuang.mimedia.ui.activity.redbag.VideoPreviewActivity"/>
 
     </application>
 
