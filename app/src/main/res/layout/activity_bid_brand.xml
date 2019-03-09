@@ -103,6 +103,60 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/space15"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textfont16"
+                android:textColor="@color/text_black"
+                android:text="@string/buy_time"/>
+            <RadioGroup
+                android:id="@+id/rgroup_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/rbtn_five"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/space20"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:textColor="@color/date_text_selector"
+                    android:textSize="@dimen/textfont14"
+                    android:background="@drawable/bg_date_check_selector"
+                    android:text="@string/date_five"
+                    android:checked="true"
+                    />
+                <RadioButton
+                    android:id="@+id/rbtn_ten"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/space20"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:textColor="@color/date_text_selector"
+                    android:textSize="@dimen/textfont14"
+                    android:background="@drawable/bg_date_check_selector"
+                    android:text="@string/date_ten"/>
+                <RadioButton
+                    android:id="@+id/rbtn_fifth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/space20"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:textColor="@color/date_text_selector"
+                    android:textSize="@dimen/textfont14"
+                    android:background="@drawable/bg_date_check_selector"
+                    android:text="@string/date_fifth"/>
+            </RadioGroup>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@drawable/bg_white_block"
             android:layout_margin="@dimen/space10"

@@ -8,6 +8,7 @@ import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
+import android.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.guochuang.mimedia.base.MvpActivity;
@@ -33,12 +35,14 @@ import com.guochuang.mimedia.tools.calendar.CalendarDateView;
 import com.guochuang.mimedia.tools.calendar.CalendarFactory;
 import com.guochuang.mimedia.tools.calendar.CalendarView;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
+import com.guochuang.mimedia.ui.activity.MainActivity;
 import com.sz.gcyh.KSHongBao.R;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -59,6 +63,8 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
     ImageView ivNext;
     @BindView(R.id.cdv_month)
     CalendarDateView cdvMonth;
+    @BindView(R.id.rgroup_date)
+    RadioGroup rGroupDate;
     @BindView(R.id.tv_buy_time)
     TextView tvBuyTime;
     @BindView(R.id.tv_buy_day_count)
@@ -99,9 +105,9 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
     long nestLocationId;
     NestTimeInfo timeInfo;
     double rate;
-    NestTimeInfo.InfoBean curInfoBean;
+    int selectDayCount=5;
     CaledarAdapter caledarAdapter;
-    boolean isSelectCur=true;//是否选择当期
+    HashMap<String,String> dateAvatar=new HashMap<>();
 
     @Override
     protected BidBrandPresenter createPresenter() {
@@ -130,11 +136,7 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
                 String monthStr = CommonUtil.dateToString(date, Constant.FORMAT_MONTH);
                 tvMonth.setText(monthStr);
                 String dateStr= CommonUtil.dateToString(date, Constant.FORMAT_DATE_SIMPLE);
-                if (currentArr.contains(dateStr)){
-                    setInfo(timeInfo.getCurrent());
-                }else if (nextArr.contains(dateStr)){
-                    setInfo(timeInfo.getNext());
-                }
+
             }
         });
         etBidPrice.addTextChangedListener(new TextWatcher() {
@@ -163,7 +165,23 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
                     etBidPrice.setText(String.valueOf(timeInfo.getMaxPrice()));
                     return;
                 }
-                tvEqualKsb.setText(String.valueOf(DoubleUtil.divide(money*curInfoBean.getDay(),rate)));
+                tvEqualKsb.setText(String.valueOf(DoubleUtil.divide(money*selectDayCount,rate)));
+            }
+        });
+        rGroupDate.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                switch (i){
+                    case R.id.rbtn_five:
+                         setSelect(5);
+                        break;
+                    case R.id.rbtn_ten:
+                        setSelect(10);
+                        break;
+                    case R.id.rbtn_fifth:
+                        setSelect(15);
+                        break;
+                }
             }
         });
         mvpPresenter.setNestTimeInfo(nestLocationId,latitude,longitude);
@@ -178,6 +196,8 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
                TextView tvDate = convertView.findViewById(R.id.tv_date);
                ImageView ivAuction = convertView.findViewById(R.id.iv_auction);
                ImageView ivHot = convertView.findViewById(R.id.iv_hot);
+               ImageView ivAvatar = convertView.findViewById(R.id.iv_avatar);
+
                if (bean.mothFlag != 0) {
                    tvDate.setTextColor(getResources().getColor(R.color.text_gray));
                } else {
@@ -186,43 +206,20 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
                tvDate.setText(String.valueOf(bean.day));
                String dateStr = CommonUtil.dateToString(CalendarFactory.getCalendarByBean(bean).getTime(), Constant.FORMAT_DATE_SIMPLE);
                if (currentArr.contains(dateStr)) {
-                   if (timeInfo.getCurrent().isSale()){
-                       ivAuction.setVisibility(View.GONE);
-                       if (currentSelectArr.contains(dateStr)){
-                           ivHot.setVisibility(View.VISIBLE);
-                           if (timeInfo.getNext().isSale()){
-                               if (isSelectCur){
-                                   tvDate.setBackgroundResource(R.drawable.bg_date_red);
-                                   tvDate.setTextColor(getResources().getColor(R.color.text_white));
-                               }else {
-                                   tvDate.setBackgroundResource(R.drawable.bg_date_white);
-                               }
-                           }else {
-                               tvDate.setBackgroundResource(R.drawable.bg_date_white);
-                           }
-                       }else {
-                           ivHot.setVisibility(View.GONE);
-                           tvDate.setBackgroundResource(R.drawable.bg_date_gray);
-                       }
-                   }else {
-                       ivAuction.setVisibility(View.VISIBLE);
-                       ivHot.setVisibility(View.GONE);
-                       tvDate.setBackgroundResource(R.drawable.bg_date_gray);
-                   }
+                   ivAuction.setVisibility(View.VISIBLE);
+                   ivHot.setVisibility(View.GONE);
+                   tvDate.setBackgroundResource(R.drawable.bg_date_gray);
+                   ivAvatar.setVisibility(View.VISIBLE);
+                   GlideImgManager.loadCircleImage(BidBrandActivity.this,dateAvatar.get(dateStr),ivAvatar);
                } else if(nextArr.contains(dateStr)){
-                   if (timeInfo.getNext().isSale()){
-                       ivAuction.setVisibility(View.GONE);
-                       ivHot.setVisibility(View.VISIBLE);
-                       if (isSelectCur){
-                           tvDate.setBackgroundResource(R.drawable.bg_date_white);
-                       }else {//当期被选择
-                           tvDate.setBackgroundResource(R.drawable.bg_date_red);
-                           tvDate.setTextColor(getResources().getColor(R.color.text_white));
-                       }
-                   }else {
-                       ivAuction.setVisibility(View.VISIBLE);
-                       ivHot.setVisibility(View.GONE);
-                       tvDate.setBackgroundResource(R.drawable.bg_date_gray);
+                   ivAuction.setVisibility(View.GONE);
+                   ivHot.setVisibility(View.VISIBLE);
+                   ivAvatar.setVisibility(View.VISIBLE);
+                   if (currentSelectArr.contains(dateStr)){
+                       tvDate.setBackgroundResource(R.drawable.bg_date_red);
+                       tvDate.setTextColor(getResources().getColor(R.color.text_white));
+                   }else {//当期被选择
+                       tvDate.setBackgroundResource(R.drawable.bg_date_white);
                    }
                }else {
                    tvDate.setBackgroundResource(R.drawable.bg_date_gray);
@@ -250,21 +247,21 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
                 cdvMonth.setCurrentItem(cdvMonth.getCurrentItem() + 1);
                 break;
             case R.id.tv_bid_record:
-                if(curInfoBean!=null){
-                    startActivity(new Intent(this, BidRecordActivity.class).putExtra(Constant.NESTTIMEINFOID, curInfoBean.getNestTimeInfoId()));
+                if(timeInfo!=null){
+                    startActivity(new Intent(this, BidRecordActivity.class).putExtra(Constant.NESTINFOID, nestLocationId));
                 }
                 break;
             case R.id.btn_buy:
-                if (curInfoBean!=null) {
+                if (timeInfo!=null) {
                     String bidPrice = etBidPrice.getText().toString();
                     if (TextUtils.isEmpty(bidPrice)) {
                         showShortToast(R.string.buy_price_not_empty);
                     } else {
                         int price = Integer.parseInt(bidPrice);
-                        if (price <= curInfoBean.getPrice()) {
+                        if (price <= timeInfo.getMaxPrice()) {
                             showShortToast(R.string.buy_price_limit);
                         } else {
-                            IntentUtils.startPurchaseActivity(this, Constant.TYPE_PURCHASE_NESTAD, curInfoBean.getNestTimeInfoId(), String.valueOf(price * curInfoBean.getDay()), price);
+                            IntentUtils.startPurchaseActivity(this, Constant.TYPE_PURCHASE_NESTAD, nestLocationId, String.valueOf(price * selectDayCount), price);
                         }
                     }
                 }
@@ -278,43 +275,52 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
         if (data != null) {
             timeInfo = data;
             rate = Double.parseDouble(data.getRate());
-            NestTimeInfo.InfoBean currentBean = data.getCurrent();
-            NestTimeInfo.InfoBean nestBean = data.getNext();
+            if (data.getBuyList()!=null&&data.getBuyList().size()>0){
+                for (NestTimeInfo.BuyListBean listBean:data.getBuyList()){
+                    Calendar startCal = Calendar.getInstance();
+                    startCal.setTime(CommonUtil.stringToDate(listBean.getStartDate(), Constant.FORMAT_DATE_SIMPLE));
+                    Calendar endCal = Calendar.getInstance();
+                    endCal.setTime(CommonUtil.stringToDate(listBean.getEndDate(), Constant.FORMAT_DATE_SIMPLE));
+                    int dayCount=differentDays(endCal.getTime(),startCal.getTime());
+                    for (int i = 0; i < dayCount; i++) {
+                        Calendar cal = Calendar.getInstance();
+                        cal.setTime(startCal.getTime());
+                        cal.add(Calendar.DATE, i);
+                        dateAvatar.put(CommonUtil.dateToString(cal.getTime(), Constant.FORMAT_DATE_SIMPLE),listBean.getUserAvatar());
+                        currentArr.add(CommonUtil.dateToString(cal.getTime(), Constant.FORMAT_DATE_SIMPLE));
+                    }
+                }
+            }
             Calendar startCal = Calendar.getInstance();
-            if (currentBean != null) {
-                startCal.setTime(CommonUtil.stringToDate(currentBean.getStartTime(), Constant.FORMAT_DATE_SIMPLE));
-                for (int i = 0; i < nestBean.getDay(); i++) {
-                    Calendar cal = Calendar.getInstance();
-                    cal.setTime(startCal.getTime());
-                    cal.add(Calendar.DATE, i);
-                    currentArr.add(CommonUtil.dateToString(cal.getTime(), Constant.FORMAT_DATE_SIMPLE));
-                }
-                startCal.setTime(CommonUtil.stringToDate(currentBean.getSaleStartTime(), Constant.FORMAT_DATE_SIMPLE));
-                for (int i = 0; i <currentBean.getDay(); i++) {
-                    Calendar cal = Calendar.getInstance();
-                    cal.setTime(startCal.getTime());
-                    cal.add(Calendar.DATE, i);
-                    currentSelectArr.add(CommonUtil.dateToString(cal.getTime(), Constant.FORMAT_DATE_SIMPLE));
-                }
+            startCal.setTime(CommonUtil.stringToDate(data.getStartDate(), Constant.FORMAT_DATE_SIMPLE));
+            for(int i=0;i<15;i++){
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(startCal.getTime());
+                cal.add(Calendar.DATE, i);
+                nextArr.add(CommonUtil.dateToString(cal.getTime(), Constant.FORMAT_DATE_SIMPLE));
             }
 
-            if (nestBean != null) {
-                startCal.setTime(CommonUtil.stringToDate(nestBean.getStartTime(), Constant.FORMAT_DATE_SIMPLE));
-                for (int i = 0; i < nestBean.getDay(); i++) {
-                    Calendar cal = Calendar.getInstance();
-                    cal.setTime(startCal.getTime());
-                    cal.add(Calendar.DATE, i);
-                    nextArr.add(CommonUtil.dateToString(cal.getTime(), Constant.FORMAT_DATE_SIMPLE));
-                }
-            }
-            cdvMonth.update();
-            if (data.getCurrent().isSale()&&!data.getNext().isSale()){//当期可卖，并且下期不可卖
-                setInfo(currentBean);
-            }else  {//显示下一期数据
-                setInfo(nestBean);
-            }
+            setSelect(5);
 
+            etBidPrice.setText(etBidPrice.getText());
+
+            linEdit.setVisibility(View.GONE);
+            linResult.setVisibility(View.VISIBLE);
+            linRnsure.setVisibility(View.GONE);
+            linEdit.setVisibility(View.VISIBLE);
+            linResult.setVisibility(View.GONE);
+            linRnsure.setVisibility(View.VISIBLE);
+            tvCurrentPrice.setText(String.valueOf(data.getCurrentPrice()));
+            tvMyKsb.setText(String.valueOf(timeInfo.getKsb()));
         }
+    }
+    public void setSelect(int dayCount){
+        this.selectDayCount=dayCount;
+        currentSelectArr.clear();
+        currentSelectArr.addAll(nextArr.subList(0,dayCount));
+        tvBuyTime.setText(String.format(getString(R.string.format_time_to_time), currentSelectArr.get(0), currentSelectArr.get(currentSelectArr.size()-1)));
+        tvBuyDayCount.setText(String.format(getString(R.string.format_day_count), currentSelectArr.size()));
+        cdvMonth.update();
     }
 
     @Override
@@ -331,45 +337,39 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
             mvpPresenter.setNestTimeInfo(nestLocationId,latitude,longitude);
         }
     }
-    private void setInfo(NestTimeInfo.InfoBean infoBean){
-        this.curInfoBean=infoBean;
-        if (curInfoBean.getNestTimeInfoId()==timeInfo.getCurrent().getNestTimeInfoId()){
-            if (!isSelectCur){
-                isSelectCur=true;
-                cdvMonth.update();
-            }
-        }else {
-            if (isSelectCur){
-                isSelectCur=false;
-                cdvMonth.update();
-            }
-        }
-        etBidPrice.setText(etBidPrice.getText());
-        tvBuyTime.setText(String.format(getString(R.string.format_time_to_time), infoBean.getSaleStartTime(), infoBean.getEndTime()));
-        tvBuyDayCount.setText(String.format(getString(R.string.format_day_count), infoBean.getDay()));
-        if(infoBean.isSale()){//显示下一期数据
-        linEdit.setVisibility(View.VISIBLE);
-        linResult.setVisibility(View.GONE);
-        linRnsure.setVisibility(View.VISIBLE);
-        tvCurrentPrice.setText(String.valueOf(infoBean.getPrice()));
-        tvMyKsb.setText(String.valueOf(timeInfo.getKsb()));
-    } else {
-        linEdit.setVisibility(View.GONE);
-        linResult.setVisibility(View.VISIBLE);
-        linRnsure.setVisibility(View.GONE);
-        GlideImgManager.loadCircleImage(this, infoBean.getUserAvatar(), ivAvatar);
-        tvNickName.setText(infoBean.getUserName());
-        String priceStr = String.format(getString(R.string.format_price_and_total), String.valueOf(infoBean.getPrice()), String.valueOf(infoBean.getTotalPrice()));
-        SpannableStringBuilder builder = new SpannableStringBuilder(priceStr);
-        String dayprice = String.valueOf(infoBean.getPrice());
-        int dayIndex = priceStr.indexOf(dayprice);
-        builder.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.text_city_yellow)), dayIndex, dayIndex + dayprice.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        String totalprice = String.valueOf(infoBean.getTotalPrice());
-        int totalIndex = priceStr.lastIndexOf(totalprice);
-        builder.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.text_city_yellow)), totalIndex, totalIndex + totalprice.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        tvPrice.setText(builder);
-        tvNextBidTime.setText(getString(R.string.next_start_bid_time) + infoBean.getNextTime());
-    }
-    }
 
+    public static int differentDays(Date date1,Date date2)
+    {
+        Calendar cal1 = Calendar.getInstance();
+        cal1.setTime(date1);
+
+        Calendar cal2 = Calendar.getInstance();
+        cal2.setTime(date2);
+        int day1= cal1.get(Calendar.DAY_OF_YEAR);
+        int day2 = cal2.get(Calendar.DAY_OF_YEAR);
+
+        int year1 = cal1.get(Calendar.YEAR);
+        int year2 = cal2.get(Calendar.YEAR);
+        if(year1 != year2)   //同一年
+        {
+            int timeDistance = 0 ;
+            for(int i = year1 ; i < year2 ; i ++)
+            {
+                if(i%4==0 && i%100!=0 || i%400==0)    //闰年
+                {
+                    timeDistance += 366;
+                }
+                else    //不是闰年
+                {
+                    timeDistance += 365;
+                }
+            }
+
+            return timeDistance + (day2-day1) ;
+        }
+        else    //不同年
+        {
+            return day2-day1;
+        }
+    }
 }

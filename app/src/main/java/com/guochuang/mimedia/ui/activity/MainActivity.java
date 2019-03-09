@@ -393,6 +393,10 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
     public void clearMarker(){
         ((RedbagFragment)fragments[2]).clearMarker();
     }
+    public void startNestAd(){
+        ((RedbagFragment)fragments[2]).openNestAd();
+        ((MyFragment)fragments[4]).openNestAd();
+    }
 
 }
 

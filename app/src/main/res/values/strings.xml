@@ -687,6 +687,11 @@
     <string name="bid_ad_tip">您可拖动地图，点击要投放的区域，再选择对应的广告牌</string>
     <string name="ad_not_active">该广告尚未激活</string>
     <string name="i_want_add_price">我要加价</string>
+    <string name="weixin_not_installed">微信未安装，无法支付</string>
+    <string name="buy_time">竞购时长</string>
+    <string name="date_five">5天</string>
+    <string name="date_ten">10天</string>
+    <string name="date_fifth">15天</string>
 
 
 </resources>

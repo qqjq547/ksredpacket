@@ -14,8 +14,26 @@ public class NestTimeInfo {
 
     private int currentPrice;
     private int maxPrice;
+    private String rate;
+    private double ksb;;
     private String startDate;
     private List<BuyListBean> buyList;
+
+    public String getRate() {
+        return rate;
+    }
+
+    public void setRate(String rate) {
+        this.rate = rate;
+    }
+
+    public double getKsb() {
+        return ksb;
+    }
+
+    public void setKsb(double ksb) {
+        this.ksb = ksb;
+    }
 
     public int getCurrentPrice() {
         return currentPrice;
@@ -67,7 +85,7 @@ public class NestTimeInfo {
          */
 
         private String auctionDate;
-        private int dayCoin;
+        private double dayCoin;
         private int dayPrice;
         private String endDate;
         private long nestLocationId;
@@ -88,11 +106,11 @@ public class NestTimeInfo {
             this.auctionDate = auctionDate;
         }
 
-        public int getDayCoin() {
+        public double getDayCoin() {
             return dayCoin;
         }
 
-        public void setDayCoin(int dayCoin) {
+        public void setDayCoin(double dayCoin) {
             this.dayCoin = dayCoin;
         }
 

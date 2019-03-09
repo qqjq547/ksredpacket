@@ -66,7 +66,7 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
     int payType=0;
     int payNumber=0;
     long snatchId=0;
-    long nestTimeInfoId=0;
+    long nestInfoId=0;
     int price;
     @Override
     protected PurchasePresenter createPresenter() {
@@ -86,7 +86,7 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
         acountKsb=getPref().getString(PrefUtil.COIN,"");
         payNumber=getIntent().getIntExtra(Constant.PAYNUMBER,0);
         snatchId=getIntent().getLongExtra(Constant.SNATCHID,0);
-        nestTimeInfoId=getIntent().getLongExtra(Constant.NESTTIMEINFOID,0);
+        nestInfoId=getIntent().getLongExtra(Constant.NESTINFOID,0);
         price=getIntent().getIntExtra(Constant.PRICE,0);
         if (purchaseType==Constant.TYPE_PURCHASE_REGION){
             tvTitle.setText(R.string.buy_city_owner);
@@ -180,7 +180,7 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
         }else if(purchaseType==Constant.TYPE_PURCHASE_SNATCH){
             mvpPresenter.createSnatchOrder(Constant.CHANNEL_CODE_ANDROID,payType,snatchId,price,payNumber,getPref().getLongitude(),getPref().getLatitude(),safetyCode);
         }else if(purchaseType==Constant.TYPE_PURCHASE_NESTAD){
-            mvpPresenter.buyNestAd(Constant.CHANNEL_CODE_ANDROID,payType,nestTimeInfoId,price,Integer.parseInt(money),getPref().getLongitude(),getPref().getLatitude(),safetyCode);
+            mvpPresenter.buyNestAd(Constant.CHANNEL_CODE_ANDROID,payType,nestInfoId,price,Integer.parseInt(money),getPref().getLongitude(),getPref().getLatitude(),safetyCode);
         }
     }
     public void setKsbText(){

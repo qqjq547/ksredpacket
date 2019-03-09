@@ -75,10 +75,12 @@
                 android:visibility="gone"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/lin_nestad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/space15"
-            android:layout_marginRight="@dimen/space15">
+            android:layout_marginRight="@dimen/space15"
+            android:visibility="gone">
 
             <LinearLayout
                 android:id="@+id/lin_ad_bid"

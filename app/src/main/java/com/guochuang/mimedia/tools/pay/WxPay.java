@@ -2,7 +2,10 @@ package com.guochuang.mimedia.tools.pay;
 
 import com.google.gson.Gson;
 import com.guochuang.mimedia.app.App;
+import com.sz.gcyh.KSHongBao.R;
 import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 public class WxPay {
     static WxPay wxPay;
@@ -23,6 +26,10 @@ public class WxPay {
 
     public void pay(String res, OnResultListener onResultListener) {
         this.onResultListener=onResultListener;
+        if (!App.getInstance().getWxapi().isWXAppInstalled()){
+            onResultListener.onResult(false, App.getInstance().getString(R.string.weixin_not_installed));
+            return;
+        }
         final WxPayElement wxPayElement;
         Gson gson = new Gson();
         wxPayElement = gson.fromJson(res, WxPayElement.class);
@@ -44,4 +51,5 @@ public class WxPay {
         Thread payThread = new Thread(payRunnable);
         payThread.start();
     }
+
 }

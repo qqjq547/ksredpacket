@@ -175,6 +175,8 @@ public class ApiClient {
                 return TEST_URL;
             case 1://生产host
                 return RELEASE_URL;
+            case 2://生产host
+                return DEV_URL;
         }
         return "";
     }
@@ -185,6 +187,8 @@ public class ApiClient {
                 return "http://120.77.110.100/";
             case 1://生产host
                 return "https://www.guochuangyuanhe.com/";
+            case 2://开发host
+                return "http://120.77.110.100/";
         }
         return "";
     }

@@ -38,7 +38,7 @@ public class BidRecordActivity extends MvpActivity<BidHistoryPresenter> implemen
     BidRecordAdapter adapter;
     List<NestAuctionRecord> dataArr=new ArrayList<>();
     int curPage=1;
-    long nestTimeInfoId=0;
+    long nestInfoId=0;
 
     @Override
     protected BidHistoryPresenter createPresenter() {
@@ -53,7 +53,7 @@ public class BidRecordActivity extends MvpActivity<BidHistoryPresenter> implemen
     @Override
     public void initViewAndData() {
         tvTitle.setText(R.string.bid_record);
-        nestTimeInfoId= getIntent().getLongExtra(Constant.NESTTIMEINFOID,0);
+        nestInfoId= getIntent().getLongExtra(Constant.NESTINFOID,0);
         rvHistory.setLayoutManager(new LinearLayoutManager(this,OrientationHelper.VERTICAL,false));
         adapter=new BidRecordAdapter(dataArr);
         adapter.setEmptyView(getLayoutInflater().inflate(R.layout.layout_empty,null));
@@ -64,15 +64,15 @@ public class BidRecordActivity extends MvpActivity<BidHistoryPresenter> implemen
         srlRefresh.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                mvpPresenter.getNestAuctionHistory(nestTimeInfoId,curPage+1,Constant.PAGE_SIZE);
+                mvpPresenter.getNestAuctionHistory(nestInfoId,curPage+1,Constant.PAGE_SIZE);
             }
 
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                mvpPresenter.getNestAuctionHistory(nestTimeInfoId,1,Constant.PAGE_SIZE);
+                mvpPresenter.getNestAuctionHistory(nestInfoId,1,Constant.PAGE_SIZE);
             }
         });
-        mvpPresenter.getNestAuctionHistory(nestTimeInfoId,curPage,Constant.PAGE_SIZE);
+        mvpPresenter.getNestAuctionHistory(nestInfoId,curPage,Constant.PAGE_SIZE);
     }
     @OnClick(R.id.iv_back)
     public void onViewClicked() {

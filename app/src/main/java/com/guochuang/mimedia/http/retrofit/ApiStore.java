@@ -1171,7 +1171,7 @@ public interface ApiStore {
 
     @GET("/api/v1/nest/nest_time_auction/list")
     Observable<HttpResponse<Page<NestAuctionRecord>>> nestAuctionList(
-            @Query("nestTimeInfoId") long nestTimeInfoId,
+            @Query("nestInfoId") long nestInfoId,
             @Query("currentPage") int currentPage,
             @Query("pageSize") int pageSize
     );
@@ -1240,7 +1240,7 @@ public interface ApiStore {
     Observable<HttpResponse<Order>> buyNestTime(
             @Field("channelCode") String channelCode,
             @Field("payType") int payType,
-            @Field("nestTimeInfoId") long nestTimeInfoId,
+            @Field("nestTimeId") long nestTimeId,
             @Field("price") int price,
             @Field("totalPrice") int totalPrice,
             @Field("longitude") String longitude,
@@ -1262,4 +1262,9 @@ public interface ApiStore {
 
     @GET("/api/v1/common/remind/get")
     Observable<HttpResponse<Remind>> getRemind();
+
+    @GET("/api/v1/nest/nest_location/is_qualified")
+    Observable<HttpResponse<Boolean>> getIsQualified(
+            @Query("latitude") String latitude,
+            @Query("longitude") String longitude);
 }
