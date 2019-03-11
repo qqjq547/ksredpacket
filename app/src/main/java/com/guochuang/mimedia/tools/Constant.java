@@ -91,6 +91,12 @@ public class Constant {
     public static final String NESTUPDATE = "nestUpdate";
     public static final String PRICE = "price";
     public static final String INVITECODE = "inviteCode";
+    public static final String STARTDATE = "startDate";
+    public static final String DAYS = "days";
+    public static final String NESTLATITUDE = "nestLatitude";
+    public static final String NESTLONGITUDE = "nestLongitude";
+
+
 
     public static final String FORMAT_DATE_SIMPLE = "yyyy-MM-dd";
     public static final String FORMAT_DATE = "yyyy-MM-dd HH:mm:ss";

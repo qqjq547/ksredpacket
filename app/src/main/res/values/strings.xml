@@ -675,6 +675,7 @@
     <string name="buy_nestad">竞购广告</string>
     <string name="buy_price_not_empty">竞购价格不能为空</string>
     <string name="buy_price_limit">竞购价格需要大于当前价格</string>
+    <string name="buy_price_low">竞购价格需要小于最大金额</string>
     <string name="pls_agree_bid_agreement">请先同意竞购协议</string>
     <string-array name="params_pay_type">
         <item>sendRedPacket</item>

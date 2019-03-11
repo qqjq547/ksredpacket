@@ -1,5 +1,6 @@
 package com.guochuang.mimedia.ui.activity.beenest;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.text.Editable;
@@ -258,10 +259,12 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
                         showShortToast(R.string.buy_price_not_empty);
                     } else {
                         int price = Integer.parseInt(bidPrice);
-                        if (price <= timeInfo.getMaxPrice()) {
+                        if (price<=timeInfo.getCurrentPrice()){
                             showShortToast(R.string.buy_price_limit);
+                        }else if (price >= timeInfo.getMaxPrice()) {
+                            showShortToast(R.string.buy_price_low);
                         } else {
-                            IntentUtils.startPurchaseActivity(this, Constant.TYPE_PURCHASE_NESTAD, nestLocationId, String.valueOf(price * selectDayCount), price);
+                            IntentUtils.startPurchaseActivity(this, Constant.TYPE_PURCHASE_NESTAD, nestLocationId, price,String.valueOf(price*selectDayCount),selectDayCount,timeInfo.getStartDate(),latitude,longitude);
                         }
                     }
                 }
