@@ -60,6 +60,9 @@ import top.zibin.luban.OnCompressListener;
 
 import com.dmcbig.mediapicker.entity.Media;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> implements EditRedbagView {
     private static final int OPEN_VIDEO_SELECT_CODE = 0x00001;
     private static final int VIDEO_OPEN_CODE = 0x00005;
@@ -628,16 +631,16 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
             mvpPresenter.addPasswordRedbag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, password, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode);
         } else if (TextUtils.equals(redPacketType, Constant.RED_PACKET_TYPE_LUCKY)) {
             mvpPresenter.addLuckyRedbag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode);
-        }else if(TextUtils.equals(redPacketType, Constant.RED_PACKET_TYPE_VIDEO)){
+        } else if (TextUtils.equals(redPacketType, Constant.RED_PACKET_TYPE_VIDEO)) {
             //picture 拼接的是视频地址
 
             String joinProblmeJson = joinProblmeJson();
-            if(TextUtils.isEmpty(joinProblmeJson)) {
+            if (TextUtils.isEmpty(joinProblmeJson)) {
                 showShortToast("请设置问题");
                 return;
             }
 
-            mvpPresenter.addVideoReabag(latitude,longitude,redbagLatitude,redbagLongitude,content,picture,areaType,kilometer,money,quantity,urlName,url,wechat,microblog,isPublicPassword,isSaveTemplate,payType, Constant.CHANNEL_CODE_ANDROID,safetyCode,joinProblmeJson);
+            mvpPresenter.addVideoReabag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson);
         }
     }
 
@@ -647,8 +650,48 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
      */
     private String joinProblmeJson() {
 
+        if (mProblemList.isEmpty()) {
+            return "";
+        }
+        try {
+            JSONArray problmeJsonArray = new JSONArray();
+            for (int i = 0; i < mProblemList.size(); i++) {
+                JSONObject jsonObject = new JSONObject();
+                JSONArray itemJsonArray = new JSONArray();
+                //题目
+                ProblemBean problemBean = mProblemList.get(i);
+                //题目答案
+                ArrayList<ProblemBean.ItemBean> item = problemBean.getItem();
+                for (int j = 0; j < item.size(); j++) {
+                    if (problemBean.getType() == 2 && j > 0) {
+                        break;
+                    }
+                    JSONObject itemJsonObj = new JSONObject();
+                    ProblemBean.ItemBean itemBean = item.get(j);
+                    itemJsonObj.put("optionName", itemBean.getItemname())
+                            .put("optionValue", itemBean.getItemcontent())
+                            .put("isAnswer", itemBean.isIsanswer())
+                            .put("sequence", j);
 
-        return "";
+                    itemJsonArray.put(itemJsonObj);
+
+                }
+
+
+                jsonObject.put("surveyId", "")
+                        .put("title", problemBean.getProblem())
+                        .put("type", problemBean.getType())
+                        .put("sequence", i)
+                        .put("optionsList", itemJsonArray);
+
+
+            }
+
+            return problmeJsonArray.toString();
+        } catch (Exception e) {
+            return "";
+        }
+
 
     }
 
