@@ -1,6 +1,8 @@
 package com.guochuang.mimedia.ui.activity.user;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.os.SystemClock;
 import android.support.v7.widget.ListPopupWindow;
 import android.text.Editable;
@@ -269,15 +271,26 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
                 break;
             case R.id.iv_select_phone:
                 //判断软件盘状态
+                GeneralUtil.hideSoftInputFromWindow(this);
                 //dissmis 时间出、不超过多好毫秒这个contiun  记录dissmis 时间
                 if(SystemClock.currentThreadTimeMillis()-mDismissTime<20) {
                     return;
                 }
-                if (SoftInputIsClose) {
-                    swichPopo();
-                }
 
-                GeneralUtil.hideSoftInputFromWindow(this);
+                new Handler(){
+                    @Override
+                    public void handleMessage(Message msg) {
+                        super.handleMessage(msg);
+
+                        if (SoftInputIsClose) {
+                            swichPopo();
+                        }
+
+                    }
+                }.sendEmptyMessageDelayed(0,200);
+
+
+
 
                 break;
             case R.id.iv_login_wx:
