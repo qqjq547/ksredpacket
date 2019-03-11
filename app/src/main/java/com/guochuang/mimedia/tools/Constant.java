@@ -87,7 +87,7 @@ public class Constant {
     public static final String ADDRESS = "address";
     public static final String NESTINFOID = "nestInfoId";
     public static final String NESTLOCATIONID = "nestLocationId";
-    public static final String NESTTIMEID = "nestTimeId";
+    public static final String NESTSUCCESSID = "nestSuccessId";
     public static final String NESTUPDATE = "nestUpdate";
     public static final String PRICE = "price";
     public static final String INVITECODE = "inviteCode";

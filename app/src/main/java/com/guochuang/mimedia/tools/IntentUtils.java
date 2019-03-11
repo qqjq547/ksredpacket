@@ -240,11 +240,11 @@ public class IntentUtils {
         intent.putExtra(Constant.ARGS_POSITION, position);
         activity.startActivity(intent);
     }
-    public static void startEditAdActivity(Activity activity, long nestInfoId,long nestLocationId,long nestTimeId,boolean update) {
+    public static void startEditAdActivity(Activity activity, long nestInfoId,long nestLocationId,long nestSuccessId,boolean update) {
         Intent intent = new Intent(activity, EditAdActivity.class);
         intent.putExtra(Constant.NESTINFOID, nestInfoId);
         intent.putExtra(Constant.NESTLOCATIONID, nestLocationId);
-        intent.putExtra(Constant.NESTTIMEID, nestTimeId);
+        intent.putExtra(Constant.NESTSUCCESSID, nestSuccessId);
         intent.putExtra(Constant.NESTUPDATE, update);
         activity.startActivityForResult(intent,Constant.REQUEST_EDIT_NESTAD);
     }

@@ -280,9 +280,9 @@ public class WebActivity extends MvpActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    LogUtil.d("shareUrl="+shareUrl);
                     ShareDialog shareDialog=new ShareDialog(WebActivity.this,shareTitle,shareUrl,shareImg);
                     shareDialog.setContent(shareText);
+                    shareDialog.onlyWechatPlatom();
                     shareDialog.setOnShareResultListener(new ShareDialog.OnShareResultListener() {
                         @Override
                         public void onSuccess(String platform) {

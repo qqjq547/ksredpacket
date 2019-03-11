@@ -76,7 +76,7 @@ public class EditAdPresenter extends BasePresenter<EditAdView> {
     public void editNestAd(
             long nestInfoId,
             long nestLocationId,
-            long nestTimeId,
+            long nestSuccessId,
             String shortMsg,
             String coverPicture,
             String introduction,
@@ -95,7 +95,7 @@ public class EditAdPresenter extends BasePresenter<EditAdView> {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().nesteEdit(
                 nestInfoId,
                 nestLocationId,
-                nestTimeId,
+                nestSuccessId,
                 shortMsg,
                 coverPicture,
                 introduction,

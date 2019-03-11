@@ -10,7 +10,7 @@ public class MyAd {
      * nestInfoId : 0
      * nestLocationId : 0
      * nestStatisticsResDto : {"clickQuantity":0,"favoriteQuantity":0,"showQuantity":0}
-     * nestTimeId : 0
+     * nestSuccessId : 0
      * startDate : string
      * status : string
      * totalPrice : string
@@ -24,7 +24,7 @@ public class MyAd {
     private long nestInfoId;
     private long nestLocationId;
     private NestStatisticsResDtoBean nestStatisticsResDto;
-    private long nestTimeId;
+    private long nestSuccessId;
     private String startDate;
     private int status;
     private String totalPrice;
@@ -86,12 +86,12 @@ public class MyAd {
         this.nestStatisticsResDto = nestStatisticsResDto;
     }
 
-    public long getNestTimeId() {
-        return nestTimeId;
+    public long getNestSuccessId() {
+        return nestSuccessId;
     }
 
-    public void setNestTimeId(long nestTimeId) {
-        this.nestTimeId = nestTimeId;
+    public void setNestSuccessId(long nestSuccessId) {
+        this.nestSuccessId = nestSuccessId;
     }
 
     public String getStartDate() {

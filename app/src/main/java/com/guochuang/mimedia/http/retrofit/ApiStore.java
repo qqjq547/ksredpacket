@@ -1140,7 +1140,7 @@ public interface ApiStore {
     Observable<HttpResponse<Boolean>> nesteEdit(
             @Field("nestInfoId") long nestInfoId,
             @Field("nestLocationId") long nestLocationId,
-            @Field("nestTimeId") long nestTimeId,
+            @Field("nestSuccessId") long nestSuccessId,
             @Field("shortMsg") String shortMsg,
             @Field("coverPicture") String coverPicture,
             @Field("introduction") String introduction,

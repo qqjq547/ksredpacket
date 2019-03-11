@@ -246,7 +246,7 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
             if (!TextUtils.isEmpty(location.getAvatar())) {
                 GlideApp.with(this)
                         .asBitmap()
-                        .load(App.getInstance().getUserInfo().getAvatar())
+                        .load(location.getAvatar())
                         .circleCrop()
                         .into(new SimpleTarget<Bitmap>() {
                             @Override

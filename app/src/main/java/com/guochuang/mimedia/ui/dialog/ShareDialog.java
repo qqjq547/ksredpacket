@@ -108,7 +108,10 @@ public class ShareDialog extends Dialog {
     public void setOnShareResultListener(OnShareResultListener onShareResultListener) {
         this.onShareResultListener = onShareResultListener;
     }
-
+    public void onlyWechatPlatom(){
+        tvQq.setVisibility(View.GONE);
+        tvSinaweibo.setVisibility(View.GONE);
+    }
     @Override
     public void show() {
         super.show();
