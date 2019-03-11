@@ -89,7 +89,7 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
         @Override
         public void keyBoardHide(int height) {
             SoftInputIsClose = true;
-            swichPopo();
+//            swichPopo();
 
         }
     };
