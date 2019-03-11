@@ -630,9 +630,26 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
             mvpPresenter.addLuckyRedbag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode);
         }else if(TextUtils.equals(redPacketType, Constant.RED_PACKET_TYPE_VIDEO)){
             //picture 拼接的是视频地址
-            // TODO: 2019/3/9
-//            mvpPresenter.addVideoReabag(latitude,longitude,redbagLatitude,redbagLongitude,content,picture,areaType,kilometer,money,quantity,urlName,url,wechat,microblog,isPublicPassword,isSaveTemplate,payType, Constant.CHANNEL_CODE_ANDROID,safetyCode,);
+
+            String joinProblmeJson = joinProblmeJson();
+            if(TextUtils.isEmpty(joinProblmeJson)) {
+                showShortToast("请设置问题");
+                return;
+            }
+
+            mvpPresenter.addVideoReabag(latitude,longitude,redbagLatitude,redbagLongitude,content,picture,areaType,kilometer,money,quantity,urlName,url,wechat,microblog,isPublicPassword,isSaveTemplate,payType, Constant.CHANNEL_CODE_ANDROID,safetyCode,joinProblmeJson);
         }
+    }
+
+
+    /**
+     * 拼接joinProblmeJson
+     */
+    private String joinProblmeJson() {
+
+
+        return "";
+
     }
 
     @Override
