@@ -19,12 +19,10 @@ import com.bumptech.glide.Glide;
 import com.dmcbig.mediapicker.PreviewActivity;
 import com.dmcbig.mediapicker.R;
 import com.dmcbig.mediapicker.entity.Media;
-
+import com.github.chrisbanes.photoview.OnPhotoTapListener;
+import com.github.chrisbanes.photoview.PhotoView;
 import java.io.File;
 import java.util.List;
-
-import uk.co.senab.photoview.PhotoView;
-import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
  * Created by dmcBig on 2017/8/16.
@@ -33,7 +31,6 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 public class PreviewFragment extends Fragment {
     private PhotoView mPhotoView;
     ImageView play_view;
- //   private PhotoViewAttacher mAttacher;
 
     public static PreviewFragment newInstance(Media media, String label) {
         PreviewFragment f = new PreviewFragment();
@@ -61,9 +58,9 @@ public class PreviewFragment extends Fragment {
         play_view = (ImageView) view.findViewById(R.id.play_view);
         mPhotoView = (PhotoView) view.findViewById(R.id.photoview);
         mPhotoView.setMaximumScale(5);
-        mPhotoView.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {
+        mPhotoView.setOnPhotoTapListener(new OnPhotoTapListener() {
             @Override
-            public void onPhotoTap(View view, float x, float y) {
+            public void onPhotoTap(ImageView view, float x, float y) {
                 PreviewActivity previewActivity=  (PreviewActivity)getActivity();
                 previewActivity.setBarStatus();
             }
