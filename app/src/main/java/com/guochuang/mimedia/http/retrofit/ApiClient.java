@@ -169,7 +169,7 @@ public class ApiClient {
         return ssfFactory;
     }
     public static String getDebugHost(){
-        int debugHost=PrefUtil.getInstance().getInt(PrefUtil.DEBUGHOST,0);
+        int debugHost=PrefUtil.getInstance().getInt(PrefUtil.DEBUGHOST,2);
         switch (debugHost){
             case 0://测试host
                 return TEST_URL;
@@ -181,7 +181,7 @@ public class ApiClient {
         return "";
     }
     public static String getDebuHtmlHost(){
-        int debugHost=PrefUtil.getInstance().getInt(PrefUtil.DEBUGHOST,0);
+        int debugHost=PrefUtil.getInstance().getInt(PrefUtil.DEBUGHOST,2);
         switch (debugHost){
             case 0://测试host
                 return "http://120.77.110.100/";

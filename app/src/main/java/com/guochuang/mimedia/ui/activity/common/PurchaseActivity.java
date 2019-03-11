@@ -66,8 +66,12 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
     int payType=0;
     int payNumber=0;
     long snatchId=0;
-    long nestInfoId=0;
-    int price;
+    long nestLocationId=0;
+    int price;//单价
+    String startDate="";
+    int days=0;
+    String nestLatitude;
+    String nestLongitude;
     @Override
     protected PurchasePresenter createPresenter() {
         return new PurchasePresenter(this);
@@ -86,8 +90,12 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
         acountKsb=getPref().getString(PrefUtil.COIN,"");
         payNumber=getIntent().getIntExtra(Constant.PAYNUMBER,0);
         snatchId=getIntent().getLongExtra(Constant.SNATCHID,0);
-        nestInfoId=getIntent().getLongExtra(Constant.NESTINFOID,0);
+        nestLocationId=getIntent().getLongExtra(Constant.NESTLOCATIONID,0);
+        startDate=getIntent().getStringExtra(Constant.STARTDATE);
         price=getIntent().getIntExtra(Constant.PRICE,0);
+        days=getIntent().getIntExtra(Constant.DAYS,0);
+        nestLatitude=getIntent().getStringExtra(Constant.NESTLATITUDE);
+        nestLongitude=getIntent().getStringExtra(Constant.NESTLONGITUDE);
         if (purchaseType==Constant.TYPE_PURCHASE_REGION){
             tvTitle.setText(R.string.buy_city_owner);
             tvAgreement.setText(R.string.city_buy_agreement);
@@ -180,7 +188,7 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
         }else if(purchaseType==Constant.TYPE_PURCHASE_SNATCH){
             mvpPresenter.createSnatchOrder(Constant.CHANNEL_CODE_ANDROID,payType,snatchId,price,payNumber,getPref().getLongitude(),getPref().getLatitude(),safetyCode);
         }else if(purchaseType==Constant.TYPE_PURCHASE_NESTAD){
-            mvpPresenter.buyNestAd(Constant.CHANNEL_CODE_ANDROID,payType,nestInfoId,price,Integer.parseInt(money),getPref().getLongitude(),getPref().getLatitude(),safetyCode);
+            mvpPresenter.buyNestAd(Constant.CHANNEL_CODE_ANDROID,payType,nestLocationId,price,startDate,days,getPref().getLatitude(),getPref().getLongitude(),nestLatitude,nestLongitude,safetyCode);
         }
     }
     public void setKsbText(){
