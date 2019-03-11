@@ -22,6 +22,7 @@ public interface RedbagView {
     void setHomeRegion(HomeRegion data);
     void setKilometre(Integer data);
     void setHomeAd(List<NestHomeAd> data);
+    void setIsQualified(Boolean data);
     void setError(String msg);
     void setRedbagInvalid();
 

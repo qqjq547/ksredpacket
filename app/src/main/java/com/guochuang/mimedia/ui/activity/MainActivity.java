@@ -27,7 +27,10 @@ import com.allenliu.versionchecklib.callback.APKDownloadListener;
 import com.allenliu.versionchecklib.v2.AllenVersionChecker;
 import com.allenliu.versionchecklib.v2.builder.UIData;
 import com.allenliu.versionchecklib.v2.callback.CustomDownloadingDialogListener;
+import com.guochuang.mimedia.mvp.model.Remind;
 import com.guochuang.mimedia.tools.AdCollectionView;
+import com.guochuang.mimedia.tools.LogUtil;
+import com.guochuang.mimedia.ui.dialog.RemindDialog;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.MvpActivity;
@@ -89,7 +92,11 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
     boolean curRedbg = false;
     MainReceiver mainReceiver;
     boolean showErrorDelay=false;//是否正在延时显示错误toast
-    AdCollectionView adCollectionView;
+    private static MainActivity instance;
+
+    public static MainActivity getInstance() {
+        return instance;
+    }
 
     @Override
     protected MainPresenter createPresenter() {
@@ -103,6 +110,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
 
     @Override
     public void initViewAndData() {
+        instance=this;
         setStatusbar(R.color.bg_white,true);
         if (getIntent().getBooleanExtra(Constant.FROMLOGIN,true)){
             CommonUtil.syncCookie(this,ApiClient.HTML_URL);
@@ -180,6 +188,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
     @Override
     public void setUserInfo(UserInfo data) {
         App.getInstance().setUserInfo(data);
+        CommonUtil.syncCookie(this,ApiClient.HTML_URL);
         ((MyFragment)fragments[4]).setUpUser();
     }
 
@@ -213,11 +222,14 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
 
     @Override
     public void setVersion(final VersionMsg data) {
+        mvpPresenter.getRemind();
        if (data!=null){
            final boolean isForce=data.getIsForce()>0;
            long time=getPref().getLong(PrefUtil.UPGRADE_NOTICE,0);
            if (isForce||(System.currentTimeMillis()-time>data.getRemindIntervalMinute()*60*1000)){
-               final VersionUpdateDialog versionUpdateDialog=new VersionUpdateDialog(this,data.getTitle().replace("\\n", "\n"),isForce);
+               String content=data.getTitle()+"\n"+data.getDescription();
+               content=content.replace("\\n", "\n");
+               final VersionUpdateDialog versionUpdateDialog=new VersionUpdateDialog(this,content,isForce);
                versionUpdateDialog.setOnResultListener(new VersionUpdateDialog.OnResultListener() {
                    @Override
                    public void onRefuse() {
@@ -263,6 +275,17 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
     public void setMessageIsNews(Boolean data) {
         getPref().setBoolean(PrefUtil.MSGISNEW,data);
         setMsgDotView();
+    }
+
+    @Override
+    public void setRemind(Remind data) {
+      if (data!=null){
+          long dateTime=getPref().getLong(PrefUtil.LAST_REMIND_TIME,0)+data.getIntervalMinute()*60000;
+          if (System.currentTimeMillis()>dateTime){
+              getPref().setLong(PrefUtil.LAST_REMIND_TIME,System.currentTimeMillis());
+              new RemindDialog(this,data.getPicture(),data.getLink()).show();
+          }
+      }
     }
 
 
@@ -367,5 +390,13 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
             }
         }
     }
+    public void clearMarker(){
+        ((RedbagFragment)fragments[2]).clearMarker();
+    }
+    public void startNestAd(){
+        ((RedbagFragment)fragments[2]).openNestAd();
+        ((MyFragment)fragments[4]).openNestAd();
+    }
+
 }
 

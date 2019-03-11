@@ -44,7 +44,7 @@ public class ApiClient {
     private ApiStore apiStores;
     public static OkHttpClient okHttpClient;
     public static String DEV_URL="http://dev.guochuangyuanhe.com:7005/";
-    public static String TEST_URL="https://test_gateway.guochuangyuanhe.com/";//http://192.168.0.112:7005/
+    public static String TEST_URL="http://test_gateway.guochuangyuanhe.com/";
     public static String RELEASE_URL="https://api.guochuangyuanhe.com/";
     public static String HTML_URL=
             Constant.isDebug ?
@@ -169,22 +169,26 @@ public class ApiClient {
         return ssfFactory;
     }
     public static String getDebugHost(){
-        int debugHost=PrefUtil.getInstance().getInt(PrefUtil.DEBUGHOST,0);
+        int debugHost=PrefUtil.getInstance().getInt(PrefUtil.DEBUGHOST,2);
         switch (debugHost){
             case 0://测试host
                 return TEST_URL;
             case 1://生产host
                 return RELEASE_URL;
+            case 2://生产host
+                return DEV_URL;
         }
         return "";
     }
     public static String getDebuHtmlHost(){
-        int debugHost=PrefUtil.getInstance().getInt(PrefUtil.DEBUGHOST,0);
+        int debugHost=PrefUtil.getInstance().getInt(PrefUtil.DEBUGHOST,2);
         switch (debugHost){
             case 0://测试host
                 return "http://120.77.110.100/";
             case 1://生产host
                 return "https://www.guochuangyuanhe.com/";
+            case 2://开发host
+                return "http://120.77.110.100/";
         }
         return "";
     }

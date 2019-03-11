@@ -47,7 +47,7 @@ public class TVCheckAll {
             //获取到第三行最后一个文字的下标
             int index = staticLayout.getLineStart(maxLine) - 1;
             //定义收起后的文本内容
-            String substring = content.substring(0, index - 4) + "..." + "查看全部";
+            String substring = content.substring(0, index - 6) + "..." + "查看全部";
             elipseString = new SpannableString(substring);
             //给查看全部设成蓝色
             elipseString.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.text_blue)), substring.length() - 4, substring.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

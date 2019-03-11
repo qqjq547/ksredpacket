@@ -239,7 +239,6 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_login_confirm:
-                savePhone();
                 if (AntiShake.check(view.getId()))
                     return;
                 if (!doCheck()) {
@@ -359,7 +358,7 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
     @Override
     public void setLoginData(String data) {
         closeLoadingDialog();
-//        savePhone();
+        savePhone();
         UserLogin userLogin = new Gson().fromJson(CommonUtil.baseDecrypt(data.split("\\.")[1]), UserLogin.class);
         getPref().setString(PrefUtil.USER_TOKEN, data);
         if (TextUtils.isEmpty(userLogin.getMobile())) {

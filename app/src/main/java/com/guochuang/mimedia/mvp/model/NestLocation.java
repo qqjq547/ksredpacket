@@ -10,6 +10,7 @@ public class NestLocation {
 
     private double latitude;
     private double longitude;
+    private String avatar;
     private long nestLocationId;
 
     public double getLatitude() {
@@ -26,6 +27,14 @@ public class NestLocation {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public long getNestLocationId() {

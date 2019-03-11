@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+<ImageView
+    android:id="@+id/iv_bg"
+    android:layout_width="@dimen/space26"
+    android:layout_height="@dimen/space32"
+    android:src="@drawable/ic_marker_white"/>
+    <ImageView
+        android:id="@+id/iv_avatar"
+        android:layout_width="@dimen/space20"
+        android:layout_height="@dimen/space20"
+        android:layout_marginLeft="@dimen/space3"
+        android:layout_marginRight="@dimen/space3"
+        android:layout_marginTop="@dimen/space4"
+        />
+</FrameLayout>

@@ -11,6 +11,7 @@ import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.Address;
 import com.guochuang.mimedia.mvp.presenter.AddAddressPresenter;
 import com.guochuang.mimedia.mvp.view.AddAddressView;
+import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.DialogBuilder;
 import com.guochuang.mimedia.ui.dialog.SelectAreaDialog;
@@ -130,6 +131,8 @@ public class AddAddressActivity extends MvpActivity<AddAddressPresenter> impleme
                     showShortToast(R.string.name_not_empty);
                 }else if(TextUtils.isEmpty(mobile)){
                     showShortToast(R.string.mobile_not_empty);
+                }else if (mobile.length() < 11) {
+                    showShortToast(getResources().getString(R.string.input_phone_error));
                 }else if(TextUtils.isEmpty(province)||TextUtils.isEmpty(city)||TextUtils.isEmpty(district)){
                     showShortToast(R.string.address_not_empty);
                 }else if(TextUtils.isEmpty(address)){

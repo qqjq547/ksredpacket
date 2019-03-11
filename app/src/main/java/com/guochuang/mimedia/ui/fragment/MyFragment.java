@@ -18,6 +18,7 @@ import com.guochuang.mimedia.mvp.model.NestAuctionMsg;
 import com.guochuang.mimedia.mvp.model.RegionCore;
 import com.guochuang.mimedia.tools.DialogBuilder;
 import com.guochuang.mimedia.tools.IntentUtils;
+import com.guochuang.mimedia.ui.activity.MainActivity;
 import com.guochuang.mimedia.ui.activity.beenest.AdBidActivity;
 import com.guochuang.mimedia.ui.activity.beenest.MyAdActivity;
 import com.guochuang.mimedia.ui.activity.city.CityActivity;
@@ -74,6 +75,8 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
     RecyclerView rvMenu;
     @BindView(R.id.iv_message)
     ImageView ivMessage;
+    @BindView(R.id.lin_nestad)
+    LinearLayout linNestad;
 
     TextView tvMyKsb;
     TextView tvBalance;
@@ -95,6 +98,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
     UserInfo userInfo;
     BadgeView badgeView;
     RecommendData recommendData;
+    boolean isShowNestAd=false;
 
 
     @Override
@@ -121,7 +125,11 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         }else {
            tvTitle.setVisibility(View.GONE);
         }
-
+        if (isShowNestAd){
+            linNestad.setVisibility(View.VISIBLE);
+        }else {
+            linNestad.setVisibility(View.GONE);
+        }
         LayoutInflater inflater = LayoutInflater.from(getActivity());
         ksbView = inflater.inflate(R.layout.layout_my_ksb, null);
         ksbView.setOnClickListener(pageOnClickListener);
@@ -296,6 +304,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                 startActivity(new Intent(getActivity(), MessageActivity.class));
                 break;
             case R.id.lin_ad_bid:
+                ((MainActivity)getActivity()).clearMarker();
                 startActivity(new Intent(getActivity(), AdBidActivity.class));
                 break;
             case R.id.lin_my_ad:
@@ -305,6 +314,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                 List<String> itemArr=new ArrayList<>();
                 itemArr.add(getString(R.string.test_version));
                 itemArr.add(getString(R.string.release_version));
+                itemArr.add(getString(R.string.dev_version));
                 SheetDialog sheetDialog=new SheetDialog(getActivity(), itemArr, new SheetDialog.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
@@ -315,6 +325,9 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                                 break;
                             case 1:
                                 getPref().setInt(PrefUtil.DEBUGHOST, 1);
+                                break;
+                            case 2:
+                                getPref().setInt(PrefUtil.DEBUGHOST, 2);
                                 break;
                         }
                         App.getInstance().finishActivity();
@@ -430,5 +443,10 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
             mvpPresenter.getRecommendData();
         }
     }
-
+    public void openNestAd(){
+        isShowNestAd=true;
+        if (isAdded()) {
+            linNestad.setVisibility(View.VISIBLE);
+        }
+    }
 }

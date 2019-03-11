@@ -146,10 +146,11 @@ public class IntentUtils {
         intent.putExtra(Constant.REGIONID,regionId);
         activity.startActivity(intent);
     }
-    public static void startPurchaseActivity(Activity activity, int purchaseType,long snatchId,int payNumber,String money) {
+    public static void startPurchaseActivity(Activity activity, int purchaseType,long snatchId,int unitPrice,int payNumber,String money) {
         Intent intent = new Intent(activity, PurchaseActivity.class);
         intent.putExtra(Constant.PURCHASE_TYPE,purchaseType);
         intent.putExtra(Constant.SNATCHID,snatchId);
+        intent.putExtra(Constant.PRICE,unitPrice);
         intent.putExtra(Constant.PAYNUMBER,payNumber);
         intent.putExtra(Constant.MONEY,money);
         activity.startActivityForResult(intent,Constant.REQUEST_PURCHASE);
@@ -168,12 +169,16 @@ public class IntentUtils {
         intent.putExtra(Constant.PAYNUMBER,payNumber);
         activity.startActivityForResult(intent,Constant.REQUEST_PURCHASE);
     }
-    public static void startPurchaseActivity(Activity activity, int purchaseType,long nestTimeInfoId,String money,int price) {
+    public static void startPurchaseActivity(Activity activity, int purchaseType,long nestLocationId,int price,String money,int days,String startDate,String nestLatitude,String nestLongitude) {
         Intent intent = new Intent(activity, PurchaseActivity.class);
         intent.putExtra(Constant.PURCHASE_TYPE,purchaseType);
-        intent.putExtra(Constant.NESTTIMEINFOID,nestTimeInfoId);
-        intent.putExtra(Constant.MONEY,money);
+        intent.putExtra(Constant.NESTLOCATIONID,nestLocationId);
         intent.putExtra(Constant.PRICE,price);
+        intent.putExtra(Constant.MONEY,money);
+        intent.putExtra(Constant.DAYS,days);
+        intent.putExtra(Constant.STARTDATE,startDate);
+        intent.putExtra(Constant.NESTLATITUDE,nestLatitude);
+        intent.putExtra(Constant.NESTLONGITUDE,nestLongitude);
         activity.startActivityForResult(intent,Constant.REQUEST_PURCHASE);
     }
     public static void startRedbagJoinedActivity(Activity activity, String redPacketUuid,String avatar,String name,String ksb,String money,String areaType,String drawNumber,String total) {

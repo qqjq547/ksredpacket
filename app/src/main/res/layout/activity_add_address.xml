@@ -28,6 +28,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="right|center_vertical"
+                android:maxLength="10"
                 android:background="@color/transparent"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/textfont14"
@@ -52,6 +53,7 @@
                 android:gravity="right|center_vertical"
                 android:background="@color/transparent"
                 android:textColor="@color/text_black"
+                android:inputType="number"
                 android:textSize="@dimen/textfont14"
                 android:hint="@string/input_phone_number"/>
         </LinearLayout>

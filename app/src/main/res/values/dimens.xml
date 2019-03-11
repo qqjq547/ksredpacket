@@ -45,6 +45,7 @@
     <dimen name="space22">22dp</dimen>
     <dimen name="space24">24dp</dimen>
     <dimen name="space25">25dp</dimen>
+    <dimen name="space26">26dp</dimen>
     <dimen name="space27">27dp</dimen>
     <dimen name="space28">28dp</dimen>
     <dimen name="space30">30dp</dimen>

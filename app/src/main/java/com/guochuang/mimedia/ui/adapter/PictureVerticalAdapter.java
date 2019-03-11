@@ -18,6 +18,6 @@ public class PictureVerticalAdapter extends BaseQuickAdapter<String,BaseViewHold
     }
     @Override
     protected void convert(BaseViewHolder helper, String item) {
-        GlideImgManager.loadCornerImage(mContext,item,(ImageView) helper.getView(R.id.iv_picture),8);
+        GlideImgManager.loadImage(mContext,item,(ImageView) helper.getView(R.id.iv_picture));
     }
 }

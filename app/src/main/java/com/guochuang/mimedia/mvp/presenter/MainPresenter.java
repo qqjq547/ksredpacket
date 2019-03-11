@@ -6,6 +6,7 @@ import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.NameAuthAndSafety;
 import com.guochuang.mimedia.mvp.model.RainMsg;
+import com.guochuang.mimedia.mvp.model.Remind;
 import com.guochuang.mimedia.mvp.model.UserInfo;
 import com.guochuang.mimedia.mvp.model.VersionMsg;
 import com.guochuang.mimedia.mvp.view.MainView;
@@ -143,5 +144,25 @@ public class MainPresenter extends BasePresenter<MainView> {
             }
         });
     }
+    public void getRemind() {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
+                getRemind()), new ApiCallback<Remind>() {
+            @Override
+            public void onSuccess(Remind data) {
+                mvpView.setRemind(data);
 
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setError(exception.getMessage());
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
 }

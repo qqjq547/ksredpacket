@@ -42,7 +42,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="@dimen/space10"
             android:layout_marginTop="@dimen/space10"
-            android:text="@string/more"
+            android:text="@string/pack_up"
             android:textColor="@color/text_blue"
             android:textSize="@dimen/textfont14" />
 
@@ -54,7 +54,7 @@
             android:layout_marginRight="@dimen/space15"
             android:orientation="vertical"
             android:background="@color/bg_gray"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <LinearLayout
                 android:layout_width="match_parent"

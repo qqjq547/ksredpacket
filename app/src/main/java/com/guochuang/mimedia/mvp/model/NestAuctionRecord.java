@@ -24,12 +24,12 @@ public class NestAuctionRecord {
     private int dealNum;
     private String endDate;
     private long nestTimeId;
-    private long nestTimeInfoId;
     private String startDate;
     private int totalPrice;
     private String userAvatar;
     private String userName;
     private String userUuid;
+    private long nestLocationId;
 
     public int getAuctionStatus() {
         return auctionStatus;
@@ -87,13 +87,6 @@ public class NestAuctionRecord {
         this.nestTimeId = nestTimeId;
     }
 
-    public long getNestTimeInfoId() {
-        return nestTimeInfoId;
-    }
-
-    public void setNestTimeInfoId(long nestTimeInfoId) {
-        this.nestTimeInfoId = nestTimeInfoId;
-    }
 
     public String getStartDate() {
         return startDate;
@@ -133,5 +126,13 @@ public class NestAuctionRecord {
 
     public void setUserUuid(String userUuid) {
         this.userUuid = userUuid;
+    }
+
+    public long getNestLocationId() {
+        return nestLocationId;
+    }
+
+    public void setNestLocationId(long nestLocationId) {
+        this.nestLocationId = nestLocationId;
     }
 }

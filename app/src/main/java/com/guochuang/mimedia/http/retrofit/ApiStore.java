@@ -75,6 +75,7 @@ import com.guochuang.mimedia.mvp.model.RegionCore;
 import com.guochuang.mimedia.mvp.model.RegionCoreHome;
 import com.guochuang.mimedia.mvp.model.RegionDetail;
 import com.guochuang.mimedia.mvp.model.RegistUser;
+import com.guochuang.mimedia.mvp.model.Remind;
 import com.guochuang.mimedia.mvp.model.Reply;
 import com.guochuang.mimedia.mvp.model.Redbag;
 import com.guochuang.mimedia.mvp.model.SafeCenter;
@@ -947,7 +948,7 @@ public interface ApiStore {
             @Query("beginRegisterDate") String beginRegisterDate,
             @Query("endRegisterDate") String endRegisterDate
     );
-    @GET("/api/v1/user/user_statistic/statistic")
+    @GET("/api/v1/user/user_statistic/statistics")
     Observable<HttpResponse<UserStatistics>> userStatistics(
             @Query("latitude") String latitude,
             @Query("longitude") String longitude
@@ -1119,6 +1120,7 @@ public interface ApiStore {
             @Field("channelCode") String channelCode,
             @Field("payType") int payType,
             @Field("snatchId") long snatchId,
+            @Field("unitPrice") int unitPrice,
             @Field("buyCount") int buyCount,
             @Field("longitude") String longitude,
             @Field("latitude") String latitude,
@@ -1168,10 +1170,9 @@ public interface ApiStore {
     Observable<HttpResponse<NestAuctionMsg>> nestAuctionMsg();
 
     @GET("/api/v1/nest/nest_time_auction/list")
-    Observable<HttpResponse<Page<NestAuctionRecord>>> nestAuctionList(
-            @Query("nestTimeInfoId") long nestTimeInfoId,
-            @Query("currentPage") int currentPage,
-            @Query("pageSize") int pageSize
+    Observable<HttpResponse<List<NestAuctionRecord>>> nestAuctionList(
+            @Query("nestLocationId") long nestLocationId,
+            @Query("startDate") String startDate
     );
     @GET("/api/v1/nest/nest_time_auction/my_list")
     Observable<HttpResponse<Page<NestAuctionRecord>>> nestMyAuctionList(
@@ -1238,11 +1239,14 @@ public interface ApiStore {
     Observable<HttpResponse<Order>> buyNestTime(
             @Field("channelCode") String channelCode,
             @Field("payType") int payType,
-            @Field("nestTimeInfoId") long nestTimeInfoId,
+            @Field("nestLocationId") long nestLocationId,
             @Field("price") int price,
-            @Field("totalPrice") int totalPrice,
-            @Field("longitude") String longitude,
-            @Field("latitude") String latitude,
+            @Field("startDate") String startDate,
+            @Field("days") int days,
+            @Field("payLatitude") String payLatitude,
+            @Field("payLongitude") String payLongitude,
+            @Field("nestLatitude") String nestLatitude,
+            @Field("nestLongitude") String nestLongitude,
             @Field("safetyCode") String safetyCode
     );
 
@@ -1257,6 +1261,14 @@ public interface ApiStore {
     @GET("/api/v1/order/order/get_pay_type")
     Observable<HttpResponse<PayConfig>> getPayType(
             @Query("bizType") String bizType);
+
+    @GET("/api/v1/common/remind/get")
+    Observable<HttpResponse<Remind>> getRemind();
+
+    @GET("/api/v1/nest/nest_location/is_qualified")
+    Observable<HttpResponse<Boolean>> getIsQualified(
+            @Query("latitude") String latitude,
+            @Query("longitude") String longitude);
 
 
 

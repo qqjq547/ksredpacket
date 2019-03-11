@@ -34,7 +34,7 @@ public class MyBidAdapter extends BaseQuickAdapter<NestAuctionRecord,BaseViewHol
                 GlideImgManager.loadImage(mContext,R.drawable.ic_bid_done,(ImageView) helper.getView(R.id.iv_avatar));
                 break;
         }
-        helper.setText(R.id.tv_name,item.getUserName());
+        helper.setText(R.id.tv_name,String.valueOf(item.getNestLocationId()));
         helper.setText(R.id.tv_duration,String.format(mContext.getString(R.string.format_time_to_time),item.getStartDate(),item.getEndDate()));
         String priceStr=String.format(mContext.getString(R.string.format_price_and_total),String.valueOf(item.getDayPrice()),String.valueOf(item.getTotalPrice()));
         SpannableStringBuilder builder=new SpannableStringBuilder(priceStr);

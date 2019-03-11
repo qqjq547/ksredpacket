@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
@@ -104,6 +105,17 @@ public class HoneyCombView extends LinearLayout {
                 }
             }
         });
+        honeyAdapter=new HoneyAdapter(dataArr);
+        honeyAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if (onMenuClickListener!=null){
+                    onMenuClickListener.onClick(honeyAdapter.getData().get(position));
+                }
+            }
+        });
+        rvHoney.setAdapter(honeyAdapter);
+        appbar.setExpanded(false,true);
     }
 
     public void setData(List<NestHomeAd> data, final OnMenuClickListener onMenuClickListener){
@@ -119,17 +131,12 @@ public class HoneyCombView extends LinearLayout {
                }
            }
        }
-        honeyAdapter=new HoneyAdapter(dataArr);
-        honeyAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                if (onMenuClickListener!=null){
-                    onMenuClickListener.onClick(honeyAdapter.getData().get(position));
-                }
-            }
-        });
-        rvHoney.setAdapter(honeyAdapter);
-        appbar.setExpanded(false,true);
+       if (isExpand){
+           honeyAdapter.setNewData(dataArr);
+       }else {
+           honeyAdapter.setNewData(allData.get(currentRow));
+       }
+
     }
     @OnClick({R.id.iv_arrow,R.id.tv_vote})
     public void onViewClicked(View view) {
@@ -148,15 +155,23 @@ public class HoneyCombView extends LinearLayout {
             honeyAdapter.setNewData(dataArr);
         }
         tvVote.setVisibility(VISIBLE);
+        ivArrow.setImageResource(R.drawable.ic_double_arrow_up);
         isExpand=true;
     }
     public void setCollse(){
         tvVote.setVisibility(GONE);
-        if (allData.size()>1) {
-            honeyAdapter.setNewData(allData.get(currentRow));
-            handler.removeMessages(0);
-            handler.sendEmptyMessageDelayed(0,delayTime);
-        }
-        isExpand=false;
+        ivArrow.setImageResource(R.drawable.ic_double_arrow_down);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (allData.size()>1) {
+                    honeyAdapter.setNewData(allData.get(currentRow));
+                    handler.removeMessages(0);
+                    handler.sendEmptyMessageDelayed(0,delayTime);
+                }
+                isExpand=false;
+            }
+        },500);
+
     }
 }
