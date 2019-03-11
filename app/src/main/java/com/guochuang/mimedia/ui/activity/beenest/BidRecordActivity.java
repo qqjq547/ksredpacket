@@ -32,13 +32,11 @@ public class BidRecordActivity extends MvpActivity<BidHistoryPresenter> implemen
     TextView tvTitle;
     @BindView(R.id.rv_history)
     RecyclerView rvHistory;
-    @BindView(R.id.srl_refresh)
-    SmartRefreshLayout srlRefresh;
 
     BidRecordAdapter adapter;
     List<NestAuctionRecord> dataArr=new ArrayList<>();
-    int curPage=1;
     long nestLocationId=0;
+    String startDate;
 
     @Override
     protected BidHistoryPresenter createPresenter() {
@@ -54,25 +52,13 @@ public class BidRecordActivity extends MvpActivity<BidHistoryPresenter> implemen
     public void initViewAndData() {
         tvTitle.setText(R.string.bid_record);
         nestLocationId= getIntent().getLongExtra(Constant.NESTLOCATIONID,0);
+        startDate=getIntent().getStringExtra(Constant.STARTDATE);
         rvHistory.setLayoutManager(new LinearLayoutManager(this,OrientationHelper.VERTICAL,false));
         adapter=new BidRecordAdapter(dataArr);
         adapter.setEmptyView(getLayoutInflater().inflate(R.layout.layout_empty,null));
         adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         rvHistory.setAdapter(adapter);
-        srlRefresh.setEnableRefresh(true);
-        srlRefresh.setEnableLoadmore(true);
-        srlRefresh.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
-            @Override
-            public void onLoadmore(RefreshLayout refreshlayout) {
-                mvpPresenter.getNestAuctionHistory(nestLocationId,curPage+1,Constant.PAGE_SIZE);
-            }
-
-            @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-                mvpPresenter.getNestAuctionHistory(nestLocationId,1,Constant.PAGE_SIZE);
-            }
-        });
-        mvpPresenter.getNestAuctionHistory(nestLocationId,curPage,Constant.PAGE_SIZE);
+        mvpPresenter.getNestAuctionHistory(nestLocationId,startDate);
     }
     @OnClick(R.id.iv_back)
     public void onViewClicked() {
@@ -81,28 +67,13 @@ public class BidRecordActivity extends MvpActivity<BidHistoryPresenter> implemen
 
 
     @Override
-    public void setData(Page<NestAuctionRecord> data) {
-        srlRefresh.finishRefresh();
-        srlRefresh.finishLoadmore();
-        curPage = data.getCurrentPage();
-        if (curPage == 1) {
-            dataArr.clear();
-        }
-        if (data.getDataList() != null) {
-            dataArr.addAll(data.getDataList());
-        }
+    public void setData(List<NestAuctionRecord> data) {
+        dataArr.addAll(data);
         adapter.notifyDataSetChanged();
-        if (data.getCurrentPage() >= data.getTotalPage()) {
-            srlRefresh.setEnableLoadmore(false);
-        } else {
-            srlRefresh.setEnableLoadmore(true);
-        }
     }
 
     @Override
     public void setError(String msg) {
-        srlRefresh.finishRefresh();
-        srlRefresh.finishLoadmore();
         closeLoadingDialog();
         showShortToast(msg);
     }

@@ -1170,10 +1170,9 @@ public interface ApiStore {
     Observable<HttpResponse<NestAuctionMsg>> nestAuctionMsg();
 
     @GET("/api/v1/nest/nest_time_auction/list")
-    Observable<HttpResponse<Page<NestAuctionRecord>>> nestAuctionList(
+    Observable<HttpResponse<List<NestAuctionRecord>>> nestAuctionList(
             @Query("nestLocationId") long nestLocationId,
-            @Query("currentPage") int currentPage,
-            @Query("pageSize") int pageSize
+            @Query("startDate") String startDate
     );
     @GET("/api/v1/nest/nest_time_auction/my_list")
     Observable<HttpResponse<Page<NestAuctionRecord>>> nestMyAuctionList(

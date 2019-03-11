@@ -249,7 +249,7 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
                 break;
             case R.id.tv_bid_record:
                 if(timeInfo!=null){
-                    startActivity(new Intent(this, BidRecordActivity.class).putExtra(Constant.NESTINFOID, nestLocationId));
+                    startActivity(new Intent(this, BidRecordActivity.class).putExtra(Constant.NESTLOCATIONID, nestLocationId).putExtra(Constant.STARTDATE, timeInfo.getStartDate()));
                 }
                 break;
             case R.id.btn_buy:
@@ -278,13 +278,16 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
         if (data != null) {
             timeInfo = data;
             rate = Double.parseDouble(data.getRate());
+            dateAvatar.clear();
+            currentArr.clear();
+            nextArr.clear();
             if (data.getBuyList()!=null&&data.getBuyList().size()>0){
                 for (NestTimeInfo.BuyListBean listBean:data.getBuyList()){
                     Calendar startCal = Calendar.getInstance();
                     startCal.setTime(CommonUtil.stringToDate(listBean.getStartDate(), Constant.FORMAT_DATE_SIMPLE));
                     Calendar endCal = Calendar.getInstance();
                     endCal.setTime(CommonUtil.stringToDate(listBean.getEndDate(), Constant.FORMAT_DATE_SIMPLE));
-                    int dayCount=differentDays(endCal.getTime(),startCal.getTime());
+                    int dayCount=differentDays(startCal.getTime(),endCal.getTime())+1;
                     for (int i = 0; i < dayCount; i++) {
                         Calendar cal = Calendar.getInstance();
                         cal.setTime(startCal.getTime());
