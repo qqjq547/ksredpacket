@@ -635,10 +635,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
             //picture 拼接的是视频地址
 
             String joinProblmeJson = joinProblmeJson();
-            if (TextUtils.isEmpty(joinProblmeJson)) {
-                showShortToast("请设置问题");
-                return;
-            }
+            Log.e( "startPay: ",joinProblmeJson );
 
             mvpPresenter.addVideoReabag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson);
         }
@@ -684,6 +681,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                         .put("sequence", i)
                         .put("optionsList", itemJsonArray);
 
+                problmeJsonArray.put(jsonObject);
 
             }
 
