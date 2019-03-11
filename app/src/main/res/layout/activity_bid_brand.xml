@@ -103,6 +103,60 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/space15"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textfont16"
+                android:textColor="@color/text_black"
+                android:text="@string/buy_time"/>
+            <RadioGroup
+                android:id="@+id/rgroup_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/rbtn_five"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/space20"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:textColor="@color/date_text_selector"
+                    android:textSize="@dimen/textfont14"
+                    android:background="@drawable/bg_date_check_selector"
+                    android:text="@string/date_five"
+                    android:checked="true"
+                    />
+                <RadioButton
+                    android:id="@+id/rbtn_ten"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/space20"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:textColor="@color/date_text_selector"
+                    android:textSize="@dimen/textfont14"
+                    android:background="@drawable/bg_date_check_selector"
+                    android:text="@string/date_ten"/>
+                <RadioButton
+                    android:id="@+id/rbtn_fifth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/space20"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:textColor="@color/date_text_selector"
+                    android:textSize="@dimen/textfont14"
+                    android:background="@drawable/bg_date_check_selector"
+                    android:text="@string/date_fifth"/>
+            </RadioGroup>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@drawable/bg_white_block"
             android:layout_margin="@dimen/space10"
@@ -118,8 +172,14 @@
                     android:id="@+id/tv_buy_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont14" />
+                <TextView
+                    android:id="@+id/tv_buy_day_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/space15"
+                    android:textColor="@color/text_city_yellow"
                     android:textSize="@dimen/textfont14" />
                 <Space
                     android:layout_width="0dp"
@@ -161,7 +221,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textColor="@color/text_city_yellow"
-                    android:textSize="@dimen/textfont14" />
+                    android:textSize="@dimen/textfont18" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -191,8 +251,9 @@
                     android:gravity="center_vertical|right"
                     android:background="@color/bg_white"
                     android:inputType="number"
+                    android:hint="@string/i_want_add_price"
                     android:textColor="@color/text_city_yellow"
-                    android:textSize="@dimen/textfont14" />
+                    android:textSize="@dimen/textfont18" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

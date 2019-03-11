@@ -234,7 +234,7 @@ public class InfoDetailActivity extends MvpActivity<InfoDetailPresenter> impleme
     };
 
     public void showShare(boolean isReport) {
-        ShareDialog shareDialog = new ShareDialog(this, detail.getTitle(), Constant.URL_INFOMATION_DETAIL + "?id=" + articleUuid, null);
+        ShareDialog shareDialog = new ShareDialog(this, detail.getTitle(), Constant.URL_INFOMATION_DETAIL + "?id=" + articleUuid+"&userAccountUuid="+App.getInstance().getUserInfo().getUserAccountUuid(), null);
         shareDialog.setOnShareResultListener(new ShareDialog.OnShareResultListener() {
             @Override
             public void onSuccess(String platform) {

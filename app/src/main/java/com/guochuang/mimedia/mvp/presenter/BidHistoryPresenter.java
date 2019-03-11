@@ -13,17 +13,19 @@ import com.guochuang.mimedia.mvp.view.BidHistoryView;
 import com.guochuang.mimedia.tools.GsonUtil;
 import com.guochuang.mimedia.tools.RxUtil;
 
+import java.util.List;
+
 public class BidHistoryPresenter extends BasePresenter<BidHistoryView> {
 
     public BidHistoryPresenter(BidHistoryView view) {
         attachView(view);
     }
 
-    public void getNestAuctionHistory(long nestTimeInfoId,int currentPage,int pageSize){
+    public void getNestAuctionHistory(long nestLocationId,String startDate){
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                nestAuctionList(nestTimeInfoId,currentPage,pageSize)), new ApiCallback<Page<NestAuctionRecord>>() {
+                nestAuctionList(nestLocationId,startDate)), new ApiCallback<List<NestAuctionRecord>>() {
             @Override
-            public void onSuccess(Page<NestAuctionRecord> data) {
+            public void onSuccess(List<NestAuctionRecord> data) {
                 mvpView.setData(data);
             }
 

@@ -1,44 +1,23 @@
 package com.guochuang.mimedia.mvp.model;
 
+import java.util.List;
+
 public class NestTimeInfo {
 
 
     /**
-     * current : {"day":0,"endTime":"2019-02-23T06:30:29.606Z","nestTimeInfoId":0,"nextTime":"2019-02-23T06:30:29.606Z","price":0,"sale":true,"saleStartTime":"2019-02-23T06:30:29.606Z","startTime":"2019-02-23T06:30:29.606Z","totalPrice":0,"userAvatar":"string","userName":"string"}
-     * ksb : 0
-     * next : {"day":0,"endTime":"2019-02-23T06:30:29.606Z","nestTimeInfoId":0,"nextTime":"2019-02-23T06:30:29.606Z","price":0,"sale":true,"saleStartTime":"2019-02-23T06:30:29.606Z","startTime":"2019-02-23T06:30:29.606Z","totalPrice":0,"userAvatar":"string","userName":"string"}
-     * rate : string
+     * buyList : [{"auctionDate":"2019-03-09T07:04:17.906Z","dayCoin":0,"dayPrice":0,"endDate":"2019-03-09T07:04:17.906Z","nestLocationId":0,"startDate":"2019-03-09T07:04:17.906Z","totalCoin":0,"totalPrice":0,"userAccountUuid":"string","userAvatar":"string","userMobile":"string","userName":"string","userRealName":"string"}]
+     * currentPrice : 0
+     * maxPrice : 0
+     * startDate : string
      */
 
-    private InfoBean current;
-    private String ksb;
-    private InfoBean next;
-    private String rate;
+    private int currentPrice;
     private int maxPrice;
-
-    public InfoBean getCurrent() {
-        return current;
-    }
-
-    public void setCurrent(InfoBean current) {
-        this.current = current;
-    }
-
-    public String getKsb() {
-        return ksb;
-    }
-
-    public void setKsb(String ksb) {
-        this.ksb = ksb;
-    }
-
-    public InfoBean getNext() {
-        return next;
-    }
-
-    public void setNext(InfoBean next) {
-        this.next = next;
-    }
+    private String rate;
+    private double ksb;;
+    private String startDate;
+    private List<BuyListBean> buyList;
 
     public String getRate() {
         return rate;
@@ -46,6 +25,22 @@ public class NestTimeInfo {
 
     public void setRate(String rate) {
         this.rate = rate;
+    }
+
+    public double getKsb() {
+        return ksb;
+    }
+
+    public void setKsb(double ksb) {
+        this.ksb = ksb;
+    }
+
+    public int getCurrentPrice() {
+        return currentPrice;
+    }
+
+    public void setCurrentPrice(int currentPrice) {
+        this.currentPrice = currentPrice;
     }
 
     public int getMaxPrice() {
@@ -56,95 +51,107 @@ public class NestTimeInfo {
         this.maxPrice = maxPrice;
     }
 
-    public static class InfoBean {
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public List<BuyListBean> getBuyList() {
+        return buyList;
+    }
+
+    public void setBuyList(List<BuyListBean> buyList) {
+        this.buyList = buyList;
+    }
+
+    public static class BuyListBean {
         /**
-         * day : 0
-         * endTime : 2019-02-23T06:30:29.606Z
-         * nestTimeInfoId : 0
-         * nextTime : 2019-02-23T06:30:29.606Z
-         * price : 0
-         * sale : true
-         * saleStartTime : 2019-02-23T06:30:29.606Z
-         * startTime : 2019-02-23T06:30:29.606Z
+         * auctionDate : 2019-03-09T07:04:17.906Z
+         * dayCoin : 0
+         * dayPrice : 0
+         * endDate : 2019-03-09T07:04:17.906Z
+         * nestLocationId : 0
+         * startDate : 2019-03-09T07:04:17.906Z
+         * totalCoin : 0
          * totalPrice : 0
+         * userAccountUuid : string
          * userAvatar : string
+         * userMobile : string
          * userName : string
+         * userRealName : string
          */
 
-        private int day;
-        private String endTime;
-        private long nestTimeInfoId;
-        private String nextTime;
-        private int price;
-        private boolean sale;
-        private String saleStartTime;
-        private String startTime;
+        private String auctionDate;
+        private double dayCoin;
+        private int dayPrice;
+        private String endDate;
+        private long nestLocationId;
+        private String startDate;
+        private int totalCoin;
         private int totalPrice;
+        private String userAccountUuid;
         private String userAvatar;
+        private String userMobile;
         private String userName;
+        private String userRealName;
 
-        public int getDay() {
-            return day;
+        public String getAuctionDate() {
+            return auctionDate;
         }
 
-        public void setDay(int day) {
-            this.day = day;
+        public void setAuctionDate(String auctionDate) {
+            this.auctionDate = auctionDate;
         }
 
-        public String getEndTime() {
-            return endTime;
+        public double getDayCoin() {
+            return dayCoin;
         }
 
-        public void setEndTime(String endTime) {
-            this.endTime = endTime;
+        public void setDayCoin(double dayCoin) {
+            this.dayCoin = dayCoin;
         }
 
-        public long getNestTimeInfoId() {
-            return nestTimeInfoId;
+        public int getDayPrice() {
+            return dayPrice;
         }
 
-        public void setNestTimeInfoId(long nestTimeInfoId) {
-            this.nestTimeInfoId = nestTimeInfoId;
+        public void setDayPrice(int dayPrice) {
+            this.dayPrice = dayPrice;
         }
 
-        public String getNextTime() {
-            return nextTime;
+        public String getEndDate() {
+            return endDate;
         }
 
-        public void setNextTime(String nextTime) {
-            this.nextTime = nextTime;
+        public void setEndDate(String endDate) {
+            this.endDate = endDate;
         }
 
-        public int getPrice() {
-            return price;
+        public long getNestLocationId() {
+            return nestLocationId;
         }
 
-        public void setPrice(int price) {
-            this.price = price;
+        public void setNestLocationId(long nestLocationId) {
+            this.nestLocationId = nestLocationId;
         }
 
-        public boolean isSale() {
-            return sale;
+        public String getStartDate() {
+            return startDate;
         }
 
-        public void setSale(boolean sale) {
-            this.sale = sale;
+        public void setStartDate(String startDate) {
+            this.startDate = startDate;
         }
 
-        public String getSaleStartTime() {
-            return saleStartTime;
+        public int getTotalCoin() {
+            return totalCoin;
         }
 
-        public void setSaleStartTime(String saleStartTime) {
-            this.saleStartTime = saleStartTime;
-        }
-
-        public String getStartTime() {
-            return startTime;
-        }
-
-        public void setStartTime(String startTime) {
-            this.startTime = startTime;
+        public void setTotalCoin(int totalCoin) {
+            this.totalCoin = totalCoin;
         }
 
         public int getTotalPrice() {
@@ -155,6 +162,14 @@ public class NestTimeInfo {
             this.totalPrice = totalPrice;
         }
 
+        public String getUserAccountUuid() {
+            return userAccountUuid;
+        }
+
+        public void setUserAccountUuid(String userAccountUuid) {
+            this.userAccountUuid = userAccountUuid;
+        }
+
         public String getUserAvatar() {
             return userAvatar;
         }
@@ -163,12 +178,28 @@ public class NestTimeInfo {
             this.userAvatar = userAvatar;
         }
 
+        public String getUserMobile() {
+            return userMobile;
+        }
+
+        public void setUserMobile(String userMobile) {
+            this.userMobile = userMobile;
+        }
+
         public String getUserName() {
             return userName;
         }
 
         public void setUserName(String userName) {
             this.userName = userName;
+        }
+
+        public String getUserRealName() {
+            return userRealName;
+        }
+
+        public void setUserRealName(String userRealName) {
+            this.userRealName = userRealName;
         }
     }
 }

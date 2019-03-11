@@ -129,7 +129,6 @@ public class BeeNestTempActivity extends MvpActivity<BeeNestTempPresneter> imple
     @Override
     public void setData(List<NestTemplate> data) {
         closeLoadingDialog();
-        this.tempArr=data;
         if (data!=null&&data.size()>0) {
             linEmpty.setVisibility(View.GONE);
             vpTemp.setVisibility(View.VISIBLE);

@@ -18,6 +18,7 @@ import com.guochuang.mimedia.mvp.model.Snatch;
 import com.guochuang.mimedia.mvp.presenter.MyTreasurePresenter;
 import com.guochuang.mimedia.mvp.view.MyTreasureView;
 import com.guochuang.mimedia.tools.Constant;
+import com.guochuang.mimedia.tools.DialogBuilder;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.pay.AliPay;
 import com.guochuang.mimedia.tools.pay.WxPay;
@@ -169,7 +170,7 @@ public class MyTreasureActivity extends MvpActivity<MyTreasurePresenter> impleme
             WxPay.getInstance().pay(order.getVendorResponse(), new WxPay.OnResultListener() {
                 @Override
                 public void onResult(boolean success, String errMsg) {
-                    srlRefresh.autoRefresh();
+                    showPayResult(success,errMsg);
                 }
             });
             break;
@@ -181,10 +182,33 @@ public class MyTreasureActivity extends MvpActivity<MyTreasurePresenter> impleme
             AliPay.getInstance().pay(this, order.getVendorResponse(), new AliPay.OnResultListener() {
                 @Override
                 public void onResult(boolean success, String errMsg) {
-                    srlRefresh.autoRefresh();
+                    showPayResult(success,errMsg);
                 }
             });
             break;
     }
 }
+    public void showPayResult(boolean success,String errmsg){
+        if (success){
+            new DialogBuilder(this)
+                    .setTitle(R.string.tip)
+                    .setMessage(R.string.pay_success)
+                    .setPositiveButton(R.string.confirm, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            srlRefresh.autoRefresh();
+                        }
+                    }).create().show();
+        }else {
+            new DialogBuilder(this)
+                    .setTitle(R.string.tip)
+                    .setMessage(TextUtils.isEmpty(errmsg)?getString(R.string.pay_fail):errmsg)
+                    .setPositiveButton(R.string.confirm, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                        }
+                    }).create().show();
+        }
+    }
 }

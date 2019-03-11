@@ -2,10 +2,13 @@ package com.guochuang.mimedia.ui.activity.beenest;
 
 import android.Manifest;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,15 +21,19 @@ import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.InfoWindow;
 import com.baidu.mapapi.map.MapPoi;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.Overlay;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.NestLocation;
@@ -36,6 +43,8 @@ import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.tools.antishake.AntiShake;
+import com.guochuang.mimedia.tools.glide.GlideApp;
+import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.sz.gcyh.KSHongBao.R;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
@@ -44,6 +53,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.jiguang.share.android.api.JShareInterface;
 import rx.functions.Action1;
 
 public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidView {
@@ -65,52 +75,9 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
     BaiduMap bm;
     LocationClient mLocationClient;
     LocationClientOption option;
-    List<Marker> adOptions = new ArrayList<>();
+    List<OverlayOptions> adOptions = new ArrayList<>();
     BDLocation currentLoc;
-
-    BaiduMap.OnMarkerClickListener lisener = new BaiduMap.OnMarkerClickListener() {
-
-        @Override
-        public boolean onMarkerClick(Marker marker) {
-            Log.e("onMarkerClick: ", marker.getId());
-//            Bundle mb = marker.getExtraInfo();
-//            String value = mb.getString(Constant.RED_PACKET_TYPE);
-//            if (TextUtils.equals(value, Constant.MAP_MARKER_SPOT)) {
-//                long nestLocationId = mb.getLong(Constant.NESTLOCATIONID, 0);
-//                String latitude = mb.getString(Constant.LATITUDE);
-//                String longitude = mb.getString(Constant.LONGITUDE);
-//                if (nestLocationId > 0) {
-//                    IntentUtils.startBidBrandActivity(AdBidActivity.this, nestLocationId, latitude, longitude);
-//                }
-//            }
-            return true;
-        }
-    };
-
-
-
-
-
-    BaiduMap.OnMapClickListener mMapClickListener = new BaiduMap.OnMapClickListener() {
-        @Override
-        public void onMapClick(LatLng latLng) {
-
-            toPosition(latLng);
-            showLoadingDialog(null);
-            mvpPresenter.getNestSpot(String.valueOf(latLng.latitude), String.valueOf(latLng.longitude));
-
-        }
-
-        @Override
-        public boolean onMapPoiClick(MapPoi mapPoi) {
-
-            toPosition(mapPoi.getPosition());
-            showLoadingDialog(null);
-            mvpPresenter.getNestSpot(String.valueOf(mapPoi.getPosition().latitude), String.valueOf(mapPoi.getPosition().longitude));
-            return false;
-        }
-    };
-
+    BaiduMap.OnMarkerClickListener onMarkerClickListener;
     @Override
     protected AdBidPresenter createPresenter() {
         return new AdBidPresenter(this);
@@ -140,20 +107,49 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
                 }
             }
         });
-        bm.setOnMapClickListener(mMapClickListener);
+        bm.setOnMapClickListener(new BaiduMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                toPosition(latLng);
+                showLoadingDialog(null);
+                mvpPresenter.getNestSpot(String.valueOf(latLng.latitude),String.valueOf(latLng.longitude));
+            }
+            @Override
+            public boolean onMapPoiClick(MapPoi mapPoi) {
+                toPosition(mapPoi.getPosition());
+                showLoadingDialog(null);
+                mvpPresenter.getNestSpot(String.valueOf(mapPoi.getPosition().latitude),String.valueOf(mapPoi.getPosition().longitude));
+                return false;
+            }
+        });
+        BaiduMap.OnMarkerClickListener onMarkerClickListener=new BaiduMap.OnMarkerClickListener() {
 
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                Bundle mb = marker.getExtraInfo();
+                String value=mb.getString(Constant.RED_PACKET_TYPE);
+                if (TextUtils.equals(value,Constant.MAP_MARKER_SPOT)){
+                    long nestLocationId=mb.getLong(Constant.NESTLOCATIONID,0);
+//                    showShortToast("nestLocationId="+nestLocationId);
+                    String latitude=mb.getString(Constant.LATITUDE);
+                    String longitude=mb.getString(Constant.LONGITUDE);
+                    if(nestLocationId>0){
+                        IntentUtils.startBidBrandActivity(AdBidActivity.this,nestLocationId,latitude,longitude);
+                    }else {
+                        showShortToast(R.string.ad_not_active);
+                    }
+                }
+                return true;
+            }
+        };
+        bm.setOnMarkerClickListener(onMarkerClickListener);
         setTextMarquee(tvTip);
     }
-
-
-
-
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         mvContent.onSaveInstanceState(outState);
     }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -169,34 +165,10 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
     @Override
     public void onDestroy() {
         super.onDestroy();
+        bm.clear();
+        bm.removeMarkerClickListener(onMarkerClickListener);
         mvContent.onDestroy();
-
     }
-
-    @Override
-    protected void finalize() throws Throwable {
-        super.finalize();
-
-        if (bm != null) {
-            bm.removeMarkerClickListener(lisener);
-            bm.setOnMapClickListener(null);
-            bm.clear();
-            bm = null;
-        }
-
-        if (mvContent != null) {
-            mvContent = null;
-        }
-        if(lisener != null) {
-            lisener = null;
-        }
-        if(mMapClickListener != null) {
-            mMapClickListener = null;
-        }
-
-    }
-
-
     @OnClick({R.id.iv_back, R.id.tv_text, R.id.tv_my_ad, R.id.iv_location})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -204,10 +176,10 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
                 onBackPressed();
                 break;
             case R.id.tv_text:
-                IntentUtils.startWebActivity(this, null, Constant.URL_FENGCHAO_JINGPAI);
+                IntentUtils.startWebActivity(this,null,Constant.URL_FENGCHAO_JINGPAI);
                 break;
             case R.id.tv_my_ad:
-                startActivity(new Intent(this, MyAdActivity.class));
+                startActivity(new Intent(this,MyAdActivity.class));
                 break;
             case R.id.iv_location:
                 if (AntiShake.check(view.getId()))
@@ -218,7 +190,6 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
                 break;
         }
     }
-
     public void startLocation() {
         if (mLocationClient == null) {
             mLocationClient = new LocationClient(App.getInstance());
@@ -236,7 +207,6 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
         }
         mLocationClient.start();
     }
-
     BDAbstractLocationListener locationListener = new BDAbstractLocationListener() {
         @Override
         public void onReceiveLocation(BDLocation bdLocation) {
@@ -245,25 +215,18 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
             if ("4.9E-324".equals(String.valueOf(bdLocation.getLatitude()))) {
                 return;
             }
-            mvpPresenter.getNestSpot(String.valueOf(bdLocation.getLatitude()), String.valueOf(getPref().getLongitude()));
             LatLng ll = new LatLng(bdLocation.getLatitude(),
                     bdLocation.getLongitude());
             MapStatus.Builder builder = new MapStatus.Builder();
             builder.target(ll).zoom(16f);
             bm.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
-            currentLoc = bdLocation;
+            currentLoc=bdLocation;
+            mvpPresenter.getNestSpot(String.valueOf(bdLocation.getLatitude()),String.valueOf(getPref().getLongitude()));
         }
     };
-
     public void addMarker(List<NestLocation> data) {
-
-        for (int i = 0; i <data.size(); i++){
-            bm.removeMarkerClickListener(lisener);
-        }
-
-
         bm.clear();
-        if (currentLoc != null) {
+        if (currentLoc!=null) {
             LatLng point = new LatLng(currentLoc.getLatitude(), currentLoc.getLongitude());
             //构建Marker图标
             BitmapDescriptor bitmap = BitmapDescriptorFactory
@@ -271,57 +234,74 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
             Bundle nowbundle = new Bundle();
             nowbundle.putString(Constant.RED_PACKET_TYPE, Constant.TYPE_NOW);
             //构建MarkerOption，用于在地图上添加Marker
-            OverlayOptions option = new MarkerOptions()
+            MarkerOptions option = new MarkerOptions()
                     .position(point)
                     .icon(bitmap).extraInfo(nowbundle);
             //在地图上添加Marker，并显示
-            Marker marker = (Marker) bm.addOverlay(option);
+            bm.addOverlay(option);
         }
         adOptions.clear();
         for (int i = 0; i < data.size(); i++) {
-            BitmapDescriptor bitmap;
-            Bundle bundle = new Bundle();
-            bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_ad_marker);
-            bundle.putSerializable(Constant.RED_PACKET_TYPE, Constant.MAP_MARKER_SPOT);
-            bundle.putLong(Constant.NESTLOCATIONID, data.get(i).getNestLocationId());
-            bundle.putString(Constant.LATITUDE, String.valueOf(data.get(i).getLatitude()));
-            bundle.putString(Constant.LONGITUDE, String.valueOf(data.get(i).getLongitude()));
-            OverlayOptions option = new MarkerOptions()
-                    .position(new LatLng(data.get(i).getLatitude(), data.get(i).getLongitude()))
-                    .icon(bitmap).extraInfo(bundle)
-                    .animateType(MarkerOptions.MarkerAnimateType.grow);
-
-            Marker marker = (Marker) bm.addOverlay(option);
-            adOptions.add(marker);
-//            adOptions.add(option);
-
-            bm.setOnMarkerClickListener(lisener);
+            final NestLocation location = data.get(i);
+            if (!TextUtils.isEmpty(location.getAvatar())) {
+                GlideApp.with(this)
+                        .asBitmap()
+                        .load(App.getInstance().getUserInfo().getAvatar())
+                        .circleCrop()
+                        .into(new SimpleTarget<Bitmap>() {
+                            @Override
+                            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                                BitmapDescriptor bitmap;
+                                View view = LayoutInflater.from(AdBidActivity.this).inflate(R.layout.layout_overlay, null);
+                                ImageView ivAvatar = view.findViewById(R.id.iv_avatar);
+                                ivAvatar.setImageBitmap(resource);
+                                bitmap = BitmapDescriptorFactory.fromView(view);
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable(Constant.RED_PACKET_TYPE, Constant.MAP_MARKER_SPOT);
+                                bundle.putLong(Constant.NESTLOCATIONID, location.getNestLocationId());
+                                bundle.putString(Constant.LATITUDE, String.valueOf(location.getLatitude()));
+                                bundle.putString(Constant.LONGITUDE, String.valueOf(location.getLongitude()));
+                                MarkerOptions option = new MarkerOptions()
+                                        .position(new LatLng(location.getLatitude(), location.getLongitude()))
+                                        .icon(bitmap).extraInfo(bundle).draggable(true)
+                                        .animateType(MarkerOptions.MarkerAnimateType.grow);
+                                bm.addOverlay(option);
+                            }
+                        });
+            } else {
+                BitmapDescriptor bitmap;
+                View view = LayoutInflater.from(AdBidActivity.this).inflate(R.layout.layout_overlay, null);
+                ImageView ivbg = view.findViewById(R.id.iv_bg);
+                ivbg.setImageResource(R.drawable.ic_marker_default);
+                bitmap = BitmapDescriptorFactory.fromView(view);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(Constant.RED_PACKET_TYPE, Constant.MAP_MARKER_SPOT);
+                bundle.putLong(Constant.NESTLOCATIONID, location.getNestLocationId());
+                bundle.putString(Constant.LATITUDE, String.valueOf(location.getLatitude()));
+                bundle.putString(Constant.LONGITUDE, String.valueOf(location.getLongitude()));
+                MarkerOptions option = new MarkerOptions()
+                        .position(new LatLng(location.getLatitude(), location.getLongitude()))
+                        .icon(bitmap).extraInfo(bundle).draggable(true)
+                        .animateType(MarkerOptions.MarkerAnimateType.grow);
+                bm.addOverlay(option);
+            }
         }
-
-        Log.e( "addMarker: ", "设置覆盖物的监听事件");
-//        bm.removeMarkerClickListener(lisener);
-
-//        bm.addOverlays(adOptions);
-
-
-        //移动后点发生变化
 
     }
 
     @Override
     public void setData(List<NestLocation> data) {
         closeLoadingDialog();
-        if (data != null && data.size() > 0) {
+        if (data!=null&&data.size()>0){
             addMarker(data);
         }
     }
 
     @Override
     public void setError(String msg) {
-        closeLoadingDialog();
-        showShortToast(msg);
+       closeLoadingDialog();
+       showShortToast(msg);
     }
-
     public static void setTextMarquee(TextView textView) {
         if (textView != null) {
             textView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
@@ -331,7 +311,6 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
             textView.setFocusableInTouchMode(true);
         }
     }
-
     private void toPosition(LatLng pt) {
         MapStatus.Builder builder = new MapStatus.Builder();
         builder.target(pt);

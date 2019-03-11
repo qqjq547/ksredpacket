@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -20,8 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="@dimen/space250"
-                android:scaleType="fitXY"
-                android:src="@drawable/bg_recommend_agent_banner"/>
+                android:scaleType="fitXY" />
                 <TextView
                     android:id="@+id/tv_temp_name"
                     android:layout_width="@dimen/space200"
@@ -29,9 +29,9 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:background="@drawable/bg_bee_temp_name"
-                    android:textColor="@color/text_white"
+                    android:textColor="@color/text_black"
                     android:textSize="@dimen/textfont18"
-                    android:text="xxxxxxxxxxxxx"/>
+                    android:text=""/>
             </FrameLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -63,7 +63,7 @@
                             android:ellipsize="end"
                             android:textSize="@dimen/textfont15"
                             android:textColor="@color/text_black"
-                            android:text="xxxxx"/>
+                            android:text=""/>
                     </LinearLayout>
                     <include layout="@layout/layout_divide_deep_line"/>
                     <TextView
@@ -71,10 +71,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space7"
-                        android:maxLines="3"
                         android:textColor="@color/text_black"
                         android:textSize="@dimen/textfont14"
-                        android:text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"/>
+                        android:gravity="center"
+                        android:text=""/>
                     <TextView
                         android:id="@+id/tv_url"
                         android:layout_width="wrap_content"
@@ -86,7 +86,7 @@
                         android:paddingLeft="@dimen/space13"
                         android:paddingRight="@dimen/space13"
                         android:paddingTop="@dimen/space10"
-                        android:textColor="@color/text_white"
+                        android:textColor="@color/text_black"
                         android:textSize="@dimen/textfont14"
                         android:visibility="visible" />
                     <LinearLayout
@@ -108,13 +108,19 @@
                             android:layout_marginLeft="@dimen/space5"
                             android:textSize="@dimen/textfont16"
                             android:textColor="@color/text_black"
-                            android:text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"/>
+                            android:text=""/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space20"
                         android:orientation="horizontal">
+                        <LinearLayout
+                            android:id="@+id/lin_call"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center">
                         <TextView
                             android:id="@+id/tv_call"
                             android:layout_width="wrap_content"
@@ -130,10 +136,13 @@
                             android:textSize="@dimen/space12"
                             android:textColor="@color/text_black"
                             android:text="@string/call"/>
-                        <Space
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/lin_wechat"
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center">
                         <TextView
                             android:id="@+id/tv_wechat"
                             android:layout_width="wrap_content"
@@ -149,10 +158,13 @@
                             android:textSize="@dimen/space12"
                             android:textColor="@color/text_black"
                             android:text="@string/copy"/>
-                        <Space
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/lin_weibo"
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center">
                         <TextView
                             android:id="@+id/tv_weibo"
                             android:layout_width="wrap_content"
@@ -164,10 +176,11 @@
                             android:paddingBottom="@dimen/space5"
                             android:gravity="center"
                             android:drawableLeft="@drawable/ic_bee_weibo"
-                            android:drawablePadding="@dimen/space12"
-                            android:textSize="@dimen/textfont15"
+                            android:drawablePadding="@dimen/space10"
+                            android:textSize="@dimen/space12"
                             android:textColor="@color/text_black"
                             android:text="@string/copy"/>
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
 

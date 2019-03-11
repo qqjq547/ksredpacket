@@ -14,6 +14,7 @@ import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.tools.AdCollectionView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.IntentUtils;
@@ -83,8 +84,10 @@ public class WebActivity extends MvpActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                tvTitle.setText(view.getTitle());
-                srlRefresh.finishRefresh();
+                if (wvContent.getProgress() == 100) {
+                    tvTitle.setText(view.getTitle());
+                    srlRefresh.finishRefresh();
+                }
             }
         });
         wvContent.addJavascriptInterface(new JSInterface(this),"browserController");
@@ -230,11 +233,11 @@ public class WebActivity extends MvpActivity {
             });
         }
         @JavascriptInterface
-        public void payment(final double money,final int number,final long snatchId,final boolean isPacketTail){
+        public void payment(final double money,final int number,final long snatchId,final int unitPrice){
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    IntentUtils.startPurchaseActivity(WebActivity.this,Constant.TYPE_PURCHASE_SNATCH,snatchId,number,String.valueOf(money));
+                    IntentUtils.startPurchaseActivity(WebActivity.this,Constant.TYPE_PURCHASE_SNATCH,snatchId,unitPrice,number,String.valueOf(money));
                 }
             });
         }
@@ -273,11 +276,13 @@ public class WebActivity extends MvpActivity {
             });
         }
         @JavascriptInterface
-        public void shareDetails(final String shareImg,final String shareUrl,final String shareTitle){
+        public void shareDetails(final String shareImg,final String shareUrl,final String shareTitle,final String shareText){
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    LogUtil.d("shareUrl="+shareUrl);
                     ShareDialog shareDialog=new ShareDialog(WebActivity.this,shareTitle,shareUrl,shareImg);
+                    shareDialog.setContent(shareText);
                     shareDialog.setOnShareResultListener(new ShareDialog.OnShareResultListener() {
                         @Override
                         public void onSuccess(String platform) {

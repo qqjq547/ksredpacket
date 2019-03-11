@@ -15,24 +15,20 @@
                     android:id="@+id/collap"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="115dp"
+                    android:minHeight="104dp"
                     android:background="@color/bg_trans_white"
-                    app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed">
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical"
                                     >
-                                      <FrameLayout
-                                          android:layout_width="match_parent"
-                                          android:layout_height="wrap_content">
                                         <android.support.v7.widget.RecyclerView
                                             android:id="@+id/rv_honey"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:nestedScrollingEnabled="false">
+                                            android:nestedScrollingEnabled="true">
                                         </android.support.v7.widget.RecyclerView>
-                                      </FrameLayout>
 
                                         <TextView
                                             android:id="@+id/tv_vote"
@@ -49,10 +45,10 @@
                                             android:visibility="gone"/>
                                         <ImageView
                                             android:id="@+id/iv_arrow"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
+                                            android:layout_width="@dimen/space20"
+                                            android:layout_height="@dimen/space20"
                                             android:layout_gravity="center_horizontal"
-                                            android:padding="@dimen/space12"
+                                            android:padding="@dimen/space5"
                                             android:src="@drawable/ic_double_arrow_down" />
                                 </LinearLayout>
                 </android.support.design.widget.CollapsingToolbarLayout>

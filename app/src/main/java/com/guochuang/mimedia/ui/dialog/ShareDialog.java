@@ -55,6 +55,7 @@ public class ShareDialog extends Dialog {
     String imageUrl;
     boolean report=false;
     String imagePath;
+    String content;
 
     OnShareResultListener onShareResultListener;
     public interface OnShareResultListener{
@@ -144,7 +145,9 @@ public class ShareDialog extends Dialog {
         }
         dismiss();
     }
-    public void showImage(){}
+    public void setContent(String content){
+        this.content=content;
+    }
 
     private void showShare(final String platform) {
         if (JShareInterface.isClientValid(platform)) {
@@ -157,7 +160,11 @@ public class ShareDialog extends Dialog {
             }
             shareParams.setShareType(Platform.SHARE_WEBPAGE);
             shareParams.setTitle(title);
-            shareParams.setText(getContext().getString(R.string.app_name));
+            if (TextUtils.isEmpty(content)){
+                shareParams.setText(getContext().getString(R.string.app_name));
+            }else {
+                shareParams.setText(content);
+            }
             shareParams.setUrl(url);
             if (TextUtils.isEmpty(imageUrl)){
                 shareParams.setImageData(BitmapFactory.decodeResource(getContext().getResources(),R.mipmap.app_icon));

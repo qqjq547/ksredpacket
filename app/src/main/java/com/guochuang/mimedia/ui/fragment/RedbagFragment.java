@@ -118,12 +118,16 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     boolean isFirstLocation = true;
     View vScope;
     Animation rotateAnim;
+    BaiduMap.OnMarkerClickListener onMarkerClickListener;
+    boolean showNest=false;
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             isDelay = false;
-            mLocationClient.start();
+            if (isVisible()) {
+                mLocationClient.start();
+            }
         }
     };
 
@@ -168,7 +172,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
         mvpPresenter.getWalletCoinAndMoney();
         mvpPresenter.getScrollBar();
         mvpPresenter.getUserRole();
-        bm.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
+        onMarkerClickListener=new BaiduMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
                 optMarker = marker;
@@ -208,9 +212,10 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                 }
                 return false;
             }
-        });
+        };
+        bm.setOnMarkerClickListener(onMarkerClickListener);
         setUserRole(getPref().getInt(PrefUtil.USER_ROLE,0));
-        setHomeAd(new ArrayList<NestHomeAd>());
+//        setHomeAd(new ArrayList<NestHomeAd>());
     }
 
     @Override
@@ -223,6 +228,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     public void onResume() {
         super.onResume();
         mvRedbag.onResume();
+        bm.setOnMarkerClickListener(onMarkerClickListener);
         if (mLocationClient != null) {
             if (!TextUtils.isEmpty(getPref().getLatitude())) {
                 mvpPresenter.getHomeRegion(getPref().getLatitude(), getPref().getLongitude());
@@ -303,6 +309,9 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                     handler.sendEmptyMessage(0);
                     mvpPresenter.getHomeRegion(getPref().getLatitude(), getPref().getLongitude());
                     mvpPresenter.getKilometre();
+                    if (showNest) {
+                        mvpPresenter.getHomeAd(getPref().getLatitude(), getPref().getLongitude());
+                    }
                 }
                 break;
             case R.id.tv_upgrade_agent:
@@ -348,8 +357,8 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
             if (isFirstLocation) {
                 isFirstLocation = false;
                 mvpPresenter.getHomeRegion(getPref().getLatitude(), getPref().getLongitude());
-                mvpPresenter.getHomeAd(getPref().getLatitude(), getPref().getLongitude());
                 mvpPresenter.userStatistics(getPref().getLatitude(), getPref().getLongitude());
+                mvpPresenter.getIsQualified(getPref().getLatitude(), getPref().getLongitude());
             }
             if (!isHidden() && isResumed()) {
                 isDelay = true;
@@ -357,6 +366,9 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
             }
             mvpPresenter.redPacketGet(String.valueOf(bdLocation.getLatitude()), String.valueOf(bdLocation.getLongitude()));
             mvpPresenter.getLocationRedabg(String.valueOf(bdLocation.getLatitude()), String.valueOf(bdLocation.getLongitude()));
+            if (showNest) {
+                mvpPresenter.getHomeAd(String.valueOf(bdLocation.getLatitude()), String.valueOf(bdLocation.getLongitude()));
+            }
             LatLng ll = new LatLng(bdLocation.getLatitude(),
                     bdLocation.getLongitude());
             MapStatus.Builder builder = new MapStatus.Builder();
@@ -399,7 +411,9 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     public void setSystemRedbag(List<Redbag> data) {
         closeAnim();
         if (data != null) {
-            addMarker(data, poolOptions);
+            if (isVisible()) {
+                addMarker(data, poolOptions);
+            }
         }
     }
 
@@ -407,7 +421,9 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     public void setLocationRedbag(List<Redbag> data) {
         closeAnim();
         if (data != null) {
-            addMarker(data, locOptions);
+            if (isVisible()) {
+                addMarker(data, locOptions);
+            }
         }
     }
 
@@ -481,7 +497,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     @Override
     public void setHomeAd(List<NestHomeAd> data) {
         LinearLayout.LayoutParams lp=(LinearLayout.LayoutParams) flCityOwner.getLayoutParams();
-//        for (int i=0;i<8;i++){
+//        for (int i=0;i<30;i++){
 //            NestHomeAd ad=new NestHomeAd();
 //            ad.setCoverPicture("https://upload.jianshu.io/users/upload_avatars/4174308/540285e2-5be5-483a-9259-db485564a4b0.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96");
 //            ad.setShortMsg("name="+(i+1));
@@ -495,7 +511,12 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
         }
         flCityOwner.setLayoutParams(lp);
     }
-
+    @Override
+    public void setIsQualified(Boolean data) {
+        if (data!=null&&data.booleanValue()){
+            ((MainActivity)getActivity()).startNestAd();
+        }
+    }
     @Override
     public void setError(String msg) {
         closeLoadingDialog();
@@ -581,8 +602,19 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
 
             @Override
             public void onSendAd() {
+                clearMarker();
                 startActivity(new Intent(getActivity(),AdBidActivity.class));
             }
         });
+    }
+    public void clearMarker(){
+        bm.removeMarkerClickListener(onMarkerClickListener);
+        bm.clear();
+    }
+    public void openNestAd(){
+        showNest=true;
+        if (!TextUtils.isEmpty(getPref().getString(PrefUtil.LATITUDE,""))){
+            mvpPresenter.getHomeAd(PrefUtil.getInstance().getLatitude(),getPref().getLongitude());
+        }
     }
 }

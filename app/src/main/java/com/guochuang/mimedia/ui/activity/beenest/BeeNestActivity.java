@@ -24,6 +24,7 @@ import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.TVCheckAll;
 import com.guochuang.mimedia.tools.ToastUtil;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
+import com.guochuang.mimedia.ui.activity.MainActivity;
 import com.guochuang.mimedia.ui.adapter.PictureVerticalAdapter;
 import com.guochuang.mimedia.ui.dialog.BeeNestDialog;
 import com.guochuang.mimedia.ui.dialog.ReportDialog;
@@ -69,6 +70,12 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
     LinearLayout linInfo;
     @BindView(R.id.rv_picture)
     RecyclerView rvPicture;
+    @BindView(R.id.lin_call)
+    LinearLayout linCall;
+    @BindView(R.id.lin_wechat)
+    LinearLayout linWechat;
+    @BindView(R.id.lin_weibo)
+    LinearLayout linWeibo;
     PictureVerticalAdapter adapter;
     List<String> pictureArr=new ArrayList<>();
     long nestInfoId=0;
@@ -112,6 +119,7 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
 
                     @Override
                     public void onBidOther() {
+                        MainActivity.getInstance().clearMarker();
                         startActivity(new Intent(BeeNestActivity.this,AdBidActivity.class));
                     }
 
@@ -132,15 +140,23 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
                 }
                 break;
             case R.id.tv_url:
-                IntentUtils.startOutWebActivity(this, "");
+                if(detail==null)
+                    return;
+                IntentUtils.startOutWebActivity(this, detail.getLinkUrl());
                 break;
             case R.id.tv_navigation:
-                GuideHelper.guide(this,Double.parseDouble(getPref().getLatitude()),Double.parseDouble(getPref().getLongitude()));
+                if(detail==null)
+                    return;
+                    GuideHelper.guide(this, detail.getAddressLat(), detail.getAddressLng());
                 break;
             case R.id.tv_call:
-                CommonUtil.callPhone(this,detail.getContactPhone());
+                if(detail==null)
+                    return;
+                    CommonUtil.callPhone(this, detail.getContactPhone());
                 break;
             case R.id.tv_wechat:
+                if(detail==null)
+                    return;
                 CommonUtil.copyMsg(this, detail.getWechat());
                 new DialogBuilder(this)
                         .setTitle(R.string.tip)
@@ -159,6 +175,8 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
                         }).create().show();
                 break;
             case R.id.tv_weibo:
+                if(detail==null)
+                    return;
                 CommonUtil.copyMsg(this, detail.getWeibo());
                 new DialogBuilder(this)
                         .setTitle(R.string.tip)
@@ -183,7 +201,7 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
     public void setData(NestAd data) {
         closeLoadingDialog();
         this.detail=data;
-        tvTitle.setText(data.getTitle());
+        tvTitle.setText(data.getShortMsg());
         tvName.setText(data.getTitle());
         GlideImgManager.loadImage(this,data.getCoverPicture(),ivBackground);
         if (data.getIsCollection()>0){
@@ -199,20 +217,20 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
              tvUrl.setText(data.getLinkText());
          }
          tvAddress.setText(data.getAddress()+data.getAddressDetail());
-         if (TextUtils.isEmpty(data.getContactPhone())){
-             tvCall.setVisibility(View.GONE);
-         }else {
-             tvCall.setVisibility(View.VISIBLE);
-         }
-        if (TextUtils.isEmpty(data.getWechat())){
-            tvWechat.setVisibility(View.GONE);
-        }else {
-            tvWechat.setVisibility(View.VISIBLE);
+        if (TextUtils.isEmpty(data.getContactPhone())) {
+            linCall.setVisibility(View.GONE);
+        } else {
+            linCall.setVisibility(View.VISIBLE);
         }
-        if (TextUtils.isEmpty(data.getWeibo())){
-            tvWeibo.setVisibility(View.GONE);
-        }else {
-            tvWeibo.setVisibility(View.VISIBLE);
+        if (TextUtils.isEmpty(data.getWechat())) {
+            linWechat.setVisibility(View.GONE);
+        } else {
+            linWechat.setVisibility(View.VISIBLE);
+        }
+        if (TextUtils.isEmpty(data.getWeibo())) {
+            linWeibo.setVisibility(View.GONE);
+        } else {
+            linWeibo.setVisibility(View.VISIBLE);
         }
         pictureArr.addAll(data.getPictureList());
         adapter=new PictureVerticalAdapter(pictureArr);

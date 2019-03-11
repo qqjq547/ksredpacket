@@ -61,7 +61,7 @@ public class CollectInfoFragment extends MvpFragment<CollectInfoPresenter> imple
             }
         });
         rvList.setAdapter(adapter);
-        srlRefresh.setEnableRefresh(false);
+        srlRefresh.setEnableRefresh(true);
         srlRefresh.setEnableLoadmore(true);
         srlRefresh.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
             @Override

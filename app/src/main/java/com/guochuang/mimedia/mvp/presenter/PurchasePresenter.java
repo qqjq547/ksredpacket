@@ -95,8 +95,8 @@ public class PurchasePresenter extends BasePresenter<PurchaseView> {
             }
         });
     }
-    public void createSnatchOrder(String channelCode,int payType,long snatchId,int buyCount,String longitude,String latitude,String safetyCode){
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().createSnatchOrder(channelCode,payType,snatchId,buyCount,longitude,latitude,safetyCode)), new ApiCallback<Order>() {
+    public void createSnatchOrder(String channelCode,int payType,long snatchId,int unitPrice,int buyCount,String longitude,String latitude,String safetyCode){
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().createSnatchOrder(channelCode,payType,snatchId,unitPrice,buyCount,longitude,latitude,safetyCode)), new ApiCallback<Order>() {
             @Override
             public void onSuccess(Order data) {
                 mvpView.setSnatch(data);
@@ -115,8 +115,30 @@ public class PurchasePresenter extends BasePresenter<PurchaseView> {
             }
         });
     }
-    public void buyNestAd(String channelCode,int payType,long nestTimeInfoId,int price,int totalPrice,String longitude,String latitude,String safetyCode){
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().buyNestTime(channelCode,payType,nestTimeInfoId,price,totalPrice,longitude,latitude,safetyCode)), new ApiCallback<Order>() {
+    public void buyNestAd(
+            String channelCode,
+            int payType,
+            long nestLocationId,
+            int price,
+            String startDate,
+            int days,
+            String payLatitude,
+            String payLongitude,
+            String nestLatitude,
+            String nestLongitude,
+            String safetyCode){
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().buyNestTime(
+                channelCode,
+                payType,
+                nestLocationId,
+                price,
+                startDate,
+                days,
+                payLatitude,
+                payLongitude,
+                nestLatitude,
+                nestLongitude,
+                safetyCode)), new ApiCallback<Order>() {
             @Override
             public void onSuccess(Order data) {
                 mvpView.setBuyNestAd(data);

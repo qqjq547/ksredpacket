@@ -250,5 +250,25 @@ public class RedbagPresenter extends BasePresenter<RedbagView> {
             }
         });
     }
+    public void getIsQualified(String latitude,String longitude) {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
+                getIsQualified(latitude,longitude)), new ApiCallback<Boolean>() {
+            @Override
+            public void onSuccess(Boolean data) {
+                mvpView.setIsQualified(data);
 
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setError(exception.getMessage());
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
 }
