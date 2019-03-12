@@ -24,6 +24,7 @@ import com.guochuang.mimedia.mvp.model.KsbTransfer;
 import com.guochuang.mimedia.mvp.model.KsbTrend;
 import com.guochuang.mimedia.mvp.model.CurrentRegion;
 import com.guochuang.mimedia.mvp.model.CityBidHall;
+import com.guochuang.mimedia.mvp.model.LookSurveyResult;
 import com.guochuang.mimedia.mvp.model.LuckyConfig;
 import com.guochuang.mimedia.mvp.model.LuckyResult;
 import com.guochuang.mimedia.mvp.model.MegviiSerach;
@@ -1331,4 +1332,6 @@ public interface ApiStore {
 
     );
 
+    @GET("/api/v1/survey/v2/survey/get")
+    Observable<HttpResponse<LookSurveyResult>> getProblems();
 }

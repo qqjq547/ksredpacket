@@ -27,6 +27,7 @@ import com.guochuang.mimedia.mvp.model.ProblemBean;
 import com.guochuang.mimedia.mvp.presenter.VideoProblemPresenter;
 import com.guochuang.mimedia.mvp.view.VideoProblemView;
 import com.guochuang.mimedia.tools.Constant;
+import com.guochuang.mimedia.tools.DialogBuilder;
 import com.guochuang.mimedia.ui.adapter.ProblemDialogInAdapter;
 import com.guochuang.mimedia.ui.adapter.VideoProblemAdapter;
 import com.sz.gcyh.KSHongBao.R;
@@ -112,8 +113,11 @@ public class VideoProblemActivity extends MvpActivity<VideoProblemPresenter> imp
         mVideoProblemAdapter.setOnDeleteClickLisenter(new VideoProblemAdapter.OnDeleteClick() {
             @Override
             public void onClick(int position) {
-                mProblemList.remove(position);
-                refreshUI();
+                //删除提示框
+                deletDialog(position);
+
+
+
             }
         });
 
@@ -122,6 +126,27 @@ public class VideoProblemActivity extends MvpActivity<VideoProblemPresenter> imp
         refreshUI();
 
     }
+
+
+
+    private void deletDialog(final int position) {
+
+        new DialogBuilder(this)
+                .setTitle(R.string.tip)
+                .setMessage("您确定删除该问题？")
+                .setNegativeButton(R.string.cancel,null)
+                .setPositiveButton(R.string.confirm, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mProblemList.remove(position);
+                        refreshUI();
+
+                    }
+                }).create().show();
+
+    }
+
+
 
     private void EditProblem(int position) {
         //修改前的数据

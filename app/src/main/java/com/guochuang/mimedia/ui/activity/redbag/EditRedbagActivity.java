@@ -638,7 +638,10 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
             mvpPresenter.addLuckyRedbag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode);
         } else if (TextUtils.equals(redPacketType, Constant.RED_PACKET_TYPE_VIDEO)) {
             //picture 拼接的是视频地址
-
+            if(TextUtils.isEmpty(picture)) {
+                showShortToast("上传视频");
+                return;
+            }
             String joinProblmeJson = joinProblmeJson();
                       Log.e("startPay: ", joinProblmeJson);
 
