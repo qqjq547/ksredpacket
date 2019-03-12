@@ -281,6 +281,14 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
             dateAvatar.clear();
             currentArr.clear();
             nextArr.clear();
+            Calendar startDateCal = Calendar.getInstance();
+            startDateCal.setTime(CommonUtil.stringToDate(data.getStartDate(), Constant.FORMAT_DATE_SIMPLE));
+            for(int i=0;i<15;i++){
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(startDateCal.getTime());
+                cal.add(Calendar.DATE, i);
+                nextArr.add(CommonUtil.dateToString(cal.getTime(), Constant.FORMAT_DATE_SIMPLE));
+            }
             if (data.getBuyList()!=null&&data.getBuyList().size()>0){
                 for (NestTimeInfo.BuyListBean listBean:data.getBuyList()){
                     Calendar startCal = Calendar.getInstance();
@@ -292,19 +300,15 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
                         Calendar cal = Calendar.getInstance();
                         cal.setTime(startCal.getTime());
                         cal.add(Calendar.DATE, i);
-                        dateAvatar.put(CommonUtil.dateToString(cal.getTime(), Constant.FORMAT_DATE_SIMPLE),listBean.getUserAvatar());
-                        currentArr.add(CommonUtil.dateToString(cal.getTime(), Constant.FORMAT_DATE_SIMPLE));
+                        String dateStr=CommonUtil.dateToString(cal.getTime(), Constant.FORMAT_DATE_SIMPLE);
+                        if (!nextArr.contains(dateStr)){
+                            dateAvatar.put(dateStr,listBean.getUserAvatar());
+                            currentArr.add(dateStr);
+                        }
                     }
                 }
             }
-            Calendar startCal = Calendar.getInstance();
-            startCal.setTime(CommonUtil.stringToDate(data.getStartDate(), Constant.FORMAT_DATE_SIMPLE));
-            for(int i=0;i<15;i++){
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(startCal.getTime());
-                cal.add(Calendar.DATE, i);
-                nextArr.add(CommonUtil.dateToString(cal.getTime(), Constant.FORMAT_DATE_SIMPLE));
-            }
+
 
             setSelect(5);
 
@@ -327,6 +331,11 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
         tvBuyTime.setText(String.format(getString(R.string.format_time_to_time), currentSelectArr.get(0), currentSelectArr.get(currentSelectArr.size()-1)));
         tvBuyDayCount.setText(String.format(getString(R.string.format_day_count), currentSelectArr.size()));
         cdvMonth.update();
+        String text = etBidPrice.getText().toString().trim();
+        if (!TextUtils.isEmpty(text)){
+            double money=Double.parseDouble(text);
+            tvEqualKsb.setText(String.valueOf(DoubleUtil.divide(money*selectDayCount,rate)));
+        }
     }
 
     @Override
@@ -340,6 +349,7 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == Constant.REQUEST_PURCHASE) {
             showLoadingDialog(null);
+            etBidPrice.setText(null);
             mvpPresenter.setNestTimeInfo(nestLocationId,latitude,longitude);
         }
     }
