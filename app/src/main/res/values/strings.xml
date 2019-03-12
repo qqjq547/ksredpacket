@@ -638,6 +638,7 @@
     <string name="showlist_hint">分享自己的喜悦吧</string>
     <string name="has_send_good">已发货</string>
     <string name="waiting_send_good">待发放</string>
+    <string name="waiting_send_good_thing">待发货</string>
     <string name="received_address">收货地址</string>
     <string name="address_hint">详细地址，如道路、门牌号、小区、楼栋号等</string>
     <string name="received_person_name">收货人姓名</string>
