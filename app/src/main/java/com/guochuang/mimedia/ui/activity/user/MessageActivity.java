@@ -88,8 +88,13 @@ public class MessageActivity extends MvpActivity<MessagePresenter> implements Me
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Message message=messageArr.get(position);
-                if (TextUtils.equals(message.getType(),Constant.MSG_TYPE_NOTICE)){
-                    IntentUtils.startWebActivity(MessageActivity.this,message.getTitle(),Constant.URL_NOTICE_DETAIL +"?id="+message.getId());
+                switch (message.getType()){
+                    case Constant.MSG_TYPE_NOTICE:
+                        IntentUtils.startWebActivity(MessageActivity.this,message.getTitle(),Constant.URL_NOTICE_DETAIL +"?id="+message.getId());
+                        break;
+                    case Constant.MSG_TYPE_SNATCHACTIVITY:
+                        IntentUtils.startWebActivity(MessageActivity.this,"",Constant.URL_DUOBAO_DETAIL+message.getSourceUuid());
+                        break;
                 }
             }
         });

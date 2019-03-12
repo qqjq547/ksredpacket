@@ -225,6 +225,9 @@ public class Message implements MultiItemEntity {
             case Constant.MSG_TYPE_REDPACKET:
                 itemType=1;
                 break;
+            case Constant.MSG_TYPE_SNATCHACTIVITY:
+                itemType=2;
+                break;
 
         }
         return itemType;

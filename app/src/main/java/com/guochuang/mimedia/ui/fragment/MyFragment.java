@@ -115,13 +115,15 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
     public void initViewAndData() {
         if (Constant.isDebug){
             tvTitle.setVisibility(View.VISIBLE);
-            if (ApiClient.API_SERVER_URL.equals(ApiClient.DEV_URL)){
-                tvTitle.setText(R.string.dev_version);
-            }else if(ApiClient.API_SERVER_URL.equals(ApiClient.TEST_URL)){
-                tvTitle.setText(R.string.test_version);
-            }else if(ApiClient.API_SERVER_URL.equals(ApiClient.RELEASE_URL)){
-                tvTitle.setText(R.string.release_version);
-            }
+            int debugHost = getPref().getInt(PrefUtil.DEBUGHOST, Constant.DEFAULT_HOST);
+            switch (debugHost) {
+                case 0://测试host
+                    tvTitle.setText(R.string.test_version);
+                case 1://生产host
+                    tvTitle.setText(R.string.release_version);
+                case 2://开发host
+                    tvTitle.setText(R.string.dev_version);
+               }
         }else {
            tvTitle.setVisibility(View.GONE);
         }

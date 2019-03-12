@@ -17,7 +17,8 @@ public class Constant {
      * 是否调试模式
      */
     public static final boolean isDebug = (BuildConfig.ENV == 0);
-    public static final int HTTP_STATUS_OK = 1;
+    public static final int DEFAULT_HOST = 2;
+
     public static final int HTTP_STATUS_FORCE_LOGIN = 1007;
     public static final int HTTP_STATUS_REDBAD_INVALID = 10012;
     public static final String PARAMS_H_TIME = "h-time";
@@ -87,7 +88,7 @@ public class Constant {
     public static final String ADDRESS = "address";
     public static final String NESTINFOID = "nestInfoId";
     public static final String NESTLOCATIONID = "nestLocationId";
-    public static final String NESTTIMEID = "nestTimeId";
+    public static final String NESTSUCCESSID = "nestSuccessId";
     public static final String NESTUPDATE = "nestUpdate";
     public static final String PRICE = "price";
     public static final String INVITECODE = "inviteCode";
@@ -237,6 +238,7 @@ public class Constant {
     public static final String MSG_TYPE_NOTICE = "notice";
     public static final String MSG_TYPE_COMMENT = "comment";
     public static final String MSG_TYPE_REDPACKET = "redPacket";
+    public static final String MSG_TYPE_SNATCHACTIVITY = "snatchActivity";
 
     public static final String ACTION_CHANGE_COIN = "change_coin";
     public static final String ACTION_CHANGE_AGENT = "change_agent";

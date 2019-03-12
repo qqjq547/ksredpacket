@@ -98,7 +98,7 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
 
     long nestInfoId;
     long nestLocationId;
-    long nestTimeId;
+    long nestSuccessId;
     String shortMsg;
     String iconUrl;
     String content;
@@ -141,7 +141,7 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
         tvText.setText(R.string.select_temp);
         nestInfoId=getIntent().getLongExtra(Constant.NESTINFOID,0);
         nestLocationId=getIntent().getLongExtra(Constant.NESTLOCATIONID,0);
-        nestTimeId=getIntent().getLongExtra(Constant.NESTTIMEID,0);
+        nestSuccessId=getIntent().getLongExtra(Constant.NESTSUCCESSID,0);
         isUpdate=getIntent().getBooleanExtra(Constant.NESTUPDATE,false);
         rvPicture.setLayoutManager(new GridLayoutManager(this,3));
         rvPicture.addItemDecoration(new GridItemDecoration(3,CommonUtil.dip2px(this,10),false));
@@ -405,7 +405,7 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
     public void editNestAd(){
         showLoadingDialog(null);
         picture=TextUtils.join(",",picUrlArr);
-        mvpPresenter.editNestAd(nestInfoId,nestLocationId,nestTimeId,shortMsg,iconUrl,content,picture,adTitle,adMobile,adArea,adAddress
+        mvpPresenter.editNestAd(nestInfoId,nestLocationId,nestSuccessId,shortMsg,iconUrl,content,picture,adTitle,adMobile,adArea,adAddress
         ,latitude,longitude,urlName,url,wechat,microblog,isSaveTemplate);
     }
 

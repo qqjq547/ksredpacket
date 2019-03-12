@@ -61,9 +61,9 @@ public class AdListFragment extends MvpFragment<AdListPresenter> implements AdLi
                     startActivity(new Intent(getActivity(),BeeNestActivity.class).putExtra(Constant.NESTINFOID,myAd.getNestInfoId()));
                 }else {
                     if (myAd.getNestInfoId()==0){
-                        IntentUtils.startEditAdActivity(getActivity(),myAd.getNestInfoId(),myAd.getNestLocationId(),myAd.getNestTimeId(),false);
+                        IntentUtils.startEditAdActivity(getActivity(),myAd.getNestInfoId(),myAd.getNestLocationId(),myAd.getNestSuccessId(),false);
                     }else {
-                        IntentUtils.startEditAdActivity(getActivity(),myAd.getNestInfoId(),myAd.getNestLocationId(),myAd.getNestTimeId(),true);
+                        IntentUtils.startEditAdActivity(getActivity(),myAd.getNestInfoId(),myAd.getNestLocationId(),myAd.getNestSuccessId(),true);
                     }
                 }
             }
