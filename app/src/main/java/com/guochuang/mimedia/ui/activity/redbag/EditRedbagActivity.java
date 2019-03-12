@@ -206,6 +206,9 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                 break;
             case Constant.RED_PACKET_TYPE_QUESTION:
                 tvTitle.setText(R.string.questionnaire_redbag);
+                linWord.setVisibility(View.GONE);
+                cbPublicPassword.setVisibility(View.GONE);
+                cbSaveTemp.setText(R.string.save_problem_temp);
                 mLlSetProblem.setVisibility(View.VISIBLE);
                 mTvProblemNumber.setText("请设置问题");
 
@@ -250,12 +253,12 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
 
                     //判断类型
                     ArrayList<String> selectArr = (ArrayList<String>) pictureArr.clone();
-                    selectArr.remove(null);
                     if (Constant.RED_PACKET_TYPE_VIDEO.equals(redPacketType)) {
                         //打開視頻預覽
-//                        Bundle bundle = new Bundle();
-//                        bundle.putStringArrayList(Constant.VIDEO_PATH_LIST, selectArr);
-                        startActivity(VideoPreviewActivity.class, null);
+
+                        Bundle bundle = new Bundle();
+                        bundle.putString(Constant.VIDEO_PATH, selectArr.get(position));
+                        startActivity(VideoPreviewActivity.class, bundle);
 
                     } else {
 
@@ -540,11 +543,13 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                     break;
 
                 case VIDEO_OPEN_CODE:
+                case QUESTION_OPEN_CODE:
                     //视频回来
                     ArrayList<ProblemBean> problemlist = intent.getParcelableArrayListExtra(Constant.问题数据集合);
                     mProblemList.clear();
                     mProblemList.addAll(problemlist);
                     mTvProblemNumber.setText("已设置" + mProblemList.size() + "道题");
+                    Log.e("onActivityResult: ", mProblemList.toString());
                     break;
             }
         }
@@ -635,9 +640,15 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
             //picture 拼接的是视频地址
 
             String joinProblmeJson = joinProblmeJson();
-            Log.e( "startPay: ",joinProblmeJson );
+                      Log.e("startPay: ", joinProblmeJson);
 
             mvpPresenter.addVideoReabag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson);
+        }else if(TextUtils.equals(redPacketType, Constant.RED_PACKET_TYPE_QUESTION)) {
+            //问卷红包
+            String joinProblmeJson = joinProblmeJson();
+            Log.e("startPay: ", joinProblmeJson);
+            mvpPresenter.addSurveyReabag(latitude, longitude, redbagLatitude, redbagLongitude,content, picture,areaType, kilometer, money,quantity,urlName,url,wechat, microblog,isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson);
+
         }
     }
 
@@ -667,7 +678,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                     ProblemBean.ItemBean itemBean = item.get(j);
                     itemJsonObj.put("optionName", itemBean.getItemname())
                             .put("optionValue", itemBean.getItemcontent())
-                            .put("isAnswer", itemBean.isIsanswer())
+                            .put("isAnswer", itemBean.isIsanswer() ? 1 : 0)
                             .put("sequence", j);
 
                     itemJsonArray.put(itemJsonObj);

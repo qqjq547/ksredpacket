@@ -1302,10 +1302,33 @@ public interface ApiStore {
     );
 
 
+    @FormUrlEncoded
+    @POST("/api/v1/redpacket/person_red_packet/add_survey")
+    Observable<HttpResponse<String>> addSurveyRedbag(
+            @Field("userLatitude") String userLatitude,
+            @Field("userLongitude") String userLongitude,
+            @Field("redPacketLatitude") String redPacketLatitude,
+            @Field("redPacketLongitude") String redPacketLongitude,
+            @Field("content") String content,
+            @Field("picture") String videoUrl,
+            @Field("areaType") int areaType,
+            @Field("kilometer") int kilometer,
+            @Field("money") Double money,
+            @Field("quantity") int quantity,
+            @Field("urlName") String urlName,
+            @Field("url") String url,
+            @Field("wechat") String wechat,
+            @Field("microblog") String microblog,
+            @Field("isPublicPassword") int isPublicPassword,
+            @Field("isSaveTemplate") int isSaveTemplate,
+            @Field("payType") int payType,
+            @Field("channelCode") String channelCode,
+            @Field("safetyCode") String safetyCode,
+
+            @Field("surveyType") int surveyType,
+            @Field("addJsonList") String addJsonList
 
 
-
-
-
+    );
 
 }

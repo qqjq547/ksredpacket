@@ -287,4 +287,48 @@ public class EditRedbagPresenter extends BasePresenter<EditRedbagView> {
         });
 
     }
+
+    public void addSurveyReabag(String latitude, String longitude, String redbagLatitude, String redbagLongitude, String content, String picture, int areaType, int kilometer, double money, int quantity, String urlName, String url, String wechat, String microblog, int isPublicPassword, int isSaveTemplate, int payType, String channelCode, String safetyCode, String problemstr) {
+
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().addSurveyRedbag(
+                latitude,
+                longitude,
+                redbagLatitude,
+                redbagLongitude,
+                content,
+                picture,
+                areaType,
+                kilometer,
+                money,
+                quantity,
+                urlName,
+                url,
+                wechat,
+                microblog,
+                isPublicPassword,
+                isSaveTemplate,
+                payType,
+                channelCode,
+                safetyCode,1,problemstr)), new ApiCallback<String>() {
+            @Override
+            public void onSuccess(String data) {
+                mvpView.setData(data);
+
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setError(exception.getMessage());
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+
+
+
+    }
 }

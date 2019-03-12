@@ -697,5 +697,6 @@
     <string name="video_redbag">视频红包</string>
     <string name="questionnaire_redbag">问卷红包</string>
     <string name="save_video_temp">保存为视频红包模板</string>
+    <string name="save_problem_temp">保存为问卷红包模板</string>
 
 </resources>

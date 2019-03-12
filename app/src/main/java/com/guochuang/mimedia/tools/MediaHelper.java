@@ -6,6 +6,7 @@ import android.media.MediaPlayer;
  * 多媒体的工具类
  */
 public final class MediaHelper {
+    public static boolean isPlay;
 
     private MediaHelper() {
     }
@@ -24,6 +25,7 @@ public final class MediaHelper {
     public static void play(){
         if(mPlayer != null){
             mPlayer.start();
+            isPlay = true;
         }
     }
 
@@ -31,6 +33,7 @@ public final class MediaHelper {
     public static void pause(){
         if(mPlayer != null){
             mPlayer.pause();
+            isPlay = false;
         }
     }
 
@@ -39,6 +42,7 @@ public final class MediaHelper {
         if(mPlayer != null){
             mPlayer.release();
             mPlayer = null;
+            isPlay = false;
         }
     }
 

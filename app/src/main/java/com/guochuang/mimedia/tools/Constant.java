@@ -279,5 +279,6 @@ public class Constant {
     public static final String VIDEO_PATH_LIST = "视频路径集合";
     public static final String PROBLEMLIST_KEY = "问题集合";
     public static final String OPEN_VIDEOPROBLEMACTIVITY_TYPE = "打开VideoProblemActivity的类型";
+    public static final String VIDEO_PATH = "视频路径";
     public static String 问题数据集合 = "问题数据集合";
 }
