@@ -2,21 +2,14 @@ package com.guochuang.mimedia.http.retrofit;
 
 import android.support.v4.util.ArrayMap;
 
-import com.baidu.location.Jni;
 import com.guochuang.mimedia.tools.Constant;
-import com.guochuang.mimedia.tools.JniUtil;
-import com.guochuang.mimedia.tools.JsonUtil;
-import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.tools.StringUtil;
 import com.sz.gcyh.KSHongBao.BuildConfig;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.security.SecureRandom;
-import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -43,17 +36,14 @@ public class ApiClient {
     private static ApiClient instances;
     private ApiStore apiStores;
     public static OkHttpClient okHttpClient;
-    public static String DEV_URL="http://dev.guochuangyuanhe.com:7005/";
-    public static String TEST_URL="http://test_gateway.guochuangyuanhe.com/";
-    public static String RELEASE_URL="https://api.guochuangyuanhe.com/";
-    public static String HTML_URL=
-            Constant.isDebug ?
-            getDebuHtmlHost():
-            "https://www.guochuangyuanhe.com/";
-    public static String API_SERVER_URL =
-            Constant.isDebug ?
-                    getDebugHost():
-                    RELEASE_URL;
+    public static String DEV_API_URL="http://dev_api.guochuangyuanhe.com/";
+    public static String DEV_H5_URL="http://dev_h5.guochuangyuanhe.com/";
+    public static String TEST_API_URL ="http://test_gateway.guochuangyuanhe.com/";
+    public static String TEST_H5_URL ="http://120.77.110.100/";
+    public static String RELEASE_API_URL ="https://api.guochuangyuanhe.com/";
+    public static String RELEASE_H5_URL="https://www.guochuangyuanhe.com/";
+    public static String HTML_URL= getDebuHtmlHost();
+    public static String API_SERVER_URL = getDebugHost();
 
     public static Retrofit Retrofit(final String baseUrl) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
@@ -169,27 +159,31 @@ public class ApiClient {
         return ssfFactory;
     }
     public static String getDebugHost(){
-        int debugHost=PrefUtil.getInstance().getInt(PrefUtil.DEBUGHOST,2);
-        switch (debugHost){
-            case 0://测试host
-                return TEST_URL;
-            case 1://生产host
-                return RELEASE_URL;
-            case 2://生产host
-                return DEV_URL;
+        if (Constant.isDebug) {
+            int debugHost = PrefUtil.getInstance().getInt(PrefUtil.DEBUGHOST, Constant.DEFAULT_HOST);
+            switch (debugHost) {
+                case 0://测试host
+                    return TEST_API_URL;
+                case 1://生产host
+                    return RELEASE_API_URL;
+                case 2://开发host
+                    return DEV_API_URL;
+            }
         }
-        return "";
+        return RELEASE_API_URL;
     }
     public static String getDebuHtmlHost(){
-        int debugHost=PrefUtil.getInstance().getInt(PrefUtil.DEBUGHOST,2);
-        switch (debugHost){
-            case 0://测试host
-                return "http://120.77.110.100/";
-            case 1://生产host
-                return "https://www.guochuangyuanhe.com/";
-            case 2://开发host
-                return "http://120.77.110.100/";
+        if (Constant.isDebug){
+            int debugHost=PrefUtil.getInstance().getInt(PrefUtil.DEBUGHOST,Constant.DEFAULT_HOST);
+            switch (debugHost){
+                case 0://测试host
+                    return TEST_H5_URL;
+                case 1://生产host
+                    return RELEASE_H5_URL;
+                case 2://开发host
+                    return DEV_H5_URL;
+            }
         }
-        return "";
+        return RELEASE_H5_URL;
     }
 }

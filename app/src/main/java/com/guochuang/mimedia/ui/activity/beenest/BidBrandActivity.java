@@ -261,7 +261,7 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
                         int price = Integer.parseInt(bidPrice);
                         if (price<=timeInfo.getCurrentPrice()){
                             showShortToast(R.string.buy_price_limit);
-                        }else if (price >= timeInfo.getMaxPrice()) {
+                        }else if (price > timeInfo.getMaxPrice()) {
                             showShortToast(R.string.buy_price_low);
                         } else {
                             IntentUtils.startPurchaseActivity(this, Constant.TYPE_PURCHASE_NESTAD, nestLocationId, price,String.valueOf(price*selectDayCount),selectDayCount,timeInfo.getStartDate(),latitude,longitude);

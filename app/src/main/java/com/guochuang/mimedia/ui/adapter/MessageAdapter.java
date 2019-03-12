@@ -18,6 +18,7 @@ public class MessageAdapter extends BaseMultiItemQuickAdapter<Message,BaseViewHo
         super(data);
         addItemType(0, R.layout.item_message_notice);
         addItemType(1, R.layout.item_message_redbag);
+        addItemType(2, R.layout.item_message_snatch);
     }
 
     @Override
@@ -52,6 +53,11 @@ public class MessageAdapter extends BaseMultiItemQuickAdapter<Message,BaseViewHo
                     helper.setText(R.id.tv_content_title,item.getSourceContent());
                     helper.setTextColor(R.id.tv_content_title,mContext.getResources().getColor(R.color.text_black));
                 }
+                helper.setText(R.id.tv_time,item.getCreateDate());
+                break;
+            case 2:
+                helper.setText(R.id.tv_name,item.getTitle());
+                helper.setText(R.id.tv_content,item.getContent());
                 helper.setText(R.id.tv_time,item.getCreateDate());
                 break;
         }
