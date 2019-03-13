@@ -276,7 +276,7 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
                     showShortToast(R.string.content_cant_empty);
                 }else if(TextUtils.isEmpty(adTitle)){
                     showShortToast(R.string.title_cant_empty);
-                }else if(TextUtils.isEmpty(adArea)){
+                }else if(!TextUtils.isEmpty(adAddress)&&TextUtils.isEmpty(adArea)){
                     showShortToast(R.string.area_cant_empty);
                 }else if(!TextUtils.isEmpty(url)&&TextUtils.isEmpty(urlName)){
                     showShortToast(R.string.link_name_cant_empty);
@@ -353,6 +353,9 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
                     latitude=String.valueOf(intent.getDoubleExtra(Constant.LATITUDE,0));
                     longitude=String.valueOf(intent.getDoubleExtra(Constant.LONGITUDE,0));
                     tvArea.setText(intent.getStringExtra(Constant.NAME));
+                    if (TextUtils.isEmpty(intent.getStringExtra(Constant.NAME))){
+                        etAddress.setText(null);
+                    }
                     break;
                 case Constant.REQUEST_TEMPLATE:
                     NestTemplate temp=(NestTemplate)intent.getSerializableExtra(Constant.TEMPLATE);

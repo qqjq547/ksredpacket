@@ -216,7 +216,12 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
              tvUrl.setVisibility(View.VISIBLE);
              tvUrl.setText(data.getLinkText());
          }
-         tvAddress.setText(data.getAddress()+data.getAddressDetail());
+         if (TextUtils.isEmpty(data.getAddress())){
+             linLocation.setVisibility(View.GONE);
+         }else {
+             linLocation.setVisibility(View.VISIBLE);
+             tvAddress.setText(data.getAddress()+data.getAddressDetail());
+         }
         if (TextUtils.isEmpty(data.getContactPhone())) {
             linCall.setVisibility(View.GONE);
         } else {
