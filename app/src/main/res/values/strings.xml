@@ -455,13 +455,6 @@
         <item>全省</item>
         <item>全国</item>
     </string-array>
-    <string-array name="redbag_scope_password">
-        <item>1公里</item>
-        <item>3公里</item>
-        <item>5公里</item>
-        <item>全区/县</item>
-        <item>全市</item>
-    </string-array>
 
     <string name="identify_no_image">未能获取图片，请重新尝试</string>
     <string name="identify_formal_image">请使用真实身份证进行扫描</string>
@@ -700,6 +693,12 @@
     <string name="save_problem_temp">保存为问卷红包模板</string>
     <string name="finish_answer_can_get">完成答题可获得</string>
     <string name="watched_video_open_redbag">已看完视频，去答题开启红包</string>
+    <string name="answer_open_redbag">已看完视频，去答题开启红包</string>
+    <string name="open_redbag">开启红包</string>
+    <string name="respone">答：</string>
+    <string name="input_blank">【填空】</string>
+    <string name="single_choice">【单选】</string>
+    <string name="muti_choice">【多选】</string>
 
 
 </resources>

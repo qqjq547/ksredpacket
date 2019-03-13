@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.base.recycleview.WrapEmptyRecyclerView;
 import com.guochuang.mimedia.base.recycleview.adapter.MultiTypeSupport;
+import com.guochuang.mimedia.mvp.model.LookSurveyResult;
 import com.guochuang.mimedia.mvp.presenter.LookSurveyPresenter;
 import com.guochuang.mimedia.mvp.view.LookView;
 import com.guochuang.mimedia.ui.adapter.LookSurveyAdapter;
@@ -61,4 +62,13 @@ public class LookSurveyActivity extends MvpActivity<LookSurveyPresenter> impleme
 
     }
 
+    @Override
+    public void setData(LookSurveyResult data) {
+
+    }
+
+    @Override
+    public void setError(String message) {
+
+    }
 }
