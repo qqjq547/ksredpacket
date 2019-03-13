@@ -219,6 +219,11 @@ public class MapPickActivity extends MvpActivity<MapPickPresenter> implements Ma
 //                showLocationInMap(lat,lng);
                 mvpPresenter.getGeocode(String.valueOf(lat),String.valueOf(lng),null);
                 break;
+            case R.id.tv_clear:
+                setResult(RESULT_OK, getIntent());
+                finish();
+                break;
+
         }
     }
 
