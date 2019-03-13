@@ -698,5 +698,8 @@
     <string name="questionnaire_redbag">问卷红包</string>
     <string name="save_video_temp">保存为视频红包模板</string>
     <string name="save_problem_temp">保存为问卷红包模板</string>
+    <string name="finish_answer_can_get">完成答题可获得</string>
+    <string name="watched_video_open_redbag">已看完视频，去答题开启红包</string>
+
 
 </resources>
