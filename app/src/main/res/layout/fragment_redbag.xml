@@ -44,83 +44,100 @@
         android:id="@+id/mv_redbag"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
     </com.baidu.mapapi.map.MapView>
 
     <LinearLayout
+        android:id="@+id/lin_fl_head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-      <FrameLayout
-          android:id="@+id/fl_city_owner"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="@dimen/space15"
-          android:layout_marginTop="@dimen/space30">
-
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/space30">
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
         <LinearLayout
             android:id="@+id/lin_city_owner"
             android:layout_width="@dimen/space113"
-            android:layout_height="@dimen/space30"
-            android:layout_marginLeft="@dimen/space30"
-            android:layout_marginTop="@dimen/space18"
-            android:background="@drawable/bg_city_owner"
+            android:layout_height="@dimen/space36"
+            android:layout_marginTop="@dimen/space12"
+            android:paddingLeft="@dimen/space15"
+            android:paddingRight="@dimen/space15"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="@drawable/bg_home_white_left">
+            <View
+                android:layout_width="@dimen/space30"
+                android:layout_height="@dimen/space30"/>
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/city_owner"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/textfont12" />
+            <TextView
+                android:id="@+id/tv_city_owner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space4"
+                android:ellipsize="end"
+                android:lines="1"
+                android:paddingLeft="@dimen/space5"
+                android:paddingRight="@dimen/space5"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/textfont9" />
+          </LinearLayout>
+
+        </LinearLayout>
+            <FrameLayout
+                android:layout_width="@dimen/space30"
+                android:layout_height="@dimen/space48"
+                android:layout_marginLeft="@dimen/space15"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+                <ImageView
+                    android:layout_width="23dp"
+                    android:layout_height="17dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/ic_crown"/>
+                <ImageView
+                    android:id="@+id/iv_city_owner_avatar"
+                    android:layout_width="@dimen/space30"
+                    android:layout_height="@dimen/space30"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="@dimen/space3"/>
+            </FrameLayout>
+        </FrameLayout>
+      <Space
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="1"/>
+        <LinearLayout
+            android:id="@+id/lin_upgrade_agent"
+            android:layout_width="@dimen/space113"
+            android:layout_height="@dimen/space36"
+            android:layout_marginTop="@dimen/space12"
             android:gravity="center"
-            android:orientation="vertical"
-            android:paddingLeft="@dimen/space10"
-            android:paddingRight="@dimen/space30">
-
-          <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="@string/city_owner"
-              android:textColor="@color/text_black"
-              android:textSize="@dimen/textfont12" />
-
-          <TextView
-              android:id="@+id/tv_city_owner"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:ellipsize="end"
-              android:lines="1"
-              android:maxWidth="@dimen/space100"
-              android:paddingLeft="@dimen/space5"
-              android:paddingRight="@dimen/space5"
-              android:textColor="@color/text_black"
-              android:textSize="@dimen/textfont9" />
+            android:background="@drawable/bg_home_white_right"
+            android:visibility="gone">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_upgrade_agent" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/space9"
+                android:gravity="center"
+                android:text="@string/upgrade_agent"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/textfont12" />
         </LinearLayout>
 
-        <FrameLayout
-            android:layout_width="@dimen/space45"
-            android:layout_height="@dimen/space55"
-            android:background="@drawable/ic_crown"
-            android:paddingLeft="@dimen/space9"
-            android:paddingTop="@dimen/space16">
-
-          <com.guochuang.mimedia.view.HexagonImageView
-              android:id="@+id/hiv_avatar"
-              android:layout_width="35dp"
-              android:layout_height="37dp"
-              app:civ_border_width="0dp" />
-        </FrameLayout>
-      </FrameLayout>
-
-      <TextView
-          android:id="@+id/tv_upgrade_agent"
-          android:layout_width="wrap_content"
-          android:layout_height="@dimen/space30"
-          android:layout_marginLeft="@dimen/space25"
-          android:layout_marginTop="@dimen/space16"
-          android:background="@drawable/bg_agent"
-          android:drawableLeft="@drawable/ic_upgrade_agent"
-          android:drawablePadding="@dimen/space9"
-          android:gravity="center"
-          android:paddingLeft="@dimen/space9"
-          android:paddingRight="@dimen/space9"
-          android:text="@string/upgrade_agent"
-          android:textColor="@color/text_black"
-          android:textSize="@dimen/textfont12"
-          android:visibility="gone" />
     </LinearLayout>
     <ImageView
       android:id="@+id/tv_start"
@@ -130,13 +147,23 @@
       android:layout_marginBottom="@dimen/space28"
       android:src="@drawable/ic_redbag_edit"/>
     <ImageView
-        android:id="@+id/iv_refresh"
+        android:id="@+id/iv_share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right|bottom"
-        android:layout_marginBottom="@dimen/space12"
+        android:layout_marginBottom="@dimen/space60"
         android:layout_marginRight="@dimen/space15"
-        android:src="@drawable/ic_redbag_refresh"/>
+        android:padding="@dimen/space15"
+        android:src="@drawable/ic_home_share"
+        android:background="@drawable/ic_redbag_refresh"/>
+      <ImageView
+          android:id="@+id/iv_refresh"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="right|bottom"
+          android:layout_marginBottom="@dimen/space12"
+          android:layout_marginRight="@dimen/space15"
+          android:src="@drawable/ic_redbag_refresh"/>
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="match_parent"

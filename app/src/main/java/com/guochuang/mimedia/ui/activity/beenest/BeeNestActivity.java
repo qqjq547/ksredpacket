@@ -79,6 +79,7 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
     PictureVerticalAdapter adapter;
     List<String> pictureArr=new ArrayList<>();
     long nestInfoId=0;
+    long nestLocationId=0;
     NestAd detail;
 
     @Override
@@ -94,10 +95,13 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
     @Override
     public void initViewAndData() {
         nestInfoId=getIntent().getLongExtra(Constant.NESTINFOID,0);
+        nestLocationId=getIntent().getLongExtra(Constant.NESTLOCATIONID,0);
+        ivImage.setImageResource(R.drawable.ic_more);
         showLoadingDialog(null);
         mvpPresenter.getNestAd(nestInfoId,Constant.AD_TYPE_DETAIL);
-        ivImage.setImageResource(R.drawable.ic_more);
-
+        if (nestLocationId==0){
+            mvpPresenter.getNestRandomAd(getPref().getLatitude(),getPref().getLongitude());
+        }
     }
 
 
@@ -114,7 +118,9 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
                 new BeeNestDialog(this).setOnItemClikListener(new BeeNestDialog.OnItemClikListener() {
                     @Override
                     public void onBidThis() {
-                        IntentUtils.startBidBrandActivity(BeeNestActivity.this,detail.getNestLocationId(),String.valueOf(detail.getNestLocationLat()),String.valueOf(detail.getNestLocationLng()));
+                        if (nestLocationId>0) {
+                            IntentUtils.startBidBrandActivity(BeeNestActivity.this,nestLocationId, String.valueOf(detail.getNestLocationLat()), String.valueOf(detail.getNestLocationLng()));
+                        }
                     }
 
                     @Override
@@ -242,6 +248,14 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
         rvPicture.setLayoutManager(new LinearLayoutManager(this,OrientationHelper.VERTICAL,false));
         rvPicture.addItemDecoration(new VerticalDecoration(this,R.drawable.bg_city_divide));
         rvPicture.setAdapter(adapter);
+    }
+
+    @Override
+    public void setLocationId(Long data) {
+        closeLoadingDialog();
+        if (data!=null){
+            nestLocationId=data.longValue();
+        }
     }
 
     @Override
