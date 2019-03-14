@@ -153,9 +153,7 @@
         android:layout_gravity="right|bottom"
         android:layout_marginBottom="@dimen/space60"
         android:layout_marginRight="@dimen/space15"
-        android:padding="@dimen/space15"
-        android:src="@drawable/ic_home_share"
-        android:background="@drawable/ic_redbag_refresh"/>
+        android:src="@drawable/ic_home_share" />
       <ImageView
           android:id="@+id/iv_refresh"
           android:layout_width="wrap_content"

@@ -695,5 +695,6 @@
     <string name="date_ten">10天</string>
     <string name="date_fifth">15天</string>
     <string name="clear_address">清空地址</string>
+    <string name="navigation_not_empty">导航地址不能为空</string>
 
 </resources>

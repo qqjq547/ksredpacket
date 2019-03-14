@@ -461,7 +461,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     public void setHomeRegion(HomeRegion data) {
         if (data != null && data != homeRegion) {
             homeRegion = data;
-            GlideImgManager.loadCircleImage(getActivity(), data.getAvatar(), ivCityOwnerAvatar);
+            GlideImgManager.loadCircleImage(getActivity(), data.getAvatar(), ivCityOwnerAvatar,R.drawable.ic_city_owner_default);
             tvCityOwner.setText(data.getNickName());
         }
     }
@@ -586,7 +586,13 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
             @Override
             public void onSendAd() {
                 clearMarker();
-                startActivity(new Intent(getActivity(),AdBidActivity.class));
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(getActivity(), AdBidActivity.class));
+                    }
+                },500);
+//                startActivity(new Intent(getActivity(),AdBidActivity.class));
             }
         });
     }
