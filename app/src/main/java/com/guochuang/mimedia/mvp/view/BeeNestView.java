@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface BeeNestView {
     void setData(NestAd data);
+    void setLocationId(Long data);
     void setError(String msg);
     void addFavorite(Boolean data);
     void deleteFavorite(Boolean data);

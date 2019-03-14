@@ -52,8 +52,6 @@ import com.guochuang.mimedia.tools.antishake.AntiShake;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.guochuang.mimedia.ui.activity.beenest.AdBidActivity;
 import com.guochuang.mimedia.ui.activity.beenest.BeeNestActivity;
-import com.guochuang.mimedia.ui.activity.beenest.BidBrandActivity;
-import com.guochuang.mimedia.ui.activity.beenest.EditAdActivity;
 import com.guochuang.mimedia.ui.activity.city.CityActivity;
 import com.guochuang.mimedia.ui.activity.MainActivity;
 import com.guochuang.mimedia.ui.activity.common.ShareActivity;
@@ -61,7 +59,6 @@ import com.guochuang.mimedia.ui.activity.redbag.SquareActivity;
 import com.guochuang.mimedia.ui.activity.user.UpgradeAgentActivity;
 import com.guochuang.mimedia.ui.dialog.OpenRedbagDialog;
 import com.guochuang.mimedia.ui.dialog.RedbagTypeDialog;
-import com.guochuang.mimedia.view.HexagonImageView;
 import com.guochuang.mimedia.view.HoneyCombView;
 import com.guochuang.mimedia.view.ScrollTextView;
 import com.sz.gcyh.KSHongBao.R;
@@ -72,6 +69,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import lecho.lib.hellocharts.model.Line;
 import rx.functions.Action1;
 
 public class RedbagFragment extends MvpFragment<RedbagPresenter> implements RedbagView {
@@ -88,18 +86,20 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     LinearLayout linNotice;
     @BindView(R.id.stv_notice)
     ScrollTextView stvNotice;
-    @BindView(R.id.fl_city_owner)
-    FrameLayout flCityOwner;
+    @BindView(R.id.lin_fl_head)
+    LinearLayout linFlHead;
     @BindView(R.id.tv_city_owner)
     TextView tvCityOwner;
     @BindView(R.id.lin_city_owner)
     LinearLayout linCityOwner;
-    @BindView(R.id.hiv_avatar)
-    HexagonImageView hivAvatar;
+    @BindView(R.id.iv_city_owner_avatar)
+    ImageView ivCityOwnerAvatar;
+    @BindView(R.id.iv_share)
+    ImageView ivShare;
     @BindView(R.id.iv_refresh)
     ImageView ivRefresh;
-    @BindView(R.id.tv_upgrade_agent)
-    TextView tvUpgradeAgent;
+    @BindView(R.id.lin_upgrade_agent)
+    LinearLayout linUpgradeAgent;
     @BindView(R.id.hcv_ad)
     HoneyCombView hcvAd;
 
@@ -180,9 +180,6 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                 switch (mb.getString(Constant.RED_PACKET_TYPE)) {
                     case Constant.TYPE_NOW:
                         break;
-                    case Constant.TYPE_SHARE:
-                        startActivity(new Intent(getActivity(), ShareActivity.class));
-                        break;
                     case Constant.TYPE_REDBAG:
                         redbag = (Redbag) mb.getSerializable(Constant.RED_PACKET_DATA);
                         if (redbag == null) {
@@ -215,7 +212,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
         };
         bm.setOnMarkerClickListener(onMarkerClickListener);
         setUserRole(getPref().getInt(PrefUtil.USER_ROLE,0));
-//        setHomeAd(new ArrayList<NestHomeAd>());
+        setHomeAd(new ArrayList<NestHomeAd>());
     }
 
     @Override
@@ -262,14 +259,14 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
         super.onDestroyView();
         mvRedbag.onDestroy();
     }
-    @OnClick({R.id.tv_text, R.id.lin_city_owner, R.id.hiv_avatar, R.id.tv_start, R.id.iv_refresh, R.id.tv_upgrade_agent})
+    @OnClick({R.id.tv_text, R.id.lin_city_owner, R.id.iv_city_owner_avatar, R.id.tv_start, R.id.iv_share,R.id.iv_refresh, R.id.lin_upgrade_agent})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_text:
                 startActivity(new Intent(getActivity(), SquareActivity.class));
                 break;
             case R.id.lin_city_owner:
-            case R.id.hiv_avatar:
+            case R.id.iv_city_owner_avatar:
                 startActivity(new Intent(getActivity(), CityActivity.class));
                 break;
             case R.id.tv_start:
@@ -304,7 +301,10 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                     }
                 }
                 break;
-            case R.id.tv_upgrade_agent:
+            case R.id.iv_share:
+                startActivity(new Intent(getActivity(), ShareActivity.class));
+                break;
+            case R.id.lin_upgrade_agent:
                 startActivity(new Intent(getActivity(), UpgradeAgentActivity.class));
                 break;
         }
@@ -387,13 +387,6 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
             if (isAdded()) {
                 tvScope.setText(String.format(getString(R.string.format_mill_unit), kilometre));
             }
-            Bundle sharebundle = new Bundle();
-            sharebundle.putString(Constant.RED_PACKET_TYPE, Constant.TYPE_SHARE);
-            OverlayOptions shareOption = new MarkerOptions().
-                    position(new LatLng(bdLocation.getLatitude() - (kilometre * 0.00001), bdLocation.getLongitude())).
-                    icon(BitmapDescriptorFactory
-                            .fromView(vScope)).extraInfo(sharebundle);
-            bm.addOverlay(shareOption);
         }
     };
 
@@ -457,9 +450,9 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
         if (data != null) {
             getPref().setInt(PrefUtil.USER_ROLE, 0);
             if (data.intValue() >= Constant.USER_ROLE_AGENT) {
-                tvUpgradeAgent.setVisibility(View.GONE);
+                linUpgradeAgent.setVisibility(View.GONE);
             } else {
-                tvUpgradeAgent.setVisibility(View.VISIBLE);
+                linUpgradeAgent.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -468,7 +461,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     public void setHomeRegion(HomeRegion data) {
         if (data != null && data != homeRegion) {
             homeRegion = data;
-            GlideImgManager.loadImage(getActivity(), data.getAvatar(), hivAvatar);
+            GlideImgManager.loadCircleImage(getActivity(), data.getAvatar(), ivCityOwnerAvatar);
             tvCityOwner.setText(data.getNickName());
         }
     }
@@ -486,7 +479,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
 
     @Override
     public void setHomeAd(List<NestHomeAd> data) {
-        LinearLayout.LayoutParams lp=(LinearLayout.LayoutParams) flCityOwner.getLayoutParams();
+        FrameLayout.LayoutParams lp=(FrameLayout.LayoutParams) linFlHead.getLayoutParams();
 //        for (int i=0;i<30;i++){
 //            NestHomeAd ad=new NestHomeAd();
 //            ad.setCoverPicture("https://upload.jianshu.io/users/upload_avatars/4174308/540285e2-5be5-483a-9259-db485564a4b0.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96");
@@ -499,7 +492,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
         }else {
             lp.topMargin=CommonUtil.dip2px(getContext(),30);
         }
-        flCityOwner.setLayoutParams(lp);
+        linFlHead.setLayoutParams(lp);
     }
     @Override
     public void setIsQualified(Boolean data) {
@@ -587,7 +580,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
         hcvAd.setData(honeyArr, new HoneyCombView.OnMenuClickListener() {
             @Override
             public void onClick(NestHomeAd data) {
-                startActivity(new Intent(getActivity(),BeeNestActivity.class).putExtra(Constant.NESTINFOID,data.getNestInfoId()));
+                IntentUtils.startBeeNestActivity(getActivity(),data.getNestInfoId(),data.getNestLocationId());
             }
 
             @Override

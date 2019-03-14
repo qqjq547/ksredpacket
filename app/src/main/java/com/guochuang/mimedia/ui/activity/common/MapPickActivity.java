@@ -193,7 +193,7 @@ public class MapPickActivity extends MvpActivity<MapPickPresenter> implements Ma
         }
     }
 
-    @OnClick({R.id.iv_back, R.id.tv_confirm, R.id.iv_location})
+    @OnClick({R.id.iv_back, R.id.tv_confirm, R.id.iv_location,R.id.tv_clear})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:

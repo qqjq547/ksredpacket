@@ -1269,4 +1269,9 @@ public interface ApiStore {
     Observable<HttpResponse<Boolean>> getIsQualified(
             @Query("latitude") String latitude,
             @Query("longitude") String longitude);
+
+    @GET("/api/v1/nest/nest_location/get_random_spot")
+    Observable<HttpResponse<Long>> getRandomSpot(
+            @Query("latitude") String latitude,
+            @Query("longitude") String longitude);
 }

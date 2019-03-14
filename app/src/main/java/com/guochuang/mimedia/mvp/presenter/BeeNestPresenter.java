@@ -43,6 +43,26 @@ public class BeeNestPresenter extends BasePresenter<BeeNestView> {
             }
         });
     }
+    public void getNestRandomAd(String latitdue,String longitudepe){
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getRandomSpot(latitdue,longitudepe)), new ApiCallback<Long>() {
+            @Override
+            public void onSuccess(Long data) {
+                mvpView.setLocationId(data);
+
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setError(exception.getMessage());
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
 
     public void favoriteAdd(long nestInfoId){
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().nestAddFavorite(nestInfoId)), new ApiCallback<Boolean>() {
