@@ -63,6 +63,7 @@ import com.guochuang.mimedia.view.HoneyCombView;
 import com.guochuang.mimedia.view.ScrollTextView;
 import com.sz.gcyh.KSHongBao.R;
 import com.tbruyelle.rxpermissions.RxPermissions;
+import com.toomee.mengplus.manager.TooMeeManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -263,7 +264,8 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_text:
-                startActivity(new Intent(getActivity(), SquareActivity.class));
+//                startActivity(new Intent(getActivity(), SquareActivity.class));
+                TooMeeManager.start(getActivity(),"http://task.juxiangwan.com/?mid=470&utoken=8844019749709720&from=h5android");
                 break;
             case R.id.lin_city_owner:
             case R.id.iv_city_owner_avatar:

@@ -103,7 +103,7 @@ public class App extends Application {
             TooMeeManager.init(this,"470", "api_uuid", "7e454d9d019a83c8976b6123616dbd48", new TooMeeImageLoader() {
                 @Override
                 public void loadImage(String path, ImageView imageView) {
-                    GlideImgManager.loadImage(getApplicationContext(),);
+                    GlideImgManager.loadImage(getApplicationContext(),path,imageView);
                 }
 
                 @Override
