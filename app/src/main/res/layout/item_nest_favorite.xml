@@ -28,6 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/space10"
         android:textColor="@color/text_black"
+        android:maxLines="2"
         android:textSize="@dimen/textfont14"
         android:text=""/>
     <ImageView

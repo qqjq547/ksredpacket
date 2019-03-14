@@ -46,6 +46,7 @@ import com.guochuang.mimedia.mvp.model.NestHistory;
 import com.guochuang.mimedia.mvp.model.NestHomeAd;
 import com.guochuang.mimedia.mvp.model.NestInfoLimit;
 import com.guochuang.mimedia.mvp.model.NestLocation;
+import com.guochuang.mimedia.mvp.model.NestRandomAd;
 import com.guochuang.mimedia.mvp.model.NestStatistics;
 import com.guochuang.mimedia.mvp.model.NestTemplate;
 import com.guochuang.mimedia.mvp.model.NestTimeInfo;
@@ -1271,7 +1272,7 @@ public interface ApiStore {
             @Query("longitude") String longitude);
 
     @GET("/api/v1/nest/nest_location/get_random_spot")
-    Observable<HttpResponse<Long>> getRandomSpot(
+    Observable<HttpResponse<NestRandomAd>> getRandomSpot(
             @Query("latitude") String latitude,
             @Query("longitude") String longitude);
 }
