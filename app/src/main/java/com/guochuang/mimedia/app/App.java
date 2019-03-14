@@ -29,9 +29,6 @@ import com.guochuang.mimedia.tools.PrefUtil;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.tencent.smtt.sdk.QbSdk;
-import com.toomee.mengplus.common.widget.TooMeeImageLoader;
-import com.toomee.mengplus.manager.TooMeeManager;
-
 import java.io.File;
 import java.util.ArrayList;
 
@@ -98,17 +95,6 @@ public class App extends Application {
                 @Override
                 public void onViewInitFinished() {
 
-                }
-            });
-            TooMeeManager.init(this,"470", "api_uuid", "7e454d9d019a83c8976b6123616dbd48", new TooMeeImageLoader() {
-                @Override
-                public void loadImage(String path, ImageView imageView) {
-                    GlideImgManager.loadImage(getApplicationContext(),path,imageView);
-                }
-
-                @Override
-                public void loadImage(int imageDrawable, ImageView imageView, int errorView) {
-                    GlideImgManager.loadImage(getApplicationContext(),imageDrawable,imageView);
                 }
             });
         }

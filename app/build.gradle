@@ -92,5 +92,4 @@ dependencies {
     implementation(name: 'idcard_ocr', ext: 'aar')
     implementation 'com.googlecode.android-query:android-query:0.25.9'
     implementation project(path: ':hellocharts-library')
-    implementation 'com.toomee:jxwSDK-Android:2.0.3'
 }
