@@ -327,7 +327,9 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
     public void setSelect(int dayCount){
         this.selectDayCount=dayCount;
         currentSelectArr.clear();
-        currentSelectArr.addAll(nextArr.subList(0,dayCount));
+        if (nextArr.size()>0) {
+            currentSelectArr.addAll(nextArr.subList(0, dayCount));
+        }
         tvBuyTime.setText(String.format(getString(R.string.format_time_to_time), currentSelectArr.get(0), currentSelectArr.get(currentSelectArr.size()-1)));
         tvBuyDayCount.setText(String.format(getString(R.string.format_day_count), currentSelectArr.size()));
         cdvMonth.update();

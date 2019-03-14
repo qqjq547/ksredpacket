@@ -87,7 +87,7 @@ public class InfoListFragment extends MvpFragment<InfoListPresenter> implements 
                 mvpPresenter.getRecommendList(1,Constant.PAGE_SIZE,categoryId);
             }
         });
-//        mvpPresenter.getRecommendList(curPage,Constant.PAGE_SIZE,categoryId);
+        mvpPresenter.getRecommendList(curPage,Constant.PAGE_SIZE,categoryId);
     }
 
     @Override

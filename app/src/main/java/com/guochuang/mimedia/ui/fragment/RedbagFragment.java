@@ -486,7 +486,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
 //            data.add(ad);
 //        }
         if (data!=null&&data.size()>0){
-            lp.topMargin=CommonUtil.dip2px(getContext(),150);
+            lp.topMargin=CommonUtil.dip2px(getContext(),140);
             sethoneyData(data);
         }else {
             lp.topMargin=CommonUtil.dip2px(getContext(),30);

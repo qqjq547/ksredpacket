@@ -61,7 +61,11 @@ public class MyAddressActivity extends MvpActivity<MyAddressPresenter> implement
     public void initViewAndData() {
         tvTitle.setText(R.string.received_address);
         snatchId=getIntent().getLongExtra(Constant.SNATCHID,0);
-        tvText.setText(null);
+        if (snatchId>0){
+            tvText.setText(R.string.confirm);
+        }else {
+            tvText.setText(null);
+        }
         rvAddress.setLayoutManager(new LinearLayoutManager(this,OrientationHelper.VERTICAL,false));
         adapter=new AddressAdapter(dataArr);
         adapter.setEmptyView(getLayoutInflater().inflate(R.layout.layout_empty,null));
@@ -128,7 +132,6 @@ public class MyAddressActivity extends MvpActivity<MyAddressPresenter> implement
                     break;
             }
         }
-
     }
 
     @Override
@@ -142,7 +145,7 @@ public class MyAddressActivity extends MvpActivity<MyAddressPresenter> implement
         if (data.getDataList() != null) {
             dataArr.addAll(data.getDataList());
         }
-        if (dataArr.size()>0){
+        if (snatchId>0&&dataArr.size()>0){
             tvText.setText(R.string.confirm);
         }else {
             tvText.setText(null);
