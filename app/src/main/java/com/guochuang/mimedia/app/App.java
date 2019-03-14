@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.support.multidex.MultiDex;
+import android.widget.ImageView;
 
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
@@ -13,6 +14,7 @@ import com.guochuang.mimedia.mvp.model.UserInfo;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.LogUtil;
+import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.guochuang.mimedia.ui.activity.user.LoginActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreater;
@@ -27,6 +29,8 @@ import com.guochuang.mimedia.tools.PrefUtil;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.tencent.smtt.sdk.QbSdk;
+import com.toomee.mengplus.common.widget.TooMeeImageLoader;
+import com.toomee.mengplus.manager.TooMeeManager;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -96,7 +100,17 @@ public class App extends Application {
 
                 }
             });
+            TooMeeManager.init(this,"470", "api_uuid", "7e454d9d019a83c8976b6123616dbd48", new TooMeeImageLoader() {
+                @Override
+                public void loadImage(String path, ImageView imageView) {
+                    GlideImgManager.loadImage(getApplicationContext(),);
+                }
 
+                @Override
+                public void loadImage(int imageDrawable, ImageView imageView, int errorView) {
+                    GlideImgManager.loadImage(getApplicationContext(),imageDrawable,imageView);
+                }
+            });
         }
     public static App getInstance(){
         return instance;
