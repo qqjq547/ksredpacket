@@ -1,9 +1,9 @@
 package com.guochuang.mimedia.mvp.view;
 
-import com.guochuang.mimedia.mvp.model.LookSurveyResult;
+import com.guochuang.mimedia.mvp.model.LookVideoResult;
 
 public interface LookView {
-    void setData(LookSurveyResult data);
+    void setData(LookVideoResult data);
 
     void setError(String message);
 }

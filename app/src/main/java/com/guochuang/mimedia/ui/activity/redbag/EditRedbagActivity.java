@@ -329,8 +329,10 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                 bundle.putParcelableArrayList(Constant.PROBLEMLIST_KEY, mProblemList);
                 bundle.putString(Constant.OPEN_VIDEOPROBLEMACTIVITY_TYPE, redPacketType);
                 if (Constant.RED_PACKET_TYPE_VIDEO.equals(redPacketType)) {
+                    //视频红包
                     startActivityForResult(VideoProblemActivity.class, bundle, VIDEO_OPEN_CODE);
                 } else {
+                    //问卷红包
                     startActivityForResult(VideoProblemActivity.class, bundle, QUESTION_OPEN_CODE);
                 }
                 break;
@@ -638,19 +640,19 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
             mvpPresenter.addLuckyRedbag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode);
         } else if (TextUtils.equals(redPacketType, Constant.RED_PACKET_TYPE_VIDEO)) {
             //picture 拼接的是视频地址
-            if(TextUtils.isEmpty(picture)) {
+            if (TextUtils.isEmpty(picture)) {
                 showShortToast("上传视频");
                 return;
             }
             String joinProblmeJson = joinProblmeJson();
-                      Log.e("startPay: ", joinProblmeJson);
+            Log.e("startPay: ", joinProblmeJson);
 
             mvpPresenter.addVideoReabag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson);
-        }else if(TextUtils.equals(redPacketType, Constant.RED_PACKET_TYPE_QUESTION)) {
+        } else if (TextUtils.equals(redPacketType, Constant.RED_PACKET_TYPE_QUESTION)) {
             //问卷红包
             String joinProblmeJson = joinProblmeJson();
             Log.e("startPay: ", joinProblmeJson);
-            mvpPresenter.addSurveyReabag(latitude, longitude, redbagLatitude, redbagLongitude,content, picture,areaType, kilometer, money,quantity,urlName,url,wechat, microblog,isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson);
+            mvpPresenter.addSurveyReabag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson);
 
         }
     }

@@ -698,5 +698,10 @@
     <string name="questionnaire_redbag">问卷红包</string>
     <string name="save_video_temp">保存为视频红包模板</string>
     <string name="save_problem_temp">保存为问卷红包模板</string>
+    <string name="video_redbag_problem">视频红包问题</string>
+    <string name="surevy_redbag_problem">问卷红包问题</string>
+    <string name="tips_delete_problem">你确定删除该问题？</string>
+
+
 
 </resources>

@@ -22,6 +22,7 @@ import com.guochuang.mimedia.ui.activity.MainActivity;
 import com.guochuang.mimedia.ui.activity.beenest.AdBidActivity;
 import com.guochuang.mimedia.ui.activity.beenest.MyAdActivity;
 import com.guochuang.mimedia.ui.activity.city.CityActivity;
+import com.guochuang.mimedia.ui.activity.redbag.RedbagDynamicActivity2;
 import com.guochuang.mimedia.ui.activity.user.MyAddressActivity;
 import com.guochuang.mimedia.ui.dialog.SheetDialog;
 import com.sz.gcyh.KSHongBao.R;
@@ -214,7 +215,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                         IntentUtils.startWebActivity(getActivity(),getString(R.string.text_my_order),Constant.URL_MY_ORDER);
                         break;
                     case R.drawable.ic_my_dynamic:
-                        startActivity(new Intent(getActivity(), RedbagDynamicActivity.class));
+                        startActivity(new Intent(getActivity(), RedbagDynamicActivity2.class));
                         break;
                     case R.drawable.ic_my_collection:
                         startActivity(new Intent(getActivity(), MyCollectActivity.class));

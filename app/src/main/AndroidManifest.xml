@@ -39,7 +39,8 @@
         tools:replace="android:icon,android:theme">
         <!--<activity android:name="com.guochuang.mimedia.ui.activity.redbag.VideoProblemActivity">-->
 
-       <activity android:name="com.guochuang.mimedia.ui.activity.WelcomeActivity"
+        <activity
+            android:name="com.guochuang.mimedia.ui.activity.WelcomeActivity"
             android:theme="@style/FullScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -73,7 +74,7 @@
         <activity android:name="com.guochuang.mimedia.ui.activity.user.FansDetailActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.user.RecommendDetailActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.user.ShareBenefitDetailActivity" />
-        <activity android:name="com.guochuang.mimedia.ui.activity.redbag.RedbagDynamicActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.redbag.RedbagDynamicActivity2" />
         <activity android:name="com.guochuang.mimedia.ui.activity.user.MyCollectActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.user.MyCommentActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.user.SafeCenterActivity" />
@@ -366,8 +367,11 @@
 
 
         <!--视频问题界面-->
-        <activity android:name="com.guochuang.mimedia.ui.activity.redbag.VideoProblemActivity"/>
-        <activity android:name="com.guochuang.mimedia.ui.activity.redbag.VideoPreviewActivity"/>
+        <activity android:name="com.guochuang.mimedia.ui.activity.redbag.VideoProblemActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.redbag.VideoPreviewActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.redbag.LookVideoProblemActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.redbag.LookSurevyActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.redbag.FillAnswerInfoActivity" />
 
     </application>
 

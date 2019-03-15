@@ -24,7 +24,9 @@ import com.guochuang.mimedia.mvp.model.KsbTransfer;
 import com.guochuang.mimedia.mvp.model.KsbTrend;
 import com.guochuang.mimedia.mvp.model.CurrentRegion;
 import com.guochuang.mimedia.mvp.model.CityBidHall;
-import com.guochuang.mimedia.mvp.model.LookSurveyResult;
+import com.guochuang.mimedia.mvp.model.LookSurevyResult;
+import com.guochuang.mimedia.mvp.model.LookVideoResult;
+import com.guochuang.mimedia.mvp.model.LookVideoPBResult;
 import com.guochuang.mimedia.mvp.model.LuckyConfig;
 import com.guochuang.mimedia.mvp.model.LuckyResult;
 import com.guochuang.mimedia.mvp.model.MegviiSerach;
@@ -61,7 +63,6 @@ import com.guochuang.mimedia.mvp.model.RecommendDetail;
 import com.guochuang.mimedia.mvp.model.RedbagBenefit;
 import com.guochuang.mimedia.mvp.model.RedbagInfo;
 import com.guochuang.mimedia.mvp.model.RedbagReceived;
-import com.guochuang.mimedia.mvp.model.RedbagRecord;
 import com.guochuang.mimedia.mvp.model.BindingPhone;
 import com.guochuang.mimedia.mvp.model.Captcha;
 import com.guochuang.mimedia.mvp.model.CardList;
@@ -70,6 +71,7 @@ import com.guochuang.mimedia.mvp.model.FavoriteAndPraise;
 import com.guochuang.mimedia.mvp.model.InfoDetail;
 import com.guochuang.mimedia.mvp.model.RedPacketReply;
 import com.guochuang.mimedia.mvp.model.RedbagDetail;
+import com.guochuang.mimedia.mvp.model.RedbagRecord;
 import com.guochuang.mimedia.mvp.model.RedbagTemp;
 import com.guochuang.mimedia.mvp.model.RedbagUser;
 import com.guochuang.mimedia.mvp.model.RegionCore;
@@ -1332,6 +1334,9 @@ public interface ApiStore {
 
     );
 
-    @GET("/api/v1/survey/v2/survey/get")
-    Observable<HttpResponse<LookSurveyResult>> getProblems();
+    @GET("/api/v1/survey/survey/get_detail")
+    Observable<HttpResponse<LookVideoResult>> getProblems(@Query("surveyId") long surveyId, @Query("redPacketUuid")String redPacketUuid);
+
+    @GET("/api/v1/survey/survey/get_statistics")
+    Observable<HttpResponse<LookSurevyResult>> getVideoProblemAnswerList(@Query("surveyId") long surveyId, @Query("redPacketUuid")String redPacketUuid);
 }

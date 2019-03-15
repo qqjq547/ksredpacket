@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/lin_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:background="@color/bg_red"
+            android:layout_height="@dimen/title_height">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="@dimen/title_height"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"
+
+                android:src="@drawable/ic_back_white" />
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabTextColor="@color/white"
+                style="@style/MyTablayoutstyle">
+
+            </android.support.design.widget.TabLayout>
+
+            <!--<RadioGroup
+                android:id="@+id/rg_nav"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/space32"
+                android:layout_centerInParent="true"
+                android:background="@drawable/bg_nav_white"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rbtn_receive"
+                    android:layout_width="@dimen/space120"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_nav_left_selector"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/received_redbag"
+                    android:textColor="@color/nav_tab_text_selector"
+                    android:textSize="@dimen/textfont15"></RadioButton>
+
+                <RadioButton
+                    android:id="@+id/rbtn_send"
+                    android:layout_width="@dimen/space120"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_nav_right_selector"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/send_redbag"
+                    android:textColor="@color/nav_tab_text_selector"
+                    android:textSize="@dimen/textfont15"></RadioButton>
+            </RadioGroup>-->
+        </LinearLayout>
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

@@ -20,7 +20,7 @@ public class ReceiveRedbagAdapter extends BaseQuickAdapter<RedbagReceived,BaseVi
     }
     @Override
     protected void convert(BaseViewHolder helper, RedbagReceived item) {
-        GlideImgManager.loadCircleImage(mContext,item.getSenderAvatar(),(ImageView) helper.getView(R.id.iv_avatar));
+        GlideImgManager.loadCornerImage(mContext,item.getSenderAvatar(),(ImageView) helper.getView(R.id.iv_avatar),360,true);
         helper.setText(R.id.tv_name,item.getSenderNickName());
         if (TextUtils.isEmpty(item.getRedPacketContent())&&TextUtils.isEmpty(item.getRedPacketPicture())){
             helper.setGone(R.id.lin_content,false);
@@ -32,7 +32,7 @@ public class ReceiveRedbagAdapter extends BaseQuickAdapter<RedbagReceived,BaseVi
             helper.setTextColor(R.id.tv_content_title,mContext.getResources().getColor(R.color.text_black));
             if (!TextUtils.isEmpty(item.getRedPacketPicture())) {
                 helper.setGone(R.id.iv_content_image,true);
-                GlideImgManager.loadImage(mContext,item.getRedPacketPicture(),(ImageView) helper.getView(R.id.iv_content_image));
+                GlideImgManager.loadCornerImage(mContext,item.getRedPacketPicture(),(ImageView) helper.getView(R.id.iv_content_image),8,true);
             }else {
                 helper.setGone(R.id.iv_content_image,false);
             }

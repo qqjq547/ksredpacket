@@ -40,4 +40,5 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
         int hashCode = fragmentArr[position].hashCode();
         return hashCode;
     }
+
 }

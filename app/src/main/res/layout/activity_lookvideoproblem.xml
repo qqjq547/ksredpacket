@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tv_answer_number"
+        android:id="@+id/tv_anser_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
