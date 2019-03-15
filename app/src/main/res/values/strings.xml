@@ -691,11 +691,6 @@
     <string name="questionnaire_redbag">问卷红包</string>
     <string name="save_video_temp">保存为视频红包模板</string>
     <string name="save_problem_temp">保存为问卷红包模板</string>
-    <string name="video_redbag_problem">视频红包问题</string>
-    <string name="surevy_redbag_problem">问卷红包问题</string>
-    <string name="tips_delete_problem">你确定删除该问题？</string>
-
-
     <string name="finish_answer_can_get">完成答题可获得</string>
     <string name="watched_video_open_redbag">已看完视频，去答题开启红包</string>
     <string name="answer_open_redbag">已看完视频，去答题开启红包</string>
@@ -704,6 +699,11 @@
     <string name="input_blank">【填空】</string>
     <string name="single_choice">【单选】</string>
     <string name="muti_choice">【多选】</string>
+
+    <string name="video_redbag_problem">视频红包问题</string>
+    <string name="surevy_redbag_problem">问卷红包问题</string>
+    <string name="tips_delete_problem">你确定删除该问题？</string>
+    <string name="video_preview">视频预览</string>
 
 
 </resources>

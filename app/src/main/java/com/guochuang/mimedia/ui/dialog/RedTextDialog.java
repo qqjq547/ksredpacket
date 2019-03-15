@@ -50,7 +50,10 @@ public class RedTextDialog extends Dialog {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                dismiss();
+                if(isShowing()) {
+                    dismiss();
+                }
+
             }
         },2000);
     }

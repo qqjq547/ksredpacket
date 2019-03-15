@@ -1,10 +1,13 @@
 package com.guochuang.mimedia.ui.activity.redbag;
 
+import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -33,12 +36,11 @@ public class VideoPreviewActivity extends AppCompatActivity {
         Bundle bundle = intent.getBundleExtra(Constant.ACTIVTYPUTBUNDLEKEY);
         url = bundle.getString(Constant.VIDEO_PATH);
         if (!url.startsWith("http")) {
-            Log.e("onCreate: ", url);
             url = "file:///" + url;
         }
 
 
-        new DefaultNavigationBar.Builder(this).setTitle("视频预览")
+        new DefaultNavigationBar.Builder(this).setTitle(getResources().getString(R.string.video_preview))
                 .setLeftClick(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -59,7 +61,9 @@ public class VideoPreviewActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (!MediaHelper.isPlay) {
+
             MediaHelper.play();
+
         }
     }
 
@@ -77,4 +81,6 @@ public class VideoPreviewActivity extends AppCompatActivity {
         super.onDestroy();
         MediaHelper.release();
     }
+
+
 }

@@ -4,20 +4,21 @@ import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
-import com.guochuang.mimedia.mvp.model.LookVideoResult;
-import com.guochuang.mimedia.mvp.view.LookView;
+import com.guochuang.mimedia.mvp.model.LookSurevyResult;
+import com.guochuang.mimedia.mvp.model.LookVideoPBResult;
+import com.guochuang.mimedia.mvp.view.LookVideoProblemView;
 import com.guochuang.mimedia.tools.RxUtil;
 
-public class LookSurveyPresenter extends BasePresenter<LookView> {
-    public LookSurveyPresenter(LookView view) {
+public class LookSurveymPresenter extends BasePresenter<LookVideoProblemView> {
+    public LookSurveymPresenter(LookVideoProblemView view) {
         attachView(view);
     }
 
 
-    public void getProblems(long surveyId,String redpackId) {
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getProblems(surveyId,redpackId)), new ApiCallback<LookVideoResult>() {
+    public void getVideoProblemAnswerList(long surveyId, String redpackId) {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getVideoProblemAnswerList(surveyId, redpackId)), new ApiCallback<LookSurevyResult>() {
             @Override
-            public void onSuccess(LookVideoResult data) {
+            public void onSuccess(LookSurevyResult data) {
                 mvpView.setData(data);
             }
 
@@ -34,7 +35,4 @@ public class LookSurveyPresenter extends BasePresenter<LookView> {
 
 
     }
-
-
-
 }

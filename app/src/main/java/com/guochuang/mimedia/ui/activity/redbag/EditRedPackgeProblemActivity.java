@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +28,7 @@ import com.guochuang.mimedia.mvp.view.VideoProblemView;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.DialogBuilder;
 import com.guochuang.mimedia.ui.adapter.ProblemDialogInAdapter;
-import com.guochuang.mimedia.ui.adapter.VideoProblemAdapter;
+import com.guochuang.mimedia.ui.adapter.EditRedPackgeProblemAdapter;
 import com.sz.gcyh.KSHongBao.R;
 
 import java.util.ArrayList;
@@ -40,7 +39,10 @@ import butterknife.OnClick;
 
 import static com.guochuang.mimedia.tools.Constant.*;
 
-public class VideoProblemActivity extends MvpActivity<VideoProblemPresenter> implements VideoProblemView {
+/**
+ * 编辑视频与问卷问题
+ */
+public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresenter> implements VideoProblemView {
 
     @BindView(R.id.recycler_list)
     WrapEmptyRecyclerView recyclerList;
@@ -48,8 +50,7 @@ public class VideoProblemActivity extends MvpActivity<VideoProblemPresenter> imp
     TextView tvNuber;
     @BindView(R.id.tv_add_problem)
     TextView tvAddProblem;
-    private VideoProblemAdapter mVideoProblemAdapter;
-    private List mData = new ArrayList(5);
+    private EditRedPackgeProblemAdapter mEditRedPackgeProblemAdapter;
     private String mRedPacketType;
     private ArrayList<ProblemBean> mProblemList = new ArrayList<>();
     private ProblemDialogInAdapter mProblemDialogInAdapter;
@@ -101,8 +102,8 @@ public class VideoProblemActivity extends MvpActivity<VideoProblemPresenter> imp
         }).build();
 
         recyclerList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        mVideoProblemAdapter = new VideoProblemAdapter(this, mProblemList, R.layout.item_problem_layout, mRedPacketType);
-        mVideoProblemAdapter.setOnEditeClickLisenter(new VideoProblemAdapter.OnEditeClick() {
+        mEditRedPackgeProblemAdapter = new EditRedPackgeProblemAdapter(this, mProblemList, R.layout.item_problem_layout, mRedPacketType);
+        mEditRedPackgeProblemAdapter.setOnEditeClickLisenter(new EditRedPackgeProblemAdapter.OnEditeClick() {
             @Override
             public void onClick(int position) {
                 //修改
@@ -111,7 +112,7 @@ public class VideoProblemActivity extends MvpActivity<VideoProblemPresenter> imp
             }
         });
 
-        mVideoProblemAdapter.setOnDeleteClickLisenter(new VideoProblemAdapter.OnDeleteClick() {
+        mEditRedPackgeProblemAdapter.setOnDeleteClickLisenter(new EditRedPackgeProblemAdapter.OnDeleteClick() {
             @Override
             public void onClick(int position) {
                 //删除提示框
@@ -120,7 +121,7 @@ public class VideoProblemActivity extends MvpActivity<VideoProblemPresenter> imp
             }
         });
 
-        recyclerList.setAdapter(mVideoProblemAdapter);
+        recyclerList.setAdapter(mEditRedPackgeProblemAdapter);
         recyclerList.isShowEmptyPage();
         refreshUI();
 
@@ -172,9 +173,9 @@ public class VideoProblemActivity extends MvpActivity<VideoProblemPresenter> imp
             tvAddProblem.setVisibility(View.VISIBLE);
         }
 
-        if (mVideoProblemAdapter != null) {
+        if (mEditRedPackgeProblemAdapter != null) {
             recyclerList.isShowEmptyPage();
-            mVideoProblemAdapter.notifyDataSetChanged();
+            mEditRedPackgeProblemAdapter.notifyDataSetChanged();
         }
 
 
@@ -300,7 +301,6 @@ public class VideoProblemActivity extends MvpActivity<VideoProblemPresenter> imp
                             return;
                         }
                     } else {
-                        Log.e("onClick: ", problemBean.toString());
                         //判斷是否設置答案
                         List<ProblemBean.ItemBean> items = problemBean.getItem();
                         boolean flag = false;
@@ -349,15 +349,20 @@ public class VideoProblemActivity extends MvpActivity<VideoProblemPresenter> imp
     private void setItmeType(ProblemBean problemBean, int type) {
 
         int number;
-        if (type == 2) {
+        if (type == Constant.FILL_IN_PROBLEM) {
+            //填空题
             number = 1;
         } else {
             number = 4;
         }
 
         if (!mIsRestProblem) {
+            if (problemBean.getItem() == null || problemBean.getItem().isEmpty()) {
+                crateItme(problemBean, type, number);
+            } else {
+                changeProblemType(problemBean, type);
+            }
 
-            crateItme(problemBean, type, number);
         } else {
             mDialogData.clear();
             mDialogData.addAll(problemBean.getItem());

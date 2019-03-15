@@ -37,7 +37,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon,android:theme">
-        <!--<activity android:name="com.guochuang.mimedia.ui.activity.redbag.VideoProblemActivity">-->
+        <!--<activity android:name="com.guochuang.mimedia.ui.activity.redbag.AddAndEditRedPackgeProblemActivityroblemActivity">-->
 
         <activity
             android:name="com.guochuang.mimedia.ui.activity.WelcomeActivity"
@@ -368,7 +368,7 @@
 
 
         <!--视频问题界面-->
-        <activity android:name="com.guochuang.mimedia.ui.activity.redbag.VideoProblemActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.redbag.EditRedPackgeProblemActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.redbag.VideoPreviewActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.redbag.LookVideoProblemActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.redbag.LookSurevyActivity" />

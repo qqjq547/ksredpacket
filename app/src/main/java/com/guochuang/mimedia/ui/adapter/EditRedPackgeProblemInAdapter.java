@@ -13,11 +13,11 @@ import com.sz.gcyh.KSHongBao.R;
 
 import java.util.List;
 
-public class VideoProblemInAdapter extends CommonRecyclerAdapter<ProblemBean.ItemBean> {
+public class EditRedPackgeProblemInAdapter extends CommonRecyclerAdapter<ProblemBean.ItemBean> {
 
     private String mRedPacketType;
 
-    public VideoProblemInAdapter(Context context, List<ProblemBean.ItemBean> itemBeans, int itemlayout, String redPacketType) {
+    public EditRedPackgeProblemInAdapter(Context context, List<ProblemBean.ItemBean> itemBeans, int itemlayout, String redPacketType) {
         super(context, itemBeans, itemlayout);
         mRedPacketType = redPacketType;
     }
@@ -26,7 +26,7 @@ public class VideoProblemInAdapter extends CommonRecyclerAdapter<ProblemBean.Ite
     public int getItemCount() {
         if (mData != null && !mData.isEmpty()) {
             ProblemBean.ItemBean itemBean = mData.get(0);
-            if (itemBean.getProblemType() == 2) {
+            if (itemBean.getProblemType() == Constant.FILL_IN_PROBLEM) {
                 if(Constant.RED_PACKET_TYPE_QUESTION.equals(mRedPacketType)) {
                     return 0;
                 }

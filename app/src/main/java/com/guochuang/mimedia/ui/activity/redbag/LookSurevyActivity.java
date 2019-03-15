@@ -1,6 +1,5 @@
 package com.guochuang.mimedia.ui.activity.redbag;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Html;
@@ -10,13 +9,10 @@ import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.base.navigationbar.DefaultNavigationBar;
 import com.guochuang.mimedia.base.recycleview.WrapEmptyRecyclerView;
 import com.guochuang.mimedia.mvp.model.LookSurevyResult;
-import com.guochuang.mimedia.mvp.model.LookVideoPBResult;
-import com.guochuang.mimedia.mvp.model.LookVideoResult;
-import com.guochuang.mimedia.mvp.presenter.LookVideoProblemPresenter;
+import com.guochuang.mimedia.mvp.presenter.LookSurveymPresenter;
 import com.guochuang.mimedia.mvp.view.LookVideoProblemView;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.ui.adapter.LookSurevyAdapter;
-import com.guochuang.mimedia.ui.adapter.LookVideoProblemAdapter;
 import com.sz.gcyh.KSHongBao.R;
 
 import java.util.ArrayList;
@@ -24,7 +20,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class LookSurevyActivity extends MvpActivity<LookVideoProblemPresenter> implements LookVideoProblemView {
+public class LookSurevyActivity extends MvpActivity<LookSurveymPresenter> implements LookVideoProblemView {
     @BindView(R.id.tv_anser_number)
     TextView tvAnserNumber;
     @BindView(R.id.wrap_em_recycle)
@@ -32,13 +28,13 @@ public class LookSurevyActivity extends MvpActivity<LookVideoProblemPresenter> i
 
     LookSurevyAdapter mLookSurevyAdapter;
     List<LookSurevyResult.StatisticsListBean> mData = new ArrayList<LookSurevyResult.StatisticsListBean>();
-    private LookVideoProblemPresenter mLookVideoProblemPresenter;
+    private LookSurveymPresenter mLookSurveymPresenter;
     private String mSurveyId;
     private String mRedPackgeId;
 
     @Override
-    protected LookVideoProblemPresenter createPresenter() {
-        return mLookVideoProblemPresenter = new LookVideoProblemPresenter(this);
+    protected LookSurveymPresenter createPresenter() {
+        return mLookSurveymPresenter = new LookSurveymPresenter(this);
     }
 
     @Override
@@ -69,7 +65,7 @@ public class LookSurevyActivity extends MvpActivity<LookVideoProblemPresenter> i
     }
 
     private void initData() {
-        mLookVideoProblemPresenter.getVideoProblemAnswerList(Long.parseLong(mSurveyId), mRedPackgeId);
+        mLookSurveymPresenter.getVideoProblemAnswerList(Long.parseLong(mSurveyId), mRedPackgeId);
 
     }
 

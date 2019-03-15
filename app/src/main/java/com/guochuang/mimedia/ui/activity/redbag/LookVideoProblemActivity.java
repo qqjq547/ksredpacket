@@ -9,7 +9,7 @@ import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.base.navigationbar.DefaultNavigationBar;
 import com.guochuang.mimedia.base.recycleview.WrapEmptyRecyclerView;
 import com.guochuang.mimedia.mvp.model.LookVideoResult;
-import com.guochuang.mimedia.mvp.presenter.LookSurveyPresenter;
+import com.guochuang.mimedia.mvp.presenter.LookVideoProblemPresenter;
 import com.guochuang.mimedia.mvp.view.LookView;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.ui.adapter.LookVideoProblemAdapter;
@@ -24,22 +24,22 @@ import butterknife.BindView;
  * 查看问卷问题界面
  * 类型 0：单选 1：多选 2：填空题
  */
-public class LookVideoProblemActivity extends MvpActivity<LookSurveyPresenter> implements LookView {
+public class LookVideoProblemActivity extends MvpActivity<LookVideoProblemPresenter> implements LookView {
     @BindView(R.id.wrap_em_recycle)
     WrapEmptyRecyclerView mWrapEmRecycle;
     @BindView(R.id.tv_answer_number)
     TextView mTvAnswerNumber;
     LookVideoProblemAdapter mLookVideoProblemAdapter;
     List<LookVideoResult.QuestionListBean> mData = new ArrayList<>();
-    private LookSurveyPresenter mLookSurveyPresenter;
+    private LookVideoProblemPresenter mLookVideoProblemPresenter;
     private String mSurveyId;
     private String mRedPackgeId;
 
 
     @Override
-    protected LookSurveyPresenter createPresenter() {
-        mLookSurveyPresenter = new LookSurveyPresenter(this);
-        return mLookSurveyPresenter;
+    protected LookVideoProblemPresenter createPresenter() {
+        mLookVideoProblemPresenter = new LookVideoProblemPresenter(this);
+        return mLookVideoProblemPresenter;
     }
 
     @Override
@@ -68,7 +68,7 @@ public class LookVideoProblemActivity extends MvpActivity<LookSurveyPresenter> i
     }
 
     private void initTitle() {
-        new DefaultNavigationBar.Builder(this).setTitle("视频红包问题").build();
+        new DefaultNavigationBar.Builder(this).setTitle(getResources().getString(R.string.video_redbag_problem)).build();
     }
 
     /**
@@ -76,7 +76,7 @@ public class LookVideoProblemActivity extends MvpActivity<LookSurveyPresenter> i
      */
     private void initData() {
 
-        mLookSurveyPresenter.getProblems(Long.parseLong(mSurveyId), mRedPackgeId);
+        mLookVideoProblemPresenter.getProblems(Long.parseLong(mSurveyId), mRedPackgeId);
 
     }
 

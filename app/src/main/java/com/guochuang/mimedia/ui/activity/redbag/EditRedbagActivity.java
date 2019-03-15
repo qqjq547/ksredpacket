@@ -3,7 +3,6 @@ package com.guochuang.mimedia.ui.activity.redbag;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,7 +23,6 @@ import com.donkingliang.imageselector.utils.ImageSelector;
 import com.donkingliang.imageselector.utils.ImageSelectorUtils;
 import com.guochuang.mimedia.mvp.model.LuckyConfig;
 import com.guochuang.mimedia.mvp.model.ProblemBean;
-import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.ui.activity.common.MapPickActivity;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.MvpActivity;
@@ -330,10 +328,10 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                 bundle.putString(Constant.OPEN_VIDEOPROBLEMACTIVITY_TYPE, redPacketType);
                 if (Constant.RED_PACKET_TYPE_VIDEO.equals(redPacketType)) {
                     //视频红包
-                    startActivityForResult(VideoProblemActivity.class, bundle, VIDEO_OPEN_CODE);
+                    startActivityForResult(EditRedPackgeProblemActivity.class, bundle, VIDEO_OPEN_CODE);
                 } else {
                     //问卷红包
-                    startActivityForResult(VideoProblemActivity.class, bundle, QUESTION_OPEN_CODE);
+                    startActivityForResult(EditRedPackgeProblemActivity.class, bundle, QUESTION_OPEN_CODE);
                 }
                 break;
             case R.id.lin_scope:
