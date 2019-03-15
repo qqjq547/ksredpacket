@@ -3,7 +3,9 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
    <include layout="@layout/layout_title"/>
-
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -382,9 +384,11 @@
             android:layout_marginTop="@dimen/space50"
             android:layout_marginLeft="@dimen/space15"
             android:layout_marginRight="@dimen/space15"
+            android:layout_marginBottom="@dimen/space30"
             android:background="@drawable/bg_btn_red"
             android:textSize="@dimen/textfont15"
             android:textColor="@color/text_white"
             android:text="@string/safe_exit"/>
     </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </LinearLayout>
