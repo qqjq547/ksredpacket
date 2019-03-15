@@ -12,6 +12,7 @@ import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -23,6 +24,8 @@ import com.guochuang.mimedia.mvp.model.RedbagInfo;
 import com.guochuang.mimedia.tools.AdCollectionView;
 import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.ui.activity.common.ShareActivity;
+import com.guochuang.mimedia.ui.activity.redbag.AnswerActivity;
+import com.guochuang.mimedia.ui.activity.redbag.VideoPreviewActivity;
 import com.guochuang.mimedia.view.BadgeView;
 import com.qq.e.ads.nativ.NativeExpressADView;
 import com.sz.gcyh.KSHongBao.R;
@@ -77,6 +80,8 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
     TextView tvNotice;
     @BindView(R.id.rl_value)
     RelativeLayout rlValue;
+    @BindView(R.id.tv_redbag_tip)
+    TextView tvRedbagTip;
     @BindView(R.id.tv_red_packet_details_ksb)
     TextView tvKsb;
     @BindView(R.id.tv_red_packet_details_money)
@@ -138,6 +143,15 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
     @BindView(R.id.lin_redbag_share)
     LinearLayout linRedbagShare;
 
+    @BindView(R.id.lin_video_head)
+    LinearLayout linVideoHead;
+    @BindView(R.id.tv_will_get_ksb)
+    TextView tvWillGetKsb;
+    @BindView(R.id.btn_open_packet)
+    Button btnOpenPacket;
+    @BindView(R.id.iv_video_prev)
+    ImageView ivVideoPrev;
+
     RedbagReplyAdapter redPacketReplyAdapter;
     List<RedPacketReply> replyList = new ArrayList<>();
     RedPacketReply other;
@@ -169,7 +183,7 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
 
     @Override
     public void initViewAndData() {
-        redbagDetail = (RedbagDetail) getIntent().getSerializableExtra(Constant.RED_PACKET_DETAIL);
+//        redbagDetail = (RedbagDetail) getIntent().getSerializableExtra(Constant.RED_PACKET_DETAIL);
         showLoadingDialog(null);
         setStatusbar(R.color.bg_red, false);
         if (redbagDetail == null) {
@@ -186,7 +200,17 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                 linRedbagShare.setVisibility(View.VISIBLE);
                 srlRefresh.setEnableRefresh(false);
                 srlRefresh.setEnableLoadmore(false);
-            } else {
+            }else if(redPacketType.equals(Constant.ROLETYPE_VIDEO)){
+                rlValue.setVisibility(View.GONE);
+                tvRedbagTip.setVisibility(View.GONE);
+                linVideoHead.setVisibility(View.VISIBLE);
+                btnOpenPacket.setText(R.string.watched_video_open_redbag);
+            }else if(redPacketType.equals(Constant.ROLETYPE_VIDEO)){
+                rlValue.setVisibility(View.GONE);
+                tvRedbagTip.setVisibility(View.GONE);
+                linVideoHead.setVisibility(View.VISIBLE);
+                btnOpenPacket.setText(R.string.answer_open_redbag);
+            }else {
                 linRedbagDetail.setVisibility(View.VISIBLE);
                 linComment.setVisibility(View.VISIBLE);
                 linReply.setVisibility(View.VISIBLE);
@@ -319,7 +343,7 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
         }
     }
 
-    @OnClick({R.id.iv_back, R.id.rl_red_packet_details_header,R.id.lin_wechat,R.id.lin_weibo,R.id.lin_redbag_share, R.id.tv_reply, R.id.iv_comment, R.id.iv_collect, R.id.iv_zan, R.id.tv_url})
+    @OnClick({R.id.iv_back, R.id.rl_red_packet_details_header,R.id.lin_wechat,R.id.lin_weibo,R.id.lin_redbag_share, R.id.tv_reply, R.id.iv_comment, R.id.iv_collect, R.id.iv_zan, R.id.tv_url,R.id.btn_open_packet,R.id.iv_video_prev})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -408,6 +432,13 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                     IntentUtils.startOutWebActivity(this, redbagInfo.getUrl());
                 }
                 break;
+            case R.id.btn_open_packet:
+                startActivity(new Intent(this,AnswerActivity.class));
+                break;
+            case R.id.iv_video_prev:
+                startActivity(new Intent(this,VideoPreviewActivity.class).putExtra(Constant.URL,""));
+                break;
+
         }
     }
 
@@ -499,6 +530,9 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                     nativeExpressADView = adCollectionView.getNativeExpressADView();
                 }
             } else {
+                if (TextUtils.equals(redPacketType,Constant.ROLETYPE_VIDEO)){
+                    linVideoHead.setVisibility(View.GONE);
+                }
                 tvReceiveNum.setText(String.format(getString(R.string.format_people_get_redbag), redbagDetail.getDrawNumber()));
                 tvContent.setText(redbagDetail.getContent());
                 if (redbagDetail != null && redbagDetail.getPicture().size() > 0) {
