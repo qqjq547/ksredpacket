@@ -25,6 +25,7 @@ import com.guochuang.mimedia.tools.AdCollectionView;
 import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.ui.activity.common.ShareActivity;
 import com.guochuang.mimedia.ui.activity.redbag.AnswerActivity;
+import com.guochuang.mimedia.ui.activity.redbag.EditRedbagActivity;
 import com.guochuang.mimedia.ui.activity.redbag.VideoPreviewActivity;
 import com.guochuang.mimedia.view.BadgeView;
 import com.qq.e.ads.nativ.NativeExpressADView;
@@ -436,7 +437,8 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                 startActivity(new Intent(this,AnswerActivity.class));
                 break;
             case R.id.iv_video_prev:
-                startActivity(new Intent(this,VideoPreviewActivity.class).putExtra(Constant.URL,""));
+//                IntentUtils.startVideoPreviewActivity(this,redbagDetail.get);
+//                startActivity(new Intent(this,VideoPreviewActivity.class).putExtra(Constant.URL,""));
                 break;
 
         }

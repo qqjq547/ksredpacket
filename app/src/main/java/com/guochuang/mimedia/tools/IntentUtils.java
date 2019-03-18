@@ -11,6 +11,7 @@ import com.guochuang.mimedia.mvp.model.RedbagDetail;
 import com.guochuang.mimedia.ui.activity.beenest.BidBrandActivity;
 import com.guochuang.mimedia.ui.activity.beenest.EditAdActivity;
 import com.guochuang.mimedia.ui.activity.common.ImagePreviewActivity;
+import com.guochuang.mimedia.ui.activity.redbag.VideoPreviewActivity;
 import com.guochuang.mimedia.ui.activity.user.CardAddActivity;
 import com.guochuang.mimedia.ui.activity.city.CityBidRecordActivity;
 import com.guochuang.mimedia.ui.activity.city.CityDetailActivity;
@@ -253,6 +254,11 @@ public class IntentUtils {
         intent.putExtra(Constant.NESTLOCATIONID, nestLocationId);
         intent.putExtra(Constant.LATITUDE, latitude);
         intent.putExtra(Constant.LONGITUDE, longitude);
+        activity.startActivity(intent);
+    }
+    public static void startVideoPreviewActivity(Activity activity, String videoPath){
+        Intent intent = new Intent(activity, VideoPreviewActivity.class);
+        intent.putExtra(Constant.VIDEO_PATH, videoPath);
         activity.startActivity(intent);
     }
 }

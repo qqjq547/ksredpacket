@@ -704,6 +704,8 @@
     <string name="surevy_redbag_problem">问卷红包问题</string>
     <string name="tips_delete_problem">你确定删除该问题？</string>
     <string name="video_preview">视频预览</string>
+    <string name="check_question">查看所提问题>></string>
+
 
 
 </resources>

@@ -17,16 +17,6 @@ public abstract class MvpActivity<P extends BasePresenter> extends BaseActivity 
         initViewAndData();
     }
 
-    @Override
-    protected void paserIntent(Bundle bundle) {
-
-    }
-
-    @Override
-    protected void paserIntent(Intent intent) {
-
-    }
-
     protected abstract P createPresenter();
 
     @Override

@@ -11,6 +11,9 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.guochuang.mimedia.base.BaseActivity;
+import com.guochuang.mimedia.base.BasePresenter;
+import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.base.navigationbar.DefaultNavigationBar;
 import com.guochuang.mimedia.mvp.model.VideoPlayerItemInfo;
 import com.guochuang.mimedia.tools.Constant;
@@ -21,25 +24,29 @@ import com.sz.gcyh.KSHongBao.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class VideoPreviewActivity extends AppCompatActivity {
-    String url;
+public class VideoPreviewActivity extends MvpActivity {
+
+    @BindView(R.id.video_player)
     MyVideoPlayer videoPlayer;
 
+    String url;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        setContentView(R.layout.activity_videopreview);
-        videoPlayer = findViewById(R.id.video_player);
-        Intent intent = getIntent();
-        Bundle bundle = intent.getBundleExtra(Constant.ACTIVTYPUTBUNDLEKEY);
-        url = bundle.getString(Constant.VIDEO_PATH);
+    protected BasePresenter createPresenter() {
+        return null;
+    }
+
+    @Override
+    public int getLayout() {
+        return R.layout.activity_videopreview;
+    }
+
+    @Override
+    public void initViewAndData() {
+        url = getIntent().getStringExtra(Constant.VIDEO_PATH);
         if (!url.startsWith("http")) {
             url = "file:///" + url;
         }
-
-
         new DefaultNavigationBar.Builder(this).setTitle(getResources().getString(R.string.video_preview))
                 .setLeftClick(new View.OnClickListener() {
                     @Override
@@ -61,9 +68,7 @@ public class VideoPreviewActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (!MediaHelper.isPlay) {
-
             MediaHelper.play();
-
         }
     }
 
@@ -81,6 +86,8 @@ public class VideoPreviewActivity extends AppCompatActivity {
         super.onDestroy();
         MediaHelper.release();
     }
+
+
 
 
 }

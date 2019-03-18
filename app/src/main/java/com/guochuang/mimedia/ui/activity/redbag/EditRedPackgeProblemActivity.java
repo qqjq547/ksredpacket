@@ -15,8 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-
-import com.dmcbig.mediapicker.utils.ScreenUtils;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.base.dialog.AlertDialog;
 import com.guochuang.mimedia.base.navigationbar.DefaultNavigationBar;
@@ -25,6 +23,7 @@ import com.guochuang.mimedia.base.recycleview.adapter.MultiTypeSupport;
 import com.guochuang.mimedia.mvp.model.ProblemBean;
 import com.guochuang.mimedia.mvp.presenter.VideoProblemPresenter;
 import com.guochuang.mimedia.mvp.view.VideoProblemView;
+import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.DialogBuilder;
 import com.guochuang.mimedia.ui.adapter.ProblemDialogInAdapter;
@@ -66,13 +65,6 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
 
 
     @Override
-    protected void paserIntent(Bundle bundle) {
-        super.paserIntent(bundle);
-        mProblemList = bundle.getParcelableArrayList(PROBLEMLIST_KEY);
-        mRedPacketType = bundle.getString(OPEN_VIDEOPROBLEMACTIVITY_TYPE);
-    }
-
-    @Override
     public int getLayout() {
         return R.layout.activity_videoproblem;
     }
@@ -80,6 +72,8 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
     @Override
     public void initViewAndData() {
         setStatusbar(R.color.white,true);
+        mProblemList = getIntent().getParcelableArrayListExtra(PROBLEMLIST_KEY);
+        mRedPacketType = getIntent().getStringExtra(OPEN_VIDEOPROBLEMACTIVITY_TYPE);
         mNavigationbuilder = new DefaultNavigationBar.Builder(this);
         if (RED_PACKET_TYPE_VIDEO.equals(mRedPacketType)) {
             mNavigationbuilder.setTitle(getResources().getString(R.string.video_redbag_problem));
@@ -208,13 +202,13 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
         final AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setContentView(R.layout.dialog_problem_layout)
                 .setGravity(Gravity.CENTER)
-                .setWidthAndHeight((int) (ScreenUtils.getScreenWidth(this) * 0.9), ViewGroup.LayoutParams.WRAP_CONTENT)
+                .setWidthAndHeight((int) (CommonUtil.getScreenW(this) * 0.9), ViewGroup.LayoutParams.WRAP_CONTENT)
                 .create();
 
         LinearLayout ll_header_root = alertDialog.getView(R.id.ll_header_root);
         if (RED_PACKET_TYPE_QUESTION.equals(mRedPacketType)) {
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) ll_header_root.getLayoutParams();
-            layoutParams.bottomMargin = ScreenUtils.dp2px(this, 8);
+            layoutParams.bottomMargin = CommonUtil.dip2px(this, 8);
             ll_header_root.setLayoutParams(layoutParams);
         }
 

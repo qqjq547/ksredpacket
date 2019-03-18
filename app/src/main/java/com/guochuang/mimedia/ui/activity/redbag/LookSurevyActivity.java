@@ -1,5 +1,6 @@
 package com.guochuang.mimedia.ui.activity.redbag;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Html;
@@ -38,13 +39,6 @@ public class LookSurevyActivity extends MvpActivity<LookSurveymPresenter> implem
     }
 
     @Override
-    protected void paserIntent(Bundle bundle) {
-        mSurveyId = bundle.getString(Constant.LOOK_PROBLEM_RED_PACKET_ID);
-        mRedPackgeId = bundle.getString(Constant.RED_PACKET_ID);
-
-    }
-
-    @Override
     public int getLayout() {
         return R.layout.activity_lookvideoproblem;
     }
@@ -52,6 +46,8 @@ public class LookSurevyActivity extends MvpActivity<LookSurveymPresenter> implem
     @Override
     public void initViewAndData() {
         setStatusbar(R.color.white,true);
+        mSurveyId = getIntent().getStringExtra(Constant.LOOK_PROBLEM_RED_PACKET_ID);
+        mRedPackgeId = getIntent().getStringExtra(Constant.RED_PACKET_ID);
         initTitle();
         initData();
         wrapEmRecycle.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -85,9 +81,7 @@ public class LookSurevyActivity extends MvpActivity<LookSurveymPresenter> implem
             @Override
             public void itmeChildrenClick(int viewId, int position) {
                 LookSurevyResult.StatisticsListBean statisticsListBean = mData.get(position);
-                Bundle bundle = new Bundle();
-                bundle.putParcelable(Constant.FILL_ANSWER_INFO,statisticsListBean);
-                startActivity(FillAnswerInfoActivity.class,bundle);
+                startActivity(new Intent(LookSurevyActivity.this,FillAnswerInfoActivity.class).putExtra(Constant.FILL_ANSWER_INFO,statisticsListBean));
             }
         });
 
