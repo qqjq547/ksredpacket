@@ -575,7 +575,7 @@
     <string name="pls_input_title">请输入标题</string>
     <string name="relate_mobile">联系电话</string>
     <string name="pls_input_relate_phone">请输入联系电话（选填）</string>
-    <string name="local_area">所在地区</string>
+    <string name="local_area">导航地址</string>
     <string name="address_option">(地址选填)</string>
     <string name="detail_address">详细地址</string>
     <string name="detail_address_hint">如道路，门牌号，小区，楼栋号等</string>
@@ -631,6 +631,7 @@
     <string name="showlist_hint">分享自己的喜悦吧</string>
     <string name="has_send_good">已发货</string>
     <string name="waiting_send_good">待发放</string>
+    <string name="waiting_send_good_thing">待发货</string>
     <string name="received_address">收货地址</string>
     <string name="address_hint">详细地址，如道路、门牌号、小区、楼栋号等</string>
     <string name="received_person_name">收货人姓名</string>
@@ -642,7 +643,7 @@
     <string name="setup_default_address">设为默认地址</string>
     <string name="default_address">默认</string>
     <string name="my_treasure">我的淘区块</string>
-    <string name="has_sell_all">已售罄，幸运号生成中..</string>
+    <string name="has_sell_all">人次已满，幸运号生成中..</string>
     <string name="progress">进度：</string>
     <string name="perfect_address">完善收货地址</string>
     <string name="receive_address_">收货地址：</string>
@@ -707,5 +708,7 @@
     <string name="check_question">查看所提问题>></string>
 
 
+    <string name="clear_address">清空地址</string>
+    <string name="navigation_not_empty">导航地址不能为空</string>
 
 </resources>

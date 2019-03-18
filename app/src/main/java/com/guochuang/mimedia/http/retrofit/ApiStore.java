@@ -1339,4 +1339,9 @@ public interface ApiStore {
 
     @GET("/api/v1/survey/survey/get_statistics")
     Observable<HttpResponse<LookSurevyResult>> getVideoProblemAnswerList(@Query("surveyId") long surveyId, @Query("redPacketUuid")String redPacketUuid);
+
+    @GET("/api/v1/nest/nest_location/get_random_spot")
+    Observable<HttpResponse<NestRandomAd>> getRandomSpot(
+            @Query("latitude") String latitude,
+            @Query("longitude") String longitude);
 }

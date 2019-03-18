@@ -132,7 +132,6 @@ public class MyAddressActivity extends MvpActivity<MyAddressPresenter> implement
                     break;
             }
         }
-
     }
 
     @Override
@@ -145,6 +144,11 @@ public class MyAddressActivity extends MvpActivity<MyAddressPresenter> implement
         }
         if (data.getDataList() != null) {
             dataArr.addAll(data.getDataList());
+        }
+        if (snatchId>0&&dataArr.size()>0){
+            tvText.setText(R.string.confirm);
+        }else {
+            tvText.setText(null);
         }
         adapter.notifyDataSetChanged();
         if (data.getCurrentPage() >= data.getTotalPage()) {

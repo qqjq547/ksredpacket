@@ -193,7 +193,7 @@ public class MapPickActivity extends MvpActivity<MapPickPresenter> implements Ma
         }
     }
 
-    @OnClick({R.id.iv_back, R.id.tv_confirm, R.id.iv_location})
+    @OnClick({R.id.iv_back, R.id.tv_confirm, R.id.iv_location,R.id.tv_clear})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -219,6 +219,11 @@ public class MapPickActivity extends MvpActivity<MapPickPresenter> implements Ma
 //                showLocationInMap(lat,lng);
                 mvpPresenter.getGeocode(String.valueOf(lat),String.valueOf(lng),null);
                 break;
+            case R.id.tv_clear:
+                setResult(RESULT_OK, getIntent());
+                finish();
+                break;
+
         }
     }
 

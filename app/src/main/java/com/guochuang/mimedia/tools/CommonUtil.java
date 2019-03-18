@@ -1,6 +1,7 @@
 package com.guochuang.mimedia.tools;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.ClipboardManager;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -808,6 +809,16 @@ public class CommonUtil {
                 break;
         }
         return result;
+    }
+    public static String getProcessName(Context context) {
+        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningAppProcessInfo processInfo : manager.getRunningAppProcesses()) {
+            if (processInfo.pid == android.os.Process.myPid()) {
+                return processInfo.processName;
+            }
+        }
+
+        return null;
     }
 
 }

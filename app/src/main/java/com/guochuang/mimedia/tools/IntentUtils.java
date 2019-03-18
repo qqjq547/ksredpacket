@@ -8,6 +8,7 @@ import android.net.Uri;
 
 import com.guochuang.mimedia.mvp.model.RecommendData;
 import com.guochuang.mimedia.mvp.model.RedbagDetail;
+import com.guochuang.mimedia.ui.activity.beenest.BeeNestActivity;
 import com.guochuang.mimedia.ui.activity.beenest.BidBrandActivity;
 import com.guochuang.mimedia.ui.activity.beenest.EditAdActivity;
 import com.guochuang.mimedia.ui.activity.common.ImagePreviewActivity;
@@ -259,6 +260,12 @@ public class IntentUtils {
     public static void startVideoPreviewActivity(Activity activity, String videoPath){
         Intent intent = new Intent(activity, VideoPreviewActivity.class);
         intent.putExtra(Constant.VIDEO_PATH, videoPath);
+        activity.startActivity(intent);
+    }
+    public static void startBeeNestActivity(Activity activity, long nestInfoId,long nestLocationId) {
+        Intent intent = new Intent(activity, BeeNestActivity.class);
+        intent.putExtra(Constant.NESTINFOID, nestInfoId);
+        intent.putExtra(Constant.NESTLOCATIONID, nestLocationId);
         activity.startActivity(intent);
     }
 }
