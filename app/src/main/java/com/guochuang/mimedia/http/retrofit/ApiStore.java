@@ -19,6 +19,7 @@ import com.guochuang.mimedia.mvp.model.IncomeStatistics;
 import com.guochuang.mimedia.mvp.model.DictionaryType;
 import com.guochuang.mimedia.mvp.model.InfoItem;
 import com.guochuang.mimedia.mvp.model.InviterUser;
+import com.guochuang.mimedia.mvp.model.JxwUserInfoUrl;
 import com.guochuang.mimedia.mvp.model.KsbRecord;
 import com.guochuang.mimedia.mvp.model.KsbTransfer;
 import com.guochuang.mimedia.mvp.model.KsbTrend;
@@ -731,13 +732,13 @@ public interface ApiStore {
     @GET("/api/v1/common/region/get_two")
     Observable<HttpResponse<List<Area>>> getRegion();
 
-    @GET("/api/v1/redpacket/red_packet_survery_template/get")
+    @GET("/api/v1/redpacket/red_packet_survey_template/get")
     Observable<HttpResponse<List<RedbagTemp>>> getTemplate(
             @Query("redPacketType") String redPacketType
     );
 
     @FormUrlEncoded
-    @POST("/api/v1/redpacket/red_packet_survery_template/delete")
+    @POST("/api/v1/redpacket/red_packet_survey_template/delete")
     Observable<HttpResponse<Boolean>> deleteTemplate(
             @Field("templateId") long templateId
     );
@@ -1343,6 +1344,18 @@ public interface ApiStore {
 
     @GET("/api/v1/nest/nest_location/get_random_spot")
     Observable<HttpResponse<NestRandomAd>> getRandomSpot(
-            @Query("latitude") String latitude,
-            @Query("longitude") String longitude);
+                    @Query("latitude") String latitude,
+                    @Query("longitude") String longitude);
+
+    @GET("/api/v1/activity/jxwAccount/addStatistics")
+    Observable<HttpResponse<Boolean>> addStatistics(
+            @Query("utoken") String utoken,
+            @Query("deviceCode") String deviceCode,
+            @Query("deviceFrom") String deviceFrom,
+            @Query("jumpUrl") String jumpUrl);
+
+    @GET("/api/v1/activity/jxwAccount/getJxwUserInfoUrl")
+    Observable<HttpResponse<JxwUserInfoUrl>> getJxwUserInfoUrl(
+            @Query("deviceCode") String deviceCode,
+            @Query("from") String from);
 }

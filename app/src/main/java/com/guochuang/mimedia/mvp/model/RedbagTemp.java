@@ -61,7 +61,7 @@ public class RedbagTemp implements Serializable {
     private String wechat;
     private String videoUrl;
     private String coverUrl;
-    private long surveryId;
+    private long surveyId;
     private String redPacketUuid;
 
     public int getAreaType() {
@@ -288,12 +288,12 @@ public class RedbagTemp implements Serializable {
         this.coverUrl = coverUrl;
     }
 
-    public long getSurveryId() {
-        return surveryId;
+    public long getSurveyId() {
+        return surveyId;
     }
 
-    public void setSurveryId(long surveryId) {
-        this.surveryId = surveryId;
+    public void setSurveyId(long surveyId) {
+        this.surveyId = surveyId;
     }
 
     public String getRedPacketUuid() {

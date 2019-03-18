@@ -68,7 +68,7 @@ public class TempFragment extends MvpFragment {
     public void initViewAndData() {
         if (temp.getRedPacketType().equals(Constant.RED_PACKET_TYPE_VIDEO)
                 ||temp.getRedPacketType().equals(Constant.RED_PACKET_TYPE_QUESTION)){
-            if (temp.getSurveryId()>0){
+            if (temp.getSurveyId()>0){
                 tvSurvery.setVisibility(View.VISIBLE);
             }
         }
@@ -125,7 +125,7 @@ public class TempFragment extends MvpFragment {
        switch (view.getId()){
            case R.id.tv_survery:
                startActivity(new Intent(getActivity(),LookSurevyActivity.class)
-                       .putExtra(Constant.LOOK_PROBLEM_RED_PACKET_ID,String.valueOf(temp.getSurveryId()))
+                       .putExtra(Constant.LOOK_PROBLEM_RED_PACKET_ID,String.valueOf(temp.getSurveyId()))
                        .putExtra(Constant.RED_PACKET_ID,temp.getRedPacketUuid()));
                break;
            case R.id.iv_cover:
