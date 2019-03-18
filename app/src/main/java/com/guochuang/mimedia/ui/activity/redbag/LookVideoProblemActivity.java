@@ -57,6 +57,7 @@ public class LookVideoProblemActivity extends MvpActivity<LookVideoProblemPresen
 
     @Override
     public void initViewAndData() {
+        setStatusbar(R.color.white,true);
         initTitle();
         initData();
         mWrapEmRecycle.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));

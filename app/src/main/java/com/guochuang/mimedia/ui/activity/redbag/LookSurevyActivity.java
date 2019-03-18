@@ -51,6 +51,7 @@ public class LookSurevyActivity extends MvpActivity<LookSurveymPresenter> implem
 
     @Override
     public void initViewAndData() {
+        setStatusbar(R.color.white,true);
         initTitle();
         initData();
         wrapEmRecycle.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));

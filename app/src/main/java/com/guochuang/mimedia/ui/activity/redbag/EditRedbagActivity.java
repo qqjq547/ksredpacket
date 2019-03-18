@@ -169,6 +169,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
 
     @Override
     public void initViewAndData() {
+        setStatusbar(R.color.white,true);
         redPacketType = getIntent().getStringExtra(Constant.RED_PACKET_TYPE);
         scopeArr = Arrays.asList(getResources().getStringArray(R.array.redbag_scope));
         tvScope.setText(scopeArr.get(0));

@@ -43,6 +43,7 @@ public class FillAnswerInfoActivity extends MvpActivity {
 
     @Override
     public void initViewAndData() {
+        setStatusbar(R.color.white,true);
         initTitle();
 
         tvTitle.setText("【填空】" + mLookSurevyStatisticsList.getTitle());

@@ -79,6 +79,7 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
 
     @Override
     public void initViewAndData() {
+        setStatusbar(R.color.white,true);
         mNavigationbuilder = new DefaultNavigationBar.Builder(this);
         if (RED_PACKET_TYPE_VIDEO.equals(mRedPacketType)) {
             mNavigationbuilder.setTitle(getResources().getString(R.string.video_redbag_problem));
