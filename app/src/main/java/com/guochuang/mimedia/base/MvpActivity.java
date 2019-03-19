@@ -1,10 +1,8 @@
 package com.guochuang.mimedia.base;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.guochuang.mimedia.mvp.view.MainView;
-import com.guochuang.mimedia.tools.Constant;
 
 
 public abstract class MvpActivity<P extends BasePresenter> extends BaseActivity {
@@ -17,6 +15,7 @@ public abstract class MvpActivity<P extends BasePresenter> extends BaseActivity 
         initViewAndData();
     }
 
+
     protected abstract P createPresenter();
 
     @Override
@@ -26,6 +25,5 @@ public abstract class MvpActivity<P extends BasePresenter> extends BaseActivity 
             mvpPresenter.detachView();
         }
     }
-
 
 }

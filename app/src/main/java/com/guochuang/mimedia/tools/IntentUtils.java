@@ -12,6 +12,7 @@ import com.guochuang.mimedia.ui.activity.beenest.BeeNestActivity;
 import com.guochuang.mimedia.ui.activity.beenest.BidBrandActivity;
 import com.guochuang.mimedia.ui.activity.beenest.EditAdActivity;
 import com.guochuang.mimedia.ui.activity.common.ImagePreviewActivity;
+import com.guochuang.mimedia.ui.activity.redbag.RedbagDetailActivity;
 import com.guochuang.mimedia.ui.activity.redbag.VideoPreviewActivity;
 import com.guochuang.mimedia.ui.activity.user.CardAddActivity;
 import com.guochuang.mimedia.ui.activity.city.CityBidRecordActivity;
@@ -25,7 +26,6 @@ import com.guochuang.mimedia.ui.activity.redbag.LuckyActivity;
 import com.guochuang.mimedia.ui.activity.MainActivity;
 import com.guochuang.mimedia.ui.activity.common.PurchaseActivity;
 import com.guochuang.mimedia.ui.activity.user.RecommendDetailActivity;
-import com.guochuang.mimedia.ui.activity.RedbagDetailActivity;
 import com.guochuang.mimedia.ui.activity.redbag.RedbagJoinedActivity;
 import com.guochuang.mimedia.ui.activity.redbag.RedbagRainActivity;
 import com.guochuang.mimedia.ui.activity.redbag.SquareDetailActivity;
@@ -61,17 +61,18 @@ public class IntentUtils {
         intent.putExtra(Constant.CARDMOBILE,mobile);
         activity.startActivity(intent);
     }
-    public static void startRedbagDetailActivity(Activity activity, RedbagDetail redbagDetail,String redPacketUuid,String redPacketType) {
+    public static void startRedbagDetailActivity(Activity activity, RedbagDetail redbagDetail,String redPacketUuid,String roleType,String redPacketType) {
         Intent intent = new Intent(activity, RedbagDetailActivity.class);
         intent.putExtra(Constant.RED_PACKET_DETAIL,redbagDetail);
         intent.putExtra(Constant.RED_PACKET_UUID,redPacketUuid);
+        intent.putExtra(Constant.ROLE_TYPE,roleType);
         intent.putExtra(Constant.RED_PACKET_TYPE,redPacketType);
         activity.startActivity(intent);
     }
-    public static void startRedbagDetailActivity(Activity activity, String redPacketUuid,String redPacketType,String startIndex) {
+    public static void startRedbagDetailActivity(Activity activity, String redPacketUuid,String roleType,String startIndex) {
         Intent intent = new Intent(activity, RedbagDetailActivity.class);
         intent.putExtra(Constant.RED_PACKET_UUID,redPacketUuid);
-        intent.putExtra(Constant.RED_PACKET_TYPE,redPacketType);
+        intent.putExtra(Constant.ROLE_TYPE,roleType);
         intent.putExtra(Constant.START_INDEX,startIndex);
         activity.startActivity(intent);
     }

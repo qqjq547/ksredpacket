@@ -50,9 +50,7 @@ import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.tools.antishake.AntiShake;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
-import com.guochuang.mimedia.ui.activity.RedbagDetailActivity;
 import com.guochuang.mimedia.ui.activity.beenest.AdBidActivity;
-import com.guochuang.mimedia.ui.activity.beenest.BeeNestActivity;
 import com.guochuang.mimedia.ui.activity.city.CityActivity;
 import com.guochuang.mimedia.ui.activity.MainActivity;
 import com.guochuang.mimedia.ui.activity.common.ShareActivity;
@@ -424,8 +422,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     public void setRedbagDetail(RedbagDetail redbagDetail) {
         closeLoadingDialog();
         if (redbagDetail != null) {
-            IntentUtils.startRedbagDetailActivity(getActivity(), redbagDetail, redbag.getUuid(), Constant.ROLETYPE_VIDEO);
-//            IntentUtils.startRedbagDetailActivity(getActivity(), redbagDetail, redbag.getUuid(), redbag.getRoleType());
+            IntentUtils.startRedbagDetailActivity(getActivity(), redbagDetail, redbag.getUuid(), redbag.getRoleType(),redbag.getType());
         }
     }
 

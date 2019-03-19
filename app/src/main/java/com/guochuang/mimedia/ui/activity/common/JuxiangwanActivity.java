@@ -53,7 +53,7 @@ public class JuxiangwanActivity extends MvpActivity<JuxiangwanPresenter> impleme
 
     @Override
     public void initViewAndData() {
-        jxwUserInfoUrl = getIntent().getParcelableExtra(Constant.DATA);
+        jxwUserInfoUrl = (JxwUserInfoUrl)getIntent().getSerializableExtra(Constant.DATA);
         wvContent.getSettings().setJavaScriptEnabled(true);
         wvContent.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         wvContent.getSettings().setLoadWithOverviewMode(true);

@@ -182,6 +182,7 @@ public class Constant {
     public static final String RESET_NATION_CODE = "86";
 
     public static final String RED_PACKET_TYPE = "redPacketType";
+    public static final String ROLE_TYPE = "roleType";
     public static final String TYPE_NOW = "now";
     public static final String TYPE_SHARE = "share";
     public static final String TYPE_REDBAG = "redbag";
@@ -198,6 +199,7 @@ public class Constant {
     public static final String ARGS_DATA = "data";
     public static final String JXW_FROM = "h5android";
     public static final String DATA = "data";
+    public static final String SURVEYID = "surveyId";
 
 
     public static final int STATE_HAS_GET = 1;
@@ -225,8 +227,6 @@ public class Constant {
     public static final String ROLETYPE_PERSON = "person";
     public static final String ROLETYPE_MERCHANT = "merchant";
     public static final String ROLETYPE_SYSTEM = "system";
-    public static final String ROLETYPE_VIDEO = "video";
-    public static final String ROLETYPE_QUESTION = "question";
 
     public static final int PAY_TYPE_WXPAY = 11;
     public static final int PAY_TYPE_ALIPAY = 101;

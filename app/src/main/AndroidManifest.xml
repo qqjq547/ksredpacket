@@ -169,7 +169,7 @@
 
         // 红包详情界面
         <activity
-            android:name="com.guochuang.mimedia.ui.activity.RedbagDetailActivity"
+            android:name="com.guochuang.mimedia.ui.activity.redbag.RedbagDetailActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         // 城主-竞购大厅

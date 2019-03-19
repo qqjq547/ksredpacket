@@ -2,7 +2,6 @@ package com.guochuang.mimedia.base;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -13,8 +12,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
-import com.guochuang.mimedia.tools.Constant;
-import com.guochuang.mimedia.tools.IntentUtils;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.mvp.view.MainView;

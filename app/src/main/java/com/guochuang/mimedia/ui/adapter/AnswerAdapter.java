@@ -9,14 +9,15 @@ import android.widget.RadioGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.guochuang.mimedia.mvp.model.LookVideoResult;
 import com.sz.gcyh.KSHongBao.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnswerAdapter extends BaseQuickAdapter<String,BaseViewHolder> {
+public class AnswerAdapter extends BaseQuickAdapter<LookVideoResult.QuestionListBean,BaseViewHolder> {
     List<ItemAnswer> listResult=new ArrayList<>();
-    public AnswerAdapter(@Nullable List<String> data) {
+    public AnswerAdapter(@Nullable List<LookVideoResult.QuestionListBean> data) {
         super(R.layout.item_answer,data);
         for (int i=0;i<data.size();i++){
             listResult.add(new ItemAnswer());
@@ -24,28 +25,28 @@ public class AnswerAdapter extends BaseQuickAdapter<String,BaseViewHolder> {
     }
 
     @Override
-    protected void convert(final BaseViewHolder helper, String item) {
+    protected void convert(final BaseViewHolder helper, LookVideoResult.QuestionListBean item) {
         helper.setText(R.id.tv_index,helper.getAdapterPosition()+".");
-        switch (helper.getAdapterPosition()%3){
-            case 0:
+        switch (item.getType()){
+            case 0://单选题
                 helper.setGone(R.id.lin_direct_answer,true);
                 helper.setGone(R.id.rgroup_answer,false);
                 helper.setGone(R.id.lin_check,false);
-                helper.setText(R.id.tv_question,mContext.getString(R.string.input_blank)+"ttttttttt");
+                helper.setText(R.id.tv_question,mContext.getString(R.string.input_blank)+item.getTitle());
                 break;
-            case 1:
+            case 1://多选题
                 helper.setGone(R.id.lin_direct_answer,false);
                 helper.setGone(R.id.rgroup_answer,true);
                 helper.setGone(R.id.lin_check,false);
-                helper.setText(R.id.tv_question,mContext.getString(R.string.single_choice)+"ttttttttt");
+                helper.setText(R.id.tv_question,mContext.getString(R.string.single_choice)+item.getTitle());
                 RadioGroup group=helper.getView(R.id.rgroup_answer);
                 group.setOnCheckedChangeListener(new OnCheckListener(helper.getAdapterPosition()));
                 break;
-            case 2:
+            case 2://填空题
                 helper.setGone(R.id.lin_direct_answer,false);
                 helper.setGone(R.id.rgroup_answer,false);
                 helper.setGone(R.id.lin_check,true);
-                helper.setText(R.id.tv_question,mContext.getString(R.string.muti_choice)+"ttttttttt");
+                helper.setText(R.id.tv_question,mContext.getString(R.string.muti_choice)+item.getTitle());
                 OnCheckBoxListener listener=new OnCheckBoxListener(helper.getAdapterPosition());
                 ((CheckBox)helper.getView(R.id.cb_one)).setOnCheckedChangeListener(listener);
                 ((CheckBox)helper.getView(R.id.cb_two)).setOnCheckedChangeListener(listener);
