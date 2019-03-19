@@ -276,8 +276,8 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
                     showShortToast(R.string.content_cant_empty);
                 }else if(TextUtils.isEmpty(adTitle)){
                     showShortToast(R.string.title_cant_empty);
-                }else if(TextUtils.isEmpty(adArea)){
-                    showShortToast(R.string.area_cant_empty);
+                }else if(!TextUtils.isEmpty(adAddress)&&TextUtils.isEmpty(adArea)){
+                    showShortToast(R.string.navigation_not_empty);
                 }else if(!TextUtils.isEmpty(url)&&TextUtils.isEmpty(urlName)){
                     showShortToast(R.string.link_name_cant_empty);
                 }else if(!TextUtils.isEmpty(urlName)&&TextUtils.isEmpty(url)){
@@ -353,6 +353,9 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
                     latitude=String.valueOf(intent.getDoubleExtra(Constant.LATITUDE,0));
                     longitude=String.valueOf(intent.getDoubleExtra(Constant.LONGITUDE,0));
                     tvArea.setText(intent.getStringExtra(Constant.NAME));
+                    if (TextUtils.isEmpty(intent.getStringExtra(Constant.NAME))){
+                        etAddress.setText(null);
+                    }
                     break;
                 case Constant.REQUEST_TEMPLATE:
                     NestTemplate temp=(NestTemplate)intent.getSerializableExtra(Constant.TEMPLATE);
@@ -377,13 +380,6 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
                     etAddress.setText(temp.getAddressDetail());
                     latitude=temp.getAddressLat();
                     longitude=temp.getAddressLng();
-                    if (!TextUtils.isEmpty(temp.getLinkUrl())||!TextUtils.isEmpty(temp.getLinkText())||!TextUtils.isEmpty(temp.getWechat())||!TextUtils.isEmpty(temp.getWeibo())){
-                        linLink.setVisibility(View.VISIBLE);
-                        tvLink.setText(R.string.pack_up);
-                    }else {
-                        linLink.setVisibility(View.GONE);
-                        tvLink.setText(R.string.more);
-                    }
                     etLinkName.setText(temp.getLinkText());
                     etLinkUrl.setText(temp.getLinkUrl());
                     etLinkWechat.setText(temp.getWechat());
@@ -430,13 +426,6 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
             etAddress.setText(data.getAddressDetail());
             latitude=String.valueOf(data.getAddressLat());
             longitude=String.valueOf(data.getAddressLng());
-            if (!TextUtils.isEmpty(data.getLinkUrl())||!TextUtils.isEmpty(data.getLinkText())||!TextUtils.isEmpty(data.getWechat())||!TextUtils.isEmpty(data.getWeibo())){
-                linLink.setVisibility(View.VISIBLE);
-                tvLink.setText(R.string.pack_up);
-            }else {
-                linLink.setVisibility(View.GONE);
-                tvLink.setText(R.string.more);
-            }
             etLinkName.setText(data.getLinkText());
             etLinkUrl.setText(data.getLinkUrl());
             etLinkWechat.setText(data.getWechat());

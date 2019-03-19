@@ -29,14 +29,6 @@ public class FillAnswerInfoActivity extends MvpActivity {
 
 
     @Override
-    protected void paserIntent(Bundle bundle) {
-        super.paserIntent(bundle);
-
-        mLookSurevyStatisticsList = bundle.getParcelable(Constant.FILL_ANSWER_INFO);
-
-    }
-
-    @Override
     public int getLayout() {
         return R.layout.activity_fillanswerinfo;
     }
@@ -44,6 +36,7 @@ public class FillAnswerInfoActivity extends MvpActivity {
     @Override
     public void initViewAndData() {
         setStatusbar(R.color.white,true);
+        mLookSurevyStatisticsList = getIntent().getParcelableExtra(Constant.FILL_ANSWER_INFO);
         initTitle();
 
         tvTitle.setText("【填空】" + mLookSurevyStatisticsList.getTitle());

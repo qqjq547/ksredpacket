@@ -133,18 +133,7 @@ public class SafeCenterActivity extends MvpActivity<SafeCenterPresenter> impleme
                         showShortToast(R.string.pls_identity_first);
                         startActivityForResult(new Intent(this, IdentifyActivity.class), Constant.REFRESH);
                     } else {
-//                        startActivityForResult(new Intent(this, MyAlipayActivity.class), Constant.REFRESH);
-                        AliPay.getInstance().auth(this, "", new AliPay.OnAuthResultListener() {
-                            @Override
-                            public void onSuccess(AuthResult result) {
-                                LogUtil.d(result.getAlipayOpenId());
-                            }
-
-                            @Override
-                            public void onFail(String errmsg) {
-                                showShortToast(errmsg);
-                            }
-                        });
+                        startActivityForResult(new Intent(this, MyAlipayActivity.class), Constant.REFRESH);
                     }
                 }
                 break;

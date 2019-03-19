@@ -63,7 +63,7 @@ public class CollectNestAdFragment extends MvpFragment<CollectNestAdPresenter> i
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 NestFavorite item=itemArr.get(position);
-                startActivity(new Intent(getActivity(),BeeNestActivity.class).putExtra(Constant.NESTINFOID,item.getNestInfoId()));
+                IntentUtils.startBeeNestActivity(getActivity(),item.getNestInfoId(),0);
             }
         });
         rvList.setAdapter(adapter);

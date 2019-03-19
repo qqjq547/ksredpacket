@@ -1,6 +1,7 @@
 package com.guochuang.mimedia.ui.activity.beenest;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.DictionaryType;
 import com.guochuang.mimedia.mvp.model.InfoDetail;
 import com.guochuang.mimedia.mvp.model.NestAd;
+import com.guochuang.mimedia.mvp.model.NestRandomAd;
 import com.guochuang.mimedia.mvp.presenter.BeeNestPresenter;
 import com.guochuang.mimedia.mvp.view.BeeNestView;
 import com.guochuang.mimedia.tools.CommonUtil;
@@ -79,6 +81,9 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
     PictureVerticalAdapter adapter;
     List<String> pictureArr=new ArrayList<>();
     long nestInfoId=0;
+    long nestLocationId=0;
+    double nestLocationLat=0;
+    double nestLocationLng=0;
     NestAd detail;
 
     @Override
@@ -94,10 +99,13 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
     @Override
     public void initViewAndData() {
         nestInfoId=getIntent().getLongExtra(Constant.NESTINFOID,0);
+        nestLocationId=getIntent().getLongExtra(Constant.NESTLOCATIONID,0);
+        ivImage.setImageResource(R.drawable.ic_more);
         showLoadingDialog(null);
         mvpPresenter.getNestAd(nestInfoId,Constant.AD_TYPE_DETAIL);
-        ivImage.setImageResource(R.drawable.ic_more);
-
+        if (nestLocationId==0){
+            mvpPresenter.getNestRandomAd(getPref().getLatitude(),getPref().getLongitude());
+        }
     }
 
 
@@ -114,13 +122,28 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
                 new BeeNestDialog(this).setOnItemClikListener(new BeeNestDialog.OnItemClikListener() {
                     @Override
                     public void onBidThis() {
-                        IntentUtils.startBidBrandActivity(BeeNestActivity.this,detail.getNestLocationId(),String.valueOf(detail.getNestLocationLat()),String.valueOf(detail.getNestLocationLng()));
+                        if (nestLocationId>0) {
+                            IntentUtils.startBidBrandActivity(BeeNestActivity.this,nestLocationId, String.valueOf(detail.getNestLocationLat()), String.valueOf(detail.getNestLocationLng()));
+                        }else {
+                            MainActivity.getInstance().clearMarker();
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    startActivity(new Intent(BeeNestActivity.this,AdBidActivity.class));
+                                }
+                            },500);
+                        }
                     }
 
                     @Override
                     public void onBidOther() {
                         MainActivity.getInstance().clearMarker();
-                        startActivity(new Intent(BeeNestActivity.this,AdBidActivity.class));
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                startActivity(new Intent(BeeNestActivity.this,AdBidActivity.class));
+                            }
+                        },500);
                     }
 
                     @Override
@@ -200,7 +223,12 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
     @Override
     public void setData(NestAd data) {
         closeLoadingDialog();
-        this.detail=data;
+        detail=data;
+        if (data.getNestLocationId()>0){
+            nestLocationId=data.getNestLocationId();
+            nestLocationLat=data.getNestLocationLat();
+            nestLocationLng=data.getNestLocationLng();
+        }
         tvTitle.setText(data.getShortMsg());
         tvName.setText(data.getTitle());
         GlideImgManager.loadImage(this,data.getCoverPicture(),ivBackground);
@@ -216,7 +244,12 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
              tvUrl.setVisibility(View.VISIBLE);
              tvUrl.setText(data.getLinkText());
          }
-         tvAddress.setText(data.getAddress()+data.getAddressDetail());
+         if (TextUtils.isEmpty(data.getAddress())){
+             linLocation.setVisibility(View.GONE);
+         }else {
+             linLocation.setVisibility(View.VISIBLE);
+             tvAddress.setText(data.getAddress()+data.getAddressDetail());
+         }
         if (TextUtils.isEmpty(data.getContactPhone())) {
             linCall.setVisibility(View.GONE);
         } else {
@@ -237,6 +270,16 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
         rvPicture.setLayoutManager(new LinearLayoutManager(this,OrientationHelper.VERTICAL,false));
         rvPicture.addItemDecoration(new VerticalDecoration(this,R.drawable.bg_city_divide));
         rvPicture.setAdapter(adapter);
+    }
+
+    @Override
+    public void setRandomAd(NestRandomAd data) {
+        closeLoadingDialog();
+        if (data!=null){
+            nestLocationId=data.getNestLocationId();
+            nestLocationLat=data.getNestLocationLat();
+            nestLocationLng=data.getNestLocationLat();
+        }
     }
 
     @Override

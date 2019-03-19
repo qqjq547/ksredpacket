@@ -47,17 +47,12 @@ public class LookVideoProblemActivity extends MvpActivity<LookVideoProblemPresen
         return R.layout.activity_looksurvey;
     }
 
-    @Override
-    protected void paserIntent(Bundle bundle) {
-        mSurveyId = bundle.getString(Constant.LOOK_PROBLEM_RED_PACKET_ID);
-        mRedPackgeId = bundle.getString(Constant.RED_PACKET_ID);
-
-    }
-
 
     @Override
     public void initViewAndData() {
         setStatusbar(R.color.white,true);
+        mSurveyId = getIntent().getStringExtra(Constant.LOOK_PROBLEM_RED_PACKET_ID);
+        mRedPackgeId = getIntent().getStringExtra(Constant.RED_PACKET_ID);
         initTitle();
         initData();
         mWrapEmRecycle.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));

@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
@@ -723,6 +724,11 @@ public class AdCollectionView {
         if (TextUtils.isEmpty(sysImaUrl)) {
             return;
         }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                if(((Activity)context).isDestroyed()){
+                    return;
+                }
+            }
         GlideApp.with(context).asBitmap().load(sysImaUrl).into(new SimpleTarget<Bitmap>() {
             @Override
             public void onResourceReady(@NonNull Bitmap resource, @android.support.annotation.Nullable Transition<? super Bitmap> transition) {

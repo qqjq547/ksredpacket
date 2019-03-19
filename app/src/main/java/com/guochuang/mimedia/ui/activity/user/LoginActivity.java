@@ -113,7 +113,8 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
 
     @Override
     public void initViewAndData() {
-        setStatusbar(R.color.bg_red,false);
+
+
         SoftKeyBoardListener.setListener(this, listener);
 
         BoxStore boxStore = App.getInstance().getBoxStore();

@@ -260,11 +260,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                     ArrayList<String> selectArr = (ArrayList<String>) pictureArr.clone();
                     if (Constant.RED_PACKET_TYPE_VIDEO.equals(redPacketType)) {
                         //打開視頻預覽
-
-                        Bundle bundle = new Bundle();
-                        bundle.putString(Constant.VIDEO_PATH, selectArr.get(position));
-                        startActivity(VideoPreviewActivity.class, bundle);
-
+                        IntentUtils.startVideoPreviewActivity(EditRedbagActivity.this,selectArr.get(position));
                     } else {
 
                         IntentUtils.startImagePreviewActivity(EditRedbagActivity.this, position, selectArr);
@@ -330,15 +326,15 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
 
             case R.id.ll_set_problem:
                 //跳转设问题
-                Bundle bundle = new Bundle();
-                bundle.putParcelableArrayList(Constant.PROBLEMLIST_KEY, mProblemList);
-                bundle.putString(Constant.OPEN_VIDEOPROBLEMACTIVITY_TYPE, redPacketType);
+                Intent intent1 = new Intent(this,EditRedPackgeProblemActivity.class);
+                intent1.putExtra(Constant.PROBLEMLIST_KEY, mProblemList);
+                intent1.putExtra(Constant.OPEN_VIDEOPROBLEMACTIVITY_TYPE, redPacketType);
                 if (Constant.RED_PACKET_TYPE_VIDEO.equals(redPacketType)) {
                     //视频红包
-                    startActivityForResult(EditRedPackgeProblemActivity.class, bundle, VIDEO_OPEN_CODE);
+                    startActivityForResult(intent1, VIDEO_OPEN_CODE);
                 } else {
                     //问卷红包
-                    startActivityForResult(EditRedPackgeProblemActivity.class, bundle, QUESTION_OPEN_CODE);
+                    startActivityForResult(intent1, QUESTION_OPEN_CODE);
                 }
                 break;
             case R.id.lin_scope:

@@ -15,7 +15,7 @@ public class NestTimeInfo {
     private int currentPrice;
     private int maxPrice;
     private String rate;
-    private double ksb;;
+    private String ksb;;
     private String startDate;
     private List<BuyListBean> buyList;
 
@@ -27,11 +27,11 @@ public class NestTimeInfo {
         this.rate = rate;
     }
 
-    public double getKsb() {
+    public String getKsb() {
         return ksb;
     }
 
-    public void setKsb(double ksb) {
+    public void setKsb(String ksb) {
         this.ksb = ksb;
     }
 

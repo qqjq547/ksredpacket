@@ -83,7 +83,7 @@
                 android:drawablePadding="@dimen/space20"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/textfont18"
-                android:text="@string/waiting_send_good"/>
+                android:text="@string/waiting_send_good_thing"/>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/lin_has_send"

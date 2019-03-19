@@ -17,7 +17,7 @@ public class Constant {
      * 是否调试模式
      */
     public static final boolean isDebug = (BuildConfig.ENV == 0);
-    public static final int DEFAULT_HOST = 2;
+    public static final int DEFAULT_HOST = 0;
 
     public static final int HTTP_STATUS_FORCE_LOGIN = 1007;
     public static final int HTTP_STATUS_REDBAD_INVALID = 10012;
@@ -196,6 +196,8 @@ public class Constant {
     public static final String ARGS_ARRAY = "args_array";
     public static final String ARGS_POSITION = "args_position";
     public static final String ARGS_DATA = "data";
+    public static final String JXW_FROM = "h5android";
+    public static final String DATA = "data";
 
 
     public static final int STATE_HAS_GET = 1;

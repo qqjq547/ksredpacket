@@ -112,6 +112,7 @@
         <activity android:name="com.guochuang.mimedia.ui.activity.beenest.AdBidActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.beenest.MyBidActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.redbag.AnswerActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.common.JuxiangwanActivity" />
         <activity
             android:name="com.guochuang.mimedia.ui.activity.redbag.LuckyActivity"
             android:theme="@style/Transparent" />
@@ -369,7 +370,8 @@
 
         <!--视频问题界面-->
         <activity android:name="com.guochuang.mimedia.ui.activity.redbag.EditRedPackgeProblemActivity" />
-        <activity android:name="com.guochuang.mimedia.ui.activity.redbag.VideoPreviewActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.redbag.VideoPreviewActivity"
+            android:theme="@style/FullScreenTheme"/>
         <activity android:name="com.guochuang.mimedia.ui.activity.redbag.LookVideoProblemActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.redbag.LookSurevyActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.redbag.FillAnswerInfoActivity" />

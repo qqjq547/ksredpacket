@@ -3,6 +3,7 @@ package com.guochuang.mimedia.http.retrofit;
 import android.support.v4.util.ArrayMap;
 
 import com.guochuang.mimedia.tools.Constant;
+import com.guochuang.mimedia.tools.JniUtil;
 import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.tools.StringUtil;
 import com.sz.gcyh.KSHongBao.BuildConfig;
@@ -74,7 +75,12 @@ public class ApiClient {
                 map.put(Constant.PARAMS_H_TENANT_CODE, h_tenant_code);
                 map.put(Constant.PARAMS_H_TIME, h_time);
                 map.put(Constant.PARAMS_H_NONCE, h_nonce);
-                String secret=StringUtil.toSort(map)+"&secretValue=" + "*2f4961%8*5B588463bee04djDAed27";
+                String secret=StringUtil.toSort(map)+"&secretValue=" ;
+                if (ApiClient.getDebugHost().equals(ApiClient.RELEASE_API_URL)){
+                    secret=secret+JniUtil.getSign();
+                }else {
+                    secret=secret+"*2f4961%8*5B588463bee04djDAed27";
+                }
                 h_sign =  StringUtil.md5(secret);
                 request = request.newBuilder()
                         .addHeader(Constant.PARAMS_H_API_TOEKN, h_api_token)
