@@ -621,7 +621,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                     ArrayList<ProblemBean> problemlist = intent.getParcelableArrayListExtra(Constant.问题数据集合);
                     mProblemList.clear();
                     mProblemList.addAll(problemlist);
-                    mTvProblemNumber.setText(String.format(getString(R.string.set_problem_number), mProblemList.size()));
+                    mTvProblemNumber.setText(String.format(getString(R.string.set_problem_number), String.valueOf(mProblemList.size())));
                     break;
             }
         }
@@ -925,7 +925,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
             mProblemList.add(problemBean);
 
         }
-        mTvProblemNumber.setText(String.format(getString(R.string.set_problem_number), mProblemList.size()));
+        mTvProblemNumber.setText(String.format(getString(R.string.set_problem_number), String.valueOf(mProblemList.size())));
         closeLoadingDialog();
 
     }
