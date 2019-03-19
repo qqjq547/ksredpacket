@@ -704,6 +704,10 @@
     <string name="surevy_redbag_problem">问卷红包问题</string>
     <string name="tips_delete_problem">你确定删除该问题？</string>
     <string name="video_preview">视频预览</string>
+    <string name="provide_least_two_items">最少要设置2个选项供选择</string>
+    <string name="fill_problem_title">请填写问题标题</string>
+    <string name="please_set_answer">请给问题设置答案</string>
+    <string name="upload_video">正在上传视频...</string>
 
 
 </resources>

@@ -185,8 +185,8 @@ public class EditRedbagPresenter extends BasePresenter<EditRedbagView> {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().fileUpload(businessType, body)), new ApiCallback<UploadFile>() {
             @Override
             public void onSuccess(UploadFile data) {
-                String url = data.getUrl();
-                mvpView.setUploadFile(data);
+                mvpView.uploadVideoSuccess(data);
+//                mvpView.setUploadFile(data);
             }
 
             @Override
@@ -246,7 +246,7 @@ public class EditRedbagPresenter extends BasePresenter<EditRedbagView> {
     }
 
 
-    public void addVideoReabag(String latitude, String longitude, String redbagLatitude, String redbagLongitude, String content, String picture, int areaType, int kilometer, double money, int quantity, String urlName, String url, String wechat, String microblog, int isPublicPassword, int isSaveTemplate, int payType, String channelCode, String safetyCode,String problemstr) {
+    public void addVideoReabag(String latitude, String longitude, String redbagLatitude, String redbagLongitude, String content, String picture, int areaType, int kilometer, double money, int quantity, String urlName, String url, String wechat, String microblog, int isPublicPassword, int isSaveTemplate, int payType, String channelCode, String safetyCode,String problemstr,String videoFrame) {
 
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().addVideoRedbag(
                 latitude,
@@ -267,7 +267,7 @@ public class EditRedbagPresenter extends BasePresenter<EditRedbagView> {
                 isSaveTemplate,
                 payType,
                 channelCode,
-                safetyCode,0,problemstr)), new ApiCallback<String>() {
+                safetyCode,0,problemstr,videoFrame)), new ApiCallback<String>() {
             @Override
             public void onSuccess(String data) {
                 mvpView.setData(data);

@@ -11,6 +11,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.bumptech.glide.Glide;
 import com.guochuang.mimedia.base.navigationbar.DefaultNavigationBar;
 import com.guochuang.mimedia.mvp.model.VideoPlayerItemInfo;
 import com.guochuang.mimedia.tools.Constant;
@@ -48,6 +49,8 @@ public class VideoPreviewActivity extends AppCompatActivity {
                         finish();
                     }
                 }).build();
+
+
 
         //传递给条目里面的MyVideoPlayer
         VideoPlayerItemInfo info = new VideoPlayerItemInfo(0, url);

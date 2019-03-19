@@ -21,4 +21,5 @@ public interface EditRedbagView {
     void setError(String msg);
 
 
+    void uploadVideoSuccess(UploadFile data);
 }

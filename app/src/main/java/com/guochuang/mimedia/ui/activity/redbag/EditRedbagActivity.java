@@ -2,6 +2,9 @@ package com.guochuang.mimedia.ui.activity.redbag;
 
 import android.Manifest;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.MediaMetadataRetriever;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -23,6 +26,7 @@ import com.donkingliang.imageselector.utils.ImageSelector;
 import com.donkingliang.imageselector.utils.ImageSelectorUtils;
 import com.guochuang.mimedia.mvp.model.LuckyConfig;
 import com.guochuang.mimedia.mvp.model.ProblemBean;
+import com.guochuang.mimedia.tools.BitmapUtils;
 import com.guochuang.mimedia.ui.activity.common.MapPickActivity;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.MvpActivity;
@@ -137,6 +141,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
     String content;
     String picture;
     String password;
+    String mVideoFrameUrl;
     double money = 0d;
     int quantity = 0;
     int areaType = 0;
@@ -156,6 +161,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
     private ArrayList<Media> mSelect;
 
     private ArrayList<ProblemBean> mProblemList = new ArrayList();
+    private File mCurrentFile;
 
     @Override
     protected EditRedbagPresenter createPresenter() {
@@ -169,7 +175,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
 
     @Override
     public void initViewAndData() {
-        setStatusbar(R.color.white,true);
+        setStatusbar(R.color.white, true);
         redPacketType = getIntent().getStringExtra(Constant.RED_PACKET_TYPE);
         scopeArr = Arrays.asList(getResources().getStringArray(R.array.redbag_scope));
         tvScope.setText(scopeArr.get(0));
@@ -457,19 +463,24 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
             }
             return;
         }
-        File file = new File(waitUpload.get(0));
+        mCurrentFile = new File(waitUpload.get(0));
         Log.e("uploadFile: ", "视频文件上传到服务器");
 
-
         if (redPacketType.equals(Constant.RED_PACKET_TYPE_VIDEO)) {
-            //视频红包
-            mvpPresenter.videoFileUpload(Constant.BUSSINESSTYPE_RED_PACKET, file);
+            //截取视频帧画面
+            File frameFile = catVideoFrame(mCurrentFile);
+
+            if(frameFile.exists()) {
+                //上传视频帧画面
+                mvpPresenter.fileUpload(Constant.BUSSINESSTYPE_RED_PACKET, frameFile);
+            }
+
             return;
         }
 
 
         Luban.with(this)
-                .load(file)
+                .load(mCurrentFile)
                 .ignoreBy(300)
                 .setTargetDir(Constant.COMPRESS_DIR_PATH)
                 .setCompressListener(new OnCompressListener() {
@@ -489,6 +500,28 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                         showShortToast(e.getMessage());
                     }
                 }).launch();
+    }
+
+    /**
+     * 截取视频帧画面
+     *
+     * @param file
+     */
+    private File catVideoFrame(File file) {
+
+        MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+        //设置数据源为该文件对象指定的绝对路径
+        mmr.setDataSource(file.getAbsolutePath());
+        //获得视频第一帧的Bitmap对象
+        Bitmap bitmap = mmr.getFrameAtTime();
+
+
+        String filepngname = Constant.COMMON_PATH + File.separator + file.getName().substring(0, file.getName().indexOf(".")) + ".png";
+
+        BitmapUtils.savePNG(bitmap, filepngname);
+
+        return  new File(filepngname);
+
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -644,13 +677,11 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                 return;
             }
             String joinProblmeJson = joinProblmeJson();
-            Log.e("startPay: ", joinProblmeJson);
 
-            mvpPresenter.addVideoReabag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson);
+            mvpPresenter.addVideoReabag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson,mVideoFrameUrl);
         } else if (TextUtils.equals(redPacketType, Constant.RED_PACKET_TYPE_QUESTION)) {
             //问卷红包
             String joinProblmeJson = joinProblmeJson();
-            Log.e("startPay: ", joinProblmeJson);
             mvpPresenter.addSurveyReabag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson);
 
         }
@@ -750,6 +781,9 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
 
     @Override
     public void setUploadFile(UploadFile data) {
+        //视频上传帧画面也会走到这来
+        if(ifVideoUploadFrame(data))return;
+
         waitUpload.remove(0);
         picUrlArr.add(data.getUrl());
         if (waitUpload.size() > 0) {
@@ -758,6 +792,23 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
             closeLoadingDialog();
             selectPayType();
         }
+    }
+
+    /**
+     * 分出上传图片中的 帧画面
+     * @param data
+     */
+    private boolean ifVideoUploadFrame(UploadFile data) {
+        if(Constant.RED_PACKET_TYPE_VIDEO.equals(redPacketType)){
+           mVideoFrameUrl = data.getUrl();
+            Log.e( "ifVideoUploadFrame: ", mVideoFrameUrl);
+            //视频红包
+            closeLoadingDialog();
+            showLoadingDialog(R.string.upload_video);
+            mvpPresenter.videoFileUpload(Constant.BUSSINESSTYPE_RED_PACKET, mCurrentFile);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -792,6 +843,18 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
     public void setError(String msg) {
         closeLoadingDialog();
         showShortToast(msg);
+    }
+
+    @Override
+    public void uploadVideoSuccess(UploadFile data) {
+        waitUpload.remove(0);
+        picUrlArr.add(data.getUrl());
+        if (waitUpload.size() > 0) {
+            uploadFile();
+        } else {
+            closeLoadingDialog();
+            selectPayType();
+        }
     }
 
     /**

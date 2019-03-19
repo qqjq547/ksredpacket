@@ -28,7 +28,7 @@ public class PickImageAdapter extends BaseQuickAdapter<String,BaseViewHolder> {
         if(TextUtils.isEmpty(item)){
             if(Constant.RED_PACKET_TYPE_VIDEO.equals(mType)) {
                 //视频添加图标
-                ivPicture.setImageResource(R.drawable.ic_add_pic);
+                ivPicture.setImageResource(R.drawable.ic_add_video);
             }else {
                 ivPicture.setImageResource(R.drawable.ic_add_pic);
             }

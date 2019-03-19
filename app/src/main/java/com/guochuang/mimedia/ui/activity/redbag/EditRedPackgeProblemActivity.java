@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,7 @@ import com.guochuang.mimedia.ui.adapter.EditRedPackgeProblemAdapter;
 import com.sz.gcyh.KSHongBao.R;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import butterknife.BindView;
@@ -79,7 +81,7 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
 
     @Override
     public void initViewAndData() {
-        setStatusbar(R.color.white,true);
+        setStatusbar(R.color.white, true);
         mNavigationbuilder = new DefaultNavigationBar.Builder(this);
         if (RED_PACKET_TYPE_VIDEO.equals(mRedPacketType)) {
             mNavigationbuilder.setTitle(getResources().getString(R.string.video_redbag_problem));
@@ -235,13 +237,13 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
                 //根据type 切换中间布局
                 switch (checkedId) {
                     case R.id.rb_single_select:
-                        setItmeType(problemBean, 0);
+                        setItmeType(problemBean, Constant.SINGLESELECT);
                         break;
                     case R.id.rb_many_select:
-                        setItmeType(problemBean, 1);
+                        setItmeType(problemBean, Constant.MORESELECT);
                         break;
                     case R.id.eb_fill_in_blanks:
-                        setItmeType(problemBean, 2);
+                        setItmeType(problemBean, Constant.FILL_IN_PROBLEM);
                         break;
                 }
 
@@ -287,49 +289,19 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
             @Override
             public void onClick(View v) {
                 problemBean.setProblem(et_input_problem.getText().toString().trim());
-                if (TextUtils.isEmpty(problemBean.getProblem())) {
-                    showShortToast("请填写问题");
+
+                if (!checkCondition(problemBean)) {
                     return;
                 }
 
-                // 判断红包的类型     区分条件
-                if (RED_PACKET_TYPE_VIDEO.equals(mRedPacketType)) {
-
-
-                    if (problemBean.getType() == 2) {
-                        if (TextUtils.isEmpty(problemBean.getItem().get(0).getItemcontent())) {
-                            showShortToast("请填写答案");
-                            return;
-                        }
-                    } else {
-                        //判斷是否設置答案
-                        List<ProblemBean.ItemBean> items = problemBean.getItem();
-                        boolean flag = false;
-                        for (ProblemBean.ItemBean item : items) {
-                            if (item.isIsanswer()) {
-                                flag = true;
-                                break;
-                            }
-                        }
-
-                        if (!flag) {
-                            showShortToast("请设置答案");
-                            return;
-                        }
-                    }
-
-
-                } else {
-
-
-                }
-
+                //移除多余的选项
+                removeRedundantOptions(problemBean);
 
                 if (mIsRestProblem) {
                     mProblemList.remove(mCustomaryProblemBean);
                 }
-                mProblemList.add(problemBean);
 
+                mProblemList.add(problemBean);
 
                 alertDialog.dismiss();
                 //刷新外部列表
@@ -338,6 +310,84 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
             }
         });
         alertDialog.show();
+
+    }
+
+
+    /**
+     * checkCondition 校验条件是否满足需求
+     *
+     * @param problemBean
+     */
+    private boolean checkCondition(ProblemBean problemBean) {
+
+        if (TextUtils.isEmpty(problemBean.getProblem())) {
+            showShortToast(R.string.fill_problem_title);
+            return false;
+        }
+
+        // 判断红包的类型    区分条件   视频红包
+
+        if (problemBean.getType() == Constant.FILL_IN_PROBLEM) {
+            //填空题
+            if (RED_PACKET_TYPE_VIDEO.equals(mRedPacketType)) {
+                //并且是视频红包
+                if (TextUtils.isEmpty(problemBean.getItem().get(0).getItemcontent())) {
+                    showShortToast(R.string.please_set_answer);
+                    return false;
+                }
+            }
+        } else {
+            //选择题
+            //判斷是否設置答案
+            List<ProblemBean.ItemBean> items = problemBean.getItem();
+
+
+            int number = 0;
+            for (ProblemBean.ItemBean item : items) {
+                if (!TextUtils.isEmpty(item.getItemcontent())) {
+                    number++;
+                }
+
+            }
+
+            if (number < 2) {
+                showShortToast(R.string.provide_least_two_items);
+                return false;
+            }
+
+
+            if (RED_PACKET_TYPE_VIDEO.equals(mRedPacketType)) {
+                //只有视频红包问题才能设置答案
+                boolean flag = false;
+                for (ProblemBean.ItemBean item : items) {
+                    if (item.isIsanswer()) {
+                        flag = true;
+                        break;
+                    }
+                }
+
+                if (!flag) {
+                    showShortToast(R.string.please_set_answer);
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * 移除多余的选项 Remove redundant options
+     */
+    private void removeRedundantOptions(ProblemBean problemBean) {
+        Iterator<ProblemBean.ItemBean> iterator = problemBean.getItem().iterator();
+        while (iterator.hasNext()) {
+            ProblemBean.ItemBean item = iterator.next();
+            if (TextUtils.isEmpty(item.getItemcontent())) {
+                iterator.remove();
+            }
+        }
 
     }
 
