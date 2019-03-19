@@ -694,7 +694,7 @@
     <string name="save_problem_temp">保存为问卷红包模板</string>
     <string name="finish_answer_can_get">完成答题可获得</string>
     <string name="watched_video_open_redbag">已看完视频，去答题开启红包</string>
-    <string name="answer_open_redbag">已看完视频，去答题开启红包</string>
+    <string name="answer_open_redbag">答题开启红包</string>
     <string name="open_redbag">开启红包</string>
     <string name="respone">答：</string>
     <string name="input_blank">【填空】</string>
@@ -717,5 +717,6 @@
     <string name="set_problem">请设置问题</string>
     <string name="tip_upload_video">上传视频</string>
     <string name="set_problem_number">已设置%s道题</string>
+    <string name="this_redbag_has_robe">该红包已被抢完</string>
 
 </resources>

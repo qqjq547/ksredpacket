@@ -1,13 +1,11 @@
 package com.guochuang.mimedia.ui.activity.redbag;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Parcel;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -210,7 +208,7 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
                 .create();
 
         LinearLayout ll_header_root = alertDialog.getView(R.id.ll_header_root);
-        if (RED_PACKET_TYPE_QUESTION.equals(mRedPacketType)) {
+        if (RED_PACKET_TYPE_SURVEY.equals(mRedPacketType)) {
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) ll_header_root.getLayoutParams();
             layoutParams.bottomMargin = CommonUtil.dip2px(this, 8);
             ll_header_root.setLayoutParams(layoutParams);

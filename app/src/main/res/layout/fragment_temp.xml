@@ -6,7 +6,7 @@
     android:background="@drawable/bg_temp">
 <View
     android:layout_width="match_parent"
-    android:layout_height="@dimen/space60" />
+    android:layout_height="@dimen/space140" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

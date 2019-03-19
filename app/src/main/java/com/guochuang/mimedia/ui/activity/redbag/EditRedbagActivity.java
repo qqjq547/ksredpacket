@@ -4,7 +4,6 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
 import android.os.Bundle;
 import android.os.Parcel;
@@ -213,7 +212,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                 mTvProblemNumber.setText(getString(R.string.set_problem));
 
                 break;
-            case Constant.RED_PACKET_TYPE_QUESTION:
+            case Constant.RED_PACKET_TYPE_SURVEY:
                 tvTitle.setText(R.string.questionnaire_redbag);
                 linWord.setVisibility(View.GONE);
                 cbPublicPassword.setVisibility(View.GONE);
@@ -264,7 +263,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                     ArrayList<String> selectArr = (ArrayList<String>) pictureArr.clone();
                     if (Constant.RED_PACKET_TYPE_VIDEO.equals(redPacketType)) {
                         //打開視頻預覽
-                        IntentUtils.startVideoPreviewActivity(EditRedbagActivity.this, selectArr.get(position));
+                        IntentUtils.startVideoPreviewActivity(EditRedbagActivity.this,selectArr.get(position));
                     } else {
 
                         IntentUtils.startImagePreviewActivity(EditRedbagActivity.this, position, selectArr);
@@ -330,7 +329,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
 
             case R.id.ll_set_problem:
                 //跳转设问题
-                Intent intent1 = new Intent(this, EditRedPackgeProblemActivity.class);
+                Intent intent1 = new Intent(this,EditRedPackgeProblemActivity.class);
                 intent1.putExtra(Constant.PROBLEMLIST_KEY, mProblemList);
                 intent1.putExtra(Constant.OPEN_VIDEOPROBLEMACTIVITY_TYPE, redPacketType);
                 if (Constant.RED_PACKET_TYPE_VIDEO.equals(redPacketType)) {
@@ -555,7 +554,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                     // 清空问题
                     mProblemList.clear();
 
-                    if (Constant.RED_PACKET_TYPE_QUESTION.equals(redPacketType)) {
+                    if (Constant.RED_PACKET_TYPE_SURVEY.equals(redPacketType)) {
                         //问卷类型
 
                         if (temp.getSurveyId() != 0) {
@@ -714,9 +713,8 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                 return;
             }
             String joinProblmeJson = joinProblmeJson();
-
-            mvpPresenter.addVideoReabag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson, mVideoFrameUrl);
-        } else if (TextUtils.equals(redPacketType, Constant.RED_PACKET_TYPE_QUESTION)) {
+            mvpPresenter.addVideoReabag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson,mVideoFrameUrl);
+        } else if (TextUtils.equals(redPacketType, Constant.RED_PACKET_TYPE_SURVEY)) {
             //问卷红包
             String joinProblmeJson = joinProblmeJson();
             mvpPresenter.addSurveyReabag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson);

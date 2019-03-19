@@ -107,6 +107,28 @@ public class RedbagPresenter extends BasePresenter<RedbagView> {
             }
         });
     }
+    public void redPacketPoolOpen(String latitude,String longitude,String redPacketUuid){
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().redPacketPoolOpenSurvey(latitude,longitude,redPacketUuid)), new ApiCallback<RedbagDetail>() {
+            @Override
+            public void onSuccess(RedbagDetail data) {
+                mvpView.setRedbagDetail(data);
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setError(exception.getMessage());
+                if (exception.getStatusCode()==Constant.HTTP_STATUS_REDBAD_INVALID){
+                    mvpView.setRedbagInvalid();
+                }
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
     public void getWalletCoinAndMoney() {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
                 getMyKsb()), new ApiCallback<MyKsb>() {

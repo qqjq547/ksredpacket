@@ -264,6 +264,14 @@ public interface ApiStore {
             @Field("password") String password
     );
 
+    @FormUrlEncoded
+    @POST("/api/v1/redpacket/red_packet_pool/open_survey")
+    Observable<HttpResponse<RedbagDetail>> redPacketPoolOpenSurvey(
+            @Field("latitude") String latitude,
+            @Field("longitude") String longitude,
+            @Field("redPacketUuid") String redPacketUuid
+    );
+
     //发随机红包
     @FormUrlEncoded
     @POST("/api/v1/redpacket/person_red_packet/add_random")
@@ -1337,10 +1345,14 @@ public interface ApiStore {
     );
 
     @GET("/api/v1/survey/survey/get_detail")
-    Observable<HttpResponse<LookVideoResult>> getProblems(@Query("surveyId") long surveyId, @Query("redPacketUuid") String redPacketUuid);
+    Observable<HttpResponse<LookVideoResult>> getProblems(
+            @Query("surveyId") long surveyId,
+            @Query("redPacketUuid") String redPacketUuid);
 
     @GET("/api/v1/survey/survey/get_statistics")
-    Observable<HttpResponse<LookSurevyResult>> getVideoProblemAnswerList(@Query("surveyId") long surveyId, @Query("redPacketUuid") String redPacketUuid);
+    Observable<HttpResponse<LookSurevyResult>> getVideoProblemAnswerList(
+            @Query("surveyId") long surveyId,
+            @Query("redPacketUuid") String redPacketUuid);
 
     @GET("/api/v1/nest/nest_location/get_random_spot")
     Observable<HttpResponse<NestRandomAd>> getRandomSpot(
@@ -1358,4 +1370,30 @@ public interface ApiStore {
     Observable<HttpResponse<JxwUserInfoUrl>> getJxwUserInfoUrl(
             @Query("deviceCode") String deviceCode,
             @Query("from") String from);
+
+    @GET("/api/v1/redpacket/red_packet_pool/getRemain")
+    Observable<HttpResponse<Integer>> getRemain(
+            @Query("redPacketUuid") String redPacketUuid);
+
+    @FormUrlEncoded
+    @POST("/api/v1/survey/survey/survey_submit")
+    Observable<HttpResponse<RedbagDetail>> surveySubmit(
+            @Field("channelCode") String channelCode,
+            @Field("clientIp") String clientIp,
+            @Field("userAccountId") long userAccountId,
+            @Field("redPacketUuid") String redPacketUuid,
+            @Field("latitude") String latitude,
+            @Field("longitude") String longitude,
+            @Field("submitJson") String submitJson);
+
+    @FormUrlEncoded
+    @POST("/api/v1/survey/survey/video_submit")
+    Observable<HttpResponse<RedbagDetail>> videoSubmit(
+            @Field("channelCode") String channelCode,
+            @Field("clientIp") String clientIp,
+            @Field("userAccountId") long userAccountId,
+            @Field("redPacketUuid") String redPacketUuid,
+            @Field("latitude") String latitude,
+            @Field("longitude") String longitude,
+            @Field("submitJson") String submitJson);
 }

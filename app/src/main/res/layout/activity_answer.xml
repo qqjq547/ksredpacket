@@ -5,6 +5,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 <include layout="@layout/layout_title"/>
+        <TextView
+            android:id="@+id/tv_notice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_red"
+            android:textSize="@dimen/textfont14"
+            android:textColor="@color/text_white"
+            android:text="@string/this_redbag_has_robe"
+            android:padding="@dimen/space5"
+            android:visibility="gone"/>
+
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

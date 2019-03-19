@@ -107,7 +107,7 @@ public class GameFragment extends MvpFragment<GamePresenter> implements GameView
             });
         }
         @JavascriptInterface
-        public void goJuxiangwan() {
+        public void goTrialHall() {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
