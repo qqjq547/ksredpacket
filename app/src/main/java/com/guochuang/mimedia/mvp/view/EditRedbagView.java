@@ -1,5 +1,7 @@
 package com.guochuang.mimedia.mvp.view;
 
+import com.guochuang.mimedia.mvp.model.LookSurevyResult;
+import com.guochuang.mimedia.mvp.model.LookVideoResult;
 import com.guochuang.mimedia.mvp.model.LuckyConfig;
 import com.guochuang.mimedia.mvp.model.Order;
 import com.guochuang.mimedia.mvp.model.Redbag;
@@ -22,4 +24,8 @@ public interface EditRedbagView {
 
 
     void uploadVideoSuccess(UploadFile data);
+
+    void videoProblems(LookVideoResult data);
+
+    void surevyProblems(LookSurevyResult data);
 }

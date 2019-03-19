@@ -1,11 +1,13 @@
 package com.guochuang.mimedia.ui.activity.redbag;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
 import android.os.Bundle;
+import android.os.Parcel;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +26,8 @@ import com.dmcbig.mediapicker.PickerActivity;
 import com.dmcbig.mediapicker.PickerConfig;
 import com.donkingliang.imageselector.utils.ImageSelector;
 import com.donkingliang.imageselector.utils.ImageSelectorUtils;
+import com.guochuang.mimedia.mvp.model.LookSurevyResult;
+import com.guochuang.mimedia.mvp.model.LookVideoResult;
 import com.guochuang.mimedia.mvp.model.LuckyConfig;
 import com.guochuang.mimedia.mvp.model.ProblemBean;
 import com.guochuang.mimedia.tools.BitmapUtils;
@@ -206,7 +210,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                 cbPublicPassword.setVisibility(View.GONE);
                 cbSaveTemp.setText(R.string.save_video_temp);
                 mLlSetProblem.setVisibility(View.VISIBLE);
-                mTvProblemNumber.setText("请设置问题");
+                mTvProblemNumber.setText(getString(R.string.set_problem));
 
                 break;
             case Constant.RED_PACKET_TYPE_QUESTION:
@@ -215,7 +219,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                 cbPublicPassword.setVisibility(View.GONE);
                 cbSaveTemp.setText(R.string.save_problem_temp);
                 mLlSetProblem.setVisibility(View.VISIBLE);
-                mTvProblemNumber.setText("请设置问题");
+                mTvProblemNumber.setText(getString(R.string.set_problem));
 
                 break;
 
@@ -260,7 +264,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                     ArrayList<String> selectArr = (ArrayList<String>) pictureArr.clone();
                     if (Constant.RED_PACKET_TYPE_VIDEO.equals(redPacketType)) {
                         //打開視頻預覽
-                        IntentUtils.startVideoPreviewActivity(EditRedbagActivity.this,selectArr.get(position));
+                        IntentUtils.startVideoPreviewActivity(EditRedbagActivity.this, selectArr.get(position));
                     } else {
 
                         IntentUtils.startImagePreviewActivity(EditRedbagActivity.this, position, selectArr);
@@ -326,7 +330,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
 
             case R.id.ll_set_problem:
                 //跳转设问题
-                Intent intent1 = new Intent(this,EditRedPackgeProblemActivity.class);
+                Intent intent1 = new Intent(this, EditRedPackgeProblemActivity.class);
                 intent1.putExtra(Constant.PROBLEMLIST_KEY, mProblemList);
                 intent1.putExtra(Constant.OPEN_VIDEOPROBLEMACTIVITY_TYPE, redPacketType);
                 if (Constant.RED_PACKET_TYPE_VIDEO.equals(redPacketType)) {
@@ -466,7 +470,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
             //截取视频帧画面
             File frameFile = catVideoFrame(mCurrentFile);
 
-            if(frameFile.exists()) {
+            if (frameFile.exists()) {
                 //上传视频帧画面
                 mvpPresenter.fileUpload(Constant.BUSSINESSTYPE_RED_PACKET, frameFile);
             }
@@ -516,7 +520,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
 
         BitmapUtils.savePNG(bitmap, filepngname);
 
-        return  new File(filepngname);
+        return new File(filepngname);
 
     }
 
@@ -534,20 +538,59 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                     tvLocation.setText(intent.getStringExtra(Constant.NAME));
                     break;
                 case Constant.REQUEST_TEMPLATE:
+                    //模板回来处理
                     RedbagTemp temp = (RedbagTemp) intent.getSerializableExtra(Constant.TEMPLATE);
+                    //数据回显
                     mvpPresenter.getTemplate(redPacketType);
                     if (temp == null) {
                         return;
                     }
                     etContent.setText(temp.getContent());
+                    //图片清空
                     pictureArr.clear();
+                    //图片链接
                     picUrlArr.clear();
-                    if (TextUtils.isEmpty(temp.getPicture())) {
-                        addPicture(new ArrayList<String>());
-                    } else {
-                        List<String> pics = Arrays.asList(TextUtils.split(temp.getPicture(), ","));
-                        addPicture(pics);
+                    //获取图片链接
+                    //判断一下是否是 视频红包类型
+                    // 清空问题
+                    mProblemList.clear();
+
+                    if (Constant.RED_PACKET_TYPE_QUESTION.equals(redPacketType)) {
+                        //问卷类型
+
+                        if (temp.getSurveyId() != 0) {
+                            showLoadingDialog(R.string.loading);
+                            mvpPresenter.getSurevyProblemList(temp.getSurveyId(), temp.getRedPacketUuid());
+
+                        }
                     }
+
+                    if (Constant.RED_PACKET_TYPE_VIDEO.equals(redPacketType)) {
+                        //获取问题
+                        if (temp.getSurveyId() != 0) {
+                            showLoadingDialog(R.string.loading);
+                            mvpPresenter.getVideoProblems(temp.getSurveyId(), temp.getRedPacketUuid());
+                        }
+
+                        if (TextUtils.isEmpty(temp.getVideoUrl())) {
+                            addPicture(new ArrayList<String>());
+                        } else {
+                            List<String> pics = Arrays.asList(TextUtils.split(temp.getVideoUrl(), ","));
+                            addPicture(pics);
+                        }
+
+
+                    } else {
+
+                        if (TextUtils.isEmpty(temp.getPicture())) {
+                            addPicture(new ArrayList<String>());
+                        } else {
+                            List<String> pics = Arrays.asList(TextUtils.split(temp.getPicture(), ","));
+                            addPicture(pics);
+                        }
+                    }
+
+
                     etAmout.setText(String.valueOf((int) temp.getMoney()));
                     etCount.setText(String.valueOf(temp.getQuantity()));
                     areaType = temp.getAreaType();
@@ -570,6 +613,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                     etLinkUrl.setText(temp.getUrl());
                     etLinkWechat.setText(temp.getWechat());
                     etLinkWeibo.setText(temp.getMicroblog());
+
                     break;
 
                 case VIDEO_OPEN_CODE:
@@ -578,8 +622,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                     ArrayList<ProblemBean> problemlist = intent.getParcelableArrayListExtra(Constant.问题数据集合);
                     mProblemList.clear();
                     mProblemList.addAll(problemlist);
-                    mTvProblemNumber.setText("已设置" + mProblemList.size() + "道题");
-                    Log.e("onActivityResult: ", mProblemList.toString());
+                    mTvProblemNumber.setText(String.format(getString(R.string.set_problem_number), mProblemList.size()));
                     break;
             }
         }
@@ -589,8 +632,6 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
             mSelect = intent.getParcelableArrayListExtra(PickerConfig.EXTRA_RESULT);
             List<String> videoList = new ArrayList<>(1);
             for (Media media : mSelect) {
-                Log.i("media", media.path);
-                Log.e("media", "s:" + media.size);
                 videoList.add(media.path);
 
             }
@@ -669,12 +710,12 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
         } else if (TextUtils.equals(redPacketType, Constant.RED_PACKET_TYPE_VIDEO)) {
             //picture 拼接的是视频地址
             if (TextUtils.isEmpty(picture)) {
-                showShortToast("上传视频");
+                showShortToast(R.string.tip_upload_video);
                 return;
             }
             String joinProblmeJson = joinProblmeJson();
 
-            mvpPresenter.addVideoReabag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson,mVideoFrameUrl);
+            mvpPresenter.addVideoReabag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson, mVideoFrameUrl);
         } else if (TextUtils.equals(redPacketType, Constant.RED_PACKET_TYPE_QUESTION)) {
             //问卷红包
             String joinProblmeJson = joinProblmeJson();
@@ -778,7 +819,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
     @Override
     public void setUploadFile(UploadFile data) {
         //视频上传帧画面也会走到这来
-        if(ifVideoUploadFrame(data))return;
+        if (ifVideoUploadFrame(data)) return;
 
         waitUpload.remove(0);
         picUrlArr.add(data.getUrl());
@@ -792,12 +833,12 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
 
     /**
      * 分出上传图片中的 帧画面
+     *
      * @param data
      */
     private boolean ifVideoUploadFrame(UploadFile data) {
-        if(Constant.RED_PACKET_TYPE_VIDEO.equals(redPacketType)){
-           mVideoFrameUrl = data.getUrl();
-            Log.e( "ifVideoUploadFrame: ", mVideoFrameUrl);
+        if (Constant.RED_PACKET_TYPE_VIDEO.equals(redPacketType)) {
+            mVideoFrameUrl = data.getUrl();
             //视频红包
             closeLoadingDialog();
             showLoadingDialog(R.string.upload_video);
@@ -851,6 +892,84 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
             closeLoadingDialog();
             selectPayType();
         }
+    }
+
+    /**
+     * 模板回来的视频问题数据
+     *
+     * @param data
+     */
+    @Override
+    public void videoProblems(LookVideoResult data) {
+        List<LookVideoResult.QuestionListBean> questionList = data.getQuestionList();
+
+        for (int index = 0; index < questionList.size(); index++) {
+            ProblemBean problemBean = new ProblemBean(Parcel.obtain());
+            LookVideoResult.QuestionListBean questionListBean = questionList.get(index);
+
+            problemBean.setProblem(questionListBean.getTitle());
+            problemBean.setType(questionListBean.getType());
+
+            List<LookVideoResult.QuestionListBean.OptionsListBean> optionsList = questionListBean.getOptionsList();
+            ArrayList<ProblemBean.ItemBean> items = new ArrayList<>();
+
+            for (int option = 0; option < optionsList.size(); option++) {
+                LookVideoResult.QuestionListBean.OptionsListBean optionsListBean = optionsList.get(option);
+                ProblemBean.ItemBean itemBean = new ProblemBean.ItemBean(Parcel.obtain());
+                itemBean.setIsanswer(optionsListBean.getIsAnswer() == 0 ? false : true);
+                itemBean.setProblemType(questionListBean.getType());
+                itemBean.setItemcontent(optionsListBean.getOptionValue());
+                itemBean.setItemname(optionsListBean.getOptionName());
+                items.add(itemBean);
+            }
+            problemBean.setItem(items);
+
+            mProblemList.add(problemBean);
+
+        }
+        mTvProblemNumber.setText(String.format(getString(R.string.set_problem_number), mProblemList.size()));
+        closeLoadingDialog();
+
+    }
+
+    /**
+     * 模板回来的问卷问题数据
+     *
+     * @param data
+     */
+    @SuppressLint("StringFormatMatches")
+    @Override
+    public void surevyProblems(LookSurevyResult data) {
+        List<LookSurevyResult.StatisticsListBean> statisticsList = data.getStatisticsList();
+        for (int index = 0; index < statisticsList.size(); index++) {
+            ProblemBean problemBean = new ProblemBean(Parcel.obtain());
+            LookSurevyResult.StatisticsListBean statisticsListBean = statisticsList.get(index);
+
+            problemBean.setProblem(statisticsListBean.getTitle());
+            problemBean.setType(statisticsListBean.getType());
+
+            List<LookSurevyResult.StatisticsListBean.OptionsListBean> optionsList = statisticsListBean.getOptionsList();
+            ArrayList<ProblemBean.ItemBean> items = new ArrayList<>();
+            for (int option = 0; option < optionsList.size(); option++) {
+                LookSurevyResult.StatisticsListBean.OptionsListBean optionsListBean = optionsList.get(option);
+                ProblemBean.ItemBean itemBean = new ProblemBean.ItemBean(Parcel.obtain());
+                itemBean.setIsanswer(false);
+                itemBean.setProblemType(statisticsListBean.getType());
+                itemBean.setItemcontent(optionsListBean.getOptionValue());
+                itemBean.setItemname(optionsListBean.getOptionName());
+                items.add(itemBean);
+            }
+
+
+            problemBean.setItem(items);
+
+            mProblemList.add(problemBean);
+        }
+
+
+//        mTvProblemNumber.setText("已设置" + mProblemList.size() + "道题");
+        mTvProblemNumber.setText(String.format(getString(R.string.set_problem_number), mProblemList.size()));
+        closeLoadingDialog();
     }
 
     /**

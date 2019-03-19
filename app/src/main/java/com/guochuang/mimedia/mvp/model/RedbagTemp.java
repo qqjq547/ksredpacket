@@ -61,7 +61,7 @@ public class RedbagTemp implements Serializable {
     private String wechat;
     private String videoUrl;
     private String coverUrl;
-    private long surveyId;
+    private long surveyId;  //问题Id
     private String redPacketUuid;
 
     public int getAreaType() {

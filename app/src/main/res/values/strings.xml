@@ -714,5 +714,8 @@
 
     <string name="clear_address">清空地址</string>
     <string name="navigation_not_empty">导航地址不能为空</string>
+    <string name="set_problem">请设置问题</string>
+    <string name="tip_upload_video">上传视频</string>
+    <string name="set_problem_number">已设置%s道题</string>
 
 </resources>
