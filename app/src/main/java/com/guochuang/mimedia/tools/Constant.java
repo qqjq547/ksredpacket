@@ -221,7 +221,7 @@ public class Constant {
     public static final String RED_PACKET_TYPE_PASSWORD = "password";
     public static final String RED_PACKET_TYPE_LUCKY = "lucky";
     public static final String RED_PACKET_TYPE_VIDEO = "video";
-    public static final String RED_PACKET_TYPE_QUESTION = "question";
+    public static final String RED_PACKET_TYPE_SURVEY = "survey";
 
     public static final String ROLETYPE_ADMIN = "admin";
     public static final String ROLETYPE_PERSON = "person";

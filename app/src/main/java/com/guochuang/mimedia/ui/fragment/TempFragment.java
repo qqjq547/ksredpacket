@@ -1,11 +1,8 @@
 package com.guochuang.mimedia.ui.fragment;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,11 +14,9 @@ import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.guochuang.mimedia.ui.activity.redbag.LookSurevyActivity;
-import com.guochuang.mimedia.ui.activity.redbag.VideoPreviewActivity;
 import com.sz.gcyh.KSHongBao.R;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
@@ -67,7 +62,7 @@ public class TempFragment extends MvpFragment {
     @Override
     public void initViewAndData() {
         if (temp.getRedPacketType().equals(Constant.RED_PACKET_TYPE_VIDEO)
-                ||temp.getRedPacketType().equals(Constant.RED_PACKET_TYPE_QUESTION)){
+                ||temp.getRedPacketType().equals(Constant.RED_PACKET_TYPE_SURVEY)){
             if (temp.getSurveyId()>0){
                 tvSurvery.setVisibility(View.VISIBLE);
             }

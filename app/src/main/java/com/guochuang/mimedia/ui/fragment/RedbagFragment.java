@@ -67,7 +67,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import lecho.lib.hellocharts.model.Line;
 import rx.functions.Action1;
 
 public class RedbagFragment extends MvpFragment<RedbagPresenter> implements RedbagView {
@@ -291,7 +290,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
 
                     @Override
                     public void onQuestion() {
-                        IntentUtils.startEditRedbagActivity(getActivity(), Constant.RED_PACKET_TYPE_QUESTION);
+                        IntentUtils.startEditRedbagActivity(getActivity(), Constant.RED_PACKET_TYPE_SURVEY);
                     }
                 }).show();
                 break;

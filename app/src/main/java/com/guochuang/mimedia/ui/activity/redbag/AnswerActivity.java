@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,7 +22,12 @@ import com.guochuang.mimedia.ui.adapter.AddressAdapter;
 import com.guochuang.mimedia.ui.adapter.AnswerAdapter;
 import com.sz.gcyh.KSHongBao.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -43,6 +49,8 @@ public class AnswerActivity extends MvpActivity<AnswerPresenter> implements Answ
     AnswerAdapter adapter;
     String redPacketUuid="";
     long surveyId=0;
+    JSONArray jsonArray;
+
 
     @Override
     protected AnswerPresenter createPresenter() {
@@ -76,10 +84,37 @@ public class AnswerActivity extends MvpActivity<AnswerPresenter> implements Answ
                 onBackPressed();
                 break;
             case R.id.btn_open:
-//                List<AnswerAdapter.ItemAnswer> data=adapter.getResult();
-//                for (String item:dataArr){
-////                    data.
-//                }
+                jsonArray=new JSONArray();
+                if (dataArr.size()>0){
+                    JSONObject jsonObject=new JSONObject();
+                    for (LookVideoResult.QuestionListBean listBean:dataArr){
+                        List<String> optName=new ArrayList<>();
+                        List<String> optValue=new ArrayList<>();
+                         for (LookVideoResult.QuestionListBean.OptionsListBean bean:listBean.getOptionsList()){
+                                if (bean.isSelect()){
+                                    optName.add(bean.getOptionName());
+                                    optValue.add(bean.getOptionValue());
+                                }
+                            }
+                        if (optName.size()>0) {
+                            try {
+                                jsonObject.put("sourceId", redPacketUuid);
+                                jsonObject.put("surveyId", surveyId);
+                                jsonObject.put("questionId", listBean.getQuestionId());
+                                jsonObject.put("optionName", TextUtils.join(",", optName));
+                                jsonObject.put("optionValue", TextUtils.join(",", optName));
+                                jsonArray.put(jsonObject);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }else {
+                             showShortToast("请先完善答案");
+                             return;
+                        }
+                        }
+                    }else {
+                    showShortToast("无法获取问题");
+                }
                 break;
         }
     }

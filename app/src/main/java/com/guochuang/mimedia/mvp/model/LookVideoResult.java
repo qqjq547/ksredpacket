@@ -130,6 +130,7 @@ public class LookVideoResult {
             private String optionValue;
             private int isAnswer;
             private int sequence;
+            private boolean isSelect=false;
 
             public String getTenantCode() {
                 return tenantCode;
@@ -217,6 +218,14 @@ public class LookVideoResult {
 
             public void setSequence(int sequence) {
                 this.sequence = sequence;
+            }
+
+            public boolean isSelect() {
+                return isSelect;
+            }
+
+            public void setSelect(boolean select) {
+                isSelect = select;
             }
         }
     }

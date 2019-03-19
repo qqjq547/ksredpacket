@@ -3,9 +3,7 @@ package com.guochuang.mimedia.ui.activity.redbag;
 import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -209,7 +207,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                 mTvProblemNumber.setText("请设置问题");
 
                 break;
-            case Constant.RED_PACKET_TYPE_QUESTION:
+            case Constant.RED_PACKET_TYPE_SURVEY:
                 tvTitle.setText(R.string.questionnaire_redbag);
                 linWord.setVisibility(View.GONE);
                 cbPublicPassword.setVisibility(View.GONE);
@@ -675,7 +673,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
             String joinProblmeJson = joinProblmeJson();
 
             mvpPresenter.addVideoReabag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson,mVideoFrameUrl);
-        } else if (TextUtils.equals(redPacketType, Constant.RED_PACKET_TYPE_QUESTION)) {
+        } else if (TextUtils.equals(redPacketType, Constant.RED_PACKET_TYPE_SURVEY)) {
             //问卷红包
             String joinProblmeJson = joinProblmeJson();
             mvpPresenter.addSurveyReabag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson);

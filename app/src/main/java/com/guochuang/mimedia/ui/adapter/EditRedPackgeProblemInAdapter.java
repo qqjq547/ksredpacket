@@ -5,7 +5,6 @@ import android.text.Html;
 import android.view.View;
 
 import com.guochuang.mimedia.base.recycleview.adapter.CommonRecyclerAdapter;
-import com.guochuang.mimedia.base.recycleview.adapter.MultiTypeSupport;
 import com.guochuang.mimedia.base.recycleview.adapter.ViewHolder;
 import com.guochuang.mimedia.mvp.model.ProblemBean;
 import com.guochuang.mimedia.tools.Constant;
@@ -27,7 +26,7 @@ public class EditRedPackgeProblemInAdapter extends CommonRecyclerAdapter<Problem
         if (mData != null && !mData.isEmpty()) {
             ProblemBean.ItemBean itemBean = mData.get(0);
             if (itemBean.getProblemType() == Constant.FILL_IN_PROBLEM) {
-                if(Constant.RED_PACKET_TYPE_QUESTION.equals(mRedPacketType)) {
+                if(Constant.RED_PACKET_TYPE_SURVEY.equals(mRedPacketType)) {
                     return 0;
                 }
 
@@ -58,7 +57,7 @@ public class EditRedPackgeProblemInAdapter extends CommonRecyclerAdapter<Problem
                 text = Html.fromHtml("<font color = '#000000'>答:</font>") + itemBean.getItemcontent();
                 break;
         }
-        if(Constant.RED_PACKET_TYPE_QUESTION.equals(mRedPacketType)) {
+        if(Constant.RED_PACKET_TYPE_SURVEY.equals(mRedPacketType)) {
             holder.setViewVisibility(R.id.iv_icon, View.GONE);
         }
         holder.setText(R.id.tv_container, text);

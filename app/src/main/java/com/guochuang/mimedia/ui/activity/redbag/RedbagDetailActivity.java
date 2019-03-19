@@ -205,7 +205,7 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                     tvRedbagTip.setVisibility(View.GONE);
                     linVideoHead.setVisibility(View.VISIBLE);
                     btnOpenPacket.setText(R.string.watched_video_open_redbag);
-                }else if(roleType.equals(Constant.RED_PACKET_TYPE_QUESTION)){
+                }else if(roleType.equals(Constant.RED_PACKET_TYPE_SURVEY)){
                     rlValue.setVisibility(View.GONE);
                     tvRedbagTip.setVisibility(View.GONE);
                     linVideoHead.setVisibility(View.VISIBLE);
@@ -566,7 +566,7 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                     btnOpenPacket.setText(R.string.watched_video_open_redbag);
                     tvMoney.setText(String.format(getString(R.string.format_add_yuan), redbagDetail.getMoney()));
                     tvMoney.setVisibility(View.VISIBLE);
-                }else if(redPacketType.equals(Constant.RED_PACKET_TYPE_QUESTION)){
+                }else if(redPacketType.equals(Constant.RED_PACKET_TYPE_SURVEY)){
                     rlValue.setVisibility(View.GONE);
                     tvRedbagTip.setVisibility(View.GONE);
                     linVideoHead.setVisibility(View.VISIBLE);
@@ -648,7 +648,7 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                     btnOpenPacket.setText(R.string.watched_video_open_redbag);
                     tvMoney.setText(String.format(getString(R.string.format_add_yuan), redbagDetail.getMoney()));
                     tvMoney.setVisibility(View.VISIBLE);
-                }else if(redPacketType.equals(Constant.RED_PACKET_TYPE_QUESTION)){
+                }else if(redPacketType.equals(Constant.RED_PACKET_TYPE_SURVEY)){
                     rlValue.setVisibility(View.GONE);
                     tvRedbagTip.setVisibility(View.GONE);
                     linVideoHead.setVisibility(View.VISIBLE);

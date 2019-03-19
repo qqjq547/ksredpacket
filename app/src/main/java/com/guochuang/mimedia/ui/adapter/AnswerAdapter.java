@@ -1,10 +1,14 @@
 package com.guochuang.mimedia.ui.adapter;
 
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -16,12 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AnswerAdapter extends BaseQuickAdapter<LookVideoResult.QuestionListBean,BaseViewHolder> {
-    List<ItemAnswer> listResult=new ArrayList<>();
     public AnswerAdapter(@Nullable List<LookVideoResult.QuestionListBean> data) {
         super(R.layout.item_answer,data);
-        for (int i=0;i<data.size();i++){
-            listResult.add(new ItemAnswer());
-        }
     }
 
     @Override
@@ -29,29 +29,45 @@ public class AnswerAdapter extends BaseQuickAdapter<LookVideoResult.QuestionList
         helper.setText(R.id.tv_index,helper.getAdapterPosition()+".");
         switch (item.getType()){
             case 0://单选题
-                helper.setGone(R.id.lin_direct_answer,true);
-                helper.setGone(R.id.rgroup_answer,false);
-                helper.setGone(R.id.lin_check,false);
-                helper.setText(R.id.tv_question,mContext.getString(R.string.input_blank)+item.getTitle());
-                break;
-            case 1://多选题
                 helper.setGone(R.id.lin_direct_answer,false);
                 helper.setGone(R.id.rgroup_answer,true);
                 helper.setGone(R.id.lin_check,false);
                 helper.setText(R.id.tv_question,mContext.getString(R.string.single_choice)+item.getTitle());
                 RadioGroup group=helper.getView(R.id.rgroup_answer);
+                List<LookVideoResult.QuestionListBean.OptionsListBean> optionArr=item.getOptionsList();
+                for (int i=0;i<optionArr.size();i++){
+                    LookVideoResult.QuestionListBean.OptionsListBean bean=optionArr.get(i);
+                    RadioButton rbtn=((RadioButton)group.getChildAt(i));
+                    rbtn.setText(bean.getOptionName()+bean.getOptionValue());
+                    rbtn.setVisibility(View.VISIBLE);
+                }
                 group.setOnCheckedChangeListener(new OnCheckListener(helper.getAdapterPosition()));
                 break;
-            case 2://填空题
+            case 1://多选题
                 helper.setGone(R.id.lin_direct_answer,false);
                 helper.setGone(R.id.rgroup_answer,false);
                 helper.setGone(R.id.lin_check,true);
                 helper.setText(R.id.tv_question,mContext.getString(R.string.muti_choice)+item.getTitle());
+                List<CheckBox> checkBoxList=new ArrayList<>();
+                checkBoxList.add(((CheckBox)helper.getView(R.id.cb_one)));
+                checkBoxList.add(((CheckBox)helper.getView(R.id.cb_two)));
+                checkBoxList.add(((CheckBox)helper.getView(R.id.cb_three)));
+                checkBoxList.add(((CheckBox)helper.getView(R.id.cb_four)));
                 OnCheckBoxListener listener=new OnCheckBoxListener(helper.getAdapterPosition());
-                ((CheckBox)helper.getView(R.id.cb_one)).setOnCheckedChangeListener(listener);
-                ((CheckBox)helper.getView(R.id.cb_two)).setOnCheckedChangeListener(listener);
-                ((CheckBox)helper.getView(R.id.cb_three)).setOnCheckedChangeListener(listener);
-                ((CheckBox)helper.getView(R.id.cb_four)).setOnCheckedChangeListener(listener);
+                List<LookVideoResult.QuestionListBean.OptionsListBean> optionArr1=item.getOptionsList();
+                for (int i=0;i<optionArr1.size();i++){
+                    LookVideoResult.QuestionListBean.OptionsListBean bean=optionArr1.get(i);
+                    checkBoxList.get(i).setText(bean.getOptionName()+bean.getOptionValue());
+                    checkBoxList.get(i).setVisibility(View.VISIBLE);
+                    checkBoxList.get(i).setOnCheckedChangeListener(listener);
+                }
+                break;
+            case 2://填空题
+                helper.setGone(R.id.lin_direct_answer,true);
+                helper.setGone(R.id.rgroup_answer,false);
+                helper.setGone(R.id.lin_check,false);
+                helper.setText(R.id.tv_question,mContext.getString(R.string.input_blank)+item.getTitle());
+                ((EditText)helper.getView(R.id.et_direct_answeer)).addTextChangedListener(new OnTextChangeListener(helper.getAdapterPosition()));
                 break;
         }
     }
@@ -62,26 +78,26 @@ public class AnswerAdapter extends BaseQuickAdapter<LookVideoResult.QuestionList
        }
         @Override
         public void onCheckedChanged(RadioGroup radioGroup, int i) {
-            ItemAnswer answer=listResult.get(positon);
+            List<LookVideoResult.QuestionListBean.OptionsListBean> optionArr=getData().get(positon).getOptionsList();
+            for(LookVideoResult.QuestionListBean.OptionsListBean bean:optionArr){
+                bean.setSelect(false);
+            }
             switch (i){
                 case R.id.rbtn_one:
-                    answer.setSingleAnswer(0);
+                    optionArr.get(0).setSelect(true);
                     break;
                 case R.id.rbtn_two:
-                    answer.setSingleAnswer(1);
+                    optionArr.get(1).setSelect(true);
                     break;
                 case R.id.rbtn_three:
-                    answer.setSingleAnswer(2);
+                    optionArr.get(2).setSelect(true);
                     break;
                 case R.id.rbtn_four:
-                    answer.setSingleAnswer(3);
+                    optionArr.get(3).setSelect(true);
                     break;
             }
 
         }
-    }
-    public List<ItemAnswer> getResult(){
-        return listResult;
     }
     class OnCheckBoxListener implements CompoundButton.OnCheckedChangeListener {
         int positon=0;
@@ -90,59 +106,52 @@ public class AnswerAdapter extends BaseQuickAdapter<LookVideoResult.QuestionList
         }
         @Override
         public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-            ItemAnswer answer=listResult.get(positon);
+            List<LookVideoResult.QuestionListBean.OptionsListBean> optionArr=getData().get(positon).getOptionsList();
             switch (compoundButton.getId()){
                 case R.id.cb_one:
-                    if (!answer.getMutiAnswer().contains(0)){
-                        answer.getMutiAnswer().add(0);
-                    }
+                    optionArr.get(0).setSelect(b);
                     break;
                 case R.id.cb_two:
-                    if (!answer.getMutiAnswer().contains(1)){
-                        answer.getMutiAnswer().add(1);
-                    }
+                    optionArr.get(1).setSelect(b);
                     break;
                 case R.id.cb_three:
-                    if (!answer.getMutiAnswer().contains(2)){
-                        answer.getMutiAnswer().add(2);
-                    }
+                    optionArr.get(2).setSelect(b);
                     break;
                 case R.id.cb_four:
-                    if (!answer.getMutiAnswer().contains(3)){
-                        answer.getMutiAnswer().add(3);
-                    }
+                    optionArr.get(3).setSelect(b);
                     break;
             }
 
         }
     }
-    public  class ItemAnswer{
-        String textAnswer;
-        int singleAnswer;
-        List<Integer> mutiAnswer=new ArrayList<>();
+    class OnTextChangeListener implements TextWatcher {
+        int positon=0;
 
-        public String getTextAnswer() {
-            return textAnswer;
+        public OnTextChangeListener(int positon) {
+            this.positon = positon;
         }
 
-        public void setTextAnswer(String textAnswer) {
-            this.textAnswer = textAnswer;
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
         }
 
-        public int getSingleAnswer() {
-            return singleAnswer;
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
         }
 
-        public void setSingleAnswer(int singleAnswer) {
-            this.singleAnswer = singleAnswer;
-        }
-
-        public List<Integer> getMutiAnswer() {
-            return mutiAnswer;
-        }
-
-        public void setMutiAnswer(List<Integer> mutiAnswer) {
-            this.mutiAnswer = mutiAnswer;
+        @Override
+        public void afterTextChanged(Editable editable) {
+            List<LookVideoResult.QuestionListBean.OptionsListBean> optionArr=getData().get(positon).getOptionsList();
+            String content=editable.toString().trim();
+            if (TextUtils.isEmpty(content)){
+                optionArr.get(0).setSelect(false);
+                optionArr.get(0).setOptionValue("");
+            }else {
+                optionArr.get(0).setSelect(true);
+                optionArr.get(0).setOptionValue(content);
+            }
         }
     }
 }
