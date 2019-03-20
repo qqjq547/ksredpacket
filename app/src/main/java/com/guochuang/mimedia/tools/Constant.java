@@ -197,6 +197,9 @@ public class Constant {
     public static final String ARGS_ARRAY = "args_array";
     public static final String ARGS_POSITION = "args_position";
     public static final String ARGS_DATA = "data";
+    public static final String JXW_FROM = "h5android";
+    public static final String DATA = "data";
+    public static final String SURVEYID = "surveyId";
 
 
     public static final int STATE_HAS_GET = 1;
