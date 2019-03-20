@@ -21,7 +21,7 @@
             android:layout_marginLeft="@dimen/space15"
             android:layout_marginTop="@dimen/space30"
             android:layout_marginRight="@dimen/space15"
-            android:background="@color/white"
+            android:background="@drawable/bg_5_white_rect_shap"
             android:gravity="center"
             android:paddingTop="@dimen/space26"
             android:paddingBottom="@dimen/space26">

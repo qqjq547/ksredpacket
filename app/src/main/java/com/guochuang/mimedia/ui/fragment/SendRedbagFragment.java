@@ -105,11 +105,11 @@ public class SendRedbagFragment extends MvpFragment<SendRedbagPresenter> impleme
                 bundle.putString(Constant.RED_PACKET_ID, redbagRecord.getRedPacketUuid());
                 if ("video".equals(redbagRecord.getRedPacketType())) {
                     //視頻
-                    startActivity(LookVideoProblemActivity.class, bundle);
+                    IntentUtils.startLookVideoProblemActivity(getActivity(), redbagRecord.getSurveyId(), redbagRecord.getRedPacketUuid());
+
 
                 } else if ("survey".equals(redbagRecord.getRedPacketType())) {
-                    startActivity(LookSurevyActivity.class, bundle);
-
+                    IntentUtils.startLookSurevyActivity(getActivity(), redbagRecord.getSurveyId(), redbagRecord.getRedPacketUuid());
                 }
 
 

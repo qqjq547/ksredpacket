@@ -5,6 +5,7 @@ import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v4.app.FragmentActivity;
 
 import com.guochuang.mimedia.mvp.model.RecommendData;
 import com.guochuang.mimedia.mvp.model.RedbagDetail;
@@ -12,6 +13,8 @@ import com.guochuang.mimedia.ui.activity.beenest.BeeNestActivity;
 import com.guochuang.mimedia.ui.activity.beenest.BidBrandActivity;
 import com.guochuang.mimedia.ui.activity.beenest.EditAdActivity;
 import com.guochuang.mimedia.ui.activity.common.ImagePreviewActivity;
+import com.guochuang.mimedia.ui.activity.redbag.LookSurevyActivity;
+import com.guochuang.mimedia.ui.activity.redbag.LookVideoProblemActivity;
 import com.guochuang.mimedia.ui.activity.redbag.RedbagDetailActivity;
 import com.guochuang.mimedia.ui.activity.redbag.VideoPreviewActivity;
 import com.guochuang.mimedia.ui.activity.user.CardAddActivity;
@@ -30,6 +33,7 @@ import com.guochuang.mimedia.ui.activity.redbag.RedbagJoinedActivity;
 import com.guochuang.mimedia.ui.activity.redbag.RedbagRainActivity;
 import com.guochuang.mimedia.ui.activity.redbag.SquareDetailActivity;
 import com.guochuang.mimedia.ui.activity.common.WebActivity;
+import com.guochuang.mimedia.ui.adapter.SendRedbagAdapter2;
 
 import java.util.ArrayList;
 
@@ -267,6 +271,20 @@ public class IntentUtils {
         Intent intent = new Intent(activity, BeeNestActivity.class);
         intent.putExtra(Constant.NESTINFOID, nestInfoId);
         intent.putExtra(Constant.NESTLOCATIONID, nestLocationId);
+        activity.startActivity(intent);
+    }
+
+    public static void startLookVideoProblemActivity(Activity activity,  String surveyId, String redPacketUuid) {
+        Intent intent = new Intent(activity, LookVideoProblemActivity.class);
+        intent.putExtra(Constant.LOOK_PROBLEM_RED_PACKET_ID,surveyId);
+        intent.putExtra(Constant.RED_PACKET_ID,redPacketUuid);
+        activity.startActivity(intent);
+    }
+
+    public static void startLookSurevyActivity(Activity activity, String surveyId, String redPacketUuid) {
+        Intent intent = new Intent(activity, LookSurevyActivity.class);
+        intent.putExtra(Constant.LOOK_PROBLEM_RED_PACKET_ID,surveyId);
+        intent.putExtra(Constant.RED_PACKET_ID,redPacketUuid);
         activity.startActivity(intent);
     }
 }
