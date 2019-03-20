@@ -47,13 +47,13 @@
             android:textSize="@dimen/textfont15"
             android:textColor="@color/text_black"
             android:text="@string/respone"/>
-        <TextView
-            android:id="@+id/tv_direct_answeer"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/et_direct_answeer"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@null"
             android:textSize="@dimen/textfont14"
-            android:textColor="@color/text_gray"
-            android:text=""/>
+            android:textColor="@color/text_gray"/>
     </LinearLayout>
         <RadioGroup
             android:id="@+id/rgroup_answer"
@@ -69,7 +69,8 @@
             android:lines="1"
             android:ellipsize="end"
             android:button="@null"
-            android:drawableRight="@drawable/select_problem_type"/>
+            android:drawableRight="@drawable/select_problem_type"
+            android:visibility="gone"/>
             <RadioButton
                 android:id="@+id/rbtn_two"
                 android:layout_width="match_parent"
@@ -79,7 +80,8 @@
                 android:lines="1"
                 android:ellipsize="end"
                 android:button="@null"
-                android:drawableRight="@drawable/select_problem_type"/>
+                android:drawableRight="@drawable/select_problem_type"
+                android:visibility="gone"/>
             <RadioButton
                 android:id="@+id/rbtn_three"
                 android:layout_width="match_parent"
@@ -89,7 +91,8 @@
                 android:lines="1"
                 android:ellipsize="end"
                 android:button="@null"
-                android:drawableRight="@drawable/select_problem_type"/>
+                android:drawableRight="@drawable/select_problem_type"
+                android:visibility="gone"/>
             <RadioButton
                 android:id="@+id/rbtn_four"
                 android:layout_width="match_parent"
@@ -99,7 +102,8 @@
                 android:lines="1"
                 android:ellipsize="end"
                 android:button="@null"
-                android:drawableRight="@drawable/select_problem_type"/>
+                android:drawableRight="@drawable/select_problem_type"
+                android:visibility="gone"/>
         </RadioGroup>
         <LinearLayout
             android:id="@+id/lin_check"
@@ -116,7 +120,8 @@
             android:lines="1"
             android:ellipsize="end"
             android:button="@null"
-            android:drawableRight="@drawable/ic_redbag_answer_check_selector"/>
+            android:drawableRight="@drawable/ic_redbag_answer_check_selector"
+            android:visibility="gone"/>
             <CheckBox
                 android:id="@+id/cb_two"
                 android:layout_width="match_parent"
@@ -126,7 +131,8 @@
                 android:lines="1"
                 android:ellipsize="end"
                 android:button="@null"
-                android:drawableRight="@drawable/ic_redbag_answer_check_selector"/>
+                android:drawableRight="@drawable/ic_redbag_answer_check_selector"
+                android:visibility="gone"/>
             <CheckBox
                 android:id="@+id/cb_three"
                 android:layout_width="match_parent"
@@ -136,7 +142,8 @@
                 android:lines="1"
                 android:ellipsize="end"
                 android:button="@null"
-                android:drawableRight="@drawable/ic_redbag_answer_check_selector"/>
+                android:drawableRight="@drawable/ic_redbag_answer_check_selector"
+                android:visibility="gone"/>
             <CheckBox
                 android:id="@+id/cb_four"
                 android:layout_width="match_parent"
@@ -146,7 +153,8 @@
                 android:lines="1"
                 android:ellipsize="end"
                 android:button="@null"
-                android:drawableRight="@drawable/ic_redbag_answer_check_selector"/>
+                android:drawableRight="@drawable/ic_redbag_answer_check_selector"
+                android:visibility="gone"/>
         </LinearLayout>
 </LinearLayout>
 </LinearLayout>

@@ -1,28 +1,21 @@
 package com.guochuang.mimedia.ui.adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
-import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.guochuang.mimedia.base.recycleview.adapter.CommonRecyclerAdapter;
-import com.guochuang.mimedia.base.recycleview.adapter.MultiTypeSupport;
 import com.guochuang.mimedia.base.recycleview.adapter.ViewHolder;
 import com.guochuang.mimedia.mvp.model.ProblemBean;
 import com.sz.gcyh.KSHongBao.R;
 
 import java.util.List;
 
-public class VideoProblemAdapter extends CommonRecyclerAdapter<ProblemBean> {
+public class EditRedPackgeProblemAdapter extends CommonRecyclerAdapter<ProblemBean> {
     private String mRedPacketType;
 
-    public VideoProblemAdapter(Context context, List<ProblemBean> problemBeans, int itemlayout, String redPacketType) {
+    public EditRedPackgeProblemAdapter(Context context, List<ProblemBean> problemBeans, int itemlayout, String redPacketType) {
         super(context, problemBeans, itemlayout);
         mRedPacketType = redPacketType;
     }
@@ -59,8 +52,8 @@ public class VideoProblemAdapter extends CommonRecyclerAdapter<ProblemBean> {
 
         RecyclerView innerRecycle = holder.getView(R.id.recycle_anser);
         innerRecycle.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
-        VideoProblemInAdapter videoProblemInAdapter = new VideoProblemInAdapter(mContext, problem.getItem(), R.layout.item_anser_layout,mRedPacketType);
-        innerRecycle.setAdapter(videoProblemInAdapter);
+        EditRedPackgeProblemInAdapter editRedPackgeProblemInAdapter = new EditRedPackgeProblemInAdapter(mContext, problem.getItem(), R.layout.item_anser_layout,mRedPacketType);
+        innerRecycle.setAdapter(editRedPackgeProblemInAdapter);
 
 
     }

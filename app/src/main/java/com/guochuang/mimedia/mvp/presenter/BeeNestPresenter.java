@@ -8,6 +8,7 @@ import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.DictionaryType;
 import com.guochuang.mimedia.mvp.model.InfoDetail;
 import com.guochuang.mimedia.mvp.model.NestAd;
+import com.guochuang.mimedia.mvp.model.NestRandomAd;
 import com.guochuang.mimedia.mvp.model.Reply;
 import com.guochuang.mimedia.mvp.view.BeeNestView;
 import com.guochuang.mimedia.mvp.view.InfoDetailView;
@@ -28,6 +29,26 @@ public class BeeNestPresenter extends BasePresenter<BeeNestView> {
             @Override
             public void onSuccess(NestAd data) {
                 mvpView.setData(data);
+
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setError(exception.getMessage());
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
+    public void getNestRandomAd(String latitdue,String longitudepe){
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getRandomSpot(latitdue,longitudepe)), new ApiCallback<NestRandomAd>() {
+            @Override
+            public void onSuccess(NestRandomAd data) {
+                mvpView.setRandomAd(data);
 
             }
 

@@ -5,12 +5,18 @@ import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v4.app.FragmentActivity;
 
 import com.guochuang.mimedia.mvp.model.RecommendData;
 import com.guochuang.mimedia.mvp.model.RedbagDetail;
+import com.guochuang.mimedia.ui.activity.beenest.BeeNestActivity;
 import com.guochuang.mimedia.ui.activity.beenest.BidBrandActivity;
 import com.guochuang.mimedia.ui.activity.beenest.EditAdActivity;
 import com.guochuang.mimedia.ui.activity.common.ImagePreviewActivity;
+import com.guochuang.mimedia.ui.activity.redbag.LookSurevyActivity;
+import com.guochuang.mimedia.ui.activity.redbag.LookVideoProblemActivity;
+import com.guochuang.mimedia.ui.activity.redbag.RedbagDetailActivity;
+import com.guochuang.mimedia.ui.activity.redbag.VideoPreviewActivity;
 import com.guochuang.mimedia.ui.activity.user.CardAddActivity;
 import com.guochuang.mimedia.ui.activity.city.CityBidRecordActivity;
 import com.guochuang.mimedia.ui.activity.city.CityDetailActivity;
@@ -23,11 +29,11 @@ import com.guochuang.mimedia.ui.activity.redbag.LuckyActivity;
 import com.guochuang.mimedia.ui.activity.MainActivity;
 import com.guochuang.mimedia.ui.activity.common.PurchaseActivity;
 import com.guochuang.mimedia.ui.activity.user.RecommendDetailActivity;
-import com.guochuang.mimedia.ui.activity.RedbagDetailActivity;
 import com.guochuang.mimedia.ui.activity.redbag.RedbagJoinedActivity;
 import com.guochuang.mimedia.ui.activity.redbag.RedbagRainActivity;
 import com.guochuang.mimedia.ui.activity.redbag.SquareDetailActivity;
 import com.guochuang.mimedia.ui.activity.common.WebActivity;
+import com.guochuang.mimedia.ui.adapter.SendRedbagAdapter2;
 
 import java.util.ArrayList;
 
@@ -59,17 +65,18 @@ public class IntentUtils {
         intent.putExtra(Constant.CARDMOBILE,mobile);
         activity.startActivity(intent);
     }
-    public static void startRedbagDetailActivity(Activity activity, RedbagDetail redbagDetail,String redPacketUuid,String redPacketType) {
+    public static void startRedbagDetailActivity(Activity activity, RedbagDetail redbagDetail,String redPacketUuid,String roleType,String redPacketType) {
         Intent intent = new Intent(activity, RedbagDetailActivity.class);
         intent.putExtra(Constant.RED_PACKET_DETAIL,redbagDetail);
         intent.putExtra(Constant.RED_PACKET_UUID,redPacketUuid);
+        intent.putExtra(Constant.ROLE_TYPE,roleType);
         intent.putExtra(Constant.RED_PACKET_TYPE,redPacketType);
         activity.startActivity(intent);
     }
-    public static void startRedbagDetailActivity(Activity activity, String redPacketUuid,String redPacketType,String startIndex) {
+    public static void startRedbagDetailActivity(Activity activity, String redPacketUuid,String roleType,String startIndex) {
         Intent intent = new Intent(activity, RedbagDetailActivity.class);
         intent.putExtra(Constant.RED_PACKET_UUID,redPacketUuid);
-        intent.putExtra(Constant.RED_PACKET_TYPE,redPacketType);
+        intent.putExtra(Constant.ROLE_TYPE,roleType);
         intent.putExtra(Constant.START_INDEX,startIndex);
         activity.startActivity(intent);
     }
@@ -253,6 +260,31 @@ public class IntentUtils {
         intent.putExtra(Constant.NESTLOCATIONID, nestLocationId);
         intent.putExtra(Constant.LATITUDE, latitude);
         intent.putExtra(Constant.LONGITUDE, longitude);
+        activity.startActivity(intent);
+    }
+    public static void startVideoPreviewActivity(Activity activity, String videoPath){
+        Intent intent = new Intent(activity, VideoPreviewActivity.class);
+        intent.putExtra(Constant.VIDEO_PATH, videoPath);
+        activity.startActivity(intent);
+    }
+    public static void startBeeNestActivity(Activity activity, long nestInfoId,long nestLocationId) {
+        Intent intent = new Intent(activity, BeeNestActivity.class);
+        intent.putExtra(Constant.NESTINFOID, nestInfoId);
+        intent.putExtra(Constant.NESTLOCATIONID, nestLocationId);
+        activity.startActivity(intent);
+    }
+
+    public static void startLookVideoProblemActivity(Activity activity,  String surveyId, String redPacketUuid) {
+        Intent intent = new Intent(activity, LookVideoProblemActivity.class);
+        intent.putExtra(Constant.LOOK_PROBLEM_RED_PACKET_ID,surveyId);
+        intent.putExtra(Constant.RED_PACKET_ID,redPacketUuid);
+        activity.startActivity(intent);
+    }
+
+    public static void startLookSurevyActivity(Activity activity, String surveyId, String redPacketUuid) {
+        Intent intent = new Intent(activity, LookSurevyActivity.class);
+        intent.putExtra(Constant.LOOK_PROBLEM_RED_PACKET_ID,surveyId);
+        intent.putExtra(Constant.RED_PACKET_ID,redPacketUuid);
         activity.startActivity(intent);
     }
 }

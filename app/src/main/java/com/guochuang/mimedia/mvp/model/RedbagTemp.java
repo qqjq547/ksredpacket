@@ -59,6 +59,10 @@ public class RedbagTemp implements Serializable {
     private String urlName;
     private String userAccountUuid;
     private String wechat;
+    private String videoUrl;
+    private String coverUrl;
+    private long surveyId;  //问题Id
+    private String redPacketUuid;
 
     public int getAreaType() {
         return areaType;
@@ -266,5 +270,37 @@ public class RedbagTemp implements Serializable {
 
     public void setWechat(String wechat) {
         this.wechat = wechat;
+    }
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
+
+    public String getCoverUrl() {
+        return coverUrl;
+    }
+
+    public void setCoverUrl(String coverUrl) {
+        this.coverUrl = coverUrl;
+    }
+
+    public long getSurveyId() {
+        return surveyId;
+    }
+
+    public void setSurveyId(long surveyId) {
+        this.surveyId = surveyId;
+    }
+
+    public String getRedPacketUuid() {
+        return redPacketUuid;
+    }
+
+    public void setRedPacketUuid(String redPacketUuid) {
+        this.redPacketUuid = redPacketUuid;
     }
 }

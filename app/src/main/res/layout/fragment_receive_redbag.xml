@@ -4,18 +4,27 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_redbag_dynamic"
-        android:paddingTop="@dimen/title_height">
+        android:layout_height="wrap_content">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:background="@color/bg_red" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space20"
-            android:background="@color/transparent"
-            android:gravity="center">
+            android:layout_marginLeft="@dimen/space15"
+            android:layout_marginTop="@dimen/space30"
+            android:layout_marginRight="@dimen/space15"
+            android:background="@drawable/bg_5_white_rect_shap"
+            android:gravity="center"
+            android:paddingTop="@dimen/space26"
+            android:paddingBottom="@dimen/space26">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -31,8 +40,8 @@
                     android:ellipsize="end"
                     android:lines="1"
                     android:text="@string/zero"
-                    android:textColor="@color/text_white"
-                    android:textSize="@dimen/textfont24"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont18"
                     android:textStyle="bold" />
 
                 <TextView
@@ -40,7 +49,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space20"
                     android:text="@string/has_receive_num"
-                    android:textColor="@color/text_white"
+                    android:textColor="@color/text_black"
                     android:textSize="@dimen/textfont15" />
             </LinearLayout>
 
@@ -58,8 +67,8 @@
                     android:ellipsize="end"
                     android:lines="1"
                     android:text="@string/zero"
-                    android:textColor="@color/text_white"
-                    android:textSize="@dimen/textfont24"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textfont18"
                     android:textStyle="bold" />
 
                 <TextView
@@ -67,11 +76,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space20"
                     android:text="@string/has_receive_ksb"
-                    android:textColor="@color/text_white"
+                    android:textColor="@color/text_black"
                     android:textSize="@dimen/textfont15" />
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+
+    </RelativeLayout>
+
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/srl_refresh"
@@ -81,7 +92,9 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_record"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 </LinearLayout>

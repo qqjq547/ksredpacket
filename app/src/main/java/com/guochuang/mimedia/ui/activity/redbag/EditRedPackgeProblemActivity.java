@@ -1,13 +1,11 @@
 package com.guochuang.mimedia.ui.activity.redbag;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Parcel;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,19 +24,26 @@ import com.guochuang.mimedia.base.recycleview.adapter.MultiTypeSupport;
 import com.guochuang.mimedia.mvp.model.ProblemBean;
 import com.guochuang.mimedia.mvp.presenter.VideoProblemPresenter;
 import com.guochuang.mimedia.mvp.view.VideoProblemView;
+import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.DialogBuilder;
 import com.guochuang.mimedia.ui.adapter.ProblemDialogInAdapter;
-import com.guochuang.mimedia.ui.adapter.VideoProblemAdapter;
+import com.guochuang.mimedia.ui.adapter.EditRedPackgeProblemAdapter;
 import com.sz.gcyh.KSHongBao.R;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class VideoProblemActivity extends MvpActivity<VideoProblemPresenter> implements VideoProblemView {
+import static com.guochuang.mimedia.tools.Constant.*;
+
+/**
+ * 编辑视频与问卷问题
+ */
+public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresenter> implements VideoProblemView {
 
     @BindView(R.id.recycler_list)
     WrapEmptyRecyclerView recyclerList;
@@ -46,8 +51,7 @@ public class VideoProblemActivity extends MvpActivity<VideoProblemPresenter> imp
     TextView tvNuber;
     @BindView(R.id.tv_add_problem)
     TextView tvAddProblem;
-    private VideoProblemAdapter mVideoProblemAdapter;
-    private List mData = new ArrayList(5);
+    private EditRedPackgeProblemAdapter mEditRedPackgeProblemAdapter;
     private String mRedPacketType;
     private ArrayList<ProblemBean> mProblemList = new ArrayList<>();
     private ProblemDialogInAdapter mProblemDialogInAdapter;
@@ -63,24 +67,20 @@ public class VideoProblemActivity extends MvpActivity<VideoProblemPresenter> imp
 
 
     @Override
-    protected void paserIntent(Bundle bundle) {
-        super.paserIntent(bundle);
-        mProblemList = bundle.getParcelableArrayList(Constant.PROBLEMLIST_KEY);
-        mRedPacketType = bundle.getString(Constant.OPEN_VIDEOPROBLEMACTIVITY_TYPE);
-    }
-
-    @Override
     public int getLayout() {
         return R.layout.activity_videoproblem;
     }
 
     @Override
     public void initViewAndData() {
+        setStatusbar(R.color.white,true);
+        mProblemList = getIntent().getParcelableArrayListExtra(PROBLEMLIST_KEY);
+        mRedPacketType = getIntent().getStringExtra(OPEN_VIDEOPROBLEMACTIVITY_TYPE);
         mNavigationbuilder = new DefaultNavigationBar.Builder(this);
-        if (Constant.RED_PACKET_TYPE_VIDEO.equals(mRedPacketType)) {
-            mNavigationbuilder.setTitle("视频红包问题");
+        if (RED_PACKET_TYPE_VIDEO.equals(mRedPacketType)) {
+            mNavigationbuilder.setTitle(getResources().getString(R.string.video_redbag_problem));
         } else {
-            mNavigationbuilder.setTitle("问卷红包问题");
+            mNavigationbuilder.setTitle(getResources().getString(R.string.surevy_redbag_problem));
         }
 
         mNavigationbuilder.setLeftClick(new View.OnClickListener() {
@@ -90,7 +90,7 @@ public class VideoProblemActivity extends MvpActivity<VideoProblemPresenter> imp
 
                 //把题目的值带回去
                 Intent intent = getIntent();
-                intent.putParcelableArrayListExtra(Constant.问题数据集合, mProblemList);
+                intent.putParcelableArrayListExtra(问题数据集合, mProblemList);
                 setResult(RESULT_OK, intent);
                 finish();
 
@@ -99,42 +99,38 @@ public class VideoProblemActivity extends MvpActivity<VideoProblemPresenter> imp
         }).build();
 
         recyclerList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        mVideoProblemAdapter = new VideoProblemAdapter(this, mProblemList, R.layout.item_problem_layout,mRedPacketType);
-        mVideoProblemAdapter.setOnEditeClickLisenter(new VideoProblemAdapter.OnEditeClick() {
+        mEditRedPackgeProblemAdapter = new EditRedPackgeProblemAdapter(this, mProblemList, R.layout.item_problem_layout, mRedPacketType);
+        mEditRedPackgeProblemAdapter.setOnEditeClickLisenter(new EditRedPackgeProblemAdapter.OnEditeClick() {
             @Override
             public void onClick(int position) {
                 //修改
 
                 EditProblem(position);
-//                showDialog();
             }
         });
 
-        mVideoProblemAdapter.setOnDeleteClickLisenter(new VideoProblemAdapter.OnDeleteClick() {
+        mEditRedPackgeProblemAdapter.setOnDeleteClickLisenter(new EditRedPackgeProblemAdapter.OnDeleteClick() {
             @Override
             public void onClick(int position) {
                 //删除提示框
                 deletDialog(position);
 
-
-
             }
         });
 
-        recyclerList.setAdapter(mVideoProblemAdapter);
+        recyclerList.setAdapter(mEditRedPackgeProblemAdapter);
         recyclerList.isShowEmptyPage();
         refreshUI();
 
     }
 
 
-
     private void deletDialog(final int position) {
 
         new DialogBuilder(this)
                 .setTitle(R.string.tip)
-                .setMessage("您确定删除该问题？")
-                .setNegativeButton(R.string.cancel,null)
+                .setMessage(R.string.tips_delete_problem)
+                .setNegativeButton(R.string.cancel, null)
                 .setPositiveButton(R.string.confirm, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -145,7 +141,6 @@ public class VideoProblemActivity extends MvpActivity<VideoProblemPresenter> imp
                 }).create().show();
 
     }
-
 
 
     private void EditProblem(int position) {
@@ -162,8 +157,11 @@ public class VideoProblemActivity extends MvpActivity<VideoProblemPresenter> imp
 
     //RefreshUI
     private void refreshUI() {
-        if(mProblemList.size()>0) {
+        if (mProblemList.size() > 0) {
+            tvNuber.setVisibility(View.VISIBLE);
             tvNuber.setText(Html.fromHtml("已添加<font color = '#ff7519'>" + mProblemList.size() + "</font>个问题"));
+        } else {
+            tvNuber.setVisibility(View.GONE);
         }
 
         if (mProblemList.size() >= 5) {
@@ -172,9 +170,9 @@ public class VideoProblemActivity extends MvpActivity<VideoProblemPresenter> imp
             tvAddProblem.setVisibility(View.VISIBLE);
         }
 
-        if (mVideoProblemAdapter != null) {
+        if (mEditRedPackgeProblemAdapter != null) {
             recyclerList.isShowEmptyPage();
-            mVideoProblemAdapter.notifyDataSetChanged();
+            mEditRedPackgeProblemAdapter.notifyDataSetChanged();
         }
 
 
@@ -206,13 +204,13 @@ public class VideoProblemActivity extends MvpActivity<VideoProblemPresenter> imp
         final AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setContentView(R.layout.dialog_problem_layout)
                 .setGravity(Gravity.CENTER)
-                .setWidthAndHeight((int) (ScreenUtils.getScreenWidth(this) * 0.9), ViewGroup.LayoutParams.WRAP_CONTENT)
+                .setWidthAndHeight((int) (CommonUtil.getScreenW(this) * 0.9), ViewGroup.LayoutParams.WRAP_CONTENT)
                 .create();
 
         LinearLayout ll_header_root = alertDialog.getView(R.id.ll_header_root);
-        if (Constant.RED_PACKET_TYPE_QUESTION.equals(mRedPacketType)) {
+        if (RED_PACKET_TYPE_SURVEY.equals(mRedPacketType)) {
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) ll_header_root.getLayoutParams();
-            layoutParams.bottomMargin = ScreenUtils.dp2px(this, 8);
+            layoutParams.bottomMargin = CommonUtil.dip2px(this, 8);
             ll_header_root.setLayoutParams(layoutParams);
         }
 
@@ -233,13 +231,13 @@ public class VideoProblemActivity extends MvpActivity<VideoProblemPresenter> imp
                 //根据type 切换中间布局
                 switch (checkedId) {
                     case R.id.rb_single_select:
-                        setItmeType(problemBean, 0);
+                        setItmeType(problemBean, Constant.SINGLESELECT);
                         break;
                     case R.id.rb_many_select:
-                        setItmeType(problemBean, 1);
+                        setItmeType(problemBean, Constant.MORESELECT);
                         break;
                     case R.id.eb_fill_in_blanks:
-                        setItmeType(problemBean, 2);
+                        setItmeType(problemBean, Constant.FILL_IN_PROBLEM);
                         break;
                 }
 
@@ -285,81 +283,19 @@ public class VideoProblemActivity extends MvpActivity<VideoProblemPresenter> imp
             @Override
             public void onClick(View v) {
                 problemBean.setProblem(et_input_problem.getText().toString().trim());
-                if (TextUtils.isEmpty(problemBean.getProblem())) {
-                    showShortToast("请填写问题");
+
+                if (!checkCondition(problemBean)) {
                     return;
                 }
 
-                //todo 判断红包的类型     区分条件
-                if(Constant.RED_PACKET_TYPE_VIDEO.equals(mRedPacketType)) {
-
-
-
-
-                    if (problemBean.getType() == 2) {
-                        if (TextUtils.isEmpty(problemBean.getItem().get(0).getItemcontent())) {
-                            showShortToast("请填写答案");
-                            return;
-                        }
-                    } else {
-                        Log.e("onClick: ", problemBean.toString());
-                        //判斷是否設置答案
-                        List<ProblemBean.ItemBean> items = problemBean.getItem();
-                        boolean flag = false;
-                        for (ProblemBean.ItemBean item : items) {
-                            if (item.isIsanswer()) {
-                                flag = true;
-                                break;
-                            }
-                        }
-
-                        if (!flag) {
-                            showShortToast("请设置答案");
-                            return;
-                        }
-                    }
-
-
-
-
-
-
-
-
-
-
-
-
-                }else {
-
-
-
-
-
-
-
-
-
-                }
-
-
-
-
-
-
-
-
-
-
-
-
-
+                //移除多余的选项
+                removeRedundantOptions(problemBean);
 
                 if (mIsRestProblem) {
                     mProblemList.remove(mCustomaryProblemBean);
                 }
-                mProblemList.add(problemBean);
 
+                mProblemList.add(problemBean);
 
                 alertDialog.dismiss();
                 //刷新外部列表
@@ -368,6 +304,84 @@ public class VideoProblemActivity extends MvpActivity<VideoProblemPresenter> imp
             }
         });
         alertDialog.show();
+
+    }
+
+
+    /**
+     * checkCondition 校验条件是否满足需求
+     *
+     * @param problemBean
+     */
+    private boolean checkCondition(ProblemBean problemBean) {
+
+        if (TextUtils.isEmpty(problemBean.getProblem())) {
+            showShortToast(R.string.fill_problem_title);
+            return false;
+        }
+
+        // 判断红包的类型    区分条件   视频红包
+
+        if (problemBean.getType() == Constant.FILL_IN_PROBLEM) {
+            //填空题
+            if (RED_PACKET_TYPE_VIDEO.equals(mRedPacketType)) {
+                //并且是视频红包
+                if (TextUtils.isEmpty(problemBean.getItem().get(0).getItemcontent())) {
+                    showShortToast(R.string.please_set_answer);
+                    return false;
+                }
+            }
+        } else {
+            //选择题
+            //判斷是否設置答案
+            List<ProblemBean.ItemBean> items = problemBean.getItem();
+
+
+            int number = 0;
+            for (ProblemBean.ItemBean item : items) {
+                if (!TextUtils.isEmpty(item.getItemcontent())) {
+                    number++;
+                }
+
+            }
+
+            if (number < 2) {
+                showShortToast(R.string.provide_least_two_items);
+                return false;
+            }
+
+
+            if (RED_PACKET_TYPE_VIDEO.equals(mRedPacketType)) {
+                //只有视频红包问题才能设置答案
+                boolean flag = false;
+                for (ProblemBean.ItemBean item : items) {
+                    if (item.isIsanswer()) {
+                        flag = true;
+                        break;
+                    }
+                }
+
+                if (!flag) {
+                    showShortToast(R.string.please_set_answer);
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * 移除多余的选项 Remove redundant options
+     */
+    private void removeRedundantOptions(ProblemBean problemBean) {
+        Iterator<ProblemBean.ItemBean> iterator = problemBean.getItem().iterator();
+        while (iterator.hasNext()) {
+            ProblemBean.ItemBean item = iterator.next();
+            if (TextUtils.isEmpty(item.getItemcontent())) {
+                iterator.remove();
+            }
+        }
 
     }
 
@@ -380,15 +394,20 @@ public class VideoProblemActivity extends MvpActivity<VideoProblemPresenter> imp
     private void setItmeType(ProblemBean problemBean, int type) {
 
         int number;
-        if (type == 2) {
+        if (type == Constant.FILL_IN_PROBLEM) {
+            //填空题
             number = 1;
         } else {
             number = 4;
         }
 
         if (!mIsRestProblem) {
+            if (problemBean.getItem() == null || problemBean.getItem().isEmpty()) {
+                crateItme(problemBean, type, number);
+            } else {
+                changeProblemType(problemBean, type);
+            }
 
-            crateItme(problemBean, type, number);
         } else {
             mDialogData.clear();
             mDialogData.addAll(problemBean.getItem());

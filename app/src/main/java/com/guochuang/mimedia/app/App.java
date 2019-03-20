@@ -85,17 +85,6 @@ public class App extends Application {
             wxapi.registerApp("wx3f027d9298bbbed4");
             new File(Constant.COMPRESS_DIR_PATH).mkdirs();
             new File(Constant.COMMON_PATH).mkdirs();
-            QbSdk.preInit(this, new QbSdk.PreInitCallback() {
-                @Override
-                public void onCoreInitFinished() {
-
-                }
-
-                @Override
-                public void onViewInitFinished() {
-
-                }
-            });
 
         }
     public static App getInstance(){
@@ -171,5 +160,6 @@ public class App extends Application {
     public UserInfo getUserInfo() {
         return userInfo;
     }
+
 
 }

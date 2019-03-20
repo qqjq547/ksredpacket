@@ -1,9 +1,6 @@
 package com.guochuang.mimedia.mvp.model;
 
-import io.objectbox.annotation.Entity;
-import io.objectbox.annotation.Id;
 
-@Entity
 public class InfoItem {
 
     /**
@@ -14,7 +11,6 @@ public class InfoItem {
      * praiseNumber : 0
      * title : string
      */
-    @Id
     long id;
     private long articleId;
     private String author;

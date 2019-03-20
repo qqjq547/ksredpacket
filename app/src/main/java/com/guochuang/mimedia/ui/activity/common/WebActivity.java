@@ -109,9 +109,9 @@ public class WebActivity extends MvpActivity {
                 onBackPressed();
                 break;
             case R.id.tv_text:
-                if (headRightType.equals("rule")){//蜂窝规则
+                if ("rule".equals(headRightType)){//蜂窝规则
                     IntentUtils.startWebActivity(WebActivity.this,getString(R.string.hongycomb_agreement),Constant.URL_HONYCOMB_RULE);
-                }else if(headRightType.equals("share")){//分享夺宝
+                }else if("share".equals(headRightType)){//分享夺宝
                     wvContent.loadUrl("javascript:slef.shareDetails()");
                 }
 
@@ -170,6 +170,7 @@ public class WebActivity extends MvpActivity {
         }
         @JavascriptInterface
         public void playVideo(){
+
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {

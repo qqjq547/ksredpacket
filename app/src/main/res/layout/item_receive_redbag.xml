@@ -3,47 +3,113 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/space15" >
-  <ImageView
-      android:id="@+id/iv_avatar"
-      android:layout_width="@dimen/space40"
-      android:layout_height="@dimen/space40" />
+    android:orientation="vertical"
+    android:padding="@dimen/space15">
+
+    <!--    <ImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="37dp"
+            android:layout_height="@dimen/space40" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space15"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/textfont16"/>
+            <LinearLayout
+                android:id="@+id/lin_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space8">
+                <ImageView
+                    android:id="@+id/iv_content_image"
+                    android:layout_width="@dimen/space100"
+                    android:layout_height="@dimen/space100"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"/>
+                <TextView
+                    android:id="@+id/tv_content_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/space15"
+                    android:textSize="@dimen/textfont13"
+                    android:textColor="@color/text_black" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_reward"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space8"
+                android:textSize="@dimen/textfont13"
+                android:textColor="@color/text_black" />
+        </LinearLayout>-->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/space15"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_black"
-            android:textSize="@dimen/textfont16"/>
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="41dp"
+            android:layout_height="41dp" />
+
+
         <LinearLayout
-            android:id="@+id/lin_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space8">
-            <ImageView
-                android:id="@+id/iv_content_image"
-                android:layout_width="@dimen/space100"
-                android:layout_height="@dimen/space100"
-                android:scaleType="centerCrop"
-                android:adjustViewBounds="true"/>
+            android:layout_marginLeft="@dimen/space16"
+            android:orientation="vertical">
+
             <TextView
-                android:id="@+id/tv_content_title"
+                android:id="@+id/tv_name"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/space15"
-                android:textSize="@dimen/textfont13"
-                android:textColor="@color/text_black" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_4"
+                android:text="快收红包"
+                android:textSize="@dimen/textfont16" />
+
+            <TextView
+                android:id="@+id/tv_reward"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space8"
+                android:text="0.0639KSB"
+                android:textSize="@dimen/textfont12" />
+
         </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/lin_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
         <TextView
-            android:id="@+id/tv_reward"
+            android:id="@+id/tv_content_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space8"
-            android:textSize="@dimen/textfont13"
-            android:textColor="@color/text_black" />
+            android:layout_marginTop="@dimen/space10"
+            android:maxLines="2"
+            android:text="手中有粮，心中不慌！持KSB为王躺赚,手中有粮，心中
+不慌！持KSB为王躺赚！！！" />
+
+
+        <ImageView
+            android:id="@+id/iv_content_image"
+            android:layout_marginTop="@dimen/space10"
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            android:scaleType="centerCrop"/>
+
     </LinearLayout>
 </LinearLayout>

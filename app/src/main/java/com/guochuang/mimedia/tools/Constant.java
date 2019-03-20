@@ -17,7 +17,7 @@ public class Constant {
      * 是否调试模式
      */
     public static final boolean isDebug = (BuildConfig.ENV == 0);
-    public static final int DEFAULT_HOST = 2;
+    public static final int DEFAULT_HOST = 0;
 
     public static final int HTTP_STATUS_FORCE_LOGIN = 1007;
     public static final int HTTP_STATUS_REDBAD_INVALID = 10012;
@@ -68,7 +68,7 @@ public class Constant {
     public static final String MONEY = "money";
     public static final String KSB = "KSB";
     public static final String RECOMMENDDATA = "recommendData";
-    public static final String AVATAR ="avatar" ;
+    public static final String AVATAR = "avatar";
     public static final String AREATYPE = "areaType";
     public static final String DRAWNUMBER = "drawNumber";
     public static final String TOTAL = "total";
@@ -98,7 +98,6 @@ public class Constant {
     public static final String NESTLONGITUDE = "nestLongitude";
 
 
-
     public static final String FORMAT_DATE_SIMPLE = "yyyy-MM-dd";
     public static final String FORMAT_DATE = "yyyy-MM-dd HH:mm:ss";
     public static final String FORMAT_MONTH = "yyyy-MM";
@@ -109,7 +108,7 @@ public class Constant {
 
 
     //资讯详情
-    public static final String URL_INFOMATION_DETAIL = ApiClient.HTML_URL+"information/detail/index.htm";
+    public static final String URL_INFOMATION_DETAIL = ApiClient.HTML_URL + "information/detail/index.htm";
     //推荐协议
     public static final String URL_RULE_RECOMMEND = ApiClient.HTML_URL + "html/rule/recommend/index.htm";
     //ksb协议
@@ -131,31 +130,31 @@ public class Constant {
     //代理商协议
     public static final String URL_AGREEMENT_AGENT = ApiClient.HTML_URL + "html/agreement/agent/index.htm";
     //公告消息
-    public static final String URL_NOTICE_DETAIL = ApiClient.HTML_URL+"project/html/notice.html";
+    public static final String URL_NOTICE_DETAIL = ApiClient.HTML_URL + "project/html/notice.html";
     //帮助中心
-    public static final String URL_HELP_CENTER = ApiClient.HTML_URL+"project/html/fengwo/index.html#/helpCenter";
+    public static final String URL_HELP_CENTER = ApiClient.HTML_URL + "project/html/fengwo/index.html#/helpCenter";
     //商圈
-    public static final String URL_TRADINGAREA = ApiClient.HTML_URL+"project/html/shangquan/index.html";
+    public static final String URL_TRADINGAREA = ApiClient.HTML_URL + "project/html/shangquan/index.html";
     //蜜玩
-    public static final String URL_MIWAN = ApiClient.HTML_URL+"project/html/fengwo/index.html#miWan";
+    public static final String URL_MIWAN = ApiClient.HTML_URL + "project/html/fengwo/index.html#miWan";
     //我的订单
-    public static final String URL_MY_ORDER = ApiClient.HTML_URL+"project/html/fengwo/index.html#/myOrder";
+    public static final String URL_MY_ORDER = ApiClient.HTML_URL + "project/html/fengwo/index.html#/myOrder";
     //蜂窝规则
-    public static final String URL_HONYCOMB_RULE = ApiClient.HTML_URL+"project/html/rule/fengwoRule.html";
+    public static final String URL_HONYCOMB_RULE = ApiClient.HTML_URL + "project/html/rule/fengwoRule.html";
     //广告投放协议
-    public static final String URL_FENGCHAO_BANNER = ApiClient.HTML_URL+"project/html/rule/fengchao/banner.html";
+    public static final String URL_FENGCHAO_BANNER = ApiClient.HTML_URL + "project/html/rule/fengchao/banner.html";
     //竞购协议
-    public static final String URL_FENGCHAO_JINGGOU = ApiClient.HTML_URL+"project/html/rule/fengchao/jinggou.html";
+    public static final String URL_FENGCHAO_JINGGOU = ApiClient.HTML_URL + "project/html/rule/fengchao/jinggou.html";
     //竞拍说明
-    public static final String URL_FENGCHAO_JINGPAI = ApiClient.HTML_URL+"project/html/rule/fengchao/jingpai.html";
+    public static final String URL_FENGCHAO_JINGPAI = ApiClient.HTML_URL + "project/html/rule/fengchao/jingpai.html";
     //显示地图网页
-    public static final String URL_BMAP_URL = ApiClient.HTML_URL+"project/html/fengwo/index.html#/BMapComponent";
+    public static final String URL_BMAP_URL = ApiClient.HTML_URL + "project/html/fengwo/index.html#/BMapComponent";
     //夺宝规则
-    public static final String URL_DUOBAO_RULE = ApiClient.HTML_URL+"project/html/rule/duobaoRule.html";
+    public static final String URL_DUOBAO_RULE = ApiClient.HTML_URL + "project/html/rule/duobaoRule.html";
     //夺宝详情
-    public static final String URL_DUOBAO_DETAIL = ApiClient.HTML_URL+"project/html/fengwo/index.html#/treasureDetails?snatchId=";
+    public static final String URL_DUOBAO_DETAIL = ApiClient.HTML_URL + "project/html/fengwo/index.html#/treasureDetails?snatchId=";
     //我的夺宝
-    public static final String URL_DUOBAO_TREASURE_NUMBER = ApiClient.HTML_URL+"project/html/fengwo/index.html#/treasureNumber?type=false&snatchRecordId=";
+    public static final String URL_DUOBAO_TREASURE_NUMBER = ApiClient.HTML_URL + "project/html/fengwo/index.html#/treasureNumber?type=false&snatchRecordId=";
 
 
     public static final String REGEX_WEBURL = "http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?";
@@ -183,6 +182,7 @@ public class Constant {
     public static final String RESET_NATION_CODE = "86";
 
     public static final String RED_PACKET_TYPE = "redPacketType";
+    public static final String ROLE_TYPE = "roleType";
     public static final String TYPE_NOW = "now";
     public static final String TYPE_SHARE = "share";
     public static final String TYPE_REDBAG = "redbag";
@@ -197,6 +197,9 @@ public class Constant {
     public static final String ARGS_ARRAY = "args_array";
     public static final String ARGS_POSITION = "args_position";
     public static final String ARGS_DATA = "data";
+    public static final String JXW_FROM = "h5android";
+    public static final String DATA = "data";
+    public static final String SURVEYID = "surveyId";
 
 
     public static final int STATE_HAS_GET = 1;
@@ -218,14 +221,12 @@ public class Constant {
     public static final String RED_PACKET_TYPE_PASSWORD = "password";
     public static final String RED_PACKET_TYPE_LUCKY = "lucky";
     public static final String RED_PACKET_TYPE_VIDEO = "video";
-    public static final String RED_PACKET_TYPE_QUESTION = "question";
+    public static final String RED_PACKET_TYPE_SURVEY = "survey";
 
     public static final String ROLETYPE_ADMIN = "admin";
     public static final String ROLETYPE_PERSON = "person";
     public static final String ROLETYPE_MERCHANT = "merchant";
     public static final String ROLETYPE_SYSTEM = "system";
-    public static final String ROLETYPE_VIDEO = "video";
-    public static final String ROLETYPE_QUESTION = "question";
 
     public static final int PAY_TYPE_WXPAY = 11;
     public static final int PAY_TYPE_ALIPAY = 101;
@@ -259,11 +260,11 @@ public class Constant {
     public static final int MAX_PICK_PICTURE = 6;
     public static final int MAX_VIDEO_PICTURE = 1;
     //审核中
-    public static final int STATUS_AUDIT_INREVIEW=0;
+    public static final int STATUS_AUDIT_INREVIEW = 0;
     //审核通过
-    public static final int STATUS_AUDIT_PASS=1;
+    public static final int STATUS_AUDIT_PASS = 1;
     //审核失败
-    public static final int STATUS_AUDIT_FAIL=2;
+    public static final int STATUS_AUDIT_FAIL = 2;
 
     public static final String MAP_KEY_TOTALCOIN = "totalCoin";
 
@@ -271,9 +272,9 @@ public class Constant {
     public static final int TRANSFER_ALIPAY = 3;
     public static final int TRANSFER_BANKCARD = 4;
 
-    public static final String SORT_DEFAULT="DEFAULT";
-    public static final String SORT_ASC="ASC";
-    public static final String SORT_DESC="DESC";
+    public static final String SORT_DEFAULT = "DEFAULT";
+    public static final String SORT_ASC = "ASC";
+    public static final String SORT_DESC = "DESC";
 
     public static final String AD_TYPE_DETAIL = "detail";
     public static final String AD_TYPE_EDIT = "edit";
@@ -284,5 +285,13 @@ public class Constant {
     public static final String PROBLEMLIST_KEY = "问题集合";
     public static final String OPEN_VIDEOPROBLEMACTIVITY_TYPE = "打开VideoProblemActivity的类型";
     public static final String VIDEO_PATH = "视频路径";
+    public static final String LOOK_PROBLEM_RED_PACKET_ID = "查看红包问题ID";
+    public static final String FILL_ANSWER_INFO = "填空題答題詳情";
     public static String 问题数据集合 = "问题数据集合";
+
+
+    //   视频红包与问卷红包 问题类型 0：单选 1：多选 2：填空题
+    public static int SINGLESELECT = 0;
+    public static int MORESELECT = 1;
+    public static int FILL_IN_PROBLEM = 2;
 }

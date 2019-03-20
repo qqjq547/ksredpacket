@@ -1,4 +1,4 @@
-package com.guochuang.mimedia.ui.activity;
+package com.guochuang.mimedia.ui.activity.redbag;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;
@@ -24,8 +24,6 @@ import com.guochuang.mimedia.mvp.model.RedbagInfo;
 import com.guochuang.mimedia.tools.AdCollectionView;
 import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.ui.activity.common.ShareActivity;
-import com.guochuang.mimedia.ui.activity.redbag.AnswerActivity;
-import com.guochuang.mimedia.ui.activity.redbag.VideoPreviewActivity;
 import com.guochuang.mimedia.view.BadgeView;
 import com.qq.e.ads.nativ.NativeExpressADView;
 import com.sz.gcyh.KSHongBao.R;
@@ -162,6 +160,7 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
     String redPacketUuid;
     InputDialog inputDialog;
     RedbagInfo redbagInfo;
+    String roleType;
     String redPacketType;
     boolean fromCollect=false;
     String startIndex=null;
@@ -183,16 +182,16 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
 
     @Override
     public void initViewAndData() {
-//        redbagDetail = (RedbagDetail) getIntent().getSerializableExtra(Constant.RED_PACKET_DETAIL);
+        redbagDetail = (RedbagDetail) getIntent().getSerializableExtra(Constant.RED_PACKET_DETAIL);
         showLoadingDialog(null);
         setStatusbar(R.color.bg_red, false);
         if (redbagDetail == null) {
             redPacketUuid = getIntent().getStringExtra(Constant.RED_PACKET_UUID);
-            redPacketType = getIntent().getStringExtra(Constant.RED_PACKET_TYPE);
+            roleType = getIntent().getStringExtra(Constant.ROLE_TYPE);
             fromCollect=getIntent().getBooleanExtra(Constant.FROM_COLLECT,false);
             startIndex=getIntent().getStringExtra(Constant.START_INDEX);
-            mvpPresenter.getRedPacketInfo(redPacketUuid, redPacketType,startIndex);
-            if (redPacketType.equals(Constant.ROLETYPE_SYSTEM)) {
+            mvpPresenter.getRedPacketInfo(redPacketUuid, roleType,startIndex);
+            if (roleType.equals(Constant.ROLETYPE_SYSTEM)) {
                 linRedbagDetail.setVisibility(View.GONE);
                 linComment.setVisibility(View.GONE);
                 linReply.setVisibility(View.GONE);
@@ -200,17 +199,18 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                 linRedbagShare.setVisibility(View.VISIBLE);
                 srlRefresh.setEnableRefresh(false);
                 srlRefresh.setEnableLoadmore(false);
-            }else if(redPacketType.equals(Constant.ROLETYPE_VIDEO)){
-                rlValue.setVisibility(View.GONE);
-                tvRedbagTip.setVisibility(View.GONE);
-                linVideoHead.setVisibility(View.VISIBLE);
-                btnOpenPacket.setText(R.string.watched_video_open_redbag);
-            }else if(redPacketType.equals(Constant.ROLETYPE_VIDEO)){
-                rlValue.setVisibility(View.GONE);
-                tvRedbagTip.setVisibility(View.GONE);
-                linVideoHead.setVisibility(View.VISIBLE);
-                btnOpenPacket.setText(R.string.answer_open_redbag);
             }else {
+                if (roleType.equals(Constant.RED_PACKET_TYPE_VIDEO)){
+                    rlValue.setVisibility(View.GONE);
+                    tvRedbagTip.setVisibility(View.GONE);
+                    linVideoHead.setVisibility(View.VISIBLE);
+                    btnOpenPacket.setText(R.string.watched_video_open_redbag);
+                }else if(roleType.equals(Constant.RED_PACKET_TYPE_SURVEY)){
+                    rlValue.setVisibility(View.GONE);
+                    tvRedbagTip.setVisibility(View.GONE);
+                    linVideoHead.setVisibility(View.VISIBLE);
+                    btnOpenPacket.setText(R.string.answer_open_redbag);
+                }
                 linRedbagDetail.setVisibility(View.VISIBLE);
                 linComment.setVisibility(View.VISIBLE);
                 linReply.setVisibility(View.VISIBLE);
@@ -259,10 +259,11 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
             return;
         }
         redPacketUuid = getIntent().getStringExtra(Constant.RED_PACKET_UUID);
-        redPacketType = getIntent().getStringExtra(Constant.RED_PACKET_TYPE);
+        roleType = getIntent().getStringExtra(Constant.ROLE_TYPE);
+        redPacketType=getIntent().getStringExtra(Constant.RED_PACKET_TYPE);
         GlideImgManager.loadCircleImage(this, redbagDetail.getAvatar(), ivHeader);
         tvName.setText(redbagDetail.getNickName());
-        if (TextUtils.equals(redPacketType,Constant.ROLETYPE_SYSTEM)) {
+        if (TextUtils.equals(roleType,Constant.ROLETYPE_SYSTEM)) {
             linRedbagDetail.setVisibility(View.GONE);
 //            ivAd.setVisibility(View.VISIBLE);
             linComment.setVisibility(View.GONE);
@@ -350,7 +351,7 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                 onBackPressed();
                 break;
             case R.id.rl_red_packet_details_header:
-                if (redbagDetail != null &&TextUtils.equals(redPacketType,Constant.ROLETYPE_PERSON)) {
+                if (redbagDetail != null ) {
                     if (ivBack.getVisibility() == View.VISIBLE && ivJoinedArrow.getVisibility() == View.VISIBLE) {
                         IntentUtils.startRedbagJoinedActivity(this, redPacketUuid, redbagDetail.getAvatar(), redbagDetail.getNickName(), redbagDetail.getCoin(), redbagDetail.getMoney(), redbagDetail.getAreaType(), redbagDetail.getDrawNumber(), String.valueOf(redbagDetail.getQuantity()));
                     }
@@ -433,10 +434,15 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                 }
                 break;
             case R.id.btn_open_packet:
-                startActivity(new Intent(this,AnswerActivity.class));
+                if (redbagDetail != null) {
+                    startActivity(new Intent(this, AnswerActivity.class)
+                            .putExtra(Constant.RED_PACKET_UUID, redPacketUuid)
+                            .putExtra(Constant.SURVEYID, redbagDetail.getSurveyId())
+                            .putExtra(Constant.RED_PACKET_TYPE, redPacketType));
+                }
                 break;
             case R.id.iv_video_prev:
-                startActivity(new Intent(this,VideoPreviewActivity.class).putExtra(Constant.URL,""));
+                IntentUtils.startVideoPreviewActivity(this,redbagDetail.getVideoUrl());
                 break;
 
         }
@@ -522,7 +528,7 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                 }
             }
             setLongClick();
-            if (TextUtils.equals(redPacketType,Constant.ROLETYPE_SYSTEM)) {
+            if (TextUtils.equals(roleType,Constant.ROLETYPE_SYSTEM)) {
                 tvReceiveNum.setText(String.format(getString(R.string.format_people_get_redbag_money), redbagDetail.getDrawNumber()));
                 if (redbagDetail.getSystemAd() != null && redbagDetail.getSystemAd().size() != 0) {
                     AdCollectionView adCollectionView = new AdCollectionView(this, linAd);
@@ -530,9 +536,6 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                     nativeExpressADView = adCollectionView.getNativeExpressADView();
                 }
             } else {
-                if (TextUtils.equals(redPacketType,Constant.ROLETYPE_VIDEO)){
-                    linVideoHead.setVisibility(View.GONE);
-                }
                 tvReceiveNum.setText(String.format(getString(R.string.format_people_get_redbag), redbagDetail.getDrawNumber()));
                 tvContent.setText(redbagDetail.getContent());
                 if (redbagDetail != null && redbagDetail.getPicture().size() > 0) {
@@ -560,7 +563,24 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                     linWeibo.setVisibility(View.VISIBLE);
                     tvWeibo.setText(redbagDetail.getMicroblog());
                 }
-                startAnim();
+                if (redPacketType.equals(Constant.RED_PACKET_TYPE_VIDEO)){
+                    rlValue.setVisibility(View.GONE);
+                    tvRedbagTip.setVisibility(View.GONE);
+                    linVideoHead.setVisibility(View.VISIBLE);
+                    btnOpenPacket.setText(R.string.watched_video_open_redbag);
+                    tvWillGetKsb.setText(String.format(getString(R.string.format_ksb), redbagDetail.getCoin()));
+                    ivVideoPrev.setVisibility(View.VISIBLE);
+                    GlideImgManager.loadImage(this,redbagDetail.getCoverUrl(),ivVideoPrev);
+                }else if(redPacketType.equals(Constant.RED_PACKET_TYPE_SURVEY)){
+                    rlValue.setVisibility(View.GONE);
+                    tvRedbagTip.setVisibility(View.GONE);
+                    linVideoHead.setVisibility(View.VISIBLE);
+                    btnOpenPacket.setText(R.string.answer_open_redbag);
+                    tvWillGetKsb.setText(String.format(getString(R.string.format_ksb), redbagDetail.getCoin()));
+
+                }else {
+                    startAnim();
+                }
             }
             startCountDown(redbagDetail.getReadingSecond());
 
@@ -593,7 +613,7 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                 }
             }
             setLongClick();
-            if (redPacketType.equals(Constant.ROLETYPE_SYSTEM)) {
+            if (roleType.equals(Constant.ROLETYPE_SYSTEM)) {
                 tvReceiveNum.setText(String.format(getString(R.string.format_people_get_redbag_money), data.getReceiveUserNum()));
                 AdCollectionView adCollectionView = new AdCollectionView(this, linAd);
                 adCollectionView.init(AdCollectionView.TYPE_SYSTEM, AdCollectionView.LOCATION_REDBAG, "1108034968", "4050447759674968");
@@ -624,6 +644,11 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                 } else {
                     linWeibo.setVisibility(View.VISIBLE);
                     tvWeibo.setText(data.getMicroblog());
+                }
+
+                if (redPacketType.equals(Constant.RED_PACKET_TYPE_VIDEO)){
+                    ivVideoPrev.setVisibility(View.VISIBLE);
+                    GlideImgManager.loadImage(this,redbagDetail.getCoverUrl(),ivVideoPrev);
                 }
             }
         }

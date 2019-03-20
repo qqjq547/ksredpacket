@@ -2,6 +2,7 @@ package com.guochuang.mimedia.ui.fragment;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,6 +23,7 @@ import com.guochuang.mimedia.ui.activity.MainActivity;
 import com.guochuang.mimedia.ui.activity.beenest.AdBidActivity;
 import com.guochuang.mimedia.ui.activity.beenest.MyAdActivity;
 import com.guochuang.mimedia.ui.activity.city.CityActivity;
+import com.guochuang.mimedia.ui.activity.redbag.RedbagDynamicActivity2;
 import com.guochuang.mimedia.ui.activity.user.MyAddressActivity;
 import com.guochuang.mimedia.ui.dialog.SheetDialog;
 import com.sz.gcyh.KSHongBao.R;
@@ -119,10 +121,13 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
             switch (debugHost) {
                 case 0://测试host
                     tvTitle.setText(R.string.test_version);
+                    break;
                 case 1://生产host
                     tvTitle.setText(R.string.release_version);
+                    break;
                 case 2://开发host
                     tvTitle.setText(R.string.dev_version);
+                    break;
                }
         }else {
            tvTitle.setVisibility(View.GONE);
@@ -214,7 +219,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                         IntentUtils.startWebActivity(getActivity(),getString(R.string.text_my_order),Constant.URL_MY_ORDER);
                         break;
                     case R.drawable.ic_my_dynamic:
-                        startActivity(new Intent(getActivity(), RedbagDynamicActivity.class));
+                        startActivity(new Intent(getActivity(), RedbagDynamicActivity2.class));
                         break;
                     case R.drawable.ic_my_collection:
                         startActivity(new Intent(getActivity(), MyCollectActivity.class));
@@ -307,7 +312,12 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                 break;
             case R.id.lin_ad_bid:
                 ((MainActivity)getActivity()).clearMarker();
-                startActivity(new Intent(getActivity(), AdBidActivity.class));
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(getActivity(), AdBidActivity.class));
+                    }
+                },500);
                 break;
             case R.id.lin_my_ad:
                 startActivity(new Intent(getActivity(), MyAdActivity.class));

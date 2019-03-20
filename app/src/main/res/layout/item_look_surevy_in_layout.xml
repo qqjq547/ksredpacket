@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/space15"
+    android:paddingBottom="5dp">
+
+
+    <TextView
+        android:id="@+id/tv_option"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="A.平头哥半导体有限公司"
+        android:textColor="@color/color_666666" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.guochuang.mimedia.view.CustomProgress
+            android:id="@+id/custom_progress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+
+        <TextView
+            android:id="@+id/tv_percentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space18"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/color_ff7519"/>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

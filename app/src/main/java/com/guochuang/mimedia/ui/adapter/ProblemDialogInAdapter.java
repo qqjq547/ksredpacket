@@ -6,10 +6,8 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.dmcbig.mediapicker.utils.ScreenUtils;
 import com.guochuang.mimedia.base.recycleview.adapter.CommonRecyclerAdapter;
@@ -17,7 +15,6 @@ import com.guochuang.mimedia.base.recycleview.adapter.MultiTypeSupport;
 import com.guochuang.mimedia.base.recycleview.adapter.ViewHolder;
 import com.guochuang.mimedia.mvp.model.ProblemBean;
 import com.guochuang.mimedia.tools.Constant;
-import com.guochuang.mimedia.tools.ToastUtil;
 import com.sz.gcyh.KSHongBao.R;
 
 import java.util.List;
@@ -36,7 +33,7 @@ public class ProblemDialogInAdapter extends CommonRecyclerAdapter<ProblemBean.It
 
             ProblemBean.ItemBean itemBean = mData.get(0);
             if (itemBean.getProblemType() == 2) {
-                if (Constant.RED_PACKET_TYPE_QUESTION.equals(mRedPacketType)) {
+                if (Constant.RED_PACKET_TYPE_SURVEY.equals(mRedPacketType)) {
                     return 0;
                 }
 
@@ -58,7 +55,7 @@ public class ProblemDialogInAdapter extends CommonRecyclerAdapter<ProblemBean.It
         switch (problemType) {
             case 0:
             case 1:
-                if (Constant.RED_PACKET_TYPE_QUESTION.equals(mRedPacketType)) {
+                if (Constant.RED_PACKET_TYPE_SURVEY.equals(mRedPacketType)) {
 
                     holder.setViewVisibility(R.id.rl_select_root, View.GONE);
                 }
@@ -150,7 +147,7 @@ public class ProblemDialogInAdapter extends CommonRecyclerAdapter<ProblemBean.It
                     holder.setViewVisibility(R.id.ll_fill_container, View.VISIBLE);
                 }
 
-                if (Constant.RED_PACKET_TYPE_QUESTION.equals(mRedPacketType)) {
+                if (Constant.RED_PACKET_TYPE_SURVEY.equals(mRedPacketType)) {
 
                     holder.setViewVisibility(R.id.ll_fill_container, View.GONE);
                 }

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/space15"
+    android:layout_marginTop="@dimen/space10"
+    android:layout_marginRight="@dimen/space15"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/space10"
+    android:paddingTop="@dimen/space15"
+    android:paddingRight="@dimen/space10"
+    android:paddingBottom="@dimen/space15">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_squece"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1."
+            android:textSize="@dimen/textfont15" />
+
+        <TextView
+            android:id="@+id/tv_problem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="【单选】我们公司名字是什么,你看我猜不猜得
+    到？"
+            android:textSize="@dimen/textfont15" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_fill_answer_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space30"
+        android:text="答：平头哥半导体有限公司"
+        android:paddingBottom="@dimen/textfont15"
+        android:textColor="@color/color_ff7519" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycle_anser_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space10">
+
+    </android.support.v7.widget.RecyclerView>
+
+</LinearLayout>

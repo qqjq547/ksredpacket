@@ -1,14 +1,17 @@
 package com.guochuang.mimedia.base;
 
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.Toast;
 
+import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.CustomProDialog;
 import com.guochuang.mimedia.tools.PrefUtil;
 
@@ -138,5 +141,28 @@ public abstract class BaseFragment extends Fragment {
     public abstract int getLayout();
 
     public abstract void initViewAndData();
+
+    /**
+     * 跳转Activity
+     *
+     * @param clazz
+     * @param bundle
+     */
+    public void startActivity(Class<? extends Activity> clazz, Bundle bundle) {
+        Intent intent = new Intent(getActivity(), clazz);
+        if (bundle != null) {
+            intent.putExtra(Constant.ACTIVTYPUTBUNDLEKEY, bundle);
+        }
+        startActivity(intent);
+    }
+
+
+    public void startActivityForResult(Class<? extends Activity> clazz, Bundle bundle, int requestCode) {
+        Intent intent = new Intent(getActivity(), clazz);
+        if (bundle != null) {
+            intent.putExtra(Constant.ACTIVTYPUTBUNDLEKEY, bundle);
+        }
+        startActivityForResult(intent, requestCode);
+    }
     
 }

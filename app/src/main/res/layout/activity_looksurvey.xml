@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.guochuang.mimedia.base.recycleview.WrapEmptyRecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/wrap_em_recycle"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_answer_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center"
+        android:padding="@dimen/textfont15"
+        android:text="已添加 3 个问题"
+        android:textColor="@color/color_999999" />
+
+    <com.guochuang.mimedia.base.recycleview.WrapEmptyRecyclerView
+        android:id="@+id/wrap_em_recycle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
-</com.guochuang.mimedia.base.recycleview.WrapEmptyRecyclerView>
+    </com.guochuang.mimedia.base.recycleview.WrapEmptyRecyclerView>
+
+</LinearLayout>
+
+

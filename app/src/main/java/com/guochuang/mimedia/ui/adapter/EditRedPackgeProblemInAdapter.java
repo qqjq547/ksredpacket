@@ -5,7 +5,6 @@ import android.text.Html;
 import android.view.View;
 
 import com.guochuang.mimedia.base.recycleview.adapter.CommonRecyclerAdapter;
-import com.guochuang.mimedia.base.recycleview.adapter.MultiTypeSupport;
 import com.guochuang.mimedia.base.recycleview.adapter.ViewHolder;
 import com.guochuang.mimedia.mvp.model.ProblemBean;
 import com.guochuang.mimedia.tools.Constant;
@@ -13,11 +12,11 @@ import com.sz.gcyh.KSHongBao.R;
 
 import java.util.List;
 
-public class VideoProblemInAdapter extends CommonRecyclerAdapter<ProblemBean.ItemBean> {
+public class EditRedPackgeProblemInAdapter extends CommonRecyclerAdapter<ProblemBean.ItemBean> {
 
     private String mRedPacketType;
 
-    public VideoProblemInAdapter(Context context, List<ProblemBean.ItemBean> itemBeans, int itemlayout, String redPacketType) {
+    public EditRedPackgeProblemInAdapter(Context context, List<ProblemBean.ItemBean> itemBeans, int itemlayout, String redPacketType) {
         super(context, itemBeans, itemlayout);
         mRedPacketType = redPacketType;
     }
@@ -26,8 +25,8 @@ public class VideoProblemInAdapter extends CommonRecyclerAdapter<ProblemBean.Ite
     public int getItemCount() {
         if (mData != null && !mData.isEmpty()) {
             ProblemBean.ItemBean itemBean = mData.get(0);
-            if (itemBean.getProblemType() == 2) {
-                if(Constant.RED_PACKET_TYPE_QUESTION.equals(mRedPacketType)) {
+            if (itemBean.getProblemType() == Constant.FILL_IN_PROBLEM) {
+                if(Constant.RED_PACKET_TYPE_SURVEY.equals(mRedPacketType)) {
                     return 0;
                 }
 
@@ -58,7 +57,7 @@ public class VideoProblemInAdapter extends CommonRecyclerAdapter<ProblemBean.Ite
                 text = Html.fromHtml("<font color = '#000000'>答:</font>") + itemBean.getItemcontent();
                 break;
         }
-        if(Constant.RED_PACKET_TYPE_QUESTION.equals(mRedPacketType)) {
+        if(Constant.RED_PACKET_TYPE_SURVEY.equals(mRedPacketType)) {
             holder.setViewVisibility(R.id.iv_icon, View.GONE);
         }
         holder.setText(R.id.tv_container, text);

@@ -6,11 +6,10 @@ import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.mvp.model.RedbagRecord;
+import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class SendRedbagAdapter extends BaseQuickAdapter<RedbagRecord,BaseViewHolder> {

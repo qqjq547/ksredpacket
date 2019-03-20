@@ -33,7 +33,43 @@ public class RedbagRecord {
     private double totalMoney;
     private String userAccountUuid;
     private String redPacketType;
+    private String password;
+    private int quantity;
+    private double money;
+    private String surveyId;
     private List<PictureListBean> pictureList;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public double getMoney() {
+        return money;
+    }
+
+    public void setMoney(double money) {
+        this.money = money;
+    }
+
+    public String getSurveyId() {
+        return surveyId;
+    }
+
+    public void setSurveyId(String surveyId) {
+        this.surveyId = surveyId;
+    }
 
     public String getAvatar() {
         return avatar;

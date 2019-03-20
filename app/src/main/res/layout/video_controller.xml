@@ -70,7 +70,7 @@
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="爱你的原因"
+        android:text=""
         android:textColor="#fff"
         android:textSize="14sp"
         android:layout_margin="10dp"/>

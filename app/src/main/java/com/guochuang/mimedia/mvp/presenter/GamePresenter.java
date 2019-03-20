@@ -4,22 +4,21 @@ import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
-import com.guochuang.mimedia.mvp.model.LookSurveyResult;
-import com.guochuang.mimedia.mvp.model.LuckyResult;
-import com.guochuang.mimedia.mvp.view.LookView;
-import com.guochuang.mimedia.mvp.view.LuckyView;
+import com.guochuang.mimedia.mvp.view.GameView;
+import com.guochuang.mimedia.mvp.model.JxwUserInfoUrl;
 import com.guochuang.mimedia.tools.RxUtil;
 
-public class LookSurveyPresenter extends BasePresenter<LookView> {
-    public LookSurveyPresenter(LookView view) {
+public class GamePresenter extends BasePresenter<GameView> {
+
+    public GamePresenter(GameView view) {
         attachView(view);
     }
 
-
-    public void getProblems() {
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getProblems()), new ApiCallback<LookSurveyResult>() {
+    public void getJxwUserInfoUrl(String deviceCode,String from){
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
+                getJxwUserInfoUrl(deviceCode,from)), new ApiCallback<JxwUserInfoUrl>() {
             @Override
-            public void onSuccess(LookSurveyResult data) {
+            public void onSuccess(JxwUserInfoUrl data) {
                 mvpView.setData(data);
             }
 
@@ -33,10 +32,5 @@ public class LookSurveyPresenter extends BasePresenter<LookView> {
 
             }
         });
-
-
     }
-
-
-
 }

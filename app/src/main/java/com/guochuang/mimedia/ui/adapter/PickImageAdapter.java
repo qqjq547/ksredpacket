@@ -1,5 +1,8 @@
 package com.guochuang.mimedia.ui.adapter;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -13,6 +16,7 @@ import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 
 public class PickImageAdapter extends BaseQuickAdapter<String,BaseViewHolder> {
@@ -28,7 +32,7 @@ public class PickImageAdapter extends BaseQuickAdapter<String,BaseViewHolder> {
         if(TextUtils.isEmpty(item)){
             if(Constant.RED_PACKET_TYPE_VIDEO.equals(mType)) {
                 //视频添加图标
-                ivPicture.setImageResource(R.drawable.ic_add_pic);
+                ivPicture.setImageResource(R.drawable.ic_add_video);
             }else {
                 ivPicture.setImageResource(R.drawable.ic_add_pic);
             }
@@ -39,9 +43,20 @@ public class PickImageAdapter extends BaseQuickAdapter<String,BaseViewHolder> {
             if(Constant.RED_PACKET_TYPE_VIDEO.equals(mType)) {
                 //加载视频 到列表中
 
-                Glide.with(mContext)
-                        .load(Uri.parse("file://" +item))
-                        .into(ivPicture);
+                if(item.startsWith("http")) {
+                    MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+                    //设置数据源为该文件对象指定的绝对路径
+                    mmr.setDataSource(item, new HashMap<String, String>());
+                    //获得视频第一帧的Bitmap对象
+                    Bitmap bitmap = mmr.getFrameAtTime();
+                    ivPicture.setImageBitmap(bitmap);
+
+                }else {
+                    Glide.with(mContext)
+                            .load(Uri.parse("file://" +item))
+                            .into(ivPicture);
+                }
+
 
             }else {
                 if (item.startsWith("http")){

@@ -19,12 +19,15 @@ import com.guochuang.mimedia.mvp.model.IncomeStatistics;
 import com.guochuang.mimedia.mvp.model.DictionaryType;
 import com.guochuang.mimedia.mvp.model.InfoItem;
 import com.guochuang.mimedia.mvp.model.InviterUser;
+import com.guochuang.mimedia.mvp.model.JxwUserInfoUrl;
 import com.guochuang.mimedia.mvp.model.KsbRecord;
 import com.guochuang.mimedia.mvp.model.KsbTransfer;
 import com.guochuang.mimedia.mvp.model.KsbTrend;
 import com.guochuang.mimedia.mvp.model.CurrentRegion;
 import com.guochuang.mimedia.mvp.model.CityBidHall;
-import com.guochuang.mimedia.mvp.model.LookSurveyResult;
+import com.guochuang.mimedia.mvp.model.LookSurevyResult;
+import com.guochuang.mimedia.mvp.model.LookVideoResult;
+import com.guochuang.mimedia.mvp.model.LookVideoPBResult;
 import com.guochuang.mimedia.mvp.model.LuckyConfig;
 import com.guochuang.mimedia.mvp.model.LuckyResult;
 import com.guochuang.mimedia.mvp.model.MegviiSerach;
@@ -47,6 +50,7 @@ import com.guochuang.mimedia.mvp.model.NestHistory;
 import com.guochuang.mimedia.mvp.model.NestHomeAd;
 import com.guochuang.mimedia.mvp.model.NestInfoLimit;
 import com.guochuang.mimedia.mvp.model.NestLocation;
+import com.guochuang.mimedia.mvp.model.NestRandomAd;
 import com.guochuang.mimedia.mvp.model.NestStatistics;
 import com.guochuang.mimedia.mvp.model.NestTemplate;
 import com.guochuang.mimedia.mvp.model.NestTimeInfo;
@@ -61,7 +65,6 @@ import com.guochuang.mimedia.mvp.model.RecommendDetail;
 import com.guochuang.mimedia.mvp.model.RedbagBenefit;
 import com.guochuang.mimedia.mvp.model.RedbagInfo;
 import com.guochuang.mimedia.mvp.model.RedbagReceived;
-import com.guochuang.mimedia.mvp.model.RedbagRecord;
 import com.guochuang.mimedia.mvp.model.BindingPhone;
 import com.guochuang.mimedia.mvp.model.Captcha;
 import com.guochuang.mimedia.mvp.model.CardList;
@@ -70,6 +73,7 @@ import com.guochuang.mimedia.mvp.model.FavoriteAndPraise;
 import com.guochuang.mimedia.mvp.model.InfoDetail;
 import com.guochuang.mimedia.mvp.model.RedPacketReply;
 import com.guochuang.mimedia.mvp.model.RedbagDetail;
+import com.guochuang.mimedia.mvp.model.RedbagRecord;
 import com.guochuang.mimedia.mvp.model.RedbagTemp;
 import com.guochuang.mimedia.mvp.model.RedbagUser;
 import com.guochuang.mimedia.mvp.model.RegionCore;
@@ -258,6 +262,14 @@ public interface ApiStore {
             @Field("longitude") String longitude,
             @Field("redPacketUuid") String redPacketUuid,
             @Field("password") String password
+    );
+
+    @FormUrlEncoded
+    @POST("/api/v1/redpacket/red_packet_pool/open_survey")
+    Observable<HttpResponse<RedbagDetail>> redPacketPoolOpenSurvey(
+            @Field("latitude") String latitude,
+            @Field("longitude") String longitude,
+            @Field("redPacketUuid") String redPacketUuid
     );
 
     //发随机红包
@@ -728,13 +740,13 @@ public interface ApiStore {
     @GET("/api/v1/common/region/get_two")
     Observable<HttpResponse<List<Area>>> getRegion();
 
-    @GET("/api/v1/redpacket/red_packet_template/get")
+    @GET("/api/v1/redpacket/red_packet_survey_template/get")
     Observable<HttpResponse<List<RedbagTemp>>> getTemplate(
             @Query("redPacketType") String redPacketType
     );
 
     @FormUrlEncoded
-    @POST("/api/v1/redpacket/red_packet_template/delete")
+    @POST("/api/v1/redpacket/red_packet_survey_template/delete")
     Observable<HttpResponse<Boolean>> deleteTemplate(
             @Field("templateId") long templateId
     );
@@ -1259,6 +1271,7 @@ public interface ApiStore {
             @Field("locationLongitude") String locationLongitude
 
     );
+
     @GET("/api/v1/order/order/get_pay_type")
     Observable<HttpResponse<PayConfig>> getPayType(
             @Query("bizType") String bizType);
@@ -1270,7 +1283,6 @@ public interface ApiStore {
     Observable<HttpResponse<Boolean>> getIsQualified(
             @Query("latitude") String latitude,
             @Query("longitude") String longitude);
-
 
 
     @FormUrlEncoded
@@ -1295,9 +1307,9 @@ public interface ApiStore {
             @Field("payType") int payType,
             @Field("channelCode") String channelCode,
             @Field("safetyCode") String safetyCode,
-
             @Field("surveyType") int surveyType,
-            @Field("addJsonList") String addJsonList
+            @Field("addJsonList") String addJsonList,
+            @Field("coverUrl") String coverUrl
 
 
     );
@@ -1325,13 +1337,62 @@ public interface ApiStore {
             @Field("payType") int payType,
             @Field("channelCode") String channelCode,
             @Field("safetyCode") String safetyCode,
-
             @Field("surveyType") int surveyType,
             @Field("addJsonList") String addJsonList
 
 
     );
 
-    @GET("/api/v1/survey/v2/survey/get")
-    Observable<HttpResponse<LookSurveyResult>> getProblems();
+    @GET("/api/v1/survey/survey/get_detail")
+    Observable<HttpResponse<LookVideoResult>> getProblems(
+            @Query("surveyId") long surveyId,
+            @Query("redPacketUuid") String redPacketUuid);
+
+    @GET("/api/v1/survey/survey/get_statistics")
+    Observable<HttpResponse<LookSurevyResult>> getVideoProblemAnswerList(
+            @Query("surveyId") long surveyId,
+            @Query("redPacketUuid") String redPacketUuid);
+
+    @GET("/api/v1/nest/nest_location/get_random_spot")
+    Observable<HttpResponse<NestRandomAd>> getRandomSpot(
+                    @Query("latitude") String latitude,
+                    @Query("longitude") String longitude);
+
+    @GET("/api/v1/activity/jxwAccount/addStatistics")
+    Observable<HttpResponse<Boolean>> addStatistics(
+            @Query("utoken") String utoken,
+            @Query("deviceCode") String deviceCode,
+            @Query("deviceFrom") String deviceFrom,
+            @Query("jumpUrl") String jumpUrl);
+
+    @GET("/api/v1/activity/jxwAccount/getJxwUserInfoUrl")
+    Observable<HttpResponse<JxwUserInfoUrl>> getJxwUserInfoUrl(
+            @Query("deviceCode") String deviceCode,
+            @Query("from") String from);
+
+    @GET("/api/v1/redpacket/red_packet_pool/get_remain")
+    Observable<HttpResponse<Integer>> getRemain(
+            @Query("redPacketUuid") String redPacketUuid);
+
+    @FormUrlEncoded
+    @POST("/api/v1/survey/question/survey_submit")
+    Observable<HttpResponse<RedbagDetail>> surveySubmit(
+            @Field("channelCode") String channelCode,
+            @Field("clientIp") String clientIp,
+            @Field("userAccountId") long userAccountId,
+            @Field("redPacketUuid") String redPacketUuid,
+            @Field("latitude") String latitude,
+            @Field("longitude") String longitude,
+            @Field("submitJson") String submitJson);
+
+    @FormUrlEncoded
+    @POST("/api/v1/survey/question/video_submit")
+    Observable<HttpResponse<RedbagDetail>> videoSubmit(
+            @Field("channelCode") String channelCode,
+            @Field("clientIp") String clientIp,
+            @Field("userAccountId") long userAccountId,
+            @Field("redPacketUuid") String redPacketUuid,
+            @Field("latitude") String latitude,
+            @Field("longitude") String longitude,
+            @Field("submitJson") String submitJson);
 }
