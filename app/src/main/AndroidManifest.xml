@@ -109,6 +109,7 @@
         <activity android:name="com.guochuang.mimedia.ui.activity.beenest.AdBidActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.beenest.MyBidActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.common.JuxiangwanActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.user.MyPayCodeActivity" />
 
         <activity
             android:name="com.guochuang.mimedia.ui.activity.redbag.LuckyActivity"

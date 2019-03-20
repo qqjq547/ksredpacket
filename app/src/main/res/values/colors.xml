@@ -78,5 +78,7 @@
     <color name="btn_cancel_color">#999999</color>
     <color name="btn_confirm_color">#303F9F</color>
     <color name="scan_bg">#7f000000</color>
+    <color name="bg_pay_code">#f45e4d</color>
+    <color name="text_pay_code">#f45e4d</color>
 
 </resources>

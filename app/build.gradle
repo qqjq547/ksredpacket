@@ -91,4 +91,5 @@ dependencies {
     implementation 'com.gyf.immersionbar:immersionbar:2.3.3-beta09'
     implementation(name: 'idcard_ocr', ext: 'aar')
     implementation project(path: ':hellocharts-library')
+    implementation 'cn.yipianfengye.android:zxing-library:2.2'
 }

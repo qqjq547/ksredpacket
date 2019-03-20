@@ -107,6 +107,16 @@ public class GameFragment extends MvpFragment<GamePresenter> implements GameView
             });
         }
         @JavascriptInterface
+        public void goTrialHall() {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    showLoadingDialog(null);
+                    mvpPresenter.getJxwUserInfoUrl(SystemUtil.getDeviceId(),Constant.JXW_FROM);
+                }
+            });
+        }
+        @JavascriptInterface
         public void openWin(final String openUrl){
             getActivity().runOnUiThread(new Runnable() {
                 @Override
