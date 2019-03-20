@@ -90,6 +90,5 @@ dependencies {
     implementation 'com.allenliu.versionchecklib:library:2.1.5'
     implementation 'com.gyf.immersionbar:immersionbar:2.3.3-beta09'
     implementation(name: 'idcard_ocr', ext: 'aar')
-    implementation 'com.googlecode.android-query:android-query:0.25.9'
     implementation project(path: ':hellocharts-library')
 }
