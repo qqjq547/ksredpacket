@@ -38,7 +38,7 @@ public class AnswerAdapter extends BaseQuickAdapter<LookVideoResult.QuestionList
                 for (int i=0;i<optionArr.size();i++){
                     LookVideoResult.QuestionListBean.OptionsListBean bean=optionArr.get(i);
                     RadioButton rbtn=((RadioButton)group.getChildAt(i));
-                    rbtn.setText(bean.getOptionName()+bean.getOptionValue());
+                    rbtn.setText(bean.getOptionName()+"."+bean.getOptionValue());
                     rbtn.setVisibility(View.VISIBLE);
                 }
                 group.setOnCheckedChangeListener(new OnCheckListener(helper.getAdapterPosition()));
@@ -57,7 +57,7 @@ public class AnswerAdapter extends BaseQuickAdapter<LookVideoResult.QuestionList
                 List<LookVideoResult.QuestionListBean.OptionsListBean> optionArr1=item.getOptionsList();
                 for (int i=0;i<optionArr1.size();i++){
                     LookVideoResult.QuestionListBean.OptionsListBean bean=optionArr1.get(i);
-                    checkBoxList.get(i).setText(bean.getOptionName()+bean.getOptionValue());
+                    checkBoxList.get(i).setText(bean.getOptionName()+"."+bean.getOptionValue());
                     checkBoxList.get(i).setVisibility(View.VISIBLE);
                     checkBoxList.get(i).setOnCheckedChangeListener(listener);
                 }
@@ -144,14 +144,21 @@ public class AnswerAdapter extends BaseQuickAdapter<LookVideoResult.QuestionList
         @Override
         public void afterTextChanged(Editable editable) {
             List<LookVideoResult.QuestionListBean.OptionsListBean> optionArr=getData().get(positon).getOptionsList();
+            if (optionArr==null||optionArr.size()==0){
+                optionArr=new ArrayList<>();
+                optionArr.add(new LookVideoResult.QuestionListBean.OptionsListBean());
+            }
             String content=editable.toString().trim();
             if (TextUtils.isEmpty(content)){
                 optionArr.get(0).setSelect(false);
+                optionArr.get(0).setOptionName("");
                 optionArr.get(0).setOptionValue("");
             }else {
                 optionArr.get(0).setSelect(true);
+                optionArr.get(0).setOptionName("");
                 optionArr.get(0).setOptionValue(content);
             }
+            getData().get(positon).setOptionsList(optionArr);
         }
     }
 }

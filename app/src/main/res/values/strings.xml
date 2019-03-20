@@ -718,5 +718,10 @@
     <string name="tip_upload_video">上传视频</string>
     <string name="set_problem_number">已设置%s道题</string>
     <string name="this_redbag_has_robe">该红包已被抢完</string>
+    <string name="has_not_answer">您还有未回答的题目</string>
+    <string name="cannot_get_question">无法获取题目信息</string>
+    <string name="redbag_has_robe">红包已抢完</string>
+    <string name="answer_success_open_redbag">答题成功，开启红包</string>
+
 
 </resources>

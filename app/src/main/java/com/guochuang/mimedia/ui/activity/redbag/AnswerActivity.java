@@ -10,14 +10,19 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.baidu.mapapi.NetworkUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.LookVideoResult;
 import com.guochuang.mimedia.mvp.model.RedbagDetail;
 import com.guochuang.mimedia.mvp.presenter.AnswerPresenter;
 import com.guochuang.mimedia.mvp.view.AnswerView;
+import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
+import com.guochuang.mimedia.tools.NetWorkUtils;
+import com.guochuang.mimedia.tools.SystemUtil;
 import com.guochuang.mimedia.ui.adapter.AddressAdapter;
 import com.guochuang.mimedia.ui.adapter.AnswerAdapter;
 import com.sz.gcyh.KSHongBao.R;
@@ -49,6 +54,7 @@ public class AnswerActivity extends MvpActivity<AnswerPresenter> implements Answ
     AnswerAdapter adapter;
     String redPacketUuid="";
     long surveyId=0;
+    String redPacketType;
     JSONArray jsonArray;
 
 
@@ -67,6 +73,7 @@ public class AnswerActivity extends MvpActivity<AnswerPresenter> implements Answ
         tvTitle.setText(R.string.video_redbag);
         redPacketUuid=getIntent().getStringExtra(Constant.RED_PACKET_UUID);
         surveyId=getIntent().getLongExtra(Constant.SURVEYID,0);
+        redPacketType=getIntent().getStringExtra(Constant.RED_PACKET_TYPE);
         rvAnswer.setLayoutManager(new LinearLayoutManager(this,OrientationHelper.VERTICAL,false));
         adapter=new AnswerAdapter(dataArr);
         adapter.setEmptyView(getLayoutInflater().inflate(R.layout.layout_empty,null));
@@ -74,7 +81,7 @@ public class AnswerActivity extends MvpActivity<AnswerPresenter> implements Answ
         rvAnswer.setAdapter(adapter);
         showLoadingDialog(null);
         mvpPresenter.getRemain(redPacketUuid);
-        mvpPresenter.getProblems(surveyId,redPacketUuid);
+
     }
 
     @OnClick({R.id.iv_back, R.id.btn_open})
@@ -90,12 +97,23 @@ public class AnswerActivity extends MvpActivity<AnswerPresenter> implements Answ
                     for (LookVideoResult.QuestionListBean listBean:dataArr){
                         List<String> optName=new ArrayList<>();
                         List<String> optValue=new ArrayList<>();
-                         for (LookVideoResult.QuestionListBean.OptionsListBean bean:listBean.getOptionsList()){
+                        if (listBean.getType()==2){//填空题
+                            if (listBean.getOptionsList()!=null&&listBean.getOptionsList().size()>0){
+                                LookVideoResult.QuestionListBean.OptionsListBean bean= listBean.getOptionsList().get(0);
                                 if (bean.isSelect()){
                                     optName.add(bean.getOptionName());
                                     optValue.add(bean.getOptionValue());
                                 }
                             }
+                        }else {
+                            for (LookVideoResult.QuestionListBean.OptionsListBean bean:listBean.getOptionsList()){
+                                if (bean.isSelect()){
+                                    optName.add(bean.getOptionName());
+                                    optValue.add(bean.getOptionValue());
+                                }
+                            }
+                        }
+
                         if (optName.size()>0) {
                             try {
                                 jsonObject.put("sourceId", redPacketUuid);
@@ -107,13 +125,36 @@ public class AnswerActivity extends MvpActivity<AnswerPresenter> implements Answ
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
+                            showLoadingDialog(null);
+                            if (TextUtils.equals(redPacketType,Constant.RED_PACKET_TYPE_VIDEO)){
+                                mvpPresenter.videoSubmit(
+                                        Constant.CHANNEL_CODE_ANDROID,
+                                        NetWorkUtils.getIp(this),
+                                        App.getInstance().getUserInfo().getUserAccountId(),
+                                        redPacketUuid,
+                                        getPref().getLatitude(),
+                                        getPref().getLongitude(),
+                                        jsonArray.toString()
+                                );
+                            }else {
+                                mvpPresenter.surveySubmit(
+                                        Constant.CHANNEL_CODE_ANDROID,
+                                        NetWorkUtils.getIp(this),
+                                        App.getInstance().getUserInfo().getUserAccountId(),
+                                        redPacketUuid,
+                                        getPref().getLatitude(),
+                                        getPref().getLongitude(),
+                                        jsonArray.toString()
+                                );
+                            }
+
                         }else {
-                             showShortToast("请先完善答案");
+                             showShortToast(R.string.has_not_answer);
                              return;
                         }
                         }
                     }else {
-                    showShortToast("无法获取问题");
+                    showShortToast(R.string.cannot_get_question);
                 }
                 break;
         }
@@ -125,8 +166,11 @@ public class AnswerActivity extends MvpActivity<AnswerPresenter> implements Answ
             int remain=data.intValue();
             if (remain>0){
                 showLoadingDialog(null);
+                mvpPresenter.getProblems(surveyId,redPacketUuid);
             }else {
+                closeLoadingDialog();
                 tvNotice.setVisibility(View.VISIBLE);
+                showShortToast(R.string.redbag_has_robe);
             }
 
         }
@@ -143,7 +187,10 @@ public class AnswerActivity extends MvpActivity<AnswerPresenter> implements Answ
 
     @Override
     public void setRedbagDetail(RedbagDetail data) {
-
+       closeLoadingDialog();
+       if (data!=null){
+           showShortToast(R.string.answer_success_open_redbag);
+       }
     }
 
     @Override
