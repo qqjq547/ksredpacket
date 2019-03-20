@@ -107,7 +107,7 @@ public class RedbagPresenter extends BasePresenter<RedbagView> {
             }
         });
     }
-    public void redPacketPoolOpen(String latitude,String longitude,String redPacketUuid){
+    public void redPacketPoolOpenSurvey(String latitude,String longitude,String redPacketUuid){
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().redPacketPoolOpenSurvey(latitude,longitude,redPacketUuid)), new ApiCallback<RedbagDetail>() {
             @Override
             public void onSuccess(RedbagDetail data) {

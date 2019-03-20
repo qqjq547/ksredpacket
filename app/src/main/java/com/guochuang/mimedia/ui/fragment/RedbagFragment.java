@@ -68,6 +68,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import rx.functions.Action1;
+import rx.internal.operators.CompletableOnSubscribeConcat;
 
 public class RedbagFragment extends MvpFragment<RedbagPresenter> implements RedbagView {
 
@@ -193,7 +194,11 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                                     if (redbag.getRoleType().equals(Constant.ROLETYPE_SYSTEM)) {
                                         mvpPresenter.redPacketOpen(getPref().getLatitude(), getPref().getLongitude(), redbag.getUuid());
                                     } else {
-                                        mvpPresenter.redPacketPoolOpen(getPref().getLatitude(), getPref().getLongitude(), redbag.getUuid(), password);
+                                        if (redbag.getType().equals(Constant.RED_PACKET_TYPE_VIDEO)||redbag.getType().equals(Constant.RED_PACKET_TYPE_SURVEY)){
+                                            mvpPresenter.redPacketPoolOpenSurvey(getPref().getLatitude(), getPref().getLongitude(), redbag.getUuid());
+                                        }else {
+                                            mvpPresenter.redPacketPoolOpen(getPref().getLatitude(), getPref().getLongitude(), redbag.getUuid(), password);
+                                        }
                                     }
 
                                 }

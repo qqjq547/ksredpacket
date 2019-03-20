@@ -39,6 +39,9 @@ public class RedbagDetail implements Serializable {
     private String urlName;
     private String wechat;
     private int quantity;
+    private String coverUrl;
+    private String videoUrl;
+    private long surveyId;
     private List<String> drawAvatar;
     private List<PictureBean> picture;
     private List<RedbagAd> systemAd;
@@ -153,6 +156,30 @@ public class RedbagDetail implements Serializable {
 
     public void setWechat(String wechat) {
         this.wechat = wechat;
+    }
+
+    public String getCoverUrl() {
+        return coverUrl;
+    }
+
+    public void setCoverUrl(String coverUrl) {
+        this.coverUrl = coverUrl;
+    }
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
+
+    public long getSurveyId() {
+        return surveyId;
+    }
+
+    public void setSurveyId(long surveyId) {
+        this.surveyId = surveyId;
     }
 
     public List<String> getDrawAvatar() {

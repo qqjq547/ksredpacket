@@ -1337,7 +1337,6 @@ public interface ApiStore {
             @Field("payType") int payType,
             @Field("channelCode") String channelCode,
             @Field("safetyCode") String safetyCode,
-
             @Field("surveyType") int surveyType,
             @Field("addJsonList") String addJsonList
 
@@ -1371,12 +1370,12 @@ public interface ApiStore {
             @Query("deviceCode") String deviceCode,
             @Query("from") String from);
 
-    @GET("/api/v1/redpacket/red_packet_pool/getRemain")
+    @GET("/api/v1/redpacket/red_packet_pool/get_remain")
     Observable<HttpResponse<Integer>> getRemain(
             @Query("redPacketUuid") String redPacketUuid);
 
     @FormUrlEncoded
-    @POST("/api/v1/survey/survey/survey_submit")
+    @POST("/api/v1/survey/question/survey_submit")
     Observable<HttpResponse<RedbagDetail>> surveySubmit(
             @Field("channelCode") String channelCode,
             @Field("clientIp") String clientIp,
@@ -1387,7 +1386,7 @@ public interface ApiStore {
             @Field("submitJson") String submitJson);
 
     @FormUrlEncoded
-    @POST("/api/v1/survey/survey/video_submit")
+    @POST("/api/v1/survey/question/video_submit")
     Observable<HttpResponse<RedbagDetail>> videoSubmit(
             @Field("channelCode") String channelCode,
             @Field("clientIp") String clientIp,

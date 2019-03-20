@@ -351,7 +351,7 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                 onBackPressed();
                 break;
             case R.id.rl_red_packet_details_header:
-                if (redbagDetail != null &&TextUtils.equals(redPacketType,Constant.ROLETYPE_PERSON)) {
+                if (redbagDetail != null ) {
                     if (ivBack.getVisibility() == View.VISIBLE && ivJoinedArrow.getVisibility() == View.VISIBLE) {
                         IntentUtils.startRedbagJoinedActivity(this, redPacketUuid, redbagDetail.getAvatar(), redbagDetail.getNickName(), redbagDetail.getCoin(), redbagDetail.getMoney(), redbagDetail.getAreaType(), redbagDetail.getDrawNumber(), String.valueOf(redbagDetail.getQuantity()));
                     }
@@ -434,11 +434,15 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                 }
                 break;
             case R.id.btn_open_packet:
-                startActivity(new Intent(this,AnswerActivity.class));
+                if (redbagDetail != null) {
+                    startActivity(new Intent(this, AnswerActivity.class)
+                            .putExtra(Constant.RED_PACKET_UUID, redPacketUuid)
+                            .putExtra(Constant.SURVEYID, redbagDetail.getSurveyId())
+                            .putExtra(Constant.RED_PACKET_TYPE, redPacketType));
+                }
                 break;
             case R.id.iv_video_prev:
-//                IntentUtils.startVideoPreviewActivity(this,redbagDetail.get);
-//                startActivity(new Intent(this,VideoPreviewActivity.class).putExtra(Constant.URL,""));
+                IntentUtils.startVideoPreviewActivity(this,redbagDetail.getVideoUrl());
                 break;
 
         }
@@ -564,15 +568,16 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                     tvRedbagTip.setVisibility(View.GONE);
                     linVideoHead.setVisibility(View.VISIBLE);
                     btnOpenPacket.setText(R.string.watched_video_open_redbag);
-                    tvMoney.setText(String.format(getString(R.string.format_add_yuan), redbagDetail.getMoney()));
-                    tvMoney.setVisibility(View.VISIBLE);
+                    tvWillGetKsb.setText(String.format(getString(R.string.format_ksb), redbagDetail.getCoin()));
+                    ivVideoPrev.setVisibility(View.VISIBLE);
+                    GlideImgManager.loadImage(this,redbagDetail.getCoverUrl(),ivVideoPrev);
                 }else if(redPacketType.equals(Constant.RED_PACKET_TYPE_SURVEY)){
                     rlValue.setVisibility(View.GONE);
                     tvRedbagTip.setVisibility(View.GONE);
                     linVideoHead.setVisibility(View.VISIBLE);
                     btnOpenPacket.setText(R.string.answer_open_redbag);
-                    tvMoney.setText(String.format(getString(R.string.format_add_yuan), redbagDetail.getMoney()));
-                    tvMoney.setVisibility(View.VISIBLE);
+                    tvWillGetKsb.setText(String.format(getString(R.string.format_ksb), redbagDetail.getCoin()));
+
                 }else {
                     startAnim();
                 }
@@ -642,19 +647,8 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                 }
 
                 if (redPacketType.equals(Constant.RED_PACKET_TYPE_VIDEO)){
-                    rlValue.setVisibility(View.GONE);
-                    tvRedbagTip.setVisibility(View.GONE);
-                    linVideoHead.setVisibility(View.VISIBLE);
-                    btnOpenPacket.setText(R.string.watched_video_open_redbag);
-                    tvMoney.setText(String.format(getString(R.string.format_add_yuan), redbagDetail.getMoney()));
-                    tvMoney.setVisibility(View.VISIBLE);
-                }else if(redPacketType.equals(Constant.RED_PACKET_TYPE_SURVEY)){
-                    rlValue.setVisibility(View.GONE);
-                    tvRedbagTip.setVisibility(View.GONE);
-                    linVideoHead.setVisibility(View.VISIBLE);
-                    btnOpenPacket.setText(R.string.answer_open_redbag);
-                    tvMoney.setText(String.format(getString(R.string.format_add_yuan), redbagDetail.getMoney()));
-                    tvMoney.setVisibility(View.VISIBLE);
+                    ivVideoPrev.setVisibility(View.VISIBLE);
+                    GlideImgManager.loadImage(this,redbagDetail.getCoverUrl(),ivVideoPrev);
                 }
             }
         }
