@@ -130,15 +130,15 @@ public class MyKsbActivity extends MvpActivity<MyksbPresenter> implements MyksbV
                 }
                 break;
             case R.id.btn_transfer:
-                if (getPref().getInt(PrefUtil.IDENTITY,0)==0) {
-                    showShortToast(R.string.pls_identity_first);
-                    startActivityForResult(new Intent(this, IdentifyActivity.class), Constant.REFRESH);
-                }else if(getPref().getInt(PrefUtil.SAFECODE,0)==0){
-                    showShortToast(R.string.pls_safecode_first);
-                    startActivityForResult(new Intent(this, TradePwdActivity.class), Constant.REFRESH);
-                }else {
+//                if (getPref().getInt(PrefUtil.IDENTITY,0)==0) {
+//                    showShortToast(R.string.pls_identity_first);
+//                    startActivityForResult(new Intent(this, IdentifyActivity.class), Constant.REFRESH);
+//                }else if(getPref().getInt(PrefUtil.SAFECODE,0)==0){
+//                    showShortToast(R.string.pls_safecode_first);
+//                    startActivityForResult(new Intent(this, TradePwdActivity.class), Constant.REFRESH);
+//                }else {
                     startActivityForResult(new Intent(this, MyKsbGrantActivity.class),Constant.REQUEST_GRANT);
-                }
+//                }
                 break;
             case R.id.tv_copy:
                 String address=tvAddress.getText().toString();

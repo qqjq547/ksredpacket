@@ -702,6 +702,7 @@
     <string name="pay_code_record">收款记录</string>
     <string name="pay_code_tip">该二维码仅支持KSB方式收款</string>
     <string name="identity_can_show_paycode">实名后领取收款码</string>
+    <string name="equivalence">等值</string>
 
 
 </resources>

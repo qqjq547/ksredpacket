@@ -52,6 +52,33 @@
             </LinearLayout>
         </RelativeLayout>
 
+        <View style="@style/bottom_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="29dp"
+            android:paddingBottom="@dimen/space16"
+            android:paddingLeft="@dimen/space16"
+            android:paddingTop="@dimen/space16"
+            android:background="@color/bg_white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/equivalence"/>
+
+            <TextView
+                android:id="@+id/tv_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0 元"/>
+
+        </LinearLayout>
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,8 +86,8 @@
             android:background="@color/bg_white"
             android:orientation="vertical"
             android:paddingLeft="@dimen/space15"
-            android:paddingRight="@dimen/space15"
-            android:paddingTop="@dimen/space15">
+            android:paddingTop="@dimen/space15"
+            android:paddingRight="@dimen/space15">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -78,8 +105,8 @@
                 android:gravity="center_vertical"
                 android:hint="@string/my_ksb_grant_your_hint"
                 android:maxLines="1"
-                android:paddingBottom="@dimen/space10"
                 android:paddingTop="@dimen/space10"
+                android:paddingBottom="@dimen/space10"
                 android:textColorHint="@color/text_gray"
                 android:textSize="@dimen/textfont12" />
 
@@ -118,20 +145,81 @@
                     android:inputType="numberDecimal"
                     android:maxLength="20"
                     android:maxLines="1"
-                    android:paddingBottom="@dimen/space10"
                     android:paddingTop="@dimen/space10"
+                    android:paddingBottom="@dimen/space10"
                     android:textColorHint="@color/text_gray"
                     android:textSize="@dimen/textfont16" />
+
             </LinearLayout>
+
+
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/space15"
+            android:paddingLeft="@dimen/space15"
+            android:background="@color/bg_white"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/sp_12">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/sp_12"
+                android:text="等值"/>
+
+            <View style="@style/bottom_line"
+                android:layout_marginLeft="@dimen/space15"/>
+
+        </LinearLayout>
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="38dp"
+            android:paddingBottom="@dimen/space20"
+            android:background="@color/bg_white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_yuan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="21sp"
+                android:text="￥"/>
+
+
+
+            <EditText
+                android:id="@+id/et_iput_money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/space7"
+                android:textSize="@dimen/sp_12"
+                android:layout_marginBottom="5dp"
+                android:background="@null"
+                android:layout_toRightOf="@+id/tv_yuan"
+                android:layout_alignBottom="@+id/tv_yuan"
+                android:inputType="numberDecimal"
+                android:hint="请输入转赠数"/>
+
+
+
+        </RelativeLayout>
+
+
 
         <TextView
             android:id="@+id/tv_confirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/space15"
-            android:layout_marginRight="@dimen/space15"
             android:layout_marginTop="@dimen/space50"
+            android:layout_marginRight="@dimen/space15"
             android:background="@drawable/bg_btn_red"
             android:gravity="center"
             android:padding="@dimen/space15"

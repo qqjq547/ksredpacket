@@ -2,6 +2,7 @@ package com.guochuang.mimedia.ui.activity.user;
 
 import android.content.Intent;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
@@ -21,6 +22,16 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class MyKsbGrantActivity extends MvpActivity<MyKsbGrantPresenter> implements MyKsbGrantView {
+    enum ChangeTextView {
+        ETIPUTMONEY,
+
+        ETGRANTNUM
+    }
+
+
+    ChangeTextView currentChange;
+
+
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.tv_title)
@@ -29,15 +40,165 @@ public class MyKsbGrantActivity extends MvpActivity<MyKsbGrantPresenter> impleme
     TextView tvText;
     @BindView(R.id.tv_grant_ksb_num)
     TextView tvGrantKsbNum;
+
+    @BindView(R.id.tv_money)
+    TextView tvMoney;
+    @BindView(R.id.et_iput_money)
+    EditText etIputMoney;
+
+
     @BindView(R.id.et_grant_your)
     EditText etGrantYour;
     @BindView(R.id.et_grant_num)
     EditText etGrantNum;
+
     @BindView(R.id.tv_confirm)
     TextView tvConfirm;
 
     PassDialog passDialog;
     MyKsb myKsb;
+    private double mRate;
+
+
+    TextWatcher mInputTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if (currentChange == ChangeTextView.ETGRANTNUM) return;
+
+            try {
+                //金钱改变了
+                if (TextUtils.isEmpty(s.toString().trim())) {
+                    etGrantNum.setText("");
+                } else {
+
+                    int index = s.toString().trim().indexOf(".");
+                    if (index != -1) {
+                        if (s.toString().trim().length() - index > 3) {
+                            s = s.toString().trim().substring(0, index + 3);
+                            etIputMoney.setText(s);
+                        }
+                    }
+
+
+                    if (s.toString().trim().startsWith(".")) {
+                        etIputMoney.setText("0.");
+                    }
+                    //计算ksb
+                    double aDouble = Double.valueOf(s.toString().trim());
+
+                    etGrantNum.setText(RMB2Ksb(aDouble, mRate));
+
+                    if (TextUtils.isEmpty(s)) {
+                        return;
+                    }
+                    if (myKsb == null) {
+                        return;
+                    }
+                    if (Double.parseDouble(s.toString()) > Double.parseDouble(myKsb.getMoney())) {
+                        etGrantNum.setText(String.valueOf(myKsb.getCoin()));
+                        etIputMoney.setText(myKsb.getMoney());
+                        etIputMoney.setSelection(myKsb.getMoney().length());
+                        return;
+                    }
+
+                    if (Double.parseDouble(s.toString()) == Double.parseDouble(myKsb.getMoney())) {
+                        etGrantNum.setText(String.valueOf(myKsb.getCoin()));
+                    }
+
+
+                }
+
+
+            } catch (Exception e) {
+
+            }
+
+            etIputMoney.setSelection(s.toString().length());
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            if (currentChange == ChangeTextView.ETGRANTNUM) return;
+
+
+        }
+    };
+
+
+    TextWatcher etGrantNumTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int i, int i1, int i2) {
+            if (currentChange == ChangeTextView.ETIPUTMONEY) return;
+
+            try {
+                if (TextUtils.isEmpty(s.toString().trim())) {
+                    etIputMoney.setText("");
+                } else {
+
+
+
+
+                    if (s.toString().trim().startsWith(".")) {
+                        etGrantNum.setText("0.");
+                    }
+                    //计算ksb
+                    double aDouble;
+                    try {
+                        aDouble = Double.valueOf(s.toString().trim());
+                    } catch (Exception e) {
+                        return;
+                    }
+
+                    etIputMoney.setText(Ksb2RMB(aDouble, mRate));
+
+
+
+                    if (TextUtils.isEmpty(s)) {
+                        return;
+                    }
+                    if (myKsb == null) {
+                        return;
+                    }
+                    if (Double.parseDouble(s.toString()) > Double.parseDouble(myKsb.getCoin())) {
+                        etIputMoney.setText(myKsb.getMoney());
+                        etGrantNum.setText(myKsb.getCoin());
+                        etGrantNum.setSelection(myKsb.getCoin().length());
+                        return;
+                    }
+
+                    if(Double.parseDouble(s.toString()) == Double.parseDouble(myKsb.getCoin())) {
+                        etIputMoney.setText(myKsb.getMoney());
+                    }
+
+
+
+                }
+            } catch (Exception e) {
+
+            }
+
+            etGrantNum.setSelection(s.toString().length());
+
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            if (currentChange == ChangeTextView.ETIPUTMONEY) return;
+
+        }
+    };
+
 
     @Override
     protected MyKsbGrantPresenter createPresenter() {
@@ -53,53 +214,72 @@ public class MyKsbGrantActivity extends MvpActivity<MyKsbGrantPresenter> impleme
     public void initViewAndData() {
         tvTitle.setText(getResources().getString(R.string.my_ksb_ksb_grant_title));
         tvText.setText(getResources().getString(R.string.my_ksb_ksb_grant_record));
-        etGrantNum.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            }
-
+        etGrantNum.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//                if (charSequence.toString().contains(".")) {
-//                    if (charSequence.length() - 1 - charSequence.toString().indexOf(".") > 2) {
-//                        charSequence = charSequence.toString().subSequence(0,
-//                                charSequence.toString().indexOf(".") + 3);
-//                        etGrantNum.setText(charSequence);
-//                        etGrantNum.setSelection(charSequence.length());
-//                    }
-//                }
-//                if (charSequence.toString().trim().substring(0).equals(".")) {
-//                    charSequence = "0" + charSequence;
-//                    etGrantNum.setText(charSequence);
-//                    etGrantNum.setSelection(2);
-//                }
-//
-//                if (charSequence.toString().startsWith("0")
-//                        && charSequence.toString().trim().length() > 1) {
-//                    if (!charSequence.toString().substring(1, 2).equals(".")) {
-//                        etGrantNum.setText(charSequence.subSequence(0, 1));
-//                        etGrantNum.setSelection(1);
-//                        return;
-//                    }
-//                }
-            }
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    currentChange = ChangeTextView.ETGRANTNUM;
 
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if (TextUtils.isEmpty(editable)) {
-                    return;
-                }
-                if (myKsb == null) {
-                    return;
-                }
-                if (Double.parseDouble(editable.toString()) > Double.parseDouble(myKsb.getCoin())) {
-                    etGrantNum.setText(String.valueOf(myKsb.getCoin()));
                 }
             }
         });
+
+        etIputMoney.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    currentChange = ChangeTextView.ETIPUTMONEY;
+
+                }
+            }
+        });
+
+
+        etGrantNum.addTextChangedListener(etGrantNumTextWatcher);
+
+
+        etIputMoney.addTextChangedListener(mInputTextWatcher);
+
+
         mvpPresenter.getMyKsb();
     }
+
+    /**
+     * 人民币转化为KSB
+     *
+     * @param rmb
+     * @param rate
+     */
+    private String RMB2Ksb(double rmb, double rate) {
+        String s = String.valueOf(rmb / rate);
+        int index = s.indexOf(".");
+        String substring = s;
+        if (s.length() - index > 4) {
+            substring = s.substring(0, index + 4);
+        }
+
+        return substring;
+    }
+
+    /**
+     * 人民币转化为KSB
+     *
+     * @param ksb
+     * @param rate
+     */
+    private String Ksb2RMB(double ksb, double rate) {
+        String s = String.valueOf(ksb * rate);
+        int index = s.indexOf(".");
+        String substring = s;
+        if (s.length() - index > 2) {
+            substring = s.substring(0, index + 2);
+        }
+
+        return substring;
+
+    }
+
 
     @OnClick({R.id.iv_back, R.id.tv_text, R.id.tv_confirm})
     public void onViewClicked(View view) {
@@ -154,7 +334,7 @@ public class MyKsbGrantActivity extends MvpActivity<MyKsbGrantPresenter> impleme
         closeLoadingDialog();
         showShortToast(getResources().getString(R.string.grant_success));
         sendBroadcast(new Intent(Constant.ACTION_CHANGE_COIN));
-        setResult(RESULT_OK,getIntent());
+        setResult(RESULT_OK, getIntent());
         finish();
     }
 
@@ -168,6 +348,10 @@ public class MyKsbGrantActivity extends MvpActivity<MyKsbGrantPresenter> impleme
     public void setKsbPreiceData(MyKsb data) {
         this.myKsb = data;
         tvGrantKsbNum.setText(String.valueOf(data.getCoin()));
+        String ksbPrice = data.getKsbPrice();
+        mRate = Double.valueOf(ksbPrice);
+        tvMoney.setText(Html.fromHtml(data.getMoney() + "<font color='#ff7519S'>元</font>"));
+
     }
 
     @Override
