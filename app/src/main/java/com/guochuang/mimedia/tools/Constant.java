@@ -96,6 +96,7 @@ public class Constant {
     public static final String DAYS = "days";
     public static final String NESTLATITUDE = "nestLatitude";
     public static final String NESTLONGITUDE = "nestLongitude";
+    public static final String HAS_REFRESH = "hasRefresh";
 
 
 
