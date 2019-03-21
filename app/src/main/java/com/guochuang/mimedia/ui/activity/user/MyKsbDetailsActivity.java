@@ -57,6 +57,7 @@ public class MyKsbDetailsActivity extends MvpActivity<MyKsbDetailsPresenter> imp
     String type="00";
     String defaultIndex="0";
     String startIndex=defaultIndex;
+    long defaultType=0;
 
     @Override
     protected MyKsbDetailsPresenter createPresenter() {
@@ -72,6 +73,7 @@ public class MyKsbDetailsActivity extends MvpActivity<MyKsbDetailsPresenter> imp
     public void initViewAndData() {
         tvTitle.setText(getResources().getString(R.string.my_ksb_details_title));
         tvText.setText(getResources().getString(R.string.all));
+        defaultType=getIntent().getLongExtra(Constant.INCOME_TYPE,0);
         tvNumAll.setText(getPref().getString(PrefUtil.COIN,""));
         if (myKsbDetailsAdapter != null) {
             return;
@@ -165,9 +167,15 @@ public class MyKsbDetailsActivity extends MvpActivity<MyKsbDetailsPresenter> imp
             subjectArr.addAll(data);
             for (int i=0;i<subjectArr.size();i++){
                 subjectName.add(subjectArr.get(i).getName());
+                if (defaultType==subjectArr.get(i).getId()){
+                    type = data.get(i).getCode();
+                    mvpPresenter.getKsbRecord(type, startIndex, Constant.PAGE_SIZE);
+                }
             }
-            type=data.get(0).getCode();
-            mvpPresenter.getKsbRecord(type,startIndex,Constant.PAGE_SIZE);
+            if (defaultType==0) {
+                type = data.get(0).getCode();
+                mvpPresenter.getKsbRecord(type, startIndex, Constant.PAGE_SIZE);
+            }
         }
     }
 

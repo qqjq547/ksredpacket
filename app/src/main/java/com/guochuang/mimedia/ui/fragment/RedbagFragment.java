@@ -63,6 +63,8 @@ import com.guochuang.mimedia.view.HoneyCombView;
 import com.guochuang.mimedia.view.ScrollTextView;
 import com.sz.gcyh.KSHongBao.R;
 import com.tbruyelle.rxpermissions.RxPermissions;
+import com.uuzuche.lib_zxing.activity.CaptureActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,6 +77,8 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
 
     @BindView(R.id.tv_start)
     ImageView tvStart;
+    @BindView(R.id.iv_scan)
+    ImageView ivScan;
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.tv_text)
@@ -258,9 +262,13 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
         super.onDestroyView();
         mvRedbag.onDestroy();
     }
-    @OnClick({R.id.tv_text, R.id.lin_city_owner, R.id.iv_city_owner_avatar, R.id.tv_start, R.id.iv_share,R.id.iv_refresh, R.id.lin_upgrade_agent})
+    @OnClick({R.id.iv_scan,R.id.tv_text, R.id.lin_city_owner, R.id.iv_city_owner_avatar, R.id.tv_start, R.id.iv_share,R.id.iv_refresh, R.id.lin_upgrade_agent})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.iv_scan:
+                Intent intent = new Intent(getActivity(), CaptureActivity.class);
+                startActivityForResult(intent,Constant.REQUEST_SCAN_CODE);
+                break;
             case R.id.tv_text:
                 startActivity(new Intent(getActivity(), SquareActivity.class));
                 break;
