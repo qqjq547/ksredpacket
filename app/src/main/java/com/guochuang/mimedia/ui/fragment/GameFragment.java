@@ -8,20 +8,23 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
-import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpFragment;
+import com.guochuang.mimedia.mvp.view.GameView;
+import com.guochuang.mimedia.mvp.model.JxwUserInfoUrl;
+import com.guochuang.mimedia.mvp.presenter.GamePresenter;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.IntentUtils;
-import com.guochuang.mimedia.tools.LogUtil;
+import com.guochuang.mimedia.tools.SystemUtil;
 import com.guochuang.mimedia.ui.activity.city.CityActivity;
+import com.guochuang.mimedia.ui.activity.common.JuxiangwanActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.sz.gcyh.KSHongBao.R;
 import butterknife.BindView;
 
-public class GameFragment extends MvpFragment {
+public class GameFragment extends MvpFragment<GamePresenter> implements GameView {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
@@ -31,8 +34,8 @@ public class GameFragment extends MvpFragment {
     WebView wvGame;
 
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    protected GamePresenter createPresenter() {
+        return new GamePresenter(this);
     }
 
     @Override
@@ -80,6 +83,19 @@ public class GameFragment extends MvpFragment {
         });
     }
 
+    @Override
+    public void setData(JxwUserInfoUrl data) {
+        closeLoadingDialog();
+        if (data!=null) {
+            startActivity(new Intent(getActivity(), JuxiangwanActivity.class).putExtra(Constant.DATA, data));
+        }
+    }
+
+    @Override
+    public void setError(String msg) {
+        closeLoadingDialog();
+
+    }
     private class GameInterface {
         @JavascriptInterface
         public void goCzGame() {
@@ -87,6 +103,16 @@ public class GameFragment extends MvpFragment {
                 @Override
                 public void run() {
                     startActivity(new Intent(getActivity(), CityActivity.class));
+                }
+            });
+        }
+        @JavascriptInterface
+        public void goTrialHall() {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    showLoadingDialog(null);
+                    mvpPresenter.getJxwUserInfoUrl(SystemUtil.getDeviceId(),Constant.JXW_FROM);
                 }
             });
         }

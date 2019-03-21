@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/lin_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/bg_pay_code">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="@dimen/title_height"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_back_white" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/textfont18" />
+
+            <ImageView
+                android:id="@+id/iv_image"
+                android:layout_width="@dimen/title_height"
+                android:layout_alignParentRight="true"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside" />
+        </RelativeLayout>
+        <include layout="@layout/layout_divide_deep_line"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/bg_pay_code">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_pay_code"
+            android:layout_marginLeft="@dimen/space10"
+            android:layout_marginRight="@dimen/space10"
+            android:layout_marginTop="@dimen/space30"
+            android:backgroundTint="@drawable/bg_pay_code"
+            android:weightSum="400">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="75"
+                android:gravity="center"
+                android:textSize="@dimen/textfont18"
+                android:textColor="@color/text_pay_code"
+                android:text="@string/my_pay_code"/>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="289">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="289"
+                android:orientation="vertical"
+                android:gravity="center">
+                <com.guochuang.mimedia.view.SquareImageView
+                    android:id="@+id/iv_code"
+                    android:layout_width="@dimen/space250"
+                    android:layout_height="@dimen/space250"
+                    android:padding="@dimen/space20"/>
+                <TextView
+                    android:id="@+id/tv_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space5"
+                    android:textColor="@color/text_blue"
+                    android:textSize="@dimen/textfont14"
+                    android:text="@string/save_pay_code" />
+                
+            </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_identify"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone"
+                    android:gravity="center"
+                    android:textColor="@color/text_blue"
+                    android:textSize="@dimen/textfont14"
+                    android:background="@color/bg_trans_white"
+                    android:text="@string/identity_can_show_paycode"/>
+            </FrameLayout>
+            <TextView
+                android:id="@+id/tv_record"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="36"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/space10"
+                android:paddingRight="@dimen/space10"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/textfont16"
+                android:text="@string/pay_code_record"
+                android:drawableRight="@drawable/ic_arrow_right"/>
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/space25"
+            android:textSize="@dimen/textfont14"
+            android:textColor="@color/text_white"
+            android:text="@string/pay_code_tip"/>
+    </LinearLayout>
+</LinearLayout>

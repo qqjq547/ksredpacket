@@ -29,6 +29,8 @@ import com.guochuang.mimedia.tools.PrefUtil;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.tencent.smtt.sdk.QbSdk;
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -86,17 +88,7 @@ public class App extends Application {
             wxapi.registerApp("wx3f027d9298bbbed4");
             new File(Constant.COMPRESS_DIR_PATH).mkdirs();
             new File(Constant.COMMON_PATH).mkdirs();
-            QbSdk.preInit(this, new QbSdk.PreInitCallback() {
-                @Override
-                public void onCoreInitFinished() {
-
-                }
-
-                @Override
-                public void onViewInitFinished() {
-
-                }
-            });
+            ZXingLibrary.initDisplayOpinion(this);
         }
     public static App getInstance(){
         return instance;
@@ -171,5 +163,6 @@ public class App extends Application {
     public UserInfo getUserInfo() {
         return userInfo;
     }
+
 
 }

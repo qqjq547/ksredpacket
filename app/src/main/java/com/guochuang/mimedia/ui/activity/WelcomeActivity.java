@@ -1,5 +1,6 @@
 package com.guochuang.mimedia.ui.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,6 +8,8 @@ import android.text.TextUtils;
 import android.widget.LinearLayout;
 
 import com.guochuang.mimedia.app.AdInfoService;
+import com.guochuang.mimedia.app.App;
+import com.guochuang.mimedia.base.BaseActivity;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.presenter.WelcomePresenter;
 import com.guochuang.mimedia.mvp.view.WelcomeView;
@@ -17,25 +20,32 @@ import com.guochuang.mimedia.ui.activity.user.LoginActivity;
 import com.sz.gcyh.KSHongBao.R;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
-public class WelcomeActivity extends MvpActivity<WelcomePresenter> implements WelcomeView {
+public class WelcomeActivity extends BaseActivity implements WelcomeView {
 
 
     @BindView(R.id.ll_ad)
     LinearLayout llAd;
 
-    @Override
+    WelcomePresenter mvpPresenter;
+
     protected WelcomePresenter createPresenter() {
         return new WelcomePresenter(this);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mvpPresenter = createPresenter();
+        super.onCreate(savedInstanceState);
         if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
             finish();
             return;
         }
-        super.onCreate(savedInstanceState);
+        setContentView(getLayout());
+        initViewAndData();
+        ButterKnife.bind(this);
+        App.getInstance().addActivity(this);
     }
 
     @Override

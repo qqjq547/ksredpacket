@@ -696,5 +696,12 @@
     <string name="date_fifth">15天</string>
     <string name="clear_address">清空地址</string>
     <string name="navigation_not_empty">导航地址不能为空</string>
+    <string name="pay_code_title">收款码</string>
+    <string name="my_pay_code">我的收款码</string>
+    <string name="save_pay_code">保存收款码</string>
+    <string name="pay_code_record">收款记录</string>
+    <string name="pay_code_tip">该二维码仅支持KSB方式收款</string>
+    <string name="identity_can_show_paycode">实名后领取收款码</string>
+
 
 </resources>

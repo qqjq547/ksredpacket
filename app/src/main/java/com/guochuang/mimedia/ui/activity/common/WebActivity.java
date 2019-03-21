@@ -170,6 +170,7 @@ public class WebActivity extends MvpActivity {
         }
         @JavascriptInterface
         public void playVideo(){
+
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {

@@ -19,6 +19,7 @@ import com.guochuang.mimedia.mvp.model.IncomeStatistics;
 import com.guochuang.mimedia.mvp.model.DictionaryType;
 import com.guochuang.mimedia.mvp.model.InfoItem;
 import com.guochuang.mimedia.mvp.model.InviterUser;
+import com.guochuang.mimedia.mvp.model.JxwUserInfoUrl;
 import com.guochuang.mimedia.mvp.model.KsbRecord;
 import com.guochuang.mimedia.mvp.model.KsbTransfer;
 import com.guochuang.mimedia.mvp.model.KsbTrend;
@@ -1275,4 +1276,16 @@ public interface ApiStore {
     Observable<HttpResponse<NestRandomAd>> getRandomSpot(
             @Query("latitude") String latitude,
             @Query("longitude") String longitude);
+
+    @GET("/api/v1/activity/jxwAccount/addStatistics")
+    Observable<HttpResponse<Boolean>> addStatistics(
+            @Query("utoken") String utoken,
+            @Query("deviceCode") String deviceCode,
+            @Query("deviceFrom") String deviceFrom,
+            @Query("jumpUrl") String jumpUrl);
+
+    @GET("/api/v1/activity/jxwAccount/getJxwUserInfoUrl")
+    Observable<HttpResponse<JxwUserInfoUrl>> getJxwUserInfoUrl(
+            @Query("deviceCode") String deviceCode,
+            @Query("from") String from);
 }
