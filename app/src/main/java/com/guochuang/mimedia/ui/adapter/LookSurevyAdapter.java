@@ -27,7 +27,7 @@ public class LookSurevyAdapter extends CommonRecyclerAdapter<LookSurevyResult.St
     @Override
     protected void convert(ViewHolder holder, final int position, LookSurevyResult.StatisticsListBean item) {
         holder.setViewVisibility(R.id.tv_look_info, View.GONE).setViewVisibility(R.id.recycle_anser_count, View.GONE);
-        String type = item.getType() == 0 ? "单选" : item.getType() == 1 ? "多选" : "填空题";
+        String type = item.getType() == 0 ? mContext.getString(R.string.str_singe_select) : item.getType() == 1 ? mContext.getString(R.string.str_many_select) : mContext.getString(R.string.str_fill_problem);
 
         holder.setText(R.id.tv_squece, position + ".").setText(R.id.tv_problem, "【" + type + "】" + item.getTitle());
         //填空题

@@ -58,7 +58,7 @@ public class LookSurevyActivity extends MvpActivity<LookSurveymPresenter> implem
     }
 
     private void initTitle() {
-        new DefaultNavigationBar.Builder(this).setTitle("问卷红包问题").build();
+        new DefaultNavigationBar.Builder(this).setTitle(getString(R.string.looksurevyactivity_title)).build();
     }
 
     private void initData() {

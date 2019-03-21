@@ -722,6 +722,10 @@
     <string name="cannot_get_question">无法获取题目信息</string>
     <string name="redbag_has_robe">红包已抢完</string>
     <string name="answer_success_open_redbag">答题成功，开启红包</string>
+    <string name="str_singe_select">单选</string>
+    <string name="str_many_select">多选</string>
+    <string name="str_fill_problem">填空题</string>
+    <string name="looksurevyactivity_title">问卷红包问题</string>
 
 
 </resources>
