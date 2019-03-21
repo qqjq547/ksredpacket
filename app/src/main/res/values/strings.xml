@@ -713,5 +713,6 @@
     <string name="ksb_pay_frame_title">推荐使用KSB支付</string>
     <string name="ksb_payment">KSB支付</string>
     <string name="scan_pay">扫码支付</string>
+    <string name="get_camera_permission">请先设置相机权限</string>
 
 </resources>

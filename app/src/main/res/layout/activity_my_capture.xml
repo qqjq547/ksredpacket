@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="com.guochuang.mimedia.ui.activity.common.MyCaptureActivity">
     <LinearLayout
         android:id="@+id/lin_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/record_progress">
+        android:background="@color/transparent">
 
         <RelativeLayout
             android:layout_width="match_parent"
