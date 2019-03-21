@@ -714,5 +714,6 @@
     <string name="ksb_payment">KSB支付</string>
     <string name="scan_pay">扫码支付</string>
     <string name="get_camera_permission">请先设置相机权限</string>
+    <string name="pls_inside_code">请将二维码放入框内即可扫描</string>
 
 </resources>

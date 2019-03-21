@@ -8,17 +8,29 @@
         android:id="@+id/preview_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
     <com.uuzuche.lib_zxing.view.ViewfinderView
         android:id="@+id/viewfinder_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:inner_width="250dp"
         app:inner_height="250dp"
-        app:inner_corner_color="#fff"
-        app:inner_corner_length="30dp"
-        app:inner_corner_width="4dp"
-        app:inner_scan_speed="12"
-        app:inner_scan_iscircle="false" />
-
+        app:inner_corner_color="#55b737"
+        app:inner_corner_length="20dp"
+        app:inner_corner_width="3dp"
+        app:inner_scan_speed="10"
+        app:inner_scan_iscircle="true" />
+<LinearLayout
+    android:layout_width="320dp"
+    android:layout_height="320dp"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:gravity="center_horizontal|bottom">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space15"
+        android:textSize="@dimen/textfont13"
+        android:textColor="@color/text_white"
+        android:text="@string/pls_inside_code"/>
+</LinearLayout>
 </FrameLayout>
