@@ -3,10 +3,12 @@ package com.guochuang.mimedia.ui.activity.common;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
+import android.webkit.DownloadListener;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -91,6 +93,12 @@ public class WebActivity extends MvpActivity {
             }
         });
         wvContent.addJavascriptInterface(new JSInterface(this),"browserController");
+        wvContent.setDownloadListener(new DownloadListener() {
+            @Override
+            public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimeType, long contentLength) {
+                downloadByBrowser(url);
+            }
+        });
         wvContent.loadUrl(CommonUtil.getTimeStampUrl(url));
         srlRefresh.setEnableLoadmore(false);
         srlRefresh.setEnableRefresh(true);
@@ -305,7 +313,12 @@ public class WebActivity extends MvpActivity {
             });
         }
     }
-
+    private void downloadByBrowser(String url) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.addCategory(Intent.CATEGORY_BROWSABLE);
+        intent.setData(Uri.parse(url));
+        startActivity(intent);
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

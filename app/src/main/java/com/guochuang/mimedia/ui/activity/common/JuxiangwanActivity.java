@@ -41,8 +41,9 @@ public class JuxiangwanActivity extends MvpActivity<JuxiangwanPresenter> impleme
     WebView wvContent;
     @BindView(R.id.lin_title)
     LinearLayout linTitle;
-    boolean isFirstLoad=true;
+
     JxwUserInfoUrl jxwUserInfoUrl;
+    boolean isFirstLoad=true;
 
     @Override
     protected JuxiangwanPresenter createPresenter() {
@@ -78,7 +79,7 @@ public class JuxiangwanActivity extends MvpActivity<JuxiangwanPresenter> impleme
                 if (wvContent.getProgress() == 100) {
                     tvTitle.setText(view.getTitle());
                     srlRefresh.finishRefresh();
-                    if(isFirstLoad) {
+                    if (isFirstLoad) {
                         mvpPresenter.addStatistics(jxwUserInfoUrl.getUtoken(), SystemUtil.getDeviceId(), Constant.JXW_FROM, url);
                         isFirstLoad=false;
                     }
@@ -87,8 +88,8 @@ public class JuxiangwanActivity extends MvpActivity<JuxiangwanPresenter> impleme
         });
         wvContent.setDownloadListener(new DownloadListener() {
             @Override
-            public void onDownloadStart(String s, String s1, String s2, String s3, long l) {
-                downloadByBrowser(s);
+            public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimeType, long contentLength) {
+                downloadByBrowser(url);
             }
         });
         wvContent.loadUrl(CommonUtil.getTimeStampUrl(jxwUserInfoUrl.getTaskUrl()));
@@ -102,12 +103,7 @@ public class JuxiangwanActivity extends MvpActivity<JuxiangwanPresenter> impleme
         });
     }
 
-    private void downloadByBrowser(String url) {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.addCategory(Intent.CATEGORY_BROWSABLE);
-        intent.setData(Uri.parse(url));
-        startActivity(intent);
-    }
+
     @OnClick(R.id.iv_back)
     public void onViewClicked() {
         onBackPressed();
@@ -121,5 +117,11 @@ public class JuxiangwanActivity extends MvpActivity<JuxiangwanPresenter> impleme
     @Override
     public void setError(String msg) {
 
+    }
+    private void downloadByBrowser(String url) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.addCategory(Intent.CATEGORY_BROWSABLE);
+        intent.setData(Uri.parse(url));
+        startActivity(intent);
     }
 }
