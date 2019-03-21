@@ -24,6 +24,7 @@ import com.guochuang.mimedia.ui.activity.beenest.AdBidActivity;
 import com.guochuang.mimedia.ui.activity.beenest.MyAdActivity;
 import com.guochuang.mimedia.ui.activity.city.CityActivity;
 import com.guochuang.mimedia.ui.activity.user.MyAddressActivity;
+import com.guochuang.mimedia.ui.activity.user.MyPayCodeActivity;
 import com.guochuang.mimedia.ui.dialog.SheetDialog;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.app.App;
@@ -187,6 +188,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         itemArr.add(new MyMenuItem(R.drawable.ic_my_safe, R.string.text_my_safe));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_address, R.string.text_my_address));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_help, R.string.text_my_help));
+        itemArr.add(new MyMenuItem(R.drawable.ic_my_paycode, R.string.receive_pay_code));
         rvMenu.setLayoutManager(new GridLayoutManager(getActivity(), 4));
         menuAdapter = new MyMenuAdapter(itemArr);
         menuAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -237,6 +239,9 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                         break;
                     case R.drawable.ic_my_welfare:
                         startActivity(new Intent(getActivity(), WelfareActivity.class));
+                        break;
+                    case R.drawable.ic_my_paycode:
+                        startActivity(new Intent(getActivity(), MyPayCodeActivity.class));
                         break;
                 }
             }

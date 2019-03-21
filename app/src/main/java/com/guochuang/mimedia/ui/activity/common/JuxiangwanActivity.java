@@ -1,8 +1,11 @@
 package com.guochuang.mimedia.ui.activity.common;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.webkit.DownloadListener;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -40,6 +43,7 @@ public class JuxiangwanActivity extends MvpActivity<JuxiangwanPresenter> impleme
     LinearLayout linTitle;
 
     JxwUserInfoUrl jxwUserInfoUrl;
+    boolean isFirstLoad=true;
 
     @Override
     protected JuxiangwanPresenter createPresenter() {
@@ -75,8 +79,17 @@ public class JuxiangwanActivity extends MvpActivity<JuxiangwanPresenter> impleme
                 if (wvContent.getProgress() == 100) {
                     tvTitle.setText(view.getTitle());
                     srlRefresh.finishRefresh();
-                    mvpPresenter.addStatistics(jxwUserInfoUrl.getUtoken(),SystemUtil.getDeviceId(),Constant.JXW_FROM,url);
+                    if (isFirstLoad) {
+                        mvpPresenter.addStatistics(jxwUserInfoUrl.getUtoken(), SystemUtil.getDeviceId(), Constant.JXW_FROM, url);
+                        isFirstLoad=false;
+                    }
                 }
+            }
+        });
+        wvContent.setDownloadListener(new DownloadListener() {
+            @Override
+            public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimeType, long contentLength) {
+                downloadByBrowser(url);
             }
         });
         wvContent.loadUrl(CommonUtil.getTimeStampUrl(jxwUserInfoUrl.getTaskUrl()));
@@ -104,5 +117,11 @@ public class JuxiangwanActivity extends MvpActivity<JuxiangwanPresenter> impleme
     @Override
     public void setError(String msg) {
 
+    }
+    private void downloadByBrowser(String url) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.addCategory(Intent.CATEGORY_BROWSABLE);
+        intent.setData(Uri.parse(url));
+        startActivity(intent);
     }
 }

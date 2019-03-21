@@ -80,5 +80,6 @@
     <color name="scan_bg">#7f000000</color>
     <color name="bg_pay_code">#f45e4d</color>
     <color name="text_pay_code">#f45e4d</color>
+    <color name="bg_content">#eeeeee</color>
 
 </resources>

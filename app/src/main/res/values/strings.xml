@@ -159,6 +159,7 @@
     <string name="text_my_address">收货地址</string>
     <string name="text_my_help">帮助中心</string>
     <string name="text_my_welfare">我的福利</string>
+    <string name="receive_pay_code">收付款</string>
 
 
     <string name="money_unit_ksb">KSB</string>
@@ -702,6 +703,18 @@
     <string name="pay_code_record">收款记录</string>
     <string name="pay_code_tip">该二维码仅支持KSB方式收款</string>
     <string name="identity_can_show_paycode">实名后领取收款码</string>
+    <string name="scan_fail">解析失败</string>
+    <string name="payment_amount">付款金额</string>
+    <string name="equal">等值</string>
+    <string name="pls_input_money">请输入金额</string>
+    <string name="pls_input_remark">添加备注</string>
+    <string name="pay_for">付款给</string>
+    <string name="ksb_pay_title">ksb付款</string>
+    <string name="ksb_pay_frame_title">推荐使用KSB支付</string>
+    <string name="ksb_payment">KSB支付</string>
+    <string name="scan_pay">扫码支付</string>
+    <string name="get_camera_permission">请先设置相机权限</string>
+    <string name="pls_inside_code">请将二维码放入框内即可扫描</string>
     <string name="equivalence">等值</string>
 
 

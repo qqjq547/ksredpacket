@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.IdRes;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.telephony.mbms.DownloadProgressListener;
@@ -30,6 +31,7 @@ import com.allenliu.versionchecklib.v2.callback.CustomDownloadingDialogListener;
 import com.guochuang.mimedia.mvp.model.Remind;
 import com.guochuang.mimedia.tools.AdCollectionView;
 import com.guochuang.mimedia.tools.LogUtil;
+import com.guochuang.mimedia.ui.activity.common.KsbPayActivity;
 import com.guochuang.mimedia.ui.dialog.RemindDialog;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.app.App;
@@ -55,6 +57,7 @@ import com.guochuang.mimedia.ui.fragment.InfoFragment;
 import com.guochuang.mimedia.ui.fragment.MyFragment;
 import com.guochuang.mimedia.ui.fragment.RedbagFragment;
 import com.guochuang.mimedia.view.BadgeView;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
 
 import java.io.File;
 import java.util.Calendar;
@@ -398,5 +401,26 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
         ((MyFragment)fragments[4]).openNestAd();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==RESULT_OK){
+            if (requestCode==Constant.REQUEST_SCAN_CODE){
+                if(null != data){
+                    Bundle bundle = data.getExtras();
+                    if(bundle == null){
+                        return;
+                    }
+                    if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                        String result = bundle.getString(CodeUtils.RESULT_STRING);
+                        showShortToast(result);
+                        startActivity(new Intent(this,KsbPayActivity.class));
+                    } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                        showShortToast(R.string.scan_fail);
+                    }
+                }
+            }
+        }
+    }
 }
 
