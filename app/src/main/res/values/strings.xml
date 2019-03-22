@@ -721,6 +721,8 @@
     <string name="pay_result_success">付款成功</string>
     <string name="payee_user">收款人</string>
     <string name="format_kuahao">(%s)</string>
+    <string name="invite_friends_give_gifts">邀请好友得好礼</string>
+    <string name="str_share">分享</string>
 
 
 </resources>
