@@ -37,8 +37,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon,android:theme">
-        <activity android:name="com.guochuang.mimedia.ui.activity.WelcomeActivity"
-                  android:theme="@style/FullScreenTheme">
+        <activity
+            android:name="com.guochuang.mimedia.ui.activity.WelcomeActivity"
+            android:theme="@style/FullScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -111,15 +112,14 @@
         <activity android:name="com.guochuang.mimedia.ui.activity.common.JuxiangwanActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.user.MyPayCodeActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.common.KsbPayActivity" />
-        <activity android:name="com.guochuang.mimedia.ui.activity.common.MyCaptureActivity"
+        <activity
+            android:name="com.guochuang.mimedia.ui.activity.common.MyCaptureActivity"
             android:theme="@style/TransTheme" />
 
         <activity
             android:name="com.guochuang.mimedia.ui.activity.redbag.LuckyActivity"
             android:theme="@style/Transparent" />
-        <activity
-            android:name="com.guochuang.mimedia.ui.activity.common.ShareActivity"
-            android:theme="@style/TransTheme" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.common.ShareActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.operation.UserStatisticsActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.operation.IncreaseDetailActivity" />
         <activity
@@ -199,6 +199,7 @@
 
         // 广告信息获取service
         <service android:name="com.guochuang.mimedia.app.AdInfoService" />
+
 
         <!-- Android 7.0 文件共享配置，必须配置 -->
         <provider
