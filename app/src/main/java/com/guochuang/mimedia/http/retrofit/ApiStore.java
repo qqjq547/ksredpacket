@@ -52,7 +52,9 @@ import com.guochuang.mimedia.mvp.model.NestStatistics;
 import com.guochuang.mimedia.mvp.model.NestTemplate;
 import com.guochuang.mimedia.mvp.model.NestTimeInfo;
 import com.guochuang.mimedia.mvp.model.Order;
+import com.guochuang.mimedia.mvp.model.PayCode;
 import com.guochuang.mimedia.mvp.model.PayConfig;
+import com.guochuang.mimedia.mvp.model.PayeeUser;
 import com.guochuang.mimedia.mvp.model.QrCode;
 import com.guochuang.mimedia.mvp.model.RainMsg;
 import com.guochuang.mimedia.mvp.model.RainRecord;
@@ -1288,4 +1290,20 @@ public interface ApiStore {
     Observable<HttpResponse<JxwUserInfoUrl>> getJxwUserInfoUrl(
             @Query("deviceCode") String deviceCode,
             @Query("from") String from);
+
+    @GET("/api/v1/user/qrcodeReceipt/queryQrcode")
+    Observable<HttpResponse<PayCode>> queryQrcode();
+
+    @GET("/api/v1/user/qrcodeReceipt/payMoney")
+    Observable<HttpResponse<String>> payMoney(
+            @Query("payerUserUuid") String payerUserUuid,
+            @Query("payeeUserUuid") String payeeUserUuid,
+            @Query("coin") String coin,
+            @Query("safetyCode") String safetyCode,
+            @Query("channelCode") String channelCode
+    );
+    @GET("/api/v1/user/qrcodeReceipt/queryUserInfoByAccountUuid")
+    Observable<HttpResponse<PayeeUser>> queryUserInfoByAccountUuid(
+            @Query("userAccountUuid") String userAccountUuid
+    );
 }
