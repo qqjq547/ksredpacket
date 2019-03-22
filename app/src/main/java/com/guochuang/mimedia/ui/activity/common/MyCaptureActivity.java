@@ -4,9 +4,11 @@ import android.Manifest;
 import android.app.AppComponentFactory;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -36,8 +38,10 @@ public class MyCaptureActivity extends MvpActivity {
     TextView tvTitle;
     @BindView(R.id.fl_content)
     FrameLayout flContent;
-@Override
-protected BasePresenter createPresenter() {
+
+    public static MyCaptureActivity activity;
+  @Override
+  protected BasePresenter createPresenter() {
     return null;
 }
     @Override
@@ -45,8 +49,13 @@ protected BasePresenter createPresenter() {
         return R.layout.activity_my_capture;
     }
 
+    public static MyCaptureActivity getActivity() {
+        return activity;
+    }
+
     @Override
     public void initViewAndData() {
+        activity=this;
         tvTitle.setText(R.string.scan_pay);
         RxPermissions rxPermissions=new RxPermissions(this);
         rxPermissions.request(Manifest.permission.CAMERA).subscribe(new Action1<Boolean>() {
@@ -76,24 +85,22 @@ protected BasePresenter createPresenter() {
     CodeUtils.AnalyzeCallback analyzeCallback = new CodeUtils.AnalyzeCallback() {
         @Override
         public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
-            Intent resultIntent = new Intent();
-            Bundle bundle = new Bundle();
-            bundle.putInt(CodeUtils.RESULT_TYPE, CodeUtils.RESULT_SUCCESS);
-            bundle.putString(CodeUtils.RESULT_STRING, result);
-            resultIntent.putExtras(bundle);
-            setResult(RESULT_OK, resultIntent);
-            finish();
+            if (!TextUtils.isEmpty(result)){
+                Uri uri=Uri.parse(result);
+                String uuid=uri.getQueryParameter("uuid");
+                if (!TextUtils.isEmpty(uuid)) {
+                    startActivity(new Intent(MyCaptureActivity.this, KsbPayActivity.class).putExtra(Constant.USER_ACCOUNT_UUID, uuid));
+                    finish();
+                    MyCaptureActivity.getActivity().finish();
+                }else {
+                    showShortToast(R.string.parse_error_and_late);
+                }
+            }
         }
 
         @Override
         public void onAnalyzeFailed() {
-            Intent resultIntent = new Intent();
-            Bundle bundle = new Bundle();
-            bundle.putInt(CodeUtils.RESULT_TYPE, CodeUtils.RESULT_FAILED);
-            bundle.putString(CodeUtils.RESULT_STRING, "");
-            resultIntent.putExtras(bundle);
-            setResult(RESULT_OK, resultIntent);
-            finish();
+            showShortToast(R.string.scan_fail);
         }
     };
 

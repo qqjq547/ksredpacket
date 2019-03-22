@@ -113,6 +113,7 @@
         <activity android:name="com.guochuang.mimedia.ui.activity.common.KsbPayActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.common.MyCaptureActivity"
             android:theme="@style/TransTheme" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.common.PayResultActivity"/>
 
         <activity
             android:name="com.guochuang.mimedia.ui.activity.redbag.LuckyActivity"

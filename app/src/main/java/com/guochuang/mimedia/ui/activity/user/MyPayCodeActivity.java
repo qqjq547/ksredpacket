@@ -1,11 +1,13 @@
 package com.guochuang.mimedia.ui.activity.user;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,25 +16,33 @@ import android.widget.TextView;
 import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
+import com.guochuang.mimedia.mvp.model.PayCode;
+import com.guochuang.mimedia.mvp.presenter.MyPayCodePresenter;
+import com.guochuang.mimedia.mvp.view.MyPayCodeView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
+import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.guochuang.mimedia.ui.activity.common.KsbPayActivity;
 import com.guochuang.mimedia.ui.activity.common.MyCaptureActivity;
 import com.guochuang.mimedia.view.SquareImageView;
 import com.sz.gcyh.KSHongBao.R;
+import com.tbruyelle.rxpermissions.RxPermissions;
 import com.uuzuche.lib_zxing.activity.CaptureActivity;
+import com.uuzuche.lib_zxing.activity.CaptureFragment;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 
 import java.io.File;
+import java.net.URI;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lecho.lib.hellocharts.model.Line;
+import rx.functions.Action1;
 
-public class MyPayCodeActivity extends MvpActivity {
+public class MyPayCodeActivity extends MvpActivity<MyPayCodePresenter> implements MyPayCodeView {
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.tv_title)
@@ -55,12 +65,9 @@ public class MyPayCodeActivity extends MvpActivity {
     @BindView(R.id.tv_frame_name)
     TextView tvFrameName;
 
-
-
-
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    protected MyPayCodePresenter createPresenter() {
+        return new MyPayCodePresenter(this);
     }
 
     @Override
@@ -73,9 +80,8 @@ public class MyPayCodeActivity extends MvpActivity {
        setStatusbar(R.color.bg_pay_code,false);
        tvTitle.setText(R.string.pay_code_title);
        ivImage.setImageResource(R.drawable.ic_scan_white);
-        GlideImgManager.loadImage(this,App.getInstance().getUserInfo().getTwoDimensional(),ivCode);
-        GlideImgManager.loadImage(this,App.getInstance().getUserInfo().getTwoDimensional(),ivFrameCode);
-        tvFrameName.setText(App.getInstance().getUserInfo().getNickName());
+       showLoadingDialog(null);
+       mvpPresenter.queryQrcode();
     }
 
     @Override
@@ -97,47 +103,35 @@ public class MyPayCodeActivity extends MvpActivity {
                 onBackPressed();
                 break;
             case R.id.iv_image:
-                Intent intent = new Intent(this, MyCaptureActivity.class);
-                startActivityForResult(intent,Constant.REQUEST_SCAN_CODE);
+                startActivity(new Intent(this, MyCaptureActivity.class));
                 break;
             case R.id.iv_code:
                 break;
             case R.id.tv_save:
-                linPrint.setVisibility(View.INVISIBLE);
-                Bitmap bitmap=getViewBitmap(linPrint);
-                String filePath=Constant.COMMON_PATH +File.separator+ System.currentTimeMillis() + ".png";
-                CommonUtil.saveBitmap(bitmap,filePath);
-                showShortToast(R.string.save_image_success);
-                Uri uri = Uri.fromFile(new File(filePath));
-                sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
+                RxPermissions rxPermissions=new RxPermissions(this);
+                rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE).subscribe(new Action1<Boolean>() {
+                    @Override
+                    public void call(Boolean aBoolean) {
+                        if (aBoolean) {
+                            Bitmap bitmap=getViewBitmap(linPrint);
+                            String filePath=Constant.COMMON_PATH +File.separator+ System.currentTimeMillis() + ".png";
+                            CommonUtil.saveBitmap(bitmap,filePath);
+                            showShortToast(R.string.save_image_success);
+                            Uri uri = Uri.fromFile(new File(filePath));
+                            sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
+                        }else {
+                            showShortToast(R.string.get_camera_permission);
+                        }
+                    }
+                });
+
                 break;
             case R.id.tv_record:
-                startActivity(new Intent(this,MyKsbDetailsActivity.class).putExtra(Constant.INCOME_TYPE,4l));
+                startActivity(new Intent(this,MyKsbDetailsActivity.class).putExtra(Constant.DEFAULT_CODE,Constant.KSB_CODE_PAYMENT));
                 break;
             case R.id.tv_identify:
                 startActivity(new Intent(this, IdentifyActivity.class));
                 break;
-        }
-    }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode==RESULT_OK){
-            if (requestCode==Constant.REQUEST_SCAN_CODE){
-                if(null != data){
-                    Bundle bundle = data.getExtras();
-                    if(bundle == null){
-                        return;
-                    }
-                    if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
-                        String result = bundle.getString(CodeUtils.RESULT_STRING);
-                        showShortToast(result);
-                        startActivity(new Intent(this,KsbPayActivity.class));
-                    } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
-                        showShortToast(R.string.scan_fail);
-                    }
-                }
-            }
         }
     }
     private Bitmap getViewBitmap(View view) {
@@ -145,5 +139,21 @@ public class MyPayCodeActivity extends MvpActivity {
         Canvas c = new Canvas(screenshot);
         view.draw(c);
         return screenshot;
+    }
+
+    @Override
+    public void setData(PayCode data) {
+        closeLoadingDialog();
+        if (data!=null){
+            GlideImgManager.loadImage(this,data.getQrcode(),ivCode);
+            GlideImgManager.loadImage(this,data.getQrcode(),ivFrameCode);
+            tvFrameName.setText(data.getNickName()+" "+String.format(getString(R.string.format_kuahao),data.getRealName()));
+        }
+    }
+
+    @Override
+    public void setError(String msg) {
+      closeLoadingDialog();
+      showShortToast(msg);
     }
 }
