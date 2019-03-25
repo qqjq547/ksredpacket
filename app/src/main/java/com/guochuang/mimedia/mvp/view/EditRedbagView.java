@@ -1,5 +1,6 @@
 package com.guochuang.mimedia.mvp.view;
 
+import com.guochuang.mimedia.mvp.model.EditRedbagConfig;
 import com.guochuang.mimedia.mvp.model.LuckyConfig;
 import com.guochuang.mimedia.mvp.model.Order;
 import com.guochuang.mimedia.mvp.model.Redbag;
@@ -18,6 +19,7 @@ public interface EditRedbagView {
     void setUploadfail(String msg);
     void setTempData(List<RedbagTemp> data);
     void setLuckyConfig(LuckyConfig data);
+    void setConfig(EditRedbagConfig data);
     void setError(String msg);
 
 

@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.donkingliang.imageselector.utils.ImageSelector;
 import com.donkingliang.imageselector.utils.ImageSelectorUtils;
+import com.guochuang.mimedia.mvp.model.EditRedbagConfig;
 import com.guochuang.mimedia.mvp.model.LuckyConfig;
 import com.guochuang.mimedia.ui.activity.common.MapPickActivity;
 import com.sz.gcyh.KSHongBao.R;
@@ -68,6 +69,8 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
     EditText etWord;
     @BindView(R.id.lin_word)
     LinearLayout linWord;
+    @BindView(R.id.tv_password_tip)
+    TextView tvPasswordTip;
     @BindView(R.id.et_amout)
     EditText etAmout;
     @BindView(R.id.lin_amount)
@@ -219,6 +222,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
         });
         rvPic.setAdapter(pictureAdapter);
         mvpPresenter.getTemplate(redPacketType);
+        mvpPresenter.getEditRedbagConfig();
     }
 
     public void showPayResult(boolean success,String errmsg){
@@ -591,6 +595,14 @@ public void startPay(String safetyCode){
             etCount.setEnabled(false);
         }
     }
+
+    @Override
+    public void setConfig(EditRedbagConfig data) {
+        if (data!=null){
+            tvPasswordTip.setText(data.getPasswordOutTime());
+        }
+    }
+
     @Override
     public void setError(String msg) {
         closeLoadingDialog();

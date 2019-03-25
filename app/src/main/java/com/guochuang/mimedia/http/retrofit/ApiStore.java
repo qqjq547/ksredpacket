@@ -12,6 +12,7 @@ import com.guochuang.mimedia.mvp.model.BoardDetail;
 import com.guochuang.mimedia.mvp.model.CalValue;
 import com.guochuang.mimedia.mvp.model.CityBidRecord;
 import com.guochuang.mimedia.mvp.model.DrawStatistics;
+import com.guochuang.mimedia.mvp.model.EditRedbagConfig;
 import com.guochuang.mimedia.mvp.model.GeoCode;
 import com.guochuang.mimedia.mvp.model.HomeRegion;
 import com.guochuang.mimedia.mvp.model.IncomeDetail;
@@ -1013,6 +1014,7 @@ public interface ApiStore {
     @GET("/api/v1/redpacket/lucky_config/get")
     Observable<HttpResponse<LuckyConfig>> getLuckyConfig();
 
+
     @FormUrlEncoded
     @POST("/api/v1/redpacket/person_red_packet/open")
     Observable<HttpResponse<LuckyResult>> openLuckyRedPacket(
@@ -1024,6 +1026,11 @@ public interface ApiStore {
             @Query("longitude") String longitude,
             @Query("address") String address
     );
+
+    @GET("/api/v1/redpacket/person_red_packet/getConfig")
+    Observable<HttpResponse<EditRedbagConfig>> getConfig(
+    );
+
     @GET("/api/v1/redpacket/red_packet_square/details")
     Observable<HttpResponse<RedbagDetail>> getSquareDetail(
             @Query("redPacketUuid") String redPacketUuid
