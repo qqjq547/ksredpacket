@@ -1327,6 +1327,11 @@ public interface ApiStore {
     @GET("/api/v1/user/qrcodeReceipt/queryQrcode")
     Observable<HttpResponse<PayCode>> queryQrcode();
 
+    @GET("/api/v1/user/qrcodeReceipt/queryUserInfoByAccountUuid")
+    Observable<HttpResponse<PayeeUser>> queryUserInfoByAccountUuid(
+            @Query("userAccountUuid") String userAccountUuid
+    );
+
     @FormUrlEncoded
     @POST("/api/v1/user/qrcodeReceipt/payMoney")
     Observable<HttpResponse<PaymentResult>> payMoney(

@@ -289,6 +289,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
     public void setRemind(Remind data) {
       if (data!=null){
           long dateTime=getPref().getLong(PrefUtil.LAST_REMIND_TIME,0)+data.getIntervalMinute()*60000;
+          LogUtil.d(CommonUtil.dateToString(new Date(dateTime),Constant.FORMAT_DATE));
           if (System.currentTimeMillis()>dateTime){
               getPref().setLong(PrefUtil.LAST_REMIND_TIME,System.currentTimeMillis());
               new RemindDialog(this,data.getPicture(),data.getLink()).show();
