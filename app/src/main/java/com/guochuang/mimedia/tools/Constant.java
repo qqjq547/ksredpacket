@@ -97,6 +97,7 @@ public class Constant {
     public static final String DAYS = "days";
     public static final String NESTLATITUDE = "nestLatitude";
     public static final String NESTLONGITUDE = "nestLongitude";
+    public static final String HAS_REFRESH = "hasRefresh";
     public static final String DEFAULT_CODE = "defaultCode";
     public static final String ISSHOWDEMO = "isShowDemo";
 
@@ -114,7 +115,7 @@ public class Constant {
 
 
     //资讯详情
-    public static final String URL_INFOMATION_DETAIL = ApiClient.HTML_URL + "information/detail/index.htm";
+    public static final String URL_INFOMATION_DETAIL = ApiClient.HTML_URL+"information/detail/index.htm";
     //推荐协议
     public static final String URL_RULE_RECOMMEND = ApiClient.HTML_URL + "html/rule/recommend/index.htm";
     //ksb协议
@@ -136,31 +137,31 @@ public class Constant {
     //代理商协议
     public static final String URL_AGREEMENT_AGENT = ApiClient.HTML_URL + "html/agreement/agent/index.htm";
     //公告消息
-    public static final String URL_NOTICE_DETAIL = ApiClient.HTML_URL + "project/html/notice.html";
+    public static final String URL_NOTICE_DETAIL = ApiClient.HTML_URL+"project/html/notice.html";
     //帮助中心
-    public static final String URL_HELP_CENTER = ApiClient.HTML_URL + "project/html/fengwo/index.html#/helpCenter";
+    public static final String URL_HELP_CENTER = ApiClient.HTML_URL+"project/html/fengwo/index.html#/helpCenter";
     //商圈
-    public static final String URL_TRADINGAREA = ApiClient.HTML_URL + "project/html/shangquan/index.html";
+    public static final String URL_TRADINGAREA = ApiClient.HTML_URL+"project/html/shangquan/index.html";
     //蜜玩
-    public static final String URL_MIWAN = ApiClient.HTML_URL + "project/html/fengwo/index.html#miWan";
+    public static final String URL_MIWAN = ApiClient.HTML_URL+"project/html/fengwo/index.html#miWan";
     //我的订单
-    public static final String URL_MY_ORDER = ApiClient.HTML_URL + "project/html/fengwo/index.html#/myOrder";
+    public static final String URL_MY_ORDER = ApiClient.HTML_URL+"project/html/fengwo/index.html#/myOrder";
     //蜂窝规则
-    public static final String URL_HONYCOMB_RULE = ApiClient.HTML_URL + "project/html/rule/fengwoRule.html";
+    public static final String URL_HONYCOMB_RULE = ApiClient.HTML_URL+"project/html/rule/fengwoRule.html";
     //广告投放协议
-    public static final String URL_FENGCHAO_BANNER = ApiClient.HTML_URL + "project/html/rule/fengchao/banner.html";
+    public static final String URL_FENGCHAO_BANNER = ApiClient.HTML_URL+"project/html/rule/fengchao/banner.html";
     //竞购协议
-    public static final String URL_FENGCHAO_JINGGOU = ApiClient.HTML_URL + "project/html/rule/fengchao/jinggou.html";
+    public static final String URL_FENGCHAO_JINGGOU = ApiClient.HTML_URL+"project/html/rule/fengchao/jinggou.html";
     //竞拍说明
-    public static final String URL_FENGCHAO_JINGPAI = ApiClient.HTML_URL + "project/html/rule/fengchao/jingpai.html";
+    public static final String URL_FENGCHAO_JINGPAI = ApiClient.HTML_URL+"project/html/rule/fengchao/jingpai.html";
     //显示地图网页
-    public static final String URL_BMAP_URL = ApiClient.HTML_URL + "project/html/fengwo/index.html#/BMapComponent";
+    public static final String URL_BMAP_URL = ApiClient.HTML_URL+"project/html/fengwo/index.html#/BMapComponent";
     //夺宝规则
-    public static final String URL_DUOBAO_RULE = ApiClient.HTML_URL + "project/html/rule/duobaoRule.html";
+    public static final String URL_DUOBAO_RULE = ApiClient.HTML_URL+"project/html/rule/duobaoRule.html";
     //夺宝详情
-    public static final String URL_DUOBAO_DETAIL = ApiClient.HTML_URL + "project/html/fengwo/index.html#/treasureDetails?snatchId=";
+    public static final String URL_DUOBAO_DETAIL = ApiClient.HTML_URL+"project/html/fengwo/index.html#/treasureDetails?snatchId=";
     //我的夺宝
-    public static final String URL_DUOBAO_TREASURE_NUMBER = ApiClient.HTML_URL + "project/html/fengwo/index.html#/treasureNumber?type=false&snatchRecordId=";
+    public static final String URL_DUOBAO_TREASURE_NUMBER = ApiClient.HTML_URL+"project/html/fengwo/index.html#/treasureNumber?type=false&snatchRecordId=";
 
 
     public static final String REGEX_WEBURL = "http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?";
@@ -205,8 +206,6 @@ public class Constant {
     public static final String JXW_FROM = "h5android";
     public static final String DATA = "data";
     public static final String SURVEYID = "surveyId";
-    public static final String JPUSH_CHANNEL = "JPUSH_CHANNEL";
-    public static final String CHANNEL_DEFAULT = "default";
 
 
     public static final int STATE_HAS_GET = 1;
@@ -265,11 +264,11 @@ public class Constant {
     public static final int USER_ROLE_STAR_CHIEF = 4;
     public static final int MAX_PICK_PICTURE = 6;
     //审核中
-    public static final int STATUS_AUDIT_INREVIEW = 0;
+    public static final int STATUS_AUDIT_INREVIEW=0;
     //审核通过
-    public static final int STATUS_AUDIT_PASS = 1;
+    public static final int STATUS_AUDIT_PASS=1;
     //审核失败
-    public static final int STATUS_AUDIT_FAIL = 2;
+    public static final int STATUS_AUDIT_FAIL=2;
 
     public static final String MAP_KEY_TOTALCOIN = "totalCoin";
 
@@ -277,9 +276,9 @@ public class Constant {
     public static final int TRANSFER_ALIPAY = 3;
     public static final int TRANSFER_BANKCARD = 4;
 
-    public static final String SORT_DEFAULT = "DEFAULT";
-    public static final String SORT_ASC = "ASC";
-    public static final String SORT_DESC = "DESC";
+    public static final String SORT_DEFAULT="DEFAULT";
+    public static final String SORT_ASC="ASC";
+    public static final String SORT_DESC="DESC";
 
     public static final String AD_TYPE_DETAIL = "detail";
     public static final String AD_TYPE_EDIT = "edit";

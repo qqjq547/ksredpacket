@@ -94,7 +94,7 @@ public class JuxiangwanActivity extends MvpActivity<JuxiangwanPresenter> impleme
         });
         wvContent.loadUrl(CommonUtil.getTimeStampUrl(jxwUserInfoUrl.getTaskUrl()));
         srlRefresh.setEnableLoadmore(false);
-        srlRefresh.setEnableRefresh(true);
+        srlRefresh.setEnableRefresh(false);
         srlRefresh.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
