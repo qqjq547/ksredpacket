@@ -103,7 +103,16 @@ public class MyPayCodeActivity extends MvpActivity<MyPayCodePresenter> implement
                 onBackPressed();
                 break;
             case R.id.iv_image:
-                startActivity(new Intent(this, MyCaptureActivity.class));
+                new RxPermissions(this).request(Manifest.permission.CAMERA).subscribe(new Action1<Boolean>() {
+                    @Override
+                    public void call(Boolean aBoolean) {
+                        if (aBoolean) {
+                            startActivity(new Intent(MyPayCodeActivity.this, MyCaptureActivity.class));
+                        }else {
+                            showShortToast(R.string.get_camera_permission);
+                        }
+                    }
+                });
                 break;
             case R.id.iv_code:
                 break;

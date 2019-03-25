@@ -57,22 +57,12 @@ public class MyCaptureActivity extends MvpActivity {
     public void initViewAndData() {
         activity=this;
         tvTitle.setText(R.string.scan_pay);
-        RxPermissions rxPermissions=new RxPermissions(this);
-        rxPermissions.request(Manifest.permission.CAMERA).subscribe(new Action1<Boolean>() {
-            @Override
-            public void call(Boolean aBoolean) {
-                if (aBoolean) {
-                    CaptureFragment captureFragment = new CaptureFragment();
-                    //定制化扫描框UI
-                    CodeUtils.setFragmentArgs(captureFragment,R.layout.view_qrcode_scan);
-                    //分析结果回调
-                    captureFragment.setAnalyzeCallback(analyzeCallback);
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fl_content,captureFragment).commit();
-                }else {
-                    showShortToast(R.string.get_camera_permission);
-                }
-            }
-        });
+        CaptureFragment captureFragment = new CaptureFragment();
+        //定制化扫描框UI
+        CodeUtils.setFragmentArgs(captureFragment,R.layout.view_qrcode_scan);
+        //分析结果回调
+        captureFragment.setAnalyzeCallback(analyzeCallback);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fl_content,captureFragment).commit();
     }
 
     @OnClick(R.id.iv_back)
