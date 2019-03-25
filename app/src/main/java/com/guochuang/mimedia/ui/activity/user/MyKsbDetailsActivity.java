@@ -21,7 +21,6 @@ import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.KsbDetailsTypePop;
 import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.ui.adapter.MyKsbDetailsAdapter;
-import com.guochuang.mimedia.view.VerticalDecoration;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
@@ -57,7 +56,7 @@ public class MyKsbDetailsActivity extends MvpActivity<MyKsbDetailsPresenter> imp
     String type="00";
     String defaultIndex="0";
     String startIndex=defaultIndex;
-    long defaultType=0;
+    String defaultCode ="";
 
     @Override
     protected MyKsbDetailsPresenter createPresenter() {
@@ -73,7 +72,7 @@ public class MyKsbDetailsActivity extends MvpActivity<MyKsbDetailsPresenter> imp
     public void initViewAndData() {
         tvTitle.setText(getResources().getString(R.string.my_ksb_details_title));
         tvText.setText(getResources().getString(R.string.all));
-        defaultType=getIntent().getLongExtra(Constant.INCOME_TYPE,0);
+        defaultCode =getIntent().getStringExtra(Constant.DEFAULT_CODE);
         tvNumAll.setText(getPref().getString(PrefUtil.COIN,""));
         if (myKsbDetailsAdapter != null) {
             return;
@@ -167,12 +166,12 @@ public class MyKsbDetailsActivity extends MvpActivity<MyKsbDetailsPresenter> imp
             subjectArr.addAll(data);
             for (int i=0;i<subjectArr.size();i++){
                 subjectName.add(subjectArr.get(i).getName());
-                if (defaultType==subjectArr.get(i).getId()){
+                if (TextUtils.equals(defaultCode,subjectArr.get(i).getCode())){
                     type = data.get(i).getCode();
                     mvpPresenter.getKsbRecord(type, startIndex, Constant.PAGE_SIZE);
                 }
             }
-            if (defaultType==0) {
+            if (TextUtils.isEmpty(defaultCode)) {
                 type = data.get(0).getCode();
                 mvpPresenter.getKsbRecord(type, startIndex, Constant.PAGE_SIZE);
             }

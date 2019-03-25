@@ -64,6 +64,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import butterknife.BindView;
+import cn.jpush.android.api.JPushInterface;
 import io.objectbox.Box;
 import rx.Subscriber;
 
@@ -161,6 +162,10 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
         mvpPresenter.getVersion(Constant.SYSTEM_CODE_ANDROID, String.valueOf(CommonUtil.getVersionCode(this)));
         mvpPresenter.messageIsNews();
         mvpPresenter.isNameAuthAndSafetyCode();
+        String channel=CommonUtil.getAppMetaData(this,Constant.JPUSH_CHANNEL);
+        if (!TextUtils.equals(channel,Constant.CHANNEL_DEFAULT)){
+            mvpPresenter.marketSwitch(channel,String.valueOf(CommonUtil.getVersionCode(this)));
+        }
     }
 
     @Override
@@ -291,6 +296,14 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
       }
     }
 
+    @Override
+    public void setMarketSwitch(Integer data) {
+        if (data!=null){//1为开启开关
+            getPref().setString(PrefUtil.MARKET_SWITCH,data.intValue()==1?Constant.SWITCH_HIDE:Constant.SWITCH_SHOW);
+            CommonUtil.syncCookie(this,ApiClient.HTML_URL);
+        }
+    }
+
 
     public void selectTab(int index) {
         if (currentId == index) {
@@ -399,28 +412,6 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
     public void startNestAd(){
         ((RedbagFragment)fragments[2]).openNestAd();
         ((MyFragment)fragments[4]).openNestAd();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode==RESULT_OK){
-            if (requestCode==Constant.REQUEST_SCAN_CODE){
-                if(null != data){
-                    Bundle bundle = data.getExtras();
-                    if(bundle == null){
-                        return;
-                    }
-                    if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
-                        String result = bundle.getString(CodeUtils.RESULT_STRING);
-                        showShortToast(result);
-                        startActivity(new Intent(this,KsbPayActivity.class));
-                    } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
-                        showShortToast(R.string.scan_fail);
-                    }
-                }
-            }
-        }
     }
 }
 

@@ -266,8 +266,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_scan:
-                Intent intent = new Intent(getActivity(), CaptureActivity.class);
-                startActivityForResult(intent,Constant.REQUEST_SCAN_CODE);
+                startActivity(new Intent(getActivity(), CaptureActivity.class));
                 break;
             case R.id.tv_text:
                 startActivity(new Intent(getActivity(), SquareActivity.class));

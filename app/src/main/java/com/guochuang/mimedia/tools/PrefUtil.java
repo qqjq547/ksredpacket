@@ -32,6 +32,7 @@ public class PrefUtil {
     public static final String ADVER_MESSAGE = "adverMessage";
     public static final String UPGRADE_NOTICE = "upgrade_notice";
     public static final String LAST_REMIND_TIME = "last_remind_time";
+    public static final String MARKET_SWITCH = "market_switch";
 
 
     public static void init(Context context) {

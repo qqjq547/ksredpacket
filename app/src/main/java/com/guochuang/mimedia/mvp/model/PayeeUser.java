@@ -16,6 +16,7 @@ public class PayeeUser {
     private String nickName;
     private String rate;
     private String realName;
+    private String avatar;
     private String userAccountUuid;
 
     public String getCoin() {
@@ -64,5 +65,13 @@ public class PayeeUser {
 
     public void setUserAccountUuid(String userAccountUuid) {
         this.userAccountUuid = userAccountUuid;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }

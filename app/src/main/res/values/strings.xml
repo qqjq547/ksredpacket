@@ -716,6 +716,11 @@
     <string name="get_camera_permission">请先设置相机权限</string>
     <string name="pls_inside_code">请将二维码放入框内即可扫描</string>
     <string name="equivalence">等值</string>
+    <string name="pls_set_money">请先设置金额</string>
+    <string name="ksb_loss">KSB不足</string>
+    <string name="pay_result_success">付款成功</string>
+    <string name="payee_user">收款人</string>
+    <string name="format_kuahao">(%s)</string>
     <string name="invite_friends_give_gifts">邀请好友得好礼</string>
     <string name="str_share">分享</string>
 

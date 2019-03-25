@@ -55,6 +55,7 @@ import com.guochuang.mimedia.mvp.model.Order;
 import com.guochuang.mimedia.mvp.model.PayCode;
 import com.guochuang.mimedia.mvp.model.PayConfig;
 import com.guochuang.mimedia.mvp.model.PayeeUser;
+import com.guochuang.mimedia.mvp.model.PaymentResult;
 import com.guochuang.mimedia.mvp.model.QrCode;
 import com.guochuang.mimedia.mvp.model.RainMsg;
 import com.guochuang.mimedia.mvp.model.RainRecord;
@@ -1294,16 +1295,24 @@ public interface ApiStore {
     @GET("/api/v1/user/qrcodeReceipt/queryQrcode")
     Observable<HttpResponse<PayCode>> queryQrcode();
 
-    @GET("/api/v1/user/qrcodeReceipt/payMoney")
-    Observable<HttpResponse<String>> payMoney(
-            @Query("payerUserUuid") String payerUserUuid,
-            @Query("payeeUserUuid") String payeeUserUuid,
-            @Query("coin") String coin,
-            @Query("safetyCode") String safetyCode,
-            @Query("channelCode") String channelCode
+    @FormUrlEncoded
+    @POST("/api/v1/user/qrcodeReceipt/payMoney")
+    Observable<HttpResponse<PaymentResult>> payMoney(
+            @Field("channelCode") String channelCode,
+            @Field("payerUserUuid") String payerUserUuid,
+            @Field("payeeUserUuid") String payeeUserUuid,
+            @Field("coin") String coin,
+            @Field("safetyCode") String safetyCode,
+            @Field("remark") String remark
     );
     @GET("/api/v1/user/qrcodeReceipt/queryUserInfoByAccountUuid")
     Observable<HttpResponse<PayeeUser>> queryUserInfoByAccountUuid(
             @Query("userAccountUuid") String userAccountUuid
+    );
+
+    @GET("/api/v1/common/version/market_switch")
+    Observable<HttpResponse<Integer>> marketSwitch(
+            @Query("marketName") String marketName,
+            @Query("versionCode") String versionCode
     );
 }
