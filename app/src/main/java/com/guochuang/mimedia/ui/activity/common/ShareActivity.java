@@ -5,7 +5,9 @@ import android.graphics.Canvas;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.mvp.model.ShareBg;
 import com.guochuang.mimedia.ui.adapter.ShareAdapter;
+import com.guochuang.mimedia.view.ProportionImageView;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.MvpActivity;
@@ -53,8 +56,7 @@ public class ShareActivity extends MvpActivity<SharePresenter> implements ShareV
     @BindView(R.id.tv_share_friend)
     TextView tvShareFriend;
 
-    List<ShareBg> mData  = new ArrayList();
-
+    List<ShareBg> mData = new ArrayList();
 
 
     ShareAdapter mShareAdapter;
@@ -72,24 +74,25 @@ public class ShareActivity extends MvpActivity<SharePresenter> implements ShareV
     @Override
     public void initViewAndData() {
         tvTitle.setText(getString(R.string.str_share));
-        GlideImgManager.loadCornerImage(this,App.getInstance().getUserInfo().getTwoDimensional(),ivQrcode,5);
+        GlideImgManager.loadCornerImage(this, App.getInstance().getUserInfo().getTwoDimensional(), ivQrcode, 5);
 
-        mData.add(new ShareBg(R.drawable.share_01,R.drawable.share_z_01));
-        mData.add(new ShareBg(R.drawable.share_02,R.drawable.share_z_02));
-        mData.add(new ShareBg(R.drawable.share_03,R.drawable.share_z_03));
-        mData.add(new ShareBg(R.drawable.share_04,R.drawable.share_z_04));
-        mData.add(new ShareBg(R.drawable.share_05,R.drawable.share_z_05));
-        mData.add(new ShareBg(R.drawable.share_06,R.drawable.share_z_06));
+        mData.add(new ShareBg(R.drawable.share_01, R.drawable.share_z_01));
+        mData.add(new ShareBg(R.drawable.share_02, R.drawable.share_z_02));
+        mData.add(new ShareBg(R.drawable.share_03, R.drawable.share_z_03));
+        mData.add(new ShareBg(R.drawable.share_04, R.drawable.share_z_04));
+        mData.add(new ShareBg(R.drawable.share_05, R.drawable.share_z_05));
+        mData.add(new ShareBg(R.drawable.share_06, R.drawable.share_z_06));
 
-        rlBg.setBackgroundResource(mData.get(0).getImage());
+        ivBg.setImageResource(mData.get(0).getImage());
 
-        recycleList.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
 
-        mShareAdapter = new ShareAdapter(R.layout.item_share_layout,mData);
+        recycleList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        mShareAdapter = new ShareAdapter(R.layout.item_share_layout, mData);
         mShareAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                rlBg.setBackgroundResource(mData.get(position).getImage());
+                ivBg.setImageResource(mData.get(position).getImage());
             }
         });
 
@@ -99,8 +102,8 @@ public class ShareActivity extends MvpActivity<SharePresenter> implements ShareV
     @Override
     public void setData(QrCode data) {
         closeLoadingDialog();
-        if (data!=null){
-            GlideImgManager.loadImage(this,data.getUrl(),ivQrcode);
+        if (data != null) {
+            GlideImgManager.loadImage(this, data.getUrl(), ivQrcode);
         }
     }
 
@@ -122,13 +125,12 @@ public class ShareActivity extends MvpActivity<SharePresenter> implements ShareV
                 showShortToast(R.string.copy_success);
                 break;
             case R.id.tv_share_friend:
-                String url=App.getInstance().getUserInfo().getTwoDimensional();
+                String url = App.getInstance().getUserInfo().getTwoDimensional();
                 if (!TextUtils.isEmpty(url))
                     dealBitmap();
                 break;
         }
     }
-
 
 
     private Bitmap getViewBitmap(View view) {
@@ -137,17 +139,19 @@ public class ShareActivity extends MvpActivity<SharePresenter> implements ShareV
         view.draw(c);
         return screenshot;
     }
-    public void dealBitmap(){
-        Bitmap bitmap= getViewBitmap(rlBg);
-        if (bitmap==null){
+
+    public void dealBitmap() {
+        Bitmap bitmap = getViewBitmap(rlBg);
+        if (bitmap == null) {
             showShortToast(R.string.cant_get_qrcode);
             return;
         }
-        File file= CommonUtil.saveBitmap(bitmap, Constant.COMMON_PATH+File.separator+"qrcode.png");
+        File file = CommonUtil.saveBitmap(bitmap, Constant.COMMON_PATH + File.separator + "qrcode.png");
         share(file);
     }
-    public void share(File file){
-        ShareDialog shareDialog=new ShareDialog(this);
+
+    public void share(File file) {
+        ShareDialog shareDialog = new ShareDialog(this);
         shareDialog.setImagePath(file.getAbsolutePath());
         shareDialog.setOnShareResultListener(new ShareDialog.OnShareResultListener() {
             @Override

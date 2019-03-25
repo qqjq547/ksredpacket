@@ -28,4 +28,15 @@
     <declare-styleable name="CalendarDateView">
         <attr name="cbd_calendar_row"/>
     </declare-styleable>
+
+    <!-- 宽高比的图片 -->
+    <declare-styleable name="ProportionImageView">
+        <!-- 宽度比例 float -->
+        <attr name="width_proportion" format="float" />
+        <!-- 高度比例 float -->
+        <attr name="height_proportion" format="float" />
+        <!-- 圆角 -->
+        <attr name="corners" format="dimension" />
+    </declare-styleable>
+
 </resources>
