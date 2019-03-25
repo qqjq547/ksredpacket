@@ -125,7 +125,6 @@ public class App extends Application {
         }
         activityList.clear();
         App.getInstance().getBoxStore().boxFor(UserInfo.class).removeAll();
-        setUserInfo(null);
         String adConfig=PrefUtil.getInstance().getString(PrefUtil.ADVER_MESSAGE,"");
         PrefUtil.getInstance().clean();
         PrefUtil.getInstance().setBoolean(PrefUtil.FIRSTOPEN, false);

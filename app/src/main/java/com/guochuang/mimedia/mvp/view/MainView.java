@@ -18,5 +18,6 @@ public interface MainView {
     void setNameAuthSafefy(NameAuthAndSafety data);
     void setMessageIsNews(Boolean data);
     void setRemind(Remind data);
+    void setMarketSwitch(Integer data);
     void setError(String msg);
 }

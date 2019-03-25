@@ -158,6 +158,10 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
         mvpPresenter.getVersion(Constant.SYSTEM_CODE_ANDROID, String.valueOf(CommonUtil.getVersionCode(this)));
         mvpPresenter.messageIsNews();
         mvpPresenter.isNameAuthAndSafetyCode();
+        String channel=CommonUtil.getAppMetaData(this,Constant.JPUSH_CHANNEL);
+        if (!TextUtils.equals(channel,Constant.CHANNEL_DEFAULT)){
+            mvpPresenter.marketSwitch(channel,String.valueOf(CommonUtil.getVersionCode(this)));
+        }
     }
 
     @Override
@@ -286,6 +290,14 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
               new RemindDialog(this,data.getPicture(),data.getLink()).show();
           }
       }
+    }
+
+    @Override
+    public void setMarketSwitch(Integer data) {
+        if (data!=null){//1为开启开关
+            getPref().setString(PrefUtil.MARKET_SWITCH,data.intValue()==1?Constant.SWITCH_HIDE:Constant.SWITCH_SHOW);
+            CommonUtil.syncCookie(this,ApiClient.HTML_URL);
+        }
     }
 
 

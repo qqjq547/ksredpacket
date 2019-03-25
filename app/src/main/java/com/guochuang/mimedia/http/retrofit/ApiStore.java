@@ -1288,4 +1288,10 @@ public interface ApiStore {
     Observable<HttpResponse<JxwUserInfoUrl>> getJxwUserInfoUrl(
             @Query("deviceCode") String deviceCode,
             @Query("from") String from);
+
+    @GET("/api/v1/common/version/market_switch")
+    Observable<HttpResponse<Integer>> marketSwitch(
+            @Query("marketName") String marketName,
+            @Query("versionCode") String versionCode
+    );
 }
