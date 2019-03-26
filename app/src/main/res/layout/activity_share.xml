@@ -10,10 +10,11 @@
 
     <RelativeLayout
         android:id="@+id/rl_bg"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginLeft="38dp"
         android:layout_marginTop="@dimen/textfont19"
+        android:layout_gravity="center_horizontal"
         android:layout_marginRight="38dp"
         android:layout_weight="1">
 
