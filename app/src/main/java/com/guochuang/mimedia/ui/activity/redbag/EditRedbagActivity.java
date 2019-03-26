@@ -136,6 +136,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
     List<String> waitUpload=new ArrayList<>();
     List<String> picUrlArr=new ArrayList<>();
     String redPacketUuid;
+    PassDialog passDialog;
 
     @Override
     protected EditRedbagPresenter createPresenter() {
@@ -475,7 +476,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
     }
    public void selectPayType(){
        picture=TextUtils.join(",",picUrlArr);
-       PaySelectDialog paySelectDialog = new PaySelectDialog(this, String.valueOf(money));
+       final PaySelectDialog paySelectDialog = new PaySelectDialog(this, String.valueOf(money));
        paySelectDialog.setOnResultListener(new PaySelectDialog.OnResultListener() {
            @Override
            public void onSelectItem(int postion) {
@@ -485,7 +486,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                    payType = Constant.PAY_TYPE_ALIPAY;
                } else {
                    payType = Constant.PAY_TYPE_KSB;
-                   new PassDialog(EditRedbagActivity.this, new PassDialog.OnPassDialogListener() {
+                   passDialog =new PassDialog(EditRedbagActivity.this, new PassDialog.OnPassDialogListener() {
                        @Override
                        public void close() {
                            selectPayType();
@@ -500,7 +501,9 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                        public void onNumFull(String code) {
                            startPay(code);
                        }
-                   }).show();
+                   });
+                   passDialog.show();
+
                    return;
                }
                startPay(null);
@@ -521,6 +524,7 @@ public void startPay(String safetyCode){
     @Override
     public void setData(final String data) {
         closeLoadingDialog();
+        passDialog.dismiss();
         if (!TextUtils.isEmpty(data)) {
             Order order=GsonUtil.GsonToBean(data,Order.class);
             redPacketUuid=order.getRedPacketUuid();
@@ -607,6 +611,9 @@ public void startPay(String safetyCode){
     public void setError(String msg) {
         closeLoadingDialog();
         showShortToast(msg);
+        if (passDialog!=null&&passDialog.isShowing()){
+            passDialog.clearCode();
+        }
     }
 
 

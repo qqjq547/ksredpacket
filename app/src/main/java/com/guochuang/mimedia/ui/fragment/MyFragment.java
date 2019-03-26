@@ -178,6 +178,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
             }
         });
         setPageSelected(0);
+        itemArr.add(new MyMenuItem(R.drawable.ic_my_paycode, R.string.receive_pay_code));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_recommend, R.string.text_my_recommend));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_city, R.string.text_my_city));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_order, R.string.text_my_order));
@@ -188,7 +189,6 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         itemArr.add(new MyMenuItem(R.drawable.ic_my_safe, R.string.text_my_safe));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_address, R.string.text_my_address));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_help, R.string.text_my_help));
-        itemArr.add(new MyMenuItem(R.drawable.ic_my_paycode, R.string.receive_pay_code));
         rvMenu.setLayoutManager(new GridLayoutManager(getActivity(), 4));
         menuAdapter = new MyMenuAdapter(itemArr);
         menuAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -409,8 +409,8 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
             pagerAdapter=new MyViewPagerAdapter(viewArr);
             vpMy.setAdapter(pagerAdapter);
             llMyLamp.getChildAt(2).setVisibility(View.VISIBLE);
-            itemArr.add(0,new MyMenuItem(R.drawable.ic_my_operate_center, R.string.operation_center));
-            menuAdapter.notifyItemInserted(0);
+            itemArr.add(1,new MyMenuItem(R.drawable.ic_my_operate_center, R.string.operation_center));
+            menuAdapter.notifyItemInserted(1);
         }
     }
 

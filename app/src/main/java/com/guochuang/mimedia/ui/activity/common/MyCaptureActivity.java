@@ -83,7 +83,7 @@ public class MyCaptureActivity extends MvpActivity {
                     finish();
                     MyCaptureActivity.getActivity().finish();
                 }else {
-                    showShortToast(R.string.parse_error_and_late);
+                    showShortToast(R.string.scan_error);
                 }
             }
         }

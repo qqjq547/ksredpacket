@@ -482,8 +482,10 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
     public void setTempState(){
         if (currentTemplateCount<maxTemplate){
             cbSaveTemp.setVisibility(View.VISIBLE);
+            ivTempTip.setVisibility(View.VISIBLE);
         }else {
             cbSaveTemp.setVisibility(View.GONE);
+            ivTempTip.setVisibility(View.GONE);
         }
     }
 
