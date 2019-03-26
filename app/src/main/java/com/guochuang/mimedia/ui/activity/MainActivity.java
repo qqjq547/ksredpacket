@@ -158,10 +158,10 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
         mvpPresenter.getVersion(Constant.SYSTEM_CODE_ANDROID, String.valueOf(CommonUtil.getVersionCode(this)));
         mvpPresenter.messageIsNews();
         mvpPresenter.isNameAuthAndSafetyCode();
-        String channel=CommonUtil.getAppMetaData(this,Constant.JPUSH_CHANNEL);
-        if (!TextUtils.equals(channel,Constant.CHANNEL_DEFAULT)){
-            mvpPresenter.marketSwitch(channel,String.valueOf(CommonUtil.getVersionCode(this)));
-        }
+//        String channel=CommonUtil.getAppMetaData(this,Constant.JPUSH_CHANNEL);
+//        if (!TextUtils.equals(channel,Constant.CHANNEL_DEFAULT)){
+//            mvpPresenter.marketSwitch(channel,String.valueOf(CommonUtil.getVersionCode(this)));
+//        }
     }
 
     @Override

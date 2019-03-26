@@ -760,8 +760,12 @@ public class CommonUtil {
         cookieManager.setCookie(url, value3);
         String value4 = Constant.INVITECODE + "=" + (App.getInstance().getUserInfo()==null?"":App.getInstance().getUserInfo().getInviteCode());
         cookieManager.setCookie(url, value4);
-        String value5 = Constant.ISSHOWDEMO+"=" + PrefUtil.getInstance().getString(PrefUtil.MARKET_SWITCH,Constant.SWITCH_SHOW);
+        String value5 = Constant.VERSION_CODE+"=" + CommonUtil.getVersionCode(context);
         cookieManager.setCookie(url, value5);
+        String value6 = Constant.MARKET_NAME+"=" + CommonUtil.getAppMetaData(context,Constant.JPUSH_CHANNEL);
+        cookieManager.setCookie(url, value6);
+        String value7 = Constant.PARAMS_H_SYSTEM_CODE+"=" + Constant.H_SYSTEM_CODE;
+        cookieManager.setCookie(url, value7);
         CookieSyncManager.getInstance().sync();
     }
     public static void playRing(Context context,int rawId){
