@@ -128,6 +128,7 @@
                     android:layout_marginLeft="@dimen/space15"
                     android:background="@null"
                     android:gravity="center_vertical"
+                    android:maxLength="4"
                     android:hint="@string/hint_login_forget_verify"
                     android:textColor="@color/text_black"
                     android:textSize="@dimen/textfont16" />

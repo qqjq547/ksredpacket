@@ -709,7 +709,7 @@
     <string name="pls_input_money">请输入金额</string>
     <string name="pls_input_remark">添加备注</string>
     <string name="pay_for">付款给</string>
-    <string name="ksb_pay_title">ksb付款</string>
+    <string name="ksb_pay_title">KSB付款</string>
     <string name="ksb_pay_frame_title">推荐使用KSB支付</string>
     <string name="ksb_payment">KSB支付</string>
     <string name="scan_pay">扫码支付</string>
@@ -723,6 +723,7 @@
     <string name="format_kuahao">(%s)</string>
     <string name="invite_friends_give_gifts">邀请好友得好礼</string>
     <string name="str_share">分享</string>
+    <string name="scan_error">该收款码不是快收KSB收款码，请确定收款码后再试</string>
 
 
 </resources>
