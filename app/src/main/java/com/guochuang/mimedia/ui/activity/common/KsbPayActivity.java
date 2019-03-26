@@ -63,7 +63,6 @@ public class KsbPayActivity extends MvpActivity<KsbPayPresenter> implements KsbP
     @BindView(R.id.btn_sure)
     Button btnSure;
 
-    String userAccountUuid;
     PayeeUser payeeUser;
     PassDialog passDialog;
     double rate;
@@ -80,7 +79,8 @@ public class KsbPayActivity extends MvpActivity<KsbPayPresenter> implements KsbP
     @Override
     public void initViewAndData() {
         tvTitle.setText(R.string.ksb_pay_title);
-        userAccountUuid=getIntent().getStringExtra(Constant.USER_ACCOUNT_UUID);
+        payeeUser=(PayeeUser)getIntent().getSerializableExtra(Constant.PAYEE_USER);
+        setData(payeeUser);
         InputFilter[] filters={new CashierInputFilter()};
         etMoney.setFilters(filters);
         etMoney.addTextChangedListener(new TextWatcher() {
@@ -108,7 +108,6 @@ public class KsbPayActivity extends MvpActivity<KsbPayPresenter> implements KsbP
             }
         });
         showLoadingDialog(null);
-        mvpPresenter.queryUserInfoByAccountUuid(userAccountUuid);
     }
 
     @OnClick({R.id.iv_back, R.id.btn_sure})
@@ -149,7 +148,7 @@ public class KsbPayActivity extends MvpActivity<KsbPayPresenter> implements KsbP
                             mvpPresenter.payMoney(
                                     Constant.CHANNEL_CODE_ANDROID,
                                     App.getInstance().getUserInfo().getUserAccountUuid(),
-                                    userAccountUuid,
+                                    payeeUser.getUserAccountUuid(),
                                     coinStr,
                                     code,
                                     remark
@@ -169,11 +168,7 @@ public class KsbPayActivity extends MvpActivity<KsbPayPresenter> implements KsbP
         }
     }
 
-    @Override
     public void setData(PayeeUser data) {
-      closeLoadingDialog();
-      if (data!=null){
-          payeeUser=data;
           rate=Double.parseDouble(payeeUser.getRate());
           GlideImgManager.loadCircleImage(this,data.getAvatar(),ivAvatar);
           tvNickname.setText(data.getNickName());
@@ -184,8 +179,6 @@ public class KsbPayActivity extends MvpActivity<KsbPayPresenter> implements KsbP
                coin=Double.parseDouble(data.getCoin());
           }
           tvMyMoney.setText(CommonUtil.formatDoubleStr(DoubleUtil.mul(coin,rate)));
-
-      }
     }
 
     @Override

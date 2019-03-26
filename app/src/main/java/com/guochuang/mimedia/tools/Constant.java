@@ -104,6 +104,8 @@ public class Constant {
     public static final String SWITCH_SHOW = "show";
     public static final String SWITCH_HIDE = "hide";
 
+    public static final String PAYEE_USER = "payeeUser";
+
 
     public static final String FORMAT_DATE_SIMPLE = "yyyy-MM-dd";
     public static final String FORMAT_DATE = "yyyy-MM-dd HH:mm:ss";
