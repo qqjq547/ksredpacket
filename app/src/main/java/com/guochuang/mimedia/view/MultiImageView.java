@@ -8,7 +8,6 @@ import android.widget.LinearLayout;
 
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.guochuang.mimedia.tools.CommonUtil;
-import com.guochuang.mimedia.tools.glide.GlideApp;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 
 import java.util.List;

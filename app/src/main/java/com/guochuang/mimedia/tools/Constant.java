@@ -69,7 +69,7 @@ public class Constant {
     public static final String MONEY = "money";
     public static final String KSB = "KSB";
     public static final String RECOMMENDDATA = "recommendData";
-    public static final String AVATAR ="avatar" ;
+    public static final String AVATAR = "avatar";
     public static final String AREATYPE = "areaType";
     public static final String DRAWNUMBER = "drawNumber";
     public static final String TOTAL = "total";
@@ -97,7 +97,14 @@ public class Constant {
     public static final String DAYS = "days";
     public static final String NESTLATITUDE = "nestLatitude";
     public static final String NESTLONGITUDE = "nestLongitude";
+    public static final String HAS_REFRESH = "hasRefresh";
+    public static final String DEFAULT_CODE = "defaultCode";
+    public static final String ISSHOWDEMO = "isShowDemo";
 
+    public static final String SWITCH_SHOW = "show";
+    public static final String SWITCH_HIDE = "hide";
+
+    public static final String PAYEE_USER = "payeeUser";
 
 
     public static final String FORMAT_DATE_SIMPLE = "yyyy-MM-dd";
@@ -201,6 +208,8 @@ public class Constant {
     public static final String JXW_FROM = "h5android";
     public static final String DATA = "data";
     public static final String SURVEYID = "surveyId";
+    public static final String JPUSH_CHANNEL = "JPUSH_CHANNEL";
+    public static final String CHANNEL_DEFAULT = "default";
 
 
     public static final int STATE_HAS_GET = 1;
@@ -247,6 +256,7 @@ public class Constant {
     public static final String ACTION_CHANGE_CITY = "change_city";
     public static final String BID_CITY_CITY_ID = "bidCityCityId";
     public static final String DEFAULT_REDPACKET_TYPE = "0";
+    public static final String KSB_CODE_PAYMENT = "129";
 
     public static final int CAL_TYPE_COIN = 2;
     public static final int CAL_TYPE_MONEY = 1;
@@ -278,4 +288,6 @@ public class Constant {
     public static final String AD_TYPE_EDIT = "edit";
     public static final String MAP_MARKER_SPOT = "spot";
 
+
+    public static final String INVITE_FRIENDS_GIVE_GIFTS = "邀请好友得好礼";
 }

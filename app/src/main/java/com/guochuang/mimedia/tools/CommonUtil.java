@@ -177,6 +177,10 @@ public class CommonUtil {
         BigDecimal b = new BigDecimal(number);
         return b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
+    public static String formatDoubleStr(double number) {
+        BigDecimal b = new BigDecimal(number);
+        return b.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString();
+    }
 
     public static void callPhone(Context context, String phone) {
         Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone));
@@ -760,6 +764,8 @@ public class CommonUtil {
         cookieManager.setCookie(url, value3);
         String value4 = Constant.INVITECODE + "=" + (App.getInstance().getUserInfo()==null?"":App.getInstance().getUserInfo().getInviteCode());
         cookieManager.setCookie(url, value4);
+        String value5 = Constant.ISSHOWDEMO+"=" + PrefUtil.getInstance().getString(PrefUtil.MARKET_SWITCH,Constant.SWITCH_SHOW);
+        cookieManager.setCookie(url, value5);
         CookieSyncManager.getInstance().sync();
     }
     public static void playRing(Context context,int rawId){

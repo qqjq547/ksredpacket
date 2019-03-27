@@ -258,6 +258,7 @@ public class MyKsbTransferActivity extends MvpActivity<KsbTransferPresenter> imp
     @Override
     public void setData(String data) {
         closeLoadingDialog();
+        passDialog.dismiss();
         showShortToast(getResources().getString(R.string.transfer_success));
         sendBroadcast(new Intent(Constant.ACTION_CHANGE_COIN));
         setResult(RESULT_OK,getIntent());
@@ -268,6 +269,9 @@ public class MyKsbTransferActivity extends MvpActivity<KsbTransferPresenter> imp
     public void setError(String msg) {
         closeLoadingDialog();
         showShortToast(msg);
+        if (passDialog!=null&&passDialog.isShowing()){
+            passDialog.clearCode();
+        }
     }
 
     @Override

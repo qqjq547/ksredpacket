@@ -15,8 +15,8 @@ android {
         applicationId "com.sz.gcyh.KSHongBao"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 33
-        versionName "2.1.1"
+        versionCode 34
+        versionName "2.1.2"
         multiDexEnabled true
         ndk {
             abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a'
@@ -24,7 +24,7 @@ android {
         manifestPlaceholders = [
                 JPUSH_PKGNAME : applicationId,
                 JPUSH_APPKEY  : "e5746293850e854f49e10a76", //JPush上注册的包名对应的appkey.
-                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可
+                JPUSH_CHANNEL : "default", //暂时填写默认值即可
                 JSHARE_PKGNAME: applicationId,
                 TENCENT_APPID : "1106947833",//腾讯开放平台注册应用得到的 appId
         ]

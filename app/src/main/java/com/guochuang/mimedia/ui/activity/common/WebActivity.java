@@ -48,6 +48,7 @@ public class WebActivity extends MvpActivity {
     LinearLayout linTitle;
     AdCollectionView adCollectionView;
     String headRightType;
+    boolean hasRefresh=true;
     @Override
     protected BasePresenter createPresenter() {
         return null;
@@ -63,6 +64,8 @@ public class WebActivity extends MvpActivity {
     public void initViewAndData() {
         String title = getIntent().getStringExtra(Constant.TITLE);
         String url = getIntent().getStringExtra(Constant.URL);
+        hasRefresh=getIntent().getBooleanExtra(Constant.HAS_REFRESH,true);
+        srlRefresh.setEnableRefresh(hasRefresh);
         tvTitle.setText(title);
         wvContent.getSettings().setJavaScriptEnabled(true);
         wvContent.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
@@ -79,7 +82,7 @@ public class WebActivity extends MvpActivity {
                 if (TextUtils.equals(url,"jxaction://close")){
                     finish();
                 }else {
-                    IntentUtils.startWebActivity(WebActivity.this,view.getTitle(),url);
+                    IntentUtils.startWebActivity(WebActivity.this,view.getTitle(),url,hasRefresh);
                 }
                 return true;
             }
@@ -101,7 +104,6 @@ public class WebActivity extends MvpActivity {
         });
         wvContent.loadUrl(CommonUtil.getTimeStampUrl(url));
         srlRefresh.setEnableLoadmore(false);
-        srlRefresh.setEnableRefresh(true);
         srlRefresh.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {

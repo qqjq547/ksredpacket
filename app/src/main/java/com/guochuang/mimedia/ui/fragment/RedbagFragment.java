@@ -54,8 +54,10 @@ import com.guochuang.mimedia.ui.activity.beenest.AdBidActivity;
 import com.guochuang.mimedia.ui.activity.beenest.BeeNestActivity;
 import com.guochuang.mimedia.ui.activity.city.CityActivity;
 import com.guochuang.mimedia.ui.activity.MainActivity;
+import com.guochuang.mimedia.ui.activity.common.MyCaptureActivity;
 import com.guochuang.mimedia.ui.activity.common.ShareActivity;
 import com.guochuang.mimedia.ui.activity.redbag.SquareActivity;
+import com.guochuang.mimedia.ui.activity.user.MyPayCodeActivity;
 import com.guochuang.mimedia.ui.activity.user.UpgradeAgentActivity;
 import com.guochuang.mimedia.ui.dialog.OpenRedbagDialog;
 import com.guochuang.mimedia.ui.dialog.RedbagTypeDialog;
@@ -266,8 +268,16 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_scan:
-                Intent intent = new Intent(getActivity(), CaptureActivity.class);
-                startActivityForResult(intent,Constant.REQUEST_SCAN_CODE);
+                new RxPermissions(getActivity()).request(Manifest.permission.CAMERA).subscribe(new Action1<Boolean>() {
+                    @Override
+                    public void call(Boolean aBoolean) {
+                        if (aBoolean) {
+                            startActivity(new Intent(getActivity(), MyCaptureActivity.class));
+                        }else {
+                            showShortToast(R.string.get_camera_permission);
+                        }
+                    }
+                });
                 break;
             case R.id.tv_text:
                 startActivity(new Intent(getActivity(), SquareActivity.class));

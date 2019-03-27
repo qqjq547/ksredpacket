@@ -12,6 +12,7 @@ import com.guochuang.mimedia.mvp.model.BoardDetail;
 import com.guochuang.mimedia.mvp.model.CalValue;
 import com.guochuang.mimedia.mvp.model.CityBidRecord;
 import com.guochuang.mimedia.mvp.model.DrawStatistics;
+import com.guochuang.mimedia.mvp.model.EditRedbagConfig;
 import com.guochuang.mimedia.mvp.model.GeoCode;
 import com.guochuang.mimedia.mvp.model.HomeRegion;
 import com.guochuang.mimedia.mvp.model.IncomeDetail;
@@ -55,6 +56,7 @@ import com.guochuang.mimedia.mvp.model.Order;
 import com.guochuang.mimedia.mvp.model.PayCode;
 import com.guochuang.mimedia.mvp.model.PayConfig;
 import com.guochuang.mimedia.mvp.model.PayeeUser;
+import com.guochuang.mimedia.mvp.model.PaymentResult;
 import com.guochuang.mimedia.mvp.model.QrCode;
 import com.guochuang.mimedia.mvp.model.RainMsg;
 import com.guochuang.mimedia.mvp.model.RainRecord;
@@ -1009,11 +1011,13 @@ public interface ApiStore {
             @Query("latitude") String latitude,
             @Query("longitude") String longitude
     );
+
     @GET("/api/v1/redpacket/red_packet_pool/get_kilometre")
     Observable<HttpResponse<Integer>> getKilometre();
 
     @GET("/api/v1/redpacket/lucky_config/get")
     Observable<HttpResponse<LuckyConfig>> getLuckyConfig();
+
 
     @FormUrlEncoded
     @POST("/api/v1/redpacket/person_red_packet/open")
@@ -1026,6 +1030,12 @@ public interface ApiStore {
             @Query("longitude") String longitude,
             @Query("address") String address
     );
+
+    @GET("/api/v1/redpacket/person_red_packet/getConfig")
+    Observable<HttpResponse<EditRedbagConfig>> getConfig(
+    );
+
+
     @GET("/api/v1/redpacket/red_packet_square/details")
     Observable<HttpResponse<RedbagDetail>> getSquareDetail(
             @Query("redPacketUuid") String redPacketUuid
@@ -1291,19 +1301,28 @@ public interface ApiStore {
             @Query("deviceCode") String deviceCode,
             @Query("from") String from);
 
+    @GET("/api/v1/common/version/market_switch")
+    Observable<HttpResponse<Integer>> marketSwitch(
+            @Query("marketName") String marketName,
+            @Query("versionCode") String versionCode
+    );
+
     @GET("/api/v1/user/qrcodeReceipt/queryQrcode")
     Observable<HttpResponse<PayCode>> queryQrcode();
 
-    @GET("/api/v1/user/qrcodeReceipt/payMoney")
-    Observable<HttpResponse<String>> payMoney(
-            @Query("payerUserUuid") String payerUserUuid,
-            @Query("payeeUserUuid") String payeeUserUuid,
-            @Query("coin") String coin,
-            @Query("safetyCode") String safetyCode,
-            @Query("channelCode") String channelCode
-    );
     @GET("/api/v1/user/qrcodeReceipt/queryUserInfoByAccountUuid")
     Observable<HttpResponse<PayeeUser>> queryUserInfoByAccountUuid(
             @Query("userAccountUuid") String userAccountUuid
+    );
+
+    @FormUrlEncoded
+    @POST("/api/v1/user/qrcodeReceipt/payMoney")
+    Observable<HttpResponse<PaymentResult>> payMoney(
+            @Field("channelCode") String channelCode,
+            @Field("payerUserUuid") String payerUserUuid,
+            @Field("payeeUserUuid") String payeeUserUuid,
+            @Field("coin") String coin,
+            @Field("safetyCode") String safetyCode,
+            @Field("remark") String remark
     );
 }

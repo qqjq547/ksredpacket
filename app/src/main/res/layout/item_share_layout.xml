@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/space70"
+    android:layout_height="@dimen/space80"
+    android:layout_marginLeft="@dimen/dp_10">
+
+
+    <ImageView
+        android:id="@+id/iv_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <TextView
+        android:id="@+id/tv_des"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="邀请好友得好礼"
+        android:padding="@dimen/space6"
+        android:gravity="center"
+        android:textSize="@dimen/textfont8"
+        android:textColor="#ffffff"
+        android:background="@drawable/bottom_5_radius_shape"/>
+
+
+
+</RelativeLayout>

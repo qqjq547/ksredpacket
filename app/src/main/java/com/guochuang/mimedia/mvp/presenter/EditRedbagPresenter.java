@@ -4,6 +4,7 @@ import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
+import com.guochuang.mimedia.mvp.model.EditRedbagConfig;
 import com.guochuang.mimedia.mvp.model.LuckyConfig;
 import com.guochuang.mimedia.mvp.model.Order;
 import com.guochuang.mimedia.mvp.model.RedbagInfo;
@@ -199,6 +200,26 @@ public class EditRedbagPresenter extends BasePresenter<EditRedbagView> {
             @Override
             public void onSuccess(LuckyConfig data) {
                 mvpView.setLuckyConfig(data);
+
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setError(exception.getMessage());
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
+    public void getEditRedbagConfig(){
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getConfig()), new ApiCallback<EditRedbagConfig>() {
+            @Override
+            public void onSuccess(EditRedbagConfig data) {
+                mvpView.setConfig(data);
 
             }
 
