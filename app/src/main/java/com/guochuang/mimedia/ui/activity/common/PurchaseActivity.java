@@ -72,6 +72,7 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
     int days=0;
     String nestLatitude;
     String nestLongitude;
+    PassDialog passDialog;
     @Override
     protected PurchasePresenter createPresenter() {
         return new PurchasePresenter(this);
@@ -152,7 +153,7 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
                 }
                 if (cbRead.isChecked()){
                     if (payType == Constant.PAY_TYPE_KSB) {
-                        new PassDialog(PurchaseActivity.this, new PassDialog.OnPassDialogListener() {
+                        passDialog=new PassDialog(PurchaseActivity.this, new PassDialog.OnPassDialogListener() {
                             @Override
                             public void close() {
 
@@ -167,7 +168,8 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
                             public void onNumFull(String code) {
                                 startPay(code);
                             }
-                        }).setBackVisible(false).show();
+                        });
+                         passDialog.setBackVisible(false).show();
                         return;
                     }
                     startPay(null);
@@ -366,6 +368,9 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
     public void setError(String msg) {
         closeLoadingDialog();
         showShortToast(msg);
+        if (passDialog!=null&&passDialog.isShowing()){
+            passDialog.clearCode();
+        }
     }
 
 }

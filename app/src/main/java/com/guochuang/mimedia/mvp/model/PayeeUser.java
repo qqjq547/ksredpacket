@@ -1,6 +1,8 @@
 package com.guochuang.mimedia.mvp.model;
 
-public class PayeeUser {
+import java.io.Serializable;
+
+public class PayeeUser implements Serializable {
 
     /**
      * coin : string

@@ -342,6 +342,9 @@ public class MyKsbGrantActivity extends MvpActivity<MyKsbGrantPresenter> impleme
     public void setError(String msg) {
         closeLoadingDialog();
         showShortToast(msg);
+        if (passDialog!=null&&passDialog.isShowing()){
+            passDialog.clearCode();
+        }
     }
 
     @Override

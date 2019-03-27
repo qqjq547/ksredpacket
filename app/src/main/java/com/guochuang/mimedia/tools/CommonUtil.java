@@ -177,6 +177,10 @@ public class CommonUtil {
         BigDecimal b = new BigDecimal(number);
         return b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
+    public static String formatDoubleStr(double number) {
+        BigDecimal b = new BigDecimal(number);
+        return b.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString();
+    }
 
     public static void callPhone(Context context, String phone) {
         Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone));

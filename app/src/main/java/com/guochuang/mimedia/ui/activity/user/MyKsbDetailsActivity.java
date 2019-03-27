@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.mvp.model.DictionaryType;
+import com.guochuang.mimedia.tools.DialogBuilder;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.KsbRecord;
@@ -84,6 +85,20 @@ public class MyKsbDetailsActivity extends MvpActivity<MyKsbDetailsPresenter> imp
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
+            }
+        });
+        myKsbDetailsAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                 new DialogBuilder(MyKsbDetailsActivity.this)
+                         .setTitle(R.string.pls_input_remark)
+                         .setMessage("")
+                         .setPositiveButton(R.string.confirm, new View.OnClickListener() {
+                             @Override
+                             public void onClick(View view) {
+
+                             }
+                         }).create().show();
             }
         });
         myKsbDetailsAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);

@@ -18,6 +18,9 @@ import com.donkingliang.imageselector.utils.ImageSelector;
 import com.guochuang.mimedia.base.BaseActivity;
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
+import com.guochuang.mimedia.mvp.model.PayeeUser;
+import com.guochuang.mimedia.mvp.presenter.MyCapturePresenter;
+import com.guochuang.mimedia.mvp.view.MyCaptureView;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.ui.activity.redbag.EditRedbagActivity;
 import com.sz.gcyh.KSHongBao.R;
@@ -31,7 +34,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.functions.Action1;
 
-public class MyCaptureActivity extends MvpActivity {
+public class MyCaptureActivity extends MvpActivity<MyCapturePresenter> implements MyCaptureView {
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.tv_title)
@@ -41,8 +44,8 @@ public class MyCaptureActivity extends MvpActivity {
 
     public static MyCaptureActivity activity;
   @Override
-  protected BasePresenter createPresenter() {
-    return null;
+  protected MyCapturePresenter createPresenter() {
+    return new MyCapturePresenter(this);
 }
     @Override
     public int getLayout() {
@@ -57,6 +60,10 @@ public class MyCaptureActivity extends MvpActivity {
     public void initViewAndData() {
         activity=this;
         tvTitle.setText(R.string.scan_pay);
+        initFrame();
+    }
+
+    private void initFrame() {
         CaptureFragment captureFragment = new CaptureFragment();
         //定制化扫描框UI
         CodeUtils.setFragmentArgs(captureFragment,R.layout.view_qrcode_scan);
@@ -79,11 +86,12 @@ public class MyCaptureActivity extends MvpActivity {
                 Uri uri=Uri.parse(result);
                 String uuid=uri.getQueryParameter("uuid");
                 if (!TextUtils.isEmpty(uuid)) {
-                    startActivity(new Intent(MyCaptureActivity.this, KsbPayActivity.class).putExtra(Constant.USER_ACCOUNT_UUID, uuid));
-                    finish();
+                    showLoadingDialog(null);
+                    mvpPresenter.queryUserInfoByAccountUuid(uuid);
                     MyCaptureActivity.getActivity().finish();
                 }else {
-                    showShortToast(R.string.parse_error_and_late);
+                    initFrame();
+                    showShortToast(R.string.scan_error);
                 }
             }
         }
@@ -95,4 +103,18 @@ public class MyCaptureActivity extends MvpActivity {
     };
 
 
+    @Override
+    public void setData(PayeeUser data) {
+        closeLoadingDialog();
+        if (data!=null){
+            startActivity(new Intent(MyCaptureActivity.this, KsbPayActivity.class).putExtra(Constant.PAYEE_USER, data));
+            finish();
+        }
+    }
+
+    @Override
+    public void setError(String msg) {
+      closeLoadingDialog();
+      showShortToast(msg);
+    }
 }

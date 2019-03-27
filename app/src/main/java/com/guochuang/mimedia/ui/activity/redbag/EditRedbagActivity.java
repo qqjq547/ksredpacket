@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.donkingliang.imageselector.utils.ImageSelector;
 import com.donkingliang.imageselector.utils.ImageSelectorUtils;
+import com.guochuang.mimedia.mvp.model.EditRedbagConfig;
 import com.guochuang.mimedia.mvp.model.LuckyConfig;
 import com.guochuang.mimedia.ui.activity.common.MapPickActivity;
 import com.sz.gcyh.KSHongBao.R;
@@ -68,6 +69,8 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
     EditText etWord;
     @BindView(R.id.lin_word)
     LinearLayout linWord;
+    @BindView(R.id.tv_password_tip)
+    TextView tvPasswordTip;
     @BindView(R.id.et_amout)
     EditText etAmout;
     @BindView(R.id.lin_amount)
@@ -133,6 +136,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
     List<String> waitUpload=new ArrayList<>();
     List<String> picUrlArr=new ArrayList<>();
     String redPacketUuid;
+    PassDialog passDialog;
 
     @Override
     protected EditRedbagPresenter createPresenter() {
@@ -219,6 +223,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
         });
         rvPic.setAdapter(pictureAdapter);
         mvpPresenter.getTemplate(redPacketType);
+        mvpPresenter.getEditRedbagConfig();
     }
 
     public void showPayResult(boolean success,String errmsg){
@@ -471,7 +476,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
     }
    public void selectPayType(){
        picture=TextUtils.join(",",picUrlArr);
-       PaySelectDialog paySelectDialog = new PaySelectDialog(this, String.valueOf(money));
+       final PaySelectDialog paySelectDialog = new PaySelectDialog(this, String.valueOf(money));
        paySelectDialog.setOnResultListener(new PaySelectDialog.OnResultListener() {
            @Override
            public void onSelectItem(int postion) {
@@ -481,7 +486,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                    payType = Constant.PAY_TYPE_ALIPAY;
                } else {
                    payType = Constant.PAY_TYPE_KSB;
-                   new PassDialog(EditRedbagActivity.this, new PassDialog.OnPassDialogListener() {
+                   passDialog =new PassDialog(EditRedbagActivity.this, new PassDialog.OnPassDialogListener() {
                        @Override
                        public void close() {
                            selectPayType();
@@ -496,7 +501,9 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                        public void onNumFull(String code) {
                            startPay(code);
                        }
-                   }).show();
+                   });
+                   passDialog.show();
+
                    return;
                }
                startPay(null);
@@ -517,6 +524,7 @@ public void startPay(String safetyCode){
     @Override
     public void setData(final String data) {
         closeLoadingDialog();
+        passDialog.dismiss();
         if (!TextUtils.isEmpty(data)) {
             Order order=GsonUtil.GsonToBean(data,Order.class);
             redPacketUuid=order.getRedPacketUuid();
@@ -591,10 +599,21 @@ public void startPay(String safetyCode){
             etCount.setEnabled(false);
         }
     }
+
+    @Override
+    public void setConfig(EditRedbagConfig data) {
+        if (data!=null){
+            tvPasswordTip.setText(data.getPasswordOutTime());
+        }
+    }
+
     @Override
     public void setError(String msg) {
         closeLoadingDialog();
         showShortToast(msg);
+        if (passDialog!=null&&passDialog.isShowing()){
+            passDialog.clearCode();
+        }
     }
 
 

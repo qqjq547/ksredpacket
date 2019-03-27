@@ -190,7 +190,15 @@ public class CodeView extends View {
             invalidate();
         }
     }
-
+    public void deleteAll() {
+        if (code.length() > 0) {
+            code = "";
+            if (listener != null) {
+                listener.onValueChanged(code);
+            }
+            invalidate();
+        }
+    }
     /**
      * DP转PX
      */
