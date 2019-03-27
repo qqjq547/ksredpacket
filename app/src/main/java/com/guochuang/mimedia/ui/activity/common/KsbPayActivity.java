@@ -66,6 +66,8 @@ public class KsbPayActivity extends MvpActivity<KsbPayPresenter> implements KsbP
     PayeeUser payeeUser;
     PassDialog passDialog;
     double rate;
+    String coinStr;
+    String remark;
     @Override
     protected KsbPayPresenter createPresenter() {
         return new KsbPayPresenter(this);
@@ -107,7 +109,6 @@ public class KsbPayActivity extends MvpActivity<KsbPayPresenter> implements KsbP
 
             }
         });
-        showLoadingDialog(null);
     }
 
     @OnClick({R.id.iv_back, R.id.btn_sure})
@@ -117,8 +118,8 @@ public class KsbPayActivity extends MvpActivity<KsbPayPresenter> implements KsbP
                 onBackPressed();
                 break;
             case R.id.btn_sure:
-                final String coinStr=tvCoin.getText().toString().trim();
-                final String remark=etRemark.getText().toString().trim();
+                   coinStr=tvCoin.getText().toString().trim();
+                   remark=etRemark.getText().toString().trim();
                 if (TextUtils.isEmpty(coinStr)){
                     showShortToast(R.string.pls_set_money);
                     return;

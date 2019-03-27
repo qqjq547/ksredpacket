@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.mvp.model.DictionaryType;
 import com.guochuang.mimedia.tools.DialogBuilder;
+import com.guochuang.mimedia.tools.LogUtil;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.KsbRecord;
@@ -42,6 +43,8 @@ public class MyKsbDetailsActivity extends MvpActivity<MyKsbDetailsPresenter> imp
     TextView tvTitle;
     @BindView(R.id.tv_text)
     TextView tvText;
+    @BindView(R.id.lin_sum)
+    LinearLayout linSum;
     @BindView(R.id.tv_num_all)
     TextView tvNumAll;
     @BindView(R.id.rv_ksb)
@@ -183,6 +186,7 @@ public class MyKsbDetailsActivity extends MvpActivity<MyKsbDetailsPresenter> imp
                 subjectName.add(subjectArr.get(i).getName());
                 if (TextUtils.equals(defaultCode,subjectArr.get(i).getCode())){
                     type = data.get(i).getCode();
+                    tvText.setText(subjectArr.get(i).getName());
                     mvpPresenter.getKsbRecord(type, startIndex, Constant.PAGE_SIZE);
                 }
             }
