@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-
+<!--
     <TextView
         android:id="@+id/tv_des"
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
         android:gravity="center"
         android:textSize="@dimen/textfont8"
         android:textColor="#ffffff"
-        android:background="@drawable/bottom_5_radius_shape"/>
+        android:background="@drawable/bottom_5_radius_shape"/>-->
 
 
 

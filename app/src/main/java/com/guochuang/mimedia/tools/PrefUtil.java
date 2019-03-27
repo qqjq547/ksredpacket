@@ -12,6 +12,7 @@ import android.content.SharedPreferences.Editor;
 public class PrefUtil {
     public static final String USER_ROLE = "user_role";
     public static final String MOBILE = "mobile";
+
     private SharedPreferences sharedPreference;
     private static PrefUtil preference = null;
     public static final String LATITUDE="latitude";
@@ -33,6 +34,8 @@ public class PrefUtil {
     public static final String UPGRADE_NOTICE = "upgrade_notice";
     public static final String LAST_REMIND_TIME = "last_remind_time";
     public static final String MARKET_SWITCH = "market_switch";
+
+    public static final String ISDRAG = "isdrag";
 
 
     public static void init(Context context) {

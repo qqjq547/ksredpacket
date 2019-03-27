@@ -39,4 +39,11 @@
         <attr name="corners" format="dimension" />
     </declare-styleable>
 
+    <!--拖动-->
+    <declare-styleable name="DragView">
+        <attr name="gray_Imag" format="reference" />
+        <attr name="src_Imag" format="reference" />
+        <attr name="center_Imag" format="reference" />
+    </declare-styleable>
+
 </resources>
