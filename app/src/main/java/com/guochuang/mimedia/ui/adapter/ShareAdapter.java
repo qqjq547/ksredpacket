@@ -23,7 +23,7 @@ public class ShareAdapter extends BaseQuickAdapter<ShareBg, BaseViewHolder> {
 
     @Override
     protected void convert(BaseViewHolder holder, ShareBg item) {
-        holder.setText(R.id.tv_des, item.getDes());
+//        holder.setText(R.id.tv_des, item.getDes());
         GlideApp.with(mContext).load(item.getZoomImage()).transform(new RadiusTransformation(mContext, 5)).into((ImageView) (holder.getView(R.id.iv_bg)));
     }
 }
