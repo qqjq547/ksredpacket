@@ -193,7 +193,11 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                         }
                         openRedbagDialog = new OpenRedbagDialog(getContext());
                         //是否是拖动开红包
-                        openRedbagDialog.setDrag(true);
+                        String isDragStr = getPref().getString(PrefUtil.ISDRAG, "0");
+                        if (Constant.ISDRAG.equals(isDragStr)) {
+                            openRedbagDialog.setDrag(true);
+                        }
+
                         openRedbagDialog.setOnOpenResultListener(new OpenRedbagDialog.OnOpenResultListener() {
                             @Override
                             public void onOpenResult(String password) {
@@ -431,6 +435,8 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     @Override
     public void setRedbagDetail(RedbagDetail redbagDetail) {
         closeLoadingDialog();
+        //保存数据
+        getPref().setString(PrefUtil.ISDRAG, redbagDetail.getIsLoke());
         if (redbagDetail != null) {
             IntentUtils.startRedbagDetailActivity(getActivity(), redbagDetail, redbag.getUuid(), redbag.getRoleType());
         }

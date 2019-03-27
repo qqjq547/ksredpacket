@@ -65,6 +65,14 @@ public class OpenRedbagDialog extends Dialog {
         mContext = context;
         View  view = View.inflate(context, R.layout.dialog_open_redbag, null);
         ButterKnife.bind(this, view);
+        mDragView.setOnCheckLisenter(new DragView.OnCheckLisenter() {
+            @Override
+            public void checkSuccess() {
+                onOpenResultListener.onOpenResult(etWord.getText().toString().trim());
+                dismiss();
+            }
+        });
+
         setContentView(view);
     }
 
@@ -84,14 +92,11 @@ public class OpenRedbagDialog extends Dialog {
 
 
             if(mIsDrag) {
-
                 mLlRoot.setBackgroundResource(R.drawable.bg_drag_open_redbag);
                 mDragView.setVisibility(View.VISIBLE);
                 tvOpen.setVisibility(View.GONE);
                 etWord.setVisibility(View.GONE);
             }
-
-
 
 
 
