@@ -1,38 +1,22 @@
 package com.guochuang.mimedia.ui.activity.common;
 
-import android.Manifest;
-import android.app.AppComponentFactory;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.donkingliang.imageselector.utils.ImageSelector;
-import com.guochuang.mimedia.base.BaseActivity;
-import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.PayeeUser;
 import com.guochuang.mimedia.mvp.presenter.MyCapturePresenter;
 import com.guochuang.mimedia.mvp.view.MyCaptureView;
 import com.guochuang.mimedia.tools.Constant;
-import com.guochuang.mimedia.ui.activity.redbag.EditRedbagActivity;
 import com.sz.gcyh.KSHongBao.R;
-import com.tbruyelle.rxpermissions.RxPermissions;
-import com.uuzuche.lib_zxing.activity.CaptureActivity;
 import com.uuzuche.lib_zxing.activity.CaptureFragment;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import rx.functions.Action1;
 
 public class MyCaptureActivity extends MvpActivity<MyCapturePresenter> implements MyCaptureView {
     @BindView(R.id.iv_back)
@@ -90,8 +74,9 @@ public class MyCaptureActivity extends MvpActivity<MyCapturePresenter> implement
                     mvpPresenter.queryUserInfoByAccountUuid(uuid);
                     MyCaptureActivity.getActivity().finish();
                 }else {
-                    initFrame();
                     showShortToast(R.string.scan_error);
+                    finish();
+                    this.onAnalyzeFailed();
                 }
             }
         }
