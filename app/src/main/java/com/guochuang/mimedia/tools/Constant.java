@@ -100,6 +100,8 @@ public class Constant {
     public static final String HAS_REFRESH = "hasRefresh";
     public static final String DEFAULT_CODE = "defaultCode";
     public static final String ISSHOWDEMO = "isShowDemo";
+    public static final String MARKET_NAME = "marketName";
+    public static final String VERSION_CODE = "versionCode";
 
     public static final String SWITCH_SHOW = "show";
     public static final String SWITCH_HIDE = "hide";
