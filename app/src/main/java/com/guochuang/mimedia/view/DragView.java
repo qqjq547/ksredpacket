@@ -178,6 +178,11 @@ public class DragView extends View {
         canvas.drawBitmap(mCenterBitmap, mWidth / 2 - mCenterBitmap.getWidth() / 2, getHeight() / 2 - mCenterBitmap.getHeight() / 2, null);
 
         canvas.drawBitmap(mGrayBitmap, mGrayPosition, getPaddingTop(), null);
+        if (currentPosition == 0) {
+            canvas.drawBitmap(mSrcBitmap, getPaddingLeft() + currentPosition, getPaddingTop(), null);
+        } else {
+            canvas.drawBitmap(mSrcBitmap, currentPosition, getPaddingTop(), null);
+        }
 
         canvas.drawBitmap(mSrcBitmap, getPaddingLeft() + currentPosition, getPaddingTop(), null);
 
@@ -192,7 +197,7 @@ public class DragView extends View {
         if (null != mSrcBitmap && isDrawMask) {
             // 先绘制阴影
 //            canvas.drawBitmap(mMaskShadowBitmap, -mCaptchaX + mDragerOffset, 0, mMaskShadowPaint);
-            canvas.drawBitmap(mSrcBitmap, getPaddingLeft() + currentPosition,getPaddingTop(), null);
+            canvas.drawBitmap(mSrcBitmap, getPaddingLeft() + currentPosition, getPaddingTop(), null);
         }
 
 
@@ -223,6 +228,7 @@ public class DragView extends View {
             case MotionEvent.ACTION_MOVE:
                 //手指移动
                 float moveX = event.getX();
+                Log.e("onTouchEvent: ", "moveX = " + moveX);
                 currentPosition = (int) moveX;
                 if (moveX < 0) {
                     currentPosition = 0;
@@ -237,7 +243,7 @@ public class DragView extends View {
                 currentPosition = 0;
                 //计算两个图标是否重合
                 float upX = event.getX();
-
+                Log.e("onTouchEvent: ", "upX = " + upX + "mGrayPosition = " + mGrayPosition);
                 if (mGrayPosition - 5 < upX && upX < mGrayPosition + 5) {
                     currentPosition = (int) upX;
                     isShowSuccessAnim = true;
