@@ -433,7 +433,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     public void setRedbagDetail(RedbagDetail redbagDetail) {
         closeLoadingDialog();
         //保存数据
-        getPref().setInt(PrefUtil.ISDRAG, redbagDetail.getIsLock());
+        getPref().setInt(PrefUtil.ISDRAG, redbagDetail.getNextValidate());
         if (redbagDetail != null) {
             IntentUtils.startRedbagDetailActivity(getActivity(), redbagDetail, redbag.getUuid(), redbag.getRoleType());
         }
