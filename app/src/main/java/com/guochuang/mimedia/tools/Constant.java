@@ -100,6 +100,8 @@ public class Constant {
     public static final String HAS_REFRESH = "hasRefresh";
     public static final String DEFAULT_CODE = "defaultCode";
     public static final String ISSHOWDEMO = "isShowDemo";
+    public static final String MARKET_NAME = "marketName";
+    public static final String VERSION_CODE = "versionCode";
 
     public static final String SWITCH_SHOW = "show";
     public static final String SWITCH_HIDE = "hide";
@@ -290,5 +292,5 @@ public class Constant {
 
 
     public static final String INVITE_FRIENDS_GIVE_GIFTS = "邀请好友得好礼";
-    public static final String ISDRAG = "1";
+    public static final int ISDRAG = 1;
 }
