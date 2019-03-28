@@ -157,7 +157,7 @@ public class KsbPayActivity extends MvpActivity<KsbPayPresenter> implements KsbP
 
                         }
                     });
-                    passDialog.setNeedIdentity(true);
+                    passDialog.setNeedIdentity(false);
                     passDialog.setBackVisible(false);
                 }
                 if (passDialog.isShowing()) {

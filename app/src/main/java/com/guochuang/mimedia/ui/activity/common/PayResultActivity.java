@@ -2,6 +2,7 @@ package com.guochuang.mimedia.ui.activity.common;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -59,7 +60,13 @@ public class PayResultActivity extends MvpActivity {
             tvRealname.setText(String.format(getString(R.string.format_kuahao), result.getRealName()));
             tvMoney.setText(String.format(getString(R.string.format_yuan), result.getMoney()));
             tvKsb.setText(String.format(getString(R.string.format_ksb), result.getCoin()));
-            GlideImgManager.loadCornerImage(this, result.getTipsUrl(), ivBanner, CommonUtil.dip2px(this, 8));
+            if (TextUtils.isEmpty(result.getTipsUrl())){
+                ivBanner.setVisibility(View.GONE);
+            }else{
+                ivBanner.setVisibility(View.VISIBLE);
+                GlideImgManager.loadCornerImage(this, result.getTipsUrl(), ivBanner, CommonUtil.dip2px(this, 8));
+            }
+
         }
     }
 
@@ -70,7 +77,7 @@ public class PayResultActivity extends MvpActivity {
                 onBackPressed();
                 break;
             case R.id.iv_banner:
-                if (result!=null){
+                if (result!=null&&!TextUtils.isEmpty(result.getTipsjumpUrl())){
                     IntentUtils.startWebActivity(this,"",result.getTipsjumpUrl());
                 }
                 break;

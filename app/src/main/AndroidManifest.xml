@@ -112,6 +112,7 @@
         <activity android:name="com.guochuang.mimedia.ui.activity.common.JuxiangwanActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.user.MyPayCodeActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.common.KsbPayActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.common.ScanResultActivity" />
         <activity
             android:name="com.guochuang.mimedia.ui.activity.common.MyCaptureActivity"
             android:theme="@style/TransTheme" />

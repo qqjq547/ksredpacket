@@ -141,7 +141,7 @@ public class MyPayCodeActivity extends MvpActivity<MyPayCodePresenter> implement
                 startActivity(new Intent(this,MyKsbDetailsActivity.class).putExtra(Constant.DEFAULT_CODE,Constant.KSB_CODE_PAYMENT));
                 break;
             case R.id.tv_identify:
-                startActivity(new Intent(this, IdentifyActivity.class));
+                startActivityForResult(new Intent(this, IdentifyActivity.class), Constant.REFRESH);
                 break;
         }
     }
@@ -166,5 +166,18 @@ public class MyPayCodeActivity extends MvpActivity<MyPayCodePresenter> implement
     public void setError(String msg) {
       closeLoadingDialog();
       showShortToast(msg);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==RESULT_OK){
+            switch (requestCode){
+                case Constant.REFRESH:
+                    showLoadingDialog(null);
+                    mvpPresenter.queryQrcode();
+                    break;
+
+            }
+        }
     }
 }

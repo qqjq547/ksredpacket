@@ -74,9 +74,8 @@ public class MyCaptureActivity extends MvpActivity<MyCapturePresenter> implement
                     mvpPresenter.queryUserInfoByAccountUuid(uuid);
                     MyCaptureActivity.getActivity().finish();
                 }else {
-                    showShortToast(R.string.scan_error);
+                    startActivity(new Intent(MyCaptureActivity.this,ScanResultActivity.class).putExtra(Constant.DATA,result));
                     finish();
-                    this.onAnalyzeFailed();
                 }
             }
         }

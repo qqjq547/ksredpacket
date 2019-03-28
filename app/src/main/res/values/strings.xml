@@ -723,6 +723,7 @@
     <string name="format_kuahao">(%s)</string>
     <string name="invite_friends_give_gifts">邀请好友得好礼</string>
     <string name="str_share">分享</string>
+    <string name="scan_result">扫码结果</string>
     <string name="scan_error">该收款码不是快收KSB收款码，请确定收款码后再试</string>
     <string name="zhuan_zen_shuo_ming">由于计算时会丢失精度，不同单位输入同一个等值金额另外一个值可能会不同，以转赠KSB数为准</string>
 
