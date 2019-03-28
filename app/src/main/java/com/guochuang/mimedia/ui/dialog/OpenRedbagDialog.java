@@ -90,7 +90,6 @@ public class OpenRedbagDialog extends Dialog {
             etWord.setVisibility(View.INVISIBLE);
             //系统红包  做处理
 
-
             if(mIsDrag) {
                 mLlRoot.setBackgroundResource(R.drawable.bg_drag_open_redbag);
                 mDragView.setVisibility(View.VISIBLE);
