@@ -65,8 +65,6 @@ import com.guochuang.mimedia.view.HoneyCombView;
 import com.guochuang.mimedia.view.ScrollTextView;
 import com.sz.gcyh.KSHongBao.R;
 import com.tbruyelle.rxpermissions.RxPermissions;
-import com.uuzuche.lib_zxing.activity.CaptureActivity;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -193,8 +191,8 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                         }
                         openRedbagDialog = new OpenRedbagDialog(getContext());
                         //是否是拖动开红包
-                        String isDragStr = getPref().getString(PrefUtil.ISDRAG, "0");
-                        if (Constant.ISDRAG.equals(isDragStr)) {
+                        int isDragStr = getPref().getInt(PrefUtil.ISDRAG, 0);
+                        if (Constant.ISDRAG==isDragStr) {
                             openRedbagDialog.setDrag(true);
                         }
                         openRedbagDialog.setOnOpenResultListener(new OpenRedbagDialog.OnOpenResultListener() {
@@ -435,7 +433,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     public void setRedbagDetail(RedbagDetail redbagDetail) {
         closeLoadingDialog();
         //保存数据
-        getPref().setString(PrefUtil.ISDRAG, redbagDetail.getIsLoke());
+        getPref().setInt(PrefUtil.ISDRAG, redbagDetail.getIsLock());
         if (redbagDetail != null) {
             IntentUtils.startRedbagDetailActivity(getActivity(), redbagDetail, redbag.getUuid(), redbag.getRoleType());
         }

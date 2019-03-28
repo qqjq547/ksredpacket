@@ -43,14 +43,14 @@ public class RedbagDetail implements Serializable {
     private List<String> drawAvatar;
     private List<PictureBean> picture;
     private List<RedbagAd> systemAd;
-    private String isLoke;
+    private int isLock;
 
-    public String getIsLoke() {
-        return isLoke;
+    public int getIsLock() {
+        return isLock;
     }
 
-    public void setIsLoke(String isLoke) {
-        this.isLoke = isLoke;
+    public void setIsLock(int isLock) {
+        this.isLock = isLock;
     }
 
     public String getAreaType() {

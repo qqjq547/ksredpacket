@@ -292,5 +292,5 @@ public class Constant {
 
 
     public static final String INVITE_FRIENDS_GIVE_GIFTS = "邀请好友得好礼";
-    public static final String ISDRAG = "1";
+    public static final int ISDRAG = 1;
 }
