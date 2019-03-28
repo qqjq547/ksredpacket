@@ -152,6 +152,9 @@ public class DragView extends View {
 
         Random random = new Random(System.currentTimeMillis());
         mRandomValue = random.nextInt(100);
+        if(mRandomValue < 50) {
+            mRandomValue+=50;
+        }
 
     }
 
