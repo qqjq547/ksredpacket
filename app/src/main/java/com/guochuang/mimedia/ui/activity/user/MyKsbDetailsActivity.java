@@ -87,21 +87,17 @@ public class MyKsbDetailsActivity extends MvpActivity<MyKsbDetailsPresenter> imp
         myKsbDetailsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if (TextUtils.isEmpty(myKsbDetailsAdapter.getData().get(position).getRemark())){
+                    return;
+                }
+                new DialogBuilder(MyKsbDetailsActivity.this)
+                        .setMessage(myKsbDetailsAdapter.getData().get(position).getRemark())
+                        .setPositiveButton(R.string.confirm, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
 
-            }
-        });
-        myKsbDetailsAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                 new DialogBuilder(MyKsbDetailsActivity.this)
-                         .setTitle(R.string.pls_input_remark)
-                         .setMessage("")
-                         .setPositiveButton(R.string.confirm, new View.OnClickListener() {
-                             @Override
-                             public void onClick(View view) {
-
-                             }
-                         }).create().show();
+                            }
+                        }).create().show();
             }
         });
         myKsbDetailsAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);

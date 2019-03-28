@@ -15,7 +15,7 @@
            android:layout_width="@dimen/space15"
            android:layout_height="@dimen/space15"
            android:layout_marginRight="@dimen/space5"
-           android:src="@drawable/ic_temp_tip"/>
+           android:src="@drawable/ic_tip_remark"/>
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"

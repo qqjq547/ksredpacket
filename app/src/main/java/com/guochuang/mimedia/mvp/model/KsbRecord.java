@@ -19,6 +19,7 @@ public class KsbRecord {
     private String title;
     private String type;
     private String userAccountUuid;
+    private String remark;
 
     public String getCoin() {
         return coin;
@@ -74,5 +75,13 @@ public class KsbRecord {
 
     public void setUserAccountUuid(String userAccountUuid) {
         this.userAccountUuid = userAccountUuid;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

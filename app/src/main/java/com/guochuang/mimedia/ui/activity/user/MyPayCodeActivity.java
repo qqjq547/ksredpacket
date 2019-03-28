@@ -89,9 +89,11 @@ public class MyPayCodeActivity extends MvpActivity<MyPayCodePresenter> implement
         super.onResume();
         if (getPref().getInt(PrefUtil.IDENTITY,0)==0){
             tvRecord.setVisibility(View.INVISIBLE);
+            tvSave.setVisibility(View.INVISIBLE);
             tvIdentify.setVisibility(View.VISIBLE);
         }else {
             tvRecord.setVisibility(View.VISIBLE);
+            tvSave.setVisibility(View.VISIBLE);
             tvIdentify.setVisibility(View.GONE);
         }
     }
