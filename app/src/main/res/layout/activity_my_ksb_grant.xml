@@ -148,7 +148,7 @@
                     android:paddingTop="@dimen/space10"
                     android:paddingBottom="@dimen/space10"
                     android:textColorHint="@color/text_gray"
-                    android:textSize="@dimen/textfont16" />
+                    android:textSize="@dimen/textfont18" />
 
             </LinearLayout>
 
@@ -199,7 +199,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/space7"
-                android:textSize="@dimen/sp_12"
+                android:textSize="@dimen/textfont18"
                 android:layout_marginBottom="5dp"
                 android:background="@null"
                 android:layout_toRightOf="@+id/tv_yuan"
