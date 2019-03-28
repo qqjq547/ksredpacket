@@ -697,7 +697,7 @@
     <string name="date_fifth">15天</string>
     <string name="clear_address">清空地址</string>
     <string name="navigation_not_empty">导航地址不能为空</string>
-    <string name="pay_code_title">收款码</string>
+    <string name="pay_code_title">收付款</string>
     <string name="my_pay_code">我的收款码</string>
     <string name="save_pay_code">保存收款码</string>
     <string name="pay_code_record">收款记录</string>
@@ -712,9 +712,9 @@
     <string name="ksb_pay_title">KSB付款</string>
     <string name="ksb_pay_frame_title">推荐使用KSB支付</string>
     <string name="ksb_payment">KSB支付</string>
-    <string name="scan_pay">扫码支付</string>
+    <string name="scan_pay">扫码付款</string>
     <string name="get_camera_permission">请先设置相机权限</string>
-    <string name="pls_inside_code">请将二维码放入框内即可扫描</string>
+    <string name="pls_inside_code">将二维码放入框内即可扫描</string>
     <string name="equivalence">等值</string>
     <string name="pls_set_money">请先设置金额</string>
     <string name="ksb_loss">KSB不足</string>
