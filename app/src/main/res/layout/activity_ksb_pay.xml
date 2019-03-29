@@ -194,7 +194,6 @@
                         android:paddingLeft="@dimen/space10"
                         android:paddingRight="@dimen/space10"
                         android:textSize="@dimen/textfont18"
-                        android:inputType="number"
                         android:textColor="@color/text_black"
                         android:hint="@string/pls_input_money"/>
                     <include layout="@layout/layout_divide_deep_line"/>
