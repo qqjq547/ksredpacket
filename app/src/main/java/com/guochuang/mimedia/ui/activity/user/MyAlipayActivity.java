@@ -104,7 +104,9 @@ public class MyAlipayActivity extends MvpActivity<MyAlipayPresenter> implements 
     @Override
     public void setData(String data) {
         closeLoadingDialog();
-        passDialog.dismiss();
+        if (passDialog!=null&&passDialog.isShowing()){
+            passDialog.dismiss();
+        }
         showShortToast(getResources().getString(R.string.success));
         setResult(RESULT_OK);
         finish();
@@ -131,7 +133,6 @@ public class MyAlipayActivity extends MvpActivity<MyAlipayPresenter> implements 
     @Override
     public void setGetData(AlipayAccout data) {
         closeLoadingDialog();
-        passDialog.dismiss();
         if (data != null) {
             if (!TextUtils.isEmpty(data.getAlipayRealName())) {
                 etName.setText(data.getAlipayRealName());

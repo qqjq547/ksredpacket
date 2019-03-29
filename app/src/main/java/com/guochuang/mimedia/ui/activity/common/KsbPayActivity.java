@@ -185,7 +185,9 @@ public class KsbPayActivity extends MvpActivity<KsbPayPresenter> implements KsbP
     @Override
     public void setPayResult(PaymentResult data) {
         closeLoadingDialog();
-        passDialog.dismiss();
+        if (passDialog!=null&&passDialog.isShowing()){
+            passDialog.dismiss();
+        }
         if (data!=null){
             startActivity(new Intent(this,PayResultActivity.class).putExtra(Constant.DATA,data));
             finish();

@@ -309,6 +309,9 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
     @Override
     public void setBuyCity(String data) {
         closeLoadingDialog();
+        if (passDialog!=null&&passDialog.isShowing()){
+            passDialog.dismiss();
+        }
         if (!TextUtils.isEmpty(data)) {
             Order order=GsonUtil.GsonToBean(data,Order.class);
             payResult(order);
@@ -320,6 +323,9 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
     @Override
     public void setUpgradeAgent(Order data) {
         closeLoadingDialog();
+        if (passDialog!=null&&passDialog.isShowing()){
+            passDialog.dismiss();
+        }
         if (data!=null){
             payResult(data);
         }else {
@@ -330,6 +336,9 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
     @Override
     public void setBuyHonyComb(Order data) {
         closeLoadingDialog();
+        if (passDialog!=null&&passDialog.isShowing()){
+            passDialog.dismiss();
+        }
         if (data!=null){
             payResult(data);
         }else {
@@ -339,6 +348,9 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
     @Override
     public void setSnatch(Order data) {
         closeLoadingDialog();
+        if (passDialog!=null&&passDialog.isShowing()){
+            passDialog.dismiss();
+        }
         if (data!=null){
             payResult(data);
         }else {
@@ -349,6 +361,9 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
     @Override
     public void setBuyNestAd(Order data) {
         closeLoadingDialog();
+        if (passDialog!=null&&passDialog.isShowing()){
+            passDialog.dismiss();
+        }
         if (data!=null){
             payResult(data);
         }else {

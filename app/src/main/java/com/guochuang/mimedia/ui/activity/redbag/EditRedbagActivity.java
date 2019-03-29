@@ -524,7 +524,9 @@ public void startPay(String safetyCode){
     @Override
     public void setData(final String data) {
         closeLoadingDialog();
-        passDialog.dismiss();
+        if (passDialog!=null&&passDialog.isShowing()){
+            passDialog.dismiss();
+        }
         if (!TextUtils.isEmpty(data)) {
             Order order=GsonUtil.GsonToBean(data,Order.class);
             redPacketUuid=order.getRedPacketUuid();

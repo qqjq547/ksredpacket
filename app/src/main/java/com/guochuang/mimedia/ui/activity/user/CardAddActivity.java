@@ -200,7 +200,9 @@ public class CardAddActivity extends MvpActivity<CardAddPresenter> implements Ca
     @Override
     public void setData(Boolean data) {
         closeLoadingDialog();
-        passDialog.dismiss();
+        if (passDialog!=null&&passDialog.isShowing()){
+            passDialog.dismiss();
+        }
         showShortToast(getResources().getString(R.string.success));
         setResult(RESULT_OK);
         finish();
