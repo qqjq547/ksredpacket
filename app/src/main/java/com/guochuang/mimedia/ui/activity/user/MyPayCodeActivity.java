@@ -109,7 +109,11 @@ public class MyPayCodeActivity extends MvpActivity<MyPayCodePresenter> implement
                     @Override
                     public void call(Boolean aBoolean) {
                         if (aBoolean) {
-                            startActivity(new Intent(MyPayCodeActivity.this, MyCaptureActivity.class));
+                            if (getPref().getInt(PrefUtil.IDENTITY,0)==0){
+                                startActivity(new Intent(MyPayCodeActivity.this, IdentifyActivity.class));
+                            }else{
+                                startActivity(new Intent(MyPayCodeActivity.this, MyCaptureActivity.class));
+                            }
                         }else {
                             showShortToast(R.string.get_camera_permission);
                         }

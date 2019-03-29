@@ -57,6 +57,7 @@ import com.guochuang.mimedia.ui.activity.MainActivity;
 import com.guochuang.mimedia.ui.activity.common.MyCaptureActivity;
 import com.guochuang.mimedia.ui.activity.common.ShareActivity;
 import com.guochuang.mimedia.ui.activity.redbag.SquareActivity;
+import com.guochuang.mimedia.ui.activity.user.IdentifyActivity;
 import com.guochuang.mimedia.ui.activity.user.MyPayCodeActivity;
 import com.guochuang.mimedia.ui.activity.user.UpgradeAgentActivity;
 import com.guochuang.mimedia.ui.dialog.OpenRedbagDialog;
@@ -275,7 +276,11 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                     @Override
                     public void call(Boolean aBoolean) {
                         if (aBoolean) {
-                            startActivity(new Intent(getActivity(), MyCaptureActivity.class));
+                            if (getPref().getInt(PrefUtil.IDENTITY,0)==0){
+                                startActivity(new Intent(getActivity(), IdentifyActivity.class));
+                            }else{
+                                startActivity(new Intent(getActivity(), MyCaptureActivity.class));
+                            }
                         } else {
                             showShortToast(R.string.get_camera_permission);
                         }
