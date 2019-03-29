@@ -1343,12 +1343,13 @@ public interface ApiStore {
 
     );
 
-    @GET("/api/v1/survey/survey/get_detail")
+    @GET("/api/v1/redpacket/red_packet/get_detail")
     Observable<HttpResponse<LookVideoResult>> getProblems(
             @Query("surveyId") long surveyId,
             @Query("redPacketUuid") String redPacketUuid);
 
-    @GET("/api/v1/survey/survey/get_statistics")
+
+    @GET("/api/v1/redpacket/red_packet/get_statistics")
     Observable<HttpResponse<LookSurevyResult>> getVideoProblemAnswerList(
             @Query("surveyId") long surveyId,
             @Query("redPacketUuid") String redPacketUuid);
@@ -1375,7 +1376,7 @@ public interface ApiStore {
             @Query("redPacketUuid") String redPacketUuid);
 
     @FormUrlEncoded
-    @POST("/api/v1/survey/question/survey_submit")
+    @POST("/api/v1/redpacket/red_packet/survey_submit")
     Observable<HttpResponse<RedbagDetail>> surveySubmit(
             @Field("channelCode") String channelCode,
             @Field("clientIp") String clientIp,
@@ -1386,7 +1387,7 @@ public interface ApiStore {
             @Field("submitJson") String submitJson);
 
     @FormUrlEncoded
-    @POST("/api/v1/survey/question/video_submit")
+    @POST("/api/v1/redpacket/red_packet/video_submit")
     Observable<HttpResponse<RedbagDetail>> videoSubmit(
             @Field("channelCode") String channelCode,
             @Field("clientIp") String clientIp,
