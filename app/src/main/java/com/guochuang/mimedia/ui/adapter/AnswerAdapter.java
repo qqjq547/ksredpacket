@@ -26,7 +26,7 @@ public class AnswerAdapter extends BaseQuickAdapter<LookVideoResult.QuestionList
 
     @Override
     protected void convert(final BaseViewHolder helper, LookVideoResult.QuestionListBean item) {
-        helper.setText(R.id.tv_index,helper.getAdapterPosition()+".");
+        helper.setText(R.id.tv_index,(helper.getAdapterPosition()+1)+".");
         switch (item.getType()){
             case 0://单选题
                 helper.setGone(R.id.lin_direct_answer,false);

@@ -194,7 +194,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                                     if (redbag.getRoleType().equals(Constant.ROLETYPE_SYSTEM)) {
                                         mvpPresenter.redPacketOpen(getPref().getLatitude(), getPref().getLongitude(), redbag.getUuid());
                                     } else {
-                                        if (redbag.getType().equals(Constant.RED_PACKET_TYPE_VIDEO)||redbag.getType().equals(Constant.RED_PACKET_TYPE_SURVEY)){
+                                        if ((redbag.getType().equals(Constant.RED_PACKET_TYPE_VIDEO)&&redbag.getSurveyId()>0)||redbag.getType().equals(Constant.RED_PACKET_TYPE_SURVEY)){
                                             mvpPresenter.redPacketPoolOpenSurvey(getPref().getLatitude(), getPref().getLongitude(), redbag.getUuid());
                                         }else {
                                             mvpPresenter.redPacketPoolOpen(getPref().getLatitude(), getPref().getLongitude(), redbag.getUuid(), password);

@@ -46,6 +46,7 @@ public class RedbagDetail implements Serializable {
     private List<PictureBean> picture;
     private List<RedbagAd> systemAd;
 
+
     public String getAreaType() {
         return areaType;
     }
