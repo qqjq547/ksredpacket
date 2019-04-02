@@ -2,6 +2,7 @@ package com.guochuang.mimedia.view;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Matrix;
 import android.graphics.SurfaceTexture;
 import android.media.MediaPlayer;
 import android.util.AttributeSet;
@@ -115,7 +116,14 @@ public class MyVideoPlayer extends RelativeLayout {
         @Override
         public void onPrepared(MediaPlayer mp) {
             //调整
-            videoView.setLayoutParams(new RelativeLayout.LayoutParams(info.width, info.height));
+            if(info.rotat == 90|| info.rotat == 270) {
+                videoView.setLayoutParams(new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+                mediaController.setLayoutParams(new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+            }else {
+                videoView.setLayoutParams(new RelativeLayout.LayoutParams(info.width, info.height));
+            }
+
+
             //隐藏视频加载进度条
             mediaController.setPbLoadingVisiable(View.GONE);
             //进行视频的播放
@@ -173,6 +181,7 @@ public class MyVideoPlayer extends RelativeLayout {
     public void setPlayData(VideoPlayerItemInfo info) {
         this.info = info;
     }
+
 
 
 }

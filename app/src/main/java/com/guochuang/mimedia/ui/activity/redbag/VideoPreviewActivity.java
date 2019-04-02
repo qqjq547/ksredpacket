@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
@@ -45,7 +46,7 @@ public class VideoPreviewActivity extends MvpActivity {
     MyVideoPlayer videoPlayer;
 
     String url;
-    int mWidth, mHeight;
+    int mWidth, mHeight,mVideoWidth,mVideoHeight;
 
     @Override
     protected BasePresenter createPresenter() {
@@ -76,6 +77,12 @@ public class VideoPreviewActivity extends MvpActivity {
         videoPlayer.setBackground(new BitmapDrawable(getResources(), bitmap));
         String height = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT); // 视频高度
         String width = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH); // 视频宽度
+        String rotation = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_ROTATION); // 视频方向
+        Log.e("initViewAndData: ", rotation);
+
+        mVideoWidth = Integer.valueOf(width);
+        mVideoHeight = Integer.valueOf(height);
+        int rota = Integer.valueOf(rotation);
 
         new DefaultNavigationBar.Builder(this).setTitle(getResources().getString(R.string.video_preview))
                 .setLeftClick(new View.OnClickListener() {
@@ -87,8 +94,9 @@ public class VideoPreviewActivity extends MvpActivity {
                 }).build();
 
         //传递给条目里面的MyVideoPlayer
-        autoResize(Integer.valueOf(width),Integer.valueOf(height));
-        VideoPlayerItemInfo info = new VideoPlayerItemInfo(0, url,mWidth,mHeight);
+        autoResize(mVideoWidth,mVideoHeight,rota);
+
+        VideoPlayerItemInfo info = new VideoPlayerItemInfo(0, url,mWidth,mHeight,rota);
         videoPlayer.setPlayData(info);
 
         //设置为初始化状态
@@ -122,7 +130,13 @@ public class VideoPreviewActivity extends MvpActivity {
     }
 
 
-    private void autoResize(int width, int height) {
+
+
+    private void autoResize(int width, int height,int rotation) {
+        if(rotation == 90 || rotation == 270) {
+            videoPlayer.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+            return;
+        }
         Display currDisplay = getWindowManager().getDefaultDisplay();
         if (width > currDisplay.getWidth() || height > currDisplay.getHeight()) {
 

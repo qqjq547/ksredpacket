@@ -7,8 +7,10 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -34,6 +36,8 @@ import butterknife.OnClick;
 public class MyVideoMediaController extends RelativeLayout {
 
     private static final String TAG = "MyVideoMediaController";
+    @BindView(R.id.fl_content)
+    FrameLayout fl_content;
     @BindView(R.id.pb_loading)
     ProgressBar pbLoading;
     @BindView(R.id.iv_replay)
@@ -81,6 +85,7 @@ public class MyVideoMediaController extends RelativeLayout {
         }
     };
 
+
     public void delayHideTitle(){
         //移除消息
         mHandler.removeMessages(MSG_HIDE_TITLE);
@@ -104,6 +109,7 @@ public class MyVideoMediaController extends RelativeLayout {
     //初始化控件
     private void initView() {
         View view = View.inflate(getContext(), R.layout.video_controller, this);
+
         ButterKnife.bind(this,view);
 
         initViewDisplay();
@@ -378,5 +384,17 @@ public class MyVideoMediaController extends RelativeLayout {
     //设置视频加载进度条的显示状态
     public void setPbLoadingVisiable(int visiable) {
         pbLoading.setVisibility(visiable);
+    }
+
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        if(getLayoutParams().width == ViewGroup.LayoutParams.MATCH_PARENT && getLayoutParams().height== ViewGroup.LayoutParams.MATCH_PARENT){
+            ViewGroup.LayoutParams layoutParams = fl_content.getLayoutParams();
+            layoutParams.width =  ViewGroup.LayoutParams.MATCH_PARENT;
+            layoutParams.height =  ViewGroup.LayoutParams.MATCH_PARENT;
+            fl_content.setLayoutParams(layoutParams);
+        }
     }
 }

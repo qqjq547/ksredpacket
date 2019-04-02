@@ -41,7 +41,7 @@ public class SendRedbagAdapter extends BaseQuickAdapter<RedbagRecord,BaseViewHol
         helper.setGone(R.id.tv_goto_look_info,false);
         helper.setGone(R.id.iv_prictu,false);
 
-        String suffix = String.format(mContext.getString(R.string.money_ge_fomat),item.getMoney(),item.getQuantity());
+        String suffix = item.getMoney()+ String.format(mContext.getString(R.string.money_ge_fomat),item.getQuantity());
         helper.setText(R.id.tv_red_packet,getTypeName(item.getRedPacketType()) + suffix);
 
         helper.setText(R.id.tv_kou_lin, String.format(mContext.getString(R.string.password_fomat),item.getPassword()));
@@ -55,6 +55,7 @@ public class SendRedbagAdapter extends BaseQuickAdapter<RedbagRecord,BaseViewHol
             case Constant.RED_PACKET_TYPE_VIDEO:
                 helper.setText(R.id.tv_goto_look_problem,R.string.look_problme_str);
                 helper.setGone(R.id.tv_goto_look_problem,item.getSurveyId()>0);
+
                 break;
             default:
                 helper.setGone(R.id.tv_goto_look_problem,false);
