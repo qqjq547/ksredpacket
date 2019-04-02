@@ -12,10 +12,8 @@
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/space10"
-        android:paddingTop="@dimen/space15"
-        android:paddingRight="@dimen/space10"
-        android:paddingBottom="@dimen/space15"
+        android:background="@drawable/bg_white_block"
+        android:padding="@dimen/space20"
         android:textSize="@dimen/textfont15" />
 
     <TextView
@@ -30,6 +28,7 @@
         android:id="@+id/recycle_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="@dimen/space20"
         app:emptyPageLayout="@layout/layout_empty">
 
     </com.guochuang.mimedia.base.recycleview.WrapEmptyRecyclerView>

@@ -91,7 +91,7 @@ public class SendRedbagFragment extends MvpFragment<SendRedbagPresenter> impleme
         mSendRedbagAdapter2.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(int postion) {
-                IntentUtils.startRedbagDetailActivity(getActivity(), itemArr.get(postion).getRedPacketUuid(), Constant.ROLETYPE_PERSON, itemArr.get(postion).getRedPacketType());
+                IntentUtils.startRedbagDetailActivity(getActivity(), itemArr.get(postion).getRedPacketUuid(), Constant.ROLETYPE_PERSON, null);
             }
         });
 
