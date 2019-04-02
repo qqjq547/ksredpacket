@@ -39,7 +39,7 @@ public class FillAnswerInfoActivity extends MvpActivity {
         mLookSurevyStatisticsList = getIntent().getParcelableExtra(Constant.FILL_ANSWER_INFO);
         initTitle();
 
-        tvTitle.setText("【填空】" + mLookSurevyStatisticsList.getTitle());
+        tvTitle.setText(getString(R.string.fill_answer) + mLookSurevyStatisticsList.getTitle());
 
         recycleList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
@@ -52,7 +52,7 @@ public class FillAnswerInfoActivity extends MvpActivity {
 
 
     private void initTitle() {
-        new DefaultNavigationBar.Builder(this).setTitle("问卷红包问题").build();
+        new DefaultNavigationBar.Builder(this).setTitle(getString(R.string.look_survey_fill_activity_title)).build();
 
     }
 

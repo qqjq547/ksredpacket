@@ -1,12 +1,16 @@
 package com.guochuang.mimedia.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.SurfaceTexture;
 import android.media.MediaPlayer;
 import android.util.AttributeSet;
+import android.view.Display;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 
@@ -21,7 +25,7 @@ import butterknife.ButterKnife;
  * 对于视频播放界面的一个封装类
  */
 public class MyVideoPlayer extends RelativeLayout {
-    private static final String  TAG = "MyVideoPlayer";
+    private static final String TAG = "MyVideoPlayer";
     @BindView(R.id.video_view)
     public TextureView videoView;
     @BindView(R.id.mediaController)
@@ -31,6 +35,7 @@ public class MyVideoPlayer extends RelativeLayout {
     private Surface mSurface;
 
     public boolean hasPlay;//是否播放了
+    public Activity mActivity;
 
     public MyVideoPlayer(Context context) {
         this(context, null);
@@ -45,10 +50,10 @@ public class MyVideoPlayer extends RelativeLayout {
         initView();
     }
 
-       //初始化布局
+    //初始化布局
     private void initView() {
         View view = View.inflate(getContext(), R.layout.video_play, this);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
 
         initViewDisplay();
         //把MyVideoPlayer对象传递给MyVideoMediaController
@@ -63,30 +68,30 @@ public class MyVideoPlayer extends RelativeLayout {
         //创建完成  TextureView才可以进行视频画面的显示
         @Override
         public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
-           // Log.i(TAG,"onSurfaceTextureAvailable");
+            // Log.i(TAG,"onSurfaceTextureAvailable");
             mSurface = new Surface(surface);//连接对象（MediaPlayer和TextureView）
             play(info.url);
         }
 
         @Override
         public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
-           // Log.i(TAG,"onSurfaceTextureSizeChanged");
+            // Log.i(TAG,"onSurfaceTextureSizeChanged");
         }
 
         @Override
         public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
-           // Log.i(TAG,"onSurfaceTextureDestroyed");
+            // Log.i(TAG,"onSurfaceTextureDestroyed");
             return true;
         }
 
         @Override
         public void onSurfaceTextureUpdated(SurfaceTexture surface) {
-           // Log.i(TAG,"onSurfaceTextureUpdated");
+            // Log.i(TAG,"onSurfaceTextureUpdated");
         }
     };
 
     //视频播放（视频的初始化）
-    private void play(String url){
+    private void play(String url) {
         try {
             mPlayer = MediaHelper.getInstance();
             mPlayer.reset();
@@ -110,6 +115,8 @@ public class MyVideoPlayer extends RelativeLayout {
     private MediaPlayer.OnPreparedListener onPreparedListener = new MediaPlayer.OnPreparedListener() {
         @Override
         public void onPrepared(MediaPlayer mp) {
+            //调整
+            autoResize(mActivity,info.width, info.height);
             //隐藏视频加载进度条
             mediaController.setPbLoadingVisiable(View.GONE);
             //进行视频的播放
@@ -163,7 +170,27 @@ public class MyVideoPlayer extends RelativeLayout {
     }
 
     private VideoPlayerItemInfo info;
-    public void setPlayData(VideoPlayerItemInfo info) {
+
+    public void setPlayData(Activity activity,VideoPlayerItemInfo info) {
+        mActivity = activity;
         this.info = info;
+    }
+
+    private void autoResize(Activity context, int width, int height) {
+        Display currDisplay = context.getWindowManager().getDefaultDisplay();
+        if (width > currDisplay.getWidth() || height > currDisplay.getHeight()) {
+
+            //如果video的宽或者高超出了当前屏幕的大小，则要进行缩放
+
+            float wRatio = (float) width / (float) currDisplay.getWidth();
+
+            float hRatio = (float) height / (float) currDisplay.getHeight();
+            //选择大的一个进行缩放
+            float ratio = Math.max(wRatio, hRatio);
+            width = (int) Math.ceil((float) width / ratio);
+            height = (int) Math.ceil((float) height / ratio);
+            //设置surfaceView的布局参数
+            videoView.setLayoutParams(new RelativeLayout.LayoutParams(width, height));
+        }
     }
 }

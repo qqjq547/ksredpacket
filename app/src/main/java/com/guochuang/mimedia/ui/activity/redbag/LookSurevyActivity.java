@@ -45,14 +45,12 @@ public class LookSurevyActivity extends MvpActivity<LookSurveymPresenter> implem
 
     @Override
     public void initViewAndData() {
-        setStatusbar(R.color.white,true);
         mSurveyId = getIntent().getStringExtra(Constant.LOOK_PROBLEM_RED_PACKET_ID);
         mRedPackgeId = getIntent().getStringExtra(Constant.RED_PACKET_ID);
         initTitle();
         initData();
         wrapEmRecycle.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-//
 
 
     }
@@ -73,8 +71,7 @@ public class LookSurevyActivity extends MvpActivity<LookSurveymPresenter> implem
 
     @Override
     public void setData(LookSurevyResult data) {
-
-        tvAnserNumber.setText(Html.fromHtml("<font color='#ff7519'>" + data.getDrawNumber() + "</font>人回答问题"));
+        tvAnserNumber.setText(Html.fromHtml(String.format(getString(R.string.number_questions_answered),data.getDrawNumber())));
         mData.addAll(data.getStatisticsList());
         mLookSurevyAdapter = new LookSurevyAdapter(this, mData, R.layout.item_looksurvey_layout,data.getDrawNumber());
         mLookSurevyAdapter.setOnItmeChildren(new LookSurevyAdapter.OnItmeChildrenClick() {

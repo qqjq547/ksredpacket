@@ -157,4 +157,12 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+
+    <style name="fitsSystemWindow" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@android:color/transparent</item>
+        <item name="colorPrimaryDark">@android:color/transparent</item>
+        <item name="colorAccent">@android:color/transparent</item>
+        <item name="android:fitsSystemWindows">false</item>
+    </style>
+
 </resources>

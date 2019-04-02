@@ -1,6 +1,7 @@
 package com.guochuang.mimedia.ui.activity.redbag;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Parcel;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,15 +11,14 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.dmcbig.mediapicker.utils.ScreenUtils;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.base.dialog.AlertDialog;
-import com.guochuang.mimedia.base.navigationbar.DefaultNavigationBar;
 import com.guochuang.mimedia.base.recycleview.WrapEmptyRecyclerView;
 import com.guochuang.mimedia.base.recycleview.adapter.MultiTypeSupport;
 import com.guochuang.mimedia.mvp.model.ProblemBean;
@@ -27,8 +27,8 @@ import com.guochuang.mimedia.mvp.view.VideoProblemView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.DialogBuilder;
-import com.guochuang.mimedia.ui.adapter.ProblemDialogInAdapter;
 import com.guochuang.mimedia.ui.adapter.EditRedPackgeProblemAdapter;
+import com.guochuang.mimedia.ui.adapter.ProblemDialogInAdapter;
 import com.sz.gcyh.KSHongBao.R;
 
 import java.util.ArrayList;
@@ -36,9 +36,13 @@ import java.util.Iterator;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.guochuang.mimedia.tools.Constant.*;
+import static com.guochuang.mimedia.tools.Constant.OPEN_VIDEOPROBLEMACTIVITY_TYPE;
+import static com.guochuang.mimedia.tools.Constant.PROBLEMLIST_KEY;
+import static com.guochuang.mimedia.tools.Constant.RED_PACKET_TYPE_SURVEY;
+import static com.guochuang.mimedia.tools.Constant.RED_PACKET_TYPE_VIDEO;
 
 /**
  * 编辑视频与问卷问题
@@ -51,6 +55,11 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
     TextView tvNuber;
     @BindView(R.id.tv_add_problem)
     TextView tvAddProblem;
+    @BindView(R.id.tv_title)
+    TextView mTvTitle;
+    @BindView(R.id.iv_back)
+    ImageView ivBack;
+
     private EditRedPackgeProblemAdapter mEditRedPackgeProblemAdapter;
     private String mRedPacketType;
     private ArrayList<ProblemBean> mProblemList = new ArrayList<>();
@@ -58,7 +67,6 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
     private ArrayList<ProblemBean.ItemBean> mDialogData;
     private ProblemBean mEditProblemBean, mCustomaryProblemBean;
     private boolean mIsRestProblem = false;
-    private DefaultNavigationBar.Builder mNavigationbuilder;
 
     @Override
     protected VideoProblemPresenter createPresenter() {
@@ -73,30 +81,15 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
 
     @Override
     public void initViewAndData() {
-        setStatusbar(R.color.white,true);
+        setStatusbar(R.color.white, true);
         mProblemList = getIntent().getParcelableArrayListExtra(PROBLEMLIST_KEY);
         mRedPacketType = getIntent().getStringExtra(OPEN_VIDEOPROBLEMACTIVITY_TYPE);
-        mNavigationbuilder = new DefaultNavigationBar.Builder(this);
+
         if (RED_PACKET_TYPE_VIDEO.equals(mRedPacketType)) {
-            mNavigationbuilder.setTitle(getResources().getString(R.string.video_redbag_problem));
+            mTvTitle.setText(getResources().getString(R.string.video_redbag_problem));
         } else {
-            mNavigationbuilder.setTitle(getResources().getString(R.string.surevy_redbag_problem));
+            mTvTitle.setText(getResources().getString(R.string.surevy_redbag_problem));
         }
-
-        mNavigationbuilder.setLeftClick(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //关闭activity
-
-                //把题目的值带回去
-                Intent intent = getIntent();
-                intent.putParcelableArrayListExtra(问题数据集合, mProblemList);
-                setResult(RESULT_OK, intent);
-                finish();
-
-
-            }
-        }).build();
 
         recyclerList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mEditRedPackgeProblemAdapter = new EditRedPackgeProblemAdapter(this, mProblemList, R.layout.item_problem_layout, mRedPacketType);
@@ -179,14 +172,26 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
     }
 
 
-    @OnClick(R.id.tv_add_problem)
-    public void onViewClicked() {
-        //添加问题
-        mIsRestProblem = false;
-        showDialog(null);
 
 
+    @OnClick({R.id.iv_back, R.id.tv_add_problem})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.iv_back:
+                //把题目的值带回去
+                Intent intent = getIntent();
+                intent.putParcelableArrayListExtra(Constant.问题数据集合, mProblemList);
+                setResult(RESULT_OK, intent);
+                finish();
+                break;
+            case R.id.tv_add_problem:
+                mIsRestProblem = false;
+                showDialog(null);
+
+                break;
+        }
     }
+
 
     private void showDialog(ProblemBean problemBean_) {
         final ProblemBean problemBean;
@@ -461,6 +466,9 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
             mProblemDialogInAdapter.notifyDataSetChanged();
         }
     }
+
+
+
 
 
 }

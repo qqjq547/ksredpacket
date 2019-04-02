@@ -727,5 +727,16 @@
     <string name="str_fill_problem">填空题</string>
     <string name="looksurevyactivity_title">问卷红包问题</string>
 
+    <string name="money_ge_fomat">%f元  %d个</string>
+    <string name="password_fomat">口令: %s</string>
+    <string name="look_survey_statistics">查看问卷统计》</string>
+    <string name="look_problme_str">查看所提问题</string>
+    <string name="look_survey_fill_activity_title">问卷红包问题</string>
+    <string name="fill_answer">【填空】</string>
+    <string name="number_questions_answered"><![CDATA[<font color=\'#ff7519\'>%d</font>人回答问题]]></string>
+    <string name="single_str">单选</string>
+    <string name="more_select_str">多选</string>
+    <string name="fill_problem_str">填空题</string>
+
 
 </resources>

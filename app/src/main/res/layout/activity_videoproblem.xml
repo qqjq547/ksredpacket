@@ -6,6 +6,8 @@
     android:orientation="vertical">
 
 
+    <include layout="@layout/layout_title"/>
+
     <com.guochuang.mimedia.base.recycleview.WrapEmptyRecyclerView
         android:id="@+id/recycler_list"
         android:layout_width="match_parent"
@@ -18,30 +20,35 @@
 
     </com.guochuang.mimedia.base.recycleview.WrapEmptyRecyclerView>
 
-    <TextView
-        android:id="@+id/tv_nuber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="已添加 %s 个问题"
-        android:gravity="center"
-        android:textColor="@color/color_999999"
-        android:layout_marginBottom="@dimen/space20"
-        android:layout_marginTop="@dimen/space20"
-        android:textSize="14sp" />
 
 
-    <TextView
-        android:id="@+id/tv_add_problem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/space15"
-        android:layout_marginRight="@dimen/space15"
-        android:layout_marginBottom="23dp"
-        android:background="@drawable/bg_red_rect_btn"
-        android:gravity="center"
-        android:padding="@dimen/sp_16"
-        android:text="添加问题"
-        android:textColor="@color/white"
-        android:textSize="@dimen/sp_14" />
+        <TextView
+            android:id="@+id/tv_nuber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="已添加 %s 个问题"
+            android:gravity="center"
+            android:textColor="@color/color_999999"
+            android:layout_marginBottom="@dimen/space20"
+            android:layout_marginTop="@dimen/space20"
+            android:textSize="14sp" />
+
+
+        <TextView
+            android:id="@+id/tv_add_problem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space15"
+            android:layout_marginRight="@dimen/space15"
+            android:padding="@dimen/space16"
+            android:layout_marginBottom="23dp"
+            android:background="@drawable/bg_red_rect_btn"
+            android:gravity="center"
+            android:text="添加问题"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_14" />
+
+
+
 
 </LinearLayout>

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.tools.CommonUtil;
+import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.IndicatorLineUtil;
 import com.guochuang.mimedia.ui.adapter.MyFragmentPagerAdapter;
 import com.guochuang.mimedia.ui.fragment.ReceiveRedbagFragment;
@@ -33,7 +34,8 @@ public class RedbagDynamicActivity2 extends MvpActivity {
     ViewPager viewpager;
 
     Fragment[] fragments = new Fragment[2];
-    String[] titles = {"收的红包", "发的红包"};
+
+    String[] titles = {Constant.RECEIVED_BAG_STR, Constant.SEND_BAG_STR};
 
     @Override
     protected BasePresenter createPresenter() {

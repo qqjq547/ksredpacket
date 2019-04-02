@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import com.guochuang.mimedia.base.recycleview.adapter.CommonRecyclerAdapter;
 import com.guochuang.mimedia.base.recycleview.adapter.ViewHolder;
 import com.guochuang.mimedia.mvp.model.RedbagRecord;
+import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.sz.gcyh.KSHongBao.R;
 
@@ -15,11 +16,11 @@ import java.util.List;
 
 public class SendRedbagAdapter2 extends CommonRecyclerAdapter<RedbagRecord> {
     enum RedPacketType {
-        random("随机红包: "),
-        survey("问卷红包: "),
-        video("视频红包: "),
-        lucky("幸运红包: "),
-        password("口令红包: "),;
+        random(Constant.RANDOM_STR),
+        survey(Constant.SURVEY_STR),
+        video(Constant.VIDEO_STR),
+        lucky(Constant.LUCKY_STR),
+        password(Constant.PASSWORD_STR);
 
         String mRedPacketType;
 
@@ -45,22 +46,16 @@ public class SendRedbagAdapter2 extends CommonRecyclerAdapter<RedbagRecord> {
                 .setViewVisibility(R.id.tv_goto_look_info, View.GONE)
                 .setViewVisibility(R.id.iv_prictu, View.GONE);
 
-        String suffix = item.getMoney() + "元  " + item.getQuantity() + "个";
+       // String suffix = item.getMoney() + "元  " + item.getQuantity() + "个";
+        String suffix = String.format(mContext.getString(R.string.money_ge_fomat),item.getMoney(),item.getQuantity());
+        holder.setText(R.id.tv_red_packet,RedPacketType.valueOf(item.getRedPacketType()).getmRedPacketType() + suffix);
 
-        holder.setText(R.id.tv_red_packet,
-                "random".equals(item.getRedPacketType()) ? RedPacketType.random.getmRedPacketType() + suffix
-                        : "survey".equals(item.getRedPacketType()) ? RedPacketType.survey.getmRedPacketType() + suffix
-                        : "video".equals(item.getRedPacketType()) ? RedPacketType.video.getmRedPacketType() + suffix
-                        : "password".equals(item.getRedPacketType()) ? RedPacketType.password.getmRedPacketType() + suffix
-                        : RedPacketType.lucky.getmRedPacketType() + suffix);
-
-
-        holder.setText(R.id.tv_kou_lin, "口令: " + item.getPassword())
+        holder.setText(R.id.tv_kou_lin, String.format(mContext.getString(R.string.password_fomat),item.getPassword()))
                 .setViewVisibility(R.id.tv_kou_lin, TextUtils.isEmpty(item.getPassword()) ? View.GONE : View.VISIBLE);
 
 
-        holder.setText(R.id.tv_goto_look_problem, "survey".equals(item.getRedPacketType()) ? "查看问卷统计》" : "video".equals(item.getRedPacketType()) ? "查看所提问题" : "")
-                .setViewVisibility(R.id.tv_goto_look_problem, "survey".equals(item.getRedPacketType()) && !("0".equals(item.getSurveyId())) ? View.VISIBLE : "video".equals(item.getRedPacketType()) && !("0".equals(item.getSurveyId())) ? View.VISIBLE : View.GONE);
+        holder.setText(R.id.tv_goto_look_problem, Constant.RED_PACKET_TYPE_SURVEY.equals(item.getRedPacketType()) ? mContext.getString(R.string.look_survey_statistics) :Constant.RED_PACKET_TYPE_VIDEO.equals(item.getRedPacketType()) ? mContext.getString(R.string.look_problme_str) : "")
+                .setViewVisibility(R.id.tv_goto_look_problem, Constant.RED_PACKET_TYPE_SURVEY.equals(item.getRedPacketType()) && !("0".equals(item.getSurveyId())) ? View.VISIBLE : Constant.RED_PACKET_TYPE_VIDEO.equals(item.getRedPacketType()) && !("0".equals(item.getSurveyId())) ? View.VISIBLE : View.GONE);
 
         if (item.getPictureList() != null) {
             if (item.getPictureList().size() <= 0 && TextUtils.isEmpty(item.getContent())) {

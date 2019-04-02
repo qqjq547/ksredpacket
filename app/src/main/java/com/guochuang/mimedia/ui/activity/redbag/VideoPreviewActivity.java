@@ -69,6 +69,8 @@ public class VideoPreviewActivity extends MvpActivity {
         //获得视频第一帧的Bitmap对象
         Bitmap bitmap = mmr.getFrameAtTime();
         videoPlayer.setBackground(new BitmapDrawable(getResources(), bitmap));
+        String height = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT); // 视频高度
+        String width = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH); // 视频宽度
 
         new DefaultNavigationBar.Builder(this).setTitle(getResources().getString(R.string.video_preview))
                 .setLeftClick(new View.OnClickListener() {
@@ -80,8 +82,8 @@ public class VideoPreviewActivity extends MvpActivity {
                 }).build();
 
         //传递给条目里面的MyVideoPlayer
-        VideoPlayerItemInfo info = new VideoPlayerItemInfo(0, url);
-        videoPlayer.setPlayData(info);
+        VideoPlayerItemInfo info = new VideoPlayerItemInfo(0, url,Integer.valueOf(width),Integer.valueOf(height));
+        videoPlayer.setPlayData(this,info);
         //设置为初始化状态
         videoPlayer.initViewDisplay();
 

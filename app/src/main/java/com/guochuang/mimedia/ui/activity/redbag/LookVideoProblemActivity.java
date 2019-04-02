@@ -50,7 +50,6 @@ public class LookVideoProblemActivity extends MvpActivity<LookVideoProblemPresen
 
     @Override
     public void initViewAndData() {
-        setStatusbar(R.color.white,true);
         mSurveyId = getIntent().getStringExtra(Constant.LOOK_PROBLEM_RED_PACKET_ID);
         mRedPackgeId = getIntent().getStringExtra(Constant.RED_PACKET_ID);
         initTitle();

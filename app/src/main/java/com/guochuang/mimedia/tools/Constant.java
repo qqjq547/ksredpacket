@@ -287,6 +287,13 @@ public class Constant {
     public static final String VIDEO_PATH = "视频路径";
     public static final String LOOK_PROBLEM_RED_PACKET_ID = "查看红包问题ID";
     public static final String FILL_ANSWER_INFO = "填空題答題詳情";
+    public static final String RANDOM_STR = "随机红包: ";
+    public static final String SURVEY_STR = "问卷红包: ";
+    public static final String VIDEO_STR = "视频红包: ";
+    public static final String LUCKY_STR = "幸运红包: ";
+    public static final String PASSWORD_STR = "口令红包: ";
+    public static final String RECEIVED_BAG_STR ="收的红包";
+    public static final String SEND_BAG_STR = "发的红包";
     public static String 问题数据集合 = "问题数据集合";
 
 

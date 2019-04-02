@@ -25,7 +25,7 @@ public class LookVideoProblemAdapter extends CommonRecyclerAdapter<LookVideoResu
     @Override
     protected void convert(ViewHolder holder, int position, LookVideoResult.QuestionListBean item) {
         holder.setViewVisibility(R.id.tv_fill_answer_info, View.GONE).setViewVisibility(R.id.recycle_anser_count, View.GONE);
-        String type = item.getType() == 0 ? "单选" : item.getType() == 1 ? "多选" : "填空题";
+        String type = item.getType() == 0 ? mContext.getString(R.string.single_str) : item.getType() == 1 ? mContext.getString(R.string.more_select_str) : mContext.getString(R.string.fill_problem_str);
         holder.setText(R.id.tv_squece, position + ".").setText(R.id.tv_problem, "【" + type + "】" + item.getTitle());
         //填空题
         if (item.getType() == 2) {
