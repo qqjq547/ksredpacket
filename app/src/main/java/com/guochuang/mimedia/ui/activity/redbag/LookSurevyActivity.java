@@ -66,7 +66,7 @@ public class LookSurevyActivity extends MvpActivity<LookSurveymPresenter> implem
 
     @Override
     public void setError(String message) {
-
+        showLongToast(message);
     }
 
     @Override

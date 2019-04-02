@@ -3,6 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <TextView
@@ -12,13 +13,13 @@
         android:background="@color/white"
         android:gravity="center"
         android:padding="@dimen/textfont15"
-        android:text="已添加 3 个问题"
         android:textColor="@color/color_999999" />
 
     <com.guochuang.mimedia.base.recycleview.WrapEmptyRecyclerView
         android:id="@+id/wrap_em_recycle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:emptyPageLayout="@layout/layout_empty">
 
 
     </com.guochuang.mimedia.base.recycleview.WrapEmptyRecyclerView>

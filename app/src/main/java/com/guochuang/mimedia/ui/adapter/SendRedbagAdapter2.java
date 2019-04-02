@@ -15,29 +15,27 @@ import com.sz.gcyh.KSHongBao.R;
 import java.util.List;
 
 public class SendRedbagAdapter2 extends CommonRecyclerAdapter<RedbagRecord> {
-    enum RedPacketType {
-        random(Constant.RANDOM_STR),
-        survey(Constant.SURVEY_STR),
-        video(Constant.VIDEO_STR),
-        lucky(Constant.LUCKY_STR),
-        password(Constant.PASSWORD_STR);
 
-        String mRedPacketType;
-
-        RedPacketType(String type) {
-            mRedPacketType = type;
-        }
-
-        public String getmRedPacketType() {
-            return mRedPacketType;
-        }
-    }
-
-
+    String[] nameArr;
     public SendRedbagAdapter2(Context context, List<RedbagRecord> redbagRecords, int itemlayout) {
         super(context, redbagRecords, itemlayout);
+        nameArr= mContext.getResources().getStringArray(R.array.type_redpacket);
     }
-
+    public String getTypeName(String type){
+        switch (type){
+            case Constant.RED_PACKET_TYPE_RANDOM:
+                return nameArr[0];
+            case Constant.RED_PACKET_TYPE_PASSWORD:
+                return nameArr[1];
+            case Constant.RED_PACKET_TYPE_LUCKY:
+                return nameArr[2];
+            case Constant.RED_PACKET_TYPE_VIDEO:
+                return nameArr[3];
+            case Constant.RED_PACKET_TYPE_SURVEY:
+                return nameArr[4];
+        }
+        return null;
+    }
     @Override
     protected void convert(ViewHolder holder, final int position, RedbagRecord item) {
 
@@ -48,7 +46,7 @@ public class SendRedbagAdapter2 extends CommonRecyclerAdapter<RedbagRecord> {
 
        // String suffix = item.getMoney() + "元  " + item.getQuantity() + "个";
         String suffix = String.format(mContext.getString(R.string.money_ge_fomat),item.getMoney(),item.getQuantity());
-        holder.setText(R.id.tv_red_packet,RedPacketType.valueOf(item.getRedPacketType()).getmRedPacketType() + suffix);
+        holder.setText(R.id.tv_red_packet,getTypeName(item.getRedPacketType()) + suffix);
 
         holder.setText(R.id.tv_kou_lin, String.format(mContext.getString(R.string.password_fomat),item.getPassword()))
                 .setViewVisibility(R.id.tv_kou_lin, TextUtils.isEmpty(item.getPassword()) ? View.GONE : View.VISIBLE);
