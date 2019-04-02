@@ -3,6 +3,7 @@ package com.guochuang.mimedia.mvp.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LookSurevyResult {
@@ -56,7 +57,7 @@ public class LookSurevyResult {
         private int type;
         private int sequence;
         private String optionValue;
-        private List<OptionsListBean> optionsList;
+        private ArrayList<OptionsListBean> optionsList;
 
 
         protected StatisticsListBean(Parcel in) {
@@ -135,11 +136,11 @@ public class LookSurevyResult {
             this.optionValue = optionValue;
         }
 
-        public List<OptionsListBean> getOptionsList() {
+        public ArrayList<OptionsListBean> getOptionsList() {
             return optionsList;
         }
 
-        public void setOptionsList(List<OptionsListBean> optionsList) {
+        public void setOptionsList(ArrayList<OptionsListBean> optionsList) {
             this.optionsList = optionsList;
         }
 

@@ -152,7 +152,8 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
     private void refreshUI() {
         if (mProblemList.size() > 0) {
             tvNuber.setVisibility(View.VISIBLE);
-            tvNuber.setText(Html.fromHtml("已添加<font color = '#ff7519'>" + mProblemList.size() + "</font>个问题"));
+
+            tvNuber.setText(Html.fromHtml(String.format(getString(R.string.added_problme_number), mProblemList.size())));
         } else {
             tvNuber.setVisibility(View.GONE);
         }

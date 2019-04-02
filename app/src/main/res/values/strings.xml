@@ -727,7 +727,7 @@
     <string name="str_fill_problem">填空题</string>
     <string name="looksurevyactivity_title">问卷红包问题</string>
 
-    <string name="money_ge_fomat">%f元  %d个</string>
+    <string name="money_ge_fomat">元  %d个</string>
     <string name="password_fomat">口令: %s</string>
     <string name="look_survey_statistics">查看问卷统计》</string>
     <string name="look_problme_str">查看所提问题</string>
@@ -735,7 +735,12 @@
     <string name="fill_answer">【填空】</string>
     <string name="number_questions_answered"><![CDATA[<font color=\'#ff7519\'>%d</font>人回答问题]]></string>
     <string name="single_str">单选</string>
-     <string-array name="type_redpacket">
+    <string name="add_problem_str">添加问题</string>
+    <string name="added_problme_number"><![CDATA[已添加<font color = \'#ff7519\'>%d</font>个问题]]></string>
+    <string name="answer_str"><![CDATA[<font color = \'#000000\'>答:</font>]]></string>
+    <string name="fill_info_answer_str">回答</string>
+    <string name="answer_ok_number"><![CDATA[<font color=\'#ff7519\'>%s</font>人回答正确]]></string>
+    <string-array name="type_redpacket">
          <item>随机红包: </item>
          <item>口令红包: </item>
          <item>幸运红包: </item>

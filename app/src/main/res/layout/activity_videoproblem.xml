@@ -26,7 +26,6 @@
             android:id="@+id/tv_nuber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="已添加 %s 个问题"
             android:gravity="center"
             android:textColor="@color/color_999999"
             android:layout_marginBottom="@dimen/space20"
@@ -44,7 +43,7 @@
             android:layout_marginBottom="23dp"
             android:background="@drawable/bg_red_rect_btn"
             android:gravity="center"
-            android:text="添加问题"
+            android:text="@string/add_problem_str"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_14" />
 

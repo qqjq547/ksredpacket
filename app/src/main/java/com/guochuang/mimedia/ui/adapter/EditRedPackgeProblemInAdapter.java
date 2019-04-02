@@ -54,7 +54,7 @@ public class EditRedPackgeProblemInAdapter extends CommonRecyclerAdapter<Problem
 
                 break;
             case 2:
-                text = Html.fromHtml("<font color = '#000000'>答:</font>") + itemBean.getItemcontent();
+                text = Html.fromHtml(mContext.getString(R.string.answer_str)) + itemBean.getItemcontent();
                 break;
         }
         if(Constant.RED_PACKET_TYPE_SURVEY.equals(mRedPacketType)) {

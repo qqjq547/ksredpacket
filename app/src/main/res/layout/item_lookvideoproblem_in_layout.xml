@@ -10,8 +10,7 @@
         android:id="@+id/tv_option"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="A.平头哥半导体有限公司"/>
+        android:layout_weight="1"/>
 
     <ImageView
         android:id="@+id/iv_isanswer"

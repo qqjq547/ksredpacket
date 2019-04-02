@@ -1,5 +1,6 @@
 package com.guochuang.mimedia.ui.activity.redbag;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,9 +14,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.guochuang.mimedia.base.BaseActivity;
 import com.guochuang.mimedia.base.BasePresenter;
@@ -41,6 +45,7 @@ public class VideoPreviewActivity extends MvpActivity {
     MyVideoPlayer videoPlayer;
 
     String url;
+    int mWidth, mHeight;
 
     @Override
     protected BasePresenter createPresenter() {
@@ -82,8 +87,10 @@ public class VideoPreviewActivity extends MvpActivity {
                 }).build();
 
         //传递给条目里面的MyVideoPlayer
-        VideoPlayerItemInfo info = new VideoPlayerItemInfo(0, url,Integer.valueOf(width),Integer.valueOf(height));
-        videoPlayer.setPlayData(this,info);
+        autoResize(Integer.valueOf(width),Integer.valueOf(height));
+        VideoPlayerItemInfo info = new VideoPlayerItemInfo(0, url,mWidth,mHeight);
+        videoPlayer.setPlayData(info);
+
         //设置为初始化状态
         videoPlayer.initViewDisplay();
 
@@ -114,5 +121,23 @@ public class VideoPreviewActivity extends MvpActivity {
         MediaHelper.release();
     }
 
+
+    private void autoResize(int width, int height) {
+        Display currDisplay = getWindowManager().getDefaultDisplay();
+        if (width > currDisplay.getWidth() || height > currDisplay.getHeight()) {
+
+            //如果video的宽或者高超出了当前屏幕的大小，则要进行缩放
+
+            float wRatio = (float) width / (float) currDisplay.getWidth();
+
+            float hRatio = (float) height / (float) currDisplay.getHeight();
+            //选择大的一个进行缩放
+            float ratio = Math.max(wRatio, hRatio);
+            mWidth = (int) Math.ceil((float) width / ratio);
+            mHeight = (int) Math.ceil((float) height / ratio);
+            //设置surfaceView的布局参数
+            videoPlayer.setLayoutParams(new LinearLayout.LayoutParams(mWidth, mHeight));
+        }
+    }
 
 }

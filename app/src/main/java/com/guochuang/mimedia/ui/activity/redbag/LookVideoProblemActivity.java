@@ -77,7 +77,7 @@ public class LookVideoProblemActivity extends MvpActivity<LookVideoProblemPresen
 
     @Override
     public void setData(LookVideoResult data) {
-        mTvAnswerNumber.setText(Html.fromHtml("<font color='#ff7519'>" + data.getDrawNumber() + "</font>人回答正确"));
+        mTvAnswerNumber.setText(Html.fromHtml(String.format(getString(R.string.answer_ok_number), data.getDrawNumber())));
 
         mData.addAll(data.getQuestionList());
 

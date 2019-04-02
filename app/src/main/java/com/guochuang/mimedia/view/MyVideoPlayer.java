@@ -35,7 +35,6 @@ public class MyVideoPlayer extends RelativeLayout {
     private Surface mSurface;
 
     public boolean hasPlay;//是否播放了
-    public Activity mActivity;
 
     public MyVideoPlayer(Context context) {
         this(context, null);
@@ -116,7 +115,7 @@ public class MyVideoPlayer extends RelativeLayout {
         @Override
         public void onPrepared(MediaPlayer mp) {
             //调整
-            autoResize(mActivity,info.width, info.height);
+            videoView.setLayoutParams(new RelativeLayout.LayoutParams(info.width, info.height));
             //隐藏视频加载进度条
             mediaController.setPbLoadingVisiable(View.GONE);
             //进行视频的播放
@@ -171,26 +170,9 @@ public class MyVideoPlayer extends RelativeLayout {
 
     private VideoPlayerItemInfo info;
 
-    public void setPlayData(Activity activity,VideoPlayerItemInfo info) {
-        mActivity = activity;
+    public void setPlayData(VideoPlayerItemInfo info) {
         this.info = info;
     }
 
-    private void autoResize(Activity context, int width, int height) {
-        Display currDisplay = context.getWindowManager().getDefaultDisplay();
-        if (width > currDisplay.getWidth() || height > currDisplay.getHeight()) {
 
-            //如果video的宽或者高超出了当前屏幕的大小，则要进行缩放
-
-            float wRatio = (float) width / (float) currDisplay.getWidth();
-
-            float hRatio = (float) height / (float) currDisplay.getHeight();
-            //选择大的一个进行缩放
-            float ratio = Math.max(wRatio, hRatio);
-            width = (int) Math.ceil((float) width / ratio);
-            height = (int) Math.ceil((float) height / ratio);
-            //设置surfaceView的布局参数
-            videoView.setLayoutParams(new RelativeLayout.LayoutParams(width, height));
-        }
-    }
 }

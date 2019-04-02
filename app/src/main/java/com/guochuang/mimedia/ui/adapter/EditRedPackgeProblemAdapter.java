@@ -24,8 +24,12 @@ public class EditRedPackgeProblemAdapter extends CommonRecyclerAdapter<ProblemBe
     @Override
     protected void convert(ViewHolder holder, final int position, final ProblemBean problem) {
 
+
         holder.setText(R.id.tv_serial_number, position + 1 + ".")
-                .setText(R.id.tv_problem_name, "【" + (problem.getType() == 0 ? "单选" : problem.getType() == 1 ? "多选" : "填空") + "】" + problem.getProblem());
+                .setText(R.id.tv_problem_name, (problem.getType() == 0 ?
+                        mContext.getString(R.string.single_choice) : problem.getType() == 1
+                        ? mContext.getString(R.string.muti_choice)
+                        : mContext.getString(R.string.input_blank)) + problem.getProblem());
 
         holder.getView(R.id.iv_edit_problem).setOnClickListener(new View.OnClickListener() {
             @Override

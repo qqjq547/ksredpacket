@@ -25,13 +25,14 @@ public class LookVideoProblemAdapter extends CommonRecyclerAdapter<LookVideoResu
     @Override
     protected void convert(ViewHolder holder, int position, LookVideoResult.QuestionListBean item) {
         holder.setViewVisibility(R.id.tv_fill_answer_info, View.GONE).setViewVisibility(R.id.recycle_anser_count, View.GONE);
-        String type = item.getType() == 0 ? mContext.getString(R.string.single_str) : item.getType() == 1 ? "多选" : "填空题";
-        holder.setText(R.id.tv_squece, position + ".").setText(R.id.tv_problem, "【" + type + "】" + item.getTitle());
+        String type = item.getType() == 0 ? mContext.getString(R.string.single_choice) : item.getType() == 1 ? mContext.getString(R.string.muti_choice) : mContext.getString(R.string.input_blank);
+
+        holder.setText(R.id.tv_squece, position + ".").setText(R.id.tv_problem, type + item.getTitle());
         //填空题
         if (item.getType() == 2) {
             holder.setViewVisibility(R.id.tv_fill_answer_info, View.VISIBLE);
             if (item.getOptionsList() != null && !item.getOptionsList().isEmpty()) {
-                holder.setText(R.id.tv_fill_answer_info, Html.fromHtml("<font color='#000000'>答:</font>" + item.getOptionsList().get(0).getOptionValue()));
+                holder.setText(R.id.tv_fill_answer_info, Html.fromHtml(mContext.getString(R.string.answer_str) + item.getOptionsList().get(0).getOptionValue()));
             }
 
         } else {
@@ -39,8 +40,8 @@ public class LookVideoProblemAdapter extends CommonRecyclerAdapter<LookVideoResu
             if (item.getOptionsList() != null && !item.getOptionsList().isEmpty()) {
                 holder.setViewVisibility(R.id.recycle_anser_count, View.VISIBLE);
                 RecyclerView recyclerView = holder.getView(R.id.recycle_anser_count);
-                recyclerView.setLayoutManager(new LinearLayoutManager(mContext,LinearLayoutManager.VERTICAL,false));
-                LookVideoProblemInAdapter lookVideoProblemInAdapter = new LookVideoProblemInAdapter(mContext,item.getOptionsList(),R.layout.item_lookvideoproblem_in_layout);
+                recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+                LookVideoProblemInAdapter lookVideoProblemInAdapter = new LookVideoProblemInAdapter(mContext, item.getOptionsList(), R.layout.item_lookvideoproblem_in_layout);
                 recyclerView.setAdapter(lookVideoProblemInAdapter);
 
             }

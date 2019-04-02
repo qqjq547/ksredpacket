@@ -44,8 +44,7 @@ public class SendRedbagAdapter2 extends CommonRecyclerAdapter<RedbagRecord> {
                 .setViewVisibility(R.id.tv_goto_look_info, View.GONE)
                 .setViewVisibility(R.id.iv_prictu, View.GONE);
 
-       // String suffix = item.getMoney() + "元  " + item.getQuantity() + "个";
-        String suffix = String.format(mContext.getString(R.string.money_ge_fomat),item.getMoney(),item.getQuantity());
+        String suffix = item.getMoney()+ String.format(mContext.getString(R.string.money_ge_fomat),item.getQuantity());
         holder.setText(R.id.tv_red_packet,getTypeName(item.getRedPacketType()) + suffix);
 
         holder.setText(R.id.tv_kou_lin, String.format(mContext.getString(R.string.password_fomat),item.getPassword()))

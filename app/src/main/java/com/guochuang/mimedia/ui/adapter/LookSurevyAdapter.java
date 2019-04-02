@@ -27,9 +27,11 @@ public class LookSurevyAdapter extends CommonRecyclerAdapter<LookSurevyResult.St
     @Override
     protected void convert(ViewHolder holder, final int position, LookSurevyResult.StatisticsListBean item) {
         holder.setViewVisibility(R.id.tv_look_info, View.GONE).setViewVisibility(R.id.recycle_anser_count, View.GONE);
-        String type = item.getType() == 0 ? mContext.getString(R.string.str_singe_select) : item.getType() == 1 ? mContext.getString(R.string.str_many_select) : mContext.getString(R.string.str_fill_problem);
 
-        holder.setText(R.id.tv_squece, position + ".").setText(R.id.tv_problem, "【" + type + "】" + item.getTitle());
+
+        String type = item.getType() == 0 ? mContext.getString(R.string.single_choice) : item.getType() == 1 ? mContext.getString(R.string.muti_choice) : mContext.getString(R.string.input_blank);
+
+        holder.setText(R.id.tv_squece, position + ".").setText(R.id.tv_problem, type + item.getTitle());
         //填空题
         if (item.getType() == 2) {
             holder.setViewVisibility(R.id.tv_look_info, View.VISIBLE);
@@ -51,15 +53,14 @@ public class LookSurevyAdapter extends CommonRecyclerAdapter<LookSurevyResult.St
             @Override
             public void onClick(View v) {
 
-                if(mOnItmeChildrenClick !=null) {
-                    mOnItmeChildrenClick.itmeChildrenClick(R.id.tv_look_info,position);
+                if (mOnItmeChildrenClick != null) {
+                    mOnItmeChildrenClick.itmeChildrenClick(R.id.tv_look_info, position);
                 }
 
             }
         });
 
     }
-
 
 
     /**

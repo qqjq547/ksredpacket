@@ -13,6 +13,8 @@ import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.ui.adapter.FillAnswerInfoAdapter;
 import com.sz.gcyh.KSHongBao.R;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 
 public class FillAnswerInfoActivity extends MvpActivity {
@@ -35,15 +37,19 @@ public class FillAnswerInfoActivity extends MvpActivity {
 
     @Override
     public void initViewAndData() {
-        setStatusbar(R.color.white,true);
         mLookSurevyStatisticsList = getIntent().getParcelableExtra(Constant.FILL_ANSWER_INFO);
         initTitle();
 
         tvTitle.setText(getString(R.string.fill_answer) + mLookSurevyStatisticsList.getTitle());
 
         recycleList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        ArrayList<LookSurevyResult.StatisticsListBean.OptionsListBean> options = new ArrayList<>();
+        if(mLookSurevyStatisticsList.getOptionsList() != null) {
+            options.addAll(mLookSurevyStatisticsList.getOptionsList());
+        }
 
-        FillAnswerInfoAdapter fillAnswerInfoAdapter = new FillAnswerInfoAdapter(this, mLookSurevyStatisticsList.getOptionsList(),R.layout.item_fillanswerinfo_layout);
+
+        FillAnswerInfoAdapter fillAnswerInfoAdapter = new FillAnswerInfoAdapter(this, options,R.layout.item_fillanswerinfo_layout);
 
         recycleList.setAdapter(fillAnswerInfoAdapter);
 

@@ -7,13 +7,15 @@
     <TextureView
         android:id="@+id/video_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:visibility="visible"/>
 
     <!--视频播放控制界面-->
    <com.guochuang.mimedia.view.MyVideoMediaController
         android:id="@+id/mediaController"
         android:layout_width="match_parent"
+       android:layout_centerInParent="true"
         android:layout_height="wrap_content">
 
     </com.guochuang.mimedia.view.MyVideoMediaController>
