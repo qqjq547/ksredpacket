@@ -5,6 +5,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,6 +23,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.mvp.model.PictureBean;
 import com.guochuang.mimedia.mvp.model.RedbagInfo;
 import com.guochuang.mimedia.tools.AdCollectionView;
+import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.ui.activity.common.ShareActivity;
 import com.guochuang.mimedia.view.BadgeView;
@@ -188,6 +190,7 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
         if (redbagDetail == null) {
             redPacketUuid = getIntent().getStringExtra(Constant.RED_PACKET_UUID);
             roleType = getIntent().getStringExtra(Constant.ROLE_TYPE);
+//            redPacketType = getIntent().getStringExtra(Constant.RED_PACKET_TYPE);
             fromCollect=getIntent().getBooleanExtra(Constant.FROM_COLLECT,false);
             startIndex=getIntent().getStringExtra(Constant.START_INDEX);
             mvpPresenter.getRedPacketInfo(redPacketUuid, roleType,startIndex);
@@ -261,6 +264,7 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
         redPacketUuid = getIntent().getStringExtra(Constant.RED_PACKET_UUID);
         roleType = getIntent().getStringExtra(Constant.ROLE_TYPE);
         redPacketType=getIntent().getStringExtra(Constant.RED_PACKET_TYPE);
+
         GlideImgManager.loadCircleImage(this, redbagDetail.getAvatar(), ivHeader);
         tvName.setText(redbagDetail.getNickName());
         if (TextUtils.equals(roleType,Constant.ROLETYPE_SYSTEM)) {
@@ -435,10 +439,10 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                 break;
             case R.id.btn_open_packet:
                 if (redbagDetail != null) {
-                    startActivity(new Intent(this, AnswerActivity.class)
+                    startActivityForResult(new Intent(this, AnswerActivity.class)
                             .putExtra(Constant.RED_PACKET_UUID, redPacketUuid)
                             .putExtra(Constant.SURVEYID, redbagDetail.getSurveyId())
-                            .putExtra(Constant.RED_PACKET_TYPE, redPacketType));
+                            .putExtra(Constant.RED_PACKET_TYPE, redPacketType),Constant.REQUEST_ANSWER);
                 }
                 break;
             case R.id.iv_video_prev:
@@ -494,9 +498,10 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
     }
 
     @Override
-    public void setRedbagDetail(final RedbagDetail redbagDetail) {
+    public void setRedbagDetail(RedbagDetail redbagDetail) {
         closeLoadingDialog();
         if (redbagDetail != null) {
+            LogUtil.d("333");
             this.redbagDetail = redbagDetail;
             GlideImgManager.loadCircleImage(this, redbagDetail.getAvatar(), ivHeader);
             tvName.setText(redbagDetail.getNickName());
@@ -563,21 +568,25 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                     linWeibo.setVisibility(View.VISIBLE);
                     tvWeibo.setText(redbagDetail.getMicroblog());
                 }
-                if (redPacketType.equals(Constant.RED_PACKET_TYPE_VIDEO)){
+                if (TextUtils.isEmpty(redbagDetail.getVideoUrl())){
+                    ivVideoPrev.setVisibility(View.GONE);
+                }else {
+                    ivVideoPrev.setVisibility(View.VISIBLE);
+                    GlideImgManager.loadImage(this,redbagDetail.getCoverUrl(),ivVideoPrev);
+                }
+                if (redPacketType.equals(Constant.RED_PACKET_TYPE_VIDEO)&&redbagDetail.getSurveyId()>0){
+
                     rlValue.setVisibility(View.GONE);
                     tvRedbagTip.setVisibility(View.GONE);
                     linVideoHead.setVisibility(View.VISIBLE);
                     btnOpenPacket.setText(R.string.watched_video_open_redbag);
                     tvWillGetKsb.setText(String.format(getString(R.string.format_ksb), redbagDetail.getCoin()));
-                    ivVideoPrev.setVisibility(View.VISIBLE);
-                    GlideImgManager.loadImage(this,redbagDetail.getCoverUrl(),ivVideoPrev);
                 }else if(redPacketType.equals(Constant.RED_PACKET_TYPE_SURVEY)){
                     rlValue.setVisibility(View.GONE);
                     tvRedbagTip.setVisibility(View.GONE);
                     linVideoHead.setVisibility(View.VISIBLE);
                     btnOpenPacket.setText(R.string.answer_open_redbag);
                     tvWillGetKsb.setText(String.format(getString(R.string.format_ksb), redbagDetail.getCoin()));
-
                 }else {
                     startAnim();
                 }
@@ -592,6 +601,7 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
         closeLoadingDialog();
         if (data != null) {
             this.redbagInfo=data;
+            redPacketType=data.getRedPacketSubType();
             GlideImgManager.loadCircleImage(this, data.getSenderAvatar(), ivHeader);
             tvName.setText(data.getSenderNickName());
             tvKsb.setText(data.getDrawCoin());
@@ -620,7 +630,7 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
             } else {
                 tvReceiveNum.setText(String.format(getString(R.string.format_people_get_redbag), data.getReceiveUserNum()));
                 tvContent.setText(data.getRedPacketContent());
-                if (data != null && data.getPicture().size() > 0) {
+                if (data != null && data.getPicture()!=null&&data.getPicture().size() > 0) {
                     List<String> picArr=new ArrayList<>();
                     for (PictureBean bean:data.getPicture()) {
                         picArr.add(bean.getPicture());
@@ -855,6 +865,43 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
             badgeView.show();
         } else {
             badgeView.hide();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==RESULT_OK){
+            if (requestCode==Constant.REQUEST_ANSWER){
+                redbagDetail=(RedbagDetail) data.getSerializableExtra(Constant.RED_PACKET_DETAIL);
+                if (redPacketType.equals(Constant.RED_PACKET_TYPE_VIDEO)){
+                    rlValue.setVisibility(View.VISIBLE);
+                    tvRedbagTip.setVisibility(View.VISIBLE);
+                    linVideoHead.setVisibility(View.GONE);
+                    tvKsb.setText(redbagDetail.getCoin());
+                    tvMoney.setText(String.format(getString(R.string.format_add_yuan), redbagDetail.getMoney()));
+                    tvMoney.setVisibility(View.VISIBLE);
+                    tvNotice.setVisibility(View.GONE);
+                    rlValue.setVisibility(View.VISIBLE);
+                    sendBroadcast(new Intent(Constant.ACTION_CHANGE_COIN));
+                    if (getPref().getBoolean(PrefUtil.SOUNDSWITCH,true)){
+                        CommonUtil.playRing(this, R.raw.gold);
+                    }
+                }else if(redPacketType.equals(Constant.RED_PACKET_TYPE_SURVEY)){
+                    rlValue.setVisibility(View.VISIBLE);
+                    tvRedbagTip.setVisibility(View.VISIBLE);
+                    linVideoHead.setVisibility(View.GONE);
+                    tvKsb.setText(redbagDetail.getCoin());
+                    tvMoney.setText(String.format(getString(R.string.format_add_yuan), redbagDetail.getMoney()));
+                    tvMoney.setVisibility(View.VISIBLE);
+                    tvNotice.setVisibility(View.GONE);
+                    rlValue.setVisibility(View.VISIBLE);
+                    sendBroadcast(new Intent(Constant.ACTION_CHANGE_COIN));
+                    if (getPref().getBoolean(PrefUtil.SOUNDSWITCH,true)){
+                        CommonUtil.playRing(this, R.raw.gold);
+                    }
+                }
+            }
         }
     }
 }

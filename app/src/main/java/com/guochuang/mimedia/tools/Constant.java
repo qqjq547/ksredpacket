@@ -48,6 +48,8 @@ public class Constant {
     public static final int REQUEST_PICK_ADDRESS = 16;
     public static final int REQUEST_SET_SHOWLIST = 17;
     public static final int REQUEST_EDIT_NESTAD = 18;
+    public static final int REQUEST_ANSWER = 19;
+
 
     public static final String TITLE = "title";
     public static final String ARTICLEUUID = "articleUuid";

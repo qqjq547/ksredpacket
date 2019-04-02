@@ -35,6 +35,10 @@ public class RedbagInfo {
     private String redPacketTotal;
     private List<String> receiveUserAvatar;
     private List<PictureBean> picture;
+    private long surveyId;
+    private String videoUrl;
+    private String coverUrl;
+    private String redPacketSubType;
 
     public String getDrawCoin() {
         return drawCoin;
@@ -162,5 +166,37 @@ public class RedbagInfo {
 
     public void setPicture(List<PictureBean> picture) {
         this.picture = picture;
+    }
+
+    public long getSurveyId() {
+        return surveyId;
+    }
+
+    public void setSurveyId(long surveyId) {
+        this.surveyId = surveyId;
+    }
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
+
+    public String getCoverUrl() {
+        return coverUrl;
+    }
+
+    public void setCoverUrl(String coverUrl) {
+        this.coverUrl = coverUrl;
+    }
+
+    public String getRedPacketSubType() {
+        return redPacketSubType;
+    }
+
+    public void setRedPacketSubType(String redPacketSubType) {
+        this.redPacketSubType = redPacketSubType;
     }
 }

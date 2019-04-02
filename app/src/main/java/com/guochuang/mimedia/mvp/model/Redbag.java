@@ -26,6 +26,9 @@ public class Redbag implements Serializable {
     private String type;
     private String roleType;
     private String password;
+    private long surveyId;
+    private String videoUrl;
+    private String coverUrl;
 
     public String getLatitude() {
         return latitude;
@@ -99,6 +102,30 @@ public class Redbag implements Serializable {
         this.password = password;
     }
 
+    public long getSurveyId() {
+        return surveyId;
+    }
+
+    public void setSurveyId(long surveyId) {
+        this.surveyId = surveyId;
+    }
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
+
+    public String getCoverUrl() {
+        return coverUrl;
+    }
+
+    public void setCoverUrl(String coverUrl) {
+        this.coverUrl = coverUrl;
+    }
+
     @Override
     public String toString() {
         return "Redbag{" +
@@ -110,7 +137,10 @@ public class Redbag implements Serializable {
                 ", bestWishes='" + bestWishes + '\'' +
                 ", type='" + type + '\'' +
                 ", roleType='" + roleType + '\'' +
-                ", password=" + password +
+                ", password='" + password + '\'' +
+                ", surveyId=" + surveyId +
+                ", videoUrl='" + videoUrl + '\'' +
+                ", coverUrl='" + coverUrl + '\'' +
                 '}';
     }
 }

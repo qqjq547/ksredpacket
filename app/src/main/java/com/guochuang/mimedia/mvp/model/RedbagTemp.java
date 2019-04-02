@@ -41,7 +41,7 @@ public class RedbagTemp implements Serializable {
     private String createDate;
     private String createUser;
     private String districtName;
-    private long id;
+    private long templateId;
     private int kilometre;
     private String latitude;
     private String longitude;
@@ -128,12 +128,12 @@ public class RedbagTemp implements Serializable {
         this.districtName = districtName;
     }
 
-    public long getId() {
-        return id;
+    public long getTemplateId() {
+        return templateId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setTemplateId(long templateId) {
+        this.templateId = templateId;
     }
 
     public int getKilometre() {

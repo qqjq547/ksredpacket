@@ -132,6 +132,24 @@ public class LookVideoResult {
             private int sequence;
             private boolean isSelect=false;
 
+            @Override
+            public String toString() {
+                return "OptionsListBean{" +
+                        "tenantCode='" + tenantCode + '\'' +
+                        ", id=" + id +
+                        ", createUser=" + createUser +
+                        ", createDate='" + createDate + '\'' +
+                        ", updateUser=" + updateUser +
+                        ", updateDate=" + updateDate +
+                        ", questionId=" + questionId +
+                        ", optionName='" + optionName + '\'' +
+                        ", optionValue='" + optionValue + '\'' +
+                        ", isAnswer=" + isAnswer +
+                        ", sequence=" + sequence +
+                        ", isSelect=" + isSelect +
+                        '}';
+            }
+
             public String getTenantCode() {
                 return tenantCode;
             }

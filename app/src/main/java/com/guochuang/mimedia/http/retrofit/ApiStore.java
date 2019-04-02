@@ -99,7 +99,9 @@ import com.guochuang.mimedia.mvp.model.VersionMsg;
 import java.util.List;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -1375,25 +1377,11 @@ public interface ApiStore {
     Observable<HttpResponse<Integer>> getRemain(
             @Query("redPacketUuid") String redPacketUuid);
 
-    @FormUrlEncoded
     @POST("/api/v1/redpacket/red_packet/survey_submit")
     Observable<HttpResponse<RedbagDetail>> surveySubmit(
-            @Field("channelCode") String channelCode,
-            @Field("clientIp") String clientIp,
-            @Field("userAccountId") long userAccountId,
-            @Field("redPacketUuid") String redPacketUuid,
-            @Field("latitude") String latitude,
-            @Field("longitude") String longitude,
-            @Field("submitJson") String submitJson);
+            @Body RequestBody submitJson);
 
-    @FormUrlEncoded
     @POST("/api/v1/redpacket/red_packet/video_submit")
     Observable<HttpResponse<RedbagDetail>> videoSubmit(
-            @Field("channelCode") String channelCode,
-            @Field("clientIp") String clientIp,
-            @Field("userAccountId") long userAccountId,
-            @Field("redPacketUuid") String redPacketUuid,
-            @Field("latitude") String latitude,
-            @Field("longitude") String longitude,
-            @Field("submitJson") String submitJson);
+            @Body RequestBody submitJson);
 }

@@ -1,5 +1,6 @@
 package com.guochuang.mimedia.ui.activity.redbag;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
@@ -15,12 +16,14 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
+import com.guochuang.mimedia.mvp.model.AnswerFrom;
 import com.guochuang.mimedia.mvp.model.LookVideoResult;
 import com.guochuang.mimedia.mvp.model.RedbagDetail;
 import com.guochuang.mimedia.mvp.presenter.AnswerPresenter;
 import com.guochuang.mimedia.mvp.view.AnswerView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
+import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.tools.NetWorkUtils;
 import com.guochuang.mimedia.tools.SystemUtil;
 import com.guochuang.mimedia.ui.adapter.AddressAdapter;
@@ -31,6 +34,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -55,7 +59,6 @@ public class AnswerActivity extends MvpActivity<AnswerPresenter> implements Answ
     String redPacketUuid="";
     long surveyId=0;
     String redPacketType;
-    JSONArray jsonArray;
 
 
     @Override
@@ -70,10 +73,14 @@ public class AnswerActivity extends MvpActivity<AnswerPresenter> implements Answ
 
     @Override
     public void initViewAndData() {
-        tvTitle.setText(R.string.video_redbag);
         redPacketUuid=getIntent().getStringExtra(Constant.RED_PACKET_UUID);
         surveyId=getIntent().getLongExtra(Constant.SURVEYID,0);
         redPacketType=getIntent().getStringExtra(Constant.RED_PACKET_TYPE);
+        if (TextUtils.equals(redPacketType,Constant.RED_PACKET_TYPE_VIDEO)) {
+            tvTitle.setText(R.string.video_redbag);
+        }else {
+            tvTitle.setText(R.string.questionnaire_redbag);
+        }
         rvAnswer.setLayoutManager(new LinearLayoutManager(this,OrientationHelper.VERTICAL,false));
         adapter=new AnswerAdapter(dataArr);
         adapter.setEmptyView(getLayoutInflater().inflate(R.layout.layout_empty,null));
@@ -91,68 +98,56 @@ public class AnswerActivity extends MvpActivity<AnswerPresenter> implements Answ
                 onBackPressed();
                 break;
             case R.id.btn_open:
-                jsonArray=new JSONArray();
                 if (dataArr.size()>0){
-                    JSONObject jsonObject=new JSONObject();
-                    for (LookVideoResult.QuestionListBean listBean:dataArr){
-                        List<String> optName=new ArrayList<>();
-                        List<String> optValue=new ArrayList<>();
-                        if (listBean.getType()==2){//填空题
-                            if (listBean.getOptionsList()!=null&&listBean.getOptionsList().size()>0){
-                                LookVideoResult.QuestionListBean.OptionsListBean bean= listBean.getOptionsList().get(0);
-                                if (bean.isSelect()){
+                    ArrayList<AnswerFrom.AnswerAddListBean> answerList=new ArrayList<>();
+                    for (LookVideoResult.QuestionListBean listBean:dataArr) {
+                        AnswerFrom.AnswerAddListBean answerItem=new AnswerFrom.AnswerAddListBean();
+                        LogUtil.object(listBean.getOptionsList());
+                        List<String> optName = new ArrayList<>();
+                        List<String> optValue = new ArrayList<>();
+                        if (listBean.getType() == 2) {//填空题
+                            if (listBean.getOptionsList() != null && listBean.getOptionsList().size() > 0) {
+                                LookVideoResult.QuestionListBean.OptionsListBean bean = listBean.getOptionsList().get(0);
+                                if (bean.isSelect()) {
                                     optName.add(bean.getOptionName());
                                     optValue.add(bean.getOptionValue());
                                 }
                             }
-                        }else {
-                            for (LookVideoResult.QuestionListBean.OptionsListBean bean:listBean.getOptionsList()){
-                                if (bean.isSelect()){
+                        } else {
+                            for (LookVideoResult.QuestionListBean.OptionsListBean bean : listBean.getOptionsList()) {
+                                if (bean.isSelect()) {
                                     optName.add(bean.getOptionName());
                                     optValue.add(bean.getOptionValue());
                                 }
                             }
                         }
 
-                        if (optName.size()>0) {
-                            try {
-                                jsonObject.put("sourceId", redPacketUuid);
-                                jsonObject.put("surveyId", surveyId);
-                                jsonObject.put("questionId", listBean.getQuestionId());
-                                jsonObject.put("optionName", TextUtils.join(",", optName));
-                                jsonObject.put("optionValue", TextUtils.join(",", optName));
-                                jsonArray.put(jsonObject);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                        if (optName.size() > 0) {
+                            answerItem.setSourceId(redPacketUuid);
+                            answerItem.setSurveyId(surveyId);
+                            answerItem.setQuestionId(listBean.getQuestionId());
+                            answerItem.setOptionName(TextUtils.join(",", optName));
+                            answerItem.setOptionValue(TextUtils.join(",", optValue));
+                            answerList.add(answerItem);
+                        }
+                        else {
+                        showShortToast(R.string.has_not_answer);
+                        return;
+                         }
+                        }
                             showLoadingDialog(null);
+                            AnswerFrom answerFrom=new AnswerFrom();
+                            answerFrom.setTenantCode(Constant.PARAMS_H_TENANT_CODE);
+                            answerFrom.setUserAccountUuid(App.getInstance().getUserInfo().getUserAccountUuid());
+                            answerFrom.setRedPacketUuid(redPacketUuid);
+                            answerFrom.setLatitude(Double.parseDouble(getPref().getLatitude()));
+                            answerFrom.setLongitude(Double.parseDouble(getPref().getLongitude()));
+                            answerFrom.setAnswerAddList(answerList);
                             if (TextUtils.equals(redPacketType,Constant.RED_PACKET_TYPE_VIDEO)){
-                                mvpPresenter.videoSubmit(
-                                        Constant.CHANNEL_CODE_ANDROID,
-                                        NetWorkUtils.getIp(this),
-                                        App.getInstance().getUserInfo().getUserAccountId(),
-                                        redPacketUuid,
-                                        getPref().getLatitude(),
-                                        getPref().getLongitude(),
-                                        jsonArray.toString()
-                                );
+                                mvpPresenter.videoSubmit(answerFrom);
                             }else {
-                                mvpPresenter.surveySubmit(
-                                        Constant.CHANNEL_CODE_ANDROID,
-                                        NetWorkUtils.getIp(this),
-                                        App.getInstance().getUserInfo().getUserAccountId(),
-                                        redPacketUuid,
-                                        getPref().getLatitude(),
-                                        getPref().getLongitude(),
-                                        jsonArray.toString()
-                                );
+                                mvpPresenter.surveySubmit(answerFrom);
                             }
-
-                        }else {
-                             showShortToast(R.string.has_not_answer);
-                             return;
-                        }
-                        }
                     }else {
                     showShortToast(R.string.cannot_get_question);
                 }
@@ -189,7 +184,15 @@ public class AnswerActivity extends MvpActivity<AnswerPresenter> implements Answ
     public void setRedbagDetail(RedbagDetail data) {
        closeLoadingDialog();
        if (data!=null){
-           showShortToast(R.string.answer_success_open_redbag);
+           if (data.isDrawSuccess()){
+               showShortToast(R.string.answer_success_open_redbag);
+               Intent intent=getIntent();
+               intent.putExtra(Constant.RED_PACKET_DETAIL,data);
+               setResult(RESULT_OK,intent);
+               finish();
+           }else {
+               showShortToast(data.getReason());
+           }
        }
     }
 

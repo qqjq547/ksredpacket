@@ -5,12 +5,9 @@
     android:layout_marginLeft="@dimen/space15"
     android:layout_marginTop="@dimen/space10"
     android:layout_marginRight="@dimen/space15"
-    android:background="@color/white"
+    android:background="@drawable/bg_white_block"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/space10"
-    android:paddingTop="@dimen/space15"
-    android:paddingRight="@dimen/space10"
-    android:paddingBottom="@dimen/space15">
+    android:padding="@dimen/space15">
 
 
     <LinearLayout
