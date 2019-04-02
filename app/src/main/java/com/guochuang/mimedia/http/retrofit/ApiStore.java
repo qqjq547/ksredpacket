@@ -62,6 +62,7 @@ import com.guochuang.mimedia.mvp.model.RainRecord;
 import com.guochuang.mimedia.mvp.model.RecommedUser;
 import com.guochuang.mimedia.mvp.model.RecommendData;
 import com.guochuang.mimedia.mvp.model.RecommendDetail;
+import com.guochuang.mimedia.mvp.model.RedBagConfig;
 import com.guochuang.mimedia.mvp.model.RedbagBenefit;
 import com.guochuang.mimedia.mvp.model.RedbagInfo;
 import com.guochuang.mimedia.mvp.model.RedbagReceived;
@@ -1384,4 +1385,7 @@ public interface ApiStore {
     @POST("/api/v1/redpacket/red_packet/video_submit")
     Observable<HttpResponse<RedbagDetail>> videoSubmit(
             @Body RequestBody submitJson);
+
+    @GET("/api/v1/redpacket/red_packet/get_config")
+    Observable<HttpResponse<RedBagConfig>> getConfig(@Query("redPacketType") String redPacketType);
 }

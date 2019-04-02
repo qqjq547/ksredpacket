@@ -28,6 +28,7 @@ import com.guochuang.mimedia.mvp.model.LookSurevyResult;
 import com.guochuang.mimedia.mvp.model.LookVideoResult;
 import com.guochuang.mimedia.mvp.model.LuckyConfig;
 import com.guochuang.mimedia.mvp.model.ProblemBean;
+import com.guochuang.mimedia.mvp.model.RedBagConfig;
 import com.guochuang.mimedia.tools.BitmapUtils;
 import com.guochuang.mimedia.ui.activity.common.MapPickActivity;
 import com.sz.gcyh.KSHongBao.R;
@@ -380,6 +381,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                 IntentUtils.startWebActivity(this, tvRule.getText().toString(), Constant.URL_SEND_REDBAG);
                 break;
             case R.id.btn_add:
+
                 content = etContent.getText().toString().trim();
                 if (picUrlArr.size() == 0) {
                     waitUpload = (ArrayList<String>) pictureArr.clone();
@@ -436,15 +438,76 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                             return;
                         }
                     }
-                    if (waitUpload.size() > 0) {
-                        showLoadingDialog(R.string.upload_picture);
-                        new File(Constant.COMPRESS_DIR_PATH).mkdirs();
-                        uploadFile();
-                    } else {
-                        selectPayType();
-                    }
+
+
+                    checkConfig();
+
                 }
                 break;
+        }
+    }
+
+    /**
+     * 后天校验参数
+     */
+    private void checkConfig() {
+        //红包类型，survey：视频/问卷红包 password：口令红包
+        if (Constant.RED_PACKET_TYPE_VIDEO.equals(redPacketType)
+                || Constant.RED_PACKET_TYPE_SURVEY.equals(redPacketType)
+                || Constant.RED_PACKET_TYPE_PASSWORD.equals(redPacketType)) {
+            mvpPresenter.getConfig(redPacketType);
+        } else {
+            //跳过上传逻辑
+            checkUploadFile();
+        }
+
+    }
+
+
+    @Override
+    public void checkConfigSuccess(RedBagConfig data) {
+        //红包类型
+        if (Constant.RED_PACKET_TYPE_PASSWORD.equals(redPacketType)) {
+
+            if ( !compareLarge(money, data.getPasswordMinMoney()) ){
+                showShortToast(getString(R.string.redpacke_tip_money_str)+ data.getPasswordMinMoney());
+                return;
+            }
+            if ( !compareLarge(money*1.0 / quantity, data.getPasswordMinOneMoney())){
+                showShortToast(getString(R.string.redpacke_tip_one_money_str)+data.getPasswordMinOneMoney());
+                return;
+            }
+
+
+        } else {
+            if ( !compareLarge(money, data.getSurveyMinMoney()) ){
+                showShortToast(getString(R.string.redpacke_tip_money_str)+ data.getSurveyMinMoney());
+                return;
+            }
+            if ( !compareLarge(money*1.0 / quantity, data.getSurveyMinOneMoney())){
+                showShortToast(getString(R.string.redpacke_tip_one_money_str)+data.getSurveyMinOneMoney());
+                return;
+            }
+
+        }
+
+
+        checkUploadFile();
+
+    }
+
+    private boolean compareLarge(double mumberOne, double mumberTow) {
+        return mumberOne >= mumberTow;
+    }
+
+
+    private void checkUploadFile() {
+        if (waitUpload.size() > 0) {
+            showLoadingDialog(R.string.upload_picture);
+            new File(Constant.COMPRESS_DIR_PATH).mkdirs();
+            uploadFile();
+        } else {
+            selectPayType();
         }
     }
 
@@ -970,6 +1033,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
         mTvProblemNumber.setText(String.format(getString(R.string.set_problem_number), mProblemList.size()));
         closeLoadingDialog();
     }
+
 
     /**
      * 打开视频选择器

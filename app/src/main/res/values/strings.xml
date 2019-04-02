@@ -740,6 +740,8 @@
     <string name="answer_str"><![CDATA[<font color = \'#000000\'>答:</font>]]></string>
     <string name="fill_info_answer_str">回答</string>
     <string name="answer_ok_number"><![CDATA[<font color=\'#ff7519\'>%s</font>人回答正确]]></string>
+    <string name="redpacke_tip_money_str">红包总金额不能小于</string>
+    <string name="redpacke_tip_one_money_str">单个红包金额不能少于</string>
     <string-array name="type_redpacket">
          <item>随机红包: </item>
          <item>口令红包: </item>

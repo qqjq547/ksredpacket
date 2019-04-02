@@ -55,7 +55,8 @@ public class SendRedbagAdapter extends BaseQuickAdapter<RedbagRecord,BaseViewHol
             case Constant.RED_PACKET_TYPE_VIDEO:
                 helper.setText(R.id.tv_goto_look_problem,R.string.look_problme_str);
                 helper.setGone(R.id.tv_goto_look_problem,item.getSurveyId()>0);
-
+                helper.setGone(R.id.iv_prictu,true);
+                GlideImgManager.loadCornerImage(mContext, item.getCoverUrl(), (ImageView) helper.getView(R.id.iv_prictu), 8, true);
                 break;
             default:
                 helper.setGone(R.id.tv_goto_look_problem,false);

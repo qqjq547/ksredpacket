@@ -10,6 +10,7 @@ import com.guochuang.mimedia.mvp.model.LookSurevyResult;
 import com.guochuang.mimedia.mvp.model.LookVideoResult;
 import com.guochuang.mimedia.mvp.model.LuckyConfig;
 import com.guochuang.mimedia.mvp.model.Order;
+import com.guochuang.mimedia.mvp.model.RedBagConfig;
 import com.guochuang.mimedia.mvp.model.RedbagInfo;
 import com.guochuang.mimedia.mvp.model.RedbagTemp;
 import com.guochuang.mimedia.mvp.model.UploadFile;
@@ -388,4 +389,26 @@ public class EditRedbagPresenter extends BasePresenter<EditRedbagView> {
     }
 
 
+    /**
+     * 校验配置
+     * @param redPacketType
+     */
+    public void getConfig(String redPacketType) {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getConfig(redPacketType)), new ApiCallback<RedBagConfig>() {
+            @Override
+            public void onSuccess(RedBagConfig data) {
+                mvpView.checkConfigSuccess(data);
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setError(exception.getMessage());
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
 }

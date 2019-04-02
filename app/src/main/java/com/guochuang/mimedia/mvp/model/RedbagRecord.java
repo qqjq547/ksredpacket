@@ -37,10 +37,19 @@ public class RedbagRecord {
     private int quantity;
     private double money;
     private long surveyId;
+    private String coverUrl;
     private List<PictureListBean> pictureList;
 
     public String getPassword() {
         return password;
+    }
+
+    public String getCoverUrl() {
+        return coverUrl;
+    }
+
+    public void setCoverUrl(String coverUrl) {
+        this.coverUrl = coverUrl;
     }
 
     public void setPassword(String password) {
