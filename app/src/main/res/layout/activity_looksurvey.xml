@@ -15,14 +15,14 @@
         android:padding="@dimen/textfont15"
         android:textColor="@color/color_999999" />
 
-    <com.guochuang.mimedia.base.recycleview.WrapEmptyRecyclerView
+    <com.guochuang.mimedia.view.recycleview.WrapEmptyRecyclerView
         android:id="@+id/wrap_em_recycle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:emptyPageLayout="@layout/layout_empty">
 
 
-    </com.guochuang.mimedia.base.recycleview.WrapEmptyRecyclerView>
+    </com.guochuang.mimedia.view.recycleview.WrapEmptyRecyclerView>
 
 </LinearLayout>
 

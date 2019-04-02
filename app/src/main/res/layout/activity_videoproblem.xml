@@ -8,7 +8,7 @@
 
     <include layout="@layout/layout_title"/>
 
-    <com.guochuang.mimedia.base.recycleview.WrapEmptyRecyclerView
+    <com.guochuang.mimedia.view.recycleview.WrapEmptyRecyclerView
         android:id="@+id/recycler_list"
         android:layout_width="match_parent"
         android:paddingLeft="@dimen/space15"
@@ -18,7 +18,7 @@
         android:layout_weight="1">
 
 
-    </com.guochuang.mimedia.base.recycleview.WrapEmptyRecyclerView>
+    </com.guochuang.mimedia.view.recycleview.WrapEmptyRecyclerView>
 
 
 

@@ -5,8 +5,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.guochuang.mimedia.base.recycleview.adapter.CommonRecyclerAdapter;
-import com.guochuang.mimedia.base.recycleview.adapter.ViewHolder;
+import com.guochuang.mimedia.view.recycleview.adapter.CommonRecyclerAdapter;
+import com.guochuang.mimedia.view.recycleview.adapter.ViewHolder;
 import com.guochuang.mimedia.mvp.model.ProblemBean;
 import com.sz.gcyh.KSHongBao.R;
 

@@ -63,7 +63,7 @@ public class ReceiveRedbagFragment extends MvpFragment<ReceivedRedbagPresenter> 
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                IntentUtils.startRedbagDetailActivity(getActivity(),itemArr.get(position).getRedPacketUuid(),itemArr.get(position).getRedPacketType(),itemArr.get(position).getStartIndex());
+                IntentUtils.startRedbagDetailActivity(getActivity(),itemArr.get(position).getRedPacketUuid(),itemArr.get(position).getRedPacketType(),null,itemArr.get(position).getStartIndex());
             }
         });
         rvRecord.setAdapter(adapter);

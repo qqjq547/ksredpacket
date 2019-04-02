@@ -4,8 +4,8 @@ import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
-import com.guochuang.mimedia.base.recycleview.adapter.CommonRecyclerAdapter;
-import com.guochuang.mimedia.base.recycleview.adapter.ViewHolder;
+import com.guochuang.mimedia.view.recycleview.adapter.CommonRecyclerAdapter;
+import com.guochuang.mimedia.view.recycleview.adapter.ViewHolder;
 import com.guochuang.mimedia.mvp.model.LookVideoResult;
 import com.sz.gcyh.KSHongBao.R;
 

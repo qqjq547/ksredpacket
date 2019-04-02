@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.MediaMetadataRetriever;
-import android.os.Bundle;
 import android.os.Parcel;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -331,7 +330,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                 //跳转设问题
                 Intent intent1 = new Intent(this, EditRedPackgeProblemActivity.class);
                 intent1.putExtra(Constant.PROBLEMLIST_KEY, mProblemList);
-                intent1.putExtra(Constant.OPEN_VIDEOPROBLEMACTIVITY_TYPE, redPacketType);
+                intent1.putExtra(Constant.RED_PACKET_TYPE, redPacketType);
                 if (Constant.RED_PACKET_TYPE_VIDEO.equals(redPacketType)) {
                     //视频红包
                     startActivityForResult(intent1, VIDEO_OPEN_CODE);
@@ -620,7 +619,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                 case VIDEO_OPEN_CODE:
                 case QUESTION_OPEN_CODE:
                     //视频回来
-                    ArrayList<ProblemBean> problemlist = intent.getParcelableArrayListExtra(Constant.问题数据集合);
+                    ArrayList<ProblemBean> problemlist = intent.getParcelableArrayListExtra(Constant.PROBLEM_LIST);
                     mProblemList.clear();
                     mProblemList.addAll(problemlist);
                     mTvProblemNumber.setText(String.format(getString(R.string.set_problem_number), String.valueOf(mProblemList.size())));

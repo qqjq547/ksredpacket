@@ -103,12 +103,14 @@ public class AnswerActivity extends MvpActivity<AnswerPresenter> implements Answ
                     for (LookVideoResult.QuestionListBean listBean:dataArr) {
                         AnswerFrom.AnswerAddListBean answerItem=new AnswerFrom.AnswerAddListBean();
                         LogUtil.object(listBean.getOptionsList());
+                        List<Integer> optId = new ArrayList<>();
                         List<String> optName = new ArrayList<>();
                         List<String> optValue = new ArrayList<>();
                         if (listBean.getType() == 2) {//填空题
                             if (listBean.getOptionsList() != null && listBean.getOptionsList().size() > 0) {
                                 LookVideoResult.QuestionListBean.OptionsListBean bean = listBean.getOptionsList().get(0);
                                 if (bean.isSelect()) {
+                                    optId.add(bean.getId());
                                     optName.add(bean.getOptionName());
                                     optValue.add(bean.getOptionValue());
                                 }
@@ -116,6 +118,7 @@ public class AnswerActivity extends MvpActivity<AnswerPresenter> implements Answ
                         } else {
                             for (LookVideoResult.QuestionListBean.OptionsListBean bean : listBean.getOptionsList()) {
                                 if (bean.isSelect()) {
+                                    optId.add(bean.getId());
                                     optName.add(bean.getOptionName());
                                     optValue.add(bean.getOptionValue());
                                 }
@@ -126,6 +129,7 @@ public class AnswerActivity extends MvpActivity<AnswerPresenter> implements Answ
                             answerItem.setSourceId(redPacketUuid);
                             answerItem.setSurveyId(surveyId);
                             answerItem.setQuestionId(listBean.getQuestionId());
+                            answerItem.setOptionId(TextUtils.join(",", optId));
                             answerItem.setOptionName(TextUtils.join(",", optName));
                             answerItem.setOptionValue(TextUtils.join(",", optValue));
                             answerList.add(answerItem);

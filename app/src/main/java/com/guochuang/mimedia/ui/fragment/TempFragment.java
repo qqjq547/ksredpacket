@@ -13,7 +13,6 @@ import com.guochuang.mimedia.mvp.model.RedbagTemp;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
-import com.guochuang.mimedia.ui.activity.redbag.LookSurevyActivity;
 import com.sz.gcyh.KSHongBao.R;
 
 import butterknife.BindView;
@@ -119,9 +118,7 @@ public class TempFragment extends MvpFragment {
     public void onViewClicked(View view) {
        switch (view.getId()){
            case R.id.tv_survery:
-               startActivity(new Intent(getActivity(),LookSurevyActivity.class)
-                       .putExtra(Constant.LOOK_PROBLEM_RED_PACKET_ID,String.valueOf(temp.getSurveyId()))
-                       .putExtra(Constant.RED_PACKET_ID,temp.getRedPacketUuid()));
+               IntentUtils.startLookSurevyActivity(getActivity(),temp.getSurveyId(),temp.getRedPacketUuid());
                break;
            case R.id.iv_cover:
                IntentUtils.startVideoPreviewActivity(getActivity(),temp.getVideoUrl());

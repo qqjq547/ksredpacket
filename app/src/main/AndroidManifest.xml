@@ -74,7 +74,7 @@
         <activity android:name="com.guochuang.mimedia.ui.activity.user.FansDetailActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.user.RecommendDetailActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.user.ShareBenefitDetailActivity" />
-        <activity android:name="com.guochuang.mimedia.ui.activity.redbag.RedbagDynamicActivity2" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.redbag.RedbagDynamicActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.user.MyCollectActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.user.MyCommentActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.user.SafeCenterActivity" />

@@ -24,14 +24,14 @@
         android:text="回答"
         android:textColor="@color/color_666666" />
 
-    <com.guochuang.mimedia.base.recycleview.WrapEmptyRecyclerView
+    <com.guochuang.mimedia.view.recycleview.WrapEmptyRecyclerView
         android:id="@+id/recycle_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/space20"
         app:emptyPageLayout="@layout/layout_empty">
 
-    </com.guochuang.mimedia.base.recycleview.WrapEmptyRecyclerView>
+    </com.guochuang.mimedia.view.recycleview.WrapEmptyRecyclerView>
 
 
 </LinearLayout>

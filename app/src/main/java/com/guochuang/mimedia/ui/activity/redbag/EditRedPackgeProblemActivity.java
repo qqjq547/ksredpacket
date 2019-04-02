@@ -1,7 +1,6 @@
 package com.guochuang.mimedia.ui.activity.redbag;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Parcel;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,9 +17,9 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.guochuang.mimedia.base.MvpActivity;
-import com.guochuang.mimedia.base.dialog.AlertDialog;
-import com.guochuang.mimedia.base.recycleview.WrapEmptyRecyclerView;
-import com.guochuang.mimedia.base.recycleview.adapter.MultiTypeSupport;
+import com.guochuang.mimedia.view.dialog.AlertDialog;
+import com.guochuang.mimedia.view.recycleview.WrapEmptyRecyclerView;
+import com.guochuang.mimedia.view.recycleview.adapter.MultiTypeSupport;
 import com.guochuang.mimedia.mvp.model.ProblemBean;
 import com.guochuang.mimedia.mvp.presenter.VideoProblemPresenter;
 import com.guochuang.mimedia.mvp.view.VideoProblemView;
@@ -36,13 +35,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.guochuang.mimedia.tools.Constant.OPEN_VIDEOPROBLEMACTIVITY_TYPE;
-import static com.guochuang.mimedia.tools.Constant.PROBLEMLIST_KEY;
-import static com.guochuang.mimedia.tools.Constant.RED_PACKET_TYPE_SURVEY;
-import static com.guochuang.mimedia.tools.Constant.RED_PACKET_TYPE_VIDEO;
 
 /**
  * 编辑视频与问卷问题
@@ -82,10 +76,10 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
     @Override
     public void initViewAndData() {
         setStatusbar(R.color.white, true);
-        mProblemList = getIntent().getParcelableArrayListExtra(PROBLEMLIST_KEY);
-        mRedPacketType = getIntent().getStringExtra(OPEN_VIDEOPROBLEMACTIVITY_TYPE);
+        mProblemList = getIntent().getParcelableArrayListExtra(Constant.PROBLEMLIST_KEY);
+        mRedPacketType = getIntent().getStringExtra(Constant.RED_PACKET_TYPE);
 
-        if (RED_PACKET_TYPE_VIDEO.equals(mRedPacketType)) {
+        if (Constant.RED_PACKET_TYPE_VIDEO.equals(mRedPacketType)) {
             mTvTitle.setText(getResources().getString(R.string.video_redbag_problem));
         } else {
             mTvTitle.setText(getResources().getString(R.string.surevy_redbag_problem));
@@ -180,7 +174,7 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
             case R.id.iv_back:
                 //把题目的值带回去
                 Intent intent = getIntent();
-                intent.putParcelableArrayListExtra(Constant.问题数据集合, mProblemList);
+                intent.putParcelableArrayListExtra(Constant.PROBLEM_LIST, mProblemList);
                 setResult(RESULT_OK, intent);
                 finish();
                 break;
@@ -213,7 +207,7 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
                 .create();
 
         LinearLayout ll_header_root = alertDialog.getView(R.id.ll_header_root);
-        if (RED_PACKET_TYPE_SURVEY.equals(mRedPacketType)) {
+        if (Constant.RED_PACKET_TYPE_SURVEY.equals(mRedPacketType)) {
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) ll_header_root.getLayoutParams();
             layoutParams.bottomMargin = CommonUtil.dip2px(this, 8);
             ll_header_root.setLayoutParams(layoutParams);
@@ -329,7 +323,7 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
 
         if (problemBean.getType() == Constant.FILL_IN_PROBLEM) {
             //填空题
-            if (RED_PACKET_TYPE_VIDEO.equals(mRedPacketType)) {
+            if (Constant.RED_PACKET_TYPE_VIDEO.equals(mRedPacketType)) {
                 //并且是视频红包
                 if (TextUtils.isEmpty(problemBean.getItem().get(0).getItemcontent())) {
                     showShortToast(R.string.please_set_answer);
@@ -356,7 +350,7 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
             }
 
 
-            if (RED_PACKET_TYPE_VIDEO.equals(mRedPacketType)) {
+            if (Constant.RED_PACKET_TYPE_VIDEO.equals(mRedPacketType)) {
                 //只有视频红包问题才能设置答案
                 boolean flag = false;
                 for (ProblemBean.ItemBean item : items) {
