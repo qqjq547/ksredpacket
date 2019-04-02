@@ -79,7 +79,7 @@ public class MessageActivity extends MvpActivity<MessagePresenter> implements Me
                         inputDialog.setHint(getString(R.string.reply));
                         break;
                     case R.id.lin_content:
-                        IntentUtils.startRedbagDetailActivity(MessageActivity.this,message.getSourceUuid(),Constant.ROLETYPE_PERSON,null);
+                        IntentUtils.startRedbagDetailActivity(MessageActivity.this,message.getSourceUuid(),Constant.ROLETYPE_PERSON,null,null);
                         break;
                 }
             }

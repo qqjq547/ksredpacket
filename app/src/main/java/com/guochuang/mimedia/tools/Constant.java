@@ -283,16 +283,10 @@ public class Constant {
     public static final String MAP_MARKER_SPOT = "spot";
 
     public static final String ACTIVTYPUTBUNDLEKEY = "openActivity_key";
-    public static final String VIDEO_PATH_LIST = "视频路径集合";
-    public static final String PROBLEMLIST_KEY = "问题集合";
-    public static final String OPEN_VIDEOPROBLEMACTIVITY_TYPE = "打开VideoProblemActivity的类型";
-    public static final String VIDEO_PATH = "视频路径";
-    public static final String LOOK_PROBLEM_RED_PACKET_ID = "查看红包问题ID";
-    public static final String FILL_ANSWER_INFO = "填空題答題詳情";
-    public static final String RECEIVED_BAG_STR ="收的红包";
-    public static final String SEND_BAG_STR = "发的红包";
-    public static String 问题数据集合 = "问题数据集合";
-
+    public static final String PROBLEMLIST_KEY = "problemlist_key";
+    public static final String VIDEO_PATH = "video_path";
+    public static final String FILL_ANSWER_INFO = "fill_answer_info";
+    public static final String PROBLEM_LIST = "problem_list";
 
     //   视频红包与问卷红包 问题类型 0：单选 1：多选 2：填空题
     public static int SINGLESELECT = 0;

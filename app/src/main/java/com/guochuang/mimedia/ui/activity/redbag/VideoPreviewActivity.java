@@ -25,7 +25,7 @@ import com.guochuang.mimedia.base.BaseActivity;
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.bumptech.glide.Glide;
-import com.guochuang.mimedia.base.navigationbar.DefaultNavigationBar;
+import com.guochuang.mimedia.view.navigationbar.DefaultNavigationBar;
 import com.guochuang.mimedia.mvp.model.VideoPlayerItemInfo;
 import com.guochuang.mimedia.tools.BitmapUtils;
 import com.guochuang.mimedia.tools.Constant;

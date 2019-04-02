@@ -1,14 +1,13 @@
 package com.guochuang.mimedia.ui.activity.redbag;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Html;
 import android.widget.TextView;
 
 import com.guochuang.mimedia.base.MvpActivity;
-import com.guochuang.mimedia.base.navigationbar.DefaultNavigationBar;
-import com.guochuang.mimedia.base.recycleview.WrapEmptyRecyclerView;
+import com.guochuang.mimedia.view.navigationbar.DefaultNavigationBar;
+import com.guochuang.mimedia.view.recycleview.WrapEmptyRecyclerView;
 import com.guochuang.mimedia.mvp.model.LookSurevyResult;
 import com.guochuang.mimedia.mvp.presenter.LookSurveymPresenter;
 import com.guochuang.mimedia.mvp.view.LookVideoProblemView;
@@ -30,7 +29,7 @@ public class LookSurevyActivity extends MvpActivity<LookSurveymPresenter> implem
     LookSurevyAdapter mLookSurevyAdapter;
     List<LookSurevyResult.StatisticsListBean> mData = new ArrayList<LookSurevyResult.StatisticsListBean>();
     private LookSurveymPresenter mLookSurveymPresenter;
-    private String mSurveyId;
+    private long mSurveyId;
     private String mRedPackgeId;
 
     @Override
@@ -45,7 +44,7 @@ public class LookSurevyActivity extends MvpActivity<LookSurveymPresenter> implem
 
     @Override
     public void initViewAndData() {
-        mSurveyId = getIntent().getStringExtra(Constant.LOOK_PROBLEM_RED_PACKET_ID);
+        mSurveyId = getIntent().getLongExtra(Constant.SURVEYID,0);
         mRedPackgeId = getIntent().getStringExtra(Constant.RED_PACKET_ID);
         initTitle();
         initData();
@@ -60,7 +59,7 @@ public class LookSurevyActivity extends MvpActivity<LookSurveymPresenter> implem
     }
 
     private void initData() {
-        mLookSurveymPresenter.getVideoProblemAnswerList(Long.parseLong(mSurveyId), mRedPackgeId);
+        mLookSurveymPresenter.getVideoProblemAnswerList(mSurveyId, mRedPackgeId);
 
     }
 

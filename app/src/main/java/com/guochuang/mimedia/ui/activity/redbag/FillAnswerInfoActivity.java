@@ -6,8 +6,8 @@ import android.widget.TextView;
 
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
-import com.guochuang.mimedia.base.navigationbar.DefaultNavigationBar;
-import com.guochuang.mimedia.base.recycleview.WrapEmptyRecyclerView;
+import com.guochuang.mimedia.view.navigationbar.DefaultNavigationBar;
+import com.guochuang.mimedia.view.recycleview.WrapEmptyRecyclerView;
 import com.guochuang.mimedia.mvp.model.LookSurevyResult;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.ui.adapter.FillAnswerInfoAdapter;

@@ -5,7 +5,6 @@ import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v4.app.FragmentActivity;
 
 import com.guochuang.mimedia.mvp.model.RecommendData;
 import com.guochuang.mimedia.mvp.model.RedbagDetail;
@@ -33,7 +32,6 @@ import com.guochuang.mimedia.ui.activity.redbag.RedbagJoinedActivity;
 import com.guochuang.mimedia.ui.activity.redbag.RedbagRainActivity;
 import com.guochuang.mimedia.ui.activity.redbag.SquareDetailActivity;
 import com.guochuang.mimedia.ui.activity.common.WebActivity;
-import com.guochuang.mimedia.ui.adapter.SendRedbagAdapter2;
 
 import java.util.ArrayList;
 
@@ -73,16 +71,18 @@ public class IntentUtils {
         intent.putExtra(Constant.RED_PACKET_TYPE,redPacketType);
         activity.startActivity(intent);
     }
-    public static void startRedbagDetailActivity(Activity activity, String redPacketUuid,String roleType,String startIndex) {
+    public static void startRedbagDetailActivity(Activity activity, String redPacketUuid,String roleType,String redPacketType,String startIndex) {
         Intent intent = new Intent(activity, RedbagDetailActivity.class);
         intent.putExtra(Constant.RED_PACKET_UUID,redPacketUuid);
         intent.putExtra(Constant.ROLE_TYPE,roleType);
+        intent.putExtra(Constant.RED_PACKET_TYPE,redPacketType);
         intent.putExtra(Constant.START_INDEX,startIndex);
         activity.startActivity(intent);
     }
-    public static void startRedbagDetailActivityForResult(Activity activity, String redPacketUuid,String redPacketType,int position) {
+    public static void startRedbagDetailActivityForResult(Activity activity, String redPacketUuid,String roleType,String redPacketType,int position) {
         Intent intent = new Intent(activity, RedbagDetailActivity.class);
         intent.putExtra(Constant.RED_PACKET_UUID,redPacketUuid);
+        intent.putExtra(Constant.ROLE_TYPE,roleType);
         intent.putExtra(Constant.RED_PACKET_TYPE,redPacketType);
         intent.putExtra(Constant.FROM_COLLECT,true);
         intent.putExtra(Constant.POSITION,position);
@@ -274,16 +274,16 @@ public class IntentUtils {
         activity.startActivity(intent);
     }
 
-    public static void startLookVideoProblemActivity(Activity activity,  String surveyId, String redPacketUuid) {
+    public static void startLookVideoProblemActivity(Activity activity,  long surveyId, String redPacketUuid) {
         Intent intent = new Intent(activity, LookVideoProblemActivity.class);
-        intent.putExtra(Constant.LOOK_PROBLEM_RED_PACKET_ID,surveyId);
+        intent.putExtra(Constant.SURVEYID,surveyId);
         intent.putExtra(Constant.RED_PACKET_ID,redPacketUuid);
         activity.startActivity(intent);
     }
 
-    public static void startLookSurevyActivity(Activity activity, String surveyId, String redPacketUuid) {
+    public static void startLookSurevyActivity(Activity activity, long surveyId, String redPacketUuid) {
         Intent intent = new Intent(activity, LookSurevyActivity.class);
-        intent.putExtra(Constant.LOOK_PROBLEM_RED_PACKET_ID,surveyId);
+        intent.putExtra(Constant.SURVEYID,surveyId);
         intent.putExtra(Constant.RED_PACKET_ID,redPacketUuid);
         activity.startActivity(intent);
     }

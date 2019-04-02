@@ -14,7 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.NestAuctionMsg;
 import com.guochuang.mimedia.mvp.model.RegionCore;
 import com.guochuang.mimedia.tools.DialogBuilder;
@@ -23,7 +22,7 @@ import com.guochuang.mimedia.ui.activity.MainActivity;
 import com.guochuang.mimedia.ui.activity.beenest.AdBidActivity;
 import com.guochuang.mimedia.ui.activity.beenest.MyAdActivity;
 import com.guochuang.mimedia.ui.activity.city.CityActivity;
-import com.guochuang.mimedia.ui.activity.redbag.RedbagDynamicActivity2;
+import com.guochuang.mimedia.ui.activity.redbag.RedbagDynamicActivity;
 import com.guochuang.mimedia.ui.activity.user.MyAddressActivity;
 import com.guochuang.mimedia.ui.dialog.SheetDialog;
 import com.sz.gcyh.KSHongBao.R;
@@ -46,7 +45,6 @@ import com.guochuang.mimedia.ui.activity.user.MyKsbActivity;
 import com.guochuang.mimedia.ui.activity.operation.OperationCenterActivity;
 import com.guochuang.mimedia.ui.activity.user.RecommendAgentActivity;
 import com.guochuang.mimedia.ui.activity.user.RecommendFanActivity;
-import com.guochuang.mimedia.ui.activity.redbag.RedbagDynamicActivity;
 import com.guochuang.mimedia.ui.activity.user.SafeCenterActivity;
 import com.guochuang.mimedia.ui.activity.user.SettingActivity;
 import com.guochuang.mimedia.ui.activity.user.WelfareActivity;
@@ -219,7 +217,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                         IntentUtils.startWebActivity(getActivity(),getString(R.string.text_my_order),Constant.URL_MY_ORDER);
                         break;
                     case R.drawable.ic_my_dynamic:
-                        startActivity(new Intent(getActivity(), RedbagDynamicActivity2.class));
+                        startActivity(new Intent(getActivity(), RedbagDynamicActivity.class));
                         break;
                     case R.drawable.ic_my_collection:
                         startActivity(new Intent(getActivity(), MyCollectActivity.class));

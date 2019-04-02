@@ -59,8 +59,9 @@ public class CollectRedbagFragment extends MvpFragment<CollectRedbagPresenter> i
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                if (!TextUtils.isEmpty(itemArr.get(position).getRoleType())){
-                    IntentUtils.startRedbagDetailActivityForResult(getActivity(),itemArr.get(position).getRedPacketUuid(),itemArr.get(position).getRoleType(),position);
+                CommentRedbag redbag=itemArr.get(position);
+                if (!TextUtils.isEmpty(redbag.getRoleType())){
+                    IntentUtils.startRedbagDetailActivityForResult(getActivity(),redbag.getRedPacketUuid(),redbag.getRoleType(),redbag.getRedPacketType(),position);
                 }
             }
         });

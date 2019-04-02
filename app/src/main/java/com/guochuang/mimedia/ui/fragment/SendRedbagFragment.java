@@ -6,13 +6,12 @@ import android.support.v7.widget.OrientationHelper;
 import android.view.View;
 import android.widget.TextView;
 
-import com.guochuang.mimedia.base.recycleview.WrapEmptyRecyclerView;
-import com.guochuang.mimedia.base.recycleview.adapter.OnItemClickListener;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.guochuang.mimedia.view.recycleview.WrapEmptyRecyclerView;
+import com.guochuang.mimedia.view.recycleview.adapter.OnItemClickListener;
 import com.guochuang.mimedia.mvp.model.RedbagRecord;
 import com.guochuang.mimedia.tools.IntentUtils;
-import com.guochuang.mimedia.ui.activity.redbag.LookSurevyActivity;
-import com.guochuang.mimedia.ui.activity.redbag.LookVideoProblemActivity;
-import com.guochuang.mimedia.ui.adapter.SendRedbagAdapter2;
+import com.guochuang.mimedia.ui.adapter.SendRedbagAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
 import com.sz.gcyh.KSHongBao.R;
@@ -42,9 +41,8 @@ public class SendRedbagFragment extends MvpFragment<SendRedbagPresenter> impleme
     @BindView(R.id.srl_refresh)
     SmartRefreshLayout srlRefresh;
     List<RedbagRecord> itemArr = new ArrayList<>();
-    //    SendRedbagAdapter adapter;
     int curPage = 1;
-    private SendRedbagAdapter2 mSendRedbagAdapter2;
+    private SendRedbagAdapter mSendRedbagAdapter;
 
     @Override
     protected SendRedbagPresenter createPresenter() {
@@ -58,18 +56,6 @@ public class SendRedbagFragment extends MvpFragment<SendRedbagPresenter> impleme
 
     @Override
     public void initViewAndData() {
-//        rvRecord.setLayoutManager(new LinearLayoutManager(getContext(), OrientationHelper.VERTICAL, false));
-//        rvRecord.addItemDecoration(new VerticalDecoration(getContext(), R.drawable.bg_decoration));
-//        adapter = new SendRedbagAdapter(itemArr);
-//        adapter.setEmptyView(getLayoutInflater().inflate(R.layout.layout_empty,null));
-//        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
-//        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//
-//            }
-//        });
-//        rvRecord.setAdapter(adapter);
 
         srlRefresh.setEnableRefresh(false);
         srlRefresh.setEnableLoadmore(true);
@@ -87,37 +73,27 @@ public class SendRedbagFragment extends MvpFragment<SendRedbagPresenter> impleme
 
         rvRecord.setLayoutManager(new LinearLayoutManager(getContext(), OrientationHelper.VERTICAL, false));
 
-        mSendRedbagAdapter2 = new SendRedbagAdapter2(getActivity(), itemArr, R.layout.item_sendredbag_layout);
-        mSendRedbagAdapter2.setOnItemClickListener(new OnItemClickListener() {
+        mSendRedbagAdapter = new SendRedbagAdapter(getContext(),itemArr);
+        mSendRedbagAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(int postion) {
-                IntentUtils.startRedbagDetailActivity(getActivity(), itemArr.get(postion).getRedPacketUuid(), Constant.ROLETYPE_PERSON, null);
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                RedbagRecord redbagRecord=itemArr.get(position);
+                IntentUtils.startRedbagDetailActivity(getActivity(), redbagRecord.getRedPacketUuid(), Constant.ROLETYPE_PERSON, redbagRecord.getRedPacketType(),null);
             }
         });
-
-        mSendRedbagAdapter2.setOnItmeChildren(new SendRedbagAdapter2.OnItmeChildrenClick() {
+        mSendRedbagAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
-            public void itmeChildrenClick(int viewId, int position) {
-                //查看问题
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 RedbagRecord redbagRecord = itemArr.get(position);
-                Bundle bundle = new Bundle();
-                bundle.putString(Constant.LOOK_PROBLEM_RED_PACKET_ID, redbagRecord.getSurveyId());
-                bundle.putString(Constant.RED_PACKET_ID, redbagRecord.getRedPacketUuid());
                 if (Constant.RED_PACKET_TYPE_VIDEO.equals(redbagRecord.getRedPacketType())) {
-                    //視頻
                     IntentUtils.startLookVideoProblemActivity(getActivity(), redbagRecord.getSurveyId(), redbagRecord.getRedPacketUuid());
-
-
                 } else if (Constant.RED_PACKET_TYPE_SURVEY.equals(redbagRecord.getRedPacketType())) {
                     IntentUtils.startLookSurevyActivity(getActivity(), redbagRecord.getSurveyId(), redbagRecord.getRedPacketUuid());
                 }
-
-
             }
         });
 
-
-        rvRecord.setAdapter(mSendRedbagAdapter2);
+        rvRecord.setAdapter(mSendRedbagAdapter);
 
 
         mvpPresenter.getSendRedbagList(curPage, Constant.PAGE_SIZE);
@@ -151,7 +127,7 @@ public class SendRedbagFragment extends MvpFragment<SendRedbagPresenter> impleme
             tvHasSend.setText(String.valueOf(data.getDataList().get(0).getTotalMoney()));
             tvGrabNum.setText(String.valueOf(data.getDataList().get(0).getDrawPerson()));
         }
-        mSendRedbagAdapter2.notifyDataSetChanged();
+        mSendRedbagAdapter.notifyDataSetChanged();
         if (data.getCurrentPage() >= data.getTotalPage()) {
             srlRefresh.setEnableLoadmore(false);
         } else {

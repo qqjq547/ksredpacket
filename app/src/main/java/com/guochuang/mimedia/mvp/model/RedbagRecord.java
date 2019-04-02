@@ -36,7 +36,7 @@ public class RedbagRecord {
     private String password;
     private int quantity;
     private double money;
-    private String surveyId;
+    private long surveyId;
     private List<PictureListBean> pictureList;
 
     public String getPassword() {
@@ -63,11 +63,11 @@ public class RedbagRecord {
         this.money = money;
     }
 
-    public String getSurveyId() {
+    public long getSurveyId() {
         return surveyId;
     }
 
-    public void setSurveyId(String surveyId) {
+    public void setSurveyId(long surveyId) {
         this.surveyId = surveyId;
     }
 

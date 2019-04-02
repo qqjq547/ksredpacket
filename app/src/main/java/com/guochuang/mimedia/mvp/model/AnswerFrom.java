@@ -79,12 +79,20 @@ public class AnswerFrom {
          * sourceId : string
          * surveyId : 0
          */
-
+        private String optionId;
         private String optionName;
         private String optionValue;
         private long questionId;
         private String sourceId;
         private long surveyId;
+
+        public String getOptionId() {
+            return optionId;
+        }
+
+        public void setOptionId(String optionId) {
+            this.optionId = optionId;
+        }
 
         public String getOptionName() {
             return optionName;

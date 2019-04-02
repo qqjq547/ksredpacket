@@ -10,9 +10,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.dmcbig.mediapicker.utils.ScreenUtils;
-import com.guochuang.mimedia.base.recycleview.adapter.CommonRecyclerAdapter;
-import com.guochuang.mimedia.base.recycleview.adapter.MultiTypeSupport;
-import com.guochuang.mimedia.base.recycleview.adapter.ViewHolder;
+import com.guochuang.mimedia.view.recycleview.adapter.CommonRecyclerAdapter;
+import com.guochuang.mimedia.view.recycleview.adapter.MultiTypeSupport;
+import com.guochuang.mimedia.view.recycleview.adapter.ViewHolder;
 import com.guochuang.mimedia.mvp.model.ProblemBean;
 import com.guochuang.mimedia.tools.Constant;
 import com.sz.gcyh.KSHongBao.R;

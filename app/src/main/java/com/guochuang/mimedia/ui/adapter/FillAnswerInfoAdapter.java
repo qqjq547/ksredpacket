@@ -4,8 +4,8 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
 
-import com.guochuang.mimedia.base.recycleview.adapter.CommonRecyclerAdapter;
-import com.guochuang.mimedia.base.recycleview.adapter.ViewHolder;
+import com.guochuang.mimedia.view.recycleview.adapter.CommonRecyclerAdapter;
+import com.guochuang.mimedia.view.recycleview.adapter.ViewHolder;
 import com.guochuang.mimedia.mvp.model.LookSurevyResult;
 import com.sz.gcyh.KSHongBao.R;
 

@@ -6,10 +6,9 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.View;
 
-import com.guochuang.mimedia.base.recycleview.adapter.CommonRecyclerAdapter;
-import com.guochuang.mimedia.base.recycleview.adapter.ViewHolder;
+import com.guochuang.mimedia.view.recycleview.adapter.CommonRecyclerAdapter;
+import com.guochuang.mimedia.view.recycleview.adapter.ViewHolder;
 import com.guochuang.mimedia.mvp.model.LookSurevyResult;
-import com.guochuang.mimedia.ui.activity.redbag.LookSurevyActivity;
 import com.sz.gcyh.KSHongBao.R;
 
 import java.util.List;

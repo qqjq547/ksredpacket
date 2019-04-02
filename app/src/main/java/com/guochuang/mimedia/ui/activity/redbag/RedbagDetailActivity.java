@@ -190,7 +190,7 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
         if (redbagDetail == null) {
             redPacketUuid = getIntent().getStringExtra(Constant.RED_PACKET_UUID);
             roleType = getIntent().getStringExtra(Constant.ROLE_TYPE);
-//            redPacketType = getIntent().getStringExtra(Constant.RED_PACKET_TYPE);
+            redPacketType = getIntent().getStringExtra(Constant.RED_PACKET_TYPE);//可能为空
             fromCollect=getIntent().getBooleanExtra(Constant.FROM_COLLECT,false);
             startIndex=getIntent().getStringExtra(Constant.START_INDEX);
             mvpPresenter.getRedPacketInfo(redPacketUuid, roleType,startIndex);
@@ -446,7 +446,11 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                 }
                 break;
             case R.id.iv_video_prev:
-                IntentUtils.startVideoPreviewActivity(this,redbagDetail.getVideoUrl());
+                if (redbagDetail != null) {
+                    IntentUtils.startVideoPreviewActivity(this, redbagDetail.getVideoUrl());
+                } else if (redbagInfo != null) {
+                    IntentUtils.startVideoPreviewActivity(this, redbagInfo.getVideoUrl());
+                }
                 break;
 
         }
@@ -575,7 +579,6 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                     GlideImgManager.loadImage(this,redbagDetail.getCoverUrl(),ivVideoPrev);
                 }
                 if (redPacketType.equals(Constant.RED_PACKET_TYPE_VIDEO)&&redbagDetail.getSurveyId()>0){
-
                     rlValue.setVisibility(View.GONE);
                     tvRedbagTip.setVisibility(View.GONE);
                     linVideoHead.setVisibility(View.VISIBLE);
@@ -589,10 +592,9 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                     tvWillGetKsb.setText(String.format(getString(R.string.format_ksb), redbagDetail.getCoin()));
                 }else {
                     startAnim();
+                    startCountDown(redbagDetail.getReadingSecond());
                 }
             }
-            startCountDown(redbagDetail.getReadingSecond());
-
         }
     }
 
@@ -658,7 +660,7 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
 
                 if (redPacketType.equals(Constant.RED_PACKET_TYPE_VIDEO)){
                     ivVideoPrev.setVisibility(View.VISIBLE);
-                    GlideImgManager.loadImage(this,redbagDetail.getCoverUrl(),ivVideoPrev);
+                    GlideImgManager.loadImage(this,data.getCoverUrl(),ivVideoPrev);
                 }
             }
         }
