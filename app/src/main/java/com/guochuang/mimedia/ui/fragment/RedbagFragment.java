@@ -194,9 +194,6 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                         if (Constant.ISDRAG==isDragStr) {
                             openRedbagDialog.setDrag(true);
                         }
-//
-                        if (openRedbagDialog == null) {
-                            openRedbagDialog = new OpenRedbagDialog(getContext());
                             openRedbagDialog.setOnOpenResultListener(new OpenRedbagDialog.OnOpenResultListener() {
                                 @Override
                                 public void onOpenResult(String password) {
@@ -214,7 +211,6 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
 
                                 }
                             });
-                        }
                         LogUtil.d(redbag.toString());
                         openRedbagDialog.setRedbag(redbag);
                         openRedbagDialog.show();

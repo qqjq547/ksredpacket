@@ -117,6 +117,8 @@ public class Constant {
     public static final String TYPE_REPORT_INFORMATION = "informationReport";
     public static final String TYPE_REPORT_REDPACKET = "redPacketReport";
     public static final String TYPE_NESTINFO_REPORT = "nestInfoReport";
+    public static final String NESTAD = "nestAd";
+
 
 
     //资讯详情

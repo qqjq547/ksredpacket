@@ -46,7 +46,10 @@
         android:gravity="center"
         android:textColor="@color/text_drak_black"
         android:textSize="@dimen/textfont14" />
-
+    <FrameLayout
+        android:layout_width="@dimen/space0"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
     <TextView
         android:id="@+id/tv_state"
         android:layout_width="@dimen/space0"
@@ -55,4 +58,12 @@
         android:gravity="center"
         android:textColor="@color/text_drak_black"
         android:textSize="@dimen/textfont14" />
+        <ImageView
+            android:id="@+id/iv_tip"
+            android:layout_width="@dimen/space20"
+            android:layout_height="@dimen/space20"
+            android:layout_marginRight="@dimen/space15"
+            android:src="@drawable/ic_tip_remark"
+            android:layout_gravity="center_vertical|right"/>
+    </FrameLayout>
 </LinearLayout>

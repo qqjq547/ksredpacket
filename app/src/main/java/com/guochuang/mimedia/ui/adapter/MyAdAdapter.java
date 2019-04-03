@@ -47,26 +47,46 @@ public class MyAdAdapter extends BaseQuickAdapter<MyAd,BaseViewHolder> {
         }
 
         if (item.getStatus()==0){ //待投放
-            helper.setText(R.id.tv_edit,R.string.edit_ad);
+            if (item.getNestInfoId()==0){
+                helper.setText(R.id.tv_edit,R.string.add_ad);
+                helper.setVisible(R.id.tv_check,false);
+            }else {
+                helper.setText(R.id.tv_edit,R.string.edit_ad);
+                helper.setVisible(R.id.tv_check,false);
+            }
             helper.addOnClickListener(R.id.tv_edit);
             helper.setText(R.id.tv_status,R.string.waiting_vote);
             helper.setTextColor(R.id.tv_status,mContext.getResources().getColor(R.color.bg_sky_blue));
             helper.setBackgroundColor(R.id.v_line,mContext.getResources().getColor(R.color.bg_sky_blue));
             helper.setTextColor(R.id.tv_time,mContext.getResources().getColor(R.color.text_black));
+            helper.setVisible(R.id.tv_check,false);
         }else if(item.getStatus()==1){ //投放中
-            helper.setText(R.id.tv_edit,R.string.edit_ad);
+            if (item.getNestInfoId()==0){
+                helper.setText(R.id.tv_edit,R.string.add_ad);
+                helper.setVisible(R.id.tv_check,false);
+            }else {
+                helper.setText(R.id.tv_edit,R.string.edit_ad);
+                helper.setVisible(R.id.tv_check,true);
+                helper.addOnClickListener(R.id.tv_check);
+            }
             helper.addOnClickListener(R.id.tv_edit);
             helper.setText(R.id.tv_status,R.string.vote_going);
             helper.setTextColor(R.id.tv_status,mContext.getResources().getColor(R.color.text_city_yellow));
             helper.setBackgroundColor(R.id.v_line,mContext.getResources().getColor(R.color.text_city_yellow));
             helper.setTextColor(R.id.tv_time,mContext.getResources().getColor(R.color.text_black));
+            helper.setVisible(R.id.tv_check,true);
+            helper.addOnClickListener(R.id.tv_check);
         }else if(item.getStatus()==2){//投放结束
             if (item.getNestInfoId()==0){//未投放广告的显示
+                helper.setVisible(R.id.tv_edit,true);
                 helper.setText(R.id.tv_edit,R.string.ad_has_not_vote);
                 helper.setTextColor(R.id.tv_edit,mContext.getResources().getColor(R.color.text_gray));
+                helper.setVisible(R.id.tv_check,false);
             }else {
+                helper.setVisible(R.id.tv_edit,false);
                 helper.setText(R.id.tv_edit,R.string.check_ad);
-                helper.addOnClickListener(R.id.tv_edit);
+                helper.setVisible(R.id.tv_check,true);
+                helper.addOnClickListener(R.id.tv_check);
             }
             helper.setText(R.id.tv_status,R.string.has_vote);
             helper.setTextColor(R.id.tv_status,mContext.getResources().getColor(R.color.text_gray));

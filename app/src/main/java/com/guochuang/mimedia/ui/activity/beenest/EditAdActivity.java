@@ -124,6 +124,7 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
     ArrayList<String> pictureArr=new ArrayList<>();
     PickImageAdapter pictureAdapter;
     boolean isUpdate=false;
+    boolean isJumpPreview=false;
 
     @Override
     protected EditAdPresenter createPresenter() {
@@ -195,7 +196,7 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
 
     }
 
-    @OnClick({R.id.iv_back, R.id.tv_text,R.id.lin_picture, R.id.tv_area,R.id.tv_link, R.id.tv_rule,R.id.iv_temp_tip,R.id.btn_confirm})
+    @OnClick({R.id.iv_back, R.id.tv_text,R.id.lin_picture, R.id.tv_area,R.id.tv_link, R.id.tv_rule,R.id.iv_temp_tip,R.id.btn_confirm,R.id.btn_preview})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -246,56 +247,64 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
                 IntentUtils.startWebActivity(this,null,Constant.URL_FENGCHAO_BANNER);
                 break;
             case R.id.btn_confirm:
-                if (picUrlArr.size()==0){
-                    waitUpload = (ArrayList<String>) pictureArr.clone();
-                    waitUpload.remove(null);
-                }
-                shortMsg=etShortmsg.getText().toString().trim();
-                content=etContent.getText().toString().trim();
-                adTitle=etAdTitle.getText().toString().trim();
-                adMobile=etMobile.getText().toString().trim();
-                adArea=tvArea.getText().toString().trim();
-                adAddress=etAddress.getText().toString().trim();
-                if (linLink.getVisibility()==View.VISIBLE) {
-                    urlName=etLinkName.getText().toString().trim();
-                    url = etLinkUrl.getText().toString().trim();
-                    wechat=etLinkWechat.getText().toString().trim();
-                    microblog=etLinkWeibo.getText().toString().trim();
-                }else {
-                    urlName=null;
-                    url = null;
-                    wechat=null;
-                    microblog=null;
-                }
-                isSaveTemplate=cbSaveTemp.isChecked()?1:0;
-                if (TextUtils.isEmpty(shortMsg)){
-                    showShortToast(R.string.not_location_info);
-                }else if(TextUtils.isEmpty(iconUrl)){
-                    showShortToast(R.string.brand_icon_cant_empty);
-                }else if(TextUtils.isEmpty(content)){
-                    showShortToast(R.string.content_cant_empty);
-                }else if(TextUtils.isEmpty(adTitle)){
-                    showShortToast(R.string.title_cant_empty);
-                }else if(!TextUtils.isEmpty(adAddress)&&TextUtils.isEmpty(adArea)){
-                    showShortToast(R.string.navigation_not_empty);
-                }else if(!TextUtils.isEmpty(url)&&TextUtils.isEmpty(urlName)){
-                    showShortToast(R.string.link_name_cant_empty);
-                }else if(!TextUtils.isEmpty(urlName)&&TextUtils.isEmpty(url)){
-                    showShortToast(R.string.link_url_cant_empty);
-                }else if(!TextUtils.isEmpty(url)&&!url.matches(Constant.REGEX_WEBURL)){
-                    showShortToast(R.string.link_format_error);
-                }else if(!cbObeyRule.isChecked()) {
-                    showShortToast(R.string.agree_agreement);
-                }else {
-                    if (waitUpload.size()>0){
-                        showLoadingDialog(R.string.upload_picture);
-                        new File(Constant.COMPRESS_DIR_PATH).mkdirs();
-                        uploadFile();
-                    }else {
-                        editNestAd();
-                    }
-                }
+                isJumpPreview=false;
+                checkData();
                 break;
+            case R.id.tv_preview:
+                isJumpPreview=true;
+                checkData();
+                break;
+        }
+    }
+    public void checkData(){
+        if (picUrlArr.size()==0){
+            waitUpload = (ArrayList<String>) pictureArr.clone();
+            waitUpload.remove(null);
+        }
+        shortMsg=etShortmsg.getText().toString().trim();
+        content=etContent.getText().toString().trim();
+        adTitle=etAdTitle.getText().toString().trim();
+        adMobile=etMobile.getText().toString().trim();
+        adArea=tvArea.getText().toString().trim();
+        adAddress=etAddress.getText().toString().trim();
+        if (linLink.getVisibility()==View.VISIBLE) {
+            urlName=etLinkName.getText().toString().trim();
+            url = etLinkUrl.getText().toString().trim();
+            wechat=etLinkWechat.getText().toString().trim();
+            microblog=etLinkWeibo.getText().toString().trim();
+        }else {
+            urlName=null;
+            url = null;
+            wechat=null;
+            microblog=null;
+        }
+        isSaveTemplate=cbSaveTemp.isChecked()?1:0;
+        if (TextUtils.isEmpty(shortMsg)){
+            showShortToast(R.string.not_location_info);
+        }else if(TextUtils.isEmpty(iconUrl)){
+            showShortToast(R.string.brand_icon_cant_empty);
+        }else if(TextUtils.isEmpty(content)){
+            showShortToast(R.string.content_cant_empty);
+        }else if(TextUtils.isEmpty(adTitle)){
+            showShortToast(R.string.title_cant_empty);
+        }else if(!TextUtils.isEmpty(adAddress)&&TextUtils.isEmpty(adArea)){
+            showShortToast(R.string.navigation_not_empty);
+        }else if(!TextUtils.isEmpty(url)&&TextUtils.isEmpty(urlName)){
+            showShortToast(R.string.link_name_cant_empty);
+        }else if(!TextUtils.isEmpty(urlName)&&TextUtils.isEmpty(url)){
+            showShortToast(R.string.link_url_cant_empty);
+        }else if(!TextUtils.isEmpty(url)&&!url.matches(Constant.REGEX_WEBURL)){
+            showShortToast(R.string.link_format_error);
+        }else if(!cbObeyRule.isChecked()) {
+            showShortToast(R.string.agree_agreement);
+        }else {
+            if (waitUpload.size()>0){
+                showLoadingDialog(R.string.upload_picture);
+                new File(Constant.COMPRESS_DIR_PATH).mkdirs();
+                uploadFile();
+            }else {
+                editNestAd();
+            }
         }
     }
     public void uploadFile(){
@@ -399,6 +408,27 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
         pictureAdapter.notifyDataSetChanged();
     }
     public void editNestAd(){
+        if (isJumpPreview){
+            NestAd nestAd=new NestAd();
+            nestAd.setNestInfoId(nestInfoId);
+            nestAd.setNestLocationId(nestLocationId);
+            nestAd.setShortMsg(shortMsg);
+            nestAd.setCoverPicture(iconUrl);
+            nestAd.setIntroduction(content);
+            nestAd.setPictureList(picUrlArr);
+            nestAd.setTitle(adTitle);
+            nestAd.setContactPhone(adMobile);
+            nestAd.setAddress(adArea);
+            nestAd.setAddressDetail(adAddress);
+            nestAd.setAddressLat(Double.parseDouble(latitude));
+            nestAd.setAddressLng(Double.parseDouble(longitude));
+            nestAd.setLinkText(urlName);
+            nestAd.setLinkUrl(url);
+            nestAd.setWechat(wechat);
+            nestAd.setWeibo(microblog);
+            IntentUtils.startBeeNestActivity(this,nestAd);
+            return;
+        }
         showLoadingDialog(null);
         picture=TextUtils.join(",",picUrlArr);
         mvpPresenter.editNestAd(nestInfoId,nestLocationId,nestSuccessId,shortMsg,iconUrl,content,picture,adTitle,adMobile,adArea,adAddress

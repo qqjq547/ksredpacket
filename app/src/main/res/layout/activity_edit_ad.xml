@@ -396,6 +396,15 @@
                 android:text="@string/confirm"
                 android:textColor="@color/text_white"
                 android:textSize="@dimen/textfont15" />
+            <TextView
+                android:id="@+id/tv_preview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/space20"
+                android:textColor="@color/text_blue"
+                android:textSize="@dimen/space14"
+                android:text="@string/preview_nest_ad"/>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

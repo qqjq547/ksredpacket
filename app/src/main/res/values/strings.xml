@@ -565,6 +565,7 @@
     <string name="call">拨打</string>
     <string name="save_ad_temp">保存为广告模板</string>
     <string name="ad_agreement">《广告投放协议》</string>
+    <string name="add_ad">添加广告</string>
     <string name="edit_ad">编辑广告</string>
     <string name="ad_brand">广告牌</string>
     <string name="short_ad_msg">简短广告语</string>
@@ -780,5 +781,7 @@
          <item>视频红包: </item>
          <item>问卷红包: </item>
      </string-array>
+    <string name="preview_nest_ad">预览广告</string>
+    <string name="retire_fund">预览广告</string>
 
 </resources>

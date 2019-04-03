@@ -85,7 +85,7 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
     double nestLocationLat=0;
     double nestLocationLng=0;
     NestAd detail;
-
+    boolean isPreveiw=false;
     @Override
     protected BeeNestPresenter createPresenter() {
         return new BeeNestPresenter(this);
@@ -98,6 +98,13 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
 
     @Override
     public void initViewAndData() {
+        detail=(NestAd)getIntent().getSerializableExtra(Constant.NESTAD);
+        if (detail!=null){
+            ivImage.setVisibility(View.GONE);
+            isPreveiw=true;
+            setData(detail);
+            return;
+        }
         nestInfoId=getIntent().getLongExtra(Constant.NESTINFOID,0);
         nestLocationId=getIntent().getLongExtra(Constant.NESTLOCATIONID,0);
         ivImage.setImageResource(R.drawable.ic_more);
@@ -157,9 +164,17 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
                 if (detail == null)
                     return;
                 if (detail.getIsCollection() == 0) {
-                    mvpPresenter.favoriteAdd(nestInfoId);
+                    if (isPreveiw){
+                        addFavorite(true);
+                    }else {
+                        mvpPresenter.favoriteAdd(nestInfoId);
+                    }
                 } else {
-                    mvpPresenter.favoriteDetele(nestInfoId);
+                    if (isPreveiw){
+                        deleteFavorite(true);
+                    }else {
+                        mvpPresenter.favoriteDetele(nestInfoId);
+                    }
                 }
                 break;
             case R.id.tv_url:

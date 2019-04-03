@@ -1,8 +1,9 @@
 package com.guochuang.mimedia.mvp.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class NestAd {
+public class NestAd implements Serializable {
 
     /**
      * address : string
@@ -35,7 +36,7 @@ public class NestAd {
     private String contactPhone;
     private String coverPicture;
     private String introduction;
-    private int isCollection;
+    private int isCollection=0;
     private String linkText;
     private String linkUrl;
     private long nestInfoId;

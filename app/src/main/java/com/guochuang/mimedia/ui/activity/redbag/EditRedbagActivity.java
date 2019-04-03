@@ -286,7 +286,9 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
         });
         rvPic.setAdapter(pictureAdapter);
         mvpPresenter.getTemplate(redPacketType);
-        mvpPresenter.getEditRedbagConfig();
+        if (TextUtils.equals(redPacketType,Constant.RED_PACKET_TYPE_PASSWORD)) {
+            mvpPresenter.getEditRedbagConfig();
+        }
     }
 
     public void showPayResult(boolean success, String errmsg) {
@@ -453,6 +455,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
      * 后天校验参数
      */
     private void checkConfig() {
+        showLoadingDialog(null);
         //红包类型，survey：视频/问卷红包 password：口令红包
         if (Constant.RED_PACKET_TYPE_VIDEO.equals(redPacketType)
                 || Constant.RED_PACKET_TYPE_SURVEY.equals(redPacketType)
