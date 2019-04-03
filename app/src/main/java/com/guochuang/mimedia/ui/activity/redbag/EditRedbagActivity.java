@@ -1,6 +1,7 @@
 package com.guochuang.mimedia.ui.activity.redbag;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.MediaMetadataRetriever;
@@ -723,23 +724,6 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
 
         pictureAdapter.notifyDataSetChanged();
     }
-   public void selectPayType(){
-       picture=TextUtils.join(",",picUrlArr);
-       final PaySelectDialog paySelectDialog = new PaySelectDialog(this, String.valueOf(money));
-       paySelectDialog.setOnResultListener(new PaySelectDialog.OnResultListener() {
-           @Override
-           public void onSelectItem(int postion) {
-               if (postion == 0) {
-                   payType = Constant.PAY_TYPE_WXPAY;
-               } else if (postion == 1) {
-                   payType = Constant.PAY_TYPE_ALIPAY;
-               } else {
-                   payType = Constant.PAY_TYPE_KSB;
-                   passDialog =new PassDialog(EditRedbagActivity.this, new PassDialog.OnPassDialogListener() {
-                       @Override
-                       public void close() {
-                           selectPayType();
-                       }
 
     public void selectPayType() {
         picture = TextUtils.join(",", picUrlArr);
@@ -753,7 +737,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                     payType = Constant.PAY_TYPE_ALIPAY;
                 } else {
                     payType = Constant.PAY_TYPE_KSB;
-                    new PassDialog(EditRedbagActivity.this, new PassDialog.OnPassDialogListener() {
+                    passDialog=new PassDialog(EditRedbagActivity.this, new PassDialog.OnPassDialogListener() {
                         @Override
                         public void close() {
                             selectPayType();
@@ -768,7 +752,8 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                         public void onNumFull(String code) {
                             startPay(code);
                         }
-                    }).show();
+                    });
+                    passDialog.show();
                     return;
                 }
                 startPay(null);
@@ -799,28 +784,6 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
             mvpPresenter.addSurveyReabag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson);
 
         }
-                       @Override
-                       public void onNumFull(String code) {
-                           startPay(code);
-                       }
-                   });
-                   passDialog.show();
-
-                   return;
-               }
-               startPay(null);
-           }
-       });
-       paySelectDialog.show();
-}
-public void startPay(String safetyCode){
-    showLoadingDialog(null);
-    if (TextUtils.equals(redPacketType,Constant.RED_PACKET_TYPE_RANDOM)){
-        mvpPresenter.addRandomRedbag(latitude,longitude,redbagLatitude,redbagLongitude,content,picture,areaType,kilometer,money,quantity,urlName,url,wechat,microblog,isPublicPassword,isSaveTemplate,payType,Constant.CHANNEL_CODE_ANDROID,safetyCode);
-    }else if(TextUtils.equals(redPacketType,Constant.RED_PACKET_TYPE_PASSWORD)){
-        mvpPresenter.addPasswordRedbag(latitude,longitude,redbagLatitude,redbagLongitude,content,picture,areaType,kilometer,password,money,quantity,urlName,url,wechat,microblog,isPublicPassword,isSaveTemplate,payType,Constant.CHANNEL_CODE_ANDROID,safetyCode);
-    }else if(TextUtils.equals(redPacketType,Constant.RED_PACKET_TYPE_LUCKY)){
-        mvpPresenter.addLuckyRedbag(latitude,longitude,redbagLatitude,redbagLongitude,content,picture,areaType,kilometer,money,quantity,urlName,url,wechat,microblog,isPublicPassword,isSaveTemplate,payType,Constant.CHANNEL_CODE_ANDROID,safetyCode);
     }
 
 

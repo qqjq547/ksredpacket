@@ -1374,17 +1374,6 @@ public interface ApiStore {
             @Query("latitude") String latitude,
             @Query("longitude") String longitude);
 
-    @GET("/api/v1/activity/jxwAccount/addStatistics")
-    Observable<HttpResponse<Boolean>> addStatistics(
-            @Query("utoken") String utoken,
-            @Query("deviceCode") String deviceCode,
-            @Query("deviceFrom") String deviceFrom,
-            @Query("jumpUrl") String jumpUrl);
-
-    @GET("/api/v1/activity/jxwAccount/getJxwUserInfoUrl")
-    Observable<HttpResponse<JxwUserInfoUrl>> getJxwUserInfoUrl(
-            @Query("deviceCode") String deviceCode,
-            @Query("from") String from);
 
     @GET("/api/v1/common/version/market_switch")
     Observable<HttpResponse<Integer>> marketSwitch(
@@ -1410,8 +1399,6 @@ public interface ApiStore {
             @Field("safetyCode") String safetyCode,
             @Field("remark") String remark
     );
-                    @Query("latitude") String latitude,
-                    @Query("longitude") String longitude);
 
     @GET("/api/v1/activity/jxwAccount/addStatistics")
     Observable<HttpResponse<Boolean>> addStatistics(

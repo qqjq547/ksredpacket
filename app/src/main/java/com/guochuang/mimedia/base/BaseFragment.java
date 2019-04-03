@@ -142,27 +142,5 @@ public abstract class BaseFragment extends Fragment {
 
     public abstract void initViewAndData();
 
-    /**
-     * 跳转Activity
-     *
-     * @param clazz
-     * @param bundle
-     */
-    public void startActivity(Class<? extends Activity> clazz, Bundle bundle) {
-        Intent intent = new Intent(getActivity(), clazz);
-        if (bundle != null) {
-            intent.putExtra(Constant.ACTIVTYPUTBUNDLEKEY, bundle);
-        }
-        startActivity(intent);
-    }
-
-
-    public void startActivityForResult(Class<? extends Activity> clazz, Bundle bundle, int requestCode) {
-        Intent intent = new Intent(getActivity(), clazz);
-        if (bundle != null) {
-            intent.putExtra(Constant.ACTIVTYPUTBUNDLEKEY, bundle);
-        }
-        startActivityForResult(intent, requestCode);
-    }
     
 }

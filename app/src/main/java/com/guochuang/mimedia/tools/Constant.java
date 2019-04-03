@@ -214,9 +214,6 @@ public class Constant {
     public static final String SURVEYID = "surveyId";
     public static final String JPUSH_CHANNEL = "JPUSH_CHANNEL";
     public static final String CHANNEL_DEFAULT = "default";
-    public static final String JXW_FROM = "h5android";
-    public static final String DATA = "data";
-    public static final String SURVEYID = "surveyId";
 
 
     public static final int STATE_HAS_GET = 1;

@@ -57,7 +57,6 @@ import com.guochuang.mimedia.ui.activity.common.MyCaptureActivity;
 import com.guochuang.mimedia.ui.activity.common.ShareActivity;
 import com.guochuang.mimedia.ui.activity.redbag.SquareActivity;
 import com.guochuang.mimedia.ui.activity.user.IdentifyActivity;
-import com.guochuang.mimedia.ui.activity.user.MyPayCodeActivity;
 import com.guochuang.mimedia.ui.activity.user.UpgradeAgentActivity;
 import com.guochuang.mimedia.ui.dialog.OpenRedbagDialog;
 import com.guochuang.mimedia.ui.dialog.RedbagTypeDialog;
@@ -195,17 +194,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                         if (Constant.ISDRAG==isDragStr) {
                             openRedbagDialog.setDrag(true);
                         }
-//                        openRedbagDialog.setDrag(true);
-                        openRedbagDialog.setOnOpenResultListener(new OpenRedbagDialog.OnOpenResultListener() {
-                            @Override
-                            public void onOpenResult(String password) {
-                                optMarker.remove();
-                                showLoadingDialog(null);
-                                if (redbag.getRoleType().equals(Constant.ROLETYPE_SYSTEM)) {
-                                    mvpPresenter.redPacketOpen(getPref().getLatitude(), getPref().getLongitude(), redbag.getUuid());
-                                } else {
-                                    mvpPresenter.redPacketPoolOpen(getPref().getLatitude(), getPref().getLongitude(), redbag.getUuid(), password);
-                                }
+//
                         if (openRedbagDialog == null) {
                             openRedbagDialog = new OpenRedbagDialog(getContext());
                             openRedbagDialog.setOnOpenResultListener(new OpenRedbagDialog.OnOpenResultListener() {
@@ -216,15 +205,16 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                                     if (redbag.getRoleType().equals(Constant.ROLETYPE_SYSTEM)) {
                                         mvpPresenter.redPacketOpen(getPref().getLatitude(), getPref().getLongitude(), redbag.getUuid());
                                     } else {
-                                        if ((redbag.getType().equals(Constant.RED_PACKET_TYPE_VIDEO)&&redbag.getSurveyId()>0)||redbag.getType().equals(Constant.RED_PACKET_TYPE_SURVEY)){
+                                        if ((redbag.getType().equals(Constant.RED_PACKET_TYPE_VIDEO) && redbag.getSurveyId() > 0) || redbag.getType().equals(Constant.RED_PACKET_TYPE_SURVEY)) {
                                             mvpPresenter.redPacketPoolOpenSurvey(getPref().getLatitude(), getPref().getLongitude(), redbag.getUuid());
-                                        }else {
+                                        } else {
                                             mvpPresenter.redPacketPoolOpen(getPref().getLatitude(), getPref().getLongitude(), redbag.getUuid(), password);
                                         }
                                     }
 
-                            }
-                        });
+                                }
+                            });
+                        }
                         LogUtil.d(redbag.toString());
                         openRedbagDialog.setRedbag(redbag);
                         openRedbagDialog.show();
