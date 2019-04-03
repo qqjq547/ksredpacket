@@ -32,6 +32,15 @@ public class CommentRedbag {
     private String  redPacketType;
     private List<PictureListBean> pictureList;
     private long commentId;
+    private String coverUrl;
+
+    public String getCoverUrl() {
+        return coverUrl;
+    }
+
+    public void setCoverUrl(String coverUrl) {
+        this.coverUrl = coverUrl;
+    }
 
     public long getCommentId() {
         return commentId;
@@ -270,4 +279,5 @@ public class CommentRedbag {
             this.jumpUrl = jumpUrl;
         }
     }
+
 }

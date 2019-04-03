@@ -24,7 +24,10 @@ public class CollectRedbagAdapter extends BaseQuickAdapter<CommentRedbag,BaseVie
         if (item.getPictureList()!=null&&item.getPictureList().size()>0){
             helper.setGone(R.id.iv_content_image,true);
             GlideImgManager.loadImage(mContext,item.getPictureList().get(0).getPicture(),(ImageView) helper.getView(R.id.iv_content_image));
-        }else {
+        }else if(!TextUtils.isEmpty(item.getCoverUrl())){
+            helper.setGone(R.id.iv_content_image,true);
+            GlideImgManager.loadImage(mContext,item.getCoverUrl(),(ImageView) helper.getView(R.id.iv_content_image));
+        }else{
             helper.setGone(R.id.iv_content_image,false);
         }
         helper.setText(R.id.tv_content_title,item.getCommentContent());
