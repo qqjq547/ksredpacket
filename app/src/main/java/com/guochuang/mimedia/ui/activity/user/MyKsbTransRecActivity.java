@@ -13,6 +13,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.http.response.Page;
 import com.guochuang.mimedia.mvp.view.MyKsbTransRecView;
 import com.guochuang.mimedia.tools.Constant;
+import com.guochuang.mimedia.tools.DialogBuilder;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.MyKsbTransRec;
@@ -62,6 +63,14 @@ public class MyKsbTransRecActivity extends MvpActivity<MyKsbTransRecPresenter> i
         myKsbTransRecAdapter = new MyKsbTransRecAdapter(myKsbTransRecs);
         myKsbTransRecAdapter.setEmptyView(getLayoutInflater().inflate(R.layout.layout_empty, null));
         myKsbTransRecAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        myKsbTransRecAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                new DialogBuilder(MyKsbTransRecActivity.this)
+                        .setMessage(myKsbTransRecs.get(position).getCreateDate())
+                        .setPositiveButton(R.string.i_known, null).create().show();
+            }
+        });
         rv.setLayoutManager(new LinearLayoutManager(this, OrientationHelper.VERTICAL, false));
         rv.setItemAnimator(new DefaultItemAnimator());
         rv.setAdapter(myKsbTransRecAdapter);

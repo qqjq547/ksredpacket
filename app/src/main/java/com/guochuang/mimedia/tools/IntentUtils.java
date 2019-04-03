@@ -6,6 +6,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.net.Uri;
 
+import com.guochuang.mimedia.mvp.model.NestAd;
 import com.guochuang.mimedia.mvp.model.RecommendData;
 import com.guochuang.mimedia.mvp.model.RedbagDetail;
 import com.guochuang.mimedia.ui.activity.beenest.BeeNestActivity;
@@ -278,6 +279,11 @@ public class IntentUtils {
         Intent intent = new Intent(activity, BeeNestActivity.class);
         intent.putExtra(Constant.NESTINFOID, nestInfoId);
         intent.putExtra(Constant.NESTLOCATIONID, nestLocationId);
+        activity.startActivity(intent);
+    }
+    public static void startBeeNestActivity(Activity activity, NestAd ad) {
+        Intent intent = new Intent(activity, BeeNestActivity.class);
+        intent.putExtra(Constant.NESTAD, ad);
         activity.startActivity(intent);
     }
 

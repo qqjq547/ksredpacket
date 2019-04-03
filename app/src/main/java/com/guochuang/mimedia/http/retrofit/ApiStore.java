@@ -747,14 +747,25 @@ public interface ApiStore {
     @GET("/api/v1/common/region/get_two")
     Observable<HttpResponse<List<Area>>> getRegion();
 
-    @GET("/api/v1/redpacket/red_packet_survey_template/get")
+    @GET("/api/v1/redpacket/red_packet_template/get")
     Observable<HttpResponse<List<RedbagTemp>>> getTemplate(
             @Query("redPacketType") String redPacketType
     );
 
+    @GET("/api/v1/redpacket/red_packet_survey_template/get")
+    Observable<HttpResponse<List<RedbagTemp>>> getSurveytTemplate(
+            @Query("redPacketType") String redPacketType
+    );
+
+    @FormUrlEncoded
+    @POST("/api/v1/redpacket/red_packet_template/delete")
+    Observable<HttpResponse<Boolean>> deleteTemplate(
+            @Field("templateId") long templateId
+    );
+
     @FormUrlEncoded
     @POST("/api/v1/redpacket/red_packet_survey_template/delete")
-    Observable<HttpResponse<Boolean>> deleteTemplate(
+    Observable<HttpResponse<Boolean>> deleteSurveyTemplate(
             @Field("templateId") long templateId
     );
 

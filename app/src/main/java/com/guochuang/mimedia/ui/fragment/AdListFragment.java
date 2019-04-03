@@ -57,14 +57,17 @@ public class AdListFragment extends MvpFragment<AdListPresenter> implements AdLi
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 MyAd myAd=dataArr.get(position);
-                if (myAd.getIsEdit()==0){
-                    IntentUtils.startBeeNestActivity(getActivity(),myAd.getNestInfoId(),myAd.getNestLocationId());
-                }else {
-                    if (myAd.getNestInfoId()==0){
-                        IntentUtils.startEditAdActivity(getActivity(),myAd.getNestInfoId(),myAd.getNestLocationId(),myAd.getNestSuccessId(),false);
-                    }else {
-                        IntentUtils.startEditAdActivity(getActivity(),myAd.getNestInfoId(),myAd.getNestLocationId(),myAd.getNestSuccessId(),true);
-                    }
+                switch (view.getId()){
+                    case R.id.tv_check:
+                        IntentUtils.startBeeNestActivity(getActivity(),myAd.getNestInfoId(),myAd.getNestLocationId());
+                        break;
+                    case R.id.tv_edit:
+                        if (myAd.getNestInfoId()==0){
+                            IntentUtils.startEditAdActivity(getActivity(),myAd.getNestInfoId(),myAd.getNestLocationId(),myAd.getNestSuccessId(),false);
+                        }else {
+                            IntentUtils.startEditAdActivity(getActivity(),myAd.getNestInfoId(),myAd.getNestLocationId(),myAd.getNestSuccessId(),true);
+                        }
+                        break;
                 }
             }
         });

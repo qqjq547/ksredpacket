@@ -14,6 +14,7 @@ import com.guochuang.mimedia.mvp.model.RedbagInfo;
 import com.guochuang.mimedia.mvp.model.RedbagTemp;
 import com.guochuang.mimedia.mvp.model.UploadFile;
 import com.guochuang.mimedia.mvp.view.EditRedbagView;
+import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.RxUtil;
 
 import java.io.File;
@@ -205,24 +206,46 @@ public class EditRedbagPresenter extends BasePresenter<EditRedbagView> {
 
 
     public void getTemplate(String redPacketType) {
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getTemplate(redPacketType)), new ApiCallback<List<RedbagTemp>>() {
-            @Override
-            public void onSuccess(List<RedbagTemp> data) {
-                mvpView.setTempData(data);
+        if (redPacketType.equals(Constant.RED_PACKET_TYPE_VIDEO)||redPacketType.equals(Constant.RED_PACKET_TYPE_SURVEY)){
+            addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getSurveytTemplate(redPacketType)), new ApiCallback<List<RedbagTemp>>() {
+                @Override
+                public void onSuccess(List<RedbagTemp> data) {
+                    mvpView.setTempData(data);
 
-            }
+                }
 
-            @Override
-            public void onFailure(ApiException exception) {
-                mvpView.setError(exception.getMessage());
+                @Override
+                public void onFailure(ApiException exception) {
+                    mvpView.setError(exception.getMessage());
 
-            }
+                }
 
-            @Override
-            public void onFinish() {
+                @Override
+                public void onFinish() {
 
-            }
-        });
+                }
+            });
+        }else {
+            addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getTemplate(redPacketType)), new ApiCallback<List<RedbagTemp>>() {
+                @Override
+                public void onSuccess(List<RedbagTemp> data) {
+                    mvpView.setTempData(data);
+
+                }
+
+                @Override
+                public void onFailure(ApiException exception) {
+                    mvpView.setError(exception.getMessage());
+
+                }
+
+                @Override
+                public void onFinish() {
+
+                }
+            });
+        }
+
     }
     public void getLuckyConfig(){
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getLuckyConfig()), new ApiCallback<LuckyConfig>() {

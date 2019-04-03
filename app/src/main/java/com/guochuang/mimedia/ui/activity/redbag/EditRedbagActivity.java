@@ -286,7 +286,9 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
         });
         rvPic.setAdapter(pictureAdapter);
         mvpPresenter.getTemplate(redPacketType);
-        mvpPresenter.getEditRedbagConfig();
+        if (TextUtils.equals(redPacketType,Constant.RED_PACKET_TYPE_PASSWORD)) {
+            mvpPresenter.getEditRedbagConfig();
+        }
     }
 
     public void showPayResult(boolean success, String errmsg) {
