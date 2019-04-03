@@ -783,11 +783,11 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                 showShortToast(R.string.tip_upload_video);
                 return;
             }
-            String joinProblmeJson = joinProblmeJson();
+            JSONArray joinProblmeJson = joinProblmeJson();
             mvpPresenter.addVideoReabag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson, mVideoFrameUrl);
         } else if (TextUtils.equals(redPacketType, Constant.RED_PACKET_TYPE_SURVEY)) {
             //问卷红包
-            String joinProblmeJson = joinProblmeJson();
+            JSONArray joinProblmeJson = joinProblmeJson();
             mvpPresenter.addSurveyReabag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson);
 
         }
@@ -797,10 +797,10 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
     /**
      * 拼接joinProblmeJson
      */
-    private String joinProblmeJson() {
+    private JSONArray joinProblmeJson() {
 
         if (mProblemList.isEmpty()) {
-            return "";
+            return new JSONArray();
         }
         try {
             JSONArray problmeJsonArray = new JSONArray();
@@ -837,9 +837,9 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
 
             }
 
-            return problmeJsonArray.toString();
+            return problmeJsonArray;
         } catch (Exception e) {
-            return "";
+            return new JSONArray();
         }
 
 
