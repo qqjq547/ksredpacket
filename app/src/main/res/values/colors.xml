@@ -87,5 +87,8 @@
     <color name="color_ff7519">#ff7519</color>
     <color name="color_666666">#666666</color>
     <color name="color_000000">#000000</color>
+    <color name="bg_pay_code">#f45e4d</color>
+    <color name="text_pay_code">#f45e4d</color>
+    <color name="bg_content">#eeeeee</color>
 
 </resources>

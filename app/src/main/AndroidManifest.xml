@@ -37,8 +37,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon,android:theme">
-        <!--<activity android:name="com.guochuang.mimedia.ui.activity.redbag.AddAndEditRedPackgeProblemActivityroblemActivity">-->
-
         <activity
             android:name="com.guochuang.mimedia.ui.activity.WelcomeActivity"
             android:theme="@style/FullScreenTheme">
@@ -111,14 +109,22 @@
         <activity android:name="com.guochuang.mimedia.ui.activity.beenest.BidRecordActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.beenest.AdBidActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.beenest.MyBidActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.common.JuxiangwanActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.user.MyPayCodeActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.common.KsbPayActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.common.ScanResultActivity" />
+        <activity
+            android:name="com.guochuang.mimedia.ui.activity.common.MyCaptureActivity"
+            android:theme="@style/TransTheme" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.common.PayResultActivity"/>
+
         <activity android:name="com.guochuang.mimedia.ui.activity.redbag.AnswerActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.common.JuxiangwanActivity" />
         <activity
             android:name="com.guochuang.mimedia.ui.activity.redbag.LuckyActivity"
             android:theme="@style/Transparent" />
-        <activity
-            android:name="com.guochuang.mimedia.ui.activity.common.ShareActivity"
-            android:theme="@style/TransTheme" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.common.ShareActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.common.ShareActivity2" />
         <activity android:name="com.guochuang.mimedia.ui.activity.operation.UserStatisticsActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.operation.IncreaseDetailActivity" />
         <activity
@@ -132,70 +138,71 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
-        <!--图片选择Activity-->
+        //图片选择Activity
         <activity
             android:name="com.donkingliang.imageselector.ImageSelectorActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
-        <!--图片预览Activity-->
+        //图片预览Activity
         <activity
             android:name="com.donkingliang.imageselector.PreviewActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
-       <!-- 图片剪切Activity-->
+        //图片剪切Activity
         <activity
             android:name="com.donkingliang.imageselector.ClipImageActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
-        <!--导航页-->
+        //导航页
         <activity
             android:name="com.guochuang.mimedia.ui.activity.GuideActivity"
             android:theme="@style/FullScreenTheme" />
-       <!-- 登录页-->
+
+        // 登录页
         <activity
             android:name="com.guochuang.mimedia.ui.activity.user.LoginActivity"
             android:theme="@style/FullScreenTheme" />
 
-      <!--   忘记密码-->
+        // 忘记密码
         <activity android:name="com.guochuang.mimedia.ui.activity.user.ForgetActivity" />
 
-        <!--绑定手机号-->
+        // 绑定手机号
         <activity android:name="com.guochuang.mimedia.ui.activity.user.BindingPhoneAcitivity" />
 
-         <!--注册-->
+        // 注册
         <activity android:name="com.guochuang.mimedia.ui.activity.user.RegisterActivity" />
 
-        <!--红包详情界面-->
+        // 红包详情界面
         <activity
-            android:name="com.guochuang.mimedia.ui.activity.redbag.RedbagDetailActivity"
+            android:name="com.guochuang.mimedia.ui.activity.RedbagDetailActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
-        <!--城主-竞购大厅-->
+        // 城主-竞购大厅
         <activity android:name="com.guochuang.mimedia.ui.activity.city.CityBidHallActivity" />
 
-        <!-- 城主-我的城市-->
+        // 城主-我的城市
         <activity android:name="com.guochuang.mimedia.ui.activity.user.MyCityActivity" />
 
-        <!--// 城主-竞购记录-->
+        // 城主-竞购记录
         <activity android:name="com.guochuang.mimedia.ui.activity.city.CityBidRecordActivity" />
 
-        <!--// 我的KSB-KSB转换-->
+        // 我的KSB-KSB转换
         <activity android:name="com.guochuang.mimedia.ui.activity.user.MyKsbTransferActivity" />
 
-       <!-- // 我的KSB-KSB明细-->
+        // 我的KSB-KSB明细
         <activity android:name="com.guochuang.mimedia.ui.activity.user.MyKsbDetailsActivity" />
 
-       <!-- // 我的KSB-KSB转换记录-->
+        // 我的KSB-KSB转换记录
         <activity android:name="com.guochuang.mimedia.ui.activity.user.MyKsbTransRecActivity" />
 
-       <!-- // 我的KSB-转赠-->
+        // 我的KSB-转赠
         <activity android:name="com.guochuang.mimedia.ui.activity.user.MyKsbGrantActivity" />
 
-        <!--// 我的KSB-转赠记录-->
+        // 我的KSB-转赠记录
         <activity android:name="com.guochuang.mimedia.ui.activity.user.MyKsbGrantRecActivity" />
 
-        <!--// 广告信息获取service-->
+        // 广告信息获取service
         <service android:name="com.guochuang.mimedia.app.AdInfoService" />
 
         <!-- Android 7.0 文件共享配置，必须配置 -->

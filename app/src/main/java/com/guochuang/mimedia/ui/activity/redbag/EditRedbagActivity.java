@@ -1,7 +1,6 @@
 package com.guochuang.mimedia.ui.activity.redbag;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.MediaMetadataRetriever;
@@ -10,7 +9,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -26,6 +24,7 @@ import com.donkingliang.imageselector.utils.ImageSelector;
 import com.donkingliang.imageselector.utils.ImageSelectorUtils;
 import com.guochuang.mimedia.mvp.model.LookSurevyResult;
 import com.guochuang.mimedia.mvp.model.LookVideoResult;
+import com.guochuang.mimedia.mvp.model.EditRedbagConfig;
 import com.guochuang.mimedia.mvp.model.LuckyConfig;
 import com.guochuang.mimedia.mvp.model.ProblemBean;
 import com.guochuang.mimedia.mvp.model.RedBagConfig;
@@ -89,6 +88,8 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
     EditText etWord;
     @BindView(R.id.lin_word)
     LinearLayout linWord;
+    @BindView(R.id.tv_password_tip)
+    TextView tvPasswordTip;
     @BindView(R.id.et_amout)
     EditText etAmout;
     @BindView(R.id.lin_amount)
@@ -165,6 +166,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
 
     private ArrayList<ProblemBean> mProblemList = new ArrayList();
     private File mCurrentFile;
+    PassDialog passDialog;
 
     @Override
     protected EditRedbagPresenter createPresenter() {
@@ -178,9 +180,8 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
 
     @Override
     public void initViewAndData() {
-        setStatusbar(R.color.white, true);
-        redPacketType = getIntent().getStringExtra(Constant.RED_PACKET_TYPE);
-        scopeArr = Arrays.asList(getResources().getStringArray(R.array.redbag_scope));
+        redPacketType=getIntent().getStringExtra(Constant.RED_PACKET_TYPE);
+        scopeArr=Arrays.asList(getResources().getStringArray(R.array.redbag_scope));
         tvScope.setText(scopeArr.get(0));
         mLlSetProblem.setVisibility(View.GONE);
         switch (redPacketType) {
@@ -284,6 +285,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
         });
         rvPic.setAdapter(pictureAdapter);
         mvpPresenter.getTemplate(redPacketType);
+        mvpPresenter.getEditRedbagConfig();
     }
 
     public void showPayResult(boolean success, String errmsg) {
@@ -341,26 +343,26 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                 }
                 break;
             case R.id.lin_scope:
-                SheetDialog sheetDialog = new SheetDialog(this, scopeArr, new SheetDialog.OnItemClickListener() {
+                SheetDialog sheetDialog=new SheetDialog(this, scopeArr, new SheetDialog.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
-                        switch (position) {
+                        switch (position){
                             case 0:
-                                areaType = 0;
-                                kilometer = 1;
+                                areaType=0;
+                                kilometer=1;
                                 break;
                             case 1:
-                                areaType = 0;
-                                kilometer = 3;
+                                areaType=0;
+                                kilometer=3;
                                 break;
                             case 2:
-                                areaType = 0;
-                                kilometer = 5;
+                                areaType=0;
+                                kilometer=5;
                                 break;
-                            default:
-                                areaType = position - 2;
-                                kilometer = 0;
-                                break;
+                                default:
+                                    areaType=position-2;
+                                    kilometer=0;
+                                    break;
                         }
                         tvScope.setText(scopeArr.get(position));
                     }
@@ -368,68 +370,67 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                 sheetDialog.show();
                 break;
             case R.id.lin_location:
-                RxPermissions rxPermissions = new RxPermissions(this);
+                RxPermissions rxPermissions=new RxPermissions(this);
                 rxPermissions.request(Manifest.permission.ACCESS_COARSE_LOCATION,
-                        Manifest.permission.ACCESS_FINE_LOCATION).subscribe(new Action1<Boolean>() {
+                                      Manifest.permission.ACCESS_FINE_LOCATION).subscribe(new Action1<Boolean>() {
                     @Override
                     public void call(Boolean aBoolean) {
-                        startActivityForResult(new Intent(EditRedbagActivity.this, MapPickActivity.class), Constant.REQUEST_GET_LOCATION);
+                        startActivityForResult(new Intent(EditRedbagActivity.this, MapPickActivity.class),Constant.REQUEST_GET_LOCATION);
                     }
                 });
                 break;
             case R.id.tv_rule:
-                IntentUtils.startWebActivity(this, tvRule.getText().toString(), Constant.URL_SEND_REDBAG);
+                IntentUtils.startWebActivity(this, tvRule.getText().toString(),Constant.URL_SEND_REDBAG);
                 break;
             case R.id.btn_add:
-
-                content = etContent.getText().toString().trim();
-                if (picUrlArr.size() == 0) {
+                content=etContent.getText().toString().trim();
+                if (picUrlArr.size()==0){
                     waitUpload = (ArrayList<String>) pictureArr.clone();
                     waitUpload.remove(null);
                 }
-                password = etWord.getText().toString().trim();
-                String amountStr = etAmout.getText().toString().trim();
-                if (TextUtils.isEmpty(amountStr)) {
-                    money = 0d;
-                } else {
-                    money = Double.parseDouble(amountStr);
+                password=etWord.getText().toString().trim();
+                String amountStr=etAmout.getText().toString().trim();
+                if(TextUtils.isEmpty(amountStr)){
+                    money=0d;
+                }else {
+                    money=Double.parseDouble(amountStr);
                 }
 //                money=0.01d;
-                String countStr = etCount.getText().toString().trim();
-                if (TextUtils.isEmpty(countStr)) {
-                    quantity = 0;
-                } else {
-                    quantity = Integer.parseInt(countStr);
+                String countStr=etCount.getText().toString().trim();
+                if(TextUtils.isEmpty(countStr)){
+                    quantity=0;
+                }else {
+                    quantity=Integer.parseInt(countStr);
                 }
-                if (linLink.getVisibility() == View.VISIBLE) {
-                    urlName = etLinkName.getText().toString().trim();
-                    url = etLinkUrl.getText().toString().trim();
-                    wechat = etLinkWechat.getText().toString().trim();
-                    microblog = etLinkWeibo.getText().toString().trim();
-                } else {
-                    urlName = null;
+                if (linLink.getVisibility()==View.VISIBLE) {
+                     urlName=etLinkName.getText().toString().trim();
+                     url = etLinkUrl.getText().toString().trim();
+                     wechat=etLinkWechat.getText().toString().trim();
+                     microblog=etLinkWeibo.getText().toString().trim();
+                }else {
+                    urlName=null;
                     url = null;
-                    wechat = null;
-                    microblog = null;
+                    wechat=null;
+                    microblog=null;
                 }
-                isPublicPassword = cbPublicPassword.isChecked() ? 1 : 0;
-                isSaveTemplate = cbSaveTemp.isChecked() ? 1 : 0;
-                if (TextUtils.isEmpty(latitude) || TextUtils.isEmpty(longitude)) {
+                isPublicPassword=cbPublicPassword.isChecked()?1:0;
+                isSaveTemplate=cbSaveTemp.isChecked()?1:0;
+                if (TextUtils.isEmpty(latitude)||TextUtils.isEmpty(longitude)){
                     showShortToast(R.string.not_location_info);
-                } else if (money <= 0) {
+                }else if(money<=0){
                     showShortToast(R.string.pls_set_amount);
-                } else if (quantity <= 0) {
+                }else if(quantity<=0){
                     showShortToast(R.string.pls_set_redbag_num);
-                } else if (!TextUtils.isEmpty(url) && TextUtils.isEmpty(urlName)) {
+                }else if(!TextUtils.isEmpty(url)&&TextUtils.isEmpty(urlName)){
                     showShortToast(R.string.link_name_cant_empty);
-                } else if (!TextUtils.isEmpty(urlName) && TextUtils.isEmpty(url)) {
+                }else if(!TextUtils.isEmpty(urlName)&&TextUtils.isEmpty(url)){
                     showShortToast(R.string.link_url_cant_empty);
-                } else if (!TextUtils.isEmpty(url) && !url.matches(Constant.REGEX_WEBURL)) {
+                }else if(!TextUtils.isEmpty(url)&&!url.matches(Constant.REGEX_WEBURL)){
                     showShortToast(R.string.link_format_error);
-                } else if (!cbObeyRule.isChecked()) {
+                }else if(!cbObeyRule.isChecked()){
                     showShortToast(R.string.agree_rule);
-                } else {
-                    if (TextUtils.equals(redPacketType, Constant.RED_PACKET_TYPE_PASSWORD)) {
+                }else {
+                    if (TextUtils.equals(redPacketType,Constant.RED_PACKET_TYPE_PASSWORD)){
                         if (TextUtils.isEmpty(password)) {
                             showShortToast(R.string.word_not_empty);
                             return;
@@ -510,23 +511,20 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
             selectPayType();
         }
     }
-
-    public void uploadFile() {
+    public void uploadFile(){
         //如果是网络地址，则直接不上传,直接添加
-        if (waitUpload.get(0).startsWith("http")) {
+        if (waitUpload.get(0).startsWith("http")){
             picUrlArr.add(waitUpload.get(0));
             waitUpload.remove(0);
-            if (waitUpload.size() > 0) {
+            if (waitUpload.size()>0) {
                 uploadFile();
-            } else {
+            }else {
                 closeLoadingDialog();
                 selectPayType();
             }
             return;
         }
         mCurrentFile = new File(waitUpload.get(0));
-        Log.e("uploadFile: ", "视频文件上传到服务器");
-
         if (redPacketType.equals(Constant.RED_PACKET_TYPE_VIDEO)) {
             //截取视频帧画面
             File frameFile = catVideoFrame(mCurrentFile);
@@ -594,8 +592,8 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                     addPicture(images);
                     break;
                 case Constant.REQUEST_GET_LOCATION:
-                    redbagLatitude = String.valueOf(intent.getDoubleExtra(Constant.LATITUDE, 0));
-                    redbagLongitude = String.valueOf(intent.getDoubleExtra(Constant.LONGITUDE, 0));
+                    redbagLatitude=String.valueOf(intent.getDoubleExtra(Constant.LATITUDE,0));
+                    redbagLongitude=String.valueOf(intent.getDoubleExtra(Constant.LONGITUDE,0));
                     tvLocation.setText(intent.getStringExtra(Constant.NAME));
                     break;
                 case Constant.REQUEST_TEMPLATE:
@@ -725,6 +723,23 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
 
         pictureAdapter.notifyDataSetChanged();
     }
+   public void selectPayType(){
+       picture=TextUtils.join(",",picUrlArr);
+       final PaySelectDialog paySelectDialog = new PaySelectDialog(this, String.valueOf(money));
+       paySelectDialog.setOnResultListener(new PaySelectDialog.OnResultListener() {
+           @Override
+           public void onSelectItem(int postion) {
+               if (postion == 0) {
+                   payType = Constant.PAY_TYPE_WXPAY;
+               } else if (postion == 1) {
+                   payType = Constant.PAY_TYPE_ALIPAY;
+               } else {
+                   payType = Constant.PAY_TYPE_KSB;
+                   passDialog =new PassDialog(EditRedbagActivity.this, new PassDialog.OnPassDialogListener() {
+                       @Override
+                       public void close() {
+                           selectPayType();
+                       }
 
     public void selectPayType() {
         picture = TextUtils.join(",", picUrlArr);
@@ -784,6 +799,28 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
             mvpPresenter.addSurveyReabag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson);
 
         }
+                       @Override
+                       public void onNumFull(String code) {
+                           startPay(code);
+                       }
+                   });
+                   passDialog.show();
+
+                   return;
+               }
+               startPay(null);
+           }
+       });
+       paySelectDialog.show();
+}
+public void startPay(String safetyCode){
+    showLoadingDialog(null);
+    if (TextUtils.equals(redPacketType,Constant.RED_PACKET_TYPE_RANDOM)){
+        mvpPresenter.addRandomRedbag(latitude,longitude,redbagLatitude,redbagLongitude,content,picture,areaType,kilometer,money,quantity,urlName,url,wechat,microblog,isPublicPassword,isSaveTemplate,payType,Constant.CHANNEL_CODE_ANDROID,safetyCode);
+    }else if(TextUtils.equals(redPacketType,Constant.RED_PACKET_TYPE_PASSWORD)){
+        mvpPresenter.addPasswordRedbag(latitude,longitude,redbagLatitude,redbagLongitude,content,picture,areaType,kilometer,password,money,quantity,urlName,url,wechat,microblog,isPublicPassword,isSaveTemplate,payType,Constant.CHANNEL_CODE_ANDROID,safetyCode);
+    }else if(TextUtils.equals(redPacketType,Constant.RED_PACKET_TYPE_LUCKY)){
+        mvpPresenter.addLuckyRedbag(latitude,longitude,redbagLatitude,redbagLongitude,content,picture,areaType,kilometer,money,quantity,urlName,url,wechat,microblog,isPublicPassword,isSaveTemplate,payType,Constant.CHANNEL_CODE_ANDROID,safetyCode);
     }
 
 
@@ -841,6 +878,9 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
     @Override
     public void setData(final String data) {
         closeLoadingDialog();
+        if (passDialog!=null&&passDialog.isShowing()){
+            passDialog.dismiss();
+        }
         if (!TextUtils.isEmpty(data)) {
             Order order = GsonUtil.GsonToBean(data, Order.class);
             redPacketUuid = order.getRedPacketUuid();
@@ -930,7 +970,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
     @Override
     public void setLuckyConfig(LuckyConfig data) {
         closeLoadingDialog();
-        if (data != null) {
+        if (data!=null){
             etAmout.setText(String.valueOf(data.getJoinMoney()));
             etAmout.setEnabled(false);
             etCount.setText(String.valueOf(data.getSendQuantity()));
@@ -939,9 +979,20 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
     }
 
     @Override
+    public void setConfig(EditRedbagConfig data) {
+        if (data!=null){
+            tvPasswordTip.setText(data.getPasswordOutTime());
+        }
+    }
+
+
+    @Override
     public void setError(String msg) {
         closeLoadingDialog();
         showShortToast(msg);
+        if (passDialog!=null&&passDialog.isShowing()){
+            passDialog.clearCode();
+        }
     }
 
     @Override

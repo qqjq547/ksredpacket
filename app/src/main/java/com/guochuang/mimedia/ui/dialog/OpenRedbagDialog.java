@@ -6,12 +6,16 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.guochuang.mimedia.tools.LogUtil;
+import com.guochuang.mimedia.view.DragView;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.mvp.model.Redbag;
 import com.guochuang.mimedia.tools.CommonUtil;
@@ -39,9 +43,18 @@ public class OpenRedbagDialog extends Dialog {
     EditText etWord;
     @BindView(R.id.tv_open)
     TextView tvOpen;
+    @BindView(R.id.ll_root)
+    LinearLayout mLlRoot;
+    @BindView(R.id.drag_view)
+    DragView mDragView;
+
+
     Redbag redbag;
 
+    boolean mIsDrag;
+    Context mContext;
     OnOpenResultListener onOpenResultListener;
+
     public interface OnOpenResultListener{
         void onOpenResult(String password);
     }
@@ -49,8 +62,17 @@ public class OpenRedbagDialog extends Dialog {
 
     public OpenRedbagDialog(@NonNull Context context) {
         super(context,R.style.dialog_bottom_full);
-        View view = View.inflate(context, R.layout.dialog_open_redbag, null);
+        mContext = context;
+        View  view = View.inflate(context, R.layout.dialog_open_redbag, null);
         ButterKnife.bind(this, view);
+        mDragView.setOnCheckLisenter(new DragView.OnCheckLisenter() {
+            @Override
+            public void checkSuccess() {
+                onOpenResultListener.onOpenResult(etWord.getText().toString().trim());
+                dismiss();
+            }
+        });
+
         setContentView(view);
     }
 
@@ -66,6 +88,18 @@ public class OpenRedbagDialog extends Dialog {
         if (redbag.getRoleType().equals(Constant.ROLETYPE_SYSTEM)){
             tvSummary.setText(redbag.getBestWishes());
             etWord.setVisibility(View.INVISIBLE);
+            //系统红包  做处理
+
+            if(mIsDrag) {
+                mLlRoot.setBackgroundResource(R.drawable.bg_drag_open_redbag);
+                mDragView.setVisibility(View.VISIBLE);
+                tvOpen.setVisibility(View.GONE);
+                etWord.setVisibility(View.GONE);
+            }
+
+
+
+
         }else {
             if (redbag.getType().equals(Constant.RED_PACKET_TYPE_PASSWORD)){
                 if (TextUtils.isEmpty(redbag.getPassword())){
@@ -102,5 +136,10 @@ public class OpenRedbagDialog extends Dialog {
                 dismiss();
                 break;
         }
+    }
+
+
+    public void setDrag(boolean isDrag){
+        mIsDrag = isDrag;
     }
 }

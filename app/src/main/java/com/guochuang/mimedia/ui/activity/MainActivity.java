@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.IdRes;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.telephony.mbms.DownloadProgressListener;
@@ -30,6 +31,7 @@ import com.allenliu.versionchecklib.v2.callback.CustomDownloadingDialogListener;
 import com.guochuang.mimedia.mvp.model.Remind;
 import com.guochuang.mimedia.tools.AdCollectionView;
 import com.guochuang.mimedia.tools.LogUtil;
+import com.guochuang.mimedia.ui.activity.common.KsbPayActivity;
 import com.guochuang.mimedia.ui.dialog.RemindDialog;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.app.App;
@@ -55,12 +57,14 @@ import com.guochuang.mimedia.ui.fragment.InfoFragment;
 import com.guochuang.mimedia.ui.fragment.MyFragment;
 import com.guochuang.mimedia.ui.fragment.RedbagFragment;
 import com.guochuang.mimedia.view.BadgeView;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
 
 import java.io.File;
 import java.util.Calendar;
 import java.util.Date;
 
 import butterknife.BindView;
+import cn.jpush.android.api.JPushInterface;
 import io.objectbox.Box;
 import rx.Subscriber;
 
@@ -158,6 +162,10 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
         mvpPresenter.getVersion(Constant.SYSTEM_CODE_ANDROID, String.valueOf(CommonUtil.getVersionCode(this)));
         mvpPresenter.messageIsNews();
         mvpPresenter.isNameAuthAndSafetyCode();
+//        String channel=CommonUtil.getAppMetaData(this,Constant.JPUSH_CHANNEL);
+//        if (!TextUtils.equals(channel,Constant.CHANNEL_DEFAULT)){
+//            mvpPresenter.marketSwitch(channel,String.valueOf(CommonUtil.getVersionCode(this)));
+//        }
     }
 
     @Override
@@ -281,11 +289,20 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
     public void setRemind(Remind data) {
       if (data!=null){
           long dateTime=getPref().getLong(PrefUtil.LAST_REMIND_TIME,0)+data.getIntervalMinute()*60000;
+          LogUtil.d(CommonUtil.dateToString(new Date(dateTime),Constant.FORMAT_DATE));
           if (System.currentTimeMillis()>dateTime){
               getPref().setLong(PrefUtil.LAST_REMIND_TIME,System.currentTimeMillis());
               new RemindDialog(this,data.getPicture(),data.getLink()).show();
           }
       }
+    }
+
+    @Override
+    public void setMarketSwitch(Integer data) {
+        if (data!=null){//1为开启开关
+            getPref().setString(PrefUtil.MARKET_SWITCH,data.intValue()==1?Constant.SWITCH_HIDE:Constant.SWITCH_SHOW);
+            CommonUtil.syncCookie(this,ApiClient.HTML_URL);
+        }
     }
 
 
@@ -397,6 +414,5 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
         ((RedbagFragment)fragments[2]).openNestAd();
         ((MyFragment)fragments[4]).openNestAd();
     }
-
 }
 

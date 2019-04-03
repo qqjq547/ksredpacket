@@ -53,8 +53,11 @@ import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.guochuang.mimedia.ui.activity.beenest.AdBidActivity;
 import com.guochuang.mimedia.ui.activity.city.CityActivity;
 import com.guochuang.mimedia.ui.activity.MainActivity;
+import com.guochuang.mimedia.ui.activity.common.MyCaptureActivity;
 import com.guochuang.mimedia.ui.activity.common.ShareActivity;
 import com.guochuang.mimedia.ui.activity.redbag.SquareActivity;
+import com.guochuang.mimedia.ui.activity.user.IdentifyActivity;
+import com.guochuang.mimedia.ui.activity.user.MyPayCodeActivity;
 import com.guochuang.mimedia.ui.activity.user.UpgradeAgentActivity;
 import com.guochuang.mimedia.ui.dialog.OpenRedbagDialog;
 import com.guochuang.mimedia.ui.dialog.RedbagTypeDialog;
@@ -74,6 +77,8 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
 
     @BindView(R.id.tv_start)
     ImageView tvStart;
+    @BindView(R.id.iv_scan)
+    ImageView ivScan;
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.tv_text)
@@ -117,7 +122,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     View vScope;
     Animation rotateAnim;
     BaiduMap.OnMarkerClickListener onMarkerClickListener;
-    boolean showNest=false;
+    boolean showNest = false;
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -170,7 +175,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
         mvpPresenter.getWalletCoinAndMoney();
         mvpPresenter.getScrollBar();
         mvpPresenter.getUserRole();
-        onMarkerClickListener=new BaiduMap.OnMarkerClickListener() {
+        onMarkerClickListener = new BaiduMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
                 optMarker = marker;
@@ -184,6 +189,23 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                             showShortToast(R.string.not_find_redbag_data);
                             return false;
                         }
+                        openRedbagDialog = new OpenRedbagDialog(getContext());
+                        //是否是拖动开红包
+                        int isDragStr = getPref().getInt(PrefUtil.ISDRAG, 0);
+                        if (Constant.ISDRAG==isDragStr) {
+                            openRedbagDialog.setDrag(true);
+                        }
+//                        openRedbagDialog.setDrag(true);
+                        openRedbagDialog.setOnOpenResultListener(new OpenRedbagDialog.OnOpenResultListener() {
+                            @Override
+                            public void onOpenResult(String password) {
+                                optMarker.remove();
+                                showLoadingDialog(null);
+                                if (redbag.getRoleType().equals(Constant.ROLETYPE_SYSTEM)) {
+                                    mvpPresenter.redPacketOpen(getPref().getLatitude(), getPref().getLongitude(), redbag.getUuid());
+                                } else {
+                                    mvpPresenter.redPacketPoolOpen(getPref().getLatitude(), getPref().getLongitude(), redbag.getUuid(), password);
+                                }
                         if (openRedbagDialog == null) {
                             openRedbagDialog = new OpenRedbagDialog(getContext());
                             openRedbagDialog.setOnOpenResultListener(new OpenRedbagDialog.OnOpenResultListener() {
@@ -201,9 +223,8 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                                         }
                                     }
 
-                                }
-                            });
-                        }
+                            }
+                        });
                         LogUtil.d(redbag.toString());
                         openRedbagDialog.setRedbag(redbag);
                         openRedbagDialog.show();
@@ -213,7 +234,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
             }
         };
         bm.setOnMarkerClickListener(onMarkerClickListener);
-        setUserRole(getPref().getInt(PrefUtil.USER_ROLE,0));
+        setUserRole(getPref().getInt(PrefUtil.USER_ROLE, 0));
         setHomeAd(new ArrayList<NestHomeAd>());
     }
 
@@ -261,9 +282,26 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
         super.onDestroyView();
         mvRedbag.onDestroy();
     }
-    @OnClick({R.id.tv_text, R.id.lin_city_owner, R.id.iv_city_owner_avatar, R.id.tv_start, R.id.iv_share,R.id.iv_refresh, R.id.lin_upgrade_agent})
+
+    @OnClick({R.id.iv_scan, R.id.tv_text, R.id.lin_city_owner, R.id.iv_city_owner_avatar, R.id.tv_start, R.id.iv_share, R.id.iv_refresh, R.id.lin_upgrade_agent})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.iv_scan:
+                new RxPermissions(getActivity()).request(Manifest.permission.CAMERA).subscribe(new Action1<Boolean>() {
+                    @Override
+                    public void call(Boolean aBoolean) {
+                        if (aBoolean) {
+                            if (getPref().getInt(PrefUtil.IDENTITY,0)==0){
+                                startActivity(new Intent(getActivity(), IdentifyActivity.class));
+                            }else{
+                                startActivity(new Intent(getActivity(), MyCaptureActivity.class));
+                            }
+                        } else {
+                            showShortToast(R.string.get_camera_permission);
+                        }
+                    }
+                });
+                break;
             case R.id.tv_text:
                 startActivity(new Intent(getActivity(), SquareActivity.class));
                 break;
@@ -425,6 +463,8 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     @Override
     public void setRedbagDetail(RedbagDetail redbagDetail) {
         closeLoadingDialog();
+        //保存数据
+        getPref().setInt(PrefUtil.ISDRAG, redbagDetail.getNextValidate());
         if (redbagDetail != null) {
             IntentUtils.startRedbagDetailActivity(getActivity(), redbagDetail, redbag.getUuid(), redbag.getRoleType(),redbag.getType());
         }
@@ -473,7 +513,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     public void setHomeRegion(HomeRegion data) {
         if (data != null && data != homeRegion) {
             homeRegion = data;
-            GlideImgManager.loadCircleImage(getActivity(), data.getAvatar(), ivCityOwnerAvatar,R.drawable.ic_city_owner_default);
+            GlideImgManager.loadCircleImage(getActivity(), data.getAvatar(), ivCityOwnerAvatar, R.drawable.ic_city_owner_default);
             tvCityOwner.setText(data.getNickName());
         }
     }
@@ -491,27 +531,29 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
 
     @Override
     public void setHomeAd(List<NestHomeAd> data) {
-        FrameLayout.LayoutParams lp=(FrameLayout.LayoutParams) linFlHead.getLayoutParams();
+        FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) linFlHead.getLayoutParams();
 //        for (int i=0;i<30;i++){
 //            NestHomeAd ad=new NestHomeAd();
 //            ad.setCoverPicture("https://upload.jianshu.io/users/upload_avatars/4174308/540285e2-5be5-483a-9259-db485564a4b0.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96");
 //            ad.setShortMsg("name="+(i+1));
 //            data.add(ad);
 //        }
-        if (data!=null&&data.size()>0){
-            lp.topMargin=CommonUtil.dip2px(getContext(),140);
+        if (data != null && data.size() > 0) {
+            lp.topMargin = CommonUtil.dip2px(getContext(), 140);
             sethoneyData(data);
-        }else {
-            lp.topMargin=CommonUtil.dip2px(getContext(),30);
+        } else {
+            lp.topMargin = CommonUtil.dip2px(getContext(), 30);
         }
         linFlHead.setLayoutParams(lp);
     }
+
     @Override
     public void setIsQualified(Boolean data) {
-        if (data!=null&&data.booleanValue()){
-            ((MainActivity)getActivity()).startNestAd();
+        if (data != null && data.booleanValue()) {
+            ((MainActivity) getActivity()).startNestAd();
         }
     }
+
     @Override
     public void setError(String msg) {
         closeLoadingDialog();
@@ -587,12 +629,13 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
             rotateAnim = null;
         }
     }
-    public void sethoneyData(final List<NestHomeAd> honeyArr){
+
+    public void sethoneyData(final List<NestHomeAd> honeyArr) {
         hcvAd.setVisibility(View.VISIBLE);
         hcvAd.setData(honeyArr, new HoneyCombView.OnMenuClickListener() {
             @Override
             public void onClick(NestHomeAd data) {
-                IntentUtils.startBeeNestActivity(getActivity(),data.getNestInfoId(),data.getNestLocationId());
+                IntentUtils.startBeeNestActivity(getActivity(), data.getNestInfoId(), data.getNestLocationId());
             }
 
             @Override
@@ -603,19 +646,21 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                     public void run() {
                         startActivity(new Intent(getActivity(), AdBidActivity.class));
                     }
-                },500);
+                }, 500);
 //                startActivity(new Intent(getActivity(),AdBidActivity.class));
             }
         });
     }
-    public void clearMarker(){
+
+    public void clearMarker() {
         bm.removeMarkerClickListener(onMarkerClickListener);
         bm.clear();
     }
-    public void openNestAd(){
-        showNest=true;
-        if (!TextUtils.isEmpty(getPref().getString(PrefUtil.LATITUDE,""))){
-            mvpPresenter.getHomeAd(PrefUtil.getInstance().getLatitude(),getPref().getLongitude());
+
+    public void openNestAd() {
+        showNest = true;
+        if (!TextUtils.isEmpty(getPref().getString(PrefUtil.LATITUDE, ""))) {
+            mvpPresenter.getHomeAd(PrefUtil.getInstance().getLatitude(), getPref().getLongitude());
         }
     }
 }

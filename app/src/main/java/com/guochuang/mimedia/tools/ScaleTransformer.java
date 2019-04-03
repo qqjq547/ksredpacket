@@ -1,6 +1,6 @@
 package com.guochuang.mimedia.tools;
-
-import android.support.v4.view.ViewPager;
+import
+                         android.support.v4.view.ViewPager;
 import android.view.View;
 
 public class ScaleTransformer implements ViewPager.PageTransformer {

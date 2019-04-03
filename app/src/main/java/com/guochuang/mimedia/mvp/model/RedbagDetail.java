@@ -22,6 +22,7 @@ public class RedbagDetail implements Serializable {
      * url : string
      * urlName : string
      * wechat : string
+     * isLoke
      */
 
     private String areaType;
@@ -45,6 +46,15 @@ public class RedbagDetail implements Serializable {
     private List<String> drawAvatar;
     private List<PictureBean> picture;
     private List<RedbagAd> systemAd;
+    private int nextValidate;
+
+    public int getNextValidate() {
+        return nextValidate;
+    }
+
+    public void setNextValidate(int nextValidate) {
+        this.nextValidate = nextValidate;
+    }
 
 
     public String getAreaType() {

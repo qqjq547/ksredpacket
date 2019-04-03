@@ -72,6 +72,7 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
     int days=0;
     String nestLatitude;
     String nestLongitude;
+    PassDialog passDialog;
     @Override
     protected PurchasePresenter createPresenter() {
         return new PurchasePresenter(this);
@@ -152,7 +153,7 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
                 }
                 if (cbRead.isChecked()){
                     if (payType == Constant.PAY_TYPE_KSB) {
-                        new PassDialog(PurchaseActivity.this, new PassDialog.OnPassDialogListener() {
+                        passDialog=new PassDialog(PurchaseActivity.this, new PassDialog.OnPassDialogListener() {
                             @Override
                             public void close() {
 
@@ -167,7 +168,8 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
                             public void onNumFull(String code) {
                                 startPay(code);
                             }
-                        }).setBackVisible(false).show();
+                        });
+                         passDialog.setBackVisible(false).show();
                         return;
                     }
                     startPay(null);
@@ -307,6 +309,9 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
     @Override
     public void setBuyCity(String data) {
         closeLoadingDialog();
+        if (passDialog!=null&&passDialog.isShowing()){
+            passDialog.dismiss();
+        }
         if (!TextUtils.isEmpty(data)) {
             Order order=GsonUtil.GsonToBean(data,Order.class);
             payResult(order);
@@ -318,6 +323,9 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
     @Override
     public void setUpgradeAgent(Order data) {
         closeLoadingDialog();
+        if (passDialog!=null&&passDialog.isShowing()){
+            passDialog.dismiss();
+        }
         if (data!=null){
             payResult(data);
         }else {
@@ -328,6 +336,9 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
     @Override
     public void setBuyHonyComb(Order data) {
         closeLoadingDialog();
+        if (passDialog!=null&&passDialog.isShowing()){
+            passDialog.dismiss();
+        }
         if (data!=null){
             payResult(data);
         }else {
@@ -337,6 +348,9 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
     @Override
     public void setSnatch(Order data) {
         closeLoadingDialog();
+        if (passDialog!=null&&passDialog.isShowing()){
+            passDialog.dismiss();
+        }
         if (data!=null){
             payResult(data);
         }else {
@@ -347,6 +361,9 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
     @Override
     public void setBuyNestAd(Order data) {
         closeLoadingDialog();
+        if (passDialog!=null&&passDialog.isShowing()){
+            passDialog.dismiss();
+        }
         if (data!=null){
             payResult(data);
         }else {
@@ -366,6 +383,9 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
     public void setError(String msg) {
         closeLoadingDialog();
         showShortToast(msg);
+        if (passDialog!=null&&passDialog.isShowing()){
+            passDialog.clearCode();
+        }
     }
 
 }

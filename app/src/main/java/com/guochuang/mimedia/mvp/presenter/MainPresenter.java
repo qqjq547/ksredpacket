@@ -165,4 +165,25 @@ public class MainPresenter extends BasePresenter<MainView> {
             }
         });
     }
+    public void marketSwitch(String marketName,String versionCode) {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
+                marketSwitch(marketName,versionCode)), new ApiCallback<Integer>() {
+            @Override
+            public void onSuccess(Integer data) {
+                mvpView.setMarketSwitch(data);
+
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setError(exception.getMessage());
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
 }

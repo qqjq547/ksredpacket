@@ -94,6 +94,13 @@ public class IntentUtils {
         intent.putExtra(Constant.URL,url);
         activity.startActivity(intent);
     }
+    public static void startWebActivity(Activity activity,String title, String  url,boolean hasRefresh) {
+        Intent intent = new Intent(activity,WebActivity.class);
+        intent.putExtra(Constant.TITLE,title);
+        intent.putExtra(Constant.URL,url);
+        intent.putExtra(Constant.HAS_REFRESH,hasRefresh);
+        activity.startActivity(intent);
+    }
     public static void startImageActivity(Activity activity,String  url) {
         Intent intent = new Intent(activity,ImageActivity.class);
         intent.putExtra(Constant.URL,url);

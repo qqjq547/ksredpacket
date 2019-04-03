@@ -24,7 +24,7 @@ android {
         manifestPlaceholders = [
                 JPUSH_PKGNAME : applicationId,
                 JPUSH_APPKEY  : "e5746293850e854f49e10a76", //JPush上注册的包名对应的appkey.
-                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可
+                JPUSH_CHANNEL : "default", //暂时填写默认值即可
                 JSHARE_PKGNAME: applicationId,
                 TENCENT_APPID : "1106947833",//腾讯开放平台注册应用得到的 appId
         ]
@@ -90,7 +90,7 @@ dependencies {
     implementation 'com.allenliu.versionchecklib:library:2.1.5'
     implementation 'com.gyf.immersionbar:immersionbar:2.3.3-beta09'
     implementation(name: 'idcard_ocr', ext: 'aar')
-    implementation 'com.googlecode.android-query:android-query:0.25.9'
     implementation project(path: ':hellocharts-library')
+    implementation 'cn.yipianfengye.android:zxing-library:2.2'
     implementation project(path: ':mediapicker')
 }

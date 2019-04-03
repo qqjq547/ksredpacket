@@ -48,6 +48,7 @@ public class Constant {
     public static final int REQUEST_PICK_ADDRESS = 16;
     public static final int REQUEST_SET_SHOWLIST = 17;
     public static final int REQUEST_EDIT_NESTAD = 18;
+    public static final int REQUEST_SCAN_CODE = 19;
     public static final int REQUEST_ANSWER = 19;
 
 
@@ -98,7 +99,16 @@ public class Constant {
     public static final String DAYS = "days";
     public static final String NESTLATITUDE = "nestLatitude";
     public static final String NESTLONGITUDE = "nestLongitude";
+    public static final String HAS_REFRESH = "hasRefresh";
+    public static final String DEFAULT_CODE = "defaultCode";
+    public static final String ISSHOWDEMO = "isShowDemo";
+    public static final String MARKET_NAME = "marketName";
+    public static final String VERSION_CODE = "versionCode";
 
+    public static final String SWITCH_SHOW = "show";
+    public static final String SWITCH_HIDE = "hide";
+
+    public static final String PAYEE_USER = "payeeUser";
 
     public static final String FORMAT_DATE_SIMPLE = "yyyy-MM-dd";
     public static final String FORMAT_DATE = "yyyy-MM-dd HH:mm:ss";
@@ -110,7 +120,7 @@ public class Constant {
 
 
     //资讯详情
-    public static final String URL_INFOMATION_DETAIL = ApiClient.HTML_URL + "information/detail/index.htm";
+    public static final String URL_INFOMATION_DETAIL = ApiClient.HTML_URL+"information/detail/index.htm";
     //推荐协议
     public static final String URL_RULE_RECOMMEND = ApiClient.HTML_URL + "html/rule/recommend/index.htm";
     //ksb协议
@@ -132,31 +142,31 @@ public class Constant {
     //代理商协议
     public static final String URL_AGREEMENT_AGENT = ApiClient.HTML_URL + "html/agreement/agent/index.htm";
     //公告消息
-    public static final String URL_NOTICE_DETAIL = ApiClient.HTML_URL + "project/html/notice.html";
+    public static final String URL_NOTICE_DETAIL = ApiClient.HTML_URL+"project/html/notice.html";
     //帮助中心
-    public static final String URL_HELP_CENTER = ApiClient.HTML_URL + "project/html/fengwo/index.html#/helpCenter";
+    public static final String URL_HELP_CENTER = ApiClient.HTML_URL+"project/html/fengwo/index.html#/helpCenter";
     //商圈
-    public static final String URL_TRADINGAREA = ApiClient.HTML_URL + "project/html/shangquan/index.html";
+    public static final String URL_TRADINGAREA = ApiClient.HTML_URL+"project/html/shangquan/index.html";
     //蜜玩
-    public static final String URL_MIWAN = ApiClient.HTML_URL + "project/html/fengwo/index.html#miWan";
+    public static final String URL_MIWAN = ApiClient.HTML_URL+"project/html/fengwo/index.html#miWan";
     //我的订单
-    public static final String URL_MY_ORDER = ApiClient.HTML_URL + "project/html/fengwo/index.html#/myOrder";
+    public static final String URL_MY_ORDER = ApiClient.HTML_URL+"project/html/fengwo/index.html#/myOrder";
     //蜂窝规则
-    public static final String URL_HONYCOMB_RULE = ApiClient.HTML_URL + "project/html/rule/fengwoRule.html";
+    public static final String URL_HONYCOMB_RULE = ApiClient.HTML_URL+"project/html/rule/fengwoRule.html";
     //广告投放协议
-    public static final String URL_FENGCHAO_BANNER = ApiClient.HTML_URL + "project/html/rule/fengchao/banner.html";
+    public static final String URL_FENGCHAO_BANNER = ApiClient.HTML_URL+"project/html/rule/fengchao/banner.html";
     //竞购协议
-    public static final String URL_FENGCHAO_JINGGOU = ApiClient.HTML_URL + "project/html/rule/fengchao/jinggou.html";
+    public static final String URL_FENGCHAO_JINGGOU = ApiClient.HTML_URL+"project/html/rule/fengchao/jinggou.html";
     //竞拍说明
-    public static final String URL_FENGCHAO_JINGPAI = ApiClient.HTML_URL + "project/html/rule/fengchao/jingpai.html";
+    public static final String URL_FENGCHAO_JINGPAI = ApiClient.HTML_URL+"project/html/rule/fengchao/jingpai.html";
     //显示地图网页
-    public static final String URL_BMAP_URL = ApiClient.HTML_URL + "project/html/fengwo/index.html#/BMapComponent";
+    public static final String URL_BMAP_URL = ApiClient.HTML_URL+"project/html/fengwo/index.html#/BMapComponent";
     //夺宝规则
-    public static final String URL_DUOBAO_RULE = ApiClient.HTML_URL + "project/html/rule/duobaoRule.html";
+    public static final String URL_DUOBAO_RULE = ApiClient.HTML_URL+"project/html/rule/duobaoRule.html";
     //夺宝详情
-    public static final String URL_DUOBAO_DETAIL = ApiClient.HTML_URL + "project/html/fengwo/index.html#/treasureDetails?snatchId=";
+    public static final String URL_DUOBAO_DETAIL = ApiClient.HTML_URL+"project/html/fengwo/index.html#/treasureDetails?snatchId=";
     //我的夺宝
-    public static final String URL_DUOBAO_TREASURE_NUMBER = ApiClient.HTML_URL + "project/html/fengwo/index.html#/treasureNumber?type=false&snatchRecordId=";
+    public static final String URL_DUOBAO_TREASURE_NUMBER = ApiClient.HTML_URL+"project/html/fengwo/index.html#/treasureNumber?type=false&snatchRecordId=";
 
 
     public static final String REGEX_WEBURL = "http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?";
@@ -199,6 +209,11 @@ public class Constant {
     public static final String ARGS_ARRAY = "args_array";
     public static final String ARGS_POSITION = "args_position";
     public static final String ARGS_DATA = "data";
+    public static final String JXW_FROM = "h5android";
+    public static final String DATA = "data";
+    public static final String SURVEYID = "surveyId";
+    public static final String JPUSH_CHANNEL = "JPUSH_CHANNEL";
+    public static final String CHANNEL_DEFAULT = "default";
     public static final String JXW_FROM = "h5android";
     public static final String DATA = "data";
     public static final String SURVEYID = "surveyId";
@@ -250,6 +265,7 @@ public class Constant {
     public static final String ACTION_CHANGE_CITY = "change_city";
     public static final String BID_CITY_CITY_ID = "bidCityCityId";
     public static final String DEFAULT_REDPACKET_TYPE = "0";
+    public static final String KSB_CODE_PAYMENT = "129";
 
     public static final int CAL_TYPE_COIN = 2;
     public static final int CAL_TYPE_MONEY = 1;
@@ -282,6 +298,9 @@ public class Constant {
     public static final String AD_TYPE_EDIT = "edit";
     public static final String MAP_MARKER_SPOT = "spot";
 
+
+    public static final String INVITE_FRIENDS_GIVE_GIFTS = "邀请好友得好礼";
+    public static final int ISDRAG = 1;
     public static final String ACTIVTYPUTBUNDLEKEY = "openActivity_key";
     public static final String PROBLEMLIST_KEY = "problemlist_key";
     public static final String VIDEO_PATH = "video_path";

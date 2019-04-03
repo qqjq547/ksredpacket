@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.mvp.model.DictionaryType;
+import com.guochuang.mimedia.tools.DialogBuilder;
+import com.guochuang.mimedia.tools.LogUtil;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.KsbRecord;
@@ -21,7 +23,6 @@ import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.KsbDetailsTypePop;
 import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.ui.adapter.MyKsbDetailsAdapter;
-import com.guochuang.mimedia.view.VerticalDecoration;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
@@ -42,6 +43,8 @@ public class MyKsbDetailsActivity extends MvpActivity<MyKsbDetailsPresenter> imp
     TextView tvTitle;
     @BindView(R.id.tv_text)
     TextView tvText;
+    @BindView(R.id.lin_sum)
+    LinearLayout linSum;
     @BindView(R.id.tv_num_all)
     TextView tvNumAll;
     @BindView(R.id.rv_ksb)
@@ -57,6 +60,7 @@ public class MyKsbDetailsActivity extends MvpActivity<MyKsbDetailsPresenter> imp
     String type="00";
     String defaultIndex="0";
     String startIndex=defaultIndex;
+    String defaultCode ="";
 
     @Override
     protected MyKsbDetailsPresenter createPresenter() {
@@ -72,6 +76,7 @@ public class MyKsbDetailsActivity extends MvpActivity<MyKsbDetailsPresenter> imp
     public void initViewAndData() {
         tvTitle.setText(getResources().getString(R.string.my_ksb_details_title));
         tvText.setText(getResources().getString(R.string.all));
+        defaultCode =getIntent().getStringExtra(Constant.DEFAULT_CODE);
         tvNumAll.setText(getPref().getString(PrefUtil.COIN,""));
         if (myKsbDetailsAdapter != null) {
             return;
@@ -82,7 +87,17 @@ public class MyKsbDetailsActivity extends MvpActivity<MyKsbDetailsPresenter> imp
         myKsbDetailsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if (TextUtils.isEmpty(myKsbDetailsAdapter.getData().get(position).getRemark())){
+                    return;
+                }
+                new DialogBuilder(MyKsbDetailsActivity.this)
+                        .setMessage(myKsbDetailsAdapter.getData().get(position).getRemark())
+                        .setPositiveButton(R.string.confirm, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
 
+                            }
+                        }).create().show();
             }
         });
         myKsbDetailsAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
@@ -165,9 +180,16 @@ public class MyKsbDetailsActivity extends MvpActivity<MyKsbDetailsPresenter> imp
             subjectArr.addAll(data);
             for (int i=0;i<subjectArr.size();i++){
                 subjectName.add(subjectArr.get(i).getName());
+                if (TextUtils.equals(defaultCode,subjectArr.get(i).getCode())){
+                    type = data.get(i).getCode();
+                    tvText.setText(subjectArr.get(i).getName());
+                    mvpPresenter.getKsbRecord(type, startIndex, Constant.PAGE_SIZE);
+                }
             }
-            type=data.get(0).getCode();
-            mvpPresenter.getKsbRecord(type,startIndex,Constant.PAGE_SIZE);
+            if (TextUtils.isEmpty(defaultCode)) {
+                type = data.get(0).getCode();
+                mvpPresenter.getKsbRecord(type, startIndex, Constant.PAGE_SIZE);
+            }
         }
     }
 

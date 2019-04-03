@@ -159,6 +159,7 @@
     <string name="text_my_address">收货地址</string>
     <string name="text_my_help">帮助中心</string>
     <string name="text_my_welfare">我的福利</string>
+    <string name="receive_pay_code">收付款</string>
 
 
     <string name="money_unit_ksb">KSB</string>
@@ -714,6 +715,36 @@
 
     <string name="clear_address">清空地址</string>
     <string name="navigation_not_empty">导航地址不能为空</string>
+    <string name="pay_code_title">收付款</string>
+    <string name="my_pay_code">我的收款码</string>
+    <string name="save_pay_code">保存收款码</string>
+    <string name="pay_code_record">收款记录</string>
+    <string name="pay_code_tip">该二维码仅支持KSB方式收款</string>
+    <string name="identity_can_show_paycode">实名后领取收款码</string>
+    <string name="scan_fail">解析失败</string>
+    <string name="payment_amount">付款金额</string>
+    <string name="equal">等值</string>
+    <string name="pls_input_money">请输入金额</string>
+    <string name="pls_input_remark">添加备注</string>
+    <string name="pay_for">付款给</string>
+    <string name="ksb_pay_title">KSB付款</string>
+    <string name="ksb_pay_frame_title">推荐使用KSB支付</string>
+    <string name="ksb_payment">KSB支付</string>
+    <string name="scan_pay">扫码付款</string>
+    <string name="get_camera_permission">请先设置相机权限</string>
+    <string name="pls_inside_code">将二维码放入框内即可扫描</string>
+    <string name="equivalence">等值</string>
+    <string name="pls_set_money">请先设置金额</string>
+    <string name="ksb_loss">KSB不足</string>
+    <string name="pay_result_success">付款成功</string>
+    <string name="payee_user">收款人</string>
+    <string name="format_kuahao">(%s)</string>
+    <string name="invite_friends_give_gifts">邀请好友得好礼</string>
+    <string name="str_share">分享</string>
+    <string name="scan_result">扫码结果</string>
+    <string name="scan_error">该收款码不是快收KSB收款码，请确定收款码后再试</string>
+    <string name="zhuan_zen_shuo_ming">由于计算时会丢失精度，不同单位输入同一个等值金额另外一个值可能会不同，以转赠KSB数为准</string>
+
     <string name="set_problem">请设置问题</string>
     <string name="tip_upload_video">上传视频</string>
     <string name="set_problem_number">已设置%s道题</string>

@@ -50,7 +50,7 @@ public class PassDialog extends Dialog {
         View view = LayoutInflater.from(context).inflate(R.layout.view_virtual_keyboard, null);
         ButterKnife.bind(this, view);
         setContentView(view);
-
+        alterLoginPayPassCv.delete();
         alterLoginPayPassCv.setListener(new CodeView.Listener() {
             @Override
             public void onValueChanged(String value) {
@@ -59,7 +59,7 @@ public class PassDialog extends Dialog {
 
             @Override
             public void onComplete(String value) {
-                PassDialog.this.dismiss();
+//                PassDialog.this.dismiss();
                 onPassDialogListener.onNumFull(value);
             }
         });
@@ -102,6 +102,10 @@ public class PassDialog extends Dialog {
         this.needIdentity = needIdentity;
     }
 
+
+    public void clearCode(){
+        alterLoginPayPassCv.deleteAll();
+    }
 
     @Override
     public void show() {

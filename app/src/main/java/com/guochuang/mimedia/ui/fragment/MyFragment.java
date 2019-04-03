@@ -24,6 +24,7 @@ import com.guochuang.mimedia.ui.activity.beenest.MyAdActivity;
 import com.guochuang.mimedia.ui.activity.city.CityActivity;
 import com.guochuang.mimedia.ui.activity.redbag.RedbagDynamicActivity;
 import com.guochuang.mimedia.ui.activity.user.MyAddressActivity;
+import com.guochuang.mimedia.ui.activity.user.MyPayCodeActivity;
 import com.guochuang.mimedia.ui.dialog.SheetDialog;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.app.App;
@@ -176,6 +177,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
             }
         });
         setPageSelected(0);
+        itemArr.add(new MyMenuItem(R.drawable.ic_my_paycode, R.string.receive_pay_code));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_recommend, R.string.text_my_recommend));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_city, R.string.text_my_city));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_order, R.string.text_my_order));
@@ -236,6 +238,9 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                         break;
                     case R.drawable.ic_my_welfare:
                         startActivity(new Intent(getActivity(), WelfareActivity.class));
+                        break;
+                    case R.drawable.ic_my_paycode:
+                        startActivity(new Intent(getActivity(), MyPayCodeActivity.class));
                         break;
                 }
             }
@@ -403,8 +408,8 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
             pagerAdapter=new MyViewPagerAdapter(viewArr);
             vpMy.setAdapter(pagerAdapter);
             llMyLamp.getChildAt(2).setVisibility(View.VISIBLE);
-            itemArr.add(0,new MyMenuItem(R.drawable.ic_my_operate_center, R.string.operation_center));
-            menuAdapter.notifyItemInserted(0);
+            itemArr.add(1,new MyMenuItem(R.drawable.ic_my_operate_center, R.string.operation_center));
+            menuAdapter.notifyItemInserted(1);
         }
     }
 

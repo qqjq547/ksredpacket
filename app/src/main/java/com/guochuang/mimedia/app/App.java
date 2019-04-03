@@ -27,6 +27,8 @@ import com.guochuang.mimedia.tools.PrefUtil;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.tencent.smtt.sdk.QbSdk;
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
+
 
 import java.io.File;
 import java.util.ArrayList;
@@ -85,6 +87,7 @@ public class App extends Application {
             wxapi.registerApp("wx3f027d9298bbbed4");
             new File(Constant.COMPRESS_DIR_PATH).mkdirs();
             new File(Constant.COMMON_PATH).mkdirs();
+            ZXingLibrary.initDisplayOpinion(this);
 
         }
     public static App getInstance(){

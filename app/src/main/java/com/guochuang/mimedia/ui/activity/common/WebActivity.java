@@ -3,10 +3,12 @@ package com.guochuang.mimedia.ui.activity.common;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
+import android.webkit.DownloadListener;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -46,6 +48,7 @@ public class WebActivity extends MvpActivity {
     LinearLayout linTitle;
     AdCollectionView adCollectionView;
     String headRightType;
+    boolean hasRefresh=true;
     @Override
     protected BasePresenter createPresenter() {
         return null;
@@ -61,6 +64,8 @@ public class WebActivity extends MvpActivity {
     public void initViewAndData() {
         String title = getIntent().getStringExtra(Constant.TITLE);
         String url = getIntent().getStringExtra(Constant.URL);
+        hasRefresh=getIntent().getBooleanExtra(Constant.HAS_REFRESH,true);
+        srlRefresh.setEnableRefresh(hasRefresh);
         tvTitle.setText(title);
         wvContent.getSettings().setJavaScriptEnabled(true);
         wvContent.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
@@ -77,7 +82,7 @@ public class WebActivity extends MvpActivity {
                 if (TextUtils.equals(url,"jxaction://close")){
                     finish();
                 }else {
-                    IntentUtils.startWebActivity(WebActivity.this,view.getTitle(),url);
+                    IntentUtils.startWebActivity(WebActivity.this,view.getTitle(),url,hasRefresh);
                 }
                 return true;
             }
@@ -91,9 +96,14 @@ public class WebActivity extends MvpActivity {
             }
         });
         wvContent.addJavascriptInterface(new JSInterface(this),"browserController");
+        wvContent.setDownloadListener(new DownloadListener() {
+            @Override
+            public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimeType, long contentLength) {
+                downloadByBrowser(url);
+            }
+        });
         wvContent.loadUrl(CommonUtil.getTimeStampUrl(url));
         srlRefresh.setEnableLoadmore(false);
-        srlRefresh.setEnableRefresh(true);
         srlRefresh.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
@@ -305,7 +315,12 @@ public class WebActivity extends MvpActivity {
             });
         }
     }
-
+    private void downloadByBrowser(String url) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.addCategory(Intent.CATEGORY_BROWSABLE);
+        intent.setData(Uri.parse(url));
+        startActivity(intent);
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

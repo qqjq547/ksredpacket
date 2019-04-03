@@ -104,6 +104,9 @@ public class MyAlipayActivity extends MvpActivity<MyAlipayPresenter> implements 
     @Override
     public void setData(String data) {
         closeLoadingDialog();
+        if (passDialog!=null&&passDialog.isShowing()){
+            passDialog.dismiss();
+        }
         showShortToast(getResources().getString(R.string.success));
         setResult(RESULT_OK);
         finish();
@@ -112,6 +115,9 @@ public class MyAlipayActivity extends MvpActivity<MyAlipayPresenter> implements 
     @Override
     public void setError(String msg) {
         closeLoadingDialog();
+        if (passDialog!=null&&passDialog.isShowing()){
+            passDialog.clearCode();
+        }
         new DialogBuilder(this)
                 .setTitle(R.string.tip)
                 .setMessage(msg)

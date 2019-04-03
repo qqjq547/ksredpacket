@@ -1,13 +1,12 @@
 package com.guochuang.mimedia.mvp.presenter;
 
-import android.util.Log;
-
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.LookSurevyResult;
 import com.guochuang.mimedia.mvp.model.LookVideoResult;
+import com.guochuang.mimedia.mvp.model.EditRedbagConfig;
 import com.guochuang.mimedia.mvp.model.LuckyConfig;
 import com.guochuang.mimedia.mvp.model.Order;
 import com.guochuang.mimedia.mvp.model.RedBagConfig;
@@ -34,8 +33,8 @@ public class EditRedbagPresenter extends BasePresenter<EditRedbagView> {
         attachView(view);
     }
 
-    public void addRandomRedbag(String userLatitude, String userLongitude, String redPacketLatitude, String redPacketLongitude, String content, String picture, int areaType, int kilometer, Double money, int quantity
-            , String urlName, String url, String wechat, String microblog, int isPublicPassword, int isSaveTemplate, int payType, String channelCode, String safetyCode) {
+    public void addRandomRedbag(String userLatitude, String userLongitude, String redPacketLatitude, String redPacketLongitude,String content,String picture, int areaType,int kilometer, Double money, int quantity
+            , String urlName, String url, String wechat, String microblog, int isPublicPassword,int isSaveTemplate,int payType,String channelCode,String safetyCode) {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().addRandomRedbag(
                 userLatitude,
                 userLongitude,
@@ -75,8 +74,8 @@ public class EditRedbagPresenter extends BasePresenter<EditRedbagView> {
         });
     }
 
-    public void addPasswordRedbag(String userLatitude, String userLongitude, String redPacketLatitude, String redPacketLongitude, String content, String picture, int areaType, int kilometer, String password, Double money, int quantity
-            , String urlName, String url, String wechat, String microblog, int isPublicPassword, int isSaveTemplate, int payType, String channelCode, String safetyCode) {
+    public void addPasswordRedbag(String userLatitude, String userLongitude, String redPacketLatitude, String redPacketLongitude,String content, String picture, int areaType,int kilometer, String password, Double money, int quantity
+            , String urlName, String url, String wechat, String microblog, int isPublicPassword,int isSaveTemplate,int payType,String channelCode,String safetyCode) {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().addPasswordRedbag(
                 userLatitude,
                 userLongitude,
@@ -116,9 +115,8 @@ public class EditRedbagPresenter extends BasePresenter<EditRedbagView> {
             }
         });
     }
-
-    public void addLuckyRedbag(String userLatitude, String userLongitude, String redPacketLatitude, String redPacketLongitude, String content, String picture, int areaType, int kilometer, Double money, int quantity
-            , String urlName, String url, String wechat, String microblog, int isPublicPassword, int isSaveTemplate, int payType, String channelCode, String safetyCode) {
+    public void addLuckyRedbag(String userLatitude, String userLongitude, String redPacketLatitude, String redPacketLongitude,String content,String picture, int areaType,int kilometer,Double money, int quantity
+            , String urlName, String url, String wechat, String microblog, int isPublicPassword,int isSaveTemplate,int payType,String channelCode,String safetyCode) {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().addLuckyRedbag(
                 userLatitude,
                 userLongitude,
@@ -226,12 +224,31 @@ public class EditRedbagPresenter extends BasePresenter<EditRedbagView> {
             }
         });
     }
-
-    public void getLuckyConfig() {
+    public void getLuckyConfig(){
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getLuckyConfig()), new ApiCallback<LuckyConfig>() {
             @Override
             public void onSuccess(LuckyConfig data) {
                 mvpView.setLuckyConfig(data);
+
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setError(exception.getMessage());
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
+    public void getEditRedbagConfig(){
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getConfig()), new ApiCallback<EditRedbagConfig>() {
+            @Override
+            public void onSuccess(EditRedbagConfig data) {
+                mvpView.setConfig(data);
 
             }
 
@@ -411,4 +428,6 @@ public class EditRedbagPresenter extends BasePresenter<EditRedbagView> {
             }
         });
     }
+
+
 }
