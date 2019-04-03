@@ -187,8 +187,7 @@
                                     android:padding="@dimen/space10"
                                     android:text="@string/btn_login_register"
                                     android:textColor="@color/text_login_help"
-                                    android:textSize="@dimen/textfont10"
-                                    android:visibility="gone" />
+                                    android:textSize="@dimen/textfont10"/>
 
                                 <TextView
                                     android:id="@+id/tv_login_forget"

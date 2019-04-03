@@ -457,7 +457,11 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
         if (Constant.RED_PACKET_TYPE_VIDEO.equals(redPacketType)
                 || Constant.RED_PACKET_TYPE_SURVEY.equals(redPacketType)
                 || Constant.RED_PACKET_TYPE_PASSWORD.equals(redPacketType)) {
-            mvpPresenter.getConfig(redPacketType);
+            String tempType = redPacketType;
+            if(Constant.RED_PACKET_TYPE_VIDEO.equals(redPacketType)) {
+                tempType = Constant.RED_PACKET_TYPE_SURVEY;
+            }
+            mvpPresenter.getConfig(tempType);
         } else {
             //跳过上传逻辑
             checkUploadFile();

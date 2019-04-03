@@ -1,5 +1,6 @@
 package com.guochuang.mimedia.ui.activity.user;
 
+import android.content.Intent;
 import android.os.Build;
 import android.text.Html;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.guochuang.mimedia.tools.CommonUtil;
+import com.guochuang.mimedia.tools.GeneralUtil;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.antishake.AntiShake;
 import com.sz.gcyh.KSHongBao.R;
@@ -62,6 +64,7 @@ public class RegisterActivity extends MvpActivity<RegisterPresenter> implements 
 
     @Override
     public void initViewAndData() {
+        GeneralUtil.phoneAddSpace(etPhone);
         mvpPresenter.getRegisterImageVerify(Constant.REGISTER_CAPTCHA_IMA);
         tvTitle.setText(getString(R.string.title_login_register));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -114,6 +117,8 @@ public class RegisterActivity extends MvpActivity<RegisterPresenter> implements 
 //        Toast.makeText(this, getResources().getString(R.string.type_login_register_success), Toast.LENGTH_SHORT).show();
 //        PrefUtil.getInstance().setString(PrefUtil.USER_TOKEN, redbagDetail.getToken());
 //        IntentUtils.startMainActivity(this);
+//        Intent intent = new Intent(this,ApplyWeiXinActivity.class);
+//        startActivity(intent);
         finish();
     }
 
@@ -162,7 +167,7 @@ public class RegisterActivity extends MvpActivity<RegisterPresenter> implements 
                     showShortToast(getResources().getString(R.string.input_verity_ima_error));
                 } else {
                     mvpPresenter.getForgetSmsVerify(
-                            etPhone.getText().toString(),
+                            GeneralUtil.removeAllSpace(etPhone.getText().toString()),
                             etRegisterImaVerify.getText().toString(),
                             captcha.getUuid()
                     );
@@ -188,7 +193,7 @@ public class RegisterActivity extends MvpActivity<RegisterPresenter> implements 
                 mvpPresenter.getRegisterMobile(
                         Constant.TENANTCODE,
                         Constant.NATION_CODE,
-                        etPhone.getText().toString(),
+                        GeneralUtil.removeAllSpace(etPhone.getText().toString()),
                         etVerify.getText().toString(),
                         etPassword.getText().toString(),
                         CommonUtil.getAppMetaData(this,"JPUSH_CHANNEL"),
@@ -198,7 +203,7 @@ public class RegisterActivity extends MvpActivity<RegisterPresenter> implements 
     }
 
     private boolean doCheck() {
-        if (etPhone.getText().length() < 11) {
+        if (etPhone.getText().length() < 13) {
             showShortToast(getResources().getString(R.string.input_phone_error));
             return false;
         }
