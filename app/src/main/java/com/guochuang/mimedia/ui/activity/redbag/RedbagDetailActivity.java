@@ -505,7 +505,6 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
     public void setRedbagDetail(RedbagDetail redbagDetail) {
         closeLoadingDialog();
         if (redbagDetail != null) {
-            LogUtil.d("333");
             this.redbagDetail = redbagDetail;
             GlideImgManager.loadCircleImage(this, redbagDetail.getAvatar(), ivHeader);
             tvName.setText(redbagDetail.getNickName());

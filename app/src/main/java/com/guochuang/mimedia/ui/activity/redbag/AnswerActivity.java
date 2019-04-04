@@ -103,14 +103,14 @@ public class AnswerActivity extends MvpActivity<AnswerPresenter> implements Answ
                     for (LookVideoResult.QuestionListBean listBean:dataArr) {
                         AnswerFrom.AnswerAddListBean answerItem=new AnswerFrom.AnswerAddListBean();
                         LogUtil.object(listBean.getOptionsList());
-                        List<Integer> optId = new ArrayList<>();
+                        List<String> optId = new ArrayList<>();
                         List<String> optName = new ArrayList<>();
                         List<String> optValue = new ArrayList<>();
                         if (listBean.getType() == 2) {//填空题
                             if (listBean.getOptionsList() != null && listBean.getOptionsList().size() > 0) {
                                 LookVideoResult.QuestionListBean.OptionsListBean bean = listBean.getOptionsList().get(0);
                                 if (bean.isSelect()) {
-                                    optId.add(bean.getId());
+                                    optId.add(String.valueOf(bean.getOptionId()));
                                     optName.add(bean.getOptionName());
                                     optValue.add(bean.getOptionValue());
                                 }
@@ -118,7 +118,7 @@ public class AnswerActivity extends MvpActivity<AnswerPresenter> implements Answ
                         } else {
                             for (LookVideoResult.QuestionListBean.OptionsListBean bean : listBean.getOptionsList()) {
                                 if (bean.isSelect()) {
-                                    optId.add(bean.getId());
+                                    optId.add(String.valueOf(bean.getOptionId()));
                                     optName.add(bean.getOptionName());
                                     optValue.add(bean.getOptionValue());
                                 }
@@ -127,8 +127,8 @@ public class AnswerActivity extends MvpActivity<AnswerPresenter> implements Answ
 
                         if (optName.size() > 0) {
                             answerItem.setSourceId(redPacketUuid);
-                            answerItem.setSurveyId(surveyId);
-                            answerItem.setQuestionId(listBean.getQuestionId());
+                            answerItem.setSurveyId(String.valueOf(surveyId));
+                            answerItem.setQuestionId(String.valueOf(listBean.getQuestionId()));
                             answerItem.setOptionId(TextUtils.join(",", optId));
                             answerItem.setOptionName(TextUtils.join(",", optName));
                             answerItem.setOptionValue(TextUtils.join(",", optValue));
@@ -141,11 +141,9 @@ public class AnswerActivity extends MvpActivity<AnswerPresenter> implements Answ
                         }
                             showLoadingDialog(null);
                             AnswerFrom answerFrom=new AnswerFrom();
-                            answerFrom.setTenantCode(Constant.PARAMS_H_TENANT_CODE);
-                            answerFrom.setUserAccountUuid(App.getInstance().getUserInfo().getUserAccountUuid());
                             answerFrom.setRedPacketUuid(redPacketUuid);
-                            answerFrom.setLatitude(Double.parseDouble(getPref().getLatitude()));
-                            answerFrom.setLongitude(Double.parseDouble(getPref().getLongitude()));
+                            answerFrom.setLatitude(getPref().getLatitude());
+                            answerFrom.setLongitude(getPref().getLongitude());
                             answerFrom.setAnswerAddList(answerList);
                             if (TextUtils.equals(redPacketType,Constant.RED_PACKET_TYPE_VIDEO)){
                                 mvpPresenter.videoSubmit(answerFrom);

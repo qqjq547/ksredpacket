@@ -119,7 +119,6 @@
         <activity android:name="com.guochuang.mimedia.ui.activity.common.PayResultActivity"/>
 
         <activity android:name="com.guochuang.mimedia.ui.activity.redbag.AnswerActivity" />
-        <activity android:name="com.guochuang.mimedia.ui.activity.common.JuxiangwanActivity" />
         <activity
             android:name="com.guochuang.mimedia.ui.activity.redbag.LuckyActivity"
             android:theme="@style/Transparent" />

@@ -126,28 +126,19 @@ public class LookVideoResult {
             private Object updateUser;
             private Object updateDate;
             private int questionId;
+            private long optionId;
             private String optionName;
             private String optionValue;
             private int isAnswer;
             private int sequence;
             private boolean isSelect=false;
 
-            @Override
-            public String toString() {
-                return "OptionsListBean{" +
-                        "tenantCode='" + tenantCode + '\'' +
-                        ", id=" + id +
-                        ", createUser=" + createUser +
-                        ", createDate='" + createDate + '\'' +
-                        ", updateUser=" + updateUser +
-                        ", updateDate=" + updateDate +
-                        ", questionId=" + questionId +
-                        ", optionName='" + optionName + '\'' +
-                        ", optionValue='" + optionValue + '\'' +
-                        ", isAnswer=" + isAnswer +
-                        ", sequence=" + sequence +
-                        ", isSelect=" + isSelect +
-                        '}';
+            public long getOptionId() {
+                return optionId;
+            }
+
+            public void setOptionId(long optionId) {
+                this.optionId = optionId;
             }
 
             public String getTenantCode() {

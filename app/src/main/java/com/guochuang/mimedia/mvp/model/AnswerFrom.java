@@ -15,27 +15,25 @@ public class AnswerFrom {
      * userAccountUuid : string
      */
 
-    private double latitude;
-    private double longitude;
+    private String latitude;
+    private String longitude;
     private String redPacketUuid;
-    private String tenantCode;
-    private String userAccountUuid;
     private List<AnswerAddListBean> answerAddList;
 
 
-    public double getLatitude() {
+    public String getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 
-    public double getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 
@@ -47,21 +45,6 @@ public class AnswerFrom {
         this.redPacketUuid = redPacketUuid;
     }
 
-    public String getTenantCode() {
-        return tenantCode;
-    }
-
-    public void setTenantCode(String tenantCode) {
-        this.tenantCode = tenantCode;
-    }
-
-    public String getUserAccountUuid() {
-        return userAccountUuid;
-    }
-
-    public void setUserAccountUuid(String userAccountUuid) {
-        this.userAccountUuid = userAccountUuid;
-    }
 
     public List<AnswerAddListBean> getAnswerAddList() {
         return answerAddList;
@@ -82,9 +65,9 @@ public class AnswerFrom {
         private String optionId;
         private String optionName;
         private String optionValue;
-        private long questionId;
+        private String questionId;
         private String sourceId;
-        private long surveyId;
+        private String surveyId;
 
         public String getOptionId() {
             return optionId;
@@ -110,11 +93,11 @@ public class AnswerFrom {
             this.optionValue = optionValue;
         }
 
-        public long getQuestionId() {
+        public String getQuestionId() {
             return questionId;
         }
 
-        public void setQuestionId(long questionId) {
+        public void setQuestionId(String questionId) {
             this.questionId = questionId;
         }
 
@@ -126,11 +109,11 @@ public class AnswerFrom {
             this.sourceId = sourceId;
         }
 
-        public long getSurveyId() {
+        public String getSurveyId() {
             return surveyId;
         }
 
-        public void setSurveyId(long surveyId) {
+        public void setSurveyId(String surveyId) {
             this.surveyId = surveyId;
         }
     }

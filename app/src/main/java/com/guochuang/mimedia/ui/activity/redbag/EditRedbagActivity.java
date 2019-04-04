@@ -28,6 +28,7 @@ import com.guochuang.mimedia.mvp.model.LookVideoResult;
 import com.guochuang.mimedia.mvp.model.EditRedbagConfig;
 import com.guochuang.mimedia.mvp.model.LuckyConfig;
 import com.guochuang.mimedia.mvp.model.ProblemBean;
+import com.guochuang.mimedia.mvp.model.QuestionOpt;
 import com.guochuang.mimedia.mvp.model.RedBagConfig;
 import com.guochuang.mimedia.tools.BitmapUtils;
 import com.guochuang.mimedia.ui.activity.common.MapPickActivity;
@@ -362,10 +363,10 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                                 areaType=0;
                                 kilometer=5;
                                 break;
-                                default:
-                                    areaType=position-2;
-                                    kilometer=0;
-                                    break;
+                            default:
+                                areaType=position-2;
+                                kilometer=0;
+                                break;
                         }
                         tvScope.setText(scopeArr.get(position));
                     }
@@ -786,13 +787,12 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
             JSONArray joinProblmeJson = joinProblmeJson();
             mvpPresenter.addVideoReabag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson, mVideoFrameUrl);
         } else if (TextUtils.equals(redPacketType, Constant.RED_PACKET_TYPE_SURVEY)) {
-            //问卷红包
+            //问卷红包joinProblmeJson
             JSONArray joinProblmeJson = joinProblmeJson();
             mvpPresenter.addSurveyReabag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson);
 
         }
     }
-
 
     /**
      * 拼接joinProblmeJson
@@ -817,10 +817,10 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                     }
                     JSONObject itemJsonObj = new JSONObject();
                     ProblemBean.ItemBean itemBean = item.get(j);
-                    itemJsonObj.put("optionName", itemBean.getItemname())
+                    itemJsonObj.put("optionName", problemBean.getType()==2?"":itemBean.getItemname())
                             .put("optionValue", itemBean.getItemcontent())
-                            .put("isAnswer", itemBean.isIsanswer() ? 1 : 0)
-                            .put("sequence", j);
+                            .put("isAnswer", problemBean.getType()==2?"1":itemBean.isIsanswer() ? "1" :"0")
+                            .put("sequence", String.valueOf(j));
 
                     itemJsonArray.put(itemJsonObj);
 
@@ -829,8 +829,8 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
 
                 jsonObject.put("surveyId", "")
                         .put("title", problemBean.getProblem())
-                        .put("type", problemBean.getType())
-                        .put("sequence", i)
+                        .put("type", String.valueOf(problemBean.getType()))
+                        .put("sequence", String.valueOf(i))
                         .put("optionsList", itemJsonArray);
 
                 problmeJsonArray.put(jsonObject);

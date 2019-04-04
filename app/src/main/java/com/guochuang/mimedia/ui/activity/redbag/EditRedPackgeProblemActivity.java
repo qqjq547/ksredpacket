@@ -17,10 +17,10 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.guochuang.mimedia.base.MvpActivity;
+import com.guochuang.mimedia.mvp.model.ProblemBean;
 import com.guochuang.mimedia.view.dialog.AlertDialog;
 import com.guochuang.mimedia.view.recycleview.WrapEmptyRecyclerView;
 import com.guochuang.mimedia.view.recycleview.adapter.MultiTypeSupport;
-import com.guochuang.mimedia.mvp.model.ProblemBean;
 import com.guochuang.mimedia.mvp.presenter.VideoProblemPresenter;
 import com.guochuang.mimedia.mvp.view.VideoProblemView;
 import com.guochuang.mimedia.tools.CommonUtil;
@@ -426,7 +426,7 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
             List<ProblemBean.ItemBean> item = problemBean.getItem();
             for (ProblemBean.ItemBean itemBean : item) {
                 itemBean.setProblemType(type);
-                itemBean.setIsanswer(false);
+                itemBean.setIsanswer(type==2?true:false);
             }
             if (mProblemDialogInAdapter != null) {
                 mProblemDialogInAdapter.notifyDataSetChanged();
@@ -448,9 +448,9 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
         //设置回显
         for (int i = 0; i < number; i++) {
             ProblemBean.ItemBean itemBean = new ProblemBean.ItemBean(Parcel.obtain());
-            itemBean.setIsanswer(false);
+            itemBean.setIsanswer(type==2?true:false);
             String name = i == 0 ? "A" : i == 1 ? "B" : i == 2 ? "C" : "D";
-            itemBean.setItemname(name);
+            itemBean.setItemname(type==2?"":name);
             itemBean.setProblemType(type);
             mDialogData.add(itemBean);
         }
