@@ -16,6 +16,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.ProblemBean;
 import com.guochuang.mimedia.view.dialog.AlertDialog;
@@ -86,22 +87,20 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
         }
 
         recyclerList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        mEditRedPackgeProblemAdapter = new EditRedPackgeProblemAdapter(this, mProblemList, R.layout.item_problem_layout, mRedPacketType);
-        mEditRedPackgeProblemAdapter.setOnEditeClickLisenter(new EditRedPackgeProblemAdapter.OnEditeClick() {
+        mEditRedPackgeProblemAdapter = new EditRedPackgeProblemAdapter(mProblemList, R.layout.item_problem_layout, mRedPacketType);
+        mEditRedPackgeProblemAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
-            public void onClick(int position) {
-                //修改
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (view.getId()) {
+                    case R.id.iv_edit_problem:
+                        EditProblem(position);
+                        break;
+                    case R.id.iv_delete_problem:
+                        //删除提示框
+                        deletDialog(position);
 
-                EditProblem(position);
-            }
-        });
-
-        mEditRedPackgeProblemAdapter.setOnDeleteClickLisenter(new EditRedPackgeProblemAdapter.OnDeleteClick() {
-            @Override
-            public void onClick(int position) {
-                //删除提示框
-                deletDialog(position);
-
+                        break;
+                }
             }
         });
 
@@ -168,16 +167,23 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
 
 
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = getIntent();
+        intent.putParcelableArrayListExtra(Constant.PROBLEM_LIST, mProblemList);
+        setResult(RESULT_OK, intent);
+        super.onBackPressed();
+
+    }
+
 
     @OnClick({R.id.iv_back, R.id.tv_add_problem})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
+                onBackPressed();
                 //把题目的值带回去
-                Intent intent = getIntent();
-                intent.putParcelableArrayListExtra(Constant.PROBLEM_LIST, mProblemList);
-                setResult(RESULT_OK, intent);
-                finish();
+
                 break;
             case R.id.tv_add_problem:
                 mIsRestProblem = false;
@@ -426,7 +432,7 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
             List<ProblemBean.ItemBean> item = problemBean.getItem();
             for (ProblemBean.ItemBean itemBean : item) {
                 itemBean.setProblemType(type);
-                itemBean.setIsanswer(type==2?true:false);
+                itemBean.setIsanswer(type == 2 ? true : false);
             }
             if (mProblemDialogInAdapter != null) {
                 mProblemDialogInAdapter.notifyDataSetChanged();
@@ -448,9 +454,9 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
         //设置回显
         for (int i = 0; i < number; i++) {
             ProblemBean.ItemBean itemBean = new ProblemBean.ItemBean(Parcel.obtain());
-            itemBean.setIsanswer(type==2?true:false);
+            itemBean.setIsanswer(type == 2 ? true : false);
             String name = i == 0 ? "A" : i == 1 ? "B" : i == 2 ? "C" : "D";
-            itemBean.setItemname(type==2?"":name);
+            itemBean.setItemname(type == 2 ? "" : name);
             itemBean.setProblemType(type);
             mDialogData.add(itemBean);
         }
@@ -461,9 +467,6 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
             mProblemDialogInAdapter.notifyDataSetChanged();
         }
     }
-
-
-
 
 
 }

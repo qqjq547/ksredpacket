@@ -123,7 +123,8 @@ public class SafeCenterActivity extends MvpActivity<SafeCenterPresenter> impleme
                             }
                         });
                     } else {
-                        startActivity(new Intent(this, MyWechatActivity.class));
+                        Intent intent =new Intent(this, MyWechatActivity.class).putExtra(Constant.WHO_OPEN_MYWECHATACTIVITY,getClass().getSimpleName());
+                        startActivity(intent);
                     }
                 }
                 break;

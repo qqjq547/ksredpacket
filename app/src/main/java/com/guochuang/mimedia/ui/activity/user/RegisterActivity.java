@@ -117,8 +117,10 @@ public class RegisterActivity extends MvpActivity<RegisterPresenter> implements 
 //        Toast.makeText(this, getResources().getString(R.string.type_login_register_success), Toast.LENGTH_SHORT).show();
 //        PrefUtil.getInstance().setString(PrefUtil.USER_TOKEN, redbagDetail.getToken());
 //        IntentUtils.startMainActivity(this);
-//        Intent intent = new Intent(this,ApplyWeiXinActivity.class);
-//        startActivity(intent);
+
+
+        Intent intent = new Intent(this,MyWechatActivity.class).putExtra(Constant.WHO_OPEN_MYWECHATACTIVITY,getClass().getSimpleName());
+        startActivity(intent);
         finish();
     }
 

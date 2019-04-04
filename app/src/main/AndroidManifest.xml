@@ -381,6 +381,7 @@
         <activity android:name="com.guochuang.mimedia.ui.activity.redbag.LookVideoProblemActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.redbag.LookSurevyActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.redbag.FillAnswerInfoActivity" />
+        <!--绑定微信-->
 
     </application>
 

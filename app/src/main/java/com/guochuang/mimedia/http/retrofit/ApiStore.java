@@ -487,7 +487,7 @@ public interface ApiStore {
     // 手机注册
     @FormUrlEncoded
     @POST("/api/v1/user/register/mobile")
-    Observable<HttpResponse<String>> userRegisterMobile(
+    Observable<HttpResponse<Boolean>> userRegisterMobile(
             @Field("tenantCode") String tenantCode,
             @Field("nationCode") String nationCode,
             @Field("mobile") String mobile,

@@ -90,5 +90,8 @@
     <color name="bg_pay_code">#f45e4d</color>
     <color name="text_pay_code">#f45e4d</color>
     <color name="bg_content">#eeeeee</color>
+    <color name="color_eeeeee">#eeeeee</color>
+    <color name="color_96c160">#96c160</color>
+    <color name="color_ff3b3b">#ff3b3b</color>
 
 </resources>

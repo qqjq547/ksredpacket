@@ -783,5 +783,6 @@
      </string-array>
     <string name="preview_nest_ad">预览广告</string>
     <string name="retire_fund">预览广告</string>
+    <string name="goto_weixin_str">未绑定微信，去绑定</string>
 
 </resources>

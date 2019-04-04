@@ -1,9 +1,12 @@
 package com.guochuang.mimedia.ui.adapter;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.guochuang.mimedia.mvp.model.ProblemBean;
 import com.guochuang.mimedia.view.recycleview.adapter.CommonRecyclerAdapter;
 import com.guochuang.mimedia.view.recycleview.adapter.ViewHolder;
@@ -12,14 +15,15 @@ import com.sz.gcyh.KSHongBao.R;
 
 import java.util.List;
 
-public class EditRedPackgeProblemInAdapter extends CommonRecyclerAdapter<ProblemBean.ItemBean> {
+public class EditRedPackgeProblemInAdapter extends BaseQuickAdapter<ProblemBean.ItemBean,BaseViewHolder> {
 
     private String mRedPacketType;
 
-    public EditRedPackgeProblemInAdapter(Context context, List<ProblemBean.ItemBean> itemBeans, int itemlayout, String redPacketType) {
-        super(context, itemBeans, itemlayout);
+    public EditRedPackgeProblemInAdapter( @Nullable List<ProblemBean.ItemBean> data,int layoutResId,String redPacketType) {
+        super(layoutResId, data);
         mRedPacketType = redPacketType;
     }
+
 
     @Override
     public int getItemCount() {
@@ -38,18 +42,18 @@ public class EditRedPackgeProblemInAdapter extends CommonRecyclerAdapter<Problem
     }
 
     @Override
-    protected void convert(ViewHolder holder, int position, ProblemBean.ItemBean itemBean) {
-        holder.setViewVisibility(R.id.iv_icon, View.GONE);
+    protected void convert(BaseViewHolder holder, ProblemBean.ItemBean itemBean) {
+        holder.setGone(R.id.iv_icon, false);
 
         String text = "";
         switch (itemBean.getProblemType()) {
             case 0:
-                holder.setViewVisibility(R.id.iv_icon, View.VISIBLE).setImageResource(R.id.iv_icon, itemBean.isIsanswer() ? R.drawable.select_y : R.drawable.select_n);
+                holder.setGone(R.id.iv_icon,true).setImageResource(R.id.iv_icon, itemBean.isIsanswer() ? R.drawable.select_y : R.drawable.select_n);
 
                 text = itemBean.getItemname() + "." + itemBean.getItemcontent();
                 break;
             case 1:
-                holder.setViewVisibility(R.id.iv_icon, View.VISIBLE).setImageResource(R.id.iv_icon, itemBean.isIsanswer() ? R.drawable.many_y : R.drawable.many_n);
+                holder.setGone(R.id.iv_icon,true).setImageResource(R.id.iv_icon, itemBean.isIsanswer() ? R.drawable.many_y : R.drawable.many_n);
                 text = itemBean.getItemname() + "." + itemBean.getItemcontent();
 
                 break;
@@ -58,10 +62,9 @@ public class EditRedPackgeProblemInAdapter extends CommonRecyclerAdapter<Problem
                 break;
         }
         if(Constant.RED_PACKET_TYPE_SURVEY.equals(mRedPacketType)) {
-            holder.setViewVisibility(R.id.iv_icon, View.GONE);
+            holder.setGone(R.id.iv_icon, false);
         }
         holder.setText(R.id.tv_container, text);
-
-
     }
+
 }
