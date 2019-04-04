@@ -1,6 +1,7 @@
 package com.guochuang.mimedia.ui.adapter;
 
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -31,7 +32,7 @@ public class MyKsbTransRecAdapter extends BaseQuickAdapter<MyKsbTransRec, BaseVi
         helper.setText(R.id.tv_price, item.getMoney());
         helper.setText(R.id.tv_poundage, item.getPoundage());
         helper.setText(R.id.tv_time, item.getCreateDate());
-        helper.setGone(R.id.iv_tip,false);
+
         switch (item.getStatus()) {
             case 0:
                 helper.setText(R.id.tv_state, mContext.getResources().getString(R.string.apply_for));
@@ -41,8 +42,12 @@ public class MyKsbTransRecAdapter extends BaseQuickAdapter<MyKsbTransRec, BaseVi
                 break;
             case 2:
                 helper.setText(R.id.tv_state, mContext.getResources().getString(R.string.no_pass));
-                helper.setGone(R.id.iv_tip,true);
-                helper.addOnClickListener(R.id.iv_tip);
+                if (TextUtils.isEmpty(item.getRemarks())){
+                    helper.setGone(R.id.iv_tip,false);
+                }else {
+                    helper.setGone(R.id.iv_tip,false);
+                    helper.addOnClickListener(R.id.iv_tip);
+                }
                 break;
             case 3:
                 helper.setText(R.id.tv_state, mContext.getResources().getString(R.string.has_refund));
