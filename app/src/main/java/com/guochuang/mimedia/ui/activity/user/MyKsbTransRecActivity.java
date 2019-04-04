@@ -67,7 +67,7 @@ public class MyKsbTransRecActivity extends MvpActivity<MyKsbTransRecPresenter> i
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 new DialogBuilder(MyKsbTransRecActivity.this)
-                        .setMessage(myKsbTransRecs.get(position).getCreateDate())
+                        .setMessage(myKsbTransRecs.get(position).getRemarks())
                         .setPositiveButton(R.string.i_known, null).create().show();
             }
         });

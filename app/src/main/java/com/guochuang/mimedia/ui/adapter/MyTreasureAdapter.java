@@ -1,15 +1,12 @@
 package com.guochuang.mimedia.ui.adapter;
 
 import android.support.annotation.Nullable;
-import android.text.SpannableString;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.guochuang.mimedia.mvp.model.Snatch;
 import com.guochuang.mimedia.tools.CommonUtil;
-import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.sz.gcyh.KSHongBao.R;
 
@@ -79,7 +76,7 @@ public class MyTreasureAdapter extends BaseQuickAdapter<Snatch,BaseViewHolder> {
                helper.setGone(R.id.tv_waiting_send,false);
                helper.setGone(R.id.iv_out_date,false);
                helper.setGone(R.id.tv_refund_time,true);
-               helper.setText(R.id.tv_refund_time,item.getPayDate()+mContext.getString(R.string.retire_fund));
+               helper.setText(R.id.tv_refund_time,item.getRefundDate()+mContext.getString(R.string.retire_fund));
                if (item.getIsWin()==1){//是否中奖
                    helper.setImageResource(R.id.iv_award,R.drawable.ic_get_award);
                    if (item.getType()==1) {//实物
@@ -115,7 +112,7 @@ public class MyTreasureAdapter extends BaseQuickAdapter<Snatch,BaseViewHolder> {
                helper.setGone(R.id.tv_waiting_send,false);
                helper.setGone(R.id.iv_out_date,false);
                helper.setGone(R.id.tv_refund_time,true);
-               helper.setText(R.id.tv_refund_time,item.getPayDate()+mContext.getString(R.string.retire_fund));
+               helper.setText(R.id.tv_refund_time,item.getRefundDate()+mContext.getString(R.string.retire_fund));
                if (item.getIsWin()==1){//是否中奖
                    helper.setImageResource(R.id.iv_award,R.drawable.ic_get_award);
                    if (item.getType()==1) {//实物,有快递信息
@@ -152,7 +149,7 @@ public class MyTreasureAdapter extends BaseQuickAdapter<Snatch,BaseViewHolder> {
                ProgressBar pb1=helper.getView(R.id.pb_progress);
                pb1.setProgress((int)(item.getRate()*100));
                helper.setGone(R.id.tv_refund_time,true);
-               helper.setText(R.id.tv_refund_time,item.getPayDate()+mContext.getString(R.string.retire_fund));
+               helper.setText(R.id.tv_refund_time,item.getRefundDate()+mContext.getString(R.string.retire_fund));
                break;
        }
     }

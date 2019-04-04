@@ -14,6 +14,7 @@ public class MyKsbTransRec {
     private String poundage;
     private int payType;
     private int status;
+    private String remarks;
 
     public String getCreateDate() {
         return createDate;
@@ -53,5 +54,13 @@ public class MyKsbTransRec {
 
     public void setPayType(int payType) {
         this.payType = payType;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 }
