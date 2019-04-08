@@ -166,7 +166,6 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
     }
 
 
-
     @Override
     public void onBackPressed() {
         Intent intent = getIntent();
@@ -360,10 +359,12 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
             if (Constant.RED_PACKET_TYPE_VIDEO.equals(mRedPacketType)) {
                 //只有视频红包问题才能设置答案
                 boolean flag = false;
+                int answerNumber = 0;
                 for (ProblemBean.ItemBean item : items) {
                     if (item.isIsanswer()) {
                         flag = true;
-                        break;
+                        answerNumber++;
+//                        break;
                     }
                 }
 
@@ -371,6 +372,12 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
                     showShortToast(R.string.please_set_answer);
                     return false;
                 }
+                if (problemBean.getType() == Constant.MORESELECT && answerNumber < 2) {
+                    showShortToast(R.string.please_set_2answer);
+                    return false;
+                }
+
+
             }
         }
 

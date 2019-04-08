@@ -694,7 +694,7 @@
     <string name="questionnaire_redbag">问卷红包</string>
     <string name="save_video_temp">保存为视频红包模板</string>
     <string name="save_problem_temp">保存为问卷红包模板</string>
-    <string name="finish_answer_can_get">完成答题可获得</string>
+    <string name="finish_answer_can_get">完成答题平均可获得</string>
     <string name="watched_video_open_redbag">已看完视频，去答题开启红包</string>
     <string name="answer_open_redbag">答题开启红包</string>
     <string name="open_redbag">开启红包</string>
@@ -784,5 +784,9 @@
     <string name="preview_nest_ad">预览广告</string>
     <string name="retire_fund">预览广告</string>
     <string name="goto_weixin_str">未绑定微信，去绑定</string>
+    <string name="input_number_fomat_erro">输入数字格式不对</string>
+    <string name="please_upload_vedieo">请上传视频</string>
+    <string name="please_set_2answer">请设置两个答案</string>
+    <string name="plese_set_problem">请设置问题</string>
 
 </resources>
