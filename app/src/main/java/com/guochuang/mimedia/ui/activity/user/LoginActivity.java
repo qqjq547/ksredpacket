@@ -78,8 +78,6 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
     private boolean SoftInputIsClose = true;
 
 
-
-
     SoftKeyBoardListener.OnSoftKeyBoardChangeListener listener = new SoftKeyBoardListener.OnSoftKeyBoardChangeListener() {
         @Override
         public void keyBoardShow(int height) {
@@ -103,7 +101,6 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
     protected LoginPresenter createPresenter() {
         return new LoginPresenter(this);
     }
-
 
 
     @Override
@@ -276,10 +273,10 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
                 //判断软件盘状态
                 //dissmis 时间出、不超过多好毫秒这个contiun  记录dissmis 时间
                 GeneralUtil.hideSoftInputFromWindow(this);
-                if(SystemClock.currentThreadTimeMillis()-mDismissTime<20) {
+                if (SystemClock.currentThreadTimeMillis() - mDismissTime < 20) {
                     return;
                 }
-                new Handler(){
+                new Handler() {
                     @Override
                     public void handleMessage(Message msg) {
                         super.handleMessage(msg);
@@ -287,9 +284,7 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
                             swichPopo();
                         }
                     }
-                }.sendEmptyMessageDelayed(0,200);
-
-
+                }.sendEmptyMessageDelayed(0, 200);
 
 
                 break;
@@ -393,7 +388,16 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
         showShortToast(msg);
     }
 
-
+    /**
+     * 去绑定微信
+     */
+    @Override
+    public void goToAplayWeixin() {
+        closeLoadingDialog();
+        Intent intent = new Intent(this, MyWechatActivity.class).putExtra(Constant.WHO_OPEN_MYWECHATACTIVITY, getClass().getSimpleName())
+                .putExtra(Constant.UESRPHONE_KEY, etPhone.getText().toString().trim()).putExtra(Constant.UESRPASSWORLD_KEY, etPassword.getText().toString().trim());
+        startActivity(intent);
+    }
 
 
 }

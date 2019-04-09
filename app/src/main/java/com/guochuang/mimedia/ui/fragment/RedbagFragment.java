@@ -296,6 +296,10 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                 startActivity(new Intent(getActivity(), CityActivity.class));
                 break;
             case R.id.tv_start:
+                //请求接口
+                showLoadingDialog(null);
+                mvpPresenter.getPublishRedbagType();
+
                 new RedbagTypeDialog(getActivity(), new RedbagTypeDialog.OnItemClickListener() {
                     @Override
                     public void onRandom() {

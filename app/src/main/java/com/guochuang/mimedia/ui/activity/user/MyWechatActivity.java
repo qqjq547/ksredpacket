@@ -1,5 +1,6 @@
 package com.guochuang.mimedia.ui.activity.user;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -7,7 +8,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.guochuang.mimedia.mvp.model.PhoneEntity;
+import com.guochuang.mimedia.mvp.model.UserLogin;
+import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
+import com.guochuang.mimedia.tools.IntentUtils;
+import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.tools.WxLogin;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.app.App;
@@ -19,9 +26,13 @@ import com.guochuang.mimedia.mvp.presenter.MyWechatPresenter;
 import com.guochuang.mimedia.mvp.view.MyWechatView;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.objectbox.Box;
+import io.objectbox.BoxStore;
 
 /**
  * 判断是谁开启MyWechatActivity
@@ -42,6 +53,9 @@ public class MyWechatActivity extends MvpActivity<MyWechatPresenter> implements 
     @BindView(R.id.lin_unbind)
     LinearLayout linUnbind;
 
+    String mMobile;
+    String mPassword;
+    private Box<PhoneEntity> mBox;
     @Override
     protected MyWechatPresenter createPresenter() {
         return new MyWechatPresenter(this);
@@ -57,6 +71,9 @@ public class MyWechatActivity extends MvpActivity<MyWechatPresenter> implements 
         linBind.setVisibility(View.GONE);
         linUnbind.setVisibility(View.GONE);
 
+        BoxStore boxStore = App.getInstance().getBoxStore();
+        mBox = boxStore.boxFor(PhoneEntity.class);
+
         String whoOpen = getIntent().getStringExtra(Constant.WHO_OPEN_MYWECHATACTIVITY);
         if(SafeCenterActivity.class.getSimpleName().equals(whoOpen)){
             //已绑定展示信息
@@ -66,6 +83,14 @@ public class MyWechatActivity extends MvpActivity<MyWechatPresenter> implements 
         }else if(RegisterActivity.class.getSimpleName().equals(whoOpen)) {
             //还未绑定
             tvTitle.setText(R.string.type_login_register_success);
+            linUnbind.setVisibility(View.VISIBLE);
+            mMobile =  getIntent().getStringExtra(Constant.UESRPHONE_KEY);
+            mPassword =  getIntent().getStringExtra(Constant.UESRPASSWORLD_KEY);
+        }else if(LoginActivity.class.getSimpleName().equals(whoOpen)) {
+
+            mMobile =  getIntent().getStringExtra(Constant.UESRPHONE_KEY);
+            mPassword =  getIntent().getStringExtra(Constant.UESRPASSWORLD_KEY);
+            tvTitle.setText(R.string.type_login_apllay_weixin);
             linUnbind.setVisibility(View.VISIBLE);
         }
 
@@ -98,11 +123,8 @@ public class MyWechatActivity extends MvpActivity<MyWechatPresenter> implements 
             public void onResult(String wxCode, String errMsg) {
                 if (TextUtils.isEmpty(errMsg)) {
                     showLoadingDialog(null);
-                    mvpPresenter.userAppWechatBind(
-                            Constant.TENANTCODE,
-                            Constant.SYSTEM_CODE,
-                            wxCode
-                    );
+                    mvpPresenter.userAppWechatBind(mMobile,mPassword,Constant.SYSTEM_CODE,wxCode);
+
                 } else {
                     showShortToast(errMsg);
                 }
@@ -138,4 +160,46 @@ public class MyWechatActivity extends MvpActivity<MyWechatPresenter> implements 
         tvTitle.setText(R.string.my_weixin);
         mvpPresenter.getWechatInfo();
     }
+
+
+    /**
+     * 绑定成功 并且登录
+     * @param data
+     */
+    @Override
+    public void setBindSuccessAndLoginData(String data) {
+        closeLoadingDialog();
+        savePhone();
+        UserLogin userLogin = new Gson().fromJson(CommonUtil.baseDecrypt(data.split("\\.")[1]), UserLogin.class);
+        getPref().setString(PrefUtil.USER_TOKEN, data);
+//        if (TextUtils.isEmpty(userLogin.getMobile())) {
+//            Intent intent = new Intent(this, BindingPhoneAcitivity.class);
+//            startActivity(intent);
+//            finish();
+//        } else {
+            getPref().setString(PrefUtil.MOBILE, userLogin.getMobile());
+            IntentUtils.startMainActivity(this, true);
+            //关闭登录
+
+            App.getInstance().finishActivity(LoginActivity.class);
+            finish();
+//        }
+
+    }
+
+    private void savePhone() {
+
+        List<PhoneEntity> phoneEntitys = mBox.getAll();
+        for (int i = 0; i < phoneEntitys.size(); i++) {
+            if (mMobile.equals(phoneEntitys.get(i).phone)) {
+                mBox.remove(phoneEntitys.get(i));
+            }
+        }
+
+        PhoneEntity phoneEntity = new PhoneEntity();
+        phoneEntity.setPhone(mMobile);
+        mBox.put(phoneEntity);
+    }
+
+
 }

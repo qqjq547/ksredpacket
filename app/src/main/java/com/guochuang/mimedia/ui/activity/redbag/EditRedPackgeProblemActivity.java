@@ -329,6 +329,10 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
 
         if (problemBean.getType() == Constant.FILL_IN_PROBLEM) {
             //填空题
+            if(Constant.RED_PACKET_TYPE_SURVEY.equals(mRedPacketType)) {
+                problemBean.getItem().get(0).setItemcontent("");
+            }
+
             if (Constant.RED_PACKET_TYPE_VIDEO.equals(mRedPacketType)) {
                 //并且是视频红包
                 if (TextUtils.isEmpty(problemBean.getItem().get(0).getItemcontent())) {

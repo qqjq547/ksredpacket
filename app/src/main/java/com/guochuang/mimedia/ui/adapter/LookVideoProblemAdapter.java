@@ -32,7 +32,7 @@ public class LookVideoProblemAdapter extends BaseQuickAdapter<LookVideoResult.Qu
         holder.setGone(R.id.tv_fill_answer_info, false).setGone(R.id.recycle_anser_count, false);
         String type = item.getType() == 0 ? mContext.getString(R.string.single_choice) : item.getType() == 1 ? mContext.getString(R.string.muti_choice) : mContext.getString(R.string.input_blank);
 
-        holder.setText(R.id.tv_squece, position + ".").setText(R.id.tv_problem, type + item.getTitle());
+        holder.setText(R.id.tv_squece, position+1 + ".").setText(R.id.tv_problem, type + item.getTitle());
         //填空题
         if (item.getType() == 2) {
             holder.setGone(R.id.tv_fill_answer_info, true);

@@ -306,6 +306,9 @@ public class Constant {
     public static final String FILL_ANSWER_INFO = "fill_answer_info";
     public static final String PROBLEM_LIST = "problem_list";
     public static final String WHO_OPEN_MYWECHATACTIVITY = "WHO_OPEN_MYWECHATACTIVITY";
+    public static final int GOTOAPLAYYWEIXIN = 2719;
+    public static final String UESRPHONE_KEY = "用戶电话号码";
+    public static final String UESRPASSWORLD_KEY = "用户密码";
 
     //   视频红包与问卷红包 问题类型 0：单选 1：多选 2：填空题
     public static int SINGLESELECT = 0;

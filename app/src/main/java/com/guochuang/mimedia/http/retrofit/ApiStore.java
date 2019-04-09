@@ -60,6 +60,7 @@ import com.guochuang.mimedia.mvp.model.PayCode;
 import com.guochuang.mimedia.mvp.model.PayConfig;
 import com.guochuang.mimedia.mvp.model.PayeeUser;
 import com.guochuang.mimedia.mvp.model.PaymentResult;
+import com.guochuang.mimedia.mvp.model.PublishRedbagType;
 import com.guochuang.mimedia.mvp.model.QrCode;
 import com.guochuang.mimedia.mvp.model.RainMsg;
 import com.guochuang.mimedia.mvp.model.RainRecord;
@@ -1444,4 +1445,16 @@ public interface ApiStore {
 
     @GET("/api/v1/redpacket/red_packet/get_config")
     Observable<HttpResponse<RedBagConfig>> getConfig(@Query("redPacketType") String redPacketType);
+
+
+    // 用户绑定微信2
+    @POST("/api/v1/token/user/app_wechat_bind")
+    Observable<HttpResponse<String>> userAppWechatBind(
+            @Query("mobile") String mobile,
+            @Query("password") String password,
+            @Query("systemCode") String systemCode,
+            @Query("code") String code);
+
+    @GET("/api/v1/common/index_config/get")
+    Observable<HttpResponse<PublishRedbagType>> getPublishRedbagType();
 }

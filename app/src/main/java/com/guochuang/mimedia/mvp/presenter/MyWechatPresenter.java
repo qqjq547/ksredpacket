@@ -34,26 +34,16 @@ public class MyWechatPresenter extends BasePresenter<MyWechatView> {
     }
 
 
-
-
-
-    public void userAppWechatBind(
-            String tenantCode,
-            String systemCode,
-            String code
-    ) {
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                userAppWechatBind(tenantCode, systemCode, code)), new ApiCallback<String>() {
+    public void userAppWechatBind(String mobile, String password, String systemCode, String wxCode) {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().userAppWechatBind(mobile,password,systemCode,wxCode)), new ApiCallback<String>() {
             @Override
             public void onSuccess(String data) {
-                mvpView.setBindWxData(data);
-
+                mvpView.setBindSuccessAndLoginData(data);
             }
 
             @Override
             public void onFailure(ApiException exception) {
-                mvpView.setBindWxError(exception.getMessage());
-
+                mvpView.setError(exception.getMessage());
             }
 
             @Override

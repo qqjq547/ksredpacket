@@ -7,6 +7,7 @@ import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.HomeRegion;
 import com.guochuang.mimedia.mvp.model.MyKsb;
 import com.guochuang.mimedia.mvp.model.NestHomeAd;
+import com.guochuang.mimedia.mvp.model.PublishRedbagType;
 import com.guochuang.mimedia.mvp.model.Redbag;
 import com.guochuang.mimedia.mvp.model.RedbagDetail;
 import com.guochuang.mimedia.mvp.view.RedbagView;
@@ -293,4 +294,29 @@ public class RedbagPresenter extends BasePresenter<RedbagView> {
             }
         });
     }
+
+    /**
+     * 获取当前版本发布要发布的红包类型
+     */
+    public void getPublishRedbagType() {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
+                getPublishRedbagType()), new ApiCallback<PublishRedbagType>() {
+            @Override
+            public void onSuccess(PublishRedbagType data) {
+
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setError(exception.getMessage());
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
+
 }
