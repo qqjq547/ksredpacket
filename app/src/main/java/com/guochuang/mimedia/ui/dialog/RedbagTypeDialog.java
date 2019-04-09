@@ -112,7 +112,7 @@ public class RedbagTypeDialog extends Dialog {
                     menuArr.add(new RedbagMenu(R.string.video_redbag,R.drawable.ic_packet_video,type));
                     break;
                 case Constant.RED_PACKET_TYPE_SURVEY:
-                    menuArr.add(new RedbagMenu(R.string.questionnaire_redbag,R.drawable.ic_packet_video,type));
+                    menuArr.add(new RedbagMenu(R.string.questionnaire_redbag,R.drawable.ic_packet_survey,type));
                     break;
             }
         }
