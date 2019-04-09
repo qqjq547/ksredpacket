@@ -330,6 +330,7 @@ public interface ApiStore {
             @Field("channelCode") String channelCode,
             @Field("safetyCode") String safetyCode
     );
+
     //发随机红包
     @FormUrlEncoded
     @POST("/api/v1/redpacket/person_red_packet/add_lucky")
@@ -980,6 +981,7 @@ public interface ApiStore {
             @Query("beginRegisterDate") String beginRegisterDate,
             @Query("endRegisterDate") String endRegisterDate
     );
+
     @GET("/api/v1/user/user_statistic/statistics")
     Observable<HttpResponse<UserStatistics>> userStatistics(
             @Query("latitude") String latitude,
@@ -1005,6 +1007,7 @@ public interface ApiStore {
             @Query("beginTime") String beginTime,
             @Query("endTime") String endTime
     );
+
     @GET("/api/v1/common/dictionary/get_list")
     Observable<HttpResponse<List<DictionaryType>>> getDictionaryType(
             @Query("type") String type);
@@ -1075,6 +1078,7 @@ public interface ApiStore {
             @Query("latitude") String latitude,
             @Query("longitude") String longitude
     );
+
     @GET
     Observable<ResponseBody> downloadPicture(@Url String fileUrl);
 
@@ -1086,6 +1090,7 @@ public interface ApiStore {
             @Field("idCardPicture") String idCardPicture,
             @Field("idCardBackPicture") String idCardBackPicture
     );
+
     @FormUrlEncoded
     @POST("/api/v1/activity/beehiveDetails/appCreateOrder")
     Observable<HttpResponse<Order>> appCreateOrder(
@@ -1096,6 +1101,7 @@ public interface ApiStore {
             @Field("latitude") String latitude,
             @Field("safetyCode") String safetyCode
     );
+
     @FormUrlEncoded
     @POST("/api/v1/user/userAddress/add")
     Observable<HttpResponse<Boolean>> userAddressAdd(
@@ -1107,11 +1113,13 @@ public interface ApiStore {
             @Field("address") String address,
             @Field("isDefault") int isDefault
     );
+
     @FormUrlEncoded
     @POST("/api/v1/user/userAddress/del")
     Observable<HttpResponse<Boolean>> userAddressDel(
             @Field("userAddressUuid") String userAddressUuid
     );
+
     @FormUrlEncoded
     @POST("/api/v1/user/userAddress/update")
     Observable<HttpResponse<Boolean>> userAddressUpdate(
@@ -1123,26 +1131,31 @@ public interface ApiStore {
             @Field("district") String district,
             @Field("address") String address
     );
+
     @GET("/api/v1/user/userAddress/pagelist")
     Observable<HttpResponse<Page<Address>>> userAddressList(
             @Query("currentPage") int currentPage,
             @Query("pageSize") int pageSize
     );
+
     @GET("/api/v1/activity/snatchRecord/pageSnatchRecordlist")
     Observable<HttpResponse<Page<Snatch>>> getSnatchRecordlist(
             @Query("currentPage") int currentPage,
             @Query("pageSize") int pageSize
     );
+
     @FormUrlEncoded
     @POST("/api/v1/activity/snatchAddress/setSnatchwinAddress")
     Observable<HttpResponse<Boolean>> setWinAddress(
             @Field("snatchId") long snatchId,
             @Field("userAddressUuid") String userAddressUuid
     );
+
     @GET("/api/v1/activity/snatchAddress/querySnatchwinAddress")
     Observable<HttpResponse<SnatchAddress>> getSnatchDetail(
             @Query("snatchId") long currentPage
     );
+
     @FormUrlEncoded
     @POST("/api/v1/activity/snatchShow/add")
     Observable<HttpResponse<Boolean>> addSnatchShow(
@@ -1150,10 +1163,12 @@ public interface ApiStore {
             @Field("content") String content,
             @Field("imgs") String imgs
     );
+
     @GET("/api/v1/activity/snatchShow/queryShow")
     Observable<HttpResponse<SnatchShow>> querySnatchShow(
             @Query("snatchRecordId") long snatchRecordId
     );
+
     @FormUrlEncoded
     @POST("/api/v1/activity/snatch/create_order")
     Observable<HttpResponse<Order>> createSnatchOrder(
@@ -1166,15 +1181,18 @@ public interface ApiStore {
             @Field("latitude") String latitude,
             @Field("safetyCode") String safetyCode
     );
+
     @GET("/api/v1/activity/snatch/get_vendor_pay")
     Observable<HttpResponse<Order>> getOrderVendor(
             @Query("orderId") long orderId
     );
+
     @FormUrlEncoded
     @POST("/api/v1/nest/nest_info/delete_template")
     Observable<HttpResponse<Boolean>> deleteNestTemplate(
             @Field("nestTemplateId") long nestTemplateId
     );
+
     @FormUrlEncoded
     @POST("/api/v1/nest/nest_info/edit")
     Observable<HttpResponse<Boolean>> nesteEdit(
@@ -1197,6 +1215,7 @@ public interface ApiStore {
             @Field("weibo") String weibo,
             @Field("isSaveTemplate") int isSaveTemplate
     );
+
     @GET("/api/v1/nest/nest_info/limit")
     Observable<HttpResponse<NestInfoLimit>> nesteLimit();
 
@@ -1214,17 +1233,20 @@ public interface ApiStore {
             @Query("nestLocationId") long nestLocationId,
             @Query("startDate") String startDate
     );
+
     @GET("/api/v1/nest/nest_time_auction/my_list")
     Observable<HttpResponse<Page<NestAuctionRecord>>> nestMyAuctionList(
             @Query("currentPage") int currentPage,
             @Query("pageSize") int pageSize
     );
+
     @GET("/api/v1/nest/nest_success/history")
     Observable<HttpResponse<Page<NestHistory>>> nestHistoryList(
             @Query("nestLocationId") long nestLocationId,
             @Query("currentPage") int currentPage,
             @Query("pageSize") int pageSize
     );
+
     @GET("/api/v1/nest/nest_success/my_list")
     Observable<HttpResponse<Page<MyAd>>> nestMyList(
             @Query("status") Integer status,
@@ -1243,6 +1265,7 @@ public interface ApiStore {
             @Query("nestInfoId") long nestInfoId,
             @Query("type") String type
     );
+
     @FormUrlEncoded
     @POST("/api/v1/nest/nest_info/favorite")
     Observable<HttpResponse<Boolean>> nestAddFavorite(
@@ -1457,4 +1480,13 @@ public interface ApiStore {
 
     @GET("/api/v1/common/index_config/get")
     Observable<HttpResponse<PublishRedbagType>> getPublishRedbagType();
+
+
+    @POST("/api/v1/user/name_auth/auth")
+    Observable<HttpResponse<String>> realName(@Query("realName") String realName,
+                                              @Query("idCard") String idCard,
+                                              @Query("cardNumber") String cardNumber,
+                                              @Query("uuid") String uuid,
+                                              @Query("captcha") String captchastr);
+
 }

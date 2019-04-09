@@ -1,5 +1,6 @@
 package com.guochuang.mimedia.mvp.view;
 
+import com.guochuang.mimedia.mvp.model.Captcha;
 import com.guochuang.mimedia.mvp.model.UploadFile;
 
 public interface IdentifyView {
@@ -10,4 +11,8 @@ public interface IdentifyView {
     void setUploadData(UploadFile data);
 
     void setUploadError(String msg);
+
+    void setVerifyError(String message);
+
+    void setVerifyData(Captcha data);
 }

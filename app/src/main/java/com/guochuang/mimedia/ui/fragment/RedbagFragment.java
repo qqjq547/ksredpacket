@@ -71,6 +71,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import rx.functions.Action1;
+import rx.internal.operators.CompletableOnSubscribeConcat;
 
 public class RedbagFragment extends MvpFragment<RedbagPresenter> implements RedbagView {
 
@@ -222,7 +223,6 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
         bm.setOnMarkerClickListener(onMarkerClickListener);
         setUserRole(getPref().getInt(PrefUtil.USER_ROLE, 0));
         setHomeAd(new ArrayList<NestHomeAd>());
-        mvpPresenter.getPublishRedbagType();
     }
 
     @Override
@@ -545,22 +545,17 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
             ((MainActivity) getActivity()).startNestAd();
         }
     }
-    @Override
-    public void setRedbagInvalid() {
-        ivRefresh.callOnClick();
-    }
 
-    @Override
-    public void setRedbagType(PublishRedbagType publishRedbagType) {
-        if (publishRedbagType!=null){
-            getPref().setString(PrefUtil.EDIT_REDBAG_TYPE,publishRedbagType.getRedPacketType());
-        }
-    }
     @Override
     public void setError(String msg) {
         closeLoadingDialog();
         closeAnim();
         ((MainActivity) getActivity()).setError(msg);
+    }
+
+    @Override
+    public void setRedbagInvalid() {
+        ivRefresh.callOnClick();
     }
 
     public void addMarker(List<Redbag> redbagList, List<OverlayOptions> options) {

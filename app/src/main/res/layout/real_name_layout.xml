@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="@dimen/space15"
+        android:paddingLeft="@dimen/space15"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="姓名"/>
+
+        <EditText
+            android:id="@+id/et_input_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="4"
+            android:lines="1"
+            android:gravity="right"/>
+
+    </LinearLayout>
+
+    <include layout="@layout/device_horizontal_line"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="@dimen/space15"
+        android:paddingLeft="@dimen/space15"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="身份证号码"/>
+
+        <EditText
+            android:id="@+id/et_input_idcard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="19"
+            android:lines="1"
+            android:gravity="right"/>
+
+    </LinearLayout>
+
+    <include layout="@layout/device_horizontal_line"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="@dimen/space15"
+        android:paddingLeft="@dimen/space15"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="银行卡"/>
+
+        <EditText
+            android:id="@+id/et_input_banck_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="20"
+            android:lines="1"
+            android:gravity="right"/>
+
+    </LinearLayout>
+
+    <include layout="@layout/device_horizontal_line"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space15">
+
+    <LinearLayout
+        android:id="@+id/ll_register_ima_verify"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/iv_register_ima_verify"
+        android:background="@drawable/bg_login_phone_et_gray"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/space10"
+        android:paddingLeft="@dimen/space15"
+        android:paddingRight="@dimen/space15"
+        android:paddingTop="@dimen/space10">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_login_phone_ima_verify" />
+
+        <View style="@style/centre_line" />
+
+        <EditText
+            android:id="@+id/et_input_ima_verify"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/space15"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="@string/hint_login_forget_ima_verify"
+            android:lines="1"
+            android:maxLength="6"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/textfont16" />
+    </LinearLayout>
+        <ImageView
+            android:id="@+id/iv_register_ima_verify"
+            android:layout_width="@dimen/space96"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ll_register_ima_verify"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="@dimen/space10"
+            android:scaleType="fitXY" />
+    </RelativeLayout>
+
+    <include layout="@layout/device_horizontal_line"/>
+
+
+</LinearLayout>
