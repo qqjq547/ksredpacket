@@ -28,9 +28,9 @@ import com.guochuang.mimedia.mvp.model.LookVideoResult;
 import com.guochuang.mimedia.mvp.model.EditRedbagConfig;
 import com.guochuang.mimedia.mvp.model.LuckyConfig;
 import com.guochuang.mimedia.mvp.model.ProblemBean;
-import com.guochuang.mimedia.mvp.model.QuestionOpt;
 import com.guochuang.mimedia.mvp.model.RedBagConfig;
 import com.guochuang.mimedia.tools.BitmapUtils;
+import com.guochuang.mimedia.tools.CheckConfig;
 import com.guochuang.mimedia.ui.activity.common.MapPickActivity;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.MvpActivity;
@@ -92,10 +92,12 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
     LinearLayout linWord;
     @BindView(R.id.tv_password_tip)
     TextView tvPasswordTip;
+    //红包金额
     @BindView(R.id.et_amout)
     EditText etAmout;
     @BindView(R.id.lin_amount)
     LinearLayout linAmount;
+   //紅包個數                 （两个控件都有值 并且都没有焦点时 去校验）
     @BindView(R.id.et_count)
     EditText etCount;
     @BindView(R.id.lin_count)
@@ -170,6 +172,13 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
     private File mCurrentFile;
     PassDialog passDialog;
 
+    boolean isCanUp = true;
+    String mMsg;
+
+    boolean mHasFocus;
+    boolean mWiatCheck = false;
+    View mFocusView;
+
     @Override
     protected EditRedbagPresenter createPresenter() {
         return new EditRedbagPresenter(this);
@@ -182,6 +191,24 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
 
     @Override
     public void initViewAndData() {
+        new CheckConfig().check(etAmout, etCount, new CheckConfig.CallBack() {
+            @Override
+            public void gotoChek(double amout, int count) {
+                checkConfig(amout,count);
+            }
+
+            @Override
+            public void onErro(Exception e) {
+                showShortToast(R.string.input_number_fomat_erro);
+            }
+
+            @Override
+            public void hasFocus(View v, boolean hasFocus) {
+                mFocusView =v;
+                mHasFocus = hasFocus;
+            }
+        });
+
         redPacketType=getIntent().getStringExtra(Constant.RED_PACKET_TYPE);
         scopeArr=Arrays.asList(getResources().getStringArray(R.array.redbag_scope));
         tvScope.setText(scopeArr.get(0));
@@ -387,6 +414,27 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                 IntentUtils.startWebActivity(this, tvRule.getText().toString(),Constant.URL_SEND_REDBAG);
                 break;
             case R.id.btn_add:
+                //控件失去焦点
+                if(mHasFocus && mFocusView != null) { //清除焦点
+                    mFocusView.clearFocus();
+
+                    mWiatCheck = true;
+                    //考虑校验完才往下走
+                    //走校验接口
+                    //不要走校验
+                }
+
+                if(mWiatCheck) {
+                    return;
+                }
+
+                if(!isCanUp) {
+                    showShortToast(mMsg);
+                    return;
+                }
+
+
+
                 content=etContent.getText().toString().trim();
                 if (picUrlArr.size()==0){
                     waitUpload = (ArrayList<String>) pictureArr.clone();
@@ -417,8 +465,17 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                     wechat=null;
                     microblog=null;
                 }
+
                 isPublicPassword=cbPublicPassword.isChecked()?1:0;
                 isSaveTemplate=cbSaveTemp.isChecked()?1:0;
+                //责任链模式解决校验
+                if(Constant.RED_PACKET_TYPE_SURVEY.equals(redPacketType)) {
+                    if(mProblemList == null || mProblemList.isEmpty()) {
+                        showShortToast(R.string.plese_set_problem);
+                        return;
+                    }
+
+                }
                 if (TextUtils.isEmpty(latitude)||TextUtils.isEmpty(longitude)){
                     showShortToast(R.string.not_location_info);
                 }else if(money<=0){
@@ -445,7 +502,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                     }
 
 
-                    checkConfig();
+                    checkUploadFile();
 
                 }
                 break;
@@ -455,7 +512,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
     /**
      * 后天校验参数
      */
-    private void checkConfig() {
+    private void checkConfig(double amout, int count) {
         showLoadingDialog(null);
         //红包类型，survey：视频/问卷红包 password：口令红包
         if (Constant.RED_PACKET_TYPE_VIDEO.equals(redPacketType)
@@ -465,44 +522,60 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
             if(Constant.RED_PACKET_TYPE_VIDEO.equals(redPacketType)) {
                 tempType = Constant.RED_PACKET_TYPE_SURVEY;
             }
-            mvpPresenter.getConfig(tempType);
-        } else {
-            //跳过上传逻辑
-            checkUploadFile();
+            mvpPresenter.getConfig(tempType,amout,count);
         }
 
     }
 
 
     @Override
-    public void checkConfigSuccess(RedBagConfig data) {
+    public void checkConfigSuccess(RedBagConfig data, double amout, int count) {
+        closeLoadingDialog();
         //红包类型
         if (Constant.RED_PACKET_TYPE_PASSWORD.equals(redPacketType)) {
 
-            if ( !compareLarge(money, data.getPasswordMinMoney()) ){
-                showShortToast(getString(R.string.redpacke_tip_money_str)+ data.getPasswordMinMoney());
+            if ( !compareLarge(amout, data.getPasswordMinMoney()) ){
+                String temp = getString(R.string.redpacke_tip_money_str)+ data.getPasswordMinMoney();
+                showShortToast(temp);
+                isCanUp = false;
+                mMsg = temp;
                 return;
             }
-            if ( !compareLarge(money*1.0 / quantity, data.getPasswordMinOneMoney())){
-                showShortToast(getString(R.string.redpacke_tip_one_money_str)+data.getPasswordMinOneMoney());
+            if ( !compareLarge(amout*1.0 / count, data.getPasswordMinOneMoney())){
+                String temp = getString(R.string.redpacke_tip_one_money_str)+data.getPasswordMinOneMoney();
+                mMsg = temp;
+                showShortToast(temp);
+                isCanUp = false;
                 return;
             }
 
 
         } else {
-            if ( !compareLarge(money, data.getSurveyMinMoney()) ){
-                showShortToast(getString(R.string.redpacke_tip_money_str)+ data.getSurveyMinMoney());
+            if ( !compareLarge(amout, data.getSurveyMinMoney()) ){
+                String temp = getString(R.string.redpacke_tip_money_str)+ data.getSurveyMinMoney();
+                showShortToast(temp);
+                isCanUp = false;
+                mMsg = temp;
                 return;
             }
-            if ( !compareLarge(money*1.0 / quantity, data.getSurveyMinOneMoney())){
-                showShortToast(getString(R.string.redpacke_tip_one_money_str)+data.getSurveyMinOneMoney());
+            if ( !compareLarge(amout*1.0 / count, data.getSurveyMinOneMoney())){
+                String temp =getString(R.string.redpacke_tip_one_money_str)+data.getSurveyMinOneMoney();
+                mMsg = temp;
+                showShortToast(temp);
+                isCanUp = false;
                 return;
             }
 
         }
+        isCanUp = true;
+
+        if(mWiatCheck) {
+            mWiatCheck = false;
+            onViewClicked(btnAdd);
+        }
 
 
-        checkUploadFile();
+
 
     }
 
@@ -517,6 +590,10 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
             new File(Constant.COMPRESS_DIR_PATH).mkdirs();
             uploadFile();
         } else {
+            if(Constant.RED_PACKET_TYPE_VIDEO.equals(redPacketType)) {
+                showShortToast(R.string.please_upload_vedieo);
+                return;
+            }
             selectPayType();
         }
     }

@@ -1,11 +1,14 @@
 package com.guochuang.mimedia.ui.adapter;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.guochuang.mimedia.view.recycleview.adapter.CommonRecyclerAdapter;
 import com.guochuang.mimedia.view.recycleview.adapter.ViewHolder;
 import com.guochuang.mimedia.mvp.model.LookSurevyResult;
@@ -14,18 +17,19 @@ import com.sz.gcyh.KSHongBao.R;
 import java.util.List;
 
 
-public class LookSurevyAdapter extends CommonRecyclerAdapter<LookSurevyResult.StatisticsListBean> {
+public class LookSurevyAdapter extends BaseQuickAdapter<LookSurevyResult.StatisticsListBean, BaseViewHolder> {
     private int mDrawNumber;
 
-    public LookSurevyAdapter(Context context, List<LookSurevyResult.StatisticsListBean> statisticsListBeans, int itemlayout, int drawNumber) {
-        super(context, statisticsListBeans, itemlayout);
+    public LookSurevyAdapter(@Nullable List<LookSurevyResult.StatisticsListBean> data, int layoutResId, int drawNumber) {
+        super(layoutResId, data);
         mDrawNumber = drawNumber;
     }
 
 
     @Override
-    protected void convert(ViewHolder holder, final int position, LookSurevyResult.StatisticsListBean item) {
-        holder.setViewVisibility(R.id.tv_look_info, View.GONE).setViewVisibility(R.id.recycle_anser_count, View.GONE);
+    protected void convert(BaseViewHolder holder, LookSurevyResult.StatisticsListBean item) {
+        int position = holder.getAdapterPosition();
+        holder.setGone(R.id.tv_look_info, false).setGone(R.id.recycle_anser_count, false);
 
 
         String type = item.getType() == 0 ? mContext.getString(R.string.single_choice) : item.getType() == 1 ? mContext.getString(R.string.muti_choice) : mContext.getString(R.string.input_blank);
@@ -33,49 +37,23 @@ public class LookSurevyAdapter extends CommonRecyclerAdapter<LookSurevyResult.St
         holder.setText(R.id.tv_squece, position + ".").setText(R.id.tv_problem, type + item.getTitle());
         //填空题
         if (item.getType() == 2) {
-            holder.setViewVisibility(R.id.tv_look_info, View.VISIBLE);
+            holder.setGone(R.id.tv_look_info, true);
         } else {
             //单选或者是多选
             if (item.getOptionsList() != null && !item.getOptionsList().isEmpty()) {
 
-                holder.setViewVisibility(R.id.recycle_anser_count, View.VISIBLE);
+                holder.setGone(R.id.recycle_anser_count, true);
                 RecyclerView recyclerView = holder.getView(R.id.recycle_anser_count);
                 recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
-                LookSurevyInAdapter lookSurevyInAdapter = new LookSurevyInAdapter(mContext, item.getOptionsList(), R.layout.item_look_surevy_in_layout, mDrawNumber);
+                LookSurevyInAdapter lookSurevyInAdapter = new LookSurevyInAdapter(item.getOptionsList(), R.layout.item_look_surevy_in_layout, mDrawNumber);
                 recyclerView.setAdapter(lookSurevyInAdapter);
 
             }
 
         }
 
-        holder.getView(R.id.tv_look_info).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (mOnItmeChildrenClick != null) {
-                    mOnItmeChildrenClick.itmeChildrenClick(R.id.tv_look_info, position);
-                }
-
-            }
-        });
-
+        holder.addOnClickListener(R.id.tv_look_info);
     }
 
-
-    /**
-     * 设置监听
-     */
-
-    public interface OnItmeChildrenClick {
-        void itmeChildrenClick(int viewId, int position);
-
-    }
-
-    LookSurevyAdapter.OnItmeChildrenClick mOnItmeChildrenClick;
-
-    public void setOnItmeChildren(LookSurevyAdapter.OnItmeChildrenClick listener) {
-        mOnItmeChildrenClick = listener;
-
-    }
 
 }

@@ -54,7 +54,7 @@ public class LookVideoProblemActivity extends MvpActivity<LookVideoProblemPresen
         initTitle();
         initData();
         mWrapEmRecycle.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        mLookVideoProblemAdapter = new LookVideoProblemAdapter(this, mData, R.layout.item_lookvideoproblem_layout);
+        mLookVideoProblemAdapter = new LookVideoProblemAdapter(mData, R.layout.item_lookvideoproblem_layout);
 
         mWrapEmRecycle.setAdapter(mLookVideoProblemAdapter);
         mWrapEmRecycle.isShowEmptyPage();

@@ -569,7 +569,11 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                         bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_map_redbag_person);
                     } else if (redbagList.get(i).getType().equals(Constant.RED_PACKET_TYPE_PASSWORD)) {
                         bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_map_redbag_pwd);
-                    } else {
+                    }else if(redbagList.get(i).getType().equals(Constant.RED_PACKET_TYPE_VIDEO)) {
+                        bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_map_redbag_video);
+                    } else if(redbagList.get(i).getType().equals(Constant.RED_PACKET_TYPE_SURVEY)){
+                        bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_map_redbag_survey);
+                    }else {
                         bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_map_redbag_person);
                     }
                     break;

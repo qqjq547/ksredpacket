@@ -3,8 +3,10 @@ package com.guochuang.mimedia.ui.activity.redbag;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Html;
+import android.view.View;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.view.navigationbar.DefaultNavigationBar;
 import com.guochuang.mimedia.view.recycleview.WrapEmptyRecyclerView;
@@ -72,12 +74,13 @@ public class LookSurevyActivity extends MvpActivity<LookSurveymPresenter> implem
     public void setData(LookSurevyResult data) {
         tvAnserNumber.setText(Html.fromHtml(String.format(getString(R.string.number_questions_answered),data.getDrawNumber())));
         mData.addAll(data.getStatisticsList());
-        mLookSurevyAdapter = new LookSurevyAdapter(this, mData, R.layout.item_looksurvey_layout,data.getDrawNumber());
-        mLookSurevyAdapter.setOnItmeChildren(new LookSurevyAdapter.OnItmeChildrenClick() {
+        mLookSurevyAdapter = new LookSurevyAdapter( mData, R.layout.item_looksurvey_layout,data.getDrawNumber());
+        mLookSurevyAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
-            public void itmeChildrenClick(int viewId, int position) {
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 LookSurevyResult.StatisticsListBean statisticsListBean = mData.get(position);
                 startActivity(new Intent(LookSurevyActivity.this,FillAnswerInfoActivity.class).putExtra(Constant.FILL_ANSWER_INFO,statisticsListBean));
+
             }
         });
 

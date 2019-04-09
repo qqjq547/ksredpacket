@@ -560,11 +560,11 @@ public class EditRedbagPresenter extends BasePresenter<EditRedbagView> {
      *
      * @param redPacketType
      */
-    public void getConfig(String redPacketType) {
+    public void getConfig(String redPacketType, final double amout, final int count) {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getConfig(redPacketType)), new ApiCallback<RedBagConfig>() {
             @Override
             public void onSuccess(RedBagConfig data) {
-                mvpView.checkConfigSuccess(data);
+                mvpView.checkConfigSuccess(data,amout,count);
             }
 
             @Override

@@ -49,7 +49,7 @@ public class FillAnswerInfoActivity extends MvpActivity {
         }
 
 
-        FillAnswerInfoAdapter fillAnswerInfoAdapter = new FillAnswerInfoAdapter(this, options,R.layout.item_fillanswerinfo_layout);
+        FillAnswerInfoAdapter fillAnswerInfoAdapter = new FillAnswerInfoAdapter(options,R.layout.item_fillanswerinfo_layout);
 
         recycleList.setAdapter(fillAnswerInfoAdapter);
 
