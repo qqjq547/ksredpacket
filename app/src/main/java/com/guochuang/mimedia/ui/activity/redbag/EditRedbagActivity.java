@@ -423,10 +423,12 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
 
 
                 content = etContent.getText().toString().trim();
+                //第一次可以上传 为甚么第二次不可上传 第一是
                 if (picUrlArr.size() == 0) {
                     waitUpload = (ArrayList<String>) pictureArr.clone();
                     waitUpload.remove(null);
                 }
+
                 password = etWord.getText().toString().trim();
 
                 if (TextUtils.isEmpty(amountStr)) {
@@ -775,6 +777,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
 
         if (requestCode == OPEN_VIDEO_SELECT_CODE && resultCode == PickerConfig.RESULT_CODE) {
             mSelect = intent.getParcelableArrayListExtra(PickerConfig.EXTRA_RESULT);
+            picUrlArr.clear();
             List<String> videoList = new ArrayList<>(1);
             for (Media media : mSelect) {
                 videoList.add(media.path);
