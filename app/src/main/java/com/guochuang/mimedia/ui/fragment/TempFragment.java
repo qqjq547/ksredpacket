@@ -118,7 +118,7 @@ public class TempFragment extends MvpFragment {
     public void onViewClicked(View view) {
        switch (view.getId()){
            case R.id.tv_survery:
-               IntentUtils.startLookSurevyActivity(getActivity(),temp.getSurveyId(),temp.getRedPacketUuid());
+               IntentUtils.startCheckQuestionActivity(getActivity(),temp.getRedPacketType(),temp.getSurveyId(),temp.getRedPacketUuid());
                break;
            case R.id.iv_cover:
                IntentUtils.startVideoPreviewActivity(getActivity(),temp.getVideoUrl());

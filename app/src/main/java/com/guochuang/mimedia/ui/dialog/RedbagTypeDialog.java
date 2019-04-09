@@ -70,6 +70,7 @@ public class RedbagTypeDialog extends Dialog {
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                cancel();
                 if (RedbagTypeDialog.this.onOpenResultListener==null){
                     return;
                 }

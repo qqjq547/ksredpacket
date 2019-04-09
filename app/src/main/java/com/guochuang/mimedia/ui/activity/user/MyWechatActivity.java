@@ -87,10 +87,9 @@ public class MyWechatActivity extends MvpActivity<MyWechatPresenter> implements 
             mMobile =  getIntent().getStringExtra(Constant.UESRPHONE_KEY);
             mPassword =  getIntent().getStringExtra(Constant.UESRPASSWORLD_KEY);
         }else if(LoginActivity.class.getSimpleName().equals(whoOpen)) {
-
+            tvTitle.setText(R.string.type_login_apllay_weixin);
             mMobile =  getIntent().getStringExtra(Constant.UESRPHONE_KEY);
             mPassword =  getIntent().getStringExtra(Constant.UESRPASSWORLD_KEY);
-            tvTitle.setText(R.string.type_login_apllay_weixin);
             linUnbind.setVisibility(View.VISIBLE);
         }
 
@@ -109,7 +108,6 @@ public class MyWechatActivity extends MvpActivity<MyWechatPresenter> implements 
 
                 applayWeiXin();
 
-
                 break;
         }
     }
@@ -123,7 +121,8 @@ public class MyWechatActivity extends MvpActivity<MyWechatPresenter> implements 
             public void onResult(String wxCode, String errMsg) {
                 if (TextUtils.isEmpty(errMsg)) {
 //                    showLoadingDialog(null);
-                    mvpPresenter.userAppWechatBind(mMobile,mPassword,Constant.SYSTEM_CODE,wxCode);
+//                    mvpPresenter.userAppWechatBind(mMobile,mPassword,Constant.SYSTEM_CODE,wxCode);
+                    mvpPresenter.mobileBindWechat(mMobile,mPassword,Constant.SYSTEM_CODE,wxCode);
 
                 } else {
                     showShortToast(errMsg);

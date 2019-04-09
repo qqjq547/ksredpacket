@@ -13,6 +13,7 @@ import com.guochuang.mimedia.ui.activity.beenest.BeeNestActivity;
 import com.guochuang.mimedia.ui.activity.beenest.BidBrandActivity;
 import com.guochuang.mimedia.ui.activity.beenest.EditAdActivity;
 import com.guochuang.mimedia.ui.activity.common.ImagePreviewActivity;
+import com.guochuang.mimedia.ui.activity.redbag.CheckQuestionActivity;
 import com.guochuang.mimedia.ui.activity.redbag.LookSurevyActivity;
 import com.guochuang.mimedia.ui.activity.redbag.LookVideoProblemActivity;
 import com.guochuang.mimedia.ui.activity.redbag.RedbagDetailActivity;
@@ -298,6 +299,13 @@ public class IntentUtils {
         Intent intent = new Intent(activity, LookSurevyActivity.class);
         intent.putExtra(Constant.SURVEYID,surveyId);
         intent.putExtra(Constant.RED_PACKET_ID,redPacketUuid);
+        activity.startActivity(intent);
+    }
+    public static void startCheckQuestionActivity(Activity activity, String redPacketType,long surveyId, String redPacketUuid) {
+        Intent intent = new Intent(activity, CheckQuestionActivity.class);
+        intent.putExtra(Constant.RED_PACKET_TYPE,redPacketType);
+        intent.putExtra(Constant.RED_PACKET_ID,redPacketUuid);
+        intent.putExtra(Constant.SURVEYID,surveyId);
         activity.startActivity(intent);
     }
 }

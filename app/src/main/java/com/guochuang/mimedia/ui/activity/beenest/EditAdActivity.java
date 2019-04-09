@@ -196,7 +196,7 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
 
     }
 
-    @OnClick({R.id.iv_back, R.id.tv_text,R.id.lin_picture, R.id.tv_area,R.id.tv_link, R.id.tv_rule,R.id.iv_temp_tip,R.id.btn_confirm,R.id.btn_preview})
+    @OnClick({R.id.iv_back, R.id.tv_text,R.id.lin_picture, R.id.tv_area,R.id.tv_link, R.id.tv_rule,R.id.iv_temp_tip,R.id.btn_confirm,R.id.tv_preview})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
