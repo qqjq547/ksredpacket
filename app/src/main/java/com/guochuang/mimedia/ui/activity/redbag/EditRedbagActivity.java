@@ -194,7 +194,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
     @Override
     public void initViewAndData() {
         //红包类型，survey：视频/问卷红包 password：口令红包
-        checkConfig();
+
 
         new CheckConfig().check(etAmout, etCount, new CheckConfig.CallBack() {
             @Override
@@ -210,6 +210,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
         });
 
         redPacketType = getIntent().getStringExtra(Constant.RED_PACKET_TYPE);
+        checkConfig();
         scopeArr = Arrays.asList(getResources().getStringArray(R.array.redbag_scope));
         tvScope.setText(scopeArr.get(0));
         mLlSetProblem.setVisibility(View.GONE);
