@@ -788,5 +788,6 @@
     <string name="please_upload_vedieo">请上传视频</string>
     <string name="please_set_2answer">请设置两个答案</string>
     <string name="plese_set_problem">请设置问题</string>
+    <string name="type_login_apllay_weixin">绑定微信</string>
 
 </resources>

@@ -10,6 +10,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -31,6 +32,7 @@ import com.guochuang.mimedia.mvp.model.ProblemBean;
 import com.guochuang.mimedia.mvp.model.RedBagConfig;
 import com.guochuang.mimedia.tools.BitmapUtils;
 import com.guochuang.mimedia.tools.CheckConfig;
+import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.ui.activity.common.MapPickActivity;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.MvpActivity;
@@ -291,11 +293,13 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
 
                     //判断类型
                     ArrayList<String> selectArr = (ArrayList<String>) pictureArr.clone();
+                    if(selectArr.contains(null)) {
+                        selectArr.remove(null);
+                    }
                     if (Constant.RED_PACKET_TYPE_VIDEO.equals(redPacketType)) {
                         //打開視頻預覽
                         IntentUtils.startVideoPreviewActivity(EditRedbagActivity.this, selectArr.get(position));
                     } else {
-
                         IntentUtils.startImagePreviewActivity(EditRedbagActivity.this, position, selectArr);
                     }
                 }
@@ -590,10 +594,10 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
             new File(Constant.COMPRESS_DIR_PATH).mkdirs();
             uploadFile();
         } else {
-            if(Constant.RED_PACKET_TYPE_VIDEO.equals(redPacketType)) {
-                showShortToast(R.string.please_upload_vedieo);
-                return;
-            }
+//            if(Constant.RED_PACKET_TYPE_VIDEO.equals(redPacketType)) {
+//                showShortToast(R.string.please_upload_vedieo);
+//                return;
+//            }
             selectPayType();
         }
     }
@@ -866,6 +870,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
         } else if (TextUtils.equals(redPacketType, Constant.RED_PACKET_TYPE_SURVEY)) {
             //问卷红包joinProblmeJson
             JSONArray joinProblmeJson = joinProblmeJson();
+            LogUtil.e(joinProblmeJson.toString());
             mvpPresenter.addSurveyReabag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson);
 
         }
@@ -907,7 +912,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                 jsonObject.put("surveyId", "")
                         .put("title", problemBean.getProblem())
                         .put("type", String.valueOf(problemBean.getType()))
-                        .put("sequence", String.valueOf(i))
+                        .put("sequence", String.valueOf(i+1))
                         .put("optionsList", itemJsonArray);
 
                 problmeJsonArray.put(jsonObject);

@@ -9,4 +9,6 @@ public interface MyWechatView {
     void setBindWxError(String message);
 
     void setBindWxData(String data);
+
+    void setBindSuccessAndLoginData(String data);
 }

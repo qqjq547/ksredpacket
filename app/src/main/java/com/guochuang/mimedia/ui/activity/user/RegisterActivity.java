@@ -119,7 +119,8 @@ public class RegisterActivity extends MvpActivity<RegisterPresenter> implements 
 //        IntentUtils.startMainActivity(this);
 
 
-        Intent intent = new Intent(this,MyWechatActivity.class).putExtra(Constant.WHO_OPEN_MYWECHATACTIVITY,getClass().getSimpleName());
+        Intent intent = new Intent(this,MyWechatActivity.class).putExtra(Constant.WHO_OPEN_MYWECHATACTIVITY,getClass().getSimpleName())
+                .putExtra(Constant.UESRPHONE_KEY, etPhone.getText().toString().trim()).putExtra(Constant.UESRPASSWORLD_KEY, etPassword.getText().toString().trim());
         startActivity(intent);
         finish();
     }

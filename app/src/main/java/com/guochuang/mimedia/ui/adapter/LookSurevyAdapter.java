@@ -34,7 +34,7 @@ public class LookSurevyAdapter extends BaseQuickAdapter<LookSurevyResult.Statist
 
         String type = item.getType() == 0 ? mContext.getString(R.string.single_choice) : item.getType() == 1 ? mContext.getString(R.string.muti_choice) : mContext.getString(R.string.input_blank);
 
-        holder.setText(R.id.tv_squece, position + ".").setText(R.id.tv_problem, type + item.getTitle());
+        holder.setText(R.id.tv_squece, position+1 + ".").setText(R.id.tv_problem, type + item.getTitle());
         //填空题
         if (item.getType() == 2) {
             holder.setGone(R.id.tv_look_info, true);

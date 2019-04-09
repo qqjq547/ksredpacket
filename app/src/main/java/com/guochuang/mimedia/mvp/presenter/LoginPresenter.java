@@ -5,6 +5,7 @@ import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.view.LoginView;
+import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.RxUtil;
 
 public class LoginPresenter extends BasePresenter<LoginView> {
@@ -54,6 +55,11 @@ public class LoginPresenter extends BasePresenter<LoginView> {
 
             @Override
             public void onFailure(ApiException exception) {
+                //2719
+                if(exception.getStatusCode() == Constant.GOTOAPLAYYWEIXIN) {
+                    mvpView.goToAplayWeixin();
+                    return;
+                }
                 mvpView.setLoginError(exception.getMessage());
             }
 
