@@ -91,6 +91,7 @@ public class RedbagTypeDialog extends Dialog {
                         RedbagTypeDialog.this.onOpenResultListener.onQuestion();
                         break;
                 }
+                dismiss();
             }
         });
         rvMenu.setLayoutManager(new GridLayoutManager(context,3));
