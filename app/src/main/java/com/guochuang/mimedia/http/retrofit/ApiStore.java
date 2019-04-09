@@ -1479,17 +1479,24 @@ public interface ApiStore {
     Observable<HttpResponse<RedBagConfig>> getConfig(@Query("redPacketType") String redPacketType);
 
 
-    // 用户绑定微信2
+    @FormUrlEncoded
     @POST("/api/v1/token/user/app_wechat_bind")
     Observable<HttpResponse<String>> userAppWechatBind(
-            @Query("mobile") String mobile,
-            @Query("password") String password,
-            @Query("systemCode") String systemCode,
-            @Query("code") String code);
+            @Field("mobile") String mobile,
+            @Field("password") String password,
+            @Field("systemCode") String systemCode,
+            @Field("code") String code);
+
+    @FormUrlEncoded
+    @POST("/api/v1/token/user/mobile_bind_wechat")
+    Observable<HttpResponse<String>> mobileBindWechat(
+            @Field("mobile") String mobile,
+            @Field("password") String password,
+            @Field("systemCode") String systemCode,
+            @Field("code") String code);
 
     @GET("/api/v1/common/index_config/get")
     Observable<HttpResponse<PublishRedbagType>> getPublishRedbagType();
-
 
     @POST("/api/v1/user/name_auth/auth")
     Observable<HttpResponse<String>> realName(@Query("realName") String realName,

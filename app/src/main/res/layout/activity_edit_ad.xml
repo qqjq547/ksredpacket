@@ -402,6 +402,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/space20"
+                android:layout_marginBottom="@dimen/space20"
                 android:textColor="@color/text_blue"
                 android:textSize="@dimen/space14"
                 android:text="@string/preview_nest_ad"/>

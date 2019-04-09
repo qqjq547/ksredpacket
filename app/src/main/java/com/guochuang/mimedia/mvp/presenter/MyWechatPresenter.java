@@ -52,4 +52,22 @@ public class MyWechatPresenter extends BasePresenter<MyWechatView> {
             }
         });
     }
+    public void mobileBindWechat(String mobile, String password, String systemCode, String wxCode) {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().mobileBindWechat(mobile,password,systemCode,wxCode)), new ApiCallback<String>() {
+            @Override
+            public void onSuccess(String data) {
+                mvpView.setBindSuccessAndLoginData(data);
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setError(exception.getMessage());
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
 }

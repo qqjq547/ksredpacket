@@ -879,9 +879,9 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
             return addReqDtoListBeanArr;
         }
         try {
-            List<AddReqDtoListBean.OptionsListBean> listBeans = new ArrayList<>();
             for (int i = 0; i < mProblemList.size(); i++) {
                 AddReqDtoListBean addReqDtoListBean = new AddReqDtoListBean();
+                List<AddReqDtoListBean.OptionsListBean> listBeans = new ArrayList<>();
                 ProblemBean problemBean = mProblemList.get(i);
                 ArrayList<ProblemBean.ItemBean> item = problemBean.getItem();
                 for (int j = 0; j < item.size(); j++) {
@@ -897,11 +897,13 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                     listBeans.add(bean);
 
                 }
+
                 addReqDtoListBean.setTitle(problemBean.getProblem());
                 addReqDtoListBean.setType(problemBean.getType());
                 addReqDtoListBean.setSequence(i + 1);
                 addReqDtoListBean.setOptionsList(listBeans);
                 addReqDtoListBeanArr.add(addReqDtoListBean);
+//                LogUtil.d(GsonUtil.GsonString(addReqDtoListBean));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -1076,6 +1078,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
         }
         mTvProblemNumber.setText(String.format(getString(R.string.set_problem_number), String.valueOf(mProblemList.size())));
         closeLoadingDialog();
+        joinProblmeJson();
 
     }
 

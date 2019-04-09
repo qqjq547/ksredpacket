@@ -35,7 +35,8 @@ public class AnswerAdapter extends BaseQuickAdapter<LookVideoResult.QuestionList
                 helper.setText(R.id.tv_question,mContext.getString(R.string.single_choice)+item.getTitle());
                 RadioGroup group=helper.getView(R.id.rgroup_answer);
                 List<LookVideoResult.QuestionListBean.OptionsListBean> optionArr=item.getOptionsList();
-                for (int i=0;i<optionArr.size();i++){
+                int count=optionArr.size()>4?4:optionArr.size();
+                for (int i=0;i<count;i++){
                     LookVideoResult.QuestionListBean.OptionsListBean bean=optionArr.get(i);
                     RadioButton rbtn=((RadioButton)group.getChildAt(i));
                     rbtn.setText(bean.getOptionName()+"."+bean.getOptionValue());
@@ -55,7 +56,8 @@ public class AnswerAdapter extends BaseQuickAdapter<LookVideoResult.QuestionList
                 checkBoxList.add(((CheckBox)helper.getView(R.id.cb_four)));
                 OnCheckBoxListener listener=new OnCheckBoxListener(helper.getAdapterPosition());
                 List<LookVideoResult.QuestionListBean.OptionsListBean> optionArr1=item.getOptionsList();
-                for (int i=0;i<optionArr1.size();i++){
+                int count1=optionArr1.size()>4?4:optionArr1.size();
+                for (int i=0;i<count1;i++){
                     LookVideoResult.QuestionListBean.OptionsListBean bean=optionArr1.get(i);
                     checkBoxList.get(i).setText(bean.getOptionName()+"."+bean.getOptionValue());
                     checkBoxList.get(i).setVisibility(View.VISIBLE);
