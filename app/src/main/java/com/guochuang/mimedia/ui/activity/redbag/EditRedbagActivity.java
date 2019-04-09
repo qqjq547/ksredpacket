@@ -193,6 +193,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
 
     @Override
     public void initViewAndData() {
+
         new CheckConfig().check(etAmout, etCount, new CheckConfig.CallBack() {
             @Override
             public void gotoChek(double amout, int count) {
@@ -420,9 +421,10 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
             case R.id.btn_add:
                 //控件失去焦点
                 if(mHasFocus && mFocusView != null) { //清除焦点
+                    mWiatCheck = true;
                     mFocusView.clearFocus();
 
-                    mWiatCheck = true;
+
                     //考虑校验完才往下走
                     //走校验接口
                     //不要走校验
@@ -517,7 +519,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
      * 后天校验参数
      */
     private void checkConfig(double amout, int count) {
-        showLoadingDialog(null);
+
         //红包类型，survey：视频/问卷红包 password：口令红包
         if (Constant.RED_PACKET_TYPE_VIDEO.equals(redPacketType)
                 || Constant.RED_PACKET_TYPE_SURVEY.equals(redPacketType)
@@ -526,6 +528,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
             if(Constant.RED_PACKET_TYPE_VIDEO.equals(redPacketType)) {
                 tempType = Constant.RED_PACKET_TYPE_SURVEY;
             }
+            showLoadingDialog(null);
             mvpPresenter.getConfig(tempType,amout,count);
         }
 
