@@ -43,21 +43,21 @@ public class QuestionOpt {
     private String jumpUrl;
     private int kilometer;
     private String microblog;
-    private int money;
+    private double money;
     private String password;
     private int payType;
     private String picture;
     private int quantity;
-    private int redPacketLatitude;
-    private int redPacketLongitude;
+    private String redPacketLatitude;
+    private String redPacketLongitude;
     private String redPacketType;
     private String safetyCode;
     private int surveyType;
     private String title;
     private String url;
     private String urlName;
-    private double userLatitude;
-    private double userLongitude;
+    private String userLatitude;
+    private String userLongitude;
     private String videoUrl;
     private String wechat;
     private List<AddReqDtoListBean> addReqDtoList;
@@ -134,11 +134,11 @@ public class QuestionOpt {
         this.microblog = microblog;
     }
 
-    public int getMoney() {
+    public double getMoney() {
         return money;
     }
 
-    public void setMoney(int money) {
+    public void setMoney(double money) {
         this.money = money;
     }
 
@@ -174,19 +174,19 @@ public class QuestionOpt {
         this.quantity = quantity;
     }
 
-    public int getRedPacketLatitude() {
+    public String getRedPacketLatitude() {
         return redPacketLatitude;
     }
 
-    public void setRedPacketLatitude(int redPacketLatitude) {
+    public void setRedPacketLatitude(String redPacketLatitude) {
         this.redPacketLatitude = redPacketLatitude;
     }
 
-    public int getRedPacketLongitude() {
+    public String getRedPacketLongitude() {
         return redPacketLongitude;
     }
 
-    public void setRedPacketLongitude(int redPacketLongitude) {
+    public void setRedPacketLongitude(String redPacketLongitude) {
         this.redPacketLongitude = redPacketLongitude;
     }
 
@@ -238,19 +238,19 @@ public class QuestionOpt {
         this.urlName = urlName;
     }
 
-    public double getUserLatitude() {
+    public String getUserLatitude() {
         return userLatitude;
     }
 
-    public void setUserLatitude(double userLatitude) {
+    public void setUserLatitude(String userLatitude) {
         this.userLatitude = userLatitude;
     }
 
-    public double getUserLongitude() {
+    public String getUserLongitude() {
         return userLongitude;
     }
 
-    public void setUserLongitude(double userLongitude) {
+    public void setUserLongitude(String userLongitude) {
         this.userLongitude = userLongitude;
     }
 
@@ -278,105 +278,5 @@ public class QuestionOpt {
         this.addReqDtoList = addReqDtoList;
     }
 
-    public static class AddReqDtoListBean {
-        /**
-         * optionsList : [{"isAnswer":0,"optionName":"string","optionValue":"string","sequence":0}]
-         * sequence : 0
-         * surveyId : 0
-         * title : string
-         * type : 0
-         */
 
-        private int sequence;
-        private int surveyId;
-        private String title;
-        private int type;
-        private List<OptionsListBean> optionsList;
-
-        public int getSequence() {
-            return sequence;
-        }
-
-        public void setSequence(int sequence) {
-            this.sequence = sequence;
-        }
-
-        public int getSurveyId() {
-            return surveyId;
-        }
-
-        public void setSurveyId(int surveyId) {
-            this.surveyId = surveyId;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-        public int getType() {
-            return type;
-        }
-
-        public void setType(int type) {
-            this.type = type;
-        }
-
-        public List<OptionsListBean> getOptionsList() {
-            return optionsList;
-        }
-
-        public void setOptionsList(List<OptionsListBean> optionsList) {
-            this.optionsList = optionsList;
-        }
-
-        public static class OptionsListBean {
-            /**
-             * isAnswer : 0
-             * optionName : string
-             * optionValue : string
-             * sequence : 0
-             */
-
-            private int isAnswer;
-            private String optionName;
-            private String optionValue;
-            private int sequence;
-
-            public int getIsAnswer() {
-                return isAnswer;
-            }
-
-            public void setIsAnswer(int isAnswer) {
-                this.isAnswer = isAnswer;
-            }
-
-            public String getOptionName() {
-                return optionName;
-            }
-
-            public void setOptionName(String optionName) {
-                this.optionName = optionName;
-            }
-
-            public String getOptionValue() {
-                return optionValue;
-            }
-
-            public void setOptionValue(String optionValue) {
-                this.optionValue = optionValue;
-            }
-
-            public int getSequence() {
-                return sequence;
-            }
-
-            public void setSequence(int sequence) {
-                this.sequence = sequence;
-            }
-        }
-    }
 }

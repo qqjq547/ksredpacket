@@ -782,7 +782,7 @@
          <item>问卷红包: </item>
      </string-array>
     <string name="preview_nest_ad">预览广告</string>
-    <string name="retire_fund">预览广告</string>
+    <string name="retire_fund">退押金</string>
     <string name="goto_weixin_str">未绑定微信，去绑定</string>
     <string name="input_number_fomat_erro">输入数字格式不对</string>
     <string name="please_upload_vedieo">请上传视频</string>

@@ -6,11 +6,13 @@ import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
+import com.guochuang.mimedia.mvp.model.AddReqDtoListBean;
 import com.guochuang.mimedia.mvp.model.LookSurevyResult;
 import com.guochuang.mimedia.mvp.model.LookVideoResult;
 import com.guochuang.mimedia.mvp.model.EditRedbagConfig;
 import com.guochuang.mimedia.mvp.model.LuckyConfig;
 import com.guochuang.mimedia.mvp.model.Order;
+import com.guochuang.mimedia.mvp.model.QuestionOpt;
 import com.guochuang.mimedia.mvp.model.RedBagConfig;
 import com.guochuang.mimedia.mvp.model.RedbagDetail;
 import com.guochuang.mimedia.mvp.model.RedbagInfo;
@@ -26,6 +28,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.MediaType;
@@ -304,42 +307,35 @@ public class EditRedbagPresenter extends BasePresenter<EditRedbagView> {
                                String content, String picture, int areaType, int kilometer, double money,
                                int quantity, String urlName, String url, String wechat, String microblog,
                                int isPublicPassword, int isSaveTemplate, int payType, String channelCode,
-                               String safetyCode, JSONArray problemstr, String videoFrame) {
+                               String safetyCode, List<AddReqDtoListBean> addReqDtoListBeanArr, String videoFrame) {
 
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        JSONObject jsonObj = new JSONObject();
+        QuestionOpt questionOpt=new QuestionOpt();
+        questionOpt.setAddReqDtoList(addReqDtoListBeanArr);
+        questionOpt.setChannelCode(channelCode);
+        questionOpt.setAreaType(areaType);
+        questionOpt.setContent(content);
+        questionOpt.setCoverUrl(videoFrame);
+        questionOpt.setIsPublicPassword(isPublicPassword);
+        questionOpt.setIsSaveTemplate(isSaveTemplate);
+        questionOpt.setKilometer(kilometer);
+        questionOpt.setMicroblog(microblog);
+        questionOpt.setMoney(money);
+        questionOpt.setPayType(payType);
+        questionOpt.setQuantity(quantity);
+        questionOpt.setRedPacketLatitude(redbagLatitude);
+        questionOpt.setRedPacketLongitude(redbagLongitude);
+        questionOpt.setRedPacketType(Constant.RED_PACKET_TYPE_VIDEO);
+        questionOpt.setSafetyCode(safetyCode);
+        questionOpt.setSurveyType(0);
+        questionOpt.setUrl(url);
+        questionOpt.setUrlName(urlName);
+        questionOpt.setUserLatitude(latitude);
+        questionOpt.setUserLongitude(longitude);
+        questionOpt.setVideoUrl(picture);
+        questionOpt.setWechat(wechat);
 
-        try {
-            jsonObj.put("addReqDtoList", problemstr)
-                    .put("areaType", areaType)
-                    .put("channelCode", channelCode)
-                    .put("content", content)
-                    .put("coverUrl", videoFrame)
-                    .put("isPublicPassword", isPublicPassword)
-                    .put("isSaveTemplate", isSaveTemplate)
-                    .put("kilometer", kilometer)
-                    .put("microblog", microblog)
-                    .put("money", money)
-                    .put("payType", payType)
-                    .put("picture", picture)
-                    .put("quantity", quantity)
-                    .put("redPacketLatitude", redbagLatitude)
-                    .put("redPacketLongitude", redbagLongitude)
-                    .put("redPacketType", Constant.RED_PACKET_TYPE_VIDEO)
-                    .put("safetyCode", safetyCode)
-                    .put("surveyType", 0)
-                    .put("url", url)
-                    .put("urlName", urlName)
-                    .put("userLatitude", latitude)
-                    .put("userLongitude", longitude)
-                    .put("videoUrl", picture)
-                    .put("wechat", wechat);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-        RequestBody body = RequestBody.create(JSON, jsonObj.toString());
+        RequestBody body = RequestBody.create(JSON, GsonUtil.GsonString(questionOpt));
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
                 addVideoRedbag(body)), new ApiCallback<String>() {
             @Override
@@ -357,87 +353,40 @@ public class EditRedbagPresenter extends BasePresenter<EditRedbagView> {
 
             }
         });
-
-//        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().addVideoRedbag(
-//                latitude,
-//                longitude,
-//                redbagLatitude,
-//                redbagLongitude,
-//                content,
-//                picture,
-//                areaType,
-//                kilometer,
-//                money,
-//                quantity,
-//                urlName,
-//                url,
-//                wechat,
-//                microblog,
-//                isPublicPassword,
-//                isSaveTemplate,
-//                payType,
-//                channelCode,
-//                safetyCode, 0, problemstr, videoFrame)), new ApiCallback<String>() {
-//            @Override
-//            public void onSuccess(String data) {
-//                mvpView.setData(data);
-//
-//            }
-//
-//            @Override
-//            public void onFailure(ApiException exception) {
-//                mvpView.setError(exception.getMessage());
-//
-//            }
-//
-//            @Override
-//            public void onFinish() {
-//
-//            }
-//        });
-
     }
 
     public void addSurveyReabag(String latitude, String longitude, String redbagLatitude, String redbagLongitude,
                                 String content, String picture, int areaType, int kilometer, double money,
                                 int quantity, String urlName, String url, String wechat, String microblog,
                                 int isPublicPassword, int isSaveTemplate, int payType, String channelCode,
-                                String safetyCode, JSONArray problemstr) {
-
+                                String safetyCode, List<AddReqDtoListBean> addReqDtoListBeanArr) {
 
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        JSONObject jsonObj = new JSONObject();
+        QuestionOpt questionOpt=new QuestionOpt();
+        questionOpt.setAddReqDtoList(addReqDtoListBeanArr);
+        questionOpt.setChannelCode(channelCode);
+        questionOpt.setAreaType(areaType);
+        questionOpt.setContent(content);
+        questionOpt.setIsPublicPassword(isPublicPassword);
+        questionOpt.setIsSaveTemplate(isSaveTemplate);
+        questionOpt.setKilometer(kilometer);
+        questionOpt.setMicroblog(microblog);
+        questionOpt.setMoney(money);
+        questionOpt.setPayType(payType);
+        questionOpt.setPicture(picture);
+        questionOpt.setQuantity(quantity);
+        questionOpt.setRedPacketLatitude(redbagLatitude);
+        questionOpt.setRedPacketLongitude(redbagLongitude);
+        questionOpt.setRedPacketType(Constant.RED_PACKET_TYPE_SURVEY);
+        questionOpt.setSafetyCode(safetyCode);
+        questionOpt.setSurveyType(1);
+        questionOpt.setUrl(url);
+        questionOpt.setUrlName(urlName);
+        questionOpt.setUserLatitude(latitude);
+        questionOpt.setUserLongitude(longitude);
+        questionOpt.setWechat(wechat);
 
-        try {
-            jsonObj.put("addReqDtoList", problemstr)
-                    .put("areaType", areaType)
-                    .put("channelCode", channelCode)
-                    .put("content", content)
-                    .put("isPublicPassword", isPublicPassword)
-                    .put("isSaveTemplate", isSaveTemplate)
-                    .put("kilometer", kilometer)
-                    .put("microblog", microblog)
-                    .put("money", money)
-                    .put("payType", payType)
-                    .put("picture", picture)
-                    .put("quantity", quantity)
-                    .put("redPacketLatitude", redbagLatitude)
-                    .put("redPacketLongitude", redbagLongitude)
-                    .put("redPacketType", Constant.RED_PACKET_TYPE_VIDEO)
-                    .put("safetyCode", safetyCode)
-                    .put("surveyType", 0)
-                    .put("url", url)
-                    .put("urlName", urlName)
-                    .put("userLatitude", latitude)
-                    .put("userLongitude", longitude)
-                    .put("wechat", wechat);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-        Log.e("addSurveyReabag: ", jsonObj.toString());
-        RequestBody body = RequestBody.create(JSON, jsonObj.toString());
+        RequestBody body = RequestBody.create(JSON, GsonUtil.GsonString(questionOpt));
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
                 addSurveyRedbag(body)), new ApiCallback<String>() {
             @Override
@@ -455,47 +404,6 @@ public class EditRedbagPresenter extends BasePresenter<EditRedbagView> {
 
             }
         });
-
-
-//
-//        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().addSurveyRedbag(
-//                latitude,
-//                longitude,
-//                redbagLatitude,
-//                redbagLongitude,
-//                content,
-//                picture,
-//                areaType,
-//                kilometer,
-//                money,
-//                quantity,
-//                urlName,
-//                url,
-//                wechat,
-//                microblog,
-//                isPublicPassword,
-//                isSaveTemplate,
-//                payType,
-//                channelCode,
-//                safetyCode, 1, problemstr)), new ApiCallback<String>() {
-//            @Override
-//            public void onSuccess(String data) {
-//                mvpView.setData(data);
-//
-//            }
-//
-//            @Override
-//            public void onFailure(ApiException exception) {
-//                mvpView.setError(exception.getMessage());
-//
-//            }
-//
-//            @Override
-//            public void onFinish() {
-//
-//            }
-//        });
-
     }
 
 

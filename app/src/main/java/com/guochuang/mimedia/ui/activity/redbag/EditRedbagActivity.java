@@ -24,6 +24,7 @@ import com.dmcbig.mediapicker.PickerActivity;
 import com.dmcbig.mediapicker.PickerConfig;
 import com.donkingliang.imageselector.utils.ImageSelector;
 import com.donkingliang.imageselector.utils.ImageSelectorUtils;
+import com.guochuang.mimedia.mvp.model.AddReqDtoListBean;
 import com.guochuang.mimedia.mvp.model.LookSurevyResult;
 import com.guochuang.mimedia.mvp.model.LookVideoResult;
 import com.guochuang.mimedia.mvp.model.EditRedbagConfig;
@@ -56,6 +57,7 @@ import com.guochuang.mimedia.view.GridItemDecoration;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
 import java.io.File;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -868,13 +870,10 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                 showShortToast(R.string.tip_upload_video);
                 return;
             }
-            JSONArray joinProblmeJson = joinProblmeJson();
-            mvpPresenter.addVideoReabag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson, mVideoFrameUrl);
+            mvpPresenter.addVideoReabag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson(), mVideoFrameUrl);
         } else if (TextUtils.equals(redPacketType, Constant.RED_PACKET_TYPE_SURVEY)) {
             //问卷红包joinProblmeJson
-            JSONArray joinProblmeJson = joinProblmeJson();
-            LogUtil.e(joinProblmeJson.toString());
-            mvpPresenter.addSurveyReabag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson);
+            mvpPresenter.addSurveyReabag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson());
 
         }
     }
@@ -882,52 +881,40 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
     /**
      * 拼接joinProblmeJson
      */
-    private JSONArray joinProblmeJson() {
-
+    private  List<AddReqDtoListBean> joinProblmeJson() {
+        List<AddReqDtoListBean> addReqDtoListBeanArr=new ArrayList<>();
         if (mProblemList.isEmpty()) {
-            return new JSONArray();
+            return addReqDtoListBeanArr;
         }
         try {
-            JSONArray problmeJsonArray = new JSONArray();
+            List<AddReqDtoListBean.OptionsListBean> listBeans=new ArrayList<>();
             for (int i = 0; i < mProblemList.size(); i++) {
-                JSONObject jsonObject = new JSONObject();
-                JSONArray itemJsonArray = new JSONArray();
-                //题目
+                AddReqDtoListBean addReqDtoListBean=new AddReqDtoListBean();
                 ProblemBean problemBean = mProblemList.get(i);
-                //题目答案
                 ArrayList<ProblemBean.ItemBean> item = problemBean.getItem();
                 for (int j = 0; j < item.size(); j++) {
+                    AddReqDtoListBean.OptionsListBean bean = new AddReqDtoListBean.OptionsListBean();
                     if (problemBean.getType() == 2 && j > 0) {
                         break;
                     }
-                    JSONObject itemJsonObj = new JSONObject();
                     ProblemBean.ItemBean itemBean = item.get(j);
-                    itemJsonObj.put("optionName", problemBean.getType()==2?"":itemBean.getItemname())
-                            .put("optionValue", itemBean.getItemcontent())
-                            .put("isAnswer", problemBean.getType()==2?"1":itemBean.isIsanswer() ? "1" :"0")
-                            .put("sequence", String.valueOf(j));
-
-                    itemJsonArray.put(itemJsonObj);
+                    bean.setOptionName(problemBean.getType() == 2 ? "" : itemBean.getItemname());
+                    bean.setOptionValue(itemBean.getItemcontent());
+                    bean.setIsAnswer(problemBean.getType() == 2 ? 1 : itemBean.isIsanswer() ? 1 : 0);
+                    bean.setSequence(j);
+                    listBeans.add(bean);
 
                 }
-
-
-                jsonObject.put("surveyId", "")
-                        .put("title", problemBean.getProblem())
-                        .put("type", String.valueOf(problemBean.getType()))
-                        .put("sequence", String.valueOf(i+1))
-                        .put("optionsList", itemJsonArray);
-
-                problmeJsonArray.put(jsonObject);
-
+                addReqDtoListBean.setTitle(problemBean.getProblem());
+                addReqDtoListBean.setType(problemBean.getType());
+                addReqDtoListBean.setSequence(i + 1);
+                addReqDtoListBean.setOptionsList(listBeans);
+                addReqDtoListBeanArr.add(addReqDtoListBean);
             }
-
-            return problmeJsonArray;
         } catch (Exception e) {
-            return new JSONArray();
+            e.printStackTrace();
         }
-
-
+         return addReqDtoListBeanArr;
     }
 
     @Override

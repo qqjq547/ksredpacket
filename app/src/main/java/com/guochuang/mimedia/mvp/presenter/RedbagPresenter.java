@@ -303,7 +303,7 @@ public class RedbagPresenter extends BasePresenter<RedbagView> {
                 getPublishRedbagType()), new ApiCallback<PublishRedbagType>() {
             @Override
             public void onSuccess(PublishRedbagType data) {
-
+              mvpView.setRedbagType(data);
             }
 
             @Override

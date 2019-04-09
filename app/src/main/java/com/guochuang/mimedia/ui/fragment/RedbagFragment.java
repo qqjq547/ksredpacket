@@ -39,6 +39,7 @@ import com.guochuang.mimedia.base.MvpFragment;
 import com.guochuang.mimedia.mvp.model.HomeRegion;
 import com.guochuang.mimedia.mvp.model.MyKsb;
 import com.guochuang.mimedia.mvp.model.NestHomeAd;
+import com.guochuang.mimedia.mvp.model.PublishRedbagType;
 import com.guochuang.mimedia.mvp.model.Redbag;
 import com.guochuang.mimedia.mvp.model.RedbagDetail;
 import com.guochuang.mimedia.mvp.presenter.RedbagPresenter;
@@ -297,10 +298,11 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                 break;
             case R.id.tv_start:
                 //请求接口
-//                showLoadingDialog(null);
-//                mvpPresenter.getPublishRedbagType();
-
-                new RedbagTypeDialog(getActivity(), new RedbagTypeDialog.OnItemClickListener() {
+                String type=getPref().getString(PrefUtil.EDIT_REDBAG_TYPE,"");
+                if (TextUtils.isEmpty(type)){
+                    return;
+                }
+                new RedbagTypeDialog(getActivity(), type,new RedbagTypeDialog.OnItemClickListener() {
                     @Override
                     public void onRandom() {
                         IntentUtils.startEditRedbagActivity(getActivity(), Constant.RED_PACKET_TYPE_RANDOM);
