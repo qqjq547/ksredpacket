@@ -122,7 +122,7 @@ public class MyWechatActivity extends MvpActivity<MyWechatPresenter> implements 
             @Override
             public void onResult(String wxCode, String errMsg) {
                 if (TextUtils.isEmpty(errMsg)) {
-                    showLoadingDialog(null);
+//                    showLoadingDialog(null);
                     mvpPresenter.userAppWechatBind(mMobile,mPassword,Constant.SYSTEM_CODE,wxCode);
 
                 } else {
