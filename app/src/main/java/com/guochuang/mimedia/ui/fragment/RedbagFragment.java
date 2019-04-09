@@ -297,8 +297,8 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                 break;
             case R.id.tv_start:
                 //请求接口
-                showLoadingDialog(null);
-                mvpPresenter.getPublishRedbagType();
+//                showLoadingDialog(null);
+//                mvpPresenter.getPublishRedbagType();
 
                 new RedbagTypeDialog(getActivity(), new RedbagTypeDialog.OnItemClickListener() {
                     @Override
