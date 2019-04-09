@@ -35,8 +35,6 @@ public class CheckConfig {
 
 
             }
-            //有焦点了
-            mCallBack.hasFocus(v, hasFocus);
 
         }
     };
@@ -54,7 +52,6 @@ public class CheckConfig {
 
         void onErro(Exception e);
 
-        void hasFocus(View v, boolean hasFocus);
     }
 
 }

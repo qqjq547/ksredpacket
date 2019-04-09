@@ -371,6 +371,15 @@ public interface ApiStore {
             @Part MultipartBody.Part file
     );
 
+    //上传视频
+    @Multipart
+    @POST("/api/v1/file/upload")
+    Observable<HttpResponse<UploadFile>> videoUpload(
+            @Part("businessType") String businessType,
+            @Part("isAsync") int isAsync,
+            @Part MultipartBody.Part file
+    );
+
     //添加点赞
     @FormUrlEncoded
     @POST("/api/v1/redpacket/praise/add")

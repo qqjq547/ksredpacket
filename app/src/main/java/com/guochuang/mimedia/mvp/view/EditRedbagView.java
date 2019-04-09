@@ -30,5 +30,5 @@ public interface EditRedbagView {
 
     void surevyProblems(LookSurevyResult data);
 
-    void checkConfigSuccess(RedBagConfig data, double amout, int count);
+    void checkConfigSuccess(RedBagConfig data);
 }

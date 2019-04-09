@@ -196,7 +196,7 @@ public class EditRedbagPresenter extends BasePresenter<EditRedbagView> {
     public void videoFileUpload(String businessType, File file) {
         RequestBody requestFile = RequestBody.create(MediaType.parse("application/octet-stream"), file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().fileUpload(businessType, body)), new ApiCallback<UploadFile>() {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().videoUpload(businessType,1, body)), new ApiCallback<UploadFile>() {
             @Override
             public void onSuccess(UploadFile data) {
                 mvpView.uploadVideoSuccess(data);
@@ -468,11 +468,11 @@ public class EditRedbagPresenter extends BasePresenter<EditRedbagView> {
      *
      * @param redPacketType
      */
-    public void getConfig(String redPacketType, final double amout, final int count) {
+    public void getConfig(String redPacketType) {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getConfig(redPacketType)), new ApiCallback<RedBagConfig>() {
             @Override
             public void onSuccess(RedBagConfig data) {
-                mvpView.checkConfigSuccess(data,amout,count);
+                mvpView.checkConfigSuccess(data);
             }
 
             @Override
