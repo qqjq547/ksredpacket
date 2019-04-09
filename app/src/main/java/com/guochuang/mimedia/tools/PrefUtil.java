@@ -36,6 +36,7 @@ public class PrefUtil {
     public static final String MARKET_SWITCH = "market_switch";
 
     public static final String ISDRAG = "isdrag";
+    public static final String EDIT_REDBAG_TYPE = "edit_redbag_type";
 
 
     public static void init(Context context) {
