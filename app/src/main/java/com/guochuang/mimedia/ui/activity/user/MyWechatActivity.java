@@ -124,7 +124,6 @@ public class MyWechatActivity extends MvpActivity<MyWechatPresenter> implements 
 //                    showLoadingDialog(null);
 //                    mvpPresenter.userAppWechatBind(mMobile,mPassword,Constant.SYSTEM_CODE,wxCode);
                     mvpPresenter.mobileBindWechat(mMobile,mPassword,Constant.SYSTEM_CODE,wxCode);
-                    Log.e("onResult: ",wxCode );
 
                 } else {
                     showShortToast(errMsg);
