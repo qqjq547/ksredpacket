@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:paddingLeft="@dimen/space15"
-    android:paddingRight="@dimen/space15"
+
     android:orientation="vertical">
 
     <LinearLayout
@@ -27,6 +27,7 @@
             android:gravity="right"
             android:hint="@string/pls_input_name"
             android:background="@null"
+            android:paddingRight="@dimen/space15"
             android:textSize="@dimen/sp_14"
             android:lines="1"
             android:maxLength="4" />
@@ -56,6 +57,7 @@
             android:lines="1"
             android:background="@null"
             android:hint="@string/pelase_input_idcard"
+            android:paddingRight="@dimen/space15"
             android:textSize="@dimen/sp_14"
             android:maxLength="19" />
 
@@ -85,6 +87,7 @@
             android:background="@null"
             android:maxLength="25"
             android:hint="@string/please_banck_card"
+            android:paddingRight="@dimen/space15"
             android:textSize="@dimen/sp_14"/>
 
     </LinearLayout>
