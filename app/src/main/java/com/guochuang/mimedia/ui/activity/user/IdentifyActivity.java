@@ -91,7 +91,7 @@ public class IdentifyActivity extends MvpActivity<IdentifyPresenter> implements 
         tvTitle.setText(R.string.identification);
         String desp = getIntent().getStringExtra(Constant.DESCRIPTION);
         tvErrmsg.setText(desp);
-        setStatusbar(R.color.bg_red, false);
+//        setStatusbar(R.color.bg_red, false);
 //        tvSubmit.setEnabled(false);
 
         GeneralUtil.bankcardAddSpace(etInputBanckCard);

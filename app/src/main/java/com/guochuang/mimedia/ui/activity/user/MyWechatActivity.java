@@ -3,6 +3,7 @@ package com.guochuang.mimedia.ui.activity.user;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -123,6 +124,7 @@ public class MyWechatActivity extends MvpActivity<MyWechatPresenter> implements 
 //                    showLoadingDialog(null);
 //                    mvpPresenter.userAppWechatBind(mMobile,mPassword,Constant.SYSTEM_CODE,wxCode);
                     mvpPresenter.mobileBindWechat(mMobile,mPassword,Constant.SYSTEM_CODE,wxCode);
+                    Log.e("onResult: ",wxCode );
 
                 } else {
                     showShortToast(errMsg);

@@ -3,136 +3,145 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
+    android:paddingLeft="@dimen/space15"
+
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingRight="@dimen/space15"
-        android:paddingLeft="@dimen/space15"
+        android:layout_height="@dimen/space50"
         android:paddingTop="@dimen/dp_10"
+        android:gravity="center_vertical"
         android:paddingBottom="@dimen/dp_10">
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="姓名"/>
+            android:text="@string/identify_name" />
 
         <EditText
             android:id="@+id/et_input_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLength="4"
+            android:gravity="right"
+            android:hint="@string/pls_input_name"
+            android:background="@null"
+            android:paddingRight="@dimen/space15"
+            android:textSize="@dimen/sp_14"
             android:lines="1"
-            android:gravity="right"/>
+            android:maxLength="4" />
 
     </LinearLayout>
 
-    <include layout="@layout/device_horizontal_line"/>
+    <include layout="@layout/device_horizontal_line" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingRight="@dimen/space15"
-        android:paddingLeft="@dimen/space15"
+        android:layout_height="@dimen/space50"
         android:paddingTop="@dimen/dp_10"
+        android:gravity="center_vertical"
         android:paddingBottom="@dimen/dp_10">
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="身份证号码"/>
+            android:text="@string/idcard_str" />
 
         <EditText
             android:id="@+id/et_input_idcard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLength="19"
+            android:gravity="right"
             android:lines="1"
-            android:gravity="right"/>
+            android:background="@null"
+            android:hint="@string/pelase_input_idcard"
+            android:paddingRight="@dimen/space15"
+            android:textSize="@dimen/sp_14"
+            android:maxLength="19" />
 
     </LinearLayout>
 
-    <include layout="@layout/device_horizontal_line"/>
+    <include layout="@layout/device_horizontal_line" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingRight="@dimen/space15"
-        android:paddingLeft="@dimen/space15"
+        android:layout_height="@dimen/space50"
         android:paddingTop="@dimen/dp_10"
+        android:gravity="center_vertical"
         android:paddingBottom="@dimen/dp_10">
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="银行卡"/>
+            android:text="@string/banck_card_str" />
 
         <EditText
             android:id="@+id/et_input_banck_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLength="20"
+            android:gravity="right"
             android:lines="1"
-            android:gravity="right"/>
+            android:background="@null"
+            android:maxLength="25"
+            android:hint="@string/please_banck_card"
+            android:paddingRight="@dimen/space15"
+            android:textSize="@dimen/sp_14"/>
 
     </LinearLayout>
 
-    <include layout="@layout/device_horizontal_line"/>
+    <include layout="@layout/device_horizontal_line" />
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/space15">
+        android:layout_height="@dimen/space50">
 
-    <LinearLayout
-        android:id="@+id/ll_register_ima_verify"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/iv_register_ima_verify"
-        android:background="@drawable/bg_login_phone_et_gray"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingBottom="@dimen/space10"
-        android:paddingLeft="@dimen/space15"
-        android:paddingRight="@dimen/space15"
-        android:paddingTop="@dimen/space10">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_login_phone_ima_verify" />
-
-        <View style="@style/centre_line" />
-
-        <EditText
-            android:id="@+id/et_input_ima_verify"
+        <LinearLayout
+            android:id="@+id/ll_register_ima_verify"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/space15"
-            android:background="@null"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/iv_register_ima_verify"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:gravity="center_vertical"
-            android:hint="@string/hint_login_forget_ima_verify"
-            android:lines="1"
-            android:maxLength="6"
-            android:textColor="@color/text_black"
-            android:textSize="@dimen/textfont16" />
-    </LinearLayout>
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/space10"
+            android:layout_alignParentBottom="true"
+            android:paddingBottom="@dimen/space10">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/image_vertify_code"/>
+
+            <EditText
+                android:id="@+id/et_input_ima_verify"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/space15"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/hint_login_forget_ima_verify"
+                android:lines="1"
+                android:maxLength="6"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/textfont16" />
+        </LinearLayout>
+
         <ImageView
             android:id="@+id/iv_register_ima_verify"
             android:layout_width="@dimen/space96"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignBottom="@+id/ll_register_ima_verify"
             android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
             android:layout_marginLeft="@dimen/space10"
             android:scaleType="fitXY" />
     </RelativeLayout>
 
-    <include layout="@layout/device_horizontal_line"/>
+    <include layout="@layout/device_horizontal_line" />
 
 
 </LinearLayout>

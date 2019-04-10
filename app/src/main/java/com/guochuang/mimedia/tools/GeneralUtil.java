@@ -1237,46 +1237,51 @@ public class GeneralUtil {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (isChanged) {
-                    location = phoneEt.getSelectionEnd();
-                    int index = 0;
-                    while (index < buffer.length()) {
-                        if (buffer.charAt(index) == ' ') {
-                            buffer.deleteCharAt(index);
-                        } else {
+                try {
+
+                    if (isChanged) {
+                        location = phoneEt.getSelectionEnd();
+                        int index = 0;
+                        while (index < buffer.length()) {
+                            if (buffer.charAt(index) == ' ') {
+                                buffer.deleteCharAt(index);
+                            } else {
+                                index++;
+                            }
+                        }
+
+                        index = 0;
+                        int konggeNumberC = 0;
+                        while (index < buffer.length()) {
+                            if ((index == 4 || index == 9 || index == 14 || index == 19)) {
+                                buffer.insert(index, ' ');
+                                konggeNumberC++;
+                            }
                             index++;
                         }
-                    }
 
-                    index = 0;
-                    int konggeNumberC = 0;
-                    while (index < buffer.length()) {
-                        if ((index == 4 || index == 9 || index == 14 || index == 19)) {
-                            buffer.insert(index, ' ');
-                            konggeNumberC++;
+                        if (konggeNumberC > konggeNumberB) {
+                            location += (konggeNumberC - konggeNumberB);
                         }
-                        index++;
-                    }
 
-                    if (konggeNumberC > konggeNumberB) {
-                        location += (konggeNumberC - konggeNumberB);
-                    }
+                        tempChar = new char[buffer.length()];
+                        buffer.getChars(0, buffer.length(), tempChar, 0);
+                        String str = buffer.toString();
+                        if (location > str.length()) {
+                            location = str.length();
+                        } else if (location < 0) {
+                            location = 0;
+                        }
 
-                    tempChar = new char[buffer.length()];
-                    buffer.getChars(0, buffer.length(), tempChar, 0);
-                    String str = buffer.toString();
-                    if (location > str.length()) {
-                        location = str.length();
-                    } else if (location < 0) {
-                        location = 0;
+                        phoneEt.setText(str);
+                        Editable etable = phoneEt.getText();
+                        Selection.setSelection(etable, location);
+                        isChanged = false;
                     }
-
-                    phoneEt.setText(str);
-                    Editable etable = phoneEt.getText();
-                    Selection.setSelection(etable, location);
-                    isChanged = false;
+                } catch (Exception e) {
                 }
             }
+
         });
     }
 
