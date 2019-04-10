@@ -58,7 +58,7 @@ public class CheckQuestionActivity extends MvpActivity<CheckQuestionPresenter> i
 
     @Override
     public void initViewAndData() {
-        tvTitle.setText(R.string.check_question);
+        tvTitle.setText(R.string.check_question_title);
         redPacketUuid=getIntent().getStringExtra(Constant.RED_PACKET_UUID);
         surveyId=getIntent().getLongExtra(Constant.SURVEYID,0);
         redPacketType=getIntent().getStringExtra(Constant.RED_PACKET_TYPE);

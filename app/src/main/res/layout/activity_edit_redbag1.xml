@@ -48,37 +48,49 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space15"
                 android:orientation="vertical">
-                <LinearLayout
-                    android:id="@+id/ll_set_problem"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/space40"
-                    android:background="@drawable/bg_input_white"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/space10"
-                    android:paddingRight="@dimen/space10">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/set_problem_name"
-                        android:textColor="@color/text_black"
-                        android:textSize="@dimen/textfont14" />
 
-                    <TextView
-                        android:id="@+id/tv_problem_number"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:gravity="right|center_vertical"
-                        android:hint="@string/set_problem_number"
-                        android:maxLength="20"
-                        android:drawablePadding="@dimen/space15"
+
+
+
+                    <LinearLayout
+                        android:id="@+id/ll_set_problem"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space40"
+                        android:background="@drawable/bg_input_white"
+                        android:gravity="center_vertical"
                         android:paddingLeft="@dimen/space10"
-                        android:textColor="@color/text_black"
-                        android:textSize="@dimen/textfont14"
-                        android:drawableRight="@drawable/ic_arrow_right"/>
-                </LinearLayout>
+                        android:paddingRight="@dimen/space10">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="设置问题"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/textfont14" />
+
+                        <TextView
+                            android:id="@+id/tv_problem_number"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:gravity="right|center_vertical"
+                            android:hint="已设置%s道题"
+                            android:maxLength="20"
+                            android:drawablePadding="@dimen/space15"
+                            android:paddingLeft="@dimen/space10"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/textfont14"
+                            android:drawableRight="@drawable/ic_arrow_right"/>
+                    </LinearLayout>
+
+
+
+
+
+
+
                 <LinearLayout
                     android:id="@+id/lin_word"
                     android:layout_width="match_parent"

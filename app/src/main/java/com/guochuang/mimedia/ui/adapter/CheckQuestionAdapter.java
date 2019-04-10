@@ -14,6 +14,7 @@ import android.widget.RadioGroup;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.guochuang.mimedia.mvp.model.LookVideoResult;
+import com.guochuang.mimedia.tools.LogUtil;
 import com.sz.gcyh.KSHongBao.R;
 
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public class CheckQuestionAdapter extends BaseQuickAdapter<LookVideoResult.Quest
                     rbtn.setChecked(bean.getIsAnswer()==1);
                     rbtn.setEnabled(false);
                     if (!showAns){
-                        rbtn.setButtonDrawable(null);
+                        rbtn.setCompoundDrawables(null,null,null,null);
                     }
                 }
                 break;
@@ -70,7 +71,7 @@ public class CheckQuestionAdapter extends BaseQuickAdapter<LookVideoResult.Quest
                     checkBoxList.get(i).setChecked(bean.getIsAnswer()==1);
                     checkBoxList.get(i).setEnabled(false);
                     if (!showAns){
-                        checkBoxList.get(i).setButtonDrawable(null);
+                        checkBoxList.get(i).setCompoundDrawables(null,null,null,null);
                     }
                 }
                 break;
@@ -79,9 +80,11 @@ public class CheckQuestionAdapter extends BaseQuickAdapter<LookVideoResult.Quest
                 helper.setGone(R.id.rgroup_answer,false);
                 helper.setGone(R.id.lin_check,false);
                 helper.setText(R.id.tv_question,mContext.getString(R.string.input_blank)+item.getTitle());
-                helper.setGone(R.id.et_direct_answeer,showAns);
-//                helper.setText(R.id.et_direct_answeer,item.get().get(0).getOptionValue());
-
+                helper.setGone(R.id.lin_direct_answer,showAns);
+                if (showAns){
+                    helper.getView(R.id.et_direct_answeer).setEnabled(false);
+                    helper.setText(R.id.et_direct_answeer,item.getOptionsList().get(0).getOptionValue());
+                }
                 break;
         }
     }

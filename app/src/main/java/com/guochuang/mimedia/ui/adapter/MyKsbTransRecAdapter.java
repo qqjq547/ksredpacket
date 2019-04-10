@@ -32,25 +32,24 @@ public class MyKsbTransRecAdapter extends BaseQuickAdapter<MyKsbTransRec, BaseVi
         helper.setText(R.id.tv_price, item.getMoney());
         helper.setText(R.id.tv_poundage, item.getPoundage());
         helper.setText(R.id.tv_time, item.getCreateDate());
-
+        if (TextUtils.isEmpty(item.getRemarks())){
+            helper.setGone(R.id.iv_tip,false);
+        }else {
+            helper.setGone(R.id.iv_tip,true);
+            helper.addOnClickListener(R.id.iv_tip);
+        }
         switch (item.getStatus()) {
             case 0:
-                helper.setText(R.id.tv_state, mContext.getResources().getString(R.string.apply_for));
+                helper.setText(R.id.tv_state, R.string.apply_for);
                 break;
             case 1:
-                helper.setText(R.id.tv_state, mContext.getResources().getString(R.string.paymented));
+                helper.setText(R.id.tv_state, R.string.paymented);
                 break;
             case 2:
-                helper.setText(R.id.tv_state, mContext.getResources().getString(R.string.no_pass));
-                if (TextUtils.isEmpty(item.getRemarks())){
-                    helper.setGone(R.id.iv_tip,false);
-                }else {
-                    helper.setGone(R.id.iv_tip,false);
-                    helper.addOnClickListener(R.id.iv_tip);
-                }
+                helper.setText(R.id.tv_state, R.string.no_pass);
                 break;
             case 3:
-                helper.setText(R.id.tv_state, mContext.getResources().getString(R.string.has_refund));
+                helper.setText(R.id.tv_state, R.string.has_refund);
                 break;
         }
     }

@@ -200,7 +200,6 @@ public class EditRedbagPresenter extends BasePresenter<EditRedbagView> {
             @Override
             public void onSuccess(UploadFile data) {
                 mvpView.uploadVideoSuccess(data);
-//                mvpView.setUploadFile(data);
             }
 
             @Override
@@ -304,10 +303,10 @@ public class EditRedbagPresenter extends BasePresenter<EditRedbagView> {
 
 
     public void addVideoReabag(String latitude, String longitude, String redbagLatitude, String redbagLongitude,
-                               String content, String picture, int areaType, int kilometer, double money,
+                               String content, int areaType, int kilometer, double money,
                                int quantity, String urlName, String url, String wechat, String microblog,
                                int isPublicPassword, int isSaveTemplate, int payType, String channelCode,
-                               String safetyCode, List<AddReqDtoListBean> addReqDtoListBeanArr, String videoFrame) {
+                               String safetyCode, List<AddReqDtoListBean> addReqDtoListBeanArr,String videoUrl,String coverUrl) {
 
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         QuestionOpt questionOpt=new QuestionOpt();
@@ -315,7 +314,6 @@ public class EditRedbagPresenter extends BasePresenter<EditRedbagView> {
         questionOpt.setChannelCode(channelCode);
         questionOpt.setAreaType(areaType);
         questionOpt.setContent(content);
-        questionOpt.setCoverUrl(videoFrame);
         questionOpt.setIsPublicPassword(isPublicPassword);
         questionOpt.setIsSaveTemplate(isSaveTemplate);
         questionOpt.setKilometer(kilometer);
@@ -330,10 +328,12 @@ public class EditRedbagPresenter extends BasePresenter<EditRedbagView> {
         questionOpt.setSurveyType(0);
         questionOpt.setUrl(url);
         questionOpt.setUrlName(urlName);
+        questionOpt.setWechat(wechat);
         questionOpt.setUserLatitude(latitude);
         questionOpt.setUserLongitude(longitude);
-        questionOpt.setVideoUrl(picture);
-        questionOpt.setWechat(wechat);
+        questionOpt.setVideoUrl(videoUrl);
+        questionOpt.setCoverUrl(coverUrl);
+
 
         RequestBody body = RequestBody.create(JSON, GsonUtil.GsonString(questionOpt));
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
@@ -407,45 +407,18 @@ public class EditRedbagPresenter extends BasePresenter<EditRedbagView> {
     }
 
 
+
     /**
-     * 获取问卷红包问题
+     * 获取问题
      *
      * @param surveyId
      * @param redpackId
      */
-    public void getSurevyProblemList(long surveyId, String redpackId) {
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getVideoProblemAnswerList(surveyId, redpackId)), new ApiCallback<LookSurevyResult>() {
-            @Override
-            public void onSuccess(LookSurevyResult data) {
-                mvpView.surevyProblems(data);
-            }
-
-            @Override
-            public void onFailure(ApiException exception) {
-                mvpView.setError(exception.getMessage());
-            }
-
-            @Override
-            public void onFinish() {
-
-            }
-        });
-
-
-    }
-
-
-    /**
-     * 获取视频红包问题
-     *
-     * @param surveyId
-     * @param redpackId
-     */
-    public void getVideoProblems(long surveyId, String redpackId) {
+    public void getProblems(long surveyId, String redpackId) {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getProblems(surveyId, redpackId)), new ApiCallback<LookVideoResult>() {
             @Override
             public void onSuccess(LookVideoResult data) {
-                mvpView.videoProblems(data);
+                mvpView.setProblems(data);
             }
 
             @Override

@@ -31,6 +31,7 @@ import com.guochuang.mimedia.ui.adapter.EditRedPackgeProblemAdapter;
 import com.guochuang.mimedia.ui.adapter.ProblemDialogInAdapter;
 import com.sz.gcyh.KSHongBao.R;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -392,13 +393,21 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
      * 移除多余的选项 Remove redundant options
      */
     private void removeRedundantOptions(ProblemBean problemBean) {
-        Iterator<ProblemBean.ItemBean> iterator = problemBean.getItem().iterator();
-        while (iterator.hasNext()) {
-            ProblemBean.ItemBean item = iterator.next();
-            if (TextUtils.isEmpty(item.getItemcontent())) {
-                iterator.remove();
+        if (problemBean.getType()==Constant.FILL_IN_PROBLEM){
+            ProblemBean.ItemBean firstItem=problemBean.getItem().get(0);
+            problemBean.getItem().clear();
+            problemBean.getItem().add(firstItem);
+        }else {
+            Iterator<ProblemBean.ItemBean> iterator = problemBean.getItem().iterator();
+            while (iterator.hasNext()) {
+                ProblemBean.ItemBean item = iterator.next();
+                if (TextUtils.isEmpty(item.getItemcontent())) {
+                    iterator.remove();
+                }
+
             }
         }
+
 
     }
 
