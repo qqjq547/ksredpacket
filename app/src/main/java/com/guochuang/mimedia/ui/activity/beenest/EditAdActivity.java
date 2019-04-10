@@ -148,7 +148,7 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
         rvPicture.addItemDecoration(new GridItemDecoration(3,CommonUtil.dip2px(this,10),false));
         rvPicture.setItemAnimator(new DefaultItemAnimator());
         pictureArr.add(null);
-        pictureAdapter=new PickImageAdapter(pictureArr,null);
+        pictureAdapter=new PickImageAdapter(pictureArr);
         pictureAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -295,7 +295,7 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
             showShortToast(R.string.link_url_cant_empty);
         }else if(!TextUtils.isEmpty(url)&&!url.matches(Constant.REGEX_WEBURL)){
             showShortToast(R.string.link_format_error);
-        }else if(!cbObeyRule.isChecked()) {
+        }else if(!isJumpPreview&&!cbObeyRule.isChecked()) {
             showShortToast(R.string.agree_agreement);
         }else {
             if (waitUpload.size()>0){
@@ -420,8 +420,8 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
             nestAd.setContactPhone(adMobile);
             nestAd.setAddress(adArea);
             nestAd.setAddressDetail(adAddress);
-            nestAd.setAddressLat(Double.parseDouble(latitude));
-            nestAd.setAddressLng(Double.parseDouble(longitude));
+            nestAd.setAddressLat(TextUtils.isEmpty(latitude)?0:Double.parseDouble(latitude));
+            nestAd.setAddressLng(TextUtils.isEmpty(longitude)?0:Double.parseDouble(longitude));
             nestAd.setLinkText(urlName);
             nestAd.setLinkUrl(url);
             nestAd.setWechat(wechat);

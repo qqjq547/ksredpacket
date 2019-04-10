@@ -14,6 +14,7 @@ import com.guochuang.mimedia.http.response.Page;
 import com.guochuang.mimedia.mvp.view.MyKsbTransRecView;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.DialogBuilder;
+import com.guochuang.mimedia.tools.LogUtil;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.MyKsbTransRec;
@@ -66,6 +67,7 @@ public class MyKsbTransRecActivity extends MvpActivity<MyKsbTransRecPresenter> i
         myKsbTransRecAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                LogUtil.d("onItemChildClick");
                 new DialogBuilder(MyKsbTransRecActivity.this)
                         .setMessage(myKsbTransRecs.get(position).getRemarks())
                         .setPositiveButton(R.string.i_known, null).create().show();

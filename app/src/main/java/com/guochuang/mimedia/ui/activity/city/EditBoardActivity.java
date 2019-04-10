@@ -85,7 +85,7 @@ public class EditBoardActivity extends MvpActivity<EditBoardkPresenter> implemen
         rvPicture.addItemDecoration(new GridItemDecoration(3,CommonUtil.dip2px(this,10),false));
         rvPicture.setItemAnimator(new DefaultItemAnimator());
         pictureArr.add(null);
-        pictureAdapter=new PickImageAdapter(pictureArr,null);
+        pictureAdapter=new PickImageAdapter(pictureArr);
         pictureAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {

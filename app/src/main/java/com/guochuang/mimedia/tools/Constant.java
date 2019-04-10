@@ -49,8 +49,9 @@ public class Constant {
     public static final int REQUEST_SET_SHOWLIST = 17;
     public static final int REQUEST_EDIT_NESTAD = 18;
     public static final int REQUEST_SCAN_CODE = 19;
-    public static final int REQUEST_ANSWER = 19;
-
+    public static final int REQUEST_ANSWER = 20;
+    public static final int REQUEST_PICK_VIDEO = 21;
+    public static final int REQUEST_EDIT_QUESTION = 22;
 
     public static final String TITLE = "title";
     public static final String ARTICLEUUID = "articleUuid";
@@ -119,8 +120,8 @@ public class Constant {
     public static final String TYPE_NESTINFO_REPORT = "nestInfoReport";
     public static final String NESTAD = "nestAd";
 
-
-
+    //用户协议
+    public static final String URL_FANS_AGREEMENT = ApiClient.HTML_URL+"/agreement/fans/index.htm";
     //资讯详情
     public static final String URL_INFOMATION_DETAIL = ApiClient.HTML_URL+"information/detail/index.htm";
     //推荐协议
@@ -275,7 +276,7 @@ public class Constant {
     public static final int USER_ROLE_CHIEF = 3;
     public static final int USER_ROLE_STAR_CHIEF = 4;
     public static final int MAX_PICK_PICTURE = 6;
-    public static final int MAX_VIDEO_PICTURE = 1;
+    public static final int MAX_PICK_VIDEO = 1;
     //审核中
     public static final int STATUS_AUDIT_INREVIEW = 0;
     //审核通过

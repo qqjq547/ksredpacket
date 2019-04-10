@@ -14,6 +14,7 @@ import com.guochuang.mimedia.ui.activity.beenest.BidBrandActivity;
 import com.guochuang.mimedia.ui.activity.beenest.EditAdActivity;
 import com.guochuang.mimedia.ui.activity.common.ImagePreviewActivity;
 import com.guochuang.mimedia.ui.activity.redbag.CheckQuestionActivity;
+import com.guochuang.mimedia.ui.activity.redbag.EditRedbagActivity;
 import com.guochuang.mimedia.ui.activity.redbag.LookSurevyActivity;
 import com.guochuang.mimedia.ui.activity.redbag.LookVideoProblemActivity;
 import com.guochuang.mimedia.ui.activity.redbag.RedbagDetailActivity;
@@ -21,7 +22,6 @@ import com.guochuang.mimedia.ui.activity.redbag.VideoPreviewActivity;
 import com.guochuang.mimedia.ui.activity.user.CardAddActivity;
 import com.guochuang.mimedia.ui.activity.city.CityBidRecordActivity;
 import com.guochuang.mimedia.ui.activity.city.CityDetailActivity;
-import com.guochuang.mimedia.ui.activity.redbag.EditRedbagActivity;
 import com.guochuang.mimedia.ui.activity.common.ImageActivity;
 import com.guochuang.mimedia.ui.activity.operation.IncomeDetailActivity;
 import com.guochuang.mimedia.ui.activity.operation.IncreaseDetailActivity;
@@ -304,7 +304,7 @@ public class IntentUtils {
     public static void startCheckQuestionActivity(Activity activity, String redPacketType,long surveyId, String redPacketUuid) {
         Intent intent = new Intent(activity, CheckQuestionActivity.class);
         intent.putExtra(Constant.RED_PACKET_TYPE,redPacketType);
-        intent.putExtra(Constant.RED_PACKET_ID,redPacketUuid);
+        intent.putExtra(Constant.RED_PACKET_UUID,redPacketUuid);
         intent.putExtra(Constant.SURVEYID,surveyId);
         activity.startActivity(intent);
     }

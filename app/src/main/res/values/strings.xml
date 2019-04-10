@@ -793,6 +793,10 @@
     <string name="pelase_input_idcard">请输入身份证号码</string>
     <string name="please_banck_card">请输入银行卡号码</string>
     <string name="pelase_input_verify">请填写验证码</string>
+    <string name="set_problem_name">设置问题</string>
+    <string name="check_question_title">查看问题</string>
+    <string name="pls_select_video">请选择视频文件</string>
+    <string name="video_cover_dont_exist">视频封面不存在</string>
     <string name="idcard_str">身份证号码</string>
     <string name="banck_card_str">银行卡</string>
 

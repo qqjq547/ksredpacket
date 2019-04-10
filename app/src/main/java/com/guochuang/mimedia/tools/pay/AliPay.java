@@ -5,8 +5,6 @@ import android.text.TextUtils;
 
 import com.alipay.sdk.app.AuthTask;
 import com.alipay.sdk.app.PayTask;
-import com.guochuang.mimedia.ui.activity.redbag.EditRedbagActivity;
-import com.sz.gcyh.KSHongBao.wxapi.WXPayEntryActivity;
 
 import java.util.Map;
 

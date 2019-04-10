@@ -179,7 +179,7 @@ public class RegisterActivity extends MvpActivity<RegisterPresenter> implements 
             case R.id.tv_register_agreenment:
                 if (AntiShake.check(view.getId()))
                     return;
-                IntentUtils.startWebActivity(this,getString(R.string.agree_rule),Constant.URL_AGREEMENT);
+                IntentUtils.startWebActivity(this,null,Constant.URL_FANS_AGREEMENT);
                 break;
             case R.id.iv_register_ima_verify:
                 if (AntiShake.check(view.getId()))
