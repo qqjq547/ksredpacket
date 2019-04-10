@@ -7,14 +7,18 @@
         android:id="@+id/fl_no_identify"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/color_eeeeee"
         android:visibility="visible">
 
-        <ImageView
+     <!--   <ImageView
+            android:id="@+id/iv_background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
-            android:src="@drawable/bg_identify_top" />
+            android:visibility="invisible"
+            android:src="@drawable/bg_identify_top" />-->
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,47 +26,58 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-           <LinearLayout
-               android:id="@+id/lin_content"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:orientation="vertical"
-               android:layout_gravity="center_horizontal"
-               android:gravity="center"
-               android:visibility="gone"
-               android:layout_marginTop="@dimen/space160">
-               <TextView
-                   android:id="@+id/tv_errmsg"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_marginBottom="@dimen/space10"
-                   android:textColor="@color/text_red"
-                   android:textSize="@dimen/textfont14" />
-            <ImageView
-                android:id="@+id/iv_card"
-                android:layout_width="210dp"
-                android:layout_height="143dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/bg_identify_card" />
 
-            <TextView
-                android:id="@+id/tv_notice"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/lin_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space15"
-                android:text="@string/upload_identify_pic"
-                android:textColor="@color/text_red"
-                android:textSize="@dimen/textfont14" />
-           </LinearLayout>
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/space160"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tv_errmsg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/space10"
+                    android:textColor="@color/text_red"
+                    android:textSize="@dimen/textfont14" />
+
+                <ImageView
+                    android:id="@+id/iv_card"
+                    android:layout_width="210dp"
+                    android:layout_height="143dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/bg_identify_card" />
+
+                <TextView
+                    android:id="@+id/tv_notice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space15"
+                    android:text="@string/upload_identify_pic"
+                    android:textColor="@color/text_red"
+                    android:textSize="@dimen/textfont14" />
+            </LinearLayout>
+
+          <!--  android:layout_marginLeft="@dimen/space15"
+            android:layout_marginRight="@dimen/space15"-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/space50"
-                android:layout_marginLeft="@dimen/space15"
-                android:layout_marginRight="@dimen/space15"
                 android:layout_marginTop="@dimen/space50"
+                android:layout_marginBottom="@dimen/space50"
                 android:gravity="bottom"
                 android:orientation="vertical">
+
+                <include
+                    layout="@layout/real_name_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"/>
+
 
                 <LinearLayout
                     android:id="@+id/ll_name_and_number"
@@ -72,6 +87,8 @@
                     android:focusableInTouchMode="false"
                     android:gravity="center_vertical"
                     android:orientation="vertical"
+                    android:layout_marginLeft="@dimen/space15"
+                    android:layout_marginRight="@dimen/space15"
                     android:visibility="invisible">
 
                     <LinearLayout
@@ -90,14 +107,14 @@
                             android:id="@+id/et_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="right|center_vertical"
                             android:background="@color/transparent"
                             android:enabled="false"
+                            android:gravity="right|center_vertical"
                             android:hint="@string/pls_input_name"
-                            android:paddingBottom="@dimen/space10"
                             android:paddingLeft="@dimen/space15"
-                            android:paddingRight="@dimen/space15"
                             android:paddingTop="@dimen/space10"
+                            android:paddingRight="@dimen/space15"
+                            android:paddingBottom="@dimen/space10"
                             android:textSize="@dimen/textfont14" />
                     </LinearLayout>
 
@@ -119,23 +136,18 @@
                             android:id="@+id/et_number"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="right|center_vertical"
                             android:background="@color/transparent"
                             android:enabled="false"
+                            android:gravity="right|center_vertical"
                             android:hint="@string/pls_input_identify"
-                            android:paddingBottom="@dimen/space10"
                             android:paddingLeft="@dimen/space15"
-                            android:paddingRight="@dimen/space15"
                             android:paddingTop="@dimen/space10"
+                            android:paddingRight="@dimen/space15"
+                            android:paddingBottom="@dimen/space10"
                             android:textSize="@dimen/textfont14" />
                     </LinearLayout>
                 </LinearLayout>
 
-
-                <include layout="@layout/real_name_layout"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/space15"/>
 
                 <Space
                     android:layout_width="match_parent"
@@ -143,20 +155,18 @@
                     android:layout_weight="1" />
 
 
-
-
-
-
-
                 <TextView
                     android:id="@+id/tv_submit"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/space45"
+                    android:layout_marginLeft="@dimen/space15"
+                    android:layout_marginRight="@dimen/space15"
                     android:background="@drawable/bg_btn_gray_selector"
                     android:gravity="center"
                     android:text="@string/submit"
                     android:textColor="@color/text_white"
                     android:textSize="@dimen/textfont15" />
+
                 <TextView
                     android:id="@+id/tv_identity_custom"
                     android:layout_width="wrap_content"
@@ -164,9 +174,9 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/space20"
                     android:layout_marginBottom="@dimen/space10"
+                    android:text="@string/identity_custom"
                     android:textColor="@color/text_blue"
-                    android:textSize="@dimen/textfont13"
-                    android:text="@string/identity_custom"/>
+                    android:textSize="@dimen/textfont13" />
             </LinearLayout>
         </LinearLayout>
     </FrameLayout>
@@ -175,6 +185,7 @@
         android:id="@+id/lin_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -186,14 +197,13 @@
                 android:layout_width="@dimen/title_height"
                 android:layout_height="match_parent"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_back_white" />
+                android:src="@drawable/ic_back" />
 
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:textColor="@color/text_white"
                 android:textSize="@dimen/textfont18" />
 
         </RelativeLayout>

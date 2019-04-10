@@ -790,8 +790,10 @@
     <string name="plese_set_problem">请设置问题</string>
     <string name="type_login_apllay_weixin">绑定微信</string>
     <string name="pelase_input_name">请填写姓名</string>
-    <string name="pelase_input_idcard">请填写身份证号</string>
-    <string name="please_banck_card">请填写银行卡号</string>
+    <string name="pelase_input_idcard">请输入身份证号码</string>
+    <string name="please_banck_card">请输入银行卡号码</string>
     <string name="pelase_input_verify">请填写验证码</string>
+    <string name="idcard_str">身份证号码</string>
+    <string name="banck_card_str">银行卡</string>
 
 </resources>
