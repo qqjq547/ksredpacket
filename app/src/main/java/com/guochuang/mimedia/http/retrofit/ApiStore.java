@@ -1505,4 +1505,7 @@ public interface ApiStore {
                                               @Query("uuid") String uuid,
                                               @Query("captcha") String captchastr);
 
+    @GET("/api/v1/token/get_oss_token")
+    Observable<HttpResponse<String>> getOssToken(@Query("content") String content);
+
 }

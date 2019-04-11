@@ -93,4 +93,5 @@ dependencies {
     implementation project(path: ':hellocharts-library')
     implementation 'cn.yipianfengye.android:zxing-library:2.2'
     implementation project(path: ':mediapicker')
+    dependencies { compile 'com.aliyun.dpa:oss-android-sdk:+' }
 }
