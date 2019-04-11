@@ -799,5 +799,6 @@
     <string name="video_cover_dont_exist">视频封面不存在</string>
     <string name="idcard_str">身份证号码</string>
     <string name="banck_card_str">银行卡</string>
+    <string name="btn_login_reset_verify">重新获取</string>
 
 </resources>

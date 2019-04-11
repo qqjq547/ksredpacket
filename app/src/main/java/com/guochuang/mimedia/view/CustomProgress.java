@@ -96,7 +96,6 @@ public class CustomProgress extends View {
 
     public void setMaxProgress(int progress) {
         mMaxProgress = progress;
-//        invalidate();
     }
 
 
