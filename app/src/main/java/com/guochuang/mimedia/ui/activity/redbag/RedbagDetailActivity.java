@@ -884,6 +884,7 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                     tvMoney.setVisibility(View.VISIBLE);
                     tvNotice.setVisibility(View.GONE);
                     rlValue.setVisibility(View.VISIBLE);
+                    tvReceiveNum.setText(String.format(getString(R.string.format_people_get_redbag), redbagDetail.getDrawNumber()));
                     sendBroadcast(new Intent(Constant.ACTION_CHANGE_COIN));
                     if (getPref().getBoolean(PrefUtil.SOUNDSWITCH,true)){
                         CommonUtil.playRing(this, R.raw.gold);
@@ -897,6 +898,7 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                     tvMoney.setVisibility(View.VISIBLE);
                     tvNotice.setVisibility(View.GONE);
                     rlValue.setVisibility(View.VISIBLE);
+                    tvReceiveNum.setText(String.format(getString(R.string.format_people_get_redbag), redbagDetail.getDrawNumber()));
                     sendBroadcast(new Intent(Constant.ACTION_CHANGE_COIN));
                     if (getPref().getBoolean(PrefUtil.SOUNDSWITCH,true)){
                         CommonUtil.playRing(this, R.raw.gold);
