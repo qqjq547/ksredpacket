@@ -25,7 +25,7 @@ public class FillAnswerInfoAdapter extends BaseQuickAdapter<LookSurevyResult.Sta
     protected void convert(BaseViewHolder holder, LookSurevyResult.StatisticsListBean.OptionsListBean item) {
         int position = holder.getAdapterPosition();
         if (!TextUtils.isEmpty(item.getOptionValue())) {
-            holder.setText(R.id.tv_answer, position + "." + item.getOptionValue()).setGone(R.id.tv_answer, true);
+            holder.setText(R.id.tv_answer, position+1 + "." + item.getOptionValue()).setGone(R.id.tv_answer, true);
         } else {
             holder.setGone(R.id.tv_answer, false);
         }

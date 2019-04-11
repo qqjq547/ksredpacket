@@ -25,7 +25,8 @@ public class LookSurevyInAdapter extends BaseQuickAdapter<LookSurevyResult.Stati
 
     @Override
     protected void convert(BaseViewHolder holder, LookSurevyResult.StatisticsListBean.OptionsListBean item) {
-        holder.setText(R.id.tv_option, item.getOptionName() + "." + item.getOptionValue()).setText(R.id.tv_percentage, item.getCount() * mDrawNumber / 100 + "%");
+        holder.setText(R.id.tv_option, item.getOptionName() + "." + item.getOptionValue())
+                .setText(R.id.tv_percentage, mDrawNumber == 0 ?"0%":(item.getCount() *  ( 100/ mDrawNumber))+ "%");
         CustomProgress view = holder.getView(R.id.custom_progress);
         view.setMaxProgress(mDrawNumber);
         view.setProgress(item.getCount());

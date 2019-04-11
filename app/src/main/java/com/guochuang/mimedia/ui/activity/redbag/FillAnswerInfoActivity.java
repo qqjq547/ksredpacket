@@ -44,8 +44,8 @@ public class FillAnswerInfoActivity extends MvpActivity {
 
         recycleList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         ArrayList<LookSurevyResult.StatisticsListBean.OptionsListBean> options = new ArrayList<>();
-        if(mLookSurevyStatisticsList.getOptionsList() != null) {
-            options.addAll(mLookSurevyStatisticsList.getOptionsList());
+        if(mLookSurevyStatisticsList.getAnswerList() != null) {
+            options.addAll(mLookSurevyStatisticsList.getAnswerList());
         }
 
 

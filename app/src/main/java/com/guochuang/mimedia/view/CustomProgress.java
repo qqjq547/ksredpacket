@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 
@@ -47,17 +48,22 @@ public class CustomProgress extends View {
         paint.setDither(true);
         paint.setStrokeWidth(dp2px(mPaintWidth));//设置画笔宽度
         paint.setStrokeCap(Paint.Cap.ROUND);
+        paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setColor(color);
         return paint;
     }
 
 
+    //放在 recycle 中测量不到大小
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         mWidth = MeasureSpec.getSize(widthMeasureSpec);
         mHeight = MeasureSpec.getSize(heightMeasureSpec);
-        setMeasuredDimension(mWidth, mHeight);
+
+
+        setMeasuredDimension(mWidth,mHeight );
+
     }
 
 
@@ -75,8 +81,9 @@ public class CustomProgress extends View {
         canvas.drawLine(0, 0, mWidth, 0, mBottoPaint);
 
         if(mMaxProgress > 0) {
-            canvas.drawLine(0, 0, mWidth, mWidth / mMaxProgress * mProgress, mPaint);
+            canvas.drawLine(0, 0, mWidth / mMaxProgress * mProgress, 0, mPaint);
         }
+
 
     }
 
@@ -89,7 +96,7 @@ public class CustomProgress extends View {
 
     public void setMaxProgress(int progress) {
         mMaxProgress = progress;
-        invalidate();
+//        invalidate();
     }
 
 

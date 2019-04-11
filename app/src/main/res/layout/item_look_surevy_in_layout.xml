@@ -14,29 +14,38 @@
         android:text="A.平头哥半导体有限公司"
         android:textColor="@color/color_666666" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <com.guochuang.mimedia.view.CustomProgress
+      <!--  <com.guochuang.mimedia.view.CustomProgress
             android:id="@+id/custom_progress"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />-->
 
         <TextView
             android:id="@+id/tv_percentage"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
+            android:gravity="center_horizontal"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/space18"
             android:layout_marginTop="5dp"
+            android:text="100%"
+            android:layout_alignParentRight="true"
             android:textColor="@color/color_ff7519"/>
 
 
-    </LinearLayout>
+        <com.guochuang.mimedia.view.CustomProgress
+            android:id="@+id/custom_progress"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_height="14dp"
+            android:layout_toLeftOf="@+id/tv_percentage"/>
+
+
+    </RelativeLayout>
 
 
 </LinearLayout>
