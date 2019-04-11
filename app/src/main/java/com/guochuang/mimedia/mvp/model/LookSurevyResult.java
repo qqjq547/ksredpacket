@@ -58,7 +58,15 @@ public class LookSurevyResult {
         private int sequence;
         private String optionValue;
         private ArrayList<OptionsListBean> optionsList;
+        private ArrayList<OptionsListBean> answerList;
 
+        public ArrayList<OptionsListBean> getAnswerList() {
+            return answerList;
+        }
+
+        public void setAnswerList(ArrayList<OptionsListBean> answerList) {
+            this.answerList = answerList;
+        }
 
         protected StatisticsListBean(Parcel in) {
             questionId = in.readInt();
@@ -67,6 +75,7 @@ public class LookSurevyResult {
             sequence = in.readInt();
             optionValue = in.readString();
             optionsList = in.createTypedArrayList(OptionsListBean.CREATOR);
+            answerList = in.createTypedArrayList(OptionsListBean.CREATOR);
         }
 
         @Override
@@ -82,6 +91,7 @@ public class LookSurevyResult {
             dest.writeInt(sequence);
             dest.writeString(optionValue);
             dest.writeTypedList(optionsList);
+            dest.writeTypedList(answerList);
         }
 
         public static final Creator<StatisticsListBean> CREATOR = new Creator<StatisticsListBean>() {
@@ -145,23 +155,59 @@ public class LookSurevyResult {
         }
 
 
-
-
-        public static class OptionsListBean implements Parcelable{
+        public static class OptionsListBean implements Parcelable {
             /**
              * count : 0
              * optionValue : 在技术大姐夫
              * optionName : A
+             * <p>
+             * "sourceId": null,
+             * "surveyId": 1,
+             * "questionId": 3,
+             * "optionName": "",
+             * "optionValue": "真刺激撒可富好地方"
              */
+
 
             private int count;
             private String optionValue;
             private String optionName;
+            private int sourceId;
+            private int surveyId;
+            private int questionId;
 
             protected OptionsListBean(Parcel in) {
                 count = in.readInt();
                 optionValue = in.readString();
                 optionName = in.readString();
+                sourceId = in.readInt();
+                surveyId = in.readInt();
+                questionId = in.readInt();
+
+            }
+
+            public int getSourceId() {
+                return sourceId;
+            }
+
+            public void setSourceId(int sourceId) {
+                this.sourceId = sourceId;
+            }
+
+            public int getSurveyId() {
+                return surveyId;
+            }
+
+            public void setSurveyId(int surveyId) {
+                this.surveyId = surveyId;
+            }
+
+            public int getQuestionId() {
+                return questionId;
+            }
+
+            public void setQuestionId(int questionId) {
+                this.questionId = questionId;
             }
 
             public static final Creator<OptionsListBean> CREATOR = new Creator<OptionsListBean>() {
@@ -210,6 +256,10 @@ public class LookSurevyResult {
                 dest.writeInt(count);
                 dest.writeString(optionValue);
                 dest.writeString(optionName);
+                dest.writeInt(sourceId);
+                dest.writeInt(surveyId);
+                dest.writeInt(questionId);
+
             }
         }
     }
