@@ -23,6 +23,7 @@ import com.dmcbig.mediapicker.PickerConfig;
 import com.dmcbig.mediapicker.entity.Media;
 import com.donkingliang.imageselector.utils.ImageSelector;
 import com.donkingliang.imageselector.utils.ImageSelectorUtils;
+import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.mvp.model.AddReqDtoListBean;
 import com.guochuang.mimedia.mvp.model.EditRedbagConfig;
 import com.guochuang.mimedia.mvp.model.LookVideoResult;
@@ -31,6 +32,8 @@ import com.guochuang.mimedia.mvp.model.ProblemBean;
 import com.guochuang.mimedia.mvp.model.RedBagConfig;
 import com.guochuang.mimedia.tools.BitmapUtils;
 import com.guochuang.mimedia.tools.LogUtil;
+import com.guochuang.mimedia.tools.OssManager;
+import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.ui.activity.common.MapPickActivity;
 import com.guochuang.mimedia.ui.adapter.PickVideoAdapter;
 import com.sz.gcyh.KSHongBao.R;
@@ -485,12 +488,13 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                     if (redPacketType.equals(Constant.RED_PACKET_TYPE_VIDEO)){
                         if (TextUtils.isEmpty(videoUrl)){//需要重新上传视频url
                             new File(Constant.COMPRESS_DIR_PATH).mkdirs();
+                            showLoadingDialog(R.string.upload_picture);
                             File frameFile = catVideoFrame(new File(videoPath));
                             if (frameFile.exists()) {
                                 //上传视频帧画面
-                                showLoadingDialog(R.string.upload_picture);
                                 mvpPresenter.fileUpload(Constant.BUSSINESSTYPE_RED_PACKET, frameFile);
                             }else {
+                                closeLoadingDialog();
                                 showShortToast(R.string.video_cover_dont_exist);
                             }
                         }else {
@@ -860,8 +864,52 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
         if (redPacketType.equals(Constant.RED_PACKET_TYPE_VIDEO)){
             coverUrl=data.getUrl();
             closeLoadingDialog();
+
             showLoadingDialog(R.string.upload_video);
-            mvpPresenter.videoFileUpload(Constant.BUSSINESSTYPE_RED_PACKET,new File(videoPath));
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    OssManager ossManager= new OssManager();
+                    ossManager.uploadVideo(videoPath,new OssManager.OnResultListener(){
+
+                        @Override
+                        public void onStart() {
+
+                        }
+
+                        @Override
+                        public void onProgress(int progress) {
+                        }
+
+                        @Override
+                        public void onSuccess(final String url) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    closeLoadingDialog();
+                                    if (!TextUtils.isEmpty(url)){
+                                        videoUrl=url;
+                                        selectPayType();
+                                    }
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onFail(String code, final String errmsg) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    closeLoadingDialog();
+                                    showShortToast(errmsg);
+                                }
+                            });
+
+                        }
+                    });
+                }
+            }).start();
+
         }else {
             waitUpload.remove(0);
             picUrlArr.add(data.getUrl());
@@ -907,14 +955,6 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
             tvPasswordTip.setText(data.getPasswordOutTime());
         }
     }
-    @Override
-    public void uploadVideoSuccess(UploadFile data) {
-        closeLoadingDialog();
-      if (data!=null){
-          videoUrl=data.getUrl();
-          selectPayType();
-      }
-    }
 
     @Override
     public void setProblems(LookVideoResult data) {
@@ -922,7 +962,6 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
         if (data!=null) {
             mProblemList.clear();
             List<LookVideoResult.QuestionListBean> questionList = data.getQuestionList();
-
             for (int index = 0; index < questionList.size(); index++) {
                 ProblemBean problemBean = new ProblemBean(Parcel.obtain());
                 LookVideoResult.QuestionListBean questionListBean = questionList.get(index);

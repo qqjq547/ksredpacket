@@ -37,7 +37,8 @@ public class PrefUtil {
 
     public static final String ISDRAG = "isdrag";
     public static final String EDIT_REDBAG_TYPE = "edit_redbag_type";
-
+    public static final String VIDEO_FOLDER= "video_folder";
+    public static final String IMAGE_FOLDER= "image_folder";
 
     public static void init(Context context) {
         preference = new PrefUtil(context);

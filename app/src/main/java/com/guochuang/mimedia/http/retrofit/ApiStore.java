@@ -107,6 +107,7 @@ import java.util.List;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
+import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -1505,7 +1506,8 @@ public interface ApiStore {
                                               @Query("uuid") String uuid,
                                               @Query("captcha") String captchastr);
 
-    @GET("/api/v1/token/get_oss_token")
-    Observable<HttpResponse<String>> getOssToken(@Query("content") String content);
+    @GET("/api/v1/file/get_oss_token")
+    Call<HttpResponse<String>> getOssToken(@Query("content") String content);
+
 
 }
