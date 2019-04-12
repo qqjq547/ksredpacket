@@ -88,7 +88,7 @@ public class RegisterActivity extends MvpActivity<RegisterPresenter> implements 
                     @Override
                     public void onCompleted() {
                         super.onCompleted();
-                        tvVerify.setText(getString(R.string.btn_login_forget_verify));
+                        tvVerify.setText(getString(R.string.btn_login_reset_verify));
                         tvVerify.setEnabled(true);
                         tvVerify.setBackgroundResource(R.drawable.bg_btn_forget_verify_red);
                         tvVerify.setTextColor(getResources().getColor(R.color.bg_btn_login_phone));
@@ -97,7 +97,7 @@ public class RegisterActivity extends MvpActivity<RegisterPresenter> implements 
                     @Override
                     public void onError(Throwable e) {
                         super.onError(e);
-                        tvVerify.setText(getString(R.string.btn_login_forget_verify));
+                        tvVerify.setText(getString(R.string.btn_login_reset_verify));
                         tvVerify.setEnabled(true);
                         tvVerify.setBackgroundResource(R.drawable.bg_btn_forget_verify_red);
                         tvVerify.setTextColor(getResources().getColor(R.color.bg_btn_login_phone));
@@ -120,7 +120,7 @@ public class RegisterActivity extends MvpActivity<RegisterPresenter> implements 
 
 
         Intent intent = new Intent(this,MyWechatActivity.class).putExtra(Constant.WHO_OPEN_MYWECHATACTIVITY,getClass().getSimpleName())
-                .putExtra(Constant.UESRPHONE_KEY, etPhone.getText().toString().trim()).putExtra(Constant.UESRPASSWORLD_KEY, etPassword.getText().toString().trim());
+                .putExtra(Constant.UESRPHONE_KEY, GeneralUtil.removeAllSpace(etPhone.getText().toString())).putExtra(Constant.UESRPASSWORLD_KEY, etPassword.getText().toString().trim());
         startActivity(intent);
         finish();
     }
@@ -206,7 +206,9 @@ public class RegisterActivity extends MvpActivity<RegisterPresenter> implements 
     }
 
     private boolean doCheck() {
-        if (etPhone.getText().length() < 13) {
+
+        boolean mobile = GeneralUtil.judgePhoneQual(GeneralUtil.removeAllSpace(etPhone.getText().toString()));
+        if (!mobile) {
             showShortToast(getResources().getString(R.string.input_phone_error));
             return false;
         }
