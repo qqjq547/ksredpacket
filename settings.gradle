@@ -1,1 +1,1 @@
-include ':app',':hellocharts-library',':mediapicker'
+include ':app', ':hellocharts-library', ':mediapicker', ':jjdxm-ijkplayer'

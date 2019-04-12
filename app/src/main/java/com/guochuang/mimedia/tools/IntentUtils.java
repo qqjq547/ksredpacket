@@ -19,6 +19,7 @@ import com.guochuang.mimedia.ui.activity.redbag.LookSurevyActivity;
 import com.guochuang.mimedia.ui.activity.redbag.LookVideoProblemActivity;
 import com.guochuang.mimedia.ui.activity.redbag.RedbagDetailActivity;
 import com.guochuang.mimedia.ui.activity.redbag.VideoPreviewActivity;
+import com.guochuang.mimedia.ui.activity.redbag.VideoPreviewActivity2;
 import com.guochuang.mimedia.ui.activity.user.CardAddActivity;
 import com.guochuang.mimedia.ui.activity.city.CityBidRecordActivity;
 import com.guochuang.mimedia.ui.activity.city.CityDetailActivity;
@@ -272,7 +273,7 @@ public class IntentUtils {
         activity.startActivity(intent);
     }
     public static void startVideoPreviewActivity(Activity activity, String videoPath){
-        Intent intent = new Intent(activity, VideoPreviewActivity.class);
+        Intent intent = new Intent(activity, VideoPreviewActivity2.class);
         intent.putExtra(Constant.VIDEO_PATH, videoPath);
         activity.startActivity(intent);
     }

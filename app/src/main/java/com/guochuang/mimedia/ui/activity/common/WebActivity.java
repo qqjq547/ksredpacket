@@ -206,8 +206,10 @@ public class WebActivity extends MvpActivity {
                     adCollectionView.setAdVideoListener(new AdCollectionView.AdVideoListener() {
                         @Override
                         public void onVideoFinish() {
+                            //todo
+
                             wvContent.loadUrl("javascript:slef.playFinished()");
-                        }
+                    }
 
                         @Override
                         public void onVideoError(String msg) {
