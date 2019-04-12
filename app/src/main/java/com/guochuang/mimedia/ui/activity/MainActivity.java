@@ -8,13 +8,11 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.telephony.mbms.DownloadProgressListener;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -23,15 +21,12 @@ import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-
-import com.allenliu.versionchecklib.callback.APKDownloadListener;
 import com.allenliu.versionchecklib.v2.AllenVersionChecker;
 import com.allenliu.versionchecklib.v2.builder.UIData;
 import com.allenliu.versionchecklib.v2.callback.CustomDownloadingDialogListener;
 import com.guochuang.mimedia.mvp.model.Remind;
-import com.guochuang.mimedia.tools.AdCollectionView;
 import com.guochuang.mimedia.tools.LogUtil;
-import com.guochuang.mimedia.ui.activity.common.KsbPayActivity;
+import com.guochuang.mimedia.tools.OssManager;
 import com.guochuang.mimedia.ui.dialog.RemindDialog;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.app.App;
@@ -166,32 +161,6 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
 //        if (!TextUtils.equals(channel,Constant.CHANNEL_DEFAULT)){
 //            mvpPresenter.marketSwitch(channel,String.valueOf(CommonUtil.getVersionCode(this)));
 //        }
-//        OssManager ossManager= new OssManager();
-//        ossManager.init();
-//        File file=new File(Constant.COMMON_PATH);
-//        File first=file.listFiles()[0];
-//        LogUtil.d("first="+first.getAbsolutePath());
-//        ossManager.putFile("test.png", first.getPath(), new OssManager.OnResultListener() {
-//            @Override
-//            public void onStart() {
-//                LogUtil.d("onStart");
-//            }
-//
-//            @Override
-//            public void onProgress(int progress) {
-//                LogUtil.d("onProgress="+progress);
-//            }
-//
-//            @Override
-//            public void onSuccess() {
-//                LogUtil.d("onSuccess");
-//            }
-//
-//            @Override
-//            public void onFail(String code, String errmsg) {
-//                LogUtil.d("onFail="+errmsg);
-//            }
-//        });
     }
 
     @Override

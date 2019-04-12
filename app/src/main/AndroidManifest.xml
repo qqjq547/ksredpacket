@@ -178,6 +178,8 @@
         <activity android:name="com.guochuang.mimedia.ui.activity.redbag.FillAnswerInfoActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.redbag.CheckQuestionActivity" />
 
+        <activity android:name="com.guochuang.mimedia.ui.activity.FengWoLinkWebViewActivity"/>
+
         // 广告信息获取service
         <service android:name="com.guochuang.mimedia.app.AdInfoService" />
 

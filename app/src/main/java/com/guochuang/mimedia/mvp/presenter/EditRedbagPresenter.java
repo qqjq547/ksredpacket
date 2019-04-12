@@ -2,6 +2,7 @@ package com.guochuang.mimedia.mvp.presenter;
 
 import android.util.Log;
 
+import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
@@ -21,6 +22,8 @@ import com.guochuang.mimedia.mvp.model.UploadFile;
 import com.guochuang.mimedia.mvp.view.EditRedbagView;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.GsonUtil;
+import com.guochuang.mimedia.tools.OssManager;
+import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.tools.RxUtil;
 
 import org.json.JSONArray;
@@ -177,29 +180,6 @@ public class EditRedbagPresenter extends BasePresenter<EditRedbagView> {
             public void onSuccess(UploadFile data) {
                 mvpView.setUploadFile(data);
 
-            }
-
-            @Override
-            public void onFailure(ApiException exception) {
-                mvpView.setUploadfail(exception.getMessage());
-
-            }
-
-            @Override
-            public void onFinish() {
-
-            }
-        });
-    }
-
-
-    public void videoFileUpload(String businessType, File file) {
-        RequestBody requestFile = RequestBody.create(MediaType.parse("application/octet-stream"), file);
-        MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().videoUpload(businessType,1, body)), new ApiCallback<UploadFile>() {
-            @Override
-            public void onSuccess(UploadFile data) {
-                mvpView.uploadVideoSuccess(data);
             }
 
             @Override

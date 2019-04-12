@@ -151,7 +151,11 @@
         android:layout_centerInParent="true"/>
 
     <!-- 顶部栏-->
-    <include layout="@layout/simple_player_topbar"/>
+    <include layout="@layout/video_player_topbar"/>
+
+
+
+
     <!-- 底部栏-->
     <include
         layout="@layout/simple_player_controlbar"
@@ -248,4 +252,17 @@
         android:layout_marginTop="8dp"
         android:src="@drawable/simple_player_center_play"/>
 
+    <com.guochuang.mimedia.view.CountDownView
+        android:id="@+id/count_down_view"
+        android:layout_marginTop="@dimen/space15"
+        android:layout_marginRight="@dimen/space15"
+        android:layout_width="@dimen/idcard_cn_dimen_60"
+        android:layout_height="@dimen/space30"
+        android:textColor="@color/text_white"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="60"
+        android:layout_alignParentRight="true"
+        android:background="@color/color_cc000000"
+        android:textSize="@dimen/sp_16"/>
 </RelativeLayout>

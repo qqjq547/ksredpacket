@@ -48,6 +48,7 @@ import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.LogUtil;
+import com.guochuang.mimedia.tools.OssManager;
 import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.tools.antishake.AntiShake;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
@@ -65,6 +66,8 @@ import com.guochuang.mimedia.view.HoneyCombView;
 import com.guochuang.mimedia.view.ScrollTextView;
 import com.sz.gcyh.KSHongBao.R;
 import com.tbruyelle.rxpermissions.RxPermissions;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -555,6 +558,8 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     public void setRedbagType(PublishRedbagType publishRedbagType) {
         if (publishRedbagType!=null){
             getPref().setString(PrefUtil.EDIT_REDBAG_TYPE,publishRedbagType.getRedPacketType());
+            getPref().setString(PrefUtil.VIDEO_FOLDER,publishRedbagType.getVideoFolder());
+            getPref().setString(PrefUtil.IMAGE_FOLDER,publishRedbagType.getImageFolder());
         }
     }
     @Override

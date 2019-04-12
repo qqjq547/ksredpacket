@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout android:id="@+id/app_video_top_box"
-              xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="?actionBarSize"
-              android:background="#CC000000"
-              android:gravity="center_vertical"
-              android:orientation="horizontal">
-
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?actionBarSize"
+    android:background="#CC000000"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+   <!-- android:layout_height="?actionBarSize"-->
     <ImageView
         android:id="@+id/app_video_finish"
         android:layout_width="wrap_content"
@@ -25,10 +25,16 @@
         android:textSize="12dp"
         android:visibility="visible"/>
 
-    <ImageView
-        android:id="@+id/app_video_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/simple_player_menu"/>
+
+        <ImageView
+            android:id="@+id/app_video_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/simple_player_menu"/>
+
+
+
+
+
 
 </LinearLayout>

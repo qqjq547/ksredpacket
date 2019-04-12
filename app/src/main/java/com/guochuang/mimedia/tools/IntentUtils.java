@@ -9,6 +9,7 @@ import android.net.Uri;
 import com.guochuang.mimedia.mvp.model.NestAd;
 import com.guochuang.mimedia.mvp.model.RecommendData;
 import com.guochuang.mimedia.mvp.model.RedbagDetail;
+import com.guochuang.mimedia.ui.activity.FengWoLinkWebViewActivity;
 import com.guochuang.mimedia.ui.activity.beenest.BeeNestActivity;
 import com.guochuang.mimedia.ui.activity.beenest.BidBrandActivity;
 import com.guochuang.mimedia.ui.activity.beenest.EditAdActivity;
@@ -308,5 +309,19 @@ public class IntentUtils {
         intent.putExtra(Constant.RED_PACKET_UUID,redPacketUuid);
         intent.putExtra(Constant.SURVEYID,surveyId);
         activity.startActivity(intent);
+    }
+
+    public static void startVideoPreviewActivityForResult(Activity activity, String path) {
+        Intent intent = new Intent(activity, VideoPreviewActivity2.class);
+        intent.putExtra(Constant.VIDEO_PATH, path);
+        intent.putExtra(Constant.COUNTDOWN_GONE, false);
+        activity.startActivityForResult(intent,Constant.REQUEST_STARTPREVIDEO_CODE);
+    }
+
+    public static void startFengWoLinkWebViewActivity(Activity activity, String title, String url) {
+        Intent intent = new Intent(activity, FengWoLinkWebViewActivity.class);
+        intent.putExtra(Constant.TITLE,title);
+        intent.putExtra(Constant.URL,url);
+        activity.startActivityForResult(intent,Constant.REQUEST_STARTPRE_FENGWOLINKWEB);
     }
 }

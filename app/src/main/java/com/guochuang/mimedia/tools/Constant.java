@@ -17,7 +17,7 @@ public class Constant {
      * 是否调试模式
      */
     public static final boolean isDebug = (BuildConfig.ENV == 0);
-    public static final int DEFAULT_HOST = 0;
+    public static final int DEFAULT_HOST = 2;
 
     public static final int HTTP_STATUS_FORCE_LOGIN = 1007;
     public static final int HTTP_STATUS_REDBAD_INVALID = 10012;
@@ -310,6 +310,12 @@ public class Constant {
     public static final int GOTOAPLAYYWEIXIN = 2719;
     public static final String UESRPHONE_KEY = "用戶电话号码";
     public static final String UESRPASSWORLD_KEY = "用户密码";
+    public static final int FENGWO_ADVERTISEMENT_LINKE = 2;
+    public static final int FENGWO_ADVERTISEMENT_VIDEO = 1;
+    public static final String COUNTDOWNTIME = "倒计时";
+    public static final int REQUEST_STARTPREVIDEO_CODE = 0x000146;
+    public static final int REQUEST_STARTPRE_FENGWOLINKWEB = 0x000147;
+    public static final String COUNTDOWN_GONE = "ISGONG";
 
     //   视频红包与问卷红包 问题类型 0：单选 1：多选 2：填空题
     public static int SINGLESELECT = 0;

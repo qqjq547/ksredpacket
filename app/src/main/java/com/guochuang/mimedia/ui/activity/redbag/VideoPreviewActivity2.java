@@ -2,6 +2,7 @@ package com.guochuang.mimedia.ui.activity.redbag;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -16,6 +17,7 @@ import com.dou361.ijkplayer.listener.OnShowThumbnailListener;
 import com.dou361.ijkplayer.widget.PlayStateParams;
 import com.dou361.ijkplayer.widget.PlayerView;
 import com.guochuang.mimedia.tools.Constant;
+import com.guochuang.mimedia.view.CountDownView;
 import com.sz.gcyh.KSHongBao.R;
 
 import java.util.HashMap;
@@ -25,7 +27,9 @@ public class VideoPreviewActivity2 extends  Activity {
     private PlayerView player;
     private Context mContext;
     private View rootView;
+    private CountDownView mCountDownView;
     String url;
+    boolean gone = true;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,10 +37,15 @@ public class VideoPreviewActivity2 extends  Activity {
         rootView = getLayoutInflater().from(this).inflate(R.layout.activity_videopreview2, null);
         setContentView(rootView);
 
-
+        gone = getIntent().getBooleanExtra(Constant.COUNTDOWN_GONE, gone);
+        if(!gone) {
+            mCountDownView = findViewById(R.id.count_down_view);
+            mCountDownView.start();
+        }
 
 
         url = getIntent().getStringExtra(Constant.VIDEO_PATH);
+
         MediaMetadataRetriever mmr = new MediaMetadataRetriever();
         if (!url.startsWith("http")) {
             //设置数据源为该文件对象指定的绝对路径
@@ -114,10 +123,20 @@ public class VideoPreviewActivity2 extends  Activity {
 
     @Override
     public void onBackPressed() {
+
         if (player != null && player.onBackPressed()) {
             return;
         }
+
+        Intent intent = getIntent();
+        intent.putExtra(Constant.COUNTDOWNTIME,mCountDownView.getCurrentTime());
+        setResult(RESULT_OK,intent);
         super.onBackPressed();
+
+
+
+
+
     }
 
 }

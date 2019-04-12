@@ -2,104 +2,7 @@ package com.guochuang.mimedia.http.retrofit;
 
 import com.guochuang.mimedia.http.response.HttpResponse;
 import com.guochuang.mimedia.http.response.Page;
-import com.guochuang.mimedia.mvp.model.AdInfo;
-import com.guochuang.mimedia.mvp.model.Address;
-import com.guochuang.mimedia.mvp.model.AlipayAccout;
-import com.guochuang.mimedia.mvp.model.Area;
-import com.guochuang.mimedia.mvp.model.BenefitType;
-import com.guochuang.mimedia.mvp.model.BidPrice;
-import com.guochuang.mimedia.mvp.model.BoardDetail;
-import com.guochuang.mimedia.mvp.model.CalValue;
-import com.guochuang.mimedia.mvp.model.CityBidRecord;
-import com.guochuang.mimedia.mvp.model.DrawStatistics;
-import com.guochuang.mimedia.mvp.model.EditRedbagConfig;
-import com.guochuang.mimedia.mvp.model.GeoCode;
-import com.guochuang.mimedia.mvp.model.HomeRegion;
-import com.guochuang.mimedia.mvp.model.IncomeDetail;
-import com.guochuang.mimedia.mvp.model.IncomeStatistics;
-import com.guochuang.mimedia.mvp.model.DictionaryType;
-import com.guochuang.mimedia.mvp.model.InfoItem;
-import com.guochuang.mimedia.mvp.model.InviterUser;
-import com.guochuang.mimedia.mvp.model.JxwUserInfoUrl;
-import com.guochuang.mimedia.mvp.model.KsbRecord;
-import com.guochuang.mimedia.mvp.model.KsbTransfer;
-import com.guochuang.mimedia.mvp.model.KsbTrend;
-import com.guochuang.mimedia.mvp.model.CurrentRegion;
-import com.guochuang.mimedia.mvp.model.CityBidHall;
-import com.guochuang.mimedia.mvp.model.LookSurevyResult;
-import com.guochuang.mimedia.mvp.model.LookVideoResult;
-import com.guochuang.mimedia.mvp.model.LookVideoPBResult;
-import com.guochuang.mimedia.mvp.model.LuckyConfig;
-import com.guochuang.mimedia.mvp.model.LuckyResult;
-import com.guochuang.mimedia.mvp.model.MegviiSerach;
-import com.guochuang.mimedia.mvp.model.Message;
-import com.guochuang.mimedia.mvp.model.MyAd;
-import com.guochuang.mimedia.mvp.model.MyKsb;
-import com.guochuang.mimedia.mvp.model.MyKsbGrantRec;
-import com.guochuang.mimedia.mvp.model.MyKsbTransRec;
-import com.guochuang.mimedia.mvp.model.MyRegion;
-import com.guochuang.mimedia.mvp.model.MyWechat;
-import com.guochuang.mimedia.mvp.model.NameAuthAndSafety;
-import com.guochuang.mimedia.mvp.model.NameAuthGet;
-import com.guochuang.mimedia.mvp.model.CommentInfo;
-import com.guochuang.mimedia.mvp.model.CommentRedbag;
-import com.guochuang.mimedia.mvp.model.NestAd;
-import com.guochuang.mimedia.mvp.model.NestAuctionMsg;
-import com.guochuang.mimedia.mvp.model.NestAuctionRecord;
-import com.guochuang.mimedia.mvp.model.NestFavorite;
-import com.guochuang.mimedia.mvp.model.NestHistory;
-import com.guochuang.mimedia.mvp.model.NestHomeAd;
-import com.guochuang.mimedia.mvp.model.NestInfoLimit;
-import com.guochuang.mimedia.mvp.model.NestLocation;
-import com.guochuang.mimedia.mvp.model.NestRandomAd;
-import com.guochuang.mimedia.mvp.model.NestStatistics;
-import com.guochuang.mimedia.mvp.model.NestTemplate;
-import com.guochuang.mimedia.mvp.model.NestTimeInfo;
-import com.guochuang.mimedia.mvp.model.Order;
-import com.guochuang.mimedia.mvp.model.PayCode;
-import com.guochuang.mimedia.mvp.model.PayConfig;
-import com.guochuang.mimedia.mvp.model.PayeeUser;
-import com.guochuang.mimedia.mvp.model.PaymentResult;
-import com.guochuang.mimedia.mvp.model.PublishRedbagType;
-import com.guochuang.mimedia.mvp.model.QrCode;
-import com.guochuang.mimedia.mvp.model.RainMsg;
-import com.guochuang.mimedia.mvp.model.RainRecord;
-import com.guochuang.mimedia.mvp.model.RecommedUser;
-import com.guochuang.mimedia.mvp.model.RecommendData;
-import com.guochuang.mimedia.mvp.model.RecommendDetail;
-import com.guochuang.mimedia.mvp.model.RedBagConfig;
-import com.guochuang.mimedia.mvp.model.RedbagBenefit;
-import com.guochuang.mimedia.mvp.model.RedbagInfo;
-import com.guochuang.mimedia.mvp.model.RedbagReceived;
-import com.guochuang.mimedia.mvp.model.BindingPhone;
-import com.guochuang.mimedia.mvp.model.Captcha;
-import com.guochuang.mimedia.mvp.model.CardList;
-import com.guochuang.mimedia.mvp.model.Category;
-import com.guochuang.mimedia.mvp.model.FavoriteAndPraise;
-import com.guochuang.mimedia.mvp.model.InfoDetail;
-import com.guochuang.mimedia.mvp.model.RedPacketReply;
-import com.guochuang.mimedia.mvp.model.RedbagDetail;
-import com.guochuang.mimedia.mvp.model.RedbagRecord;
-import com.guochuang.mimedia.mvp.model.RedbagTemp;
-import com.guochuang.mimedia.mvp.model.RedbagUser;
-import com.guochuang.mimedia.mvp.model.RegionCore;
-import com.guochuang.mimedia.mvp.model.RegionCoreHome;
-import com.guochuang.mimedia.mvp.model.RegionDetail;
-import com.guochuang.mimedia.mvp.model.RegistUser;
-import com.guochuang.mimedia.mvp.model.Remind;
-import com.guochuang.mimedia.mvp.model.Reply;
-import com.guochuang.mimedia.mvp.model.Redbag;
-import com.guochuang.mimedia.mvp.model.SafeCenter;
-import com.guochuang.mimedia.mvp.model.SetUpUser;
-import com.guochuang.mimedia.mvp.model.ShareBenefit;
-import com.guochuang.mimedia.mvp.model.Snatch;
-import com.guochuang.mimedia.mvp.model.SnatchAddress;
-import com.guochuang.mimedia.mvp.model.SnatchShow;
-import com.guochuang.mimedia.mvp.model.Square;
-import com.guochuang.mimedia.mvp.model.UploadFile;
-import com.guochuang.mimedia.mvp.model.UserInfo;
-import com.guochuang.mimedia.mvp.model.UserStatistics;
-import com.guochuang.mimedia.mvp.model.VersionMsg;
+import com.guochuang.mimedia.mvp.model.*;
 
 
 import java.util.List;
@@ -107,6 +10,7 @@ import java.util.List;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
+import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -1505,7 +1409,12 @@ public interface ApiStore {
                                               @Query("uuid") String uuid,
                                               @Query("captcha") String captchastr);
 
-    @GET("/api/v1/token/get_oss_token")
-    Observable<HttpResponse<String>> getOssToken(@Query("content") String content);
+    @GET("/api/v1/file/get_oss_token")
+    Call<HttpResponse<String>> getOssToken(@Query("content") String content);
 
+    /**
+     * 随机获取一条广告
+     */
+    @GET("/api/v1/activity/beehiveBonus/randomQueryOne")
+    Observable<HttpResponse<FengWoVideoOrLink>> getAdvertisement();
 }

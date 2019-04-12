@@ -21,7 +21,6 @@ public interface EditRedbagView {
     void setTempData(List<RedbagTemp> data);
     void setLuckyConfig(LuckyConfig data);
     void setConfig(EditRedbagConfig data);
-    void uploadVideoSuccess(UploadFile data);
     void setProblems(LookVideoResult data);
     void checkConfigSuccess(RedBagConfig data);
     void setError(String msg);
