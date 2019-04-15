@@ -95,6 +95,13 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
         }
     };
     private long mDismissTime;
+    private static LoginActivity instance;
+
+    public static void closeActivity(){
+        if (instance!=null){
+            instance.finish();
+        }
+    }
 
 
     @Override
@@ -110,8 +117,7 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
 
     @Override
     public void initViewAndData() {
-
-
+        instance=this;
         SoftKeyBoardListener.setListener(this, listener);
 
         BoxStore boxStore = App.getInstance().getBoxStore();

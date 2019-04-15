@@ -17,7 +17,7 @@ public class Constant {
      * 是否调试模式
      */
     public static final boolean isDebug = (BuildConfig.ENV == 0);
-    public static final int DEFAULT_HOST = 2;
+    public static final int DEFAULT_HOST = 0;
 
     public static final int HTTP_STATUS_FORCE_LOGIN = 1007;
     public static final int HTTP_STATUS_REDBAD_INVALID = 10012;

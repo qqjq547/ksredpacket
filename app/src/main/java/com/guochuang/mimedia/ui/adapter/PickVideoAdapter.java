@@ -10,7 +10,10 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.guochuang.mimedia.tools.CommonUtil;
+import com.guochuang.mimedia.tools.glide.GlideApp;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
+import com.guochuang.mimedia.tools.glide.RadiusTransformation;
 import com.sz.gcyh.KSHongBao.R;
 
 import java.io.File;
@@ -35,11 +38,14 @@ public class PickVideoAdapter extends BaseQuickAdapter<String,BaseViewHolder> {
                 mmr.setDataSource(item, new HashMap<String, String>());
                 //获得视频第一帧的Bitmap对象
                 Bitmap bitmap = mmr.getFrameAtTime();
-                ivPicture.setImageBitmap(bitmap);
-
+                GlideApp.with(mContext)
+                        .load(bitmap)
+                        .transform(new RadiusTransformation(mContext,CommonUtil.dip2px(mContext,8)))
+                        .into(ivPicture);
             }else {
-                Glide.with(mContext)
+                GlideApp.with(mContext)
                         .load(Uri.parse("file://" +item))
+                        .transform(new RadiusTransformation(mContext,CommonUtil.dip2px(mContext,8)))
                         .into(ivPicture);
             }
 
