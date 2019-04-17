@@ -28,6 +28,7 @@
         android:maxLength="50"
         android:minHeight="58dp"
         android:padding="@dimen/space10"
+        android:textCursorDrawable="@null"
         android:textSize="@dimen/sp_14" />
 
     <LinearLayout

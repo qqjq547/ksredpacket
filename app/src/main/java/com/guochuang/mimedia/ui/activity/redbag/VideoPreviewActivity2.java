@@ -40,6 +40,7 @@ public class VideoPreviewActivity2 extends  Activity {
         gone = getIntent().getBooleanExtra(Constant.COUNTDOWN_GONE, gone);
         if(!gone) {
             mCountDownView = findViewById(R.id.count_down_view);
+            mCountDownView.setVisibility(View.VISIBLE);
             mCountDownView.start();
         }
 

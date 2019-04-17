@@ -19,7 +19,7 @@ public class CountDownView extends TextView {
             mHandler.sendEmptyMessageDelayed(0,1000);
             if(mTime > 0) {
                 --mTime;
-                setText(mTime + "");
+                setText(mTime + "秒");
             }else {
                 setVisibility(GONE);
             }
@@ -43,14 +43,14 @@ public class CountDownView extends TextView {
 
     private void intit() {
         setBackgroundColor(defultColor);
-        setText(mTime + "");
+        setText(mTime + "秒");
     }
 
 
     private void setTime(int time) {
         mTime = time;
         setVisibility(VISIBLE);
-        setText(mTime + "");
+        setText(mTime + "秒");
     }
 
     public void start() {
