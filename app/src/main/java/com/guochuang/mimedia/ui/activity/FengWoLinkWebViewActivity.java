@@ -74,7 +74,7 @@ public class FengWoLinkWebViewActivity extends MvpActivity {
                 if (TextUtils.equals(url, "jxaction://close")) {
                     finish();
                 } else {
-                    IntentUtils.startWebActivity(FengWoLinkWebViewActivity.this, view.getTitle(), url, hasRefresh);
+                    return super.shouldOverrideUrlLoading(view,url);
                 }
                 return true;
             }

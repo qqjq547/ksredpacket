@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">快收红包</string>
+    <string name="app_release_name">快收红包</string>
+    <string name="app_dev_name">快收</string>
 
     <string name="tab_info">资讯</string>
     <string name="tab_game">蜜玩</string>

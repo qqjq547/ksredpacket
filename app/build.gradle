@@ -32,14 +32,17 @@ android {
     buildTypes {
         debug {
             buildConfigField "int", "ENV", "0"
+            resValue "string", "app_name", "快收"
             minifyEnabled false
             signingConfig signingConfigs.config
         }
         release {
             buildConfigField "int", "ENV", "2"
+            resValue "string", "app_name", "快收红包"
             minifyEnabled false
             signingConfig signingConfigs.config
         }
+
     }
     packagingOptions {
         exclude 'META-INF/proguard/androidx-annotations.pro'
