@@ -6,6 +6,7 @@ import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.guochuang.mimedia.tools.CommonUtil;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 
@@ -25,9 +26,9 @@ public class PickImageAdapter extends BaseQuickAdapter<String,BaseViewHolder> {
             helper.setGone(R.id.iv_delete,false);
         }else {
             if (item.startsWith("http")){
-                GlideImgManager.loadImage(mContext,item,ivPicture);
+                GlideImgManager.loadCornerImage(mContext,item,ivPicture,CommonUtil.dip2px(mContext,8));
             }else {
-                GlideImgManager.loadImage(mContext,new File(item),ivPicture);
+                GlideImgManager.loadCornerImage(mContext,new File(item),ivPicture,CommonUtil.dip2px(mContext,8));
             }
             helper.setGone(R.id.iv_delete,true);
             helper.addOnClickListener(R.id.iv_delete);

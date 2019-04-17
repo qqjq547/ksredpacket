@@ -147,22 +147,6 @@ public class App extends Application {
         System.exit(0);
     }
 
-    /**
-     * 根据class finish
-     */
-    public void finishActivity(Class<? extends Activity> clazz) {
-
-        for (Activity activity : activityList) {
-            if (null != activity) {
-                if(clazz.getSimpleName().equals(activity.getClass().getSimpleName())) {
-                    activity.finish();
-                    activityList.remove(activity);
-                }
-
-            }
-        }
-    }
-
     public BoxStore getBoxStore() {
         return boxStore;
     }

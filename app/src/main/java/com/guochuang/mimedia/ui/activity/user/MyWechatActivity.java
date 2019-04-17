@@ -172,19 +172,10 @@ public class MyWechatActivity extends MvpActivity<MyWechatPresenter> implements 
         savePhone();
         UserLogin userLogin = new Gson().fromJson(CommonUtil.baseDecrypt(data.split("\\.")[1]), UserLogin.class);
         getPref().setString(PrefUtil.USER_TOKEN, data);
-//        if (TextUtils.isEmpty(userLogin.getMobile())) {
-//            Intent intent = new Intent(this, BindingPhoneAcitivity.class);
-//            startActivity(intent);
-//            finish();
-//        } else {
             getPref().setString(PrefUtil.MOBILE, userLogin.getMobile());
             IntentUtils.startMainActivity(this, true);
-            //关闭登录
-
-            App.getInstance().finishActivity(LoginActivity.class);
+            LoginActivity.closeActivity();
             finish();
-//        }
-
     }
 
     private void savePhone() {
@@ -195,7 +186,6 @@ public class MyWechatActivity extends MvpActivity<MyWechatPresenter> implements 
                 mBox.remove(phoneEntitys.get(i));
             }
         }
-
         PhoneEntity phoneEntity = new PhoneEntity();
         phoneEntity.setPhone(mMobile);
         mBox.put(phoneEntity);

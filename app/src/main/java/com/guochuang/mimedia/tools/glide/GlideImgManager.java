@@ -54,6 +54,13 @@ public class GlideImgManager {
                 .into(imageView);
 
     }
+    public static void loadCornerImage(Context context, final File file, final ImageView imageView,int radius) {
+        GlideApp.with(context)
+                .load(file)
+                .transform(new RadiusTransformation(context,radius))
+                .into(imageView);
+
+    }
     public static void loadImage(Context context, final int resourceId, final ImageView imageView) {
         GlideApp.with(context)
                 .load(resourceId)
