@@ -26,6 +26,7 @@
         android:maxLength="30"
         android:hint="请输入问题的答案"
         android:gravity="top"
+        android:textCursorDrawable="@null"
         android:background="@drawable/bg_gray_rect_line_shap"
         android:layout_weight="1"/>
 

@@ -229,6 +229,13 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
 
         RadioGroup rgProblemType = alertDialog.getView(R.id.rg_problem_type);
 
+        //视频红包去掉填空题  start
+        if(Constant.RED_PACKET_TYPE_VIDEO.equals(mRedPacketType)) {
+            View view = alertDialog.getView(R.id.eb_fill_in_blanks);
+            view .setVisibility(View.INVISIBLE);
+            view.setEnabled(false);
+        }
+        //视频红包去掉填空题  end
 
         rgProblemType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

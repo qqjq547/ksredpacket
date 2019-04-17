@@ -1,11 +1,9 @@
 package com.guochuang.mimedia.ui.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.text.TextUtils;
 import android.view.View;
-import android.webkit.DownloadListener;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -14,11 +12,9 @@ import android.widget.TextView;
 
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
-import com.guochuang.mimedia.tools.AdCollectionView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.IntentUtils;
-import com.guochuang.mimedia.ui.activity.common.WebActivity;
 import com.guochuang.mimedia.view.CountDownView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -92,13 +88,6 @@ public class FengWoLinkWebViewActivity extends MvpActivity {
                 }
             }
         });
-      /*  wvContent.addJavascriptInterface(new WebActivity.JSInterface(this), "browserController");
-        wvContent.setDownloadListener(new DownloadListener() {
-            @Override
-            public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimeType, long contentLength) {
-                downloadByBrowser(url);
-            }
-        });*/
         wvContent.loadUrl(CommonUtil.getTimeStampUrl(url));
         srlRefresh.setEnableLoadmore(false);
         srlRefresh.setOnRefreshListener(new OnRefreshListener() {
