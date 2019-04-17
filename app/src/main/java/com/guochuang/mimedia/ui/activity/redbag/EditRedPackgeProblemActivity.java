@@ -55,6 +55,9 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
     TextView mTvTitle;
     @BindView(R.id.iv_back)
     ImageView ivBack;
+    @BindView(R.id.tv_text)
+    TextView mTvText;
+
 
     private EditRedPackgeProblemAdapter mEditRedPackgeProblemAdapter;
     private String mRedPacketType;
@@ -78,6 +81,7 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
     @Override
     public void initViewAndData() {
         setStatusbar(R.color.white, true);
+        mTvText.setText(getString(R.string.next_str));
         mProblemList = getIntent().getParcelableArrayListExtra(Constant.PROBLEMLIST_KEY);
         mRedPacketType = getIntent().getStringExtra(Constant.RED_PACKET_TYPE);
 
@@ -177,9 +181,10 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
     }
 
 
-    @OnClick({R.id.iv_back, R.id.tv_add_problem})
+    @OnClick({R.id.iv_back, R.id.tv_add_problem,R.id.tv_text})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.tv_text:
             case R.id.iv_back:
                 onBackPressed();
                 //把题目的值带回去

@@ -6,7 +6,8 @@
     android:orientation="vertical">
 
 
-    <include layout="@layout/layout_title"/>
+    <include layout="@layout/layout_title_text"/>
+
 
     <com.guochuang.mimedia.view.recycleview.WrapEmptyRecyclerView
         android:id="@+id/recycler_list"

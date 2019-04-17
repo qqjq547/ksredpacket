@@ -800,5 +800,6 @@
     <string name="idcard_str">身份证号码</string>
     <string name="banck_card_str">银行卡</string>
     <string name="btn_login_reset_verify">重新获取</string>
+    <string name="next_str">下一步</string>
 
 </resources>
