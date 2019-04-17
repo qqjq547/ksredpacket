@@ -203,7 +203,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                                 public void onOpenResult(String password) {
                                     optMarker.remove();
                                     showLoadingDialog(null);
-                                    if (redbag.getRoleType().equals(Constant.ROLETYPE_SYSTEM)) {
+                                    if (redbag.getRoleType().equals(Constant.ROLETYPE_SYSTEM)||redbag.getRoleType().equals(Constant.ROLETYPE_LINK)) {
                                         mvpPresenter.redPacketOpen(getPref().getLatitude(), getPref().getLongitude(), redbag.getUuid());
                                     } else {
                                         if ((redbag.getType().equals(Constant.RED_PACKET_TYPE_VIDEO) && redbag.getSurveyId() > 0) || redbag.getType().equals(Constant.RED_PACKET_TYPE_SURVEY)) {
@@ -462,7 +462,14 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
         //保存数据
         getPref().setInt(PrefUtil.ISDRAG, redbagDetail.getNextValidate());
         if (redbagDetail != null) {
-            IntentUtils.startRedbagDetailActivity(getActivity(), redbagDetail, redbag.getUuid(), redbag.getRoleType(),redbag.getType());
+            if (redbag.getRoleType().equals(Constant.ROLETYPE_SYSTEM)){
+                IntentUtils.startRedbagDetailActivity(getActivity(), redbagDetail, redbag.getUuid(), redbag.getRoleType(),redbag.getType());
+            }else if(redbag.getRoleType().equals(Constant.ROLETYPE_LINK)){
+                IntentUtils.startLinkRedbagDetailActivity(getActivity(), redbagDetail, redbag.getUuid(), redbag.getRoleType(),redbag.getType());
+            }else {
+                IntentUtils.startRedbagDetailActivity(getActivity(), redbagDetail, redbag.getUuid(), redbag.getRoleType(),redbag.getType());
+            }
+
         }
     }
 
@@ -578,6 +585,9 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                 case Constant.ROLETYPE_SYSTEM:
                     bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_map_redbag_system);
                     break;
+                case Constant.ROLETYPE_LINK:
+                    bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_map_redbag_shop);
+                    break;
                 case Constant.ROLETYPE_MERCHANT:
                     bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_map_redbag_shop);
                     break;
@@ -654,7 +664,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                         startActivity(new Intent(getActivity(), AdBidActivity.class));
                     }
                 }, 500);
-//                startActivity(new Intent(getActivity(),AdBidActivity.class));
+//                startActivity(new Intent(getActivity(),AdBidActivity.class))    ;
             }
         });
     }

@@ -48,10 +48,10 @@ public class LinkRedbagDetailActivity extends MvpActivity<LinkRedbagDetailPresen
 
     @Override
     public void initViewAndData() {
+        setStatusbar(R.color.bg_white, true);
         redbagDetail = (RedbagDetail) getIntent().getSerializableExtra(Constant.RED_PACKET_DETAIL);
-        showLoadingDialog(null);
-        setStatusbar(R.color.bg_red, false);
         if (redbagDetail == null) {
+            showLoadingDialog(null);
             redPacketUuid = getIntent().getStringExtra(Constant.RED_PACKET_UUID);
             roleType = getIntent().getStringExtra(Constant.ROLE_TYPE);
             redPacketType = getIntent().getStringExtra(Constant.RED_PACKET_TYPE);//可能为空
@@ -61,7 +61,10 @@ public class LinkRedbagDetailActivity extends MvpActivity<LinkRedbagDetailPresen
         }
         redPacketUuid = getIntent().getStringExtra(Constant.RED_PACKET_UUID);
         redPacketType=getIntent().getStringExtra(Constant.RED_PACKET_TYPE);
+        tvTitle.setText(redbagDetail.getCoin()+getString(R.string.ksb));
         CommonUtil.initH5WebView(this, wvContent);
+        wvContent.loadUrl(redbagDetail.getLinkAddress());
+        startCountDown(redbagDetail.getReadingSecond());
     }
 
     @OnClick(R.id.iv_back)
@@ -102,11 +105,17 @@ public class LinkRedbagDetailActivity extends MvpActivity<LinkRedbagDetailPresen
     }
     @Override
     public void setInfo(RedbagInfo data) {
-
+        closeLoadingDialog();
+       if (data!=null){
+           tvTitle.setText(data.getDrawCoin()+getString(R.string.ksb));
+           CommonUtil.initH5WebView(this, wvContent);
+           wvContent.loadUrl(data.getLinkAddress());
+       }
     }
 
     @Override
     public void setError(String msg) {
-
+        closeLoadingDialog();
+        showShortToast(msg);
     }
 }

@@ -16,6 +16,7 @@ import com.guochuang.mimedia.ui.activity.beenest.EditAdActivity;
 import com.guochuang.mimedia.ui.activity.common.ImagePreviewActivity;
 import com.guochuang.mimedia.ui.activity.redbag.CheckQuestionActivity;
 import com.guochuang.mimedia.ui.activity.redbag.EditRedbagActivity;
+import com.guochuang.mimedia.ui.activity.redbag.LinkRedbagDetailActivity;
 import com.guochuang.mimedia.ui.activity.redbag.LookSurevyActivity;
 import com.guochuang.mimedia.ui.activity.redbag.LookVideoProblemActivity;
 import com.guochuang.mimedia.ui.activity.redbag.RedbagDetailActivity;
@@ -75,8 +76,24 @@ public class IntentUtils {
         intent.putExtra(Constant.RED_PACKET_TYPE,redPacketType);
         activity.startActivity(intent);
     }
+    public static void startLinkRedbagDetailActivity(Activity activity, RedbagDetail redbagDetail,String redPacketUuid,String roleType,String redPacketType) {
+        Intent intent = new Intent(activity, LinkRedbagDetailActivity.class);
+        intent.putExtra(Constant.RED_PACKET_DETAIL,redbagDetail);
+        intent.putExtra(Constant.RED_PACKET_UUID,redPacketUuid);
+        intent.putExtra(Constant.ROLE_TYPE,roleType);
+        intent.putExtra(Constant.RED_PACKET_TYPE,redPacketType);
+        activity.startActivity(intent);
+    }
     public static void startRedbagDetailActivity(Activity activity, String redPacketUuid,String roleType,String redPacketType,String startIndex) {
         Intent intent = new Intent(activity, RedbagDetailActivity.class);
+        intent.putExtra(Constant.RED_PACKET_UUID,redPacketUuid);
+        intent.putExtra(Constant.ROLE_TYPE,roleType);
+        intent.putExtra(Constant.RED_PACKET_TYPE,redPacketType);
+        intent.putExtra(Constant.START_INDEX,startIndex);
+        activity.startActivity(intent);
+    }
+    public static void startLinkRedbagDetailActivity(Activity activity, String redPacketUuid,String roleType,String redPacketType,String startIndex) {
+        Intent intent = new Intent(activity, LinkRedbagDetailActivity.class);
         intent.putExtra(Constant.RED_PACKET_UUID,redPacketUuid);
         intent.putExtra(Constant.ROLE_TYPE,roleType);
         intent.putExtra(Constant.RED_PACKET_TYPE,redPacketType);

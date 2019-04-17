@@ -211,7 +211,7 @@ public class CityBidHallActivity extends MvpActivity<CityBidHallPresenter> imple
                 if (provinceCityPop != null && provinceCityPop.isShowing()) {
                     provinceCityPop.dismiss();
                 }
-                CommonUtil.hideInput(this, getCurrentFocus());
+                CommonUtil.hideInput(this, etCityBidHallQuery);
                 if (TextUtils.isEmpty(etCityBidHallQuery.getText().toString())) {
                     showShortToast(getResources().getString(R.string.city_bid_hall_query_hint));
                     return;

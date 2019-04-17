@@ -244,6 +244,7 @@ public class Constant {
     public static final String ROLETYPE_PERSON = "person";
     public static final String ROLETYPE_MERCHANT = "merchant";
     public static final String ROLETYPE_SYSTEM = "system";
+    public static final String ROLETYPE_LINK = "link";
 
     public static final int PAY_TYPE_WXPAY = 11;
     public static final int PAY_TYPE_ALIPAY = 101;

@@ -126,6 +126,7 @@ public class Redbag implements Serializable {
         this.coverUrl = coverUrl;
     }
 
+
     @Override
     public String toString() {
         return "Redbag{" +
