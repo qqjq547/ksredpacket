@@ -47,6 +47,7 @@ public class RedbagDetail implements Serializable {
     private List<PictureBean> picture;
     private List<RedbagAd> systemAd;
     private int nextValidate;
+    private String linkAddress;
 
     public int getNextValidate() {
         return nextValidate;
@@ -223,5 +224,13 @@ public class RedbagDetail implements Serializable {
 
     public void setSystemAd(List<RedbagAd> systemAd) {
         this.systemAd = systemAd;
+    }
+
+    public String getLinkAddress() {
+        return linkAddress;
+    }
+
+    public void setLinkAddress(String linkAddress) {
+        this.linkAddress = linkAddress;
     }
 }

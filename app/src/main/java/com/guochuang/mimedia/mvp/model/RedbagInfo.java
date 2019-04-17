@@ -39,6 +39,7 @@ public class RedbagInfo {
     private String videoUrl;
     private String coverUrl;
     private String redPacketSubType;
+    private String linkAddress;
 
     public String getDrawCoin() {
         return drawCoin;
@@ -198,5 +199,13 @@ public class RedbagInfo {
 
     public void setRedPacketSubType(String redPacketSubType) {
         this.redPacketSubType = redPacketSubType;
+    }
+
+    public String getLinkAddress() {
+        return linkAddress;
+    }
+
+    public void setLinkAddress(String linkAddress) {
+        this.linkAddress = linkAddress;
     }
 }
