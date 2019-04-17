@@ -69,6 +69,7 @@ public class AnswerAdapter extends BaseQuickAdapter<LookVideoResult.QuestionList
                 helper.setGone(R.id.rgroup_answer,false);
                 helper.setGone(R.id.lin_check,false);
                 helper.setText(R.id.tv_question,mContext.getString(R.string.input_blank)+item.getTitle());
+                ((EditText)helper.getView(R.id.et_direct_answeer)).setHint(mContext.getString(R.string.input_answer_str));
                 ((EditText)helper.getView(R.id.et_direct_answeer)).addTextChangedListener(new OnTextChangeListener(helper.getAdapterPosition()));
                 break;
         }

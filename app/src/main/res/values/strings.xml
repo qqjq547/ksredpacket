@@ -801,5 +801,6 @@
     <string name="banck_card_str">银行卡</string>
     <string name="btn_login_reset_verify">重新获取</string>
     <string name="next_str">下一步</string>
+    <string name="input_answer_str">请填写您的回答</string>
 
 </resources>
