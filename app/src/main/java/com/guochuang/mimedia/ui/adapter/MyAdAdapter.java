@@ -52,6 +52,7 @@ public class MyAdAdapter extends BaseQuickAdapter<MyAd,BaseViewHolder> {
                 helper.setVisible(R.id.tv_check,false);
             }else {
                 helper.setText(R.id.tv_edit,R.string.edit_ad);
+                helper.setText(R.id.tv_check,R.string.preview_nest_ad);
                 helper.setVisible(R.id.tv_check,true);
                 helper.addOnClickListener(R.id.tv_check);
             }
@@ -74,7 +75,6 @@ public class MyAdAdapter extends BaseQuickAdapter<MyAd,BaseViewHolder> {
             helper.setTextColor(R.id.tv_status,mContext.getResources().getColor(R.color.text_city_yellow));
             helper.setBackgroundColor(R.id.v_line,mContext.getResources().getColor(R.color.text_city_yellow));
             helper.setTextColor(R.id.tv_time,mContext.getResources().getColor(R.color.text_black));
-            helper.setVisible(R.id.tv_check,true);
         }else if(item.getStatus()==2){//投放结束
             if (item.getNestInfoId()==0){//未投放广告的显示
                 helper.setVisible(R.id.tv_edit,true);
