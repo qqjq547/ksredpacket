@@ -575,7 +575,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                     picUrlArr.clear();
                     videoArr.clear();
                     if (!redPacketType.equals(Constant.RED_PACKET_TYPE_VIDEO)) {
-                        if (TextUtils.isEmpty(temp.getPicture())) {
+                        if (TextUtils.isEmpty(temp.getVideoUrl())) {
                             addVideo(new ArrayList<String>());
                         } else {
                             List<String> pics = Arrays.asList(TextUtils.split( temp.getVideoUrl(), ","));

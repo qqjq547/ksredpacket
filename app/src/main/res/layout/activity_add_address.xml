@@ -28,6 +28,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="right|center_vertical"
+                android:layoutDirection="rtl"
+                android:textDirection="ltr"
                 android:maxLength="10"
                 android:background="@color/transparent"
                 android:textColor="@color/text_black"
@@ -51,6 +53,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="right|center_vertical"
+                android:layoutDirection="rtl"
+                android:textDirection="ltr"
                 android:background="@color/transparent"
                 android:textColor="@color/text_black"
                 android:inputType="number"
@@ -76,6 +80,8 @@
                 android:drawablePadding="@dimen/space10"
                 android:drawableRight="@drawable/ic_arrow_right"
                 android:gravity="right|center_vertical"
+                android:layoutDirection="rtl"
+                android:textDirection="ltr"
                 android:background="@color/transparent"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/textfont14"
@@ -125,7 +131,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:button="@drawable/bg_check_green_selector"
-                    android:gravity="right|center_vertical" />
+                    android:gravity="right|center_vertical"
+                    android:layoutDirection="rtl"
+                    android:textDirection="ltr"/>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout

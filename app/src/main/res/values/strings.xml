@@ -1,5 +1,7 @@
-<resources>
-    <string name="app_release_name">快收红包</string>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
+    <string name="app_release_name" >快收红包</string>
     <string name="app_dev_name">快收</string>
 
     <string name="tab_info">资讯</string>
@@ -803,5 +805,7 @@
     <string name="btn_login_reset_verify">重新获取</string>
     <string name="next_str">下一步</string>
     <string name="input_answer_str">请填写您的回答</string>
+    <string name="pls_ad_board">请输入公告板内容</string>
+
 
 </resources>
