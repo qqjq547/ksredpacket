@@ -652,7 +652,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
         hcvAd.setData(honeyArr, new HoneyCombView.OnMenuClickListener() {
             @Override
             public void onClick(NestHomeAd data) {
-                IntentUtils.startBeeNestActivity(getActivity(), data.getNestInfoId(), data.getNestLocationId());
+                IntentUtils.startBeeNestActivity(getActivity(), data.getNestInfoId(), data.getNestLocationId(),false);
             }
 
             @Override

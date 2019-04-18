@@ -59,7 +59,7 @@ public class AdListFragment extends MvpFragment<AdListPresenter> implements AdLi
                 MyAd myAd=dataArr.get(position);
                 switch (view.getId()){
                     case R.id.tv_check:
-                        IntentUtils.startBeeNestActivity(getActivity(),myAd.getNestInfoId(),myAd.getNestLocationId());
+                        IntentUtils.startBeeNestActivity(getActivity(),myAd.getNestInfoId(),myAd.getNestLocationId(),myAd.getStatus()==0);
                         break;
                     case R.id.tv_edit:
                         if (myAd.getNestInfoId()==0){

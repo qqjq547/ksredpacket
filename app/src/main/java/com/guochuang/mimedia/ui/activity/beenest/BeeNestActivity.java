@@ -107,6 +107,10 @@ public class BeeNestActivity extends MvpActivity<BeeNestPresenter> implements Be
         }
         nestInfoId=getIntent().getLongExtra(Constant.NESTINFOID,0);
         nestLocationId=getIntent().getLongExtra(Constant.NESTLOCATIONID,0);
+        isPreveiw=getIntent().getBooleanExtra(Constant.ISPREVIEW,false);
+        if (isPreveiw){
+            ivImage.setVisibility(View.GONE);
+        }
         ivImage.setImageResource(R.drawable.ic_more);
         showLoadingDialog(null);
         mvpPresenter.getNestAd(nestInfoId,Constant.AD_TYPE_DETAIL);

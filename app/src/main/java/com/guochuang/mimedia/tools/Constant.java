@@ -119,6 +119,7 @@ public class Constant {
     public static final String TYPE_REPORT_REDPACKET = "redPacketReport";
     public static final String TYPE_NESTINFO_REPORT = "nestInfoReport";
     public static final String NESTAD = "nestAd";
+    public static final String ISPREVIEW="isPreview";
 
     //用户协议
     public static final String URL_FANS_AGREEMENT = ApiClient.HTML_URL+"/agreement/fans/index.htm";

@@ -295,10 +295,11 @@ public class IntentUtils {
         intent.putExtra(Constant.VIDEO_PATH, videoPath);
         activity.startActivity(intent);
     }
-    public static void startBeeNestActivity(Activity activity, long nestInfoId,long nestLocationId) {
+    public static void startBeeNestActivity(Activity activity, long nestInfoId,long nestLocationId,boolean isPreview) {
         Intent intent = new Intent(activity, BeeNestActivity.class);
         intent.putExtra(Constant.NESTINFOID, nestInfoId);
         intent.putExtra(Constant.NESTLOCATIONID, nestLocationId);
+        intent.putExtra(Constant.ISPREVIEW, isPreview);
         activity.startActivity(intent);
     }
     public static void startBeeNestActivity(Activity activity, NestAd ad) {

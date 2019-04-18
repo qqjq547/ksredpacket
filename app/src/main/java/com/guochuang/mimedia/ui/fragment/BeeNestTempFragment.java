@@ -91,7 +91,13 @@ public class BeeNestTempFragment extends MvpFragment {
             tvUrl.setVisibility(View.VISIBLE);
             tvUrl.setText(template.getLinkText());
         }
-        tvAddress.setText(template.getAddress() + template.getAddressDetail());
+        if (TextUtils.isEmpty(template.getAddress())){
+            linLocation.setVisibility(View.GONE);
+        }else {
+            linLocation.setVisibility(View.VISIBLE);
+            tvAddress.setText(template.getAddress() + template.getAddressDetail());
+        }
+
         if (TextUtils.isEmpty(template.getContactPhone())) {
             linCall.setVisibility(View.GONE);
         } else {
