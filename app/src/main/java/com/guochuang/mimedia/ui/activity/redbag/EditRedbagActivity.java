@@ -573,13 +573,22 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                     etContent.setText(temp.getContent());
                     pictureArr.clear();
                     picUrlArr.clear();
+                    videoArr.clear();
                     if (!redPacketType.equals(Constant.RED_PACKET_TYPE_VIDEO)) {
                         if (TextUtils.isEmpty(temp.getPicture())) {
-                            addPicture(new ArrayList<String>());
+                            addVideo(new ArrayList<String>());
                         } else {
-                            List<String> pics = Arrays.asList(TextUtils.split(temp.getPicture(), ","));
-                            addPicture(pics);
+                            List<String> pics = Arrays.asList(TextUtils.split( temp.getVideoUrl(), ","));
+                            addVideo(pics);
                         }
+
+
+//                        if (TextUtils.isEmpty(temp.getPicture())) {
+//                            addPicture(new ArrayList<String>());
+//                        } else {
+//                            List<String> pics = Arrays.asList(TextUtils.split(temp.getPicture(), ","));
+//                            addPicture(pics);
+//                        }
                     }
                     etAmout.setText(String.valueOf((int)temp.getMoney()));
                     etCount.setText(String.valueOf(temp.getQuantity()));
