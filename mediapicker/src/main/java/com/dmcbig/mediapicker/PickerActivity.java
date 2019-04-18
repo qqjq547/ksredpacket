@@ -176,6 +176,7 @@ public class PickerActivity extends Activity implements DataCallback, View.OnCli
                 Toast.makeText(this, getString(R.string.select_null), Toast.LENGTH_SHORT).show();
                 return;
             }
+
             Intent intent = new Intent(this, PreviewActivity.class);
             intent.putExtra(PickerConfig.MAX_SELECT_COUNT, argsIntent.getIntExtra(PickerConfig.MAX_SELECT_COUNT, PickerConfig.DEFAULT_SELECTED_MAX_COUNT));
             intent.putExtra(PickerConfig.PRE_RAW_LIST, gridAdapter.getSelectMedias());

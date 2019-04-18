@@ -32,7 +32,6 @@
             android:layout_height="@dimen/space30"
             android:textColor="@color/text_white"
             android:gravity="center"
-            android:text="60"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:background="#22222222"

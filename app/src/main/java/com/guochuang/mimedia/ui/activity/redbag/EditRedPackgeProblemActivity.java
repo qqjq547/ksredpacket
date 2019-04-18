@@ -434,7 +434,7 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
         int number;
         if (type == Constant.FILL_IN_PROBLEM) {
             //填空题
-            number = 1;
+            number = 4;
         } else {
             number = 4;
         }
@@ -448,6 +448,15 @@ public class EditRedPackgeProblemActivity extends MvpActivity<VideoProblemPresen
 
         } else {
             mDialogData.clear();
+            ArrayList<ProblemBean.ItemBean> item = problemBean.getItem();
+            //修改时 补全选项 4个选项
+            for (int itemNum = item.size();itemNum < 4;itemNum++){
+                ProblemBean.ItemBean itemBean = new ProblemBean.ItemBean(Parcel.obtain());
+                String name = itemNum == 0 ? "A" : itemNum == 1 ? "B" : itemNum == 2 ? "C" : "D";
+                itemBean.setItemname(name);
+                item.add(itemBean);
+
+            }
             mDialogData.addAll(problemBean.getItem());
             //修改的
             changeProblemType(problemBean, type);
