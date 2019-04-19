@@ -574,22 +574,14 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                     pictureArr.clear();
                     picUrlArr.clear();
                     videoArr.clear();
-                    if (!redPacketType.equals(Constant.RED_PACKET_TYPE_VIDEO)) {
-                        if (TextUtils.isEmpty(temp.getVideoUrl())) {
-                            addVideo(new ArrayList<String>());
-                        } else {
-                            List<String> pics = Arrays.asList(TextUtils.split( temp.getVideoUrl(), ","));
-                            addVideo(pics);
-                        }
-
-
-//                        if (TextUtils.isEmpty(temp.getPicture())) {
-//                            addPicture(new ArrayList<String>());
-//                        } else {
-//                            List<String> pics = Arrays.asList(TextUtils.split(temp.getPicture(), ","));
-//                            addPicture(pics);
-//                        }
-                    }
+                      if (!redPacketType.equals(Constant.RED_PACKET_TYPE_VIDEO)){
+                          if (TextUtils.isEmpty(temp.getPicture())) {
+                              addPicture(new ArrayList<String>());
+                          } else {
+                              List<String> pics = Arrays.asList(TextUtils.split(temp.getPicture(), ","));
+                              addPicture(pics);
+                          }
+                      }
                     etAmout.setText(String.valueOf((int)temp.getMoney()));
                     etCount.setText(String.valueOf(temp.getQuantity()));
                     areaType=temp.getAreaType();
@@ -669,7 +661,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
         if (videoArr.size()<Constant.MAX_PICK_VIDEO){
             videoArr.add(null);
         }else {
-            pictureArr.subList(0,Constant.MAX_PICK_VIDEO-1);
+            videoArr.subList(0,Constant.MAX_PICK_VIDEO-1);
         }
         videoAdapter.notifyDataSetChanged();
     }

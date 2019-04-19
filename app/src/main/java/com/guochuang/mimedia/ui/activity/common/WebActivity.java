@@ -352,16 +352,14 @@ public class WebActivity extends MvpActivity<WebPresenter> implements IntefaceWe
 
     @Override
     public void setData(FengWoVideoOrLink data) {
-        closeLoadingDialog();
         if (Constant.FENGWO_ADVERTISEMENT_LINKE == data.getType()) {
             IntentUtils.startFengWoLinkWebViewActivity(WebActivity.this, "", data.getPath());
         }
         if (Constant.FENGWO_ADVERTISEMENT_VIDEO == data.getType()) {
             //跳转视频
-
             IntentUtils.startVideoPreviewActivityForResult(WebActivity.this, data.getPath());
         }
-
+        closeLoadingDialog();
     }
 
     @Override
