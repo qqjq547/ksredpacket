@@ -54,6 +54,8 @@ public class WebActivity extends MvpActivity<WebPresenter> implements IntefaceWe
     String headRightType;
     boolean hasRefresh = true;
 
+    boolean mOnclickBle = true;
+
     @Override
     protected WebPresenter createPresenter() {
         return new WebPresenter(this);
@@ -194,8 +196,12 @@ public class WebActivity extends MvpActivity<WebPresenter> implements IntefaceWe
         @JavascriptInterface
         public void playVideo() {
             //获取广告
-            showLoadingDialog(null);
-            mvpPresenter.getAdvertisement();
+            if(mOnclickBle){
+                showLoadingDialog(null);
+                mvpPresenter.getAdvertisement();
+            }
+            mOnclickBle = false;
+
 
 //            runOnUiThread(new Runnable() {
 //                @Override
@@ -366,6 +372,7 @@ public class WebActivity extends MvpActivity<WebPresenter> implements IntefaceWe
     public void setError(String message) {
         closeLoadingDialog();
         showShortToast(message);
+        mOnclickBle = true;
     }
 
 
@@ -389,5 +396,11 @@ public class WebActivity extends MvpActivity<WebPresenter> implements IntefaceWe
                     break;
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mOnclickBle = true;
     }
 }

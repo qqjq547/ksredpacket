@@ -704,10 +704,10 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
         }else if(TextUtils.equals(redPacketType,Constant.RED_PACKET_TYPE_LUCKY)){
             mvpPresenter.addLuckyRedbag(latitude,longitude,redbagLatitude,redbagLongitude,content,picture,areaType,kilometer,money,quantity,urlName,url,wechat,microblog,isPublicPassword,isSaveTemplate,payType,Constant.CHANNEL_CODE_ANDROID,safetyCode);
         } else if (TextUtils.equals(redPacketType, Constant.RED_PACKET_TYPE_VIDEO)) {
-        mvpPresenter.addVideoReabag(latitude, longitude, redbagLatitude, redbagLongitude, content, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson(), videoUrl,coverUrl);
-      } else if (TextUtils.equals(redPacketType, Constant.RED_PACKET_TYPE_SURVEY)) {
-        mvpPresenter.addSurveyReabag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson());
-    }
+            mvpPresenter.addVideoReabag(latitude, longitude, redbagLatitude, redbagLongitude, content, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson(), videoUrl,coverUrl);
+        } else if (TextUtils.equals(redPacketType, Constant.RED_PACKET_TYPE_SURVEY)) {
+            mvpPresenter.addSurveyReabag(latitude, longitude, redbagLatitude, redbagLongitude, content, picture, areaType, kilometer, money, quantity, urlName, url, wechat, microblog, isPublicPassword, isSaveTemplate, payType, Constant.CHANNEL_CODE_ANDROID, safetyCode, joinProblmeJson());
+        }
     }
     View.OnFocusChangeListener mOnFocusChangeListener = new View.OnFocusChangeListener() {
         @Override
@@ -725,7 +725,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                     int count = Integer.valueOf(countText);
                     checkMoney(amout,count);
                 } catch (Exception e) {
-                  e.printStackTrace();
+                    e.printStackTrace();
                 }
             }
 
