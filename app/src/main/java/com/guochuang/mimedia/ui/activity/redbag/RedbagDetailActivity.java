@@ -581,22 +581,23 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                     flVideo.setVisibility(View.VISIBLE);
                     GlideImgManager.loadImage(this,redbagDetail.getCoverUrl(),ivVideoPrev);
                 }
-                if (redPacketType.equals(Constant.RED_PACKET_TYPE_VIDEO)&&redbagDetail.getSurveyId()>0){
-                    rlValue.setVisibility(View.GONE);
-                    tvRedbagTip.setVisibility(View.GONE);
-                    linVideoHead.setVisibility(View.VISIBLE);
-                    btnOpenPacket.setText(R.string.watched_video_open_redbag);
-                    tvWillGetKsb.setText(String.format(getString(R.string.format_ksb), redbagDetail.getCoin()));
-                }else if(redPacketType.equals(Constant.RED_PACKET_TYPE_SURVEY)){
-                    rlValue.setVisibility(View.GONE);
-                    tvRedbagTip.setVisibility(View.GONE);
-                    linVideoHead.setVisibility(View.VISIBLE);
-                    btnOpenPacket.setText(R.string.answer_open_redbag);
-                    tvWillGetKsb.setText(String.format(getString(R.string.format_ksb), redbagDetail.getCoin()));
-                }else {
-                    startAnim();
-                    startCountDown(redbagDetail.getReadingSecond());
-                }
+
+            }
+            if (redPacketType.equals(Constant.RED_PACKET_TYPE_VIDEO)&&redbagDetail.getSurveyId()>0){
+                rlValue.setVisibility(View.GONE);
+                tvRedbagTip.setVisibility(View.GONE);
+                linVideoHead.setVisibility(View.VISIBLE);
+                btnOpenPacket.setText(R.string.watched_video_open_redbag);
+                tvWillGetKsb.setText(String.format(getString(R.string.format_ksb), redbagDetail.getCoin()));
+            }else if(redPacketType.equals(Constant.RED_PACKET_TYPE_SURVEY)){
+                rlValue.setVisibility(View.GONE);
+                tvRedbagTip.setVisibility(View.GONE);
+                linVideoHead.setVisibility(View.VISIBLE);
+                btnOpenPacket.setText(R.string.answer_open_redbag);
+                tvWillGetKsb.setText(String.format(getString(R.string.format_ksb), redbagDetail.getCoin()));
+            }else {
+                startAnim();
+                startCountDown(redbagDetail.getReadingSecond());
             }
         }
     }

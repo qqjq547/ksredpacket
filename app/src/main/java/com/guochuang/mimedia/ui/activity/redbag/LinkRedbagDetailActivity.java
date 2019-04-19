@@ -118,4 +118,10 @@ public class LinkRedbagDetailActivity extends MvpActivity<LinkRedbagDetailPresen
         closeLoadingDialog();
         showShortToast(msg);
     }
+    @Override
+    public void onBackPressed() {
+        if (ivBack.getVisibility() == View.VISIBLE) {
+            super.onBackPressed();
+        }
+    }
 }
