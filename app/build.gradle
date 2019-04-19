@@ -15,8 +15,8 @@ android {
         applicationId "com.sz.gcyh.KSHongBao"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 36
-        versionName "2.1.4"
+        versionCode 37
+        versionName "2.2.0"
         multiDexEnabled true
         ndk {
             abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a'
@@ -96,7 +96,7 @@ dependencies {
     implementation project(path: ':hellocharts-library')
     implementation 'cn.yipianfengye.android:zxing-library:2.2'
     implementation project(path: ':mediapicker')
-    dependencies { compile 'com.aliyun.dpa:oss-android-sdk:+' }
+    implementation 'com.aliyun.dpa:oss-android-sdk:+'
 
     implementation project(':jjdxm-ijkplayer')
     //    根据需要支持去拓展，在jjdxm-ijkplayer中默认加入了armv7a的了

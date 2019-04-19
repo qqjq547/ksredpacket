@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -57,6 +58,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import lecho.lib.hellocharts.model.Line;
 import rx.functions.Action0;
 
 public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> implements RedbagDetailView {
@@ -149,6 +151,8 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
     TextView tvWillGetKsb;
     @BindView(R.id.btn_open_packet)
     Button btnOpenPacket;
+    @BindView(R.id.fl_video)
+    FrameLayout flVideo;
     @BindView(R.id.iv_video_prev)
     ImageView ivVideoPrev;
 
@@ -572,27 +576,28 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                     tvWeibo.setText(redbagDetail.getMicroblog());
                 }
                 if (TextUtils.isEmpty(redbagDetail.getVideoUrl())){
-                    ivVideoPrev.setVisibility(View.GONE);
+                    flVideo.setVisibility(View.GONE);
                 }else {
-                    ivVideoPrev.setVisibility(View.VISIBLE);
+                    flVideo.setVisibility(View.VISIBLE);
                     GlideImgManager.loadImage(this,redbagDetail.getCoverUrl(),ivVideoPrev);
                 }
-                if (redPacketType.equals(Constant.RED_PACKET_TYPE_VIDEO)&&redbagDetail.getSurveyId()>0){
-                    rlValue.setVisibility(View.GONE);
-                    tvRedbagTip.setVisibility(View.GONE);
-                    linVideoHead.setVisibility(View.VISIBLE);
-                    btnOpenPacket.setText(R.string.watched_video_open_redbag);
-                    tvWillGetKsb.setText(String.format(getString(R.string.format_ksb), redbagDetail.getCoin()));
-                }else if(redPacketType.equals(Constant.RED_PACKET_TYPE_SURVEY)){
-                    rlValue.setVisibility(View.GONE);
-                    tvRedbagTip.setVisibility(View.GONE);
-                    linVideoHead.setVisibility(View.VISIBLE);
-                    btnOpenPacket.setText(R.string.answer_open_redbag);
-                    tvWillGetKsb.setText(String.format(getString(R.string.format_ksb), redbagDetail.getCoin()));
-                }else {
-                    startAnim();
-                    startCountDown(redbagDetail.getReadingSecond());
-                }
+
+            }
+            if (redPacketType.equals(Constant.RED_PACKET_TYPE_VIDEO)&&redbagDetail.getSurveyId()>0){
+                rlValue.setVisibility(View.GONE);
+                tvRedbagTip.setVisibility(View.GONE);
+                linVideoHead.setVisibility(View.VISIBLE);
+                btnOpenPacket.setText(R.string.watched_video_open_redbag);
+                tvWillGetKsb.setText(String.format(getString(R.string.format_ksb), redbagDetail.getCoin()));
+            }else if(redPacketType.equals(Constant.RED_PACKET_TYPE_SURVEY)){
+                rlValue.setVisibility(View.GONE);
+                tvRedbagTip.setVisibility(View.GONE);
+                linVideoHead.setVisibility(View.VISIBLE);
+                btnOpenPacket.setText(R.string.answer_open_redbag);
+                tvWillGetKsb.setText(String.format(getString(R.string.format_ksb), redbagDetail.getCoin()));
+            }else {
+                startAnim();
+                startCountDown(redbagDetail.getReadingSecond());
             }
         }
     }
@@ -658,7 +663,7 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                 }
 
                 if (redPacketType.equals(Constant.RED_PACKET_TYPE_VIDEO)){
-                    ivVideoPrev.setVisibility(View.VISIBLE);
+                    flVideo.setVisibility(View.VISIBLE);
                     GlideImgManager.loadImage(this,data.getCoverUrl(),ivVideoPrev);
                 }
             }

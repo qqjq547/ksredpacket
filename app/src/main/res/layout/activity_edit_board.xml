@@ -27,7 +27,7 @@
         android:gravity="start"
         android:textSize="@dimen/textfont14"
         android:textColor="@color/text_black"
-        android:hint="@string/advise_feedback_hint"/>
+        android:hint="@string/pls_ad_board"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_picture"
         android:layout_width="match_parent"
@@ -79,6 +79,8 @@
                     android:background="@null"
                     android:lines="1"
                     android:gravity="right|center_vertical"
+                    android:layoutDirection="rtl"
+                    android:textDirection="ltr"
                     android:hint="@string/pls_input_link_name"
                     android:paddingLeft="@dimen/space10"
                     android:paddingRight="@dimen/space10"
@@ -109,6 +111,8 @@
                     android:background="@null"
                     android:lines="1"
                     android:gravity="right|center_vertical"
+                    android:layoutDirection="rtl"
+                    android:textDirection="ltr"
                     android:hint="@string/link_item_hint"
                     android:paddingLeft="@dimen/space10"
                     android:paddingRight="@dimen/space10"

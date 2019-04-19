@@ -338,10 +338,20 @@
                                 android:layout_marginBottom="5dp"
                                 android:layout_marginTop="@dimen/space10"
                                 android:nestedScrollingEnabled="false" />
+                            <FrameLayout
+                                android:id="@+id/fl_video"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
                             <ImageView
                                 android:id="@+id/iv_video_prev"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_play_video"/>
+                            </FrameLayout>
 
                             <TextView
                                 android:id="@+id/tv_url"
