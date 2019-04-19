@@ -593,13 +593,6 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                     redbagLongitude=temp.getLongitude();
                     redbagLatitude=temp.getLatitude();
                     tvLocation.setText(temp.getCountryName()+temp.getProvinceName()+temp.getCityName()+temp.getDistrictName());
-                    if (!TextUtils.isEmpty(temp.getUrlName())||!TextUtils.isEmpty(temp.getUrlName())||!TextUtils.isEmpty(temp.getWechat())||!TextUtils.isEmpty(temp.getMicroblog())){
-                        linLink.setVisibility(View.VISIBLE);
-                        tvLink.setText(R.string.pack_up);
-                    }else {
-                        linLink.setVisibility(View.GONE);
-                        tvLink.setText(R.string.more);
-                    }
                     etLinkName.setText(temp.getUrlName());
                     etLinkUrl.setText(temp.getUrl());
                     etLinkWechat.setText(temp.getWechat());
