@@ -45,18 +45,24 @@
         android:textColor="@color/text_black"
         android:textSize="@dimen/textfont15" />
 
-    <TextView
-        android:id="@+id/tv_open"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/iv_open"
+        android:layout_width="@dimen/space30"
+        android:layout_height="@dimen/space30"
         android:layout_marginTop="@dimen/space15"
-        android:background="@drawable/bg_open_redbag_btn"
-        android:gravity="center"
-        android:text="@string/right_now_get"
-        android:textColor="#bd6e17"
-        android:textSize="@dimen/textfont15" />
+        android:src="@drawable/ic_redbag_open"
+        />
+    <!--<TextView-->
+        <!--android:id="@+id/tv_open"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="@dimen/space15"-->
+        <!--android:background="@drawable/bg_open_redbag_btn"-->
+        <!--android:gravity="center"-->
+        <!--android:text="@string/right_now_get"-->
+        <!--android:textColor="#bd6e17"-->
+        <!--android:textSize="@dimen/textfont15" />-->
 
-      <!--  android:background="@drawable/bg_redbag_drag"-->
         <com.guochuang.mimedia.view.DragView
             android:id="@+id/drag_view"
             android:layout_width="match_parent"
