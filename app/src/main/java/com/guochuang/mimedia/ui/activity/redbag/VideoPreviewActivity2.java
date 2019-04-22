@@ -17,6 +17,7 @@ import com.dou361.ijkplayer.listener.OnShowThumbnailListener;
 import com.dou361.ijkplayer.widget.PlayStateParams;
 import com.dou361.ijkplayer.widget.PlayerView;
 import com.guochuang.mimedia.tools.Constant;
+import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.view.CountDownView;
 import com.sz.gcyh.KSHongBao.R;
 
@@ -85,7 +86,7 @@ public class VideoPreviewActivity2 extends  Activity {
                     @Override
                     public void onPlayerBack() {
                         //这里可以简单播放器点击返回键
-                        finish();
+                       onBackPressed();
                     }
                 })
                 .startPlay();
@@ -125,11 +126,9 @@ public class VideoPreviewActivity2 extends  Activity {
 
     @Override
     public void onBackPressed() {
-
         if (player != null && player.onBackPressed()) {
             return;
         }
-
         Intent intent = getIntent();
         intent.putExtra(Constant.COUNTDOWNTIME,mCountDownView.getCurrentTime());
         setResult(RESULT_OK,intent);

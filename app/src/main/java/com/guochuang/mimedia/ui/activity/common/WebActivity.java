@@ -382,7 +382,6 @@ public class WebActivity extends MvpActivity<WebPresenter> implements IntefaceWe
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case Constant.REQUEST_PURCHASE:
-                    wvContent.loadUrl("javascript:slef.activationSuccess()");
                     wvContent.reload();
                     break;
                 case Constant.REQUEST_STARTPREVIDEO_CODE:
