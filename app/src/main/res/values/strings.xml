@@ -806,6 +806,14 @@
     <string name="next_str">下一步</string>
     <string name="input_answer_str">请填写您的回答</string>
     <string name="pls_ad_board">请输入公告板内容</string>
-
-
+    <string name="transfer_aaa">转AAA</string>
+    <string name="equal_aaa">等值AAA</string>
+    <string name="ksb_trans_aaa_amount">KSB转AAA数量</string>
+    <string name="pls_input_ksb_to_aaa">请输入KSB转到AAA数量</string>
+    <string name="miner_fee">矿工费</string>
+    <string name="arrived_aaa">到账AAA</string>
+    <string name="ksb_price">KSB价格</string>
+    <string name="aaa_price">AAA价格</string>
+    <string name="trans_aaa_notice">到账AAA是KSB转AAA数量扣去5%矿工费计算出来的数量</string>
+    <string name="ksb_trans_aaa">KSB转AAA</string>
 </resources>

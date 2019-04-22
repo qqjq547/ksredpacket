@@ -21,8 +21,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/space11"
-        android:textColor="@color/text_redbag_name"
-        android:textSize="@dimen/textfont18" />
+        android:textColor="@color/text_gold"
+        android:textSize="@dimen/textfont14" />
 
     <TextView
         android:id="@+id/tv_summary"
@@ -30,8 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/space15"
         android:text="@string/format_normal"
-        android:textColor="@color/text_white"
-        android:textSize="@dimen/textfont13" />
+        android:textColor="@color/text_gold"
+        android:textSize="@dimen/textfont18" />
 
     <EditText
         android:id="@+id/et_word"
@@ -47,8 +47,8 @@
 
     <ImageView
         android:id="@+id/iv_open"
-        android:layout_width="@dimen/space30"
-        android:layout_height="@dimen/space30"
+        android:layout_width="@dimen/space60"
+        android:layout_height="@dimen/space60"
         android:layout_marginTop="@dimen/space15"
         android:src="@drawable/ic_redbag_open"
         />
