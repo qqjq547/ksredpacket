@@ -115,6 +115,7 @@
         <activity android:name="com.guochuang.mimedia.ui.activity.common.ScanResultActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.redbag.LinkRedbagDetailActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.user.KsbTranAaactivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.user.AaaTranKsbActivity" />
 
         <activity
             android:name="com.guochuang.mimedia.ui.activity.common.MyCaptureActivity"
