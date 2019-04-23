@@ -23,6 +23,8 @@ import com.guochuang.mimedia.ui.activity.beenest.AdBidActivity;
 import com.guochuang.mimedia.ui.activity.beenest.MyAdActivity;
 import com.guochuang.mimedia.ui.activity.city.CityActivity;
 import com.guochuang.mimedia.ui.activity.redbag.RedbagDynamicActivity;
+import com.guochuang.mimedia.ui.activity.user.AAADetailedActivity;
+import com.guochuang.mimedia.ui.activity.user.MyAAAActivity;
 import com.guochuang.mimedia.ui.activity.user.MyAddressActivity;
 import com.guochuang.mimedia.ui.activity.user.MyPayCodeActivity;
 import com.guochuang.mimedia.ui.dialog.SheetDialog;
@@ -88,18 +90,19 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
     TextView tvAgent;
     TextView tvFans;
     TextView tvRecommendTotalIncome;
+    TextView mTvMyAaa;
     LinearLayout linAgent;
 
     List<MyMenuItem> itemArr = new ArrayList<>();
     MyMenuAdapter menuAdapter;
 
-    View[] viewArr ;
-    View ksbView,regionCoreView,recommendView;
+    View[] viewArr;
+    View ksbView, regionCoreView, recommendView,aaaView;
     MyViewPagerAdapter pagerAdapter;
     UserInfo userInfo;
     BadgeView badgeView;
     RecommendData recommendData;
-    boolean isShowNestAd=false;
+    boolean isShowNestAd = false;
 
 
     @Override
@@ -114,7 +117,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
 
     @Override
     public void initViewAndData() {
-        if (Constant.isDebug){
+        if (Constant.isDebug) {
             tvTitle.setVisibility(View.VISIBLE);
             int debugHost = getPref().getInt(PrefUtil.DEBUGHOST, Constant.DEFAULT_HOST);
             switch (debugHost) {
@@ -127,13 +130,13 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                 case 2://开发host
                     tvTitle.setText(R.string.dev_version);
                     break;
-               }
-        }else {
-           tvTitle.setVisibility(View.GONE);
+            }
+        } else {
+            tvTitle.setVisibility(View.GONE);
         }
-        if (isShowNestAd){
+        if (isShowNestAd) {
             linNestad.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             linNestad.setVisibility(View.GONE);
         }
         LayoutInflater inflater = LayoutInflater.from(getActivity());
@@ -143,6 +146,10 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         regionCoreView.setOnClickListener(pageOnClickListener);
         recommendView = inflater.inflate(R.layout.layout_my_recommend, null);
         recommendView.setOnClickListener(pageOnClickListener);
+
+        aaaView = inflater.inflate(R.layout.layout_my_aaa, null);
+        aaaView.setOnClickListener(pageOnClickListener);
+
 
         tvMyKsb = ButterKnife.findById(ksbView, R.id.tv_my_ksb);
         tvBalance = ButterKnife.findById(ksbView, R.id.tv_balance);
@@ -157,7 +164,9 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         tvRecommendTotalIncome = ButterKnife.findById(recommendView, R.id.tv_total_income);
         linAgent = ButterKnife.findById(recommendView, R.id.lin_agent);
 
-        viewArr=new View[]{ksbView,recommendView};
+        mTvMyAaa = ButterKnife.findById(aaaView, R.id.tv_my_aaa);
+
+        viewArr = new View[]{ksbView, recommendView,aaaView};
         pagerAdapter = new MyViewPagerAdapter(viewArr);
         vpMy.setAdapter(pagerAdapter);
         vpMy.setPageTransformer(false, new ScaleTransformer());
@@ -166,6 +175,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
             public void onPageScrolled(int i, float v, int i1) {
 
             }
+
             @Override
             public void onPageSelected(int i) {
                 setPageSelected(i);
@@ -178,6 +188,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         });
         setPageSelected(0);
         itemArr.add(new MyMenuItem(R.drawable.ic_my_paycode, R.string.receive_pay_code));
+        itemArr.add(new MyMenuItem(R.drawable.ic_my_aaa, R.string.receive_my_aaa));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_recommend, R.string.text_my_recommend));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_city, R.string.text_my_city));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_order, R.string.text_my_order));
@@ -198,17 +209,17 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                         startActivity(new Intent(getActivity(), OperationCenterActivity.class));
                         break;
                     case R.drawable.ic_my_recommend:
-                        if (recommendData!=null){
-                            if (getPref().getInt(PrefUtil.USER_ROLE,Constant.USER_ROLE_FANS)>Constant.USER_ROLE_FANS){
-                                Intent intent=new Intent(getActivity(), RecommendAgentActivity.class);
-                                intent.putExtra(Constant.RECOMMENDDATA,recommendData);
+                        if (recommendData != null) {
+                            if (getPref().getInt(PrefUtil.USER_ROLE, Constant.USER_ROLE_FANS) > Constant.USER_ROLE_FANS) {
+                                Intent intent = new Intent(getActivity(), RecommendAgentActivity.class);
+                                intent.putExtra(Constant.RECOMMENDDATA, recommendData);
                                 startActivity(intent);
-                            }else {
-                                Intent intent=new Intent(getActivity(), RecommendFanActivity.class);
-                                intent.putExtra(Constant.RECOMMENDDATA,recommendData);
+                            } else {
+                                Intent intent = new Intent(getActivity(), RecommendFanActivity.class);
+                                intent.putExtra(Constant.RECOMMENDDATA, recommendData);
                                 startActivity(intent);
                             }
-                        }else {
+                        } else {
                             mvpPresenter.getRecommendData();
                         }
                         break;
@@ -216,7 +227,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                         startActivity(new Intent(getActivity(), CityActivity.class));
                         break;
                     case R.drawable.ic_my_order:
-                        IntentUtils.startWebActivity(getActivity(),getString(R.string.text_my_order),Constant.URL_MY_ORDER);
+                        IntentUtils.startWebActivity(getActivity(), getString(R.string.text_my_order), Constant.URL_MY_ORDER);
                         break;
                     case R.drawable.ic_my_dynamic:
                         startActivity(new Intent(getActivity(), RedbagDynamicActivity.class));
@@ -234,13 +245,16 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                         startActivity(new Intent(getActivity(), MyAddressActivity.class));
                         break;
                     case R.drawable.ic_my_help:
-                        IntentUtils.startWebActivity(getActivity(),getString(R.string.help_center),Constant.URL_HELP_CENTER);
+                        IntentUtils.startWebActivity(getActivity(), getString(R.string.help_center), Constant.URL_HELP_CENTER);
                         break;
                     case R.drawable.ic_my_welfare:
                         startActivity(new Intent(getActivity(), WelfareActivity.class));
                         break;
                     case R.drawable.ic_my_paycode:
                         startActivity(new Intent(getActivity(), MyPayCodeActivity.class));
+                        break;
+                    case R.drawable.ic_my_aaa:
+                        startActivity(new Intent(getActivity(), MyAAAActivity.class));
                         break;
                 }
             }
@@ -264,19 +278,23 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                     startActivity(new Intent(getActivity(), OperationCenterActivity.class));
                     break;
                 case R.id.lin_my_recommend:
-                    if (recommendData!=null){
-                        if (getPref().getInt(PrefUtil.USER_ROLE,Constant.USER_ROLE_FANS)>Constant.USER_ROLE_FANS){
-                            Intent intent=new Intent(getActivity(), RecommendAgentActivity.class);
-                            intent.putExtra(Constant.RECOMMENDDATA,recommendData);
+                    if (recommendData != null) {
+                        if (getPref().getInt(PrefUtil.USER_ROLE, Constant.USER_ROLE_FANS) > Constant.USER_ROLE_FANS) {
+                            Intent intent = new Intent(getActivity(), RecommendAgentActivity.class);
+                            intent.putExtra(Constant.RECOMMENDDATA, recommendData);
                             startActivity(intent);
-                        }else {
-                            Intent intent=new Intent(getActivity(), RecommendFanActivity.class);
-                            intent.putExtra(Constant.RECOMMENDDATA,recommendData);
+                        } else {
+                            Intent intent = new Intent(getActivity(), RecommendFanActivity.class);
+                            intent.putExtra(Constant.RECOMMENDDATA, recommendData);
                             startActivity(intent);
                         }
-                    }else {
+                    } else {
                         mvpPresenter.getRecommendData();
                     }
+                    break;
+
+                case R.id.lin_my_aaa:
+                    startActivity(new Intent(getActivity(),AAADetailedActivity.class));
                     break;
             }
 
@@ -314,23 +332,23 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                 startActivity(new Intent(getActivity(), MessageActivity.class));
                 break;
             case R.id.lin_ad_bid:
-                ((MainActivity)getActivity()).clearMarker();
+                ((MainActivity) getActivity()).clearMarker();
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         startActivity(new Intent(getActivity(), AdBidActivity.class));
                     }
-                },500);
+                }, 500);
                 break;
             case R.id.lin_my_ad:
                 startActivity(new Intent(getActivity(), MyAdActivity.class));
                 break;
             case R.id.tv_title:
-                List<String> itemArr=new ArrayList<>();
+                List<String> itemArr = new ArrayList<>();
                 itemArr.add(getString(R.string.test_version));
                 itemArr.add(getString(R.string.release_version));
                 itemArr.add(getString(R.string.dev_version));
-                SheetDialog sheetDialog=new SheetDialog(getActivity(), itemArr, new SheetDialog.OnItemClickListener() {
+                SheetDialog sheetDialog = new SheetDialog(getActivity(), itemArr, new SheetDialog.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
                         App.getInstance().forceLogin();
@@ -355,7 +373,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
 
     public void setUpUser() {
         userInfo = App.getInstance().getUserInfo();
-        if (isAdded()&&userInfo!=null) {
+        if (isAdded() && userInfo != null) {
             GlideImgManager.loadCircleImage(getActivity(), userInfo.getAvatar(), ivMyHeader);
             tvMyName.setText(userInfo.getNickName());
             tvMyKsb.setText(getPref().getString(PrefUtil.COIN, ""));
@@ -367,66 +385,66 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
 
     @Override
     public void setRecommendData(RecommendData data) {
-         if (data!=null){
-             recommendData=data;
-             getPref().setInt(PrefUtil.USER_ROLE,data.getRole());
-             tvAgent.setText(String.valueOf(data.getDirectAgent()));
-             tvFans.setText(String.valueOf(data.getDirectUser()));
-             tvRecommendTotalIncome.setText(data.getCumulativeCoin());
-             if (data.getRole()>Constant.USER_ROLE_FANS){
-                 linAgent.setVisibility(View.VISIBLE);
-             }else {
-                 linAgent.setVisibility(View.GONE);
-             }
-             switch (data.getRole()){
-                 case Constant.USER_ROLE_FANS:
-                     tvLevel.setText("");
-                     break;
-                 case Constant.USER_ROLE_AGENT:
-                     tvLevel.setText(R.string.agent);
-                     break;
-                 case Constant.USER_ROLE_MANAGER:
-                     tvLevel.setText(R.string.manager);
-                     break;
-                 case Constant.USER_ROLE_CHIEF:
-                     tvLevel.setText(R.string.inspector);
-                     break;
-                 case Constant.USER_ROLE_STAR_CHIEF:
-                     tvLevel.setText(R.string.star_inspector);
-                     break;
-             }
-         }
+        if (data != null) {
+            recommendData = data;
+            getPref().setInt(PrefUtil.USER_ROLE, data.getRole());
+            tvAgent.setText(String.valueOf(data.getDirectAgent()));
+            tvFans.setText(String.valueOf(data.getDirectUser()));
+            tvRecommendTotalIncome.setText(data.getCumulativeCoin());
+            if (data.getRole() > Constant.USER_ROLE_FANS) {
+                linAgent.setVisibility(View.VISIBLE);
+            } else {
+                linAgent.setVisibility(View.GONE);
+            }
+            switch (data.getRole()) {
+                case Constant.USER_ROLE_FANS:
+                    tvLevel.setText("");
+                    break;
+                case Constant.USER_ROLE_AGENT:
+                    tvLevel.setText(R.string.agent);
+                    break;
+                case Constant.USER_ROLE_MANAGER:
+                    tvLevel.setText(R.string.manager);
+                    break;
+                case Constant.USER_ROLE_CHIEF:
+                    tvLevel.setText(R.string.inspector);
+                    break;
+                case Constant.USER_ROLE_STAR_CHIEF:
+                    tvLevel.setText(R.string.star_inspector);
+                    break;
+            }
+        }
     }
 
     @Override
     public void setRegionCoreData(RegionCore data) {
-        if (data!=null&&data.isIsCenter()){
+        if (data != null && data.isIsCenter()) {
             tvTotalIncome.setText(data.getTotalIncome());
             tvYesterdayIncome.setText(data.getYesterDayIncome());
             tvProvince.setText(data.getWhereRegion());
-            viewArr=new View[]{ksbView,regionCoreView,recommendView};
-            pagerAdapter=new MyViewPagerAdapter(viewArr);
+            viewArr = new View[]{ksbView, regionCoreView, recommendView};
+            pagerAdapter = new MyViewPagerAdapter(viewArr);
             vpMy.setAdapter(pagerAdapter);
             llMyLamp.getChildAt(2).setVisibility(View.VISIBLE);
-            itemArr.add(1,new MyMenuItem(R.drawable.ic_my_operate_center, R.string.operation_center));
+            itemArr.add(1, new MyMenuItem(R.drawable.ic_my_operate_center, R.string.operation_center));
             menuAdapter.notifyItemInserted(1);
         }
     }
 
     @Override
     public void setAuctionMsg(NestAuctionMsg data) {
-        if (data!=null&&!TextUtils.isEmpty(data.getShowMsg())){
+        if (data != null && !TextUtils.isEmpty(data.getShowMsg())) {
             new DialogBuilder(getContext())
-             .setTitle(R.string.tip)
-            .setMessage(data.getShowMsg())
-            .setNegativeButton(R.string.cancel,null)
-            .setPositiveButton(R.string.goto_add,new View.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                  startActivity(new Intent(getActivity(),MyAdActivity.class));
-                }
-            })
-            .create().show();
+                    .setTitle(R.string.tip)
+                    .setMessage(data.getShowMsg())
+                    .setNegativeButton(R.string.cancel, null)
+                    .setPositiveButton(R.string.goto_add, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            startActivity(new Intent(getActivity(), MyAdActivity.class));
+                        }
+                    })
+                    .create().show();
         }
     }
 
@@ -453,13 +471,15 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
             badgeView.hide();
         }
     }
-    public void refreshUseRole(){
+
+    public void refreshUseRole() {
         if (isAdded()) {
             mvpPresenter.getRecommendData();
         }
     }
-    public void openNestAd(){
-        isShowNestAd=true;
+
+    public void openNestAd() {
+        isShowNestAd = true;
         if (isAdded()) {
             linNestad.setVisibility(View.VISIBLE);
         }

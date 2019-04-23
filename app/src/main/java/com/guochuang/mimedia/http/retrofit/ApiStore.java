@@ -1417,4 +1417,7 @@ public interface ApiStore {
      */
     @GET("/api/v1/activity/beehiveBonus/randomQueryOne")
     Observable<HttpResponse<FengWoVideoOrLink>> getAdvertisement();
+
+    @GET("/api/v1/exchange/user_digital_currency/my_digital")
+    Observable<HttpResponse<MyAAA>> getMyAAA();
 }

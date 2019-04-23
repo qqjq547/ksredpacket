@@ -261,7 +261,7 @@
         android:textColor="@color/text_white"
         android:gravity="center"
         android:visibility="gone"
-        android:text="60"
+        android:text="30"
         android:layout_alignParentRight="true"
         android:background="@color/color_cc000000"
         android:textSize="@dimen/sp_16"/>
