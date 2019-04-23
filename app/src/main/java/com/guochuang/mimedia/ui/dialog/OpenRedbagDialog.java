@@ -41,8 +41,8 @@ public class OpenRedbagDialog extends Dialog {
     TextView tvSummary;
     @BindView(R.id.et_word)
     EditText etWord;
-    @BindView(R.id.tv_open)
-    TextView tvOpen;
+    @BindView(R.id.iv_open)
+    ImageView ivOpen;
     @BindView(R.id.ll_root)
     LinearLayout mLlRoot;
     @BindView(R.id.drag_view)
@@ -93,7 +93,7 @@ public class OpenRedbagDialog extends Dialog {
             if(mIsDrag) {
                 mLlRoot.setBackgroundResource(R.drawable.bg_drag_open_redbag);
                 mDragView.setVisibility(View.VISIBLE);
-                tvOpen.setVisibility(View.GONE);
+                ivOpen.setVisibility(View.GONE);
                 etWord.setVisibility(View.GONE);
             }
 
@@ -116,10 +116,10 @@ public class OpenRedbagDialog extends Dialog {
     }
 
 
-    @OnClick({R.id.tv_open})
+    @OnClick({R.id.iv_open})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.tv_open:
+            case R.id.iv_open:
                 String password=etWord.getText().toString().trim();
                 if (redbag.getRoleType().equals(Constant.ROLETYPE_PERSON)&&redbag.getType().equals(Constant.RED_PACKET_TYPE_PASSWORD)){
                     if (TextUtils.isEmpty(etWord.getText().toString().trim())){

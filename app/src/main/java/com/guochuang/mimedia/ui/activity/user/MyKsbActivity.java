@@ -65,6 +65,8 @@ public class MyKsbActivity extends MvpActivity<MyksbPresenter> implements MyksbV
     Button btnKsbTransfer;
     @BindView(R.id.btn_transfer)
     Button btnTransfer;
+    @BindView(R.id.btn_transfer_aaa)
+    Button btnTransferAaa;
     @BindView(R.id.tv_today_ksb_price)
     TextView tvTodayKsbPrice;
     @BindView(R.id.linechart)
@@ -102,7 +104,8 @@ public class MyKsbActivity extends MvpActivity<MyksbPresenter> implements MyksbV
         mvpPresenter.getKsbTrend();
     }
 
-    @OnClick({R.id.iv_back, R.id.tv_text, R.id.lin_ksb, R.id.lin_share_benefit, R.id.lin_equal, R.id.btn_ksb_transfer, R.id.btn_transfer, R.id.tv_copy})
+    @OnClick({R.id.iv_back, R.id.tv_text, R.id.lin_ksb, R.id.lin_share_benefit, R.id.lin_equal, R.id.btn_ksb_transfer, R.id.btn_transfer,
+            R.id.btn_transfer_aaa,R.id.tv_copy})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -138,6 +141,17 @@ public class MyKsbActivity extends MvpActivity<MyksbPresenter> implements MyksbV
                     startActivityForResult(new Intent(this, TradePwdActivity.class), Constant.REFRESH);
                 }else {
                     startActivityForResult(new Intent(this, MyKsbGrantActivity.class),Constant.REQUEST_GRANT);
+                }
+                break;
+            case R.id.btn_transfer_aaa:
+                if (getPref().getInt(PrefUtil.IDENTITY,0)==0) {
+                    showShortToast(R.string.pls_identity_first);
+                    startActivityForResult(new Intent(this, IdentifyActivity.class), Constant.REFRESH);
+                }else if(getPref().getInt(PrefUtil.SAFECODE,0)==0){
+                    showShortToast(R.string.pls_safecode_first);
+                    startActivityForResult(new Intent(this, TradePwdActivity.class), Constant.REFRESH);
+                }else {
+                    startActivityForResult(new Intent(this, KsbTranAaactivity.class),Constant.REQUEST_GRANT);
                 }
                 break;
             case R.id.tv_copy:
