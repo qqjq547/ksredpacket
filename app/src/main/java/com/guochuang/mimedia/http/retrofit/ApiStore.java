@@ -1435,4 +1435,19 @@ public interface ApiStore {
             @Field("coin") double coin,
             @Field("safetyCode") String safetyCode);
 
+    @GET("/api/v1/exchange/exchange/rate")
+    Observable<HttpResponse<Double>> getExchangeRate();
+
+    @GET("/api/v1/exchange/user_digital_currency/int_cal")
+    Observable<HttpResponse<DigitalIntCal>> intCal(
+            @Query("type") int type);
+
+    @FormUrlEncoded
+    @POST("/api/v1/exchange/exchange/withdraw_coin")
+    Observable<HttpResponse<Boolean>> withdrawCoin(
+            @Field("address") String address,
+            @Field("coin") double coin,
+            @Field("safetyCode") String safetyCode);
+
+
 }

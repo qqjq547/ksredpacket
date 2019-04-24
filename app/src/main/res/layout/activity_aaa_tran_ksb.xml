@@ -16,7 +16,6 @@
   <RelativeLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="@dimen/space10"
 
       android:padding="@dimen/space15">
 
@@ -107,7 +106,7 @@
        android:paddingTop="@dimen/space10"
        android:paddingBottom="@dimen/space10"
        android:textColorHint="@color/text_gray"
-       android:textSize="@dimen/textfont12" />
+       android:textSize="@dimen/textfont16" />
 
    </LinearLayout>
 
@@ -134,7 +133,7 @@
       android:textSize="@dimen/textfont14"
       android:text="@string/equal_ksb"/>
   <TextView
-      android:id="@+id/tv_arrive_aaa"
+      android:id="@+id/tv_arrive_ksb"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_alignParentRight="true"
