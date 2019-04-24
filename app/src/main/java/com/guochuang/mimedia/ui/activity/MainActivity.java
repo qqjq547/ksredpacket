@@ -151,6 +151,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
         IntentFilter filter=new IntentFilter();
         filter.addAction(Constant.ACTION_CHANGE_COIN);
         filter.addAction(Constant.ACTION_CHANGE_AGENT);
+        filter.addAction(Constant.ACTION_CHANGE_AAA);
         registerReceiver(mainReceiver,filter);
         mvpPresenter.getUserInfo();
         mvpPresenter.getRainMsg();
