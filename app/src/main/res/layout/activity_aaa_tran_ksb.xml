@@ -84,7 +84,7 @@
    <TextView
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:text="@string/pls_input_aaa_to_ksb"
+       android:text="@string/aaa_trans_ksb"
        android:textColor="@color/text_drak_black"
        android:textSize="@dimen/textfont14" />
    <LinearLayout
@@ -100,7 +100,7 @@
        android:layout_marginTop="@dimen/space5"
        android:background="@null"
        android:gravity="center_vertical"
-       android:hint="@string/pls_input_ksb_to_aaa"
+       android:hint="@string/pls_input_aaa_to_ksb"
        android:maxLines="1"
        android:inputType="number"
        android:paddingTop="@dimen/space10"
