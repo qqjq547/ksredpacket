@@ -78,9 +78,9 @@ public class KsbTranAaactivity extends MvpActivity<KsbTranAaaPresenter> implemen
                 }else {
                     double input= CommonUtil.formatDouble(Double.parseDouble(charSequence.toString()));
                     if (exchangeConfig!=null){
-                        tvMinerFee.setText(CommonUtil.formatDoubleStr(DoubleUtil.mul(input,exchangeConfig.getRateKSB2AAA())));
+                        tvMinerFee.setText(CommonUtil.formatDoubleStr(DoubleUtil.mul(input,exchangeConfig.getKsb2aaa().getServiceRate())));
                         if (intCal!=null){
-                            double transKsb=input*(1-exchangeConfig.getRateKSB2AAA());
+                            double transKsb=input*(1-exchangeConfig.getKsb2aaa().getServiceRate());
                             double equalMoney=DoubleUtil.mul(transKsb,Double.parseDouble(intCal.getKsbRate()));
                             double equalAaa=DoubleUtil.divide(equalMoney,Double.parseDouble(intCal.getDigitalRate()));
                             tvArriveAaa.setText(CommonUtil.formatDoubleStr(equalAaa));
@@ -106,7 +106,7 @@ public class KsbTranAaactivity extends MvpActivity<KsbTranAaaPresenter> implemen
         closeLoadingDialog();
         if (data!=null){
             exchangeConfig=data;
-            tvTip.setText(exchangeConfig.getTipWithdrawAAA());
+            tvTip.setText(exchangeConfig.getKsb2aaa().getTips());
         }
     }
 
@@ -159,8 +159,8 @@ public class KsbTranAaactivity extends MvpActivity<KsbTranAaaPresenter> implemen
                    showShortToast(R.string.coin_not_enouth);
                     return;
                 }
-                if (exchangeConfig!=null&&amount<exchangeConfig.getMinKSB2AAA()){
-                    showShortToast(String.format(getString(R.string.format_min_ksb_to_aaa),exchangeConfig.getMinKSB2AAA()));
+                if (exchangeConfig!=null&&amount<exchangeConfig.getKsb2aaa().getMinLimit()){
+                    showShortToast(String.format(getString(R.string.format_min_ksb_to_aaa),exchangeConfig.getKsb2aaa().getMinLimit()));
                     return;
                 }
                 if (passDialog == null) {

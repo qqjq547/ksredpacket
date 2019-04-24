@@ -70,7 +70,7 @@ public class AaaTransferActivity extends MvpActivity<AaaTransferPresenter> imple
                 } else {
                     double input = CommonUtil.formatDouble(Double.parseDouble(charSequence.toString().trim()));
                     if (intCal != null&&exchangeConfig!=null) {
-                        double equalAaa = DoubleUtil.mul(input, exchangeConfig.getRateWithdrawAAA());
+                        double equalAaa = DoubleUtil.mul(input, exchangeConfig.getWithdrawAAA().getServiceRate());
                         tvMinerFee.setText(CommonUtil.formatDoubleStr(equalAaa));
                     }
                 }
@@ -105,8 +105,8 @@ public class AaaTransferActivity extends MvpActivity<AaaTransferPresenter> imple
                     showShortToast(R.string.digital_not_enouth);
                     return;
                 }
-                if (exchangeConfig != null && amount < exchangeConfig.getMinWithdrawAAA()) {
-                    showShortToast(String.format(getString(R.string.format_min_aaa_to_ksb), exchangeConfig.getMinWithdrawAAA()));
+                if (exchangeConfig != null && amount < exchangeConfig.getWithdrawAAA().getMinLimit()) {
+                    showShortToast(String.format(getString(R.string.format_min_aaa_to_ksb),exchangeConfig.getWithdrawAAA().getMinLimit()));
                     return;
                 }
                 if (passDialog == null) {

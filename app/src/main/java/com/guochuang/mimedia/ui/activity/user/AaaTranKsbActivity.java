@@ -100,8 +100,8 @@ public class AaaTranKsbActivity extends MvpActivity<AaaTranKsbPresenter> impleme
                     showShortToast(R.string.digital_not_enouth);
                     return;
                 }
-                if (exchangeConfig!=null&&amount<exchangeConfig.getMinAAA2KSB()){
-                    showShortToast(String.format(getString(R.string.format_min_aaa_to_ksb),exchangeConfig.getMinAAA2KSB()));
+                if (exchangeConfig!=null&&amount<exchangeConfig.getAaa2ksb().getMinLimit()){
+                    showShortToast(String.format(getString(R.string.format_min_aaa_to_ksb),exchangeConfig.getAaa2ksb().getMinLimit()));
                     return;
                 }
                 if (passDialog == null) {

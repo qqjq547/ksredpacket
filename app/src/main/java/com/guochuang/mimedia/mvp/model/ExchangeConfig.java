@@ -2,77 +2,176 @@ package com.guochuang.mimedia.mvp.model;
 
 public class ExchangeConfig {
 
+
     /**
-     * minAAA2KSB : 0
-     * minKSB2AAA : 0
-     * minWithdrawAAA : 0
-     * rateKSB2AAA : 0
-     * rateWithdrawAAA : 0
-     * tipKSB2AAA : string
-     * tipWithdrawAAA : string
+     * aaa2ksb : {"minLimit":0,"serviceRate":0,"timesLimit":0,"tips":"string"}
+     * ksb2aaa : {"minLimit":0,"serviceRate":0,"timesLimit":0,"tips":"string"}
+     * withdrawAAA : {"minLimit":0,"serviceRate":0,"timesLimit":0,"tips":"string"}
      */
 
-    private double minAAA2KSB;
-    private double minKSB2AAA;
-    private double minWithdrawAAA;
-    private double rateKSB2AAA;
-    private double rateWithdrawAAA;
-    private String tipKSB2AAA;
-    private String tipWithdrawAAA;
+    private Aaa2ksbBean aaa2ksb;
+    private Ksb2aaaBean ksb2aaa;
+    private WithdrawAAABean withdrawAAA;
 
-    public double getMinAAA2KSB() {
-        return minAAA2KSB;
+    public Aaa2ksbBean getAaa2ksb() {
+        return aaa2ksb;
     }
 
-    public void setMinAAA2KSB(double minAAA2KSB) {
-        this.minAAA2KSB = minAAA2KSB;
+    public void setAaa2ksb(Aaa2ksbBean aaa2ksb) {
+        this.aaa2ksb = aaa2ksb;
     }
 
-    public double getMinKSB2AAA() {
-        return minKSB2AAA;
+    public Ksb2aaaBean getKsb2aaa() {
+        return ksb2aaa;
     }
 
-    public void setMinKSB2AAA(double minKSB2AAA) {
-        this.minKSB2AAA = minKSB2AAA;
+    public void setKsb2aaa(Ksb2aaaBean ksb2aaa) {
+        this.ksb2aaa = ksb2aaa;
     }
 
-    public double getMinWithdrawAAA() {
-        return minWithdrawAAA;
+    public WithdrawAAABean getWithdrawAAA() {
+        return withdrawAAA;
     }
 
-    public void setMinWithdrawAAA(double minWithdrawAAA) {
-        this.minWithdrawAAA = minWithdrawAAA;
+    public void setWithdrawAAA(WithdrawAAABean withdrawAAA) {
+        this.withdrawAAA = withdrawAAA;
     }
 
-    public double getRateKSB2AAA() {
-        return rateKSB2AAA;
+    public static class Aaa2ksbBean {
+        /**
+         * minLimit : 0
+         * serviceRate : 0
+         * timesLimit : 0
+         * tips : string
+         */
+
+        private int minLimit;
+        private double serviceRate;
+        private int timesLimit;
+        private String tips;
+
+        public int getMinLimit() {
+            return minLimit;
+        }
+
+        public void setMinLimit(int minLimit) {
+            this.minLimit = minLimit;
+        }
+
+        public double getServiceRate() {
+            return serviceRate;
+        }
+
+        public void setServiceRate(double serviceRate) {
+            this.serviceRate = serviceRate;
+        }
+
+        public int getTimesLimit() {
+            return timesLimit;
+        }
+
+        public void setTimesLimit(int timesLimit) {
+            this.timesLimit = timesLimit;
+        }
+
+        public String getTips() {
+            return tips;
+        }
+
+        public void setTips(String tips) {
+            this.tips = tips;
+        }
     }
 
-    public void setRateKSB2AAA(double rateKSB2AAA) {
-        this.rateKSB2AAA = rateKSB2AAA;
+    public static class Ksb2aaaBean {
+        /**
+         * minLimit : 0
+         * serviceRate : 0
+         * timesLimit : 0
+         * tips : string
+         */
+
+        private int minLimit;
+        private double serviceRate;
+        private int timesLimit;
+        private String tips;
+
+        public int getMinLimit() {
+            return minLimit;
+        }
+
+        public void setMinLimit(int minLimit) {
+            this.minLimit = minLimit;
+        }
+
+        public double getServiceRate() {
+            return serviceRate;
+        }
+
+        public void setServiceRate(double serviceRate) {
+            this.serviceRate = serviceRate;
+        }
+
+        public int getTimesLimit() {
+            return timesLimit;
+        }
+
+        public void setTimesLimit(int timesLimit) {
+            this.timesLimit = timesLimit;
+        }
+
+        public String getTips() {
+            return tips;
+        }
+
+        public void setTips(String tips) {
+            this.tips = tips;
+        }
     }
 
-    public double getRateWithdrawAAA() {
-        return rateWithdrawAAA;
-    }
+    public static class WithdrawAAABean {
+        /**
+         * minLimit : 0
+         * serviceRate : 0
+         * timesLimit : 0
+         * tips : string
+         */
 
-    public void setRateWithdrawAAA(double rateWithdrawAAA) {
-        this.rateWithdrawAAA = rateWithdrawAAA;
-    }
+        private int minLimit;
+        private double serviceRate;
+        private int timesLimit;
+        private String tips;
 
-    public String getTipKSB2AAA() {
-        return tipKSB2AAA;
-    }
+        public int getMinLimit() {
+            return minLimit;
+        }
 
-    public void setTipKSB2AAA(String tipKSB2AAA) {
-        this.tipKSB2AAA = tipKSB2AAA;
-    }
+        public void setMinLimit(int minLimit) {
+            this.minLimit = minLimit;
+        }
 
-    public String getTipWithdrawAAA() {
-        return tipWithdrawAAA;
-    }
+        public double getServiceRate() {
+            return serviceRate;
+        }
 
-    public void setTipWithdrawAAA(String tipWithdrawAAA) {
-        this.tipWithdrawAAA = tipWithdrawAAA;
+        public void setServiceRate(double serviceRate) {
+            this.serviceRate = serviceRate;
+        }
+
+        public int getTimesLimit() {
+            return timesLimit;
+        }
+
+        public void setTimesLimit(int timesLimit) {
+            this.timesLimit = timesLimit;
+        }
+
+        public String getTips() {
+            return tips;
+        }
+
+        public void setTips(String tips) {
+            this.tips = tips;
+        }
     }
 }
