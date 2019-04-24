@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.guochuang.mimedia.mvp.model.MyAAA;
 import com.guochuang.mimedia.tools.PrefUtil;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.MvpActivity;
@@ -140,7 +141,8 @@ public class MyKsbActivity extends MvpActivity<MyksbPresenter> implements MyksbV
                     showShortToast(R.string.pls_safecode_first);
                     startActivityForResult(new Intent(this, TradePwdActivity.class), Constant.REFRESH);
                 }else {
-                    startActivityForResult(new Intent(this, MyKsbGrantActivity.class),Constant.REQUEST_GRANT);
+                    showLoadingDialog(null);
+                    mvpPresenter.getMyAAA();
                 }
                 break;
             case R.id.btn_transfer_aaa:
@@ -151,6 +153,7 @@ public class MyKsbActivity extends MvpActivity<MyksbPresenter> implements MyksbV
                     showShortToast(R.string.pls_safecode_first);
                     startActivityForResult(new Intent(this, TradePwdActivity.class), Constant.REFRESH);
                 }else {
+
                     startActivityForResult(new Intent(this, KsbTranAaactivity.class),Constant.REQUEST_GRANT);
                 }
                 break;
@@ -257,6 +260,14 @@ public class MyKsbActivity extends MvpActivity<MyksbPresenter> implements MyksbV
             generateData();
             linechart.setViewportCalculationEnabled(false);
             resetViewport();
+        }
+    }
+
+    @Override
+    public void setMyAaa(MyAAA data) {
+        closeLoadingDialog();
+        if (data!=null){
+            startActivityForResult(new Intent(this, MyKsbGrantActivity.class),Constant.REQUEST_GRANT);
         }
     }
 

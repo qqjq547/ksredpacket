@@ -1,5 +1,6 @@
 package com.guochuang.mimedia.mvp.view;
 
+import com.guochuang.mimedia.mvp.model.MyAAA;
 import com.guochuang.mimedia.mvp.model.NestAuctionMsg;
 import com.guochuang.mimedia.mvp.model.RecommendData;
 import com.guochuang.mimedia.mvp.model.RegionCore;
@@ -12,4 +13,5 @@ public interface MyView {
     void setError(String msg);
 
 
+    void setMyAAA(MyAAA data);
 }

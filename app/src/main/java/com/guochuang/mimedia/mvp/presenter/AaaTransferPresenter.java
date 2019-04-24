@@ -6,17 +6,13 @@ import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.DigitalIntCal;
 import com.guochuang.mimedia.mvp.model.ExchangeConfig;
-import com.guochuang.mimedia.mvp.model.MyAAA;
-import com.guochuang.mimedia.mvp.model.NestLocation;
-import com.guochuang.mimedia.mvp.view.AdBidView;
-import com.guochuang.mimedia.mvp.view.KsbTranAaaView;
+import com.guochuang.mimedia.mvp.view.AaaTranKsbView;
+import com.guochuang.mimedia.mvp.view.AaaTransferView;
 import com.guochuang.mimedia.tools.RxUtil;
 
-import java.util.List;
+public class AaaTransferPresenter extends BasePresenter<AaaTransferView> {
 
-public class KsbTranAaaPresenter extends BasePresenter<KsbTranAaaView> {
-
-    public KsbTranAaaPresenter(KsbTranAaaView view) {
+    public AaaTransferPresenter(AaaTransferView view) {
         attachView(view);
     }
 
@@ -59,11 +55,11 @@ public class KsbTranAaaPresenter extends BasePresenter<KsbTranAaaView> {
             }
         });
     }
-    public void exchange(String sourceDigitalCurrency,String targetDigitalCurrency,double coin,String safetyCode){
+    public void withdrawCoin(String address,double coin,String safetyCode){
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                exchange(sourceDigitalCurrency,targetDigitalCurrency,coin,safetyCode)), new ApiCallback<String>() {
+                withdrawCoin(address,coin,safetyCode)), new ApiCallback<Boolean>() {
             @Override
-            public void onSuccess(String data) {
+            public void onSuccess(Boolean data) {
                 mvpView.setData(data);
             }
 

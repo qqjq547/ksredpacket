@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.guochuang.mimedia.mvp.model.MyAAA;
 import com.guochuang.mimedia.mvp.model.NestAuctionMsg;
 import com.guochuang.mimedia.mvp.model.RegionCore;
 import com.guochuang.mimedia.tools.DialogBuilder;
@@ -265,6 +266,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         }
         mvpPresenter.getRecommendData();
         mvpPresenter.getRegionCore();
+        mvpPresenter.getMyAAA();
     }
 
     View.OnClickListener pageOnClickListener = new View.OnClickListener() {
@@ -454,6 +456,11 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         showShortToast(msg);
     }
 
+    @Override
+    public void setMyAAA(MyAAA data) {
+        mTvMyAaa.setText(data.getCoin()+"");
+    }
+
     public void setMsgDotView() {
         if (badgeView == null)
             badgeView = new BadgeView(getActivity(), ivMessage);
@@ -476,6 +483,10 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         if (isAdded()) {
             mvpPresenter.getRecommendData();
         }
+    }
+
+    public void refreshMyAAA(){
+        mvpPresenter.getMyAAA();
     }
 
     public void openNestAd() {

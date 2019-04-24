@@ -1443,4 +1443,32 @@ public interface ApiStore {
      */
     @GET("/api/v1/exchange/digiccy_ex_detail/get_list")
     Observable<HttpResponse<Page<AAADetail>>> getAAADetailedList(@Query("currentPage") int currentPage, @Query("pageSize") int pageSize,@Query("type") String type);
+
+
+    @GET("/api/v1/exchange/exchange/config")
+    Observable<HttpResponse<ExchangeConfig>> getExchangeConfig();
+
+    @FormUrlEncoded
+    @POST("/api/v1/exchange/exchange/exchange")
+    Observable<HttpResponse<String>> exchange(
+            @Field("sourceDigitalCurrency") String sourceDigitalCurrency,
+            @Field("targetDigitalCurrency") String targetDigitalCurrency,
+            @Field("coin") double coin,
+            @Field("safetyCode") String safetyCode);
+
+    @GET("/api/v1/exchange/exchange/rate")
+    Observable<HttpResponse<Double>> getExchangeRate();
+
+    @GET("/api/v1/exchange/user_digital_currency/int_cal")
+    Observable<HttpResponse<DigitalIntCal>> intCal(
+            @Query("type") int type);
+
+    @FormUrlEncoded
+    @POST("/api/v1/exchange/exchange/withdraw_coin")
+    Observable<HttpResponse<Boolean>> withdrawCoin(
+            @Field("address") String address,
+            @Field("coin") double coin,
+            @Field("safetyCode") String safetyCode);
+
+
 }

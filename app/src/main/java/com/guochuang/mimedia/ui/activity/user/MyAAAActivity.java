@@ -128,10 +128,10 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
                 startActivity(new Intent(this, AAADetailedActivity.class));
                 break;
             case R.id.tv_tibi:
-
+                startActivityForResult(new Intent(this, AaaTransferActivity.class),Constant.REFRESH);
                 break;
             case R.id.tv_transform_ksb:
-
+                startActivityForResult(new Intent(this, AaaTranKsbActivity.class),Constant.REFRESH);
                 break;
             case R.id.tv_copy:
                 ClipboardManager clip = (ClipboardManager)getSystemService(Context.CLIPBOARD_SERVICE);

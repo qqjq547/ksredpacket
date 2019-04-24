@@ -399,6 +399,9 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
                     ((RedbagFragment)fragments[2]).refreshUserRole();
                     ((MyFragment)fragments[4]).refreshUseRole();
                     break;
+                case Constant.ACTION_CHANGE_AAA:
+                    ((MyFragment)fragments[4]).refreshMyAAA();
+                    break;
             }
         }
     }

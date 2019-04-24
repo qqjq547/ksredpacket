@@ -6,13 +6,14 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.DigitalIntCal;
 import com.guochuang.mimedia.mvp.model.ExchangeConfig;
-import com.guochuang.mimedia.mvp.presenter.AaaTranKsbPresenter;
-import com.guochuang.mimedia.mvp.view.AaaTranKsbView;
+import com.guochuang.mimedia.mvp.presenter.AaaTransferPresenter;
+import com.guochuang.mimedia.mvp.view.AaaTransferView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.DoubleUtil;
@@ -22,43 +23,42 @@ import com.sz.gcyh.KSHongBao.R;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class AaaTranKsbActivity extends MvpActivity<AaaTranKsbPresenter> implements AaaTranKsbView {
+public class AaaTransferActivity extends MvpActivity<AaaTransferPresenter> implements AaaTransferView {
+
+    @BindView(R.id.iv_back)
+    ImageView ivBack;
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.tv_aaa_num)
     TextView tvAaaNum;
-    @BindView(R.id.tv_equal_ksb)
-    TextView tvEqualKsb;
-    @BindView(R.id.et_trans_ksb)
-    EditText etTransKsb;
-    @BindView(R.id.tv_arrive_ksb)
-    TextView tvArriveKsb;
-    @BindView(R.id.tv_ksb_price)
-    TextView tvKsbPrice;
-    @BindView(R.id.tv_aaa_price)
-    TextView tvAaaPrice;
+    @BindView(R.id.et_trans_address)
+    EditText etTransAddress;
+    @BindView(R.id.et_trans_count)
+    EditText etTransCount;
+    @BindView(R.id.tv_miner_fee)
+    TextView tvMinerFee;
     @BindView(R.id.tv_confirm)
     TextView tvConfirm;
 
     PassDialog passDialog;
-    int amount=0;
+    int amount = 0;
     DigitalIntCal intCal;
     ExchangeConfig exchangeConfig;
 
     @Override
-    protected AaaTranKsbPresenter createPresenter() {
-        return new AaaTranKsbPresenter(this);
+    protected AaaTransferPresenter createPresenter() {
+        return new AaaTransferPresenter(this);
     }
 
     @Override
     public int getLayout() {
-        return R.layout.activity_aaa_tran_ksb;
+        return R.layout.activity_aaa_transfer;
     }
 
     @Override
     public void initViewAndData() {
-        tvTitle.setText(R.string.aaa_trans_ksb);
-        etTransKsb.addTextChangedListener(new TextWatcher() {
+        tvTitle.setText(R.string.aaa_transfer_title);
+        etTransCount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -66,15 +66,14 @@ public class AaaTranKsbActivity extends MvpActivity<AaaTranKsbPresenter> impleme
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (TextUtils.isEmpty(charSequence)){
-                    tvArriveKsb.setText("0");
-                }else {
-                    double input= CommonUtil.formatDouble(Double.parseDouble(charSequence.toString().trim()));
-                        if (intCal!=null){
-                            double equalMoney=DoubleUtil.mul(input,Double.parseDouble(intCal.getDigitalRate()));
-                            double equalKsb=DoubleUtil.divide(equalMoney,Double.parseDouble(intCal.getKsbRate()));
-                            tvArriveKsb.setText(CommonUtil.formatDoubleStr(equalKsb));
-                        }
+                if (TextUtils.isEmpty(charSequence)) {
+                    tvMinerFee.setText("0");
+                } else {
+                    double input = CommonUtil.formatDouble(Double.parseDouble(charSequence.toString().trim()));
+                    if (intCal != null&&exchangeConfig!=null) {
+                        double equalAaa = DoubleUtil.mul(input, exchangeConfig.getWithdrawAAA().getServiceRate());
+                        tvMinerFee.setText(CommonUtil.formatDoubleStr(equalAaa));
+                    }
                 }
             }
 
@@ -93,16 +92,22 @@ public class AaaTranKsbActivity extends MvpActivity<AaaTranKsbPresenter> impleme
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
+                onBackPressed();
                 break;
             case R.id.tv_confirm:
-                String amountStr=etTransKsb.getText().toString().trim();
-                amount=Integer.parseInt(amountStr);
-                if (intCal!=null&&amount>(int)Double.parseDouble(intCal.getDigitalCoin())){
+                final String address=etTransAddress.getText().toString().trim();
+                String amountStr = etTransCount.getText().toString().trim();
+                amount = Integer.parseInt(amountStr);
+                if (TextUtils.isEmpty(address)){
+                    showShortToast(R.string.aaa_address_empty);
+                    return;
+                }
+                if (intCal != null && amount > (int) Double.parseDouble(intCal.getDigitalCoin())) {
                     showShortToast(R.string.digital_not_enouth);
                     return;
                 }
-                if (exchangeConfig!=null&&amount<exchangeConfig.getAaa2ksb().getMinLimit()){
-                    showShortToast(String.format(getString(R.string.format_min_aaa_to_ksb),exchangeConfig.getAaa2ksb().getMinLimit()));
+                if (exchangeConfig != null && amount < exchangeConfig.getWithdrawAAA().getMinLimit()) {
+                    showShortToast(String.format(getString(R.string.format_min_aaa_to_ksb),exchangeConfig.getWithdrawAAA().getMinLimit()));
                     return;
                 }
                 if (passDialog == null) {
@@ -120,9 +125,8 @@ public class AaaTranKsbActivity extends MvpActivity<AaaTranKsbPresenter> impleme
                         @Override
                         public void onNumFull(String code) {
                             showLoadingDialog(null);
-                            mvpPresenter.exchange(
-                                    Constant.DIGITAL_CURRENCY_AAA,
-                                    Constant.DIGITAL_CURRENCY_KSB,
+                            mvpPresenter.withdrawCoin(
+                                    address,
                                     amount,
                                     code);
 
@@ -142,32 +146,30 @@ public class AaaTranKsbActivity extends MvpActivity<AaaTranKsbPresenter> impleme
 
     @Override
     public void setConfig(ExchangeConfig data) {
-        if (data!=null){
-            exchangeConfig=data;
+        if (data != null) {
+            exchangeConfig = data;
         }
     }
 
     @Override
     public void setIntCal(DigitalIntCal data) {
         closeLoadingDialog();
-        if (data!=null){
-            intCal=data;
+        if (data != null) {
+            intCal = data;
             tvAaaNum.setText(String.valueOf(data.getDigitalCoin()));
-            tvEqualKsb.setText(String.valueOf(data.getKsbCoin()));
-            tvKsbPrice.setText(String.valueOf(data.getKsbRate()));
-            tvAaaPrice.setText(String.valueOf(data.getDigitalRate()));
         }
     }
 
     @Override
-    public void setData(String data) {
+    public void setData(Boolean data) {
         closeLoadingDialog();
-        //g广播通知aaa改变
+        //广播通通知我的中心页面刷新AAA
         sendBroadcast(new Intent(Constant.ACTION_CHANGE_AAA));
-        if (passDialog!=null&&passDialog.isShowing()){
+
+        if (passDialog != null && passDialog.isShowing()) {
             passDialog.dismiss();
         }
-        showShortToast(R.string.aaa_to_ksb_success);
+        showShortToast(R.string.withdraw_coin_success);
         setResult(RESULT_OK);
         finish();
     }
@@ -176,8 +178,9 @@ public class AaaTranKsbActivity extends MvpActivity<AaaTranKsbPresenter> impleme
     public void setError(String msg) {
         closeLoadingDialog();
         showShortToast(msg);
-        if (passDialog!=null&&passDialog.isShowing()){
+        if (passDialog != null && passDialog.isShowing()) {
             passDialog.clearCode();
         }
     }
+
 }

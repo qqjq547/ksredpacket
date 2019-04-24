@@ -318,12 +318,21 @@ public class Constant {
     public static final int REQUEST_STARTPREVIDEO_CODE = 0x000146;
     public static final int REQUEST_STARTPRE_FENGWOLINKWEB = 0x000147;
     public static final String COUNTDOWN_GONE = "ISGONG";
-
+    public static final String ACTION_CHANGE_AAA = "ACTION_CHANGE_AAA";
 
     //   视频红包与问卷红包 问题类型 0：单选 1：多选 2：填空题
     public static int SINGLESELECT = 0;
     public static int MORESELECT = 1;
     public static int FILL_IN_PROBLEM = 2;
+
+    public static final String DIGITAL_CURRENCY_KSB = "KSB";
+    public static final String DIGITAL_CURRENCY_AAA = "AAA";
+
+    public static int INT_CAL_KSB_TO_AAA = 1;
+    public static int INT_CAL_AAA_TO_KSB = 2;
+
+
+
 
    // 1-AAA转KSB，2-KSB转AAA，3-AAA提币，4-AAA充币
    public static final String ALL_AAA_DETAILED = "0";

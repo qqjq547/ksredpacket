@@ -3,57 +3,41 @@ package com.guochuang.mimedia.mvp.model;
 public class MyAAA {
 
     /**
-     * tenantCode : null
-     * id : null
-     * createUser : null
-     * createDate : null
-     * updateUser : null
-     * updateDate : null
-     * walletAddress : 0XAAAAAAAAAAAAA
-     * digitalCurrency : AAA
-     * coin : 1000.0
-     * money : 5.4
-     * exchangeRate : 0.005402
-     * nameAuthentication : 1
-     * qrcodeUrlKey : http://www.baidu.com
+     * coin : 0
+     * createDate : 2019-04-24T02:21:13.738Z
+     * createUser : string
+     * digitalCurrency : string
+     * exchangeRate : 0
+     * id : 0
+     * money : 0
+     * nameAuthentication : 0
+     * qrcodeUrlKey : string
+     * tenantCode : string
+     * updateDate : 2019-04-24T02:21:13.738Z
+     * updateUser : string
+     * walletAddress : string
      */
 
-    private String tenantCode;
-    private String id;
-    private String createUser;
-    private String createDate;
-    private String updateUser;
-    private String updateDate;
-    private String walletAddress;
-    private String digitalCurrency;
     private double coin;
-    private double money;
+    private String createDate;
+    private String createUser;
+    private String digitalCurrency;
     private double exchangeRate;
+    private int id;
+    private double money;
     private int nameAuthentication;
     private String qrcodeUrlKey;
+    private String tenantCode;
+    private String updateDate;
+    private String updateUser;
+    private String walletAddress;
 
-    public String getTenantCode() {
-        return tenantCode;
+    public double getCoin() {
+        return coin;
     }
 
-    public void setTenantCode(String tenantCode) {
-        this.tenantCode = tenantCode;
-    }
-
-    public Object getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getCreateUser() {
-        return createUser;
-    }
-
-    public void setCreateUser(String createUser) {
-        this.createUser = createUser;
+    public void setCoin(double coin) {
+        this.coin = coin;
     }
 
     public String getCreateDate() {
@@ -64,28 +48,12 @@ public class MyAAA {
         this.createDate = createDate;
     }
 
-    public String getUpdateUser() {
-        return updateUser;
+    public String getCreateUser() {
+        return createUser;
     }
 
-    public void setUpdateUser(String updateUser) {
-        this.updateUser = updateUser;
-    }
-
-    public String getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(String updateDate) {
-        this.updateDate = updateDate;
-    }
-
-    public String getWalletAddress() {
-        return walletAddress;
-    }
-
-    public void setWalletAddress(String walletAddress) {
-        this.walletAddress = walletAddress;
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
     }
 
     public String getDigitalCurrency() {
@@ -96,12 +64,20 @@ public class MyAAA {
         this.digitalCurrency = digitalCurrency;
     }
 
-    public double getCoin() {
-        return coin;
+    public double getExchangeRate() {
+        return exchangeRate;
     }
 
-    public void setCoin(double coin) {
-        this.coin = coin;
+    public void setExchangeRate(double exchangeRate) {
+        this.exchangeRate = exchangeRate;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public double getMoney() {
@@ -110,14 +86,6 @@ public class MyAAA {
 
     public void setMoney(double money) {
         this.money = money;
-    }
-
-    public double getExchangeRate() {
-        return exchangeRate;
-    }
-
-    public void setExchangeRate(double exchangeRate) {
-        this.exchangeRate = exchangeRate;
     }
 
     public int getNameAuthentication() {
@@ -134,5 +102,37 @@ public class MyAAA {
 
     public void setQrcodeUrlKey(String qrcodeUrlKey) {
         this.qrcodeUrlKey = qrcodeUrlKey;
+    }
+
+    public String getTenantCode() {
+        return tenantCode;
+    }
+
+    public void setTenantCode(String tenantCode) {
+        this.tenantCode = tenantCode;
+    }
+
+    public String getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(String updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    public String getUpdateUser() {
+        return updateUser;
+    }
+
+    public void setUpdateUser(String updateUser) {
+        this.updateUser = updateUser;
+    }
+
+    public String getWalletAddress() {
+        return walletAddress;
+    }
+
+    public void setWalletAddress(String walletAddress) {
+        this.walletAddress = walletAddress;
     }
 }
