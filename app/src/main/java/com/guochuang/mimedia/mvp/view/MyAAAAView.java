@@ -6,4 +6,6 @@ public interface MyAAAAView {
     void setError(String message);
 
     void setData(MyAAA data);
+
+    void setAAARate(String data);
 }

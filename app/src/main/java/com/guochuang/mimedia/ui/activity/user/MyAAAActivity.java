@@ -1,7 +1,6 @@
 package com.guochuang.mimedia.ui.activity.user;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,15 +8,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.guochuang.mimedia.base.MvpActivity;
+import com.guochuang.mimedia.http.subscriber.CountDownSubscriber;
 import com.guochuang.mimedia.mvp.model.MyAAA;
 import com.guochuang.mimedia.mvp.presenter.MyAAAAPresenter;
 import com.guochuang.mimedia.mvp.view.MyAAAAView;
 import com.guochuang.mimedia.tools.Constant;
+import com.guochuang.mimedia.tools.RxUtil;
 import com.sz.gcyh.KSHongBao.R;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.functions.Action0;
 
 public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAAAView {
     @BindView(R.id.ll_root_view)
@@ -67,9 +68,43 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
     public void initViewAndData() {
         //判断是否实名
         getMyAAA();
+        getMyAAARate();
         tvTitle.setText(getResources().getString(R.string.my_aaa_str));
 
 
+
+    }
+
+
+    /**
+     * 五分钟获取一次 税率
+     */
+    private void getMyAAARate() {
+        addSubscription(RxUtil.countdown(60)
+                .doOnSubscribe(new Action0() {
+                    @Override
+                    public void call() {
+
+                    }
+                })
+                .subscribe(new CountDownSubscriber<Integer>() {
+                    @Override
+                    public void onCompleted() {
+                        super.onCompleted();
+                        mvpPresenter.getMyAAARate();
+                        getMyAAARate();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                        super.onNext(integer);
+                    }
+                }));
 
     }
 
@@ -132,6 +167,11 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
             mLlRootView.setBackgroundColor(getResources().getColor(R.color.color_6a4bf1));
         }
 
+    }
+
+    @Override
+    public void setAAARate(String data) {
+        tvAaaPrice.setText(data);
     }
 
 

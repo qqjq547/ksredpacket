@@ -1420,4 +1420,7 @@ public interface ApiStore {
 
     @GET("/api/v1/exchange/user_digital_currency/my_digital")
     Observable<HttpResponse<MyAAA>> getMyAAA();
+
+    @GET("/api/v1/exchange/exchange/rate")
+    Observable<HttpResponse<String>> getMyAAARate();
 }

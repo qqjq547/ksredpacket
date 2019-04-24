@@ -2,10 +2,8 @@ package com.guochuang.mimedia.mvp.presenter;
 
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.http.exception.ApiException;
-import com.guochuang.mimedia.http.response.Page;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
-import com.guochuang.mimedia.mvp.model.Message;
 import com.guochuang.mimedia.mvp.model.MyAAA;
 import com.guochuang.mimedia.mvp.view.MyAAAAView;
 import com.guochuang.mimedia.tools.RxUtil;
@@ -25,6 +23,28 @@ public class MyAAAAPresenter extends BasePresenter<MyAAAAView> {
             @Override
             public void onFailure(ApiException exception) {
                 mvpView.setError(exception.getMessage());
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
+
+    /**
+     * 获取AAA 的税率
+     */
+    public void getMyAAARate() {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getMyAAARate()), new ApiCallback<String>() {
+            @Override
+            public void onSuccess(String data) {
+                mvpView.setAAARate(data);
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+//                mvpView.setError(exception.getMessage());
             }
 
             @Override

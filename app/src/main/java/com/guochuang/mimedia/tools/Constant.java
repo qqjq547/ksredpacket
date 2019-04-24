@@ -310,11 +310,11 @@ public class Constant {
     public static final String PROBLEM_LIST = "problem_list";
     public static final String WHO_OPEN_MYWECHATACTIVITY = "WHO_OPEN_MYWECHATACTIVITY";
     public static final int GOTOAPLAYYWEIXIN = 2719;
-    public static final String UESRPHONE_KEY = "用戶电话号码";
-    public static final String UESRPASSWORLD_KEY = "用户密码";
+    public static final String UESRPHONE_KEY = "UESRPHONE_KEY";
+    public static final String UESRPASSWORLD_KEY = "UESRPASSWORLD_KEY";
     public static final int FENGWO_ADVERTISEMENT_LINKE = 2;
     public static final int FENGWO_ADVERTISEMENT_VIDEO = 1;
-    public static final String COUNTDOWNTIME = "倒计时";
+    public static final String COUNTDOWNTIME = "COUNTDOWNTIME";
     public static final int REQUEST_STARTPREVIDEO_CODE = 0x000146;
     public static final int REQUEST_STARTPRE_FENGWOLINKWEB = 0x000147;
     public static final String COUNTDOWN_GONE = "ISGONG";

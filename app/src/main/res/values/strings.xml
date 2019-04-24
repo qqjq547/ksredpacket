@@ -825,7 +825,7 @@
     <string name="aaa_number_str">AAA数</string>
     <string name="equivalence_str">等值(元）</string>
     <string name="aaa_price_str">AAA价格（元）</string>
-    <string name="aaa_update_price_str">(每5分钟更新一次）</string>
+    <string name="aaa_update_price_str">(每1分钟更新一次）</string>
     <string name="ti_bi_str">提币</string>
     <string name="transform_ksb">转KSB</string>
     <string name="aaa_des_str">充币地址禁止充值除AAA之外的其他资产，任何非AAA资产充值将不可找回。</string>
