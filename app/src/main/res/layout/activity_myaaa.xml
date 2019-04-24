@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   android:id="@+id/ll_root_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_title_text" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_goto_real_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/space15"
+            android:layout_marginRight="@dimen/space15"
+            android:layout_marginTop="@dimen/space40"
+            android:background="@drawable/aaa_banckground"
+            android:text="实名开通AAA钱包"
+            android:visibility="gone"/>
+
+
+        <include layout="@layout/my_aaa"/>
+
+
+    </FrameLayout>
+
+
+</LinearLayout>

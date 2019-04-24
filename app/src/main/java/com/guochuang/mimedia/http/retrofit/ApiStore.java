@@ -1418,6 +1418,12 @@ public interface ApiStore {
     @GET("/api/v1/activity/beehiveBonus/randomQueryOne")
     Observable<HttpResponse<FengWoVideoOrLink>> getAdvertisement();
 
+    @GET("/api/v1/exchange/user_digital_currency/my_digital")
+    Observable<HttpResponse<MyAAA>> getMyAAA();
+
+    @GET("/api/v1/exchange/exchange/rate")
+    Observable<HttpResponse<String>> getMyAAARate();
+
     @GET("/api/v1/exchange/exchange/config")
     Observable<HttpResponse<ExchangeConfig>> getExchangeConfig();
 

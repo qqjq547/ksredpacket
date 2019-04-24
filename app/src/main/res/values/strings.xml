@@ -820,4 +820,19 @@
     <string name="equal_ksb">等值KSB</string>
     <string name="aaa_trans_ksb">AAA转化KSB数量</string>
     <string name="pls_input_aaa_to_ksb">请输入AAA转到KSB数量</string>
+    <string name="receive_my_aaa">我的AAA</string>
+    <string name="my_aaa_str">我的AAA</string>
+    <string name="aaa_number_str">AAA数</string>
+    <string name="equivalence_str">等值(元）</string>
+    <string name="aaa_price_str">AAA价格（元）</string>
+    <string name="aaa_update_price_str">(每1分钟更新一次）</string>
+    <string name="ti_bi_str">提币</string>
+    <string name="transform_ksb">转KSB</string>
+    <string name="aaa_des_str">充币地址禁止充值除AAA之外的其他资产，任何非AAA资产充值将不可找回。</string>
+    <string name="copy_str">复制</string>
+    <string name="aaa_address_str">AAA钱包地址</string>
+    <string name="add_aaa_address">充币地址</string>
+    <string name="aaa_detailed_str">AAA明细</string>
+
+
 </resources>

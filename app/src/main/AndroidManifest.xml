@@ -184,7 +184,10 @@
 
         <activity android:name="com.guochuang.mimedia.ui.activity.FengWoLinkWebViewActivity"/>
 
-        // 广告信息获取service
+        <activity android:name="com.guochuang.mimedia.ui.activity.user.MyAAAActivity"/>
+        <activity android:name="com.guochuang.mimedia.ui.activity.user.AAADetailedActivity"/>
+
+      <!--  // 广告信息获取service-->
         <service android:name="com.guochuang.mimedia.app.AdInfoService" />
 
         <!-- Android 7.0 文件共享配置，必须配置 -->
