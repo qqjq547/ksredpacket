@@ -1418,9 +1418,29 @@ public interface ApiStore {
     @GET("/api/v1/activity/beehiveBonus/randomQueryOne")
     Observable<HttpResponse<FengWoVideoOrLink>> getAdvertisement();
 
+    /**
+     * 我的AAA
+     *
+     * @return
+     */
     @GET("/api/v1/exchange/user_digital_currency/my_digital")
     Observable<HttpResponse<MyAAA>> getMyAAA();
 
+    /**
+     * 获取AAA税率
+     *
+     * @return
+     */
     @GET("/api/v1/exchange/exchange/rate")
-    Observable<HttpResponse<String>> getMyAAARate();
+    Observable<HttpResponse<AAARate>> getMyAAARate();
+
+    /**
+     * AAA明细列表
+     *
+     * @param currentPage
+     * @param pageSize
+     * @return
+     */
+    @GET("/api/v1/exchange/digiccy_ex_detail/get_list")
+    Observable<HttpResponse<Page<AAADetail>>> getAAADetailedList(@Query("currentPage") int currentPage, @Query("pageSize") int pageSize,@Query("type") String type);
 }

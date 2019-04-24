@@ -1,5 +1,6 @@
 package com.guochuang.mimedia.mvp.view;
 
+import com.guochuang.mimedia.mvp.model.AAARate;
 import com.guochuang.mimedia.mvp.model.MyAAA;
 
 public interface MyAAAAView {
@@ -7,5 +8,5 @@ public interface MyAAAAView {
 
     void setData(MyAAA data);
 
-    void setAAARate(String data);
+    void setAAARate(AAARate data);
 }

@@ -319,8 +319,16 @@ public class Constant {
     public static final int REQUEST_STARTPRE_FENGWOLINKWEB = 0x000147;
     public static final String COUNTDOWN_GONE = "ISGONG";
 
+
     //   视频红包与问卷红包 问题类型 0：单选 1：多选 2：填空题
     public static int SINGLESELECT = 0;
     public static int MORESELECT = 1;
     public static int FILL_IN_PROBLEM = 2;
+
+   // 1-AAA转KSB，2-KSB转AAA，3-AAA提币，4-AAA充币
+   public static final String ALL_AAA_DETAILED = "0";
+    public static final String AAA2KSB = "1";
+    public static final String KSB2AAA = "2";
+    public static final String EXTRACT_AAA = "3";
+    public static final String Fill_AAA = "4";
 }

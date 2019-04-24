@@ -1,7 +1,10 @@
 package com.guochuang.mimedia.ui.activity.user;
 
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -9,11 +12,13 @@ import android.widget.TextView;
 
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.http.subscriber.CountDownSubscriber;
+import com.guochuang.mimedia.mvp.model.AAARate;
 import com.guochuang.mimedia.mvp.model.MyAAA;
 import com.guochuang.mimedia.mvp.presenter.MyAAAAPresenter;
 import com.guochuang.mimedia.mvp.view.MyAAAAView;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.RxUtil;
+import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.sz.gcyh.KSHongBao.R;
 
 import butterknife.BindView;
@@ -70,7 +75,6 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
         getMyAAA();
         getMyAAARate();
         tvTitle.setText(getResources().getString(R.string.my_aaa_str));
-
 
 
     }
@@ -130,7 +134,9 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
 
                 break;
             case R.id.tv_copy:
-
+                ClipboardManager clip = (ClipboardManager)getSystemService(Context.CLIPBOARD_SERVICE);
+                clip.setText(tvCopy.getText().toString()); // 复制
+                showShortToast(getResources().getString(R.string.copyed));
                 break;
             case R.id.tv_goto_real_name:
                 startActivityForResult(new Intent(this, IdentifyActivity.class), Constant.REFRESH);
@@ -152,10 +158,36 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
     @Override
     public void setData(MyAAA data) {
         closeLoadingDialog();
+        mIsRealName = data.getNameAuthentication() == 1 ? true : false;
+       //据实名展示不同的界面
+        selectShowView(mIsRealName);
+        //设置文字内容
+        setContent(data);
 
 
+    }
+
+
+    /**
+     * 设置文字内容
+     */
+    private void setContent(MyAAA data) {
         tvText.setText(getResources().getString(R.string.aaa_detailed_str));
-        if (mIsRealName) {
+        tvAaaNumber.setText(data.getCoin()+"");
+        tvMoney.setText(data.getMoney()+"");
+        tvAaaPrice.setText(data.getExchangeRate()+"");
+        GlideImgManager.loadImage(this,data.getQrcodeUrlKey(),ivCode);
+        tvAaaAddress.setText(data.getWalletAddress());
+
+
+    }
+
+    /**
+     * 是否实名 根据实名展示不同的界面
+     * @param isRealName
+     */
+    private void selectShowView(boolean isRealName) {
+        if (isRealName) {
             tvText.setVisibility(View.VISIBLE);
             mLlAaaRoot.setVisibility(View.VISIBLE);
             mTvGotoRealName.setVisibility(View.GONE);
@@ -166,13 +198,13 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
             mTvGotoRealName.setVisibility(View.VISIBLE);
             mLlRootView.setBackgroundColor(getResources().getColor(R.color.color_6a4bf1));
         }
-
     }
 
     @Override
-    public void setAAARate(String data) {
-        tvAaaPrice.setText(data);
+    public void setAAARate(AAARate data) {
+        tvAaaPrice.setText(data.getRate()+"");
     }
+
 
 
     @Override

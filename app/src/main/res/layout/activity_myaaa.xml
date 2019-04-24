@@ -20,7 +20,7 @@
             android:layout_marginRight="@dimen/space15"
             android:layout_marginTop="@dimen/space40"
             android:background="@drawable/aaa_banckground"
-            android:text="实名开通AAA钱包"
+            android:text="@string/tip_createAAA"
             android:visibility="gone"/>
 
 
