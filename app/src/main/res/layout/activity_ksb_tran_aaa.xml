@@ -233,6 +233,7 @@
      android:textSize="@dimen/textfont15" />
 
  <TextView
+     android:id="@+id/tv_tip"
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
      android:layout_gravity="center_horizontal"
@@ -240,6 +241,5 @@
      android:layout_marginLeft="@dimen/space15"
      android:layout_marginRight="@dimen/space15"
      android:textSize="12sp"
-     android:textColor="@color/text_gray"
-     android:text="@string/trans_aaa_notice"/>
+     android:textColor="@color/text_gray" />
 </LinearLayout>

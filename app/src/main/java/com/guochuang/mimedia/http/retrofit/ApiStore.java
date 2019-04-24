@@ -1417,4 +1417,16 @@ public interface ApiStore {
      */
     @GET("/api/v1/activity/beehiveBonus/randomQueryOne")
     Observable<HttpResponse<FengWoVideoOrLink>> getAdvertisement();
+
+    @GET("/api/v1/exchange/exchange/config")
+    Observable<HttpResponse<ExchangeConfig>> getExchangeConfig();
+
+    @FormUrlEncoded
+    @POST("/api/v1/exchange/exchange/exchange")
+    Observable<HttpResponse<String>> exchange(
+            @Field("sourceDigitalCurrency") String sourceDigitalCurrency,
+            @Field("targetDigitalCurrency") String targetDigitalCurrency,
+            @Field("coin") double coin,
+            @Field("safetyCode") String safetyCode);
+
 }

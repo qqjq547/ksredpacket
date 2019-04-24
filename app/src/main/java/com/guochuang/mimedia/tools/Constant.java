@@ -323,4 +323,9 @@ public class Constant {
     public static int SINGLESELECT = 0;
     public static int MORESELECT = 1;
     public static int FILL_IN_PROBLEM = 2;
+
+    public static final String DIGITAL_CURRENCY_KSB = "KSB";
+    public static final String DIGITAL_CURRENCY_AAA = "AAA";
+
+
 }

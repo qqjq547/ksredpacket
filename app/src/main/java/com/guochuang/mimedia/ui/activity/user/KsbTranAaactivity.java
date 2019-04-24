@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.MvpActivity;
+import com.guochuang.mimedia.mvp.model.ExchangeConfig;
 import com.guochuang.mimedia.mvp.presenter.KsbTranAaaPresenter;
 import com.guochuang.mimedia.mvp.view.KsbTranAaaView;
 import com.guochuang.mimedia.tools.CashierInputFilter;
@@ -46,9 +47,13 @@ public class KsbTranAaactivity extends MvpActivity<KsbTranAaaPresenter> implemen
     TextView tvAaaPrice;
     @BindView(R.id.tv_confirm)
     TextView tvConfirm;
+    @BindView(R.id.tv_tip)
+    TextView tvTip;
+
 
     PassDialog passDialog;
     int amount=0;
+    ExchangeConfig exchangeConfig;
 
     @Override
     protected KsbTranAaaPresenter createPresenter() {
@@ -63,9 +68,7 @@ public class KsbTranAaactivity extends MvpActivity<KsbTranAaaPresenter> implemen
     @Override
     public void initViewAndData() {
        tvTitle.setText(R.string.ksb_trans_aaa);
-//        InputFilter[] filters={new CashierInputFilter()};
-//        etTransKsb.setFilters(filters);
-        etTransKsb.addTextChangedListener(new TextWatcher() {
+       etTransKsb.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -73,14 +76,14 @@ public class KsbTranAaactivity extends MvpActivity<KsbTranAaaPresenter> implemen
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//                if (TextUtils.isEmpty(charSequence)){
-//                    tvMinerFee.setText("0");
-//                }else {
-//                    if (payeeUser!=null){
-//                        double input= CommonUtil.formatDouble(Double.parseDouble(charSequence.toString()));
-//                        tvMinerFee.setText(CommonUtil.formatDoubleStr(DoubleUtil.divide(input,rate)));
-//                    }
-//                }
+                if (TextUtils.isEmpty(charSequence)){
+                    tvMinerFee.setText("0");
+                }else {
+                    if (exchangeConfig!=null){
+                        double input= CommonUtil.formatDouble(Double.parseDouble(charSequence.toString()));
+                        tvMinerFee.setText(CommonUtil.formatDoubleStr(DoubleUtil.divide(input,exchangeConfig.getRateKSB2AAA())));
+                    }
+                }
 
             }
 
@@ -89,6 +92,17 @@ public class KsbTranAaactivity extends MvpActivity<KsbTranAaaPresenter> implemen
 
             }
         });
+        showLoadingDialog(null);
+        mvpPresenter.getExchangeConfig();
+    }
+
+    @Override
+    public void setConfig(ExchangeConfig data) {
+        closeLoadingDialog();
+        if (data!=null){
+            exchangeConfig=data;
+            tvTip.setText(exchangeConfig.getTipWithdrawAAA());
+        }
     }
 
     @Override
@@ -136,14 +150,11 @@ public class KsbTranAaactivity extends MvpActivity<KsbTranAaaPresenter> implemen
                         @Override
                         public void onNumFull(String code) {
                             showLoadingDialog(null);
-//                            mvpPresenter.payMoney(
-//                                    Constant.CHANNEL_CODE_ANDROID,
-//                                    App.getInstance().getUserInfo().getUserAccountUuid(),
-//                                    payeeUser.getUserAccountUuid(),
-//                                    coinStr,
-//                                    code,
-//                                    remark
-//                            );
+                            mvpPresenter.exchange(
+                                    Constant.DIGITAL_CURRENCY_KSB,
+                                    Constant.DIGITAL_CURRENCY_AAA,
+                                    amount,
+                                    code);
 
                         }
                     });
