@@ -116,6 +116,7 @@
         <activity android:name="com.guochuang.mimedia.ui.activity.redbag.LinkRedbagDetailActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.user.KsbTranAaactivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.user.AaaTranKsbActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.user.AaaTransferActivity"/>
 
         <activity
             android:name="com.guochuang.mimedia.ui.activity.common.MyCaptureActivity"
@@ -186,6 +187,7 @@
 
         <activity android:name="com.guochuang.mimedia.ui.activity.user.MyAAAActivity"/>
         <activity android:name="com.guochuang.mimedia.ui.activity.user.AAADetailedActivity"/>
+
 
       <!--  // 广告信息获取service-->
         <service android:name="com.guochuang.mimedia.app.AdInfoService" />

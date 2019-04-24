@@ -168,6 +168,7 @@ public class AaaTranKsbActivity extends MvpActivity<AaaTranKsbPresenter> impleme
             passDialog.dismiss();
         }
         showShortToast(R.string.aaa_to_ksb_success);
+        sendBroadcast(new Intent(Constant.ACTION_CHANGE_AAA));
         setResult(RESULT_OK);
         finish();
     }

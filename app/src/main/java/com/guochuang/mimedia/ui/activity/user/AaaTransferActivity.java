@@ -164,11 +164,10 @@ public class AaaTransferActivity extends MvpActivity<AaaTransferPresenter> imple
     public void setData(Boolean data) {
         closeLoadingDialog();
         //广播通通知我的中心页面刷新AAA
-        sendBroadcast(new Intent(Constant.ACTION_CHANGE_AAA));
-
         if (passDialog != null && passDialog.isShowing()) {
             passDialog.dismiss();
         }
+        sendBroadcast(new Intent(Constant.ACTION_CHANGE_AAA));
         showShortToast(R.string.withdraw_coin_success);
         setResult(RESULT_OK);
         finish();

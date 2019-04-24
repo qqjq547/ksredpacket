@@ -1,6 +1,7 @@
 package com.guochuang.mimedia.ui.activity.user;
 
 
+import android.content.Intent;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -128,6 +129,7 @@ public class KsbTranAaactivity extends MvpActivity<KsbTranAaaPresenter> implemen
         if (passDialog!=null&&passDialog.isShowing()){
             passDialog.dismiss();
         }
+        sendBroadcast(new Intent(Constant.ACTION_CHANGE_AAA));
         showShortToast(R.string.ksb_to_aaa_success);
         setResult(RESULT_OK);
         finish();
