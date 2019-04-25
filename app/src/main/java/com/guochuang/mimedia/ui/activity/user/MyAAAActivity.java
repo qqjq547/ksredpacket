@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.guochuang.mimedia.base.MvpActivity;
@@ -16,6 +17,7 @@ import com.guochuang.mimedia.mvp.model.AAARate;
 import com.guochuang.mimedia.mvp.model.MyAAA;
 import com.guochuang.mimedia.mvp.presenter.MyAAAAPresenter;
 import com.guochuang.mimedia.mvp.view.MyAAAAView;
+import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.RxUtil;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
@@ -38,8 +40,8 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
     LinearLayout linTitle;
     @BindView(R.id.tv_goto_real_name)
     TextView mTvGotoRealName;
-    @BindView(R.id.ll_aaa_root)
-    LinearLayout mLlAaaRoot;
+    @BindView(R.id.scroll_aaa_root)
+    ScrollView mScrollAaaRoot;
     @BindView(R.id.tv_aaa_number)
     TextView tvAaaNumber;
     @BindView(R.id.tv_money)
@@ -134,8 +136,7 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
                 startActivityForResult(new Intent(this, AaaTranKsbActivity.class),Constant.REFRESH);
                 break;
             case R.id.tv_copy:
-                ClipboardManager clip = (ClipboardManager)getSystemService(Context.CLIPBOARD_SERVICE);
-                clip.setText(tvCopy.getText().toString()); // 复制
+                CommonUtil.copyMsg(this,tvAaaAddress.getText().toString());
                 showShortToast(getResources().getString(R.string.copyed));
                 break;
             case R.id.tv_goto_real_name:
@@ -189,12 +190,12 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
     private void selectShowView(boolean isRealName) {
         if (isRealName) {
             tvText.setVisibility(View.VISIBLE);
-            mLlAaaRoot.setVisibility(View.VISIBLE);
+            mScrollAaaRoot.setVisibility(View.VISIBLE);
             mTvGotoRealName.setVisibility(View.GONE);
             mLlRootView.setBackgroundColor(getResources().getColor(R.color.white));
         } else {
             tvText.setVisibility(View.GONE);
-            mLlAaaRoot.setVisibility(View.GONE);
+            mScrollAaaRoot.setVisibility(View.GONE);
             mTvGotoRealName.setVisibility(View.VISIBLE);
             mLlRootView.setBackgroundColor(getResources().getColor(R.color.color_6a4bf1));
         }
