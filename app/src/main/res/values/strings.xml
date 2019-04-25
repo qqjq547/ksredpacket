@@ -852,7 +852,7 @@
     <string name="format_min_aaa_to_ksb">AAA数量至少为%d</string>
     <string name="aaa_transfer_title">AAA提币</string>
     <string name="transfer_address">接收地址</string>
-    <string name="pls_input_transfer_address">接收地址</string>
+    <string name="pls_input_transfer_address">请输入接收地址</string>
     <string name="transfer_count">提币数量</string>
     <string name="pls_input_transfer_count">请输入提币数量</string>
     <string name="unit_aaa">AAA</string>
