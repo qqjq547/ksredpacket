@@ -67,8 +67,6 @@
        android:background="@null"
        android:gravity="center_vertical"
        android:hint="@string/pls_input_transfer_address"
-       android:maxLines="1"
-       android:inputType="number"
        android:paddingTop="@dimen/space10"
        android:paddingBottom="@dimen/space10"
        android:textColorHint="@color/text_gray"

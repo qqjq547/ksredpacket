@@ -36,7 +36,7 @@
                 android:layout_weight="1"
                 android:textSize="@dimen/textfont16"
                 android:layout_height="wrap_content"
-                android:text="转KSB"/>
+                android:text=""/>
 
             <TextView
                 android:id="@+id/tv_time"
@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_999999"
                 android:textSize="@dimen/textfont12"
-                android:text="2019-03-04 10:13:14"/>
+                android:text=""/>
         </LinearLayout>
 
         <RelativeLayout
@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space10"
             android:textColor="@color/color_4498e0"
-            android:text="数量：1213.123434344"/>
+            android:text=""/>
 
         <TextView
             android:id="@+id/tv_money"
@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_nuber"
             android:layout_marginTop="@dimen/space10"
-            android:text="等值：3456.4567KSB"/>
+            android:text=""/>
             
             <ImageView
                 android:id="@+id/iv_status"
@@ -82,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space10"
-            android:text="接收地址：0xba826fec90cefdf6706858e5fbafcb27a290fbe0"/>
+            android:text=""/>
 
     </LinearLayout>
     

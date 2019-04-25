@@ -20,7 +20,7 @@ import java.util.List;
 public class AAADetailAdapter extends BaseQuickAdapter<AAADetail, BaseViewHolder> {
 
     public AAADetailAdapter(@Nullable List<AAADetail> data) {
-        super(R.layout.item_detail_layout, data);
+        super(R.layout.item_aaa_detail, data);
     }
 
     @Override
