@@ -16,6 +16,7 @@ import com.guochuang.mimedia.mvp.model.AAARate;
 import com.guochuang.mimedia.mvp.model.MyAAA;
 import com.guochuang.mimedia.mvp.presenter.MyAAAAPresenter;
 import com.guochuang.mimedia.mvp.view.MyAAAAView;
+import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.RxUtil;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
@@ -173,9 +174,9 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
      */
     private void setContent(MyAAA data) {
         tvText.setText(getResources().getString(R.string.aaa_detailed_str));
-        tvAaaNumber.setText(data.getCoin()+"");
-        tvMoney.setText(data.getMoney()+"");
-        tvAaaPrice.setText(data.getExchangeRate()+"");
+        tvAaaNumber.setText(CommonUtil.formatDoubleOrigin(data.getCoin()));
+        tvMoney.setText(CommonUtil.formatDoubleOrigin(data.getMoney()));
+        tvAaaPrice.setText(CommonUtil.formatDoubleOrigin(data.getExchangeRate()));
         GlideImgManager.loadImage(this,data.getQrcodeUrlKey(),ivCode);
         tvAaaAddress.setText(data.getWalletAddress());
 

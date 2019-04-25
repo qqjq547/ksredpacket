@@ -87,7 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_666666"
-                android:text="0.00387678"/>
+                android:text=""/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -113,7 +113,7 @@
             android:text="@string/ti_bi_str"
             android:gravity="center"
             android:textColor="@color/white"
-            android:padding="@dimen/space16"
+            android:padding="@dimen/space12"
             android:textSize="@dimen/textfont18"
             android:layout_marginLeft="@dimen/space15"
             android:background="@drawable/shape_rect_yelle_btn"
@@ -125,7 +125,7 @@
             android:text="@string/transform_ksb"
             android:gravity="center"
             android:textColor="@color/white"
-            android:padding="@dimen/space16"
+            android:padding="@dimen/space12"
             android:textSize="@dimen/textfont18"
             android:layout_marginRight="@dimen/space15"
             android:layout_marginLeft="@dimen/space45"
@@ -146,10 +146,10 @@
 
     <ImageView
         android:id="@+id/iv_code"
-        android:layout_width="154dp"
-        android:layout_height="154dp"
+        android:layout_width="@dimen/space150"
+        android:layout_height="@dimen/space150"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/space30"/>
+        android:layout_marginTop="@dimen/space20"/>
 
 
     <LinearLayout
@@ -190,7 +190,7 @@
         android:textSize="@dimen/textfont16"
         android:textColor="@color/color_999999"
         android:layout_marginRight="@dimen/space25"
-        android:text="0xba826fec90cefdf6706858e5fbafcb27a290fbe0"/>
+        android:text=""/>
 
     <View
         android:layout_width="match_parent"

@@ -181,6 +181,11 @@ public class CommonUtil {
         BigDecimal b = new BigDecimal(number);
         return b.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString();
     }
+    public static String formatDoubleOrigin(double number) {
+        java.text.NumberFormat nf = java.text.NumberFormat.getInstance();
+        nf.setGroupingUsed(false);
+        return nf.format(number);
+    }
 
     public static void callPhone(Context context, String phone) {
         Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone));
