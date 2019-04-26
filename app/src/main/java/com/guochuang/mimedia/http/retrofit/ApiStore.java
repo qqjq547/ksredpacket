@@ -1445,18 +1445,18 @@ public interface ApiStore {
     Observable<HttpResponse<Page<AAADetail>>> getAAADetailedList(@Query("currentPage") int currentPage, @Query("pageSize") int pageSize,@Query("type") String type);
 
 
-    @GET("/api/v1/exchange/exchange/config")
+    @GET("/api/v1/exchange/digi_currcy/config")
     Observable<HttpResponse<ExchangeConfig>> getExchangeConfig();
 
     @FormUrlEncoded
-    @POST("/api/v1/exchange/exchange/exchange")
+    @POST("/api/v1/exchange/digi_currcy/exchange")
     Observable<HttpResponse<String>> exchange(
             @Field("sourceDigitalCurrency") String sourceDigitalCurrency,
             @Field("targetDigitalCurrency") String targetDigitalCurrency,
             @Field("coin") double coin,
             @Field("safetyCode") String safetyCode);
 
-    @GET("/api/v1/exchange/exchange/rate")
+    @GET("/api/v1/exchange/digi_currcy/rate")
     Observable<HttpResponse<Double>> getExchangeRate();
 
     @GET("/api/v1/exchange/user_digital_currency/int_cal")
@@ -1464,7 +1464,7 @@ public interface ApiStore {
             @Query("type") int type);
 
     @FormUrlEncoded
-    @POST("/api/v1/exchange/exchange/withdraw_coin")
+    @POST("/api/v1/exchange/digi_currcy/withdraw_coin")
     Observable<HttpResponse<Boolean>> withdrawCoin(
             @Field("address") String address,
             @Field("coin") double coin,

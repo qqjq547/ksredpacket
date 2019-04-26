@@ -12,6 +12,7 @@ import com.guochuang.mimedia.mvp.model.PayeeUser;
 import com.guochuang.mimedia.mvp.presenter.MyCapturePresenter;
 import com.guochuang.mimedia.mvp.view.MyCaptureView;
 import com.guochuang.mimedia.tools.Constant;
+import com.guochuang.mimedia.ui.activity.user.AaaTransferActivity;
 import com.sz.gcyh.KSHongBao.R;
 import com.uuzuche.lib_zxing.activity.CaptureFragment;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
@@ -73,10 +74,17 @@ public class MyCaptureActivity extends MvpActivity<MyCapturePresenter> implement
                     showLoadingDialog(null);
                     mvpPresenter.queryUserInfoByAccountUuid(uuid);
                     MyCaptureActivity.getActivity().finish();
-                }else {
-                    startActivity(new Intent(MyCaptureActivity.this,ScanResultActivity.class).putExtra(Constant.DATA,result));
-                    finish();
+                    return;
                 }
+                String type=uri.getQueryParameter("type");
+                String address=uri.getQueryParameter("address");
+                if (TextUtils.equals(type,"2")&&!TextUtils.isEmpty(address)){
+                    MyCaptureActivity.getActivity().finish();
+                    startActivity(new Intent(MyCaptureActivity.this,AaaTransferActivity.class).putExtra(Constant.ADDRESS,address));
+                    return;
+                }
+                startActivity(new Intent(MyCaptureActivity.this,ScanResultActivity.class).putExtra(Constant.DATA,result));
+                finish();
             }
         }
 

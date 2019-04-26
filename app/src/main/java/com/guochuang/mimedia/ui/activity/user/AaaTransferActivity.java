@@ -44,7 +44,7 @@ public class AaaTransferActivity extends MvpActivity<AaaTransferPresenter> imple
     int amount = 0;
     DigitalIntCal intCal;
     ExchangeConfig exchangeConfig;
-
+    String address;
     @Override
     protected AaaTransferPresenter createPresenter() {
         return new AaaTransferPresenter(this);
@@ -58,6 +58,10 @@ public class AaaTransferActivity extends MvpActivity<AaaTransferPresenter> imple
     @Override
     public void initViewAndData() {
         tvTitle.setText(R.string.aaa_transfer_title);
+        address=getIntent().getStringExtra(Constant.ADDRESS);
+        if (!TextUtils.isEmpty(address)){
+            etTransAddress.setText(address);
+        }
         etTransCount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -95,7 +99,7 @@ public class AaaTransferActivity extends MvpActivity<AaaTransferPresenter> imple
                 onBackPressed();
                 break;
             case R.id.tv_confirm:
-                final String address=etTransAddress.getText().toString().trim();
+                address=etTransAddress.getText().toString().trim();
                 String amountStr = etTransCount.getText().toString().trim();
                 amount = Integer.parseInt(amountStr);
                 if (TextUtils.isEmpty(address)){

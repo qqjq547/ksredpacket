@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="none"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -41,8 +41,8 @@
                     android:background="@mipmap/aaa_top_banckground"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:paddingTop="@dimen/space18"
-                    android:paddingBottom="@dimen/space18">
+                    android:paddingTop="@dimen/space15"
+                    android:paddingBottom="@dimen/space15">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -55,7 +55,7 @@
                         android:id="@+id/tv_aaa_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space30"
+                        android:layout_marginTop="@dimen/space25"
                         android:text=""
                         android:textColor="@color/text_white"
                         android:textSize="@dimen/textfont30" />
@@ -63,7 +63,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space30"
+                        android:layout_marginTop="@dimen/space25"
                         android:orientation="horizontal">
 
                         <TextView
@@ -133,7 +133,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space20"
+                    android:layout_marginTop="@dimen/space15"
                     android:orientation="horizontal">
 
                     <TextView
@@ -147,7 +147,7 @@
                         android:padding="@dimen/space12"
                         android:text="@string/ti_bi_str"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/textfont18" />
+                        android:textSize="@dimen/textfont16" />
 
                     <TextView
                         android:id="@+id/tv_transform_ksb"
@@ -161,7 +161,7 @@
                         android:padding="@dimen/space12"
                         android:text="@string/transform_ksb"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/textfont18" />
+                        android:textSize="@dimen/textfont16" />
 
                 </LinearLayout>
 
@@ -169,7 +169,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space30"
+                    android:layout_marginTop="@dimen/space20"
                     android:gravity="center"
                     android:text="@string/add_aaa_address"
                     android:textColor="@color/color_f45e4d"
@@ -180,7 +180,7 @@
                     android:layout_width="@dimen/space150"
                     android:layout_height="@dimen/space150"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/space30" />
+                    android:layout_marginTop="@dimen/space20" />
 
 
                 <LinearLayout
@@ -192,21 +192,21 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/space25"
+                        android:layout_marginLeft="@dimen/space20"
                         android:layout_weight="1"
                         android:text="@string/aaa_address_str"
-                        android:textSize="@dimen/textfont16" />
+                        android:textSize="@dimen/textfont14" />
 
                     <TextView
                         android:id="@+id/tv_copy"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/space25"
+                        android:layout_marginRight="@dimen/space20"
                         android:paddingLeft="@dimen/space15"
                         android:paddingTop="@dimen/space15"
                         android:text="@string/copy_str"
                         android:textColor="@color/color_002a64"
-                        android:textSize="@dimen/textfont16" />
+                        android:textSize="@dimen/textfont14" />
 
 
                 </LinearLayout>
@@ -215,13 +215,13 @@
                     android:id="@+id/tv_aaa_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/space25"
-                    android:layout_marginRight="@dimen/space25"
+                    android:layout_marginLeft="@dimen/space20"
+                    android:layout_marginRight="@dimen/space20"
                     android:gravity="right"
-                    android:paddingTop="@dimen/space15"
+                    android:paddingTop="@dimen/space12"
                     android:text=""
                     android:textColor="@color/color_999999"
-                    android:textSize="@dimen/textfont16" />
+                    android:textSize="@dimen/textfont14" />
 
                 <View
                     android:layout_width="match_parent"
@@ -231,9 +231,9 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/space25"
+                    android:layout_marginLeft="@dimen/space20"
                     android:layout_marginBottom="@dimen/space11"
-                    android:layout_marginTop="@dimen/space20"
+                    android:layout_marginTop="@dimen/space15"
                     android:text="@string/aaa_des_str"
                     android:textColor="@color/color_999999"
                     android:textSize="@dimen/textfont8" />
