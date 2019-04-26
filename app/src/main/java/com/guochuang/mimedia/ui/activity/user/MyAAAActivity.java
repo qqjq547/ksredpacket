@@ -19,6 +19,8 @@ import com.guochuang.mimedia.mvp.presenter.MyAAAAPresenter;
 import com.guochuang.mimedia.mvp.view.MyAAAAView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
+import com.guochuang.mimedia.tools.CustomProDialog;
+import com.guochuang.mimedia.tools.DialogBuilder;
 import com.guochuang.mimedia.tools.RxUtil;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.sz.gcyh.KSHongBao.R;
@@ -120,7 +122,7 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
     }
 
 
-    @OnClick({R.id.iv_back, R.id.tv_text, R.id.tv_tibi, R.id.tv_transform_ksb, R.id.tv_copy, R.id.tv_goto_real_name})
+    @OnClick({R.id.iv_back, R.id.tv_text, R.id.tv_tibi, R.id.tv_transform_ksb, R.id.tv_copy, R.id.tv_goto_real_name,R.id.lin_price})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -142,6 +144,13 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
             case R.id.tv_goto_real_name:
                 startActivityForResult(new Intent(this, IdentifyActivity.class), Constant.REFRESH);
                 break;
+            case R.id.lin_price:
+                new DialogBuilder(this)
+                        .setMessage(getString(R.string.myaaa_tip))
+                        .setPositiveButton(R.string.i_known,null)
+                        .create().show();
+                break;
+
         }
     }
 

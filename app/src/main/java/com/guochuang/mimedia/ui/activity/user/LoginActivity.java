@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
@@ -33,6 +34,7 @@ import com.guochuang.mimedia.tools.SystemUtil;
 import com.guochuang.mimedia.tools.WxLogin;
 import com.guochuang.mimedia.tools.antishake.AntiShake;
 import com.guochuang.mimedia.ui.adapter.SelectPhoneAdapter;
+import com.guochuang.mimedia.ui.dialog.SheetDialog;
 import com.sz.gcyh.KSHongBao.R;
 
 import java.util.ArrayList;
@@ -44,6 +46,8 @@ import butterknife.OnClick;
 import cn.jpush.android.api.JPushInterface;
 import io.objectbox.Box;
 import io.objectbox.BoxStore;
+
+import static com.guochuang.mimedia.ui.activity.common.MyCaptureActivity.getActivity;
 
 public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginView {
 
@@ -67,6 +71,9 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
     View mBottomLine;
     @BindView(R.id.iv_select_phone)
     View mIvSelectPhone;
+    @BindView(R.id.btn_version)
+    Button btnVersion;
+
 
 
     ListPopupWindow mListPopupWindow;
@@ -118,6 +125,23 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
     @Override
     public void initViewAndData() {
         instance=this;
+        if (Constant.isDebug){
+            btnVersion.setVisibility(View.VISIBLE);
+            int debugHost = getPref().getInt(PrefUtil.DEBUGHOST, Constant.DEFAULT_HOST);
+            switch (debugHost) {
+                case 0://测试host
+                    btnVersion.setText(R.string.test_version);
+                    break;
+                case 1://生产host
+                    btnVersion.setText(R.string.release_version);
+                    break;
+                case 2://开发host
+                    btnVersion.setText(R.string.dev_version);
+                    break;
+            }
+        }else {
+            btnVersion.setVisibility(View.GONE);
+        }
         SoftKeyBoardListener.setListener(this, listener);
 
         BoxStore boxStore = App.getInstance().getBoxStore();
@@ -238,7 +262,8 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
             R.id.tv_login_register,
             R.id.tv_login_forget,
             R.id.iv_login_wx,
-            R.id.iv_select_phone})
+            R.id.iv_select_phone,
+            R.id.btn_version})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_login_confirm:
@@ -322,6 +347,33 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
                         }
                     }
                 });
+                break;
+            case R.id.btn_version:
+                if (Constant.isDebug) {
+                    List<String> itemArr = new ArrayList<>();
+                    itemArr.add(getString(R.string.test_version));
+                    itemArr.add(getString(R.string.release_version));
+                    itemArr.add(getString(R.string.dev_version));
+                    SheetDialog sheetDialog = new SheetDialog(this, itemArr, new SheetDialog.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(int position) {
+                            App.getInstance().forceLogin();
+                            switch (position) {
+                                case 0:
+                                    getPref().setInt(PrefUtil.DEBUGHOST, 0);
+                                    break;
+                                case 1:
+                                    getPref().setInt(PrefUtil.DEBUGHOST, 1);
+                                    break;
+                                case 2:
+                                    getPref().setInt(PrefUtil.DEBUGHOST, 2);
+                                    break;
+                            }
+                            App.getInstance().finishActivity();
+                        }
+                    });
+                    sheetDialog.show();
+                }
                 break;
         }
     }

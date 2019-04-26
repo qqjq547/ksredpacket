@@ -296,7 +296,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                     break;
 
                 case R.id.lin_my_aaa:
-                    startActivity(new Intent(getActivity(),AAADetailedActivity.class));
+                    startActivity(new Intent(getActivity(),MyAAAActivity.class));
                     break;
             }
 

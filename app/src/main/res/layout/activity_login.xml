@@ -32,6 +32,15 @@
                     android:layout_marginTop="@dimen/space60"
                     android:src="@drawable/ic_login_header" />
 
+                <Button
+                    android:id="@+id/btn_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/space10"
+                    android:layout_marginTop="@dimen/space10"
+                    android:background="@drawable/bg_btn_delete"
+                    android:textColor="@color/text_red"
+                    android:visibility="gone"/>
                 <RelativeLayout
                     android:id="@+id/rl_login_body_content"
                     android:layout_width="match_parent"

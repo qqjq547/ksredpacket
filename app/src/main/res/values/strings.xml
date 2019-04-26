@@ -858,6 +858,7 @@
     <string name="unit_aaa">AAA</string>
     <string name="aaa_address_empty">AAA钱包地址不能为空</string>
     <string name="withdraw_coin_success">提币申请成功</string>
+    <string name="myaaa_tip">平台AAA价格计算方式\n每分钟获取一次交易所AAA价格，然后计算近30分钟的平均值作为AAA价格</string>
 
 
 </resources>

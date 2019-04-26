@@ -39,6 +39,8 @@ public class AaaTranKsbActivity extends MvpActivity<AaaTranKsbPresenter> impleme
     TextView tvAaaPrice;
     @BindView(R.id.tv_confirm)
     TextView tvConfirm;
+    @BindView(R.id.tv_tip)
+    TextView tvTip;
 
     PassDialog passDialog;
     int amount=0;
@@ -93,6 +95,7 @@ public class AaaTranKsbActivity extends MvpActivity<AaaTranKsbPresenter> impleme
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
+                onBackPressed();
                 break;
             case R.id.tv_confirm:
                 String amountStr=etTransKsb.getText().toString().trim();
@@ -144,6 +147,7 @@ public class AaaTranKsbActivity extends MvpActivity<AaaTranKsbPresenter> impleme
     public void setConfig(ExchangeConfig data) {
         if (data!=null){
             exchangeConfig=data;
+            tvTip.setText(exchangeConfig.getAaa2ksb().getTips());
         }
     }
 
