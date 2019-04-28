@@ -5,11 +5,12 @@
     android:orientation="horizontal"
     android:layout_marginLeft="@dimen/space15"
     android:layout_marginRight="@dimen/space15"
-    android:layout_marginTop="@dimen/space10"
-    android:paddingLeft="@dimen/space5"
-    android:paddingRight="@dimen/space5"
+    android:layout_marginTop="@dimen/space6"
+    android:paddingLeft="@dimen/space10"
+    android:paddingRight="@dimen/space10"
     android:paddingTop="@dimen/space15"
     android:paddingBottom="@dimen/space15"
+    android:background="@drawable/bg_white_block"
     android:gravity="center_vertical">
 
     <ImageView

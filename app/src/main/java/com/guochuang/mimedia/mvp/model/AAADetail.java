@@ -45,10 +45,19 @@ public class AAADetail {
     private double serviceRate;
     private int status;
     private int type;
+    private  int businessType;
     private String applyDate;
     private String finishDate;
     private String transferLogId;
     private String remark;
+
+    public int getBusinessType() {
+        return businessType;
+    }
+
+    public void setBusinessType(int businessType) {
+        this.businessType = businessType;
+    }
 
     public String getTenantCode() {
         return tenantCode;

@@ -30,7 +30,7 @@ public class AAADetailAdapter extends BaseQuickAdapter<AAADetail, BaseViewHolder
         @DrawableRes int imageResId = 0;
         @StringRes int type = 0;
         String tvMoneyText = "";
-        switch (String.valueOf(item.getType())) {
+        switch (String.valueOf(item.getBusinessType())) {
             case Constant.AAA2KSB:
                 type = R.string.aaa2ksb;
                 imageResId = R.drawable.icon_aaa2ksb;
@@ -60,11 +60,16 @@ public class AAADetailAdapter extends BaseQuickAdapter<AAADetail, BaseViewHolder
 
         }
 
-        holder.setImageResource(R.id.iv_type, imageResId).setText(R.id.tv_type,
-                mContext.getResources().getString(type)).setText(R.id.tv_time, item.getCreateDate())
-                .setText(R.id.tv_nuber, String.format(mContext.getResources()
-                        .getString(R.string.aaa_number_fomat), item.getSourceCoin()+"")).setText(R.id.tv_money, tvMoneyText)
-                .setText(R.id.tv_adrress, String.format(mContext.getResources().getString(R.string.receiv_str), item.getTargetAddress()));
+        try {
+            holder.setImageResource(R.id.iv_type, imageResId).setText(R.id.tv_type,
+                    mContext.getResources().getString(type)).setText(R.id.tv_time, item.getCreateDate())
+                    .setText(R.id.tv_nuber, String.format(mContext.getResources()
+                            .getString(R.string.aaa_number_fomat), item.getSourceCoin()+"")).setText(R.id.tv_money, tvMoneyText)
+                    .setText(R.id.tv_adrress, String.format(mContext.getResources().getString(R.string.receiv_str), item.getTargetAddress()));
+        }catch (Exception e){
+
+        }
+
 
 
     }

@@ -1442,7 +1442,7 @@ public interface ApiStore {
      * @return
      */
     @GET("/api/v1/exchange/digiccy_ex_detail/get_list")
-    Observable<HttpResponse<Page<AAADetail>>> getAAADetailedList(@Query("currentPage") int currentPage, @Query("pageSize") int pageSize,@Query("type") String type);
+    Observable<HttpResponse<Page<AAADetail>>> getAAADetailedList(@Query("currentPage") int currentPage, @Query("pageSize") int pageSize,@Query("businessType") String businessType);
 
 
     @GET("/api/v1/exchange/digi_currcy/config")
