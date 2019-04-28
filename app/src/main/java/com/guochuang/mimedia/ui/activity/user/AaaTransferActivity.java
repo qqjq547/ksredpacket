@@ -101,11 +101,15 @@ public class AaaTransferActivity extends MvpActivity<AaaTransferPresenter> imple
             case R.id.tv_confirm:
                 address=etTransAddress.getText().toString().trim();
                 String amountStr = etTransCount.getText().toString().trim();
-                amount = Integer.parseInt(amountStr);
                 if (TextUtils.isEmpty(address)){
                     showShortToast(R.string.aaa_address_empty);
                     return;
                 }
+                if (TextUtils.isEmpty(amountStr)){
+                    showShortToast(R.string.pls_input_aaa_amount);
+                    return;
+                }
+                amount = Integer.parseInt(amountStr);
                 if (intCal != null && amount > (int) Double.parseDouble(intCal.getDigitalCoin())) {
                     showShortToast(R.string.digital_not_enouth);
                     return;
