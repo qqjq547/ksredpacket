@@ -183,9 +183,9 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
      */
     private void setContent(MyAAA data) {
         tvText.setText(getResources().getString(R.string.aaa_detailed_str));
-        tvAaaNumber.setText(CommonUtil.formatDoubleOrigin(data.getCoin()));
-        tvMoney.setText(CommonUtil.formatDoubleOrigin(data.getMoney()));
-        tvAaaPrice.setText(CommonUtil.formatDoubleOrigin(data.getExchangeRate()));
+        tvAaaNumber.setText(data.getCoin());
+        tvMoney.setText(data.getMoney());
+        tvAaaPrice.setText(data.getExchangeRate());
         GlideImgManager.loadImage(this,data.getQrcodeUrlKey(),ivCode);
         tvAaaAddress.setText(data.getWalletAddress());
 

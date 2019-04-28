@@ -458,7 +458,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
 
     @Override
     public void setMyAAA(MyAAA data) {
-        mTvMyAaa.setText(CommonUtil.formatDoubleOrigin(data.getCoin()));
+        mTvMyAaa.setText(data.getCoin());
     }
 
     public void setMsgDotView() {

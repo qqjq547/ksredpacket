@@ -18,13 +18,13 @@ public class MyAAA {
      * walletAddress : string
      */
 
-    private double coin;
+    private String coin;
     private String createDate;
     private String createUser;
     private String digitalCurrency;
-    private double exchangeRate;
-    private int id;
-    private double money;
+    private String exchangeRate;
+    private String id;
+    private String money;
     private int nameAuthentication;
     private String qrcodeUrlKey;
     private String tenantCode;
@@ -32,11 +32,11 @@ public class MyAAA {
     private String updateUser;
     private String walletAddress;
 
-    public double getCoin() {
+    public String getCoin() {
         return coin;
     }
 
-    public void setCoin(double coin) {
+    public void setCoin(String coin) {
         this.coin = coin;
     }
 
@@ -64,27 +64,27 @@ public class MyAAA {
         this.digitalCurrency = digitalCurrency;
     }
 
-    public double getExchangeRate() {
+    public String getExchangeRate() {
         return exchangeRate;
     }
 
-    public void setExchangeRate(double exchangeRate) {
+    public void setExchangeRate(String exchangeRate) {
         this.exchangeRate = exchangeRate;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public double getMoney() {
+    public String getMoney() {
         return money;
     }
 
-    public void setMoney(double money) {
+    public void setMoney(String money) {
         this.money = money;
     }
 

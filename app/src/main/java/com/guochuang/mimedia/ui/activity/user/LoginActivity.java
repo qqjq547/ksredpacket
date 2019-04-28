@@ -369,7 +369,6 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
                                     getPref().setInt(PrefUtil.DEBUGHOST, 2);
                                     break;
                             }
-                            App.getInstance().finishActivity();
                         }
                     });
                     sheetDialog.show();
