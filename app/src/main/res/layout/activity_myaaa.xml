@@ -198,7 +198,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/space20"
+                        android:layout_marginLeft="@dimen/space15"
                         android:layout_weight="1"
                         android:text="@string/aaa_address_str"
                         android:textSize="@dimen/textfont14" />
@@ -221,8 +221,8 @@
                     android:id="@+id/tv_aaa_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/space20"
-                    android:layout_marginRight="@dimen/space20"
+                    android:layout_marginLeft="@dimen/space15"
+                    android:layout_marginRight="@dimen/space15"
                     android:gravity="right"
                     android:paddingTop="@dimen/space12"
                     android:text=""
