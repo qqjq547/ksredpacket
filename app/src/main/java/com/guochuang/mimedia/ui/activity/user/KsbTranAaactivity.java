@@ -75,7 +75,7 @@ public class KsbTranAaactivity extends MvpActivity<KsbTranAaaPresenter> implemen
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (TextUtils.isEmpty(charSequence)){
                     tvMinerFee.setText("0");
-                    tvArriveAaa.setText("0");
+                    tvArriveAaa.setText(CommonUtil.formatDouble(0,4));
                 }else {
                     double input= CommonUtil.formatDouble(Double.parseDouble(charSequence.toString()));
                     if (exchangeConfig!=null){

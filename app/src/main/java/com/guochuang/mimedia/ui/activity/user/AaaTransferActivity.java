@@ -71,12 +71,12 @@ public class AaaTransferActivity extends MvpActivity<AaaTransferPresenter> imple
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (TextUtils.isEmpty(charSequence)) {
-                    tvMinerFee.setText("0");
+                    tvMinerFee.setText(CommonUtil.formatDouble(0,6));
                 } else {
                     double input = CommonUtil.formatDouble(Double.parseDouble(charSequence.toString().trim()));
                     if (intCal != null&&exchangeConfig!=null) {
                         double equalAaa = DoubleUtil.mul(input, exchangeConfig.getWithdrawAAA().getServiceRate());
-                        tvMinerFee.setText(CommonUtil.formatDoubleStr(equalAaa));
+                        tvMinerFee.setText(CommonUtil.formatDouble(equalAaa,6));
                     }
                 }
             }
