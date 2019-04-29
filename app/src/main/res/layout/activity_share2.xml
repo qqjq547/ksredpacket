@@ -49,7 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/space5"
-        android:layout_marginTop="@dimen/idcard_cn_dimen_30">
+        android:layout_marginTop="@dimen/space30">
 
     </android.support.v7.widget.RecyclerView>
 

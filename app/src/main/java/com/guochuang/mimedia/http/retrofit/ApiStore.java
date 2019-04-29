@@ -1431,7 +1431,7 @@ public interface ApiStore {
      *
      * @return
      */
-    @GET("/api/v1/exchange/exchange/rate")
+    @GET("/api/v1/exchange/digi_currcy/rate")
     Observable<HttpResponse<AAARate>> getMyAAARate();
 
     /**
@@ -1455,9 +1455,6 @@ public interface ApiStore {
             @Field("targetDigitalCurrency") String targetDigitalCurrency,
             @Field("coin") double coin,
             @Field("safetyCode") String safetyCode);
-
-    @GET("/api/v1/exchange/digi_currcy/rate")
-    Observable<HttpResponse<Double>> getExchangeRate();
 
     @GET("/api/v1/exchange/user_digital_currency/int_cal")
     Observable<HttpResponse<DigitalIntCal>> intCal(

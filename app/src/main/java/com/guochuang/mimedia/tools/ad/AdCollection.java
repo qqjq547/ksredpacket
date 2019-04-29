@@ -15,7 +15,6 @@ public class AdCollection {
     AdInfo adInfo ;
     TencentAd tencentAd;
     BaiduAd baiduAd;
-    VungleAd vungleAd;
 
     public static final String TYPE_GDT = "tencent";
     public static final String TYPE_BD = "baidu";
@@ -121,12 +120,6 @@ public class AdCollection {
                 }
             }
         }
-    }
-    public void showVideo(OnVideoShowResultListener listener){
-       if (vungleAd!=null){
-           vungleAd=new VungleAd(context);
-       }
-        vungleAd.showVideo(listener);
     }
 
 

@@ -71,12 +71,12 @@ public class AaaTransferActivity extends MvpActivity<AaaTransferPresenter> imple
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (TextUtils.isEmpty(charSequence)) {
-                    tvMinerFee.setText("0");
+                    tvMinerFee.setText(CommonUtil.formatDouble(0,6));
                 } else {
                     double input = CommonUtil.formatDouble(Double.parseDouble(charSequence.toString().trim()));
                     if (intCal != null&&exchangeConfig!=null) {
                         double equalAaa = DoubleUtil.mul(input, exchangeConfig.getWithdrawAAA().getServiceRate());
-                        tvMinerFee.setText(CommonUtil.formatDoubleStr(equalAaa));
+                        tvMinerFee.setText(CommonUtil.formatDouble(equalAaa,6));
                     }
                 }
             }
@@ -101,11 +101,15 @@ public class AaaTransferActivity extends MvpActivity<AaaTransferPresenter> imple
             case R.id.tv_confirm:
                 address=etTransAddress.getText().toString().trim();
                 String amountStr = etTransCount.getText().toString().trim();
-                amount = Integer.parseInt(amountStr);
                 if (TextUtils.isEmpty(address)){
                     showShortToast(R.string.aaa_address_empty);
                     return;
                 }
+                if (TextUtils.isEmpty(amountStr)){
+                    showShortToast(R.string.pls_input_aaa_amount);
+                    return;
+                }
+                amount = Integer.parseInt(amountStr);
                 if (intCal != null && amount > (int) Double.parseDouble(intCal.getDigitalCoin())) {
                     showShortToast(R.string.digital_not_enouth);
                     return;

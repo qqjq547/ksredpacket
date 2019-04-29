@@ -27,42 +27,7 @@
             android:orientation="vertical">
 
 
-            <LinearLayout
-                android:id="@+id/lin_content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/space160"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/tv_errmsg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/space10"
-                    android:textColor="@color/text_red"
-                    android:textSize="@dimen/textfont14" />
-
-                <ImageView
-                    android:id="@+id/iv_card"
-                    android:layout_width="210dp"
-                    android:layout_height="143dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/bg_identify_card" />
-
-                <TextView
-                    android:id="@+id/tv_notice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space15"
-                    android:text="@string/upload_identify_pic"
-                    android:textColor="@color/text_red"
-                    android:textSize="@dimen/textfont14" />
-            </LinearLayout>
-
-          <!--  android:layout_marginLeft="@dimen/space15"
+            <!--  android:layout_marginLeft="@dimen/space15"
             android:layout_marginRight="@dimen/space15"
              android:gravity="bottom"-->
             <LinearLayout
@@ -74,7 +39,7 @@
                 android:orientation="vertical">
 
                 <include
-                    layout="@layout/real_name_layout"
+                    layout="@layout/layout_real_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_10"/>

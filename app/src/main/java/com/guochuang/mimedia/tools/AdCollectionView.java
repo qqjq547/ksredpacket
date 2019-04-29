@@ -53,11 +53,6 @@ import com.qq.e.ads.splash.SplashADListener;
 import com.qq.e.comm.constants.AdPatternType;
 import com.qq.e.comm.util.AdError;
 import com.sz.gcyh.KSHongBao.R;
-import com.vungle.warren.AdConfig;
-import com.vungle.warren.InitCallback;
-import com.vungle.warren.LoadAdCallback;
-import com.vungle.warren.PlayAdCallback;
-import com.vungle.warren.Vungle;
 
 import org.json.JSONObject;
 
@@ -70,7 +65,6 @@ public class AdCollectionView {
     // 广告样式
     public static final String TYPE_GDT = "tencent";
     public static final String TYPE_BD = "baidu";
-    public static final String TYPE_VUNGLE = "vungle";
     public static final String TYPE_SYSTEM = "system";
     //    // 广告位置
     public static final String LOCATION_TAIL = "tail";
@@ -78,14 +72,10 @@ public class AdCollectionView {
     public static final String LOCATION_REDBAG = "redbag";
     public static final String LOCATION_CELLULAR = "cellular";
 
-    private String currentType = "";
-
     private Context context;
     private ViewGroup viewGroup;
     private ViewGroup.LayoutParams rllp;
     private AdCollectionListener adCollectionListener;
-    private AdVideoListener adVideoListener;
-    private AdVideoInitListener adVideoInitListener;
     private NativeExpressADView nativeExpressADView;
     private RewardVideoAD rewardVideoAD;
 
@@ -129,8 +119,6 @@ public class AdCollectionView {
                 adInfo = GsonUtil.GsonToBean(adInfoStr, AdInfo.class);
                 if (!place.equals(LOCATION_CELLULAR)) {
                     type = adInfo.getDefaultVendorType();
-                } else {
-                    type = TYPE_VUNGLE;
                 }
                 if (TextUtils.isEmpty(type)) {
                     if (place.equals(LOCATION_TAIL)) {
@@ -415,9 +403,7 @@ public class AdCollectionView {
                      */
                     @Override
                     public void onReward() {
-                        if (adVideoListener != null) {
-                            adVideoListener.onVideoFinish();
-                        }
+
                     }
 
                     @Override
@@ -435,9 +421,7 @@ public class AdCollectionView {
 
                     @Override
                     public void onError(AdError adError) {
-                        if (adVideoListener != null) {
-                            adVideoListener.onVideoError(adError.getErrorMsg());
-                        }
+
                     }
                 });
                 rewardVideoAD.loadAD();
@@ -623,83 +607,8 @@ public class AdCollectionView {
                 });
                 viewGroup.addView(adView, rllp);
             } else if (place.equals(LOCATION_CELLULAR)) {
-//                for (AdInfo.VendorAdListBeanX.VendorAdListBean adDetailsBean : vendorAd.getVendorAdList()) {
-//                    if (Double.parseDouble(adDetailsBean.getType()) == 1002) {
-//                        adDetails = adDetailsBean;
-//                    }
-//                }
-//                final String placeId = adDetails.getLocationId();
-//                AdView.setAppSid(context, "c8a9f32f");
-//                interstitialAd = new InterstitialAd(context, "6012509");
-//                interstitialAd.setListener(new InterstitialAdListener() {
-//                    @Override
-//                    public void onAdReady() {
-//
-//                    }
-//
-//                    @Override
-//                    public void onAdPresent() {
-//
-//                    }
-//
-//                    @Override
-//                    public void onAdClick(InterstitialAd interstitialAd) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onAdDismissed() {
-//
-//                    }
-//
-//                    @Override
-//                    public void onAdFailed(String s) {
-//
-//                    }
-//                });
-//                interstitialAd.loadAd();
-            }
-        } else if (type.equals(TYPE_VUNGLE)) {
-            currentType = type;
-            if (place.equals(LOCATION_CELLULAR)) {
-                String appId = "5c2303fdd71d110017b40171";
-                Vungle.init(appId, App.getInstance(), new InitCallback() {
-                    @Override
-                    public void onSuccess() {
-                        if (Vungle.isInitialized()) {
-                            Vungle.loadAd("DEFAULT-5224715", new LoadAdCallback() {
-                                @Override
-                                public void onAdLoad(String s) {
-                                    if (adVideoInitListener != null) {
-                                        adVideoInitListener.onInit();
-                                    }
-                                }
-
-                                @Override
-                                public void onError(String s, Throwable throwable) {
-                                    if (adVideoInitListener != null) {
-                                        adVideoInitListener.onError(throwable.getMessage());
-                                    }
-                                }
-                            });
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable throwable) {
-                        if (adVideoInitListener != null) {
-                            adVideoInitListener.onError(throwable.getMessage());
-                        }
-                    }
-
-                    @Override
-                    public void onAutoCacheAdAvailable(String s) {
-                        LogUtil.d("onAutoCacheAdAvailable");
-                    }
-                });
 
             }
-
         } else {
             if (place.equals(LOCATION_TAIL)) {
                 if (adCollectionListener != null) {
@@ -755,103 +664,10 @@ public class AdCollectionView {
         });
     }
 
-    public void setAdCollectionListener(AdCollectionListener adCollectionListener) {
-        this.adCollectionListener = adCollectionListener;
-    }
-
-    public void setAdVideoListener(AdVideoListener adVideoListener) {
-        this.adVideoListener = adVideoListener;
-    }
-
-    public void setAdVideoInitListener(AdVideoInitListener adVideoInitListener) {
-        this.adVideoInitListener = adVideoInitListener;
-    }
-
-    /**
-     * 播放激励视屏
-     */
-    public void showRewardVideoAD() {
-        if (rewardVideoAD != null) {
-            rewardVideoAD.showAD();
-        }
-        if (currentType.equals(TYPE_VUNGLE)) {
-            try {
-                if (Vungle.canPlayAd("DEFAULT-5224715")) {
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            Vungle.playAd("DEFAULT-5224715", new AdConfig(), new PlayAdCallback() {
-                                @Override
-                                public void onAdStart(String s) {
-
-                                }
-
-                                @Override
-                                public void onAdEnd(String placementReferenceId, boolean completed, boolean isCTAClicked) {
-                                    if (completed) {
-                                        if (adVideoListener != null) {
-                                            adVideoListener.onVideoFinish();
-                                        }
-                                    }
-                                }
-
-                                @Override
-                                public void onError(String s, Throwable throwable) {
-                                    if (adVideoListener != null) {
-                                        adVideoListener.onVideoError(s + throwable.getMessage());
-                                    }
-                                }
-                            });
-                        }
-                    }, 500);
-
-                } else {
-                    Vungle.loadAd("DEFAULT-5224715", new LoadAdCallback() {
-                        @Override
-                        public void onAdLoad(String s) {
-                            showRewardVideoAD();
-                        }
-
-                        @Override
-                        public void onError(String s, Throwable throwable) {
-                            if (adVideoListener != null) {
-                                adVideoListener.onVideoError(s + throwable.getMessage());
-                            }
-                        }
-                    });
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                if (adVideoListener != null) {
-                    adVideoListener.onVideoError(e.getMessage());
-                }
-            }
-        }
-
-//        if (interstitialAd != null) {
-//            if (interstitialAd.isAdReady()) {
-//                interstitialAd.showAd((Activity) context);
-//            } else {
-//                interstitialAd.loadAd();
-//            }
-//        }
-    }
-
     public interface AdCollectionListener {
         void onAdDismissed();
 
         void onAdFailed(String s);
     }
 
-    public interface AdVideoInitListener {
-        void onInit();
-
-        void onError(String msg);
-    }
-
-    public interface AdVideoListener {
-        void onVideoFinish();
-
-        void onVideoError(String msg);
-    }
 }

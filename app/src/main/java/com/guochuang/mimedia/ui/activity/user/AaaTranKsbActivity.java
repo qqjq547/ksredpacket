@@ -99,6 +99,10 @@ public class AaaTranKsbActivity extends MvpActivity<AaaTranKsbPresenter> impleme
                 break;
             case R.id.tv_confirm:
                 String amountStr=etTransKsb.getText().toString().trim();
+                if (TextUtils.isEmpty(amountStr)){
+                    showShortToast(R.string.pls_input_aaa_amount);
+                    return;
+                }
                 amount=Integer.parseInt(amountStr);
                 if (intCal!=null&&amount>(int)Double.parseDouble(intCal.getDigitalCoin())){
                     showShortToast(R.string.digital_not_enouth);

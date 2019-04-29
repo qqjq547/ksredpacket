@@ -75,7 +75,7 @@ public class KsbTranAaactivity extends MvpActivity<KsbTranAaaPresenter> implemen
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (TextUtils.isEmpty(charSequence)){
                     tvMinerFee.setText("0");
-                    tvArriveAaa.setText("0");
+                    tvArriveAaa.setText(CommonUtil.formatDouble(0,4));
                 }else {
                     double input= CommonUtil.formatDouble(Double.parseDouble(charSequence.toString()));
                     if (exchangeConfig!=null){
@@ -84,7 +84,7 @@ public class KsbTranAaactivity extends MvpActivity<KsbTranAaaPresenter> implemen
                             double transKsb=input*(1-exchangeConfig.getKsb2aaa().getServiceRate());
                             double equalMoney=DoubleUtil.mul(transKsb,Double.parseDouble(intCal.getKsbRate()));
                             double equalAaa=DoubleUtil.divide(equalMoney,Double.parseDouble(intCal.getDigitalRate()));
-                            tvArriveAaa.setText(CommonUtil.formatDoubleStr(equalAaa));
+                            tvArriveAaa.setText(CommonUtil.formatDouble(equalAaa,4));
                         }
                     }
 
@@ -153,7 +153,7 @@ public class KsbTranAaactivity extends MvpActivity<KsbTranAaaPresenter> implemen
             case R.id.tv_confirm:
                String amountStr=etTransKsb.getText().toString().trim();
                 if (TextUtils.isEmpty(amountStr)){
-                    showShortToast(R.string.pls_set_amount);
+                    showShortToast(R.string.pls_input_ksb_amount);
                     return;
                 }
                 amount=Integer.parseInt(amountStr);

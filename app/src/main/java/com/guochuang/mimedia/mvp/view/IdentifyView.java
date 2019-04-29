@@ -8,10 +8,6 @@ public interface IdentifyView {
 
     void setError(String msg);
 
-    void setUploadData(UploadFile data);
-
-    void setUploadError(String msg);
-
     void setVerifyError(String message);
 
     void setVerifyData(Captcha data);
