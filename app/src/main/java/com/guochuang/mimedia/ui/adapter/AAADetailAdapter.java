@@ -47,8 +47,8 @@ public class AAADetailAdapter extends BaseQuickAdapter<AAADetail, BaseViewHolder
                 type = R.string.extract_aaa;
                 imageResId = R.drawable.icon_extract_aaa;
                 holder.setGone(R.id.iv_status, true).setImageResource(R.id.iv_status,
-                        item.getStatus() == 0 ? R.drawable.extract_doing
-                                : R.drawable.extract_success).setGone(R.id.tv_adrress, true);
+                        item.getStatus() == 0 ? R.drawable.extract_doing : item.getStatus() == 1 ?
+                                 R.drawable.extract_success:R.drawable.extract_fial).setGone(R.id.tv_adrress, true);
                 tvMoneyText = mContext.getResources().getString(R.string.servicefee_str) + item.getServiceFee();
 
                 break;
@@ -61,6 +61,7 @@ public class AAADetailAdapter extends BaseQuickAdapter<AAADetail, BaseViewHolder
         }
 
         try {
+
             holder.setImageResource(R.id.iv_type, imageResId).setText(R.id.tv_type,
                     mContext.getResources().getString(type)).setText(R.id.tv_time, item.getCreateDate())
                     .setText(R.id.tv_nuber, String.format(mContext.getResources()
