@@ -20,55 +20,7 @@ public class IdentifyPresenter extends BasePresenter<IdentifyView> {
         attachView(view);
     }
 
-    public void userNameAuthAuth(
-            String realName,
-            String idCard,
-            String idCardPicture,
-            String vendorResponse
-    ) {
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                userNameAuthAuth(realName, idCard, idCardPicture, vendorResponse)), new ApiCallback<String>() {
-            @Override
-            public void onSuccess(String data) {
-                mvpView.setData(data);
 
-            }
-
-            @Override
-            public void onFailure(ApiException exception) {
-                mvpView.setError(exception.getMessage());
-
-            }
-
-            @Override
-            public void onFinish() {
-
-            }
-        });
-    }
-
-    public void fileUpload(String businessType, File file) {
-        RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), file);
-        MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().fileUpload(businessType, body)), new ApiCallback<UploadFile>() {
-            @Override
-            public void onSuccess(UploadFile data) {
-                mvpView.setUploadData(data);
-
-            }
-
-            @Override
-            public void onFailure(ApiException exception) {
-                mvpView.setUploadError(exception.getMessage());
-
-            }
-
-            @Override
-            public void onFinish() {
-
-            }
-        });
-    }
 
     public void getRegisterImageVerify(String mobile) {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
@@ -123,30 +75,4 @@ public class IdentifyPresenter extends BasePresenter<IdentifyView> {
 
 
     }
-
-//    public void ocrIdCard(
-//            File file
-//    ) {
-//        RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), file);
-//        MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
-//        addSubscription(RxUtil.createBaseObservable(ApiClient.getInstance().newInstance(ApiClient.OCR_ID_CARD).
-//                ocrIdCard(KeyUtil.API_KEY, KeyUtil.API_SECRET, body)), new ApiCallback<MegviiSerach>() {
-//            @Override
-//            public void onSuccess(MegviiSerach data) {
-//                mvpView.setOCRData(data);
-//
-//            }
-//
-//            @Override
-//            public void onFailure(ApiException exception) {
-//                mvpView.setOCRError(exception.getMessage());
-//
-//            }
-//
-//            @Override
-//            public void onFinish() {
-//
-//            }
-//        });
-//    }
 }

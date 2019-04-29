@@ -88,11 +88,9 @@ dependencies {
     implementation 'cn.jiguang.sdk:jshare-sinamodel:1.6.1'
     implementation 'top.zibin:Luban:1.1.8'
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
-    implementation(name: 'MGLicenseManagerSDK-0.3.1', ext: 'aar')
     implementation(name: 'alipaySdk-15.5.7-20181023110917', ext: 'aar')
     implementation 'com.allenliu.versionchecklib:library:2.1.5'
     implementation 'com.gyf.immersionbar:immersionbar:2.3.3-beta09'
-    implementation(name: 'idcard_ocr', ext: 'aar')
     implementation project(path: ':hellocharts-library')
     implementation 'cn.yipianfengye.android:zxing-library:2.2'
     implementation project(path: ':mediapicker')

@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:paddingLeft="@dimen/space20"
-    android:paddingRight="@dimen/idcard_cn_dimen_20"
+    android:paddingRight="@dimen/space20"
     android:paddingTop="@dimen/space30"
     android:paddingBottom="@dimen/space30"
     android:background="@drawable/bg_white_block">

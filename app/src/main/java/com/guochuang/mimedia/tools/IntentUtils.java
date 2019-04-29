@@ -20,7 +20,6 @@ import com.guochuang.mimedia.ui.activity.redbag.LinkRedbagDetailActivity;
 import com.guochuang.mimedia.ui.activity.redbag.LookSurevyActivity;
 import com.guochuang.mimedia.ui.activity.redbag.LookVideoProblemActivity;
 import com.guochuang.mimedia.ui.activity.redbag.RedbagDetailActivity;
-import com.guochuang.mimedia.ui.activity.redbag.VideoPreviewActivity;
 import com.guochuang.mimedia.ui.activity.redbag.VideoPreviewActivity2;
 import com.guochuang.mimedia.ui.activity.user.CardAddActivity;
 import com.guochuang.mimedia.ui.activity.city.CityBidRecordActivity;
