@@ -17,7 +17,13 @@
         android:paddingBottom="@dimen/space15"
         android:textSize="@dimen/textfont14"
         android:textColor="@color/text_gray_drak" />
+   <LinearLayout
+       android:id="@+id/lin_custom"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical">
 
+   </LinearLayout>
     <TextView
         android:id="@+id/tv_message"
         android:layout_width="match_parent"

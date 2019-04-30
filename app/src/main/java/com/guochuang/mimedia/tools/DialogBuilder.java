@@ -5,6 +5,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sz.gcyh.KSHongBao.R;
@@ -12,6 +13,7 @@ import com.sz.gcyh.KSHongBao.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import lecho.lib.hellocharts.model.Line;
 
 public class DialogBuilder {
 
@@ -27,6 +29,8 @@ public class DialogBuilder {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
+    @BindView(R.id.lin_custom)
+    LinearLayout linCustom;
     @BindView(R.id.tv_message)
     TextView tvMessage;
     @BindView(R.id.tv_negative)
@@ -35,6 +39,7 @@ public class DialogBuilder {
     View vLine;
     @BindView(R.id.tv_positive)
     TextView tvPositive;
+    View customView;
 
     Dialog dialog;
 
@@ -85,7 +90,10 @@ public class DialogBuilder {
         this.negativeListener = listener;
         return this;
     }
-
+    public DialogBuilder setCustomView(View view) {
+        this.customView=view;
+        return this;
+    }
     public Dialog create() {
         View contentView = LayoutInflater.from(context).inflate(R.layout.dialog_alert, null);
         ButterKnife.bind(this,contentView);
@@ -95,7 +103,13 @@ public class DialogBuilder {
             tvTitle.setVisibility(View.VISIBLE);
             tvTitle.setText(title);
         }
-        tvMessage.setText(message);
+        if (customView==null){
+            tvMessage.setVisibility(View.VISIBLE);
+            tvMessage.setText(message);
+        }else {
+            tvMessage.setVisibility(View.GONE);
+            linCustom.addView(customView);
+        }
         if (TextUtils.isEmpty(negativeText)) {
             tvNegative.setVisibility(View.GONE);
         } else {
@@ -109,7 +123,7 @@ public class DialogBuilder {
             tvPositive.setVisibility(View.VISIBLE);
             tvPositive.setText(positiveText);
         }
-        if (TextUtils.isEmpty(negativeText)&&TextUtils.isEmpty(positiveText)){
+        if (!TextUtils.isEmpty(negativeText)&&!TextUtils.isEmpty(positiveText)){
             vLine.setVisibility(View.VISIBLE);
         }else {
             vLine.setVisibility(View.GONE);
