@@ -21,6 +21,7 @@ import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.CustomProDialog;
 import com.guochuang.mimedia.tools.DialogBuilder;
+import com.guochuang.mimedia.tools.GeneralUtil;
 import com.guochuang.mimedia.tools.RxUtil;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.sz.gcyh.KSHongBao.R;
@@ -62,6 +63,7 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
     TextView tvAaaAddress;
 
     boolean mIsRealName;
+    double maaaCoin;
 
     @Override
     protected MyAAAAPresenter createPresenter() {
@@ -122,7 +124,7 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
     }
 
 
-    @OnClick({R.id.iv_back, R.id.tv_text, R.id.tv_tibi, R.id.tv_transform_ksb, R.id.tv_copy, R.id.tv_goto_real_name,R.id.lin_price})
+    @OnClick({R.id.iv_back, R.id.tv_text, R.id.tv_tibi, R.id.tv_transform_ksb, R.id.tv_copy, R.id.tv_goto_real_name, R.id.lin_price})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -132,13 +134,13 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
                 startActivity(new Intent(this, AAADetailedActivity.class));
                 break;
             case R.id.tv_tibi:
-                startActivityForResult(new Intent(this, AaaTransferActivity.class),Constant.REFRESH);
+                startActivityForResult(new Intent(this, AaaTransferActivity.class), Constant.REFRESH);
                 break;
             case R.id.tv_transform_ksb:
-                startActivityForResult(new Intent(this, AaaTranKsbActivity.class),Constant.REFRESH);
+                startActivityForResult(new Intent(this, AaaTranKsbActivity.class), Constant.REFRESH);
                 break;
             case R.id.tv_copy:
-                CommonUtil.copyMsg(this,tvAaaAddress.getText().toString());
+                CommonUtil.copyMsg(this, tvAaaAddress.getText().toString());
                 showShortToast(getResources().getString(R.string.copyed));
                 break;
             case R.id.tv_goto_real_name:
@@ -147,7 +149,7 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
             case R.id.lin_price:
                 new DialogBuilder(this)
                         .setMessage(getString(R.string.myaaa_tip))
-                        .setPositiveButton(R.string.i_known,null)
+                        .setPositiveButton(R.string.i_known, null)
                         .create().show();
                 break;
 
@@ -169,7 +171,7 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
     public void setData(MyAAA data) {
         closeLoadingDialog();
         mIsRealName = data.getNameAuthentication() == 1 ? true : false;
-       //据实名展示不同的界面
+        //据实名展示不同的界面
         selectShowView(mIsRealName);
         //设置文字内容
         setContent(data);
@@ -186,14 +188,15 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
         tvAaaNumber.setText(data.getCoin());
         tvMoney.setText(data.getMoney());
         tvAaaPrice.setText(data.getExchangeRate());
-        GlideImgManager.loadImage(this,data.getQrcodeUrlKey(),ivCode);
+        GlideImgManager.loadImage(this, data.getQrcodeUrlKey(), ivCode);
         tvAaaAddress.setText(data.getWalletAddress());
-
+        maaaCoin = Double.valueOf(data.getCoin());
 
     }
 
     /**
      * 是否实名 根据实名展示不同的界面
+     *
      * @param isRealName
      */
     private void selectShowView(boolean isRealName) {
@@ -212,9 +215,10 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
 
     @Override
     public void setAAARate(AAARate data) {
-        tvAaaPrice.setText(data.getRate()+"");
+        tvAaaPrice.setText(data.getRate() + "");
+        //更新等值
+        tvMoney.setText(GeneralUtil.retainDecimal((data.getRate() * maaaCoin) + "", 2));
     }
-
 
 
     @Override

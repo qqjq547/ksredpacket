@@ -18,6 +18,7 @@ import com.guochuang.mimedia.mvp.model.MyAAA;
 import com.guochuang.mimedia.mvp.model.NestAuctionMsg;
 import com.guochuang.mimedia.mvp.model.RegionCore;
 import com.guochuang.mimedia.tools.DialogBuilder;
+import com.guochuang.mimedia.tools.GeneralUtil;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.ui.activity.MainActivity;
 import com.guochuang.mimedia.ui.activity.beenest.AdBidActivity;
@@ -458,7 +459,8 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
 
     @Override
     public void setMyAAA(MyAAA data) {
-        mTvMyAaa.setText(data.getCoin());
+        //显示小数点四位
+        mTvMyAaa.setText(GeneralUtil.retainDecimal(data.getCoin().toString(),4));
     }
 
     public void setMsgDotView() {

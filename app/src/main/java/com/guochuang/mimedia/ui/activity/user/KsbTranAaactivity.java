@@ -156,7 +156,14 @@ public class KsbTranAaactivity extends MvpActivity<KsbTranAaaPresenter> implemen
                     showShortToast(R.string.pls_input_ksb_amount);
                     return;
                 }
-                amount=Integer.parseInt(amountStr);
+                //超过Integer 最大值
+                try {
+                    amount=Integer.parseInt(amountStr);
+                }catch (Exception e){
+                    showShortToast(R.string.ksb2aaa_tip_str);
+                    return;
+                }
+
                 if (intCal!=null&&amount>(int)Double.parseDouble(intCal.getKsbCoin())){
                    showShortToast(R.string.coin_not_enouth);
                     return;

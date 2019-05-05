@@ -1549,4 +1549,23 @@ public class GeneralUtil {
         return "";
     }
 
+
+    /**
+     * 保留几位小数
+     *
+     * @return
+     */
+    public static String retainDecimal(String s, int numbre) {
+        //删除“.”后面超过2位后的数据
+        if (s.toString().contains(".")) {
+            if (s.length() - 1 - s.toString().indexOf(".") > numbre) {
+                s = s.toString().subSequence(0, s.toString().indexOf(".") + numbre + 1).toString();
+            }
+        }
+
+        return s;
+    }
+
 }
+
+
