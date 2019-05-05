@@ -37,8 +37,8 @@ public class AAADetail {
     private String userAccountUuid;
     private String sourceDigitalCurrency;
     private String targetDigitalCurrency;
-    private double sourceCoin;
-    private double targetCoin;
+    private String sourceCoin;
+    private String targetCoin;
     private String sourceAddress;
     private String targetAddress;
     private double serviceFee;
@@ -139,19 +139,19 @@ public class AAADetail {
         this.targetDigitalCurrency = targetDigitalCurrency;
     }
 
-    public double getSourceCoin() {
+    public String getSourceCoin() {
         return sourceCoin;
     }
 
-    public void setSourceCoin(double sourceCoin) {
+    public void setSourceCoin(String sourceCoin) {
         this.sourceCoin = sourceCoin;
     }
 
-    public double getTargetCoin() {
+    public String getTargetCoin() {
         return targetCoin;
     }
 
-    public void setTargetCoin(double targetCoin) {
+    public void setTargetCoin(String targetCoin) {
         this.targetCoin = targetCoin;
     }
 

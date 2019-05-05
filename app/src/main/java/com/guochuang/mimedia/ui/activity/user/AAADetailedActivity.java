@@ -19,8 +19,7 @@ import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.ui.adapter.AAADetailAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
 import com.sz.gcyh.KSHongBao.R;
 
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ import butterknife.OnClick;
 /**
  * AAA 明细
  */
-public class AAADetailedActivity extends MvpActivity<AAADetailedPresenter> implements AAADetailedView, OnRefreshListener, OnLoadmoreListener {
+public class AAADetailedActivity extends MvpActivity<AAADetailedPresenter> implements AAADetailedView {
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.tv_title)
@@ -62,7 +61,7 @@ public class AAADetailedActivity extends MvpActivity<AAADetailedPresenter> imple
 
     private static final int pageSize = 20;
     private int currentPage = 0;
-    private String mCurrentType = null;
+    private int mCurrentType;
     private List<AAADetail> mData = new ArrayList<AAADetail>();
     private AAADetailAdapter mAAADetailAdapter;
 
@@ -81,11 +80,26 @@ public class AAADetailedActivity extends MvpActivity<AAADetailedPresenter> imple
     public void initViewAndData() {
         closeSelectView();
         showLoadingDialog(null);
-        getAAADetailedList(currentPage, pageSize, null);
+        getAAADetailedList(currentPage, pageSize, 0);
         tvTitle.setText(getString(R.string.aaa_detailed_str));
         tvText.setText(getString(R.string.all));
-        srlRefresh.setOnRefreshListener(this);
-        srlRefresh.setOnLoadmoreListener(this);
+        srlRefresh.setOnRefreshListener(new OnRefreshLoadmoreListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                currentPage = 0;
+                mData.clear();
+                getAAADetailedList(currentPage, pageSize, mCurrentType);
+            }
+
+
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                ++currentPage;
+                getAAADetailedList(currentPage, pageSize, mCurrentType);
+
+            }
+
+        });
         srlRefresh.setEnableLoadmore(true);
         rvAaalist.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         mAAADetailAdapter = new AAADetailAdapter(mData);
@@ -97,9 +111,9 @@ public class AAADetailedActivity extends MvpActivity<AAADetailedPresenter> imple
     /**
      * 获取AAA 明细列表
      */
-    private void getAAADetailedList(int currentPage, int pageSize, String type) {
+    private void getAAADetailedList(int currentPage, int pageSize, int type) {
         showLoadingDialog(null);
-        mvpPresenter.getAAADetailedList(currentPage, pageSize, type);
+        mvpPresenter.getAAADetailedList(currentPage, pageSize, type==0?"":String.valueOf(type));
     }
 
 
@@ -115,9 +129,9 @@ public class AAADetailedActivity extends MvpActivity<AAADetailedPresenter> imple
                 openSelectView();
                 break;
             case R.id.tv_all:
-                mCurrentType =null;
+                mCurrentType=0;
                 mData.clear();
-                getAAADetailedList(currentPage, pageSize,null);
+                getAAADetailedList(currentPage, pageSize,0);
                 break;
             case R.id.tv_tranform_ksb:
                 mData.clear();
@@ -168,22 +182,6 @@ public class AAADetailedActivity extends MvpActivity<AAADetailedPresenter> imple
         closeLoadingDialog();
         mData.addAll(data.getDataList());
         mAAADetailAdapter.notifyDataSetChanged();
-    }
-
-
-    @Override
-    public void onRefresh(RefreshLayout refreshlayout) {
-        currentPage = 0;
-        mData.clear();
-        getAAADetailedList(currentPage, pageSize, mCurrentType);
-    }
-
-
-    @Override
-    public void onLoadmore(RefreshLayout refreshlayout) {
-        ++currentPage;
-        getAAADetailedList(currentPage, pageSize, mCurrentType);
-
     }
 
     private void closeRefresAndLoadmore() {
