@@ -113,7 +113,7 @@ public class AAADetailedActivity extends MvpActivity<AAADetailedPresenter> imple
      */
     private void getAAADetailedList(int currentPage, int pageSize, int type) {
         showLoadingDialog(null);
-        mvpPresenter.getAAADetailedList(currentPage, pageSize, type==0?"":String.valueOf(type));
+        mvpPresenter.getAAADetailedList(currentPage, pageSize, type==0? null:String.valueOf(type));
     }
 
 

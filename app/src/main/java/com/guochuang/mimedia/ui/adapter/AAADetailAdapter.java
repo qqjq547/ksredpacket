@@ -28,15 +28,13 @@ public class AAADetailAdapter extends BaseQuickAdapter<AAADetail, BaseViewHolder
         holder.setGone(R.id.iv_status, false);
         holder.setGone(R.id.tv_adrress, false);
         holder.setTextColor(R.id.tv_nuber, mContext.getResources().getColor(R.color.color_000000));
-        holder.setText(R.id.tv_time, item.getCreateDate());
+        holder.setText(R.id.tv_time, item.getFinishDate());
         holder.setText(R.id.tv_nuber, String.format(mContext.getString(R.string.aaa_number_fomat), item.getSourceCoin()));
         holder.setText(R.id.tv_adrress, String.format(mContext.getResources().getString(R.string.receiv_str), item.getTargetAddress()));
         switch (item.getBusinessType()) {
             case Constant.AAA2KSB:
                 holder.setText(R.id.tv_type,R.string.aaa2ksb);
                 holder.setImageResource(R.id.iv_type, R.drawable.icon_aaa2ksb);
-                holder.setText(R.id.tv_nuber,String.format(mContext.getResources()
-                        .getString(R.string.aaa_number_fomat), item.getSourceCoin()+""));
                 holder.setTextColor(R.id.tv_nuber, mContext.getResources().getColor(R.color.color_4498e0));
                 holder.setText(R.id.tv_money, mContext.getString(R.string.dengzhi_str) + item.getTargetCoin());
                 break;
@@ -54,8 +52,6 @@ public class AAADetailAdapter extends BaseQuickAdapter<AAADetail, BaseViewHolder
                         item.getStatus() == 0 ? R.drawable.extract_doing : item.getStatus() == 1 ?
                                  R.drawable.extract_success:R.drawable.extract_fial).setGone(R.id.tv_adrress, true);
                 holder.setText(R.id.tv_money, mContext.getResources().getString(R.string.servicefee_str) + item.getServiceFee()+mContext.getString(R.string.KSB_str));
-                holder.setText(R.id.tv_nuber,String.format(mContext.getResources()
-                        .getString(R.string.aaa_number_fomat), item.getSourceCoin()));
 
                 break;
             case Constant.Fill_AAA:
