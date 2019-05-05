@@ -336,8 +336,8 @@ public class Constant {
 
    // 1-AAA转KSB，2-KSB转AAA，3-AAA提币，4-AAA充币
    public static final String ALL_AAA_DETAILED = "0";
-    public static final String AAA2KSB = "1";
-    public static final String KSB2AAA = "2";
-    public static final String EXTRACT_AAA = "3";
-    public static final String Fill_AAA = "4";
+    public static final int AAA2KSB = 1;
+    public static final int KSB2AAA = 2;
+    public static final int EXTRACT_AAA = 3;
+    public static final int Fill_AAA = 4;
 }
