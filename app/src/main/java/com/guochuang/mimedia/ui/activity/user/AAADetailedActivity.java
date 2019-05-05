@@ -1,6 +1,5 @@
 package com.guochuang.mimedia.ui.activity.user;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -26,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -60,9 +58,9 @@ public class AAADetailedActivity extends MvpActivity<AAADetailedPresenter> imple
     FrameLayout mFlSelectView;
 
     private static final int pageSize = 20;
-    private int currentPage = 0;
+    private int curPage = 0;
     private int mCurrentType;
-    private List<AAADetail> mData = new ArrayList<AAADetail>();
+    private List<AAADetail> dataArr = new ArrayList<>();
     private AAADetailAdapter mAAADetailAdapter;
 
     @Override
@@ -80,29 +78,26 @@ public class AAADetailedActivity extends MvpActivity<AAADetailedPresenter> imple
     public void initViewAndData() {
         closeSelectView();
         showLoadingDialog(null);
-        getAAADetailedList(currentPage, pageSize, 0);
+        getAAADetailedList(curPage, pageSize, 0);
         tvTitle.setText(getString(R.string.aaa_detailed_str));
         tvText.setText(getString(R.string.all));
         srlRefresh.setOnRefreshListener(new OnRefreshLoadmoreListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                currentPage = 0;
-                mData.clear();
-                getAAADetailedList(currentPage, pageSize, mCurrentType);
+                getAAADetailedList(0, pageSize, mCurrentType);
             }
 
 
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                ++currentPage;
-                getAAADetailedList(currentPage, pageSize, mCurrentType);
+                getAAADetailedList(curPage +1, pageSize, mCurrentType);
 
             }
 
         });
         srlRefresh.setEnableLoadmore(true);
         rvAaalist.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-        mAAADetailAdapter = new AAADetailAdapter(mData);
+        mAAADetailAdapter = new AAADetailAdapter(dataArr);
         mAAADetailAdapter.setEmptyView(getLayoutInflater().inflate(R.layout.layout_empty,null));
         mAAADetailAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         rvAaalist.setAdapter(mAAADetailAdapter);
@@ -130,28 +125,33 @@ public class AAADetailedActivity extends MvpActivity<AAADetailedPresenter> imple
                 break;
             case R.id.tv_all:
                 mCurrentType=0;
-                mData.clear();
-                getAAADetailedList(currentPage, pageSize,0);
+                dataArr.clear();
+                mAAADetailAdapter.notifyDataSetChanged();
+                getAAADetailedList(curPage, pageSize,0);
                 break;
             case R.id.tv_tranform_ksb:
-                mData.clear();
+                dataArr.clear();
+                mAAADetailAdapter.notifyDataSetChanged();
                 mCurrentType = Constant.AAA2KSB;
-                getAAADetailedList(currentPage, pageSize, Constant.AAA2KSB);
+                getAAADetailedList(curPage, pageSize, Constant.AAA2KSB);
                 break;
             case R.id.tv_ksb_tranform_aaa:
-                mData.clear();
+                dataArr.clear();
+                mAAADetailAdapter.notifyDataSetChanged();
                 mCurrentType = Constant.KSB2AAA;
-                getAAADetailedList(currentPage, pageSize, Constant.KSB2AAA);
+                getAAADetailedList(curPage, pageSize, Constant.KSB2AAA);
                 break;
             case R.id.tv_tibi:
-                mData.clear();
+                dataArr.clear();
+                mAAADetailAdapter.notifyDataSetChanged();
                 mCurrentType = Constant.EXTRACT_AAA;
-                getAAADetailedList(currentPage, pageSize, Constant.EXTRACT_AAA);
+                getAAADetailedList(curPage, pageSize, Constant.EXTRACT_AAA);
                 break;
             case R.id.tv_coin_charging:
-                mData.clear();
+                dataArr.clear();
+                mAAADetailAdapter.notifyDataSetChanged();
                 mCurrentType = Constant.Fill_AAA;
-                getAAADetailedList(currentPage, pageSize, Constant.Fill_AAA);
+                getAAADetailedList(curPage, pageSize, Constant.Fill_AAA);
                 break;
 
         }
@@ -171,24 +171,32 @@ public class AAADetailedActivity extends MvpActivity<AAADetailedPresenter> imple
 
     @Override
     public void setError(String message) {
+        srlRefresh.finishRefresh();
+        srlRefresh.finishLoadmore();
         closeLoadingDialog();
         showShortToast(message);
-        closeRefresAndLoadmore();
+
     }
 
     @Override
     public void setData(Page<AAADetail> data) {
-        closeRefresAndLoadmore();
         closeLoadingDialog();
-        mData.addAll(data.getDataList());
+        srlRefresh.finishRefresh();
+        srlRefresh.finishLoadmore();
+        curPage = data.getCurrentPage();
+        if (curPage == 1) {
+            dataArr.clear();
+        }
+        if (data.getDataList() != null) {
+            dataArr.addAll(data.getDataList());
+        }
         mAAADetailAdapter.notifyDataSetChanged();
-    }
-
-    private void closeRefresAndLoadmore() {
-        if (srlRefresh != null) {
-            srlRefresh.finishLoadmore();
-            srlRefresh.finishRefresh();
+        if (data.getCurrentPage() >= data.getTotalPage()) {
+            srlRefresh.setEnableLoadmore(false);
+        } else {
+            srlRefresh.setEnableLoadmore(true);
         }
     }
+
 
 }
