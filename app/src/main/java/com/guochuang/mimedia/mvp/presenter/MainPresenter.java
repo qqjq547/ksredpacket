@@ -62,26 +62,7 @@ public class MainPresenter extends BasePresenter<MainView> {
             }
         });
     }
-    public void getVersion(String systemCode,String sequence){
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().versionGet(systemCode,sequence)), new ApiCallback<VersionMsg>() {
-            @Override
-            public void onSuccess(VersionMsg data) {
-                mvpView.setVersion(data);
 
-            }
-
-            @Override
-            public void onFailure(ApiException exception) {
-                mvpView.setError(exception.getMessage());
-
-            }
-
-            @Override
-            public void onFinish() {
-
-            }
-        });
-    }
     public void getUserInfo(){
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getUserInfo()), new ApiCallback<UserInfo>() {
             @Override

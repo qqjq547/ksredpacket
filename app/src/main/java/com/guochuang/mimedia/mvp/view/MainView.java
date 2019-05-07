@@ -14,7 +14,6 @@ public interface MainView {
     void setUserInfo(UserInfo data);
     void setRain(RainMsg data);
     void setRainTip(Boolean data);
-    void setVersion(VersionMsg data);
     void setNameAuthSafefy(NameAuthAndSafety data);
     void setMessageIsNews(Boolean data);
     void setRemind(Remind data);

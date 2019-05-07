@@ -122,7 +122,7 @@ public class Constant {
     public static final String ISPREVIEW="isPreview";
 
     //用户协议
-    public static final String URL_FANS_AGREEMENT = ApiClient.HTML_URL+"/agreement/fans/index.htm";
+    public static final String URL_FANS_AGREEMENT = ApiClient.HTML_URL+"html/agreement/fans/index.htm";
     //资讯详情
     public static final String URL_INFOMATION_DETAIL = ApiClient.HTML_URL+"information/detail/index.htm";
     //推荐协议
