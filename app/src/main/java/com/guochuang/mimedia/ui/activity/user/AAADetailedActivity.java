@@ -64,7 +64,6 @@ public class AAADetailedActivity extends MvpActivity<AAADetailedPresenter> imple
     private AAADetailAdapter mAAADetailAdapter;
 
     @Override
-
     protected AAADetailedPresenter createPresenter() {
         return new AAADetailedPresenter(this);
     }
@@ -108,7 +107,6 @@ public class AAADetailedActivity extends MvpActivity<AAADetailedPresenter> imple
      * 获取AAA 明细列表
      */
     private void getAAADetailedList(int currentPage, int pageSize, int type) {
-        showLoadingDialog(null);
         mvpPresenter.getAAADetailedList(currentPage, pageSize, type==0? null:String.valueOf(type));
     }
 
@@ -181,7 +179,6 @@ public class AAADetailedActivity extends MvpActivity<AAADetailedPresenter> imple
 
     @Override
     public void setData(Page<AAADetail> data) {
-        closeLoadingDialog();
         srlRefresh.finishRefresh();
         srlRefresh.finishLoadmore();
         curPage = data.getCurrentPage();

@@ -79,7 +79,7 @@ public class KsbTranAaactivity extends MvpActivity<KsbTranAaaPresenter> implemen
                 }else {
                     double input= CommonUtil.formatDouble(Double.parseDouble(charSequence.toString()));
                     if (exchangeConfig!=null){
-                        tvMinerFee.setText(CommonUtil.formatDoubleStr(DoubleUtil.mul(input,exchangeConfig.getKsb2aaa().getServiceRate())));
+                        tvMinerFee.setText(CommonUtil.formatDouble(DoubleUtil.mul(input,exchangeConfig.getKsb2aaa().getServiceRate()),4));
                         if (intCal!=null){
                             double transKsb=input*(1-exchangeConfig.getKsb2aaa().getServiceRate());
                             double equalMoney=DoubleUtil.mul(transKsb,Double.parseDouble(intCal.getKsbRate()));
