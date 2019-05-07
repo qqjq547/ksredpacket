@@ -42,6 +42,8 @@ public class AaaTransferActivity extends MvpActivity<AaaTransferPresenter> imple
     TextView tvMinerFee;
     @BindView(R.id.tv_confirm)
     TextView tvConfirm;
+    @BindView(R.id.tv_tip)
+    TextView tvTip;
 
     PassDialog passDialog;
     int amount = 0;
@@ -179,6 +181,7 @@ public class AaaTransferActivity extends MvpActivity<AaaTransferPresenter> imple
     public void setConfig(ExchangeConfig data) {
         if (data != null) {
             exchangeConfig = data;
+            tvTip.setText(exchangeConfig.getWithdrawAAA().getTips());
         }
     }
 
