@@ -81,7 +81,7 @@ public class AaaTransferActivity extends MvpActivity<AaaTransferPresenter> imple
                     double input = CommonUtil.formatDouble(Double.parseDouble(charSequence.toString().trim()));
                     if (intCal != null&&exchangeConfig!=null) {
                         double equalAaa = DoubleUtil.mul(input, exchangeConfig.getWithdrawAAA().getServiceRate());
-                        tvMinerFee.setText(CommonUtil.formatDouble(equalAaa,6));
+                        tvMinerFee.setText(CommonUtil.formatDouble(equalAaa,4));
                     }
                 }
             }
