@@ -27,8 +27,9 @@ public class AAADetailAdapter extends BaseQuickAdapter<AAADetail, BaseViewHolder
     protected void convert(BaseViewHolder holder, AAADetail item) {
         holder.setGone(R.id.iv_status, false);
         holder.setGone(R.id.tv_adrress, false);
+        holder.setGone(R.id.tv_money, true);
         holder.setTextColor(R.id.tv_nuber, mContext.getResources().getColor(R.color.color_000000));
-        holder.setText(R.id.tv_time, item.getCreateDate());
+        holder.setText(R.id.tv_time, item.getApplyDate());
         holder.setText(R.id.tv_nuber, String.format(mContext.getString(R.string.aaa_number_fomat), item.getSourceCoin()));
         holder.setText(R.id.tv_adrress, String.format(mContext.getResources().getString(R.string.receiv_str), item.getTargetAddress()));
         switch (item.getBusinessType()) {
@@ -51,7 +52,7 @@ public class AAADetailAdapter extends BaseQuickAdapter<AAADetail, BaseViewHolder
                 holder.setGone(R.id.iv_status, true).setImageResource(R.id.iv_status,
                         item.getStatus() == 0 ? R.drawable.extract_doing : item.getStatus() == 1 ?
                                  R.drawable.extract_success:R.drawable.extract_fial).setGone(R.id.tv_adrress, true);
-                holder.setText(R.id.tv_money, mContext.getResources().getString(R.string.servicefee_str) + mContext.getString(R.string.symbol_)+item.getServiceFee()+mContext.getString(R.string.KSB_str));
+                holder.setText(R.id.tv_money, mContext.getResources().getString(R.string.servicefee_str) + mContext.getString(R.string.symbol_)+item.getServiceFee());
 
                 break;
             case Constant.Fill_AAA:
@@ -59,6 +60,8 @@ public class AAADetailAdapter extends BaseQuickAdapter<AAADetail, BaseViewHolder
                 holder.setImageResource(R.id.iv_type, R.drawable.icon_fill_aaa);
                 holder.setText(R.id.tv_nuber, String.format(mContext.getString(R.string.aaa_number_fomat), item.getTargetCoin()));
                 holder.setGone(R.id.tv_adrress, true);
+                holder.setGone(R.id.tv_money, false);
+
                 break;
 
         }

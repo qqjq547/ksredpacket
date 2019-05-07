@@ -58,8 +58,8 @@ public class AAADetailedActivity extends MvpActivity<AAADetailedPresenter> imple
     FrameLayout mFlSelectView;
 
     private static final int pageSize = 10;
-    private int curPage = 0;
-    private int mCurrentType;
+    private int curPage = 1;
+    private int mCurrentType = 0;
     private List<AAADetail> dataArr = new ArrayList<>();
     private AAADetailAdapter mAAADetailAdapter;
 
@@ -81,15 +81,16 @@ public class AAADetailedActivity extends MvpActivity<AAADetailedPresenter> imple
         getAAADetailedList(curPage, pageSize, 0);
         tvTitle.setText(getString(R.string.aaa_detailed_str));
         tvText.setText(getString(R.string.all));
-        srlRefresh.setOnRefreshListener(new OnRefreshLoadmoreListener() {
+        srlRefresh.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                getAAADetailedList(0, pageSize, mCurrentType);
+                getAAADetailedList(1, pageSize, mCurrentType);
             }
 
 
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
+
                 getAAADetailedList(curPage +1, pageSize, mCurrentType);
 
             }
