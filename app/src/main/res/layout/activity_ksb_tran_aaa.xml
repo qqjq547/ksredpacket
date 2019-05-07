@@ -137,10 +137,11 @@
        android:layout_marginLeft="@dimen/space15"
        android:layout_marginRight="@dimen/space15"/>
 
- <RelativeLayout
+ <LinearLayout
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
      android:background="@color/bg_white"
+     android:orientation="horizontal"
      android:padding="@dimen/space15">
 
   <TextView
@@ -150,15 +151,19 @@
       android:textSize="@dimen/textfont14"
       android:text="@string/arrived_aaa"/>
   <TextView
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"/>
+  <TextView
       android:id="@+id/tv_arrive_aaa"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_alignParentRight="true"
+      android:layout_marginLeft="@dimen/space5"
       android:text="0"
       android:textColor="@color/text_city_yellow"
       android:textSize="@dimen/textfont16" />
 
- </RelativeLayout>
+ </LinearLayout>
  </LinearLayout>
  <LinearLayout
      android:layout_width="wrap_content"

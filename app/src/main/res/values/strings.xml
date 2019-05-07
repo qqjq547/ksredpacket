@@ -861,10 +861,11 @@
     <string name="myaaa_tip">平台AAA价格计算方式\n每分钟获取一次交易所AAA价格，然后计算近30分钟的平均值作为AAA价格</string>
     <string name="pls_input_aaa_amount">请输入AAA数量</string>
     <string name="pls_input_ksb_amount">请输入KSB数量</string>
-    <string name="ksb2aaa_tip_str">输入数字过大或者格式格式</string>
+    <string name="ksb2aaa_tip_str">输入数字过大或者数字格式错误</string>
     <string name="KSB_str">KSB</string>
     <string name="receive_count">接收数量</string>
     <string name="transfer_ensure">提币确认</string>
     <string name="valide_trade_code">验证交易密码</string>
+    <string name="symbol_">-</string>
 
 </resources>

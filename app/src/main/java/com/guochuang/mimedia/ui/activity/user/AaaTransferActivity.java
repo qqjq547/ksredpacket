@@ -116,6 +116,7 @@ public class AaaTransferActivity extends MvpActivity<AaaTransferPresenter> imple
                     amount = Integer.parseInt(amountStr);
                 }catch (Exception e){
                     showShortToast(R.string.ksb2aaa_tip_str);
+                    return;
                 }
 
                 if (intCal != null && amount > (int) Double.parseDouble(intCal.getDigitalCoin())) {

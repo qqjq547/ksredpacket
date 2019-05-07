@@ -57,7 +57,7 @@ public class AAADetailedActivity extends MvpActivity<AAADetailedPresenter> imple
     @BindView(R.id.fl_select_view)
     FrameLayout mFlSelectView;
 
-    private static final int pageSize = 20;
+    private static final int pageSize = 10;
     private int curPage = 0;
     private int mCurrentType;
     private List<AAADetail> dataArr = new ArrayList<>();
