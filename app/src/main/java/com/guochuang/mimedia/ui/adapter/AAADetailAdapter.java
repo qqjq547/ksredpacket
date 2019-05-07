@@ -36,7 +36,7 @@ public class AAADetailAdapter extends BaseQuickAdapter<AAADetail, BaseViewHolder
                 holder.setText(R.id.tv_type,R.string.aaa2ksb);
                 holder.setImageResource(R.id.iv_type, R.drawable.icon_aaa2ksb);
                 holder.setTextColor(R.id.tv_nuber, mContext.getResources().getColor(R.color.color_4498e0));
-                holder.setText(R.id.tv_money, mContext.getString(R.string.dengzhi_str) + item.getTargetCoin());
+                holder.setText(R.id.tv_money, mContext.getString(R.string.dengzhi_str) + item.getTargetCoin()+mContext.getString(R.string.KSB_str));
                 break;
             case Constant.KSB2AAA:
                 holder.setText(R.id.tv_type,R.string.ksb2aaa);
