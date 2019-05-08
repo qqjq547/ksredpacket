@@ -44,7 +44,7 @@ public class AAADetailAdapter extends BaseQuickAdapter<AAADetail, BaseViewHolder
                 holder.setImageResource(R.id.iv_type, R.drawable.icon_ksb2aaa);
                 holder.setText(R.id.tv_money,  mContext.getResources().getString(R.string.servicefee_str) + item.getServiceFee()+mContext.getString(R.string.KSB_str));
                 holder.setText(R.id.tv_nuber,String.format(mContext.getResources()
-                        .getString(R.string.aaa_number_fomat), item.getTargetCoin()));
+                        .getString(R.string.aaa_arrival_anumber_fomat), item.getTargetCoin()));
                 break;
             case Constant.EXTRACT_AAA:
                 holder.setText(R.id.tv_type,R.string.extract_aaa);

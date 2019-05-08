@@ -841,6 +841,7 @@
     <string name="extract_aaa">提币</string>
     <string name="fill_aaa">充币</string>
     <string name="aaa_number_fomat">数量：%s</string>
+    <string name="aaa_arrival_anumber_fomat">到账数量：%s</string>
     <string name="target_str">对方：%s</string>
     <string name="servicefee_str">矿工费：</string>
     <string name="dengzhi_str">等值：</string>
