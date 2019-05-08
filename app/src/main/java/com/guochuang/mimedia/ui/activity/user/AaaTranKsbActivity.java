@@ -59,7 +59,7 @@ public class AaaTranKsbActivity extends MvpActivity<AaaTranKsbPresenter> impleme
 
     @Override
     public void initViewAndData() {
-        tvTitle.setText(R.string.aaa_trans_ksb);
+        tvTitle.setText(R.string.aaa_trans_ksb_title);
         etTransKsb.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
