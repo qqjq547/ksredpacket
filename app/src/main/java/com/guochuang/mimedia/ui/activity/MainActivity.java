@@ -159,6 +159,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
         mvpPresenter.messageIsNews();
         mvpPresenter.isNameAuthAndSafetyCode();
         mvpPresenter.getRemind();
+        mvpPresenter.checkAaaSwitch();
 //        String channel=CommonUtil.getAppMetaData(this,Constant.JPUSH_CHANNEL);
 //        if (!TextUtils.equals(channel,Constant.CHANNEL_DEFAULT)){
 //            mvpPresenter.marketSwitch(channel,String.valueOf(CommonUtil.getVersionCode(this)));
@@ -271,6 +272,13 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
         if (data!=null){//1为开启开关
             getPref().setString(PrefUtil.MARKET_SWITCH,data.intValue()==1?Constant.SWITCH_HIDE:Constant.SWITCH_SHOW);
             CommonUtil.syncCookie(this,ApiClient.HTML_URL);
+        }
+    }
+
+    @Override
+    public void setCheckAaaSwitch(Boolean data) {
+        if (data!=null){
+            getPref().setBoolean(PrefUtil.AAA_SWITCH,data.booleanValue());
         }
     }
 

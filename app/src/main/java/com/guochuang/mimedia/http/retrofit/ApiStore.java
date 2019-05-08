@@ -1467,5 +1467,7 @@ public interface ApiStore {
             @Field("coin") double coin,
             @Field("safetyCode") String safetyCode);
 
+    @GET("/api/v1/exchange/user_digital_currency/check_switch")
+    Observable<HttpResponse<Boolean>> checkSwitch();
 
 }
