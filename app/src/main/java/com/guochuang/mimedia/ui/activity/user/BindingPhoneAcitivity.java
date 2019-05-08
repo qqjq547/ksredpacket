@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -43,10 +45,14 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
     TextView tvVerify;
     @BindView(R.id.tv_binding_phone_confirm)
     TextView tvConfirm;
+    @BindView(R.id.rl_ima_verify)
+    RelativeLayout rlImaVerify;
     @BindView(R.id.et_binding_phone_ima_verify)
     EditText etBindingPhoneImaVerify;
     @BindView(R.id.iv_binding_phone_ima_verify)
     ImageView ivBindingPhoneImaVerify;
+    @BindView(R.id.lin_password)
+    LinearLayout linPassword;
     @BindView(R.id.et_password)
     EditText etPassword;
     String userAccountUuid;
@@ -68,6 +74,7 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
         userAccountUuid=userLogin.getSub();
         mvpPresenter.userBindMobileCaptcha(Constant.BIND_PHONE_CAPTCHA_IMA);
         tvTitle.setText(getString(R.string.title_phone_binding));
+        mvpPresenter.captchaIsEnabled();
     }
 
     private void sendCode() {
@@ -196,16 +203,12 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
     }
 
     @Override
-    public void getLogout(String data) {
-        closeLoadingDialog();
-        App.getInstance().forceLogin();
+    public void setCaptchaIsEnabled(Boolean data) {
+        if (data!=null){
+            rlImaVerify.setVisibility(data.booleanValue()?View.VISIBLE:View.GONE);
+        }
     }
 
-    @Override
-    public void getLogoutError(String data) {
-        closeLoadingDialog();
-        showShortToast(data);
-    }
 
     private boolean doCheck() {
         if (etPhone.getText().length() < 11) {
@@ -216,7 +219,7 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
             showShortToast(getResources().getString(R.string.input_verity_error));
             return false;
         }
-        if (etPassword.getText().length() < 6) {
+        if (linPassword.getVisibility()==View.VISIBLE&&etPassword.getText().length() < 6) {
             showShortToast(getResources().getString(R.string.input_password_error));
             return false;
         }

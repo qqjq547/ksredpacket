@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.MyAAA;
 import com.guochuang.mimedia.mvp.model.NestAuctionMsg;
 import com.guochuang.mimedia.mvp.model.RegionCore;
@@ -372,7 +373,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                                 getPref().setInt(PrefUtil.DEBUGHOST, 2);
                                 break;
                         }
-                        App.getInstance().finishActivity();
+                        ApiClient.changeEnv();
                     }
                 });
                 sheetDialog.show();

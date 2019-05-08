@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.MvpActivity;
+import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.PhoneEntity;
 import com.guochuang.mimedia.mvp.model.UserLogin;
 import com.guochuang.mimedia.mvp.presenter.LoginPresenter;
@@ -357,18 +358,21 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
                     SheetDialog sheetDialog = new SheetDialog(this, itemArr, new SheetDialog.OnItemClickListener() {
                         @Override
                         public void onItemClick(int position) {
-                            App.getInstance().forceLogin();
                             switch (position) {
                                 case 0:
                                     getPref().setInt(PrefUtil.DEBUGHOST, 0);
+                                    btnVersion.setText(R.string.test_version);
                                     break;
                                 case 1:
                                     getPref().setInt(PrefUtil.DEBUGHOST, 1);
+                                    btnVersion.setText(R.string.release_version);
                                     break;
                                 case 2:
                                     getPref().setInt(PrefUtil.DEBUGHOST, 2);
+                                    btnVersion.setText(R.string.dev_version);
                                     break;
                             }
+                            ApiClient.changeEnv();
                         }
                     });
                     sheetDialog.show();

@@ -91,17 +91,17 @@ public class BindingPhonePresenter extends BasePresenter<BindingPhoneView> {
         });
     }
 
-    public void userAccoutLogout(){
+    public void captchaIsEnabled(){
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                userAccoutLogout()), new ApiCallback<String>() {
+                captchaIsEnabled()), new ApiCallback<Boolean>() {
             @Override
-            public void onSuccess(String data) {
-                mvpView.getLogout(data);
+            public void onSuccess(Boolean data) {
+                mvpView.setCaptchaIsEnabled(data);
             }
 
             @Override
             public void onFailure(ApiException exception) {
-                mvpView.getLogoutError(exception.getMessage());
+                mvpView.setError(exception.getMessage());
             }
 
             @Override
@@ -110,4 +110,5 @@ public class BindingPhonePresenter extends BasePresenter<BindingPhoneView> {
             }
         });
     }
+
 }

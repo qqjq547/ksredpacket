@@ -89,7 +89,6 @@ public class AAADetailedActivity extends MvpActivity<AAADetailedPresenter> imple
 
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-
                 getAAADetailedList(curPage +1, pageSize, mCurrentType);
 
             }
@@ -126,31 +125,31 @@ public class AAADetailedActivity extends MvpActivity<AAADetailedPresenter> imple
                 mCurrentType=0;
                 dataArr.clear();
                 mAAADetailAdapter.notifyDataSetChanged();
-                getAAADetailedList(curPage, pageSize,0);
+                getAAADetailedList(1, pageSize,0);
                 break;
             case R.id.tv_tranform_ksb:
                 dataArr.clear();
                 mAAADetailAdapter.notifyDataSetChanged();
                 mCurrentType = Constant.AAA2KSB;
-                getAAADetailedList(curPage, pageSize, Constant.AAA2KSB);
+                getAAADetailedList(1, pageSize, Constant.AAA2KSB);
                 break;
             case R.id.tv_ksb_tranform_aaa:
                 dataArr.clear();
                 mAAADetailAdapter.notifyDataSetChanged();
                 mCurrentType = Constant.KSB2AAA;
-                getAAADetailedList(curPage, pageSize, Constant.KSB2AAA);
+                getAAADetailedList(1, pageSize, Constant.KSB2AAA);
                 break;
             case R.id.tv_tibi:
                 dataArr.clear();
                 mAAADetailAdapter.notifyDataSetChanged();
                 mCurrentType = Constant.EXTRACT_AAA;
-                getAAADetailedList(curPage, pageSize, Constant.EXTRACT_AAA);
+                getAAADetailedList(1, pageSize, Constant.EXTRACT_AAA);
                 break;
             case R.id.tv_coin_charging:
                 dataArr.clear();
                 mAAADetailAdapter.notifyDataSetChanged();
                 mCurrentType = Constant.Fill_AAA;
-                getAAADetailedList(curPage, pageSize, Constant.Fill_AAA);
+                getAAADetailedList(1, pageSize, Constant.Fill_AAA);
                 break;
 
         }
