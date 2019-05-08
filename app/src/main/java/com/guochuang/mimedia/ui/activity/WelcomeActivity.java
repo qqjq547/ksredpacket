@@ -117,7 +117,8 @@ public class WelcomeActivity extends MvpActivity<WelcomePresenter> implements We
                 versionUpdateDialog.setOnResultListener(new VersionUpdateDialog.OnResultListener() {
                     @Override
                     public void onRefuse() {
-
+                        finishUpdate=true;
+                        next();
                     }
                     @Override
                     public void onUpdate() {
