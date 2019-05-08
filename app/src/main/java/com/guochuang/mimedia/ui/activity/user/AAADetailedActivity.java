@@ -179,6 +179,7 @@ public class AAADetailedActivity extends MvpActivity<AAADetailedPresenter> imple
 
     @Override
     public void setData(Page<AAADetail> data) {
+        closeLoadingDialog();
         srlRefresh.finishRefresh();
         srlRefresh.finishLoadmore();
         curPage = data.getCurrentPage();
