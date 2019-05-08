@@ -29,6 +29,7 @@ import com.guochuang.mimedia.ui.activity.user.AAADetailedActivity;
 import com.guochuang.mimedia.ui.activity.user.MyAAAActivity;
 import com.guochuang.mimedia.ui.activity.user.MyAddressActivity;
 import com.guochuang.mimedia.ui.activity.user.MyPayCodeActivity;
+import com.guochuang.mimedia.ui.adapter.MyViewListAdapter;
 import com.guochuang.mimedia.ui.dialog.SheetDialog;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.app.App;
@@ -98,9 +99,9 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
     List<MyMenuItem> itemArr = new ArrayList<>();
     MyMenuAdapter menuAdapter;
 
-    View[] viewArr;
+    List<View> viewArr=new ArrayList<>();
     View ksbView, regionCoreView, recommendView,aaaView;
-    MyViewPagerAdapter pagerAdapter;
+    MyViewListAdapter pagerAdapter;
     UserInfo userInfo;
     BadgeView badgeView;
     RecommendData recommendData;
@@ -148,10 +149,14 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         regionCoreView.setOnClickListener(pageOnClickListener);
         recommendView = inflater.inflate(R.layout.layout_my_recommend, null);
         recommendView.setOnClickListener(pageOnClickListener);
-
-        aaaView = inflater.inflate(R.layout.layout_my_aaa, null);
-        aaaView.setOnClickListener(pageOnClickListener);
-
+        viewArr.add(ksbView);
+        viewArr.add(recommendView);
+        if (getPref().getBoolean(PrefUtil.AAA_SWITCH,false)){
+            aaaView = inflater.inflate(R.layout.layout_my_aaa, null);
+            aaaView.setOnClickListener(pageOnClickListener);
+            mTvMyAaa = ButterKnife.findById(aaaView, R.id.tv_my_aaa);
+            viewArr.add(aaaView);
+        }
 
         tvMyKsb = ButterKnife.findById(ksbView, R.id.tv_my_ksb);
         tvBalance = ButterKnife.findById(ksbView, R.id.tv_balance);
@@ -166,11 +171,9 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         tvRecommendTotalIncome = ButterKnife.findById(recommendView, R.id.tv_total_income);
         linAgent = ButterKnife.findById(recommendView, R.id.lin_agent);
 
-        mTvMyAaa = ButterKnife.findById(aaaView, R.id.tv_my_aaa);
-
-        viewArr = new View[]{ksbView, recommendView,aaaView};
-        pagerAdapter = new MyViewPagerAdapter(viewArr);
+        pagerAdapter = new MyViewListAdapter(viewArr);
         vpMy.setAdapter(pagerAdapter);
+        initDot();
         vpMy.setPageTransformer(false, new ScaleTransformer());
         vpMy.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -190,7 +193,6 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         });
         setPageSelected(0);
         itemArr.add(new MyMenuItem(R.drawable.ic_my_paycode, R.string.receive_pay_code));
-        itemArr.add(new MyMenuItem(R.drawable.ic_my_aaa, R.string.receive_my_aaa));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_recommend, R.string.text_my_recommend));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_city, R.string.text_my_city));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_order, R.string.text_my_order));
@@ -267,7 +269,11 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         }
         mvpPresenter.getRecommendData();
         mvpPresenter.getRegionCore();
-        mvpPresenter.getMyAAA();
+        if (getPref().getBoolean(PrefUtil.AAA_SWITCH,false)){
+            itemArr.add(1,new MyMenuItem(R.drawable.ic_my_aaa, R.string.receive_my_aaa));
+            mvpPresenter.getMyAAA();
+        }
+
     }
 
     View.OnClickListener pageOnClickListener = new View.OnClickListener() {
@@ -305,7 +311,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
     };
 
     public void setPageSelected(int pos) {
-        for (int i = 0; i < viewArr.length; i++) {
+        for (int i = 0; i < viewArr.size(); i++) {
             if (pos == i) {
                 llMyLamp.getChildAt(i).setSelected(true);
             } else {
@@ -418,17 +424,31 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
             }
         }
     }
+   public void initDot(){
+        llMyLamp.removeAllViews();
+        for (int i=0;i<viewArr.size();i++){
+            View view=new View(getActivity());
+            LinearLayout.LayoutParams layoutParams=
+                    new LinearLayout.LayoutParams(CommonUtil.dip2px(getContext(),10),CommonUtil.dip2px(getContext(),10));
+            if (i>0) {
+                layoutParams.leftMargin = CommonUtil.dip2px(getContext(), 10);
+            }
+            view.setLayoutParams(layoutParams);
+            view.setBackgroundResource(R.drawable.ic_my_dot_selector);
+            llMyLamp.addView(view);
+        }
 
+   }
     @Override
     public void setRegionCoreData(RegionCore data) {
         if (data != null && data.isIsCenter()) {
             tvTotalIncome.setText(data.getTotalIncome());
             tvYesterdayIncome.setText(data.getYesterDayIncome());
             tvProvince.setText(data.getWhereRegion());
-            viewArr = new View[]{ksbView, regionCoreView, recommendView};
-            pagerAdapter = new MyViewPagerAdapter(viewArr);
+            viewArr.add(1,regionCoreView);
+            pagerAdapter = new MyViewListAdapter(viewArr);
             vpMy.setAdapter(pagerAdapter);
-            llMyLamp.getChildAt(2).setVisibility(View.VISIBLE);
+            initDot();
             itemArr.add(1, new MyMenuItem(R.drawable.ic_my_operate_center, R.string.operation_center));
             menuAdapter.notifyItemInserted(1);
         }

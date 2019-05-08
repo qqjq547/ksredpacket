@@ -18,6 +18,7 @@ public interface MainView {
     void setMessageIsNews(Boolean data);
     void setRemind(Remind data);
     void setMarketSwitch(Integer data);
+    void setCheckAaaSwitch(Boolean data);
     void setError(String msg);
 
 }
