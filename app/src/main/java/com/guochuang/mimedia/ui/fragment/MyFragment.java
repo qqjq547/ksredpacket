@@ -483,7 +483,9 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         //显示小数点四位
         if (data!=null){
             if (!TextUtils.isEmpty(data.getCoin())){
-                mTvMyAaa.setText(GeneralUtil.retainDecimal(data.getCoin().toString(),4));
+                mTvMyAaa.setText(CommonUtil.formatDouble(Double.parseDouble(data.getCoin()),4));
+            }else {
+                mTvMyAaa.setText("0.0000");
             }
         }
     }

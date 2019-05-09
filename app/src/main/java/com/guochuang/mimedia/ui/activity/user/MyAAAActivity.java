@@ -4,6 +4,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -62,8 +63,8 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
     @BindView(R.id.tv_aaa_address)
     TextView tvAaaAddress;
 
-    boolean mIsRealName;
-    double maaaCoin;
+    MyAAA myAAA;
+    AAARate aaaRate;
 
     @Override
     protected MyAAAAPresenter createPresenter() {
@@ -78,11 +79,9 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
     @Override
     public void initViewAndData() {
         //判断是否实名
+        tvTitle.setText(getResources().getString(R.string.my_aaa_str));
         getMyAAA();
         getMyAAARate();
-        tvTitle.setText(getResources().getString(R.string.my_aaa_str));
-
-
     }
 
 
@@ -170,11 +169,10 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
     @Override
     public void setData(MyAAA data) {
         closeLoadingDialog();
-        mIsRealName = data.getNameAuthentication() == 1 ? true : false;
-        //据实名展示不同的界面
-        selectShowView(mIsRealName);
-        //设置文字内容
-        setContent(data);
+        if (data!=null){
+            myAAA=data;
+            selectShowView();
+        }
 
 
     }
@@ -183,28 +181,29 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
     /**
      * 设置文字内容
      */
-    private void setContent(MyAAA data) {
+    private void setContent() {
         tvText.setText(getResources().getString(R.string.aaa_detailed_str));
-        tvAaaNumber.setText(data.getCoin());
-        tvMoney.setText(data.getMoney());
-        tvAaaPrice.setText(data.getExchangeRate());
-        GlideImgManager.loadImage(this, data.getQrcodeUrlKey(), ivCode);
-        tvAaaAddress.setText(data.getWalletAddress());
-        maaaCoin = Double.valueOf(data.getCoin());
-
+        tvAaaNumber.setText(myAAA.getCoin());
+        tvMoney.setText(myAAA.getMoney());
+        tvAaaPrice.setText(myAAA.getExchangeRate());
+        GlideImgManager.loadImage(this, myAAA.getQrcodeUrlKey(), ivCode);
+        tvAaaAddress.setText(myAAA.getWalletAddress());
+        if (aaaRate!=null){
+            tvMoney.setText(CommonUtil.formatDouble(aaaRate.getRate() * Double.valueOf(myAAA.getCoin()), 2));
+        }
     }
 
     /**
      * 是否实名 根据实名展示不同的界面
      *
-     * @param isRealName
      */
-    private void selectShowView(boolean isRealName) {
-        if (isRealName) {
+    private void selectShowView() {
+        if (myAAA.getNameAuthentication()==1) {
             tvText.setVisibility(View.VISIBLE);
             mScrollAaaRoot.setVisibility(View.VISIBLE);
             mTvGotoRealName.setVisibility(View.GONE);
             mLlRootView.setBackgroundColor(getResources().getColor(R.color.white));
+            setContent();
         } else {
             tvText.setVisibility(View.GONE);
             mScrollAaaRoot.setVisibility(View.GONE);
@@ -215,9 +214,14 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
 
     @Override
     public void setAAARate(AAARate data) {
-        tvAaaPrice.setText(data.getRate() + "");
-        //更新等值
-        tvMoney.setText(GeneralUtil.retainDecimal((data.getRate() * maaaCoin) + "", 2));
+        if (data!=null){
+            aaaRate=data;
+            tvAaaPrice.setText(String.valueOf(data.getRate()));
+            //更新等值
+            if (myAAA!=null&&!TextUtils.isEmpty(myAAA.getCoin())){
+                tvMoney.setText(CommonUtil.formatDouble(aaaRate.getRate() * Double.valueOf(myAAA.getCoin()), 2));
+            }
+        }
     }
 
 
