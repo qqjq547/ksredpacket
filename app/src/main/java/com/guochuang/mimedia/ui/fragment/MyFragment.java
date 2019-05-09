@@ -481,7 +481,11 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
     @Override
     public void setMyAAA(MyAAA data) {
         //显示小数点四位
-        mTvMyAaa.setText(GeneralUtil.retainDecimal(data.getCoin().toString(),4));
+        if (data!=null){
+            if (!TextUtils.isEmpty(data.getCoin())){
+                mTvMyAaa.setText(GeneralUtil.retainDecimal(data.getCoin().toString(),4));
+            }
+        }
     }
 
     public void setMsgDotView() {
