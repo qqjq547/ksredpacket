@@ -1467,6 +1467,12 @@ public interface ApiStore {
             @Field("coin") double coin,
             @Field("safetyCode") String safetyCode);
 
+    @GET("/api/v1/exchange/user_digital_currency/check_switch")
+    Observable<HttpResponse<Boolean>> checkSwitch();
+
+    @GET("/api/v1/file/captcha/is_enabled")
+    Observable<HttpResponse<Boolean>> captchaIsEnabled();
+
     /**
      * 用户手机号是否存在
      * @param phone

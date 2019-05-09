@@ -167,4 +167,26 @@ public class MainPresenter extends BasePresenter<MainView> {
             }
         });
     }
+    public void checkAaaSwitch() {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
+                checkSwitch()), new ApiCallback<Boolean>() {
+            @Override
+            public void onSuccess(Boolean data) {
+                mvpView.setCheckAaaSwitch(data);
+
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setError(exception.getMessage());
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
+
 }

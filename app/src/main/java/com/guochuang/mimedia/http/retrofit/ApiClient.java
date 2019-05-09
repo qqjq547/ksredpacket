@@ -44,7 +44,6 @@ public class ApiClient {
     public static String RELEASE_API_URL ="https://api.guochuangyuanhe.com/";
     public static String RELEASE_H5_URL="https://www.guochuangyuanhe.com/";
     public static String HTML_URL= getDebuHtmlHost();
-    public static String API_SERVER_URL = getDebugHost();
 
     public static Retrofit Retrofit(final String baseUrl) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
@@ -132,12 +131,9 @@ public class ApiClient {
         return instances;
     }
 
-    public static ApiStore newInstance(String baseUrl) {
-        return Retrofit(baseUrl).create(ApiStore.class);
-    }
 
     private ApiClient() {
-        apiStores = Retrofit(API_SERVER_URL).create(ApiStore.class);
+        apiStores = Retrofit(getDebugHost()).create(ApiStore.class);
     }
 
     public ApiStore getApiStores() {
@@ -191,5 +187,8 @@ public class ApiClient {
             }
         }
         return RELEASE_H5_URL;
+    }
+    public static void changeEnv(){
+        instances = new ApiClient();
     }
 }

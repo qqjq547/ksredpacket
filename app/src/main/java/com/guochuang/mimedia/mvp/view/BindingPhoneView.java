@@ -11,8 +11,7 @@ public interface BindingPhoneView {
     void setCaptchaError(String msg);
     void setSmsData(String data);
     void setSmsError(String msg);
-    void getLogout(String data);
-    void getLogoutError(String data);
+    void setCaptchaIsEnabled(Boolean data);
 
     void mobileExisted(String data);
 }

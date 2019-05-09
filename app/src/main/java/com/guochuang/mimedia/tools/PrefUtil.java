@@ -34,6 +34,7 @@ public class PrefUtil {
     public static final String UPGRADE_NOTICE = "upgrade_notice";
     public static final String LAST_REMIND_TIME = "last_remind_time";
     public static final String MARKET_SWITCH = "market_switch";
+    public static final String AAA_SWITCH = "aaa_switch";
 
     public static final String ISDRAG = "isdrag";
     public static final String EDIT_REDBAG_TYPE = "edit_redbag_type";

@@ -103,6 +103,11 @@ public class MyKsbActivity extends MvpActivity<MyksbPresenter> implements MyksbV
         wvDesp.loadUrl(Constant.URL_RULE_KSB);
         mvpPresenter.getMyKsb();
         mvpPresenter.getKsbTrend();
+        if (getPref().getBoolean(PrefUtil.AAA_SWITCH,false)){
+            btnTransferAaa.setVisibility(View.VISIBLE);
+        }else {
+            btnTransferAaa.setVisibility(View.GONE);
+        }
     }
 
     @OnClick({R.id.iv_back, R.id.tv_text, R.id.lin_ksb, R.id.lin_share_benefit, R.id.lin_equal, R.id.btn_ksb_transfer, R.id.btn_transfer,

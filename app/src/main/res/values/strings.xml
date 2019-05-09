@@ -818,6 +818,7 @@
     <string name="ksb_trans_aaa">KSB转AAA</string>
     <string name="my_aaa">我的AAA</string>
     <string name="equal_ksb">等值KSB</string>
+    <string name="aaa_trans_ksb_title">AAA转KSB</string>
     <string name="aaa_trans_ksb">AAA转化KSB数量</string>
     <string name="pls_input_aaa_to_ksb">请输入AAA转到KSB数量</string>
     <string name="receive_my_aaa">我的AAA</string>

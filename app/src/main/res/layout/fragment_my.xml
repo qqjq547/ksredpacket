@@ -58,20 +58,7 @@
             android:layout_marginBottom="@dimen/space5"
             android:gravity="center"
             android:orientation="horizontal">
-            <View
-                android:layout_width="@dimen/space10"
-                android:layout_height="@dimen/space10"
-                android:background="@drawable/ic_my_dot_selector"/>
-            <View
-                android:layout_width="@dimen/space10"
-                android:layout_height="@dimen/space10"
-                android:layout_marginLeft="@dimen/space12"
-                android:background="@drawable/ic_my_dot_selector"/>
-            <View
-                android:layout_width="@dimen/space10"
-                android:layout_height="@dimen/space10"
-                android:layout_marginLeft="@dimen/space12"
-                android:background="@drawable/ic_my_dot_selector"/>
+
         </LinearLayout>
         <LinearLayout
             android:id="@+id/lin_nestad"
