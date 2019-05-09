@@ -156,6 +156,7 @@
         </RelativeLayout>
 
         <LinearLayout
+            android:id="@+id/ll_pwd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space15"
@@ -167,6 +168,7 @@
             android:paddingBottom="@dimen/space10"
             android:paddingLeft="@dimen/space15"
             android:paddingRight="@dimen/space15"
+            android:visibility="gone"
             android:paddingTop="@dimen/space10">
 
             <ImageView

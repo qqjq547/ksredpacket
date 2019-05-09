@@ -1467,5 +1467,12 @@ public interface ApiStore {
             @Field("coin") double coin,
             @Field("safetyCode") String safetyCode);
 
-
+    /**
+     * 用户手机号是否存在
+     * @param phone
+     * @return
+     */
+    @GET("/api/v1/user/account/mobile_existed")
+    Observable<HttpResponse<String>> mobileExisted(@Query("mobile") String phone);
+    //{"code":1,"success":true,"message":"成功","response":0,"map":null}
 }

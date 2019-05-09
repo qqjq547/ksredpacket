@@ -13,4 +13,6 @@ public interface BindingPhoneView {
     void setSmsError(String msg);
     void getLogout(String data);
     void getLogoutError(String data);
+
+    void mobileExisted(String data);
 }

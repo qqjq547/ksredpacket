@@ -110,4 +110,28 @@ public class BindingPhonePresenter extends BasePresenter<BindingPhoneView> {
             }
         });
     }
+
+    /**
+     * 判断是否存在手机号
+     * @param phone
+     */
+    public void mobileExisted(String phone) {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
+                mobileExisted(phone)), new ApiCallback<String>() {
+            @Override
+            public void onSuccess(String data) {
+                mvpView.mobileExisted(data);
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setError(exception.getMessage());
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
 }

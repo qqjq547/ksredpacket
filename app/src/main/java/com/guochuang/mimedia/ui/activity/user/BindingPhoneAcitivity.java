@@ -1,9 +1,11 @@
 package com.guochuang.mimedia.ui.activity.user;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -49,6 +51,8 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
     ImageView ivBindingPhoneImaVerify;
     @BindView(R.id.et_password)
     EditText etPassword;
+    @BindView(R.id.ll_pwd)
+    LinearLayout mLlPwd;
     String userAccountUuid;
     Captcha captcha;
 
@@ -122,6 +126,7 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
                 if (etBindingPhoneImaVerify.getText().length() < 1) {
                     showShortToast(getResources().getString(R.string.input_verity_ima_error));
                 } else {
+                    mvpPresenter.mobileExisted(etPhone.getText().toString());
                     mvpPresenter.userSendSms(
                             etPhone.getText().toString(),
                             etBindingPhoneImaVerify.getText().toString(),
@@ -207,6 +212,21 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
         showShortToast(data);
     }
 
+    /**
+     * 手机号是否存在
+     * @param data
+     */
+    @Override
+    public void mobileExisted(String data) {
+        if("0".equals(data)) {
+            //不存在
+            mLlPwd.setVisibility(View.VISIBLE);
+        }else {
+            //已存在
+            mLlPwd.setVisibility(View.GONE);
+        }
+    }
+
     private boolean doCheck() {
         if (etPhone.getText().length() < 11) {
             showShortToast(getResources().getString(R.string.input_phone_error));
@@ -216,7 +236,8 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
             showShortToast(getResources().getString(R.string.input_verity_error));
             return false;
         }
-        if (etPassword.getText().length() < 6) {
+
+        if (mLlPwd.getVisibility()== View.VISIBLE && etPassword.getText().length() < 6) {
             showShortToast(getResources().getString(R.string.input_password_error));
             return false;
         }
