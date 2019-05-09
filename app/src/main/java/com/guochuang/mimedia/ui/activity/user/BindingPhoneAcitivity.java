@@ -126,7 +126,7 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
             case R.id.tv_binding_phone_verify:
                 if (AntiShake.check(view.getId()))
                     return;
-                if (etBindingPhoneImaVerify.getText().length() < 1) {
+                if (rlImaVerify.getVisibility()==View.VISIBLE&&etBindingPhoneImaVerify.getText().length() < 1) {
                     showShortToast(getResources().getString(R.string.input_verity_ima_error));
                 } else {
                     mvpPresenter.userSendSms(
