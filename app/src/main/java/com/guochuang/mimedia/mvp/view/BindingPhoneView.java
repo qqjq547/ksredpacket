@@ -13,5 +13,5 @@ public interface BindingPhoneView {
     void setSmsError(String msg);
     void setCaptchaIsEnabled(Boolean data);
 
-    void mobileExisted(String data);
+    void mobileExisted(Integer data);
 }

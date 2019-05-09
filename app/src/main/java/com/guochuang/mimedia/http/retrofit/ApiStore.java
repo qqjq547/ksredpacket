@@ -1479,6 +1479,6 @@ public interface ApiStore {
      * @return
      */
     @GET("/api/v1/user/account/mobile_existed")
-    Observable<HttpResponse<String>> mobileExisted(@Query("mobile") String phone);
+    Observable<HttpResponse<Integer>> mobileExisted(@Query("mobile") String phone);
     //{"code":1,"success":true,"message":"成功","response":0,"map":null}
 }

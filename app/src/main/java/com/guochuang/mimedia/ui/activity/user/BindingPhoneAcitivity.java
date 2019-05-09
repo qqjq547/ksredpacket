@@ -218,13 +218,15 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
      * @param data
      */
     @Override
-    public void mobileExisted(String data) {
-        if("0".equals(data)) {
-            //不存在
-            linPassword.setVisibility(View.VISIBLE);
-        }else {
-            //已存在
-            linPassword.setVisibility(View.GONE);
+    public void mobileExisted(Integer data) {
+        if (data!=null) {
+            if (data.intValue()==0) {
+                //不存在
+                linPassword.setVisibility(View.VISIBLE);
+            } else {
+                //已存在
+                linPassword.setVisibility(View.GONE);
+            }
         }
     }
 

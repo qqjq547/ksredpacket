@@ -117,9 +117,9 @@ public class BindingPhonePresenter extends BasePresenter<BindingPhoneView> {
      */
     public void mobileExisted(String phone) {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                mobileExisted(phone)), new ApiCallback<String>() {
+                mobileExisted(phone)), new ApiCallback<Integer>() {
             @Override
-            public void onSuccess(String data) {
+            public void onSuccess(Integer data) {
                 mvpView.mobileExisted(data);
             }
 
