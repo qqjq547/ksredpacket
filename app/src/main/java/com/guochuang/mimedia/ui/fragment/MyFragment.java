@@ -21,6 +21,7 @@ import com.guochuang.mimedia.mvp.model.RegionCore;
 import com.guochuang.mimedia.tools.DialogBuilder;
 import com.guochuang.mimedia.tools.GeneralUtil;
 import com.guochuang.mimedia.tools.IntentUtils;
+import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.ui.activity.MainActivity;
 import com.guochuang.mimedia.ui.activity.beenest.AdBidActivity;
 import com.guochuang.mimedia.ui.activity.beenest.MyAdActivity;
@@ -151,13 +152,14 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         recommendView = inflater.inflate(R.layout.layout_my_recommend, null);
         recommendView.setOnClickListener(pageOnClickListener);
         viewArr.add(ksbView);
-        viewArr.add(recommendView);
         if (getPref().getBoolean(PrefUtil.AAA_SWITCH,false)){
             aaaView = inflater.inflate(R.layout.layout_my_aaa, null);
             aaaView.setOnClickListener(pageOnClickListener);
             mTvMyAaa = ButterKnife.findById(aaaView, R.id.tv_my_aaa);
             viewArr.add(aaaView);
         }
+        viewArr.add(recommendView);
+
 
         tvMyKsb = ButterKnife.findById(ksbView, R.id.tv_my_ksb);
         tvBalance = ButterKnife.findById(ksbView, R.id.tv_balance);
@@ -194,6 +196,10 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         });
         setPageSelected(0);
         itemArr.add(new MyMenuItem(R.drawable.ic_my_paycode, R.string.receive_pay_code));
+        if (getPref().getBoolean(PrefUtil.AAA_SWITCH,false)){
+            itemArr.add(new MyMenuItem(R.drawable.ic_my_aaa, R.string.receive_my_aaa));
+            mvpPresenter.getMyAAA();
+        }
         itemArr.add(new MyMenuItem(R.drawable.ic_my_recommend, R.string.text_my_recommend));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_city, R.string.text_my_city));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_order, R.string.text_my_order));
@@ -270,10 +276,6 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         }
         mvpPresenter.getRecommendData();
         mvpPresenter.getRegionCore();
-        if (getPref().getBoolean(PrefUtil.AAA_SWITCH,false)){
-            itemArr.add(1,new MyMenuItem(R.drawable.ic_my_aaa, R.string.receive_my_aaa));
-            mvpPresenter.getMyAAA();
-        }
 
     }
 
@@ -446,12 +448,16 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
             tvTotalIncome.setText(data.getTotalIncome());
             tvYesterdayIncome.setText(data.getYesterDayIncome());
             tvProvince.setText(data.getWhereRegion());
-            viewArr.add(1,regionCoreView);
+            int insertPos=1;
+            if(getPref().getBoolean(PrefUtil.AAA_SWITCH,false)){
+                insertPos=2;
+            }
+            itemArr.add(insertPos, new MyMenuItem(R.drawable.ic_my_operate_center, R.string.operation_center));
+            menuAdapter.notifyItemInserted(insertPos);
+            viewArr.add(insertPos,regionCoreView);
             pagerAdapter = new MyViewListAdapter(viewArr);
             vpMy.setAdapter(pagerAdapter);
             initDot();
-            itemArr.add(1, new MyMenuItem(R.drawable.ic_my_operate_center, R.string.operation_center));
-            menuAdapter.notifyItemInserted(1);
         }
     }
 
