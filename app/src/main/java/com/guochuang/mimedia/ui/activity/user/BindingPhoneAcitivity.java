@@ -132,11 +132,6 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
                     showShortToast(getResources().getString(R.string.input_verity_ima_error));
                 } else {
                     mvpPresenter.mobileExisted(etPhone.getText().toString());
-                    mvpPresenter.userSendSms(
-                            etPhone.getText().toString(),
-                            etBindingPhoneImaVerify.getText().toString(),
-                            captcha.getUuid()
-                    );
                 }
 
                 break;
@@ -223,9 +218,23 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
             if (data.intValue()==0) {
                 //不存在
                 linPassword.setVisibility(View.VISIBLE);
-            } else {
-                //已存在
+                mvpPresenter.userSendSms(
+                        etPhone.getText().toString(),
+                        etBindingPhoneImaVerify.getText().toString(),
+                        captcha.getUuid()
+                );
+            } else if(data.intValue()==1){
+                //已存在,已绑定
                 linPassword.setVisibility(View.GONE);
+                showShortToast(R.string.mobile_has_bind);
+            }else if(data.intValue()==2){
+                //已存在,未绑定
+                linPassword.setVisibility(View.GONE);
+                mvpPresenter.userSendSms(
+                        etPhone.getText().toString(),
+                        etBindingPhoneImaVerify.getText().toString(),
+                        captcha.getUuid()
+                );
             }
         }
     }
