@@ -175,7 +175,11 @@ public class TempActivity extends MvpActivity<TempPresenter> implements TempView
                             @Override
                             public void onClick(View v) {
                                 showLoadingDialog(null);
-                                mvpPresenter.deleteTemplate(redPacketType,tempArr.get(vpTemp.getCurrentItem()).getTemplateId());
+                                long templateId=tempArr.get(vpTemp.getCurrentItem()).getId();
+                                if (templateId==0) {
+                                    templateId=tempArr.get(vpTemp.getCurrentItem()).getTemplateId();
+                                }
+                                mvpPresenter.deleteTemplate(redPacketType, templateId);
                             }
                         }).create().show();
                 break;
