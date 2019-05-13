@@ -1,8 +1,6 @@
 package com.guochuang.mimedia.ui.adapter;
 
-import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -37,12 +35,12 @@ public class AAADetailAdapter extends BaseQuickAdapter<AAADetail, BaseViewHolder
                 holder.setText(R.id.tv_type,R.string.aaa2ksb);
                 holder.setImageResource(R.id.iv_type, R.drawable.icon_aaa2ksb);
                 holder.setTextColor(R.id.tv_nuber, mContext.getResources().getColor(R.color.color_4498e0));
-                holder.setText(R.id.tv_money, mContext.getString(R.string.dengzhi_str) + item.getTargetCoin()+mContext.getString(R.string.KSB_str));
+                holder.setText(R.id.tv_money, mContext.getString(R.string.dengzhi_str) + item.getTargetCoin()+mContext.getString(R.string.ksb_str));
                 break;
             case Constant.KSB2AAA:
                 holder.setText(R.id.tv_type,R.string.ksb2aaa);
                 holder.setImageResource(R.id.iv_type, R.drawable.icon_ksb2aaa);
-                holder.setText(R.id.tv_money,  mContext.getResources().getString(R.string.servicefee_str) + item.getServiceFee()+mContext.getString(R.string.KSB_str));
+                holder.setText(R.id.tv_money,  mContext.getResources().getString(R.string.servicefee_str) + item.getServiceFee()+mContext.getString(R.string.ksb_str));
                 holder.setText(R.id.tv_nuber,String.format(mContext.getResources()
                         .getString(R.string.aaa_arrival_anumber_fomat), item.getTargetCoin()));
                 break;
