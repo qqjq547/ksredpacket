@@ -31,6 +31,7 @@ import com.guochuang.mimedia.ui.activity.user.AAADetailedActivity;
 import com.guochuang.mimedia.ui.activity.user.MyAAAActivity;
 import com.guochuang.mimedia.ui.activity.user.MyAddressActivity;
 import com.guochuang.mimedia.ui.activity.user.MyPayCodeActivity;
+import com.guochuang.mimedia.ui.activity.user.MySealActivity;
 import com.guochuang.mimedia.ui.adapter.MyViewListAdapter;
 import com.guochuang.mimedia.ui.dialog.SheetDialog;
 import com.sz.gcyh.KSHongBao.R;
@@ -197,8 +198,9 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         setPageSelected(0);
         itemArr.add(new MyMenuItem(R.drawable.ic_my_paycode, R.string.receive_pay_code));
         if (getPref().getBoolean(PrefUtil.AAA_SWITCH,false)){
+            itemArr.add(new MyMenuItem(R.drawable.ic_my_seal, R.string.receive_my_seal));
             itemArr.add(new MyMenuItem(R.drawable.ic_my_aaa, R.string.receive_my_aaa));
-            mvpPresenter.getMyAAA();
+            mvpPresenter.getMyAAA(Constant.DIGITAL_CURRENCY_AAA);
         }
         itemArr.add(new MyMenuItem(R.drawable.ic_my_recommend, R.string.text_my_recommend));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_city, R.string.text_my_city));
@@ -263,6 +265,9 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                         break;
                     case R.drawable.ic_my_paycode:
                         startActivity(new Intent(getActivity(), MyPayCodeActivity.class));
+                        break;
+                    case R.drawable.ic_my_seal:
+                        startActivity(new Intent(getActivity(), MySealActivity.class));
                         break;
                     case R.drawable.ic_my_aaa:
                         startActivity(new Intent(getActivity(), MyAAAActivity.class));
@@ -521,7 +526,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
     }
 
     public void refreshMyAAA(){
-        mvpPresenter.getMyAAA();
+        mvpPresenter.getMyAAA(Constant.DIGITAL_CURRENCY_AAA);
     }
 
     public void openNestAd() {

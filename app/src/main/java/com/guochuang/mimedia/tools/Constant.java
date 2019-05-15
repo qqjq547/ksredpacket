@@ -327,7 +327,7 @@ public class Constant {
 
     public static final String DIGITAL_CURRENCY_KSB = "KSB";
     public static final String DIGITAL_CURRENCY_AAA = "AAA";
-
+    public static final String DIGITAL_CURRENCY_SEAL = "SEAL";
     public static int INT_CAL_KSB_TO_AAA = 1;
     public static int INT_CAL_AAA_TO_KSB = 2;
 

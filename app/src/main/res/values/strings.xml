@@ -812,14 +812,14 @@
     <string name="pls_input_ksb_to_aaa">请输入SEAL转到AAA数量</string>
     <string name="miner_fee">矿工费</string>
     <string name="arrived_aaa">到账AAA</string>
-    <string name="ksb_price">SEAL价格</string>
+    <string name="ksb_price">QC价格</string>
     <string name="aaa_price">AAA价格</string>
     <string name="trans_aaa_notice">到账AAA是SEAL转AAA数量扣去5%矿工费计算出来的数量</string>
     <string name="ksb_trans_aaa">SEAL转AAA</string>
     <string name="my_aaa">我的AAA</string>
-    <string name="equal_ksb">等值SEAL</string>
-    <string name="aaa_trans_ksb_title">AAA转SEAL</string>
-    <string name="aaa_trans_ksb">AAA转化SEAL数量</string>
+    <string name="equal_qc">等值QC</string>
+    <string name="aaa_trans_ksb_title">AAA转QC</string>
+    <string name="aaa_trans_ksb">AAA转化QC数量</string>
     <string name="pls_input_aaa_to_ksb">请输入AAA转到SEAL数量</string>
     <string name="receive_my_aaa">我的AAA</string>
     <string name="my_aaa_str">我的AAA</string>
@@ -828,7 +828,7 @@
     <string name="aaa_price_str">AAA价格（元）</string>
     <string name="aaa_update_price_str">(每1分钟更新一次）</string>
     <string name="ti_bi_str">提币</string>
-    <string name="transform_ksb">转SEAL</string>
+    <string name="transform_ksb">转QC</string>
     <string name="aaa_des_str">充币地址禁止充值除AAA之外的其他资产，任何非AAA资产充值将不可找回。</string>
     <string name="copy_str">复制</string>
     <string name="aaa_address_str">AAA钱包地址</string>
@@ -850,7 +850,7 @@
     <string name="format_min_ksb_to_aaa">SEAL数量至少为%d</string>
     <string name="ksb_to_aaa_success">SEAL转AAA成功</string>
     <string name="aaa_to_ksb_success">AAA转SEAL成功</string>
-    <string name="digital_not_enouth">AAA不足</string>
+    <string name="digital_aaa_not_enouth">AAA不足</string>
     <string name="format_min_aaa_to_ksb">AAA数量至少为%d</string>
     <string name="aaa_transfer_title">AAA提币</string>
     <string name="transfer_address">接收地址</string>
@@ -862,13 +862,33 @@
     <string name="withdraw_coin_success">提币申请成功</string>
     <string name="myaaa_tip">平台AAA价格计算方式\n每分钟获取一次交易所AAA价格，然后计算近30分钟的平均值作为AAA价格</string>
     <string name="pls_input_aaa_amount">请输入AAA数量</string>
-    <string name="pls_input_ksb_amount">请输入SEAL数量</string>
+    <string name="pls_input_ksb_amount">请输入KSB数量</string>
     <string name="ksb2aaa_tip_str">输入数字过大或者数字格式错误</string>
     <string name="ksb_str">SEAL</string>
     <string name="receive_count">接收数量</string>
     <string name="transfer_ensure">提币确认</string>
     <string name="valide_trade_code">验证交易密码</string>
     <string name="symbol_">-</string>
+    <string name="my_seal">我的SEAL</string>
+    <string name="myseal_tip">平台SEAL价格计算方式\n每分钟获取一次交易所SEAL价格，然后计算近30分钟的平均值作为SEAL价格</string>
+    <string name="seal_detailed_str">SEAL明细</string>
+    <string name="seal_address_str">SEAL钱包地址</string>
+    <string name="tip_createSEAL">实名开通SEAL钱包</string>
+    <string name="seal_number_str">SEAL数</string>
+    <string name="seal_price_str">SEAL价格（元）</string>
+    <string name="seal_des_str">充币地址禁止充值除SEAL之外的其他资产，任何非SEAL资产充值将不可找回。</string>
+    <string name="receive_my_seal">我的SEAL</string>
+    <string name="seal_transfer_title">SEAL提币</string>
+    <string name="unit_seal">SEAL</string>
+    <string name="seal_address_empty">SEAL钱包地址不能为空</string>
+    <string name="pls_input_seal_amount">请输入SEAL数量</string>
+    <string name="digital_seal_not_enouth">SEAL不足</string>
+    <string name="format_min_seal_to_ksb">SEAL数量至少为%d</string>
+    <string name="seal_trans_ksb_title">SEAL转QC</string>
+    <string name="seal_trans_ksb">SEAL转化QC数量</string>
+    <string name="seal_price">SEAL价格</string>
+    <string name="pls_input_seal_to_qc">请输入SEAL转到QC数量</string>
+
     <string name="mobile_has_bind">该手机号已绑定</string>
 
 </resources>

@@ -26,7 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class AaaTransferActivity extends MvpActivity<AaaTransferPresenter> implements AaaTransferView {
+public class SealTransferActivity extends MvpActivity<AaaTransferPresenter> implements AaaTransferView {
 
     @BindView(R.id.iv_back)
     ImageView ivBack;
@@ -57,12 +57,12 @@ public class AaaTransferActivity extends MvpActivity<AaaTransferPresenter> imple
 
     @Override
     public int getLayout() {
-        return R.layout.activity_aaa_transfer;
+        return R.layout.activity_seal_transfer;
     }
 
     @Override
     public void initViewAndData() {
-        tvTitle.setText(R.string.aaa_transfer_title);
+        tvTitle.setText(R.string.seal_transfer_title);
         address=getIntent().getStringExtra(Constant.ADDRESS);
         if (!TextUtils.isEmpty(address)){
             etTransAddress.setText(address);
@@ -92,8 +92,8 @@ public class AaaTransferActivity extends MvpActivity<AaaTransferPresenter> imple
             }
         });
         showLoadingDialog(null);
-        mvpPresenter.intCal(Constant.DIGITAL_CURRENCY_AAA,Constant.INT_CAL_AAA_TO_KSB);
-        mvpPresenter.getExchangeConfig(Constant.DIGITAL_CURRENCY_AAA);
+        mvpPresenter.intCal(Constant.DIGITAL_CURRENCY_SEAL,Constant.INT_CAL_AAA_TO_KSB);
+        mvpPresenter.getExchangeConfig(Constant.DIGITAL_CURRENCY_SEAL);
 
     }
 
@@ -107,11 +107,11 @@ public class AaaTransferActivity extends MvpActivity<AaaTransferPresenter> imple
                 address=etTransAddress.getText().toString().trim();
                 String amountStr = etTransCount.getText().toString().trim();
                 if (TextUtils.isEmpty(address)){
-                    showShortToast(R.string.aaa_address_empty);
+                    showShortToast(R.string.seal_address_empty);
                     return;
                 }
                 if (TextUtils.isEmpty(amountStr)){
-                    showShortToast(R.string.pls_input_aaa_amount);
+                    showShortToast(R.string.pls_input_seal_amount);
                     return;
                 }
                 try {
@@ -122,11 +122,11 @@ public class AaaTransferActivity extends MvpActivity<AaaTransferPresenter> imple
                 }
 
                 if (intCal != null && amount > (int) Double.parseDouble(intCal.getDigitalCoin())) {
-                    showShortToast(R.string.digital_aaa_not_enouth);
+                    showShortToast(R.string.digital_seal_not_enouth);
                     return;
                 }
                 if (exchangeConfig != null && amount < exchangeConfig.getWithdrawAAA().getMinLimit()) {
-                    showShortToast(String.format(getString(R.string.format_min_aaa_to_ksb),exchangeConfig.getWithdrawAAA().getMinLimit()));
+                    showShortToast(String.format(getString(R.string.format_min_seal_to_ksb),exchangeConfig.getWithdrawAAA().getMinLimit()));
                     return;
                 }
                 View contentView=LayoutInflater.from(this).inflate(R.layout.layout_aaa_transfer_notice,null);
@@ -142,7 +142,7 @@ public class AaaTransferActivity extends MvpActivity<AaaTransferPresenter> imple
                             @Override
                             public void onClick(View view) {
                                 if (passDialog == null) {
-                                    passDialog = new PassDialog(AaaTransferActivity.this, new PassDialog.OnPassDialogListener() {
+                                    passDialog = new PassDialog(SealTransferActivity.this, new PassDialog.OnPassDialogListener() {
                                         @Override
                                         public void close() {
 
@@ -157,7 +157,7 @@ public class AaaTransferActivity extends MvpActivity<AaaTransferPresenter> imple
                                         public void onNumFull(String code) {
                                             showLoadingDialog(null);
                                             mvpPresenter.withdrawCoin(
-                                                    Constant.DIGITAL_CURRENCY_AAA,
+                                                    Constant.DIGITAL_CURRENCY_SEAL,
                                                     address,
                                                     amount,
                                                     code);

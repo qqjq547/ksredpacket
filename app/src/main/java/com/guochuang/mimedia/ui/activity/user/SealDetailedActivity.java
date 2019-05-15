@@ -30,7 +30,7 @@ import butterknife.OnClick;
 /**
  * AAA 明细
  */
-public class AAADetailedActivity extends MvpActivity<AAADetailedPresenter> implements AAADetailedView {
+public class SealDetailedActivity extends MvpActivity<AAADetailedPresenter> implements AAADetailedView {
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.tv_title)
@@ -78,7 +78,7 @@ public class AAADetailedActivity extends MvpActivity<AAADetailedPresenter> imple
         closeSelectView();
         showLoadingDialog(null);
         getAAADetailedList(curPage, pageSize, 0);
-        tvTitle.setText(getString(R.string.aaa_detailed_str));
+        tvTitle.setText(getString(R.string.seal_detailed_str));
         tvText.setText(getString(R.string.all));
         srlRefresh.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
             @Override
@@ -106,7 +106,7 @@ public class AAADetailedActivity extends MvpActivity<AAADetailedPresenter> imple
      * 获取AAA 明细列表
      */
     private void getAAADetailedList(int currentPage, int pageSize, int type) {
-        mvpPresenter.getAAADetailedList(Constant.DIGITAL_CURRENCY_AAA,currentPage, pageSize, type==0? null:String.valueOf(type));
+        mvpPresenter.getAAADetailedList(Constant.DIGITAL_CURRENCY_SEAL,currentPage, pageSize, type==0? null:String.valueOf(type));
     }
 
 

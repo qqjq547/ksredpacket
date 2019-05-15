@@ -98,8 +98,8 @@ public class KsbTranAaactivity extends MvpActivity<KsbTranAaaPresenter> implemen
             }
         });
         showLoadingDialog(null);
-        mvpPresenter.intCal(Constant.INT_CAL_KSB_TO_AAA);
-        mvpPresenter.getExchangeConfig();
+        mvpPresenter.intCal(Constant.DIGITAL_CURRENCY_AAA,Constant.INT_CAL_KSB_TO_AAA);
+        mvpPresenter.getExchangeConfig(Constant.DIGITAL_CURRENCY_AAA);
     }
 
     @Override

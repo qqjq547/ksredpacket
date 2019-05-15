@@ -1,11 +1,8 @@
 package com.guochuang.mimedia.ui.activity.user;
 
-import android.content.ClipboardManager;
-import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,9 +17,7 @@ import com.guochuang.mimedia.mvp.presenter.MyAAAAPresenter;
 import com.guochuang.mimedia.mvp.view.MyAAAAView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
-import com.guochuang.mimedia.tools.CustomProDialog;
 import com.guochuang.mimedia.tools.DialogBuilder;
-import com.guochuang.mimedia.tools.GeneralUtil;
 import com.guochuang.mimedia.tools.RxUtil;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.sz.gcyh.KSHongBao.R;
@@ -31,7 +26,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import rx.functions.Action0;
 
-public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAAAView {
+public class MySealActivity extends MvpActivity<MyAAAAPresenter> implements MyAAAAView {
     @BindView(R.id.ll_root_view)
     LinearLayout mLlRootView;
     @BindView(R.id.iv_back)
@@ -54,8 +49,6 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
     TextView tvAaaPrice;
     @BindView(R.id.tv_tibi)
     TextView tvTibi;
-    @BindView(R.id.tv_transform_ksb)
-    TextView tvTransformKsb;
     @BindView(R.id.iv_code)
     ImageView ivCode;
     @BindView(R.id.tv_copy)
@@ -73,13 +66,13 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
 
     @Override
     public int getLayout() {
-        return R.layout.activity_myaaa;
+        return R.layout.activity_my_seal;
     }
 
     @Override
     public void initViewAndData() {
         //判断是否实名
-        tvTitle.setText(getResources().getString(R.string.my_aaa_str));
+        tvTitle.setText(getResources().getString(R.string.my_seal));
         getMyAAA();
         getMyAAARate();
     }
@@ -100,7 +93,7 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
                     @Override
                     public void onCompleted() {
                         super.onCompleted();
-                        mvpPresenter.getMyAAARate(Constant.DIGITAL_CURRENCY_AAA);
+                        mvpPresenter.getMyAAARate(Constant.DIGITAL_CURRENCY_SEAL);
                         getMyAAARate();
                     }
 
@@ -119,24 +112,21 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
 
     private void getMyAAA() {
         showLoadingDialog(null);
-        mvpPresenter.getMyAAA(Constant.DIGITAL_CURRENCY_AAA);
+        mvpPresenter.getMyAAA(Constant.DIGITAL_CURRENCY_SEAL);
     }
 
 
-    @OnClick({R.id.iv_back, R.id.tv_text, R.id.tv_tibi, R.id.tv_transform_ksb, R.id.tv_copy, R.id.tv_goto_real_name, R.id.lin_price})
+    @OnClick({R.id.iv_back, R.id.tv_text, R.id.tv_tibi, R.id.tv_copy, R.id.tv_goto_real_name, R.id.lin_price})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
                 onBackPressed();
                 break;
             case R.id.tv_text:
-                startActivity(new Intent(this, AAADetailedActivity.class));
+                startActivity(new Intent(this, SealDetailedActivity.class));
                 break;
             case R.id.tv_tibi:
-                startActivityForResult(new Intent(this, AaaTransferActivity.class), Constant.REFRESH);
-                break;
-            case R.id.tv_transform_ksb:
-                startActivityForResult(new Intent(this, AaaTranKsbActivity.class), Constant.REFRESH);
+                startActivityForResult(new Intent(this, SealTransferActivity.class), Constant.REFRESH);
                 break;
             case R.id.tv_copy:
                 CommonUtil.copyMsg(this, tvAaaAddress.getText().toString());
@@ -147,7 +137,7 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
                 break;
             case R.id.lin_price:
                 new DialogBuilder(this)
-                        .setMessage(getString(R.string.myaaa_tip))
+                        .setMessage(getString(R.string.myseal_tip))
                         .setPositiveButton(R.string.i_known, null)
                         .create().show();
                 break;
@@ -182,7 +172,7 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
      * 设置文字内容
      */
     private void setContent() {
-        tvText.setText(getResources().getString(R.string.aaa_detailed_str));
+        tvText.setText(getResources().getString(R.string.seal_detailed_str));
         tvAaaNumber.setText(myAAA.getCoin());
         tvMoney.setText(myAAA.getMoney());
         tvAaaPrice.setText(myAAA.getExchangeRate());

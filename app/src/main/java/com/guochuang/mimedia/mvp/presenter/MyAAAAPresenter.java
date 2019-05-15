@@ -14,8 +14,8 @@ public class MyAAAAPresenter extends BasePresenter<MyAAAAView> {
         attachView(view);
     }
 
-    public void getMyAAA() {
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getMyAAA()), new ApiCallback<MyAAA>() {
+    public void getMyAAA(String digitalCurrency) {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getMyAAA(digitalCurrency)), new ApiCallback<MyAAA>() {
             @Override
             public void onSuccess(MyAAA data) {
                 mvpView.setData(data);
@@ -36,8 +36,8 @@ public class MyAAAAPresenter extends BasePresenter<MyAAAAView> {
     /**
      * 获取AAA 的税率
      */
-    public void getMyAAARate() {
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getMyAAARate()), new ApiCallback<AAARate>() {
+    public void getMyAAARate(String digitalCurrency) {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getMyAAARate(digitalCurrency)), new ApiCallback<AAARate>() {
             @Override
             public void onSuccess(AAARate data) {
                 mvpView.setAAARate(data);

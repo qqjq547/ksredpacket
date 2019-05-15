@@ -86,8 +86,8 @@ public class AaaTranKsbActivity extends MvpActivity<AaaTranKsbPresenter> impleme
             }
         });
         showLoadingDialog(null);
-        mvpPresenter.intCal(Constant.INT_CAL_AAA_TO_KSB);
-        mvpPresenter.getExchangeConfig();
+        mvpPresenter.intCal(Constant.DIGITAL_CURRENCY_AAA,Constant.INT_CAL_AAA_TO_KSB);
+        mvpPresenter.getExchangeConfig(Constant.DIGITAL_CURRENCY_AAA);
 
     }
 
@@ -111,7 +111,7 @@ public class AaaTranKsbActivity extends MvpActivity<AaaTranKsbPresenter> impleme
                 }
 
                 if (intCal!=null&&amount>(int)Double.parseDouble(intCal.getDigitalCoin())){
-                    showShortToast(R.string.digital_not_enouth);
+                    showShortToast(R.string.digital_aaa_not_enouth);
                     return;
                 }
                 if (exchangeConfig!=null&&amount<exchangeConfig.getAaa2ksb().getMinLimit()){

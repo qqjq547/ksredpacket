@@ -147,7 +147,7 @@ public class MyKsbActivity extends MvpActivity<MyksbPresenter> implements MyksbV
                     startActivityForResult(new Intent(this, TradePwdActivity.class), Constant.REFRESH);
                 }else {
                     showLoadingDialog(null);
-                    mvpPresenter.getMyAAA();
+                    mvpPresenter.getMyAAA(Constant.DIGITAL_CURRENCY_AAA);
                 }
                 break;
             case R.id.btn_transfer_aaa:
