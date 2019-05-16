@@ -31,6 +31,7 @@ import com.guochuang.mimedia.ui.activity.user.AAADetailedActivity;
 import com.guochuang.mimedia.ui.activity.user.MyAAAActivity;
 import com.guochuang.mimedia.ui.activity.user.MyAddressActivity;
 import com.guochuang.mimedia.ui.activity.user.MyPayCodeActivity;
+import com.guochuang.mimedia.ui.activity.user.MyQCActivity;
 import com.guochuang.mimedia.ui.adapter.MyViewListAdapter;
 import com.guochuang.mimedia.ui.dialog.SheetDialog;
 import com.sz.gcyh.KSHongBao.R;
@@ -284,7 +285,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.lin_my_ksb:
-                    startActivity(new Intent(getActivity(), MyKsbActivity.class));
+                    startActivity(new Intent(getActivity(), MyQCActivity.class));
                     break;
                 case R.id.lin_my_operation_center:
                     startActivity(new Intent(getActivity(), OperationCenterActivity.class));

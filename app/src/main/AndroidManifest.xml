@@ -185,6 +185,8 @@
 
         <activity android:name="com.guochuang.mimedia.ui.activity.user.MyAAAActivity"/>
         <activity android:name="com.guochuang.mimedia.ui.activity.user.AAADetailedActivity"/>
+        <!--我的qc-->
+        <activity android:name="com.guochuang.mimedia.ui.activity.user.MyQCActivity"/>
 
 
       <!--  // 广告信息获取service-->

@@ -128,7 +128,7 @@ public class Constant {
     //推荐协议
     public static final String URL_RULE_RECOMMEND = ApiClient.HTML_URL + "html/rule/recommend/index.htm";
     //ksb协议
-    public static final String URL_RULE_KSB = ApiClient.HTML_URL + "html/rule/ksb/index.htm";
+    public static final String URL_RULE_KSB = "https://www.guochuangyuanhe.com/html/rule/ksb/index.htm";
     //平台协议
     public static final String URL_SEND_REDBAG = ApiClient.HTML_URL + "html/platformRules.html";
     //疯狂规则

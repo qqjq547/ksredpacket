@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_title_text" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/space10"
+                android:layout_marginTop="@dimen/space10"
+                android:layout_marginRight="@dimen/space10"
+                android:background="@drawable/bg_white_block"
+                android:padding="@dimen/space10">
+
+                <LinearLayout
+                    android:id="@+id/lin_ksb"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/space10"
+                    android:paddingTop="@dimen/space35"
+                    android:paddingRight="@dimen/space10"
+                    android:paddingBottom="@dimen/space35">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ksb_num"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/textfont16" />
+
+                    <TextView
+                        android:id="@+id/tv_ksb_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space30"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/textfont18" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/lin_qc_price"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/space10"
+                    android:paddingTop="@dimen/space35"
+                    android:paddingRight="@dimen/space10"
+                    android:paddingBottom="@dimen/space35">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/qc_price"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/textfont16" />
+
+                    <TextView
+                        android:id="@+id/tv_qc_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space30"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/textfont18" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/lin_share_benefit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/space10"
+                    android:paddingTop="@dimen/space35"
+                    android:paddingRight="@dimen/space10"
+                    android:paddingBottom="@dimen/space35"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/today_ksb_price"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/textfont16" />
+
+                    <TextView
+                        android:id="@+id/tv_share_benefit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space30"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/textfont18" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lin_equal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/space10"
+                    android:paddingTop="@dimen/space35"
+                    android:paddingRight="@dimen/space10"
+                    android:paddingBottom="@dimen/space35">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/equal_value"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/textfont16" />
+
+                    <TextView
+                        android:id="@+id/tv_equal_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space30"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/textfont18" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+          <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space45"
+                android:layout_marginLeft="@dimen/space15"
+                android:layout_marginTop="@dimen/space10"
+                android:layout_marginRight="@dimen/space15"
+              android:orientation="vertical">
+
+
+                <Button
+                    android:id="@+id/btn_transfer_sell"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space45"
+                    android:background="@drawable/bg_myksb_trasnfer"
+                    android:text="@string/transfer_sell"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/textfont16" />
+       </LinearLayout>
+
+
+            <WebView
+                android:id="@+id/wv_desp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space10"
+                android:background="@drawable/bg_white_block"
+                android:padding="@dimen/space10"></WebView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/space15"
+                android:layout_marginTop="@dimen/space10"
+                android:layout_marginRight="@dimen/space15">
+
+
+                <Button
+                    android:id="@+id/btn_ksb_detail"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/space45"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_myksb_trasnfer"
+                    android:text="@string/transfer_ksb_detail"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/textfont16" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+</LinearLayout>

@@ -870,5 +870,8 @@
     <string name="valide_trade_code">验证交易密码</string>
     <string name="symbol_">-</string>
     <string name="mobile_has_bind">该手机号已绑定</string>
+    <string name="transfer_sell">转SEAL</string>
+    <string name="qc_price">价格(元)</string>
+    <string name="transfer_ksb_detail">原KSB明细</string>
 
 </resources>
