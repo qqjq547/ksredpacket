@@ -12,9 +12,10 @@ import android.widget.TextView;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.http.subscriber.CountDownSubscriber;
 import com.guochuang.mimedia.mvp.model.AAARate;
-import com.guochuang.mimedia.mvp.model.MyAAA;
+import com.guochuang.mimedia.mvp.model.MySeal;
 import com.guochuang.mimedia.mvp.presenter.MyAAAAPresenter;
-import com.guochuang.mimedia.mvp.view.MyAAAAView;
+import com.guochuang.mimedia.mvp.presenter.MySealPresenter;
+import com.guochuang.mimedia.mvp.view.MySealView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.DialogBuilder;
@@ -26,7 +27,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import rx.functions.Action0;
 
-public class MySealActivity extends MvpActivity<MyAAAAPresenter> implements MyAAAAView {
+public class MySealActivity extends MvpActivity<MySealPresenter> implements MySealView {
     @BindView(R.id.ll_root_view)
     LinearLayout mLlRootView;
     @BindView(R.id.iv_back)
@@ -39,8 +40,6 @@ public class MySealActivity extends MvpActivity<MyAAAAPresenter> implements MyAA
     LinearLayout linTitle;
     @BindView(R.id.tv_goto_real_name)
     TextView mTvGotoRealName;
-    @BindView(R.id.scroll_aaa_root)
-    ScrollView mScrollAaaRoot;
     @BindView(R.id.tv_aaa_number)
     TextView tvAaaNumber;
     @BindView(R.id.tv_money)
@@ -55,13 +54,15 @@ public class MySealActivity extends MvpActivity<MyAAAAPresenter> implements MyAA
     TextView tvCopy;
     @BindView(R.id.tv_aaa_address)
     TextView tvAaaAddress;
+    @BindView(R.id.lin_content)
+    LinearLayout linContent;
 
-    MyAAA myAAA;
+    MySeal mySeal;
     AAARate aaaRate;
 
     @Override
-    protected MyAAAAPresenter createPresenter() {
-        return new MyAAAAPresenter(this);
+    protected MySealPresenter createPresenter() {
+        return new MySealPresenter(this);
     }
 
     @Override
@@ -72,8 +73,10 @@ public class MySealActivity extends MvpActivity<MyAAAAPresenter> implements MyAA
     @Override
     public void initViewAndData() {
         //判断是否实名
-        tvTitle.setText(getResources().getString(R.string.my_seal));
-        getMyAAA();
+        tvTitle.setText(R.string.my_seal);
+        tvText.setText(R.string.seal_detailed_str);
+        showLoadingDialog(null);
+        mvpPresenter.getMySeal();
         getMyAAARate();
     }
 
@@ -108,11 +111,6 @@ public class MySealActivity extends MvpActivity<MyAAAAPresenter> implements MyAA
                     }
                 }));
 
-    }
-
-    private void getMyAAA() {
-        showLoadingDialog(null);
-        mvpPresenter.getMyAAA(Constant.DIGITAL_CURRENCY_SEAL);
     }
 
 
@@ -157,10 +155,10 @@ public class MySealActivity extends MvpActivity<MyAAAAPresenter> implements MyAA
      * @param data
      */
     @Override
-    public void setData(MyAAA data) {
+    public void setData(MySeal data) {
         closeLoadingDialog();
         if (data!=null){
-            myAAA=data;
+            mySeal =data;
             selectShowView();
         }
 
@@ -172,14 +170,13 @@ public class MySealActivity extends MvpActivity<MyAAAAPresenter> implements MyAA
      * 设置文字内容
      */
     private void setContent() {
-        tvText.setText(getResources().getString(R.string.seal_detailed_str));
-        tvAaaNumber.setText(myAAA.getCoin());
-        tvMoney.setText(myAAA.getMoney());
-        tvAaaPrice.setText(myAAA.getExchangeRate());
-        GlideImgManager.loadImage(this, myAAA.getQrcodeUrlKey(), ivCode);
-        tvAaaAddress.setText(myAAA.getWalletAddress());
+        tvAaaNumber.setText(mySeal.getCoin());
+        tvMoney.setText(mySeal.getMoney());
+        tvAaaPrice.setText(mySeal.getExchangeRate());
+        GlideImgManager.loadImage(this, mySeal.getQrcodeUrlKey(), ivCode);
+        tvAaaAddress.setText(mySeal.getWalletAddress());
         if (aaaRate!=null){
-            tvMoney.setText(CommonUtil.formatDouble(aaaRate.getRate() * Double.valueOf(myAAA.getCoin()), 2));
+            tvMoney.setText(CommonUtil.formatDouble(aaaRate.getRate() * Double.valueOf(mySeal.getCoin()), 2));
         }
     }
 
@@ -188,16 +185,14 @@ public class MySealActivity extends MvpActivity<MyAAAAPresenter> implements MyAA
      *
      */
     private void selectShowView() {
-        if (myAAA.getNameAuthentication()==1) {
-            tvText.setVisibility(View.VISIBLE);
-            mScrollAaaRoot.setVisibility(View.VISIBLE);
+        if (mySeal.getNameAuthentication()==1) {
+            linContent.setVisibility(View.VISIBLE);
             mTvGotoRealName.setVisibility(View.GONE);
             mLlRootView.setBackgroundColor(getResources().getColor(R.color.white));
             setContent();
         } else {
-            tvText.setVisibility(View.GONE);
-            mScrollAaaRoot.setVisibility(View.GONE);
             mTvGotoRealName.setVisibility(View.VISIBLE);
+            linContent.setVisibility(View.GONE);
             mLlRootView.setBackgroundColor(getResources().getColor(R.color.color_6a4bf1));
         }
     }
@@ -208,8 +203,8 @@ public class MySealActivity extends MvpActivity<MyAAAAPresenter> implements MyAA
             aaaRate=data;
             tvAaaPrice.setText(String.valueOf(data.getRate()));
             //更新等值
-            if (myAAA!=null&&!TextUtils.isEmpty(myAAA.getCoin())){
-                tvMoney.setText(CommonUtil.formatDouble(aaaRate.getRate() * Double.valueOf(myAAA.getCoin()), 2));
+            if (mySeal !=null&&!TextUtils.isEmpty(mySeal.getCoin())){
+                tvMoney.setText(CommonUtil.formatDouble(aaaRate.getRate() * Double.valueOf(mySeal.getCoin()), 2));
             }
         }
     }

@@ -73,7 +73,7 @@ public class MyAAAActivity extends MvpActivity<MyAAAAPresenter> implements MyAAA
 
     @Override
     public int getLayout() {
-        return R.layout.activity_myaaa;
+        return R.layout.activity_my_aaa;
     }
 
     @Override

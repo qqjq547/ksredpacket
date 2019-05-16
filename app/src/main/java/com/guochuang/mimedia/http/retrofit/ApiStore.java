@@ -637,7 +637,7 @@ public interface ApiStore {
     Observable<HttpResponse<InviterUser>> getMyInviter();
 
     @GET("/api/v1/user/wallet/my_ksb")
-    Observable<HttpResponse<MyKsb>> getMyKsb();
+    Observable<HttpResponse<MySeal>> getMyKsb();
 
     //获取用户的币
     @GET("/api/v1/user/wallet/coin")

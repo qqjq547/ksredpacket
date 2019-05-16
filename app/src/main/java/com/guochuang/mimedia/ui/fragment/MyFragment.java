@@ -19,15 +19,12 @@ import com.guochuang.mimedia.mvp.model.MyAAA;
 import com.guochuang.mimedia.mvp.model.NestAuctionMsg;
 import com.guochuang.mimedia.mvp.model.RegionCore;
 import com.guochuang.mimedia.tools.DialogBuilder;
-import com.guochuang.mimedia.tools.GeneralUtil;
 import com.guochuang.mimedia.tools.IntentUtils;
-import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.ui.activity.MainActivity;
 import com.guochuang.mimedia.ui.activity.beenest.AdBidActivity;
 import com.guochuang.mimedia.ui.activity.beenest.MyAdActivity;
 import com.guochuang.mimedia.ui.activity.city.CityActivity;
 import com.guochuang.mimedia.ui.activity.redbag.RedbagDynamicActivity;
-import com.guochuang.mimedia.ui.activity.user.AAADetailedActivity;
 import com.guochuang.mimedia.ui.activity.user.MyAAAActivity;
 import com.guochuang.mimedia.ui.activity.user.MyAddressActivity;
 import com.guochuang.mimedia.ui.activity.user.MyPayCodeActivity;
@@ -58,7 +55,6 @@ import com.guochuang.mimedia.ui.activity.user.SafeCenterActivity;
 import com.guochuang.mimedia.ui.activity.user.SettingActivity;
 import com.guochuang.mimedia.ui.activity.user.WelfareActivity;
 import com.guochuang.mimedia.ui.adapter.MyMenuAdapter;
-import com.guochuang.mimedia.ui.adapter.MyViewPagerAdapter;
 import com.guochuang.mimedia.view.BadgeView;
 
 import java.util.ArrayList;
@@ -87,8 +83,11 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
     @BindView(R.id.lin_nestad)
     LinearLayout linNestad;
 
-    TextView tvMyKsb;
-    TextView tvBalance;
+    TextView tvMySeal;
+    TextView tvSealBalance;
+
+    TextView tvMyQc;
+    TextView tvQcBalance;
     TextView tvTotalIncome;
     TextView tvYesterdayIncome;
     TextView tvProvince;
@@ -103,7 +102,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
     MyMenuAdapter menuAdapter;
 
     List<View> viewArr=new ArrayList<>();
-    View ksbView, regionCoreView, recommendView,aaaView;
+    View sealView,qcView, regionCoreView, recommendView,aaaView;
     MyViewListAdapter pagerAdapter;
     UserInfo userInfo;
     BadgeView badgeView;
@@ -146,13 +145,16 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
             linNestad.setVisibility(View.GONE);
         }
         LayoutInflater inflater = LayoutInflater.from(getActivity());
-        ksbView = inflater.inflate(R.layout.layout_my_ksb, null);
-        ksbView.setOnClickListener(pageOnClickListener);
+        sealView = inflater.inflate(R.layout.layout_my_seal, null);
+        sealView.setOnClickListener(pageOnClickListener);
+        qcView = inflater.inflate(R.layout.layout_my_qc, null);
+        qcView.setOnClickListener(pageOnClickListener);
         regionCoreView = inflater.inflate(R.layout.layout_my_operation_center, null);
         regionCoreView.setOnClickListener(pageOnClickListener);
         recommendView = inflater.inflate(R.layout.layout_my_recommend, null);
         recommendView.setOnClickListener(pageOnClickListener);
-        viewArr.add(ksbView);
+        viewArr.add(sealView);
+        viewArr.add(qcView);
         if (getPref().getBoolean(PrefUtil.AAA_SWITCH,false)){
             aaaView = inflater.inflate(R.layout.layout_my_aaa, null);
             aaaView.setOnClickListener(pageOnClickListener);
@@ -162,8 +164,11 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         viewArr.add(recommendView);
 
 
-        tvMyKsb = ButterKnife.findById(ksbView, R.id.tv_my_ksb);
-        tvBalance = ButterKnife.findById(ksbView, R.id.tv_balance);
+        tvMySeal = ButterKnife.findById(sealView, R.id.tv_my_ksb);
+        tvSealBalance = ButterKnife.findById(sealView, R.id.tv_balance);
+
+        tvMyQc = ButterKnife.findById(qcView, R.id.tv_my_ksb);
+        tvQcBalance = ButterKnife.findById(qcView, R.id.tv_balance);
 
         tvTotalIncome = ButterKnife.findById(regionCoreView, R.id.tv_total_income);
         tvYesterdayIncome = ButterKnife.findById(regionCoreView, R.id.tv_yesterday_income);
@@ -196,9 +201,10 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
             }
         });
         setPageSelected(0);
-        itemArr.add(new MyMenuItem(R.drawable.ic_my_paycode, R.string.receive_pay_code));
+        itemArr.add(new MyMenuItem(R.drawable.ic_my_qc, R.string.my_qc));
+        itemArr.add(new MyMenuItem(R.drawable.ic_my_seal, R.string.receive_my_seal));
+//        itemArr.add(new MyMenuItem(R.drawable.ic_my_paycode, R.string.receive_pay_code));
         if (getPref().getBoolean(PrefUtil.AAA_SWITCH,false)){
-            itemArr.add(new MyMenuItem(R.drawable.ic_my_seal, R.string.receive_my_seal));
             itemArr.add(new MyMenuItem(R.drawable.ic_my_aaa, R.string.receive_my_aaa));
             mvpPresenter.getMyAAA(Constant.DIGITAL_CURRENCY_AAA);
         }
@@ -288,7 +294,10 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.lin_my_ksb:
+                case R.id.lin_my_seal:
+                    startActivity(new Intent(getActivity(), MySealActivity.class));
+                    break;
+                case R.id.lin_my_qc:
                     startActivity(new Intent(getActivity(), MyKsbActivity.class));
                     break;
                 case R.id.lin_my_operation_center:
@@ -393,8 +402,8 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         if (isAdded() && userInfo != null) {
             GlideImgManager.loadCircleImage(getActivity(), userInfo.getAvatar(), ivMyHeader);
             tvMyName.setText(userInfo.getNickName());
-            tvMyKsb.setText(getPref().getString(PrefUtil.COIN, ""));
-            tvBalance.setText(getPref().getString(PrefUtil.MONEY, ""));
+            tvMySeal.setText(getPref().getString(PrefUtil.COIN, ""));
+            tvSealBalance.setText(getPref().getString(PrefUtil.MONEY, ""));
             setMsgDotView();
         }
 
