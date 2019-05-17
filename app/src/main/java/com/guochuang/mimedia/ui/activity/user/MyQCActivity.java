@@ -57,10 +57,10 @@ public class MyQCActivity extends MvpActivity<MyksbPresenter> implements MyksbVi
 
     @Override
     public void initViewAndData() {
-        tvTitle.setText(R.string.my_ksb_title);
+        tvTitle.setText(R.string.my_qc_title);
         tvText.setText(R.string.detail);
         CommonUtil.initH5WebView(this, wvDesp);
-        wvDesp.loadUrl(Constant.URL_RULE_KSB);
+        wvDesp.loadUrl(Constant.URL_RULE_QC);
         mvpPresenter.getMyKsb();
 //        mvpPresenter.getKsbTrend();
 //        if (getPref().getBoolean(PrefUtil.AAA_SWITCH,false)){
@@ -78,6 +78,7 @@ public class MyQCActivity extends MvpActivity<MyksbPresenter> implements MyksbVi
                 onBackPressed();
                 break;
             case R.id.tv_text:
+                startActivity(new Intent(this, MyQCDetailsActivity.class));
 
                 break;
             case R.id.lin_ksb:
@@ -96,8 +97,7 @@ public class MyQCActivity extends MvpActivity<MyksbPresenter> implements MyksbVi
                     startActivityForResult(new Intent(this, TradePwdActivity.class), Constant.REFRESH);
                 }else {
 
-                    // TODO: 2019/5/16    转seal
-//                    startActivityForResult(new Intent(this, KsbTranAaactivity.class),Constant.REQUEST_GRANT);
+                    startActivityForResult(new Intent(this, QCTranSEALctivity.class),Constant.REQUEST_GRANT);
                 }
                 break;
 

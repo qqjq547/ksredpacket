@@ -20,9 +20,9 @@ public class KsbTranAaaPresenter extends BasePresenter<KsbTranAaaView> {
         attachView(view);
     }
 
-    public void getExchangeConfig(){
+    public void getExchangeConfig(String digitalCurrency){
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                getExchangeConfig()), new ApiCallback<ExchangeConfig>() {
+                getExchangeConfig(digitalCurrency)), new ApiCallback<ExchangeConfig>() {
             @Override
             public void onSuccess(ExchangeConfig data) {
                 mvpView.setConfig(data);
@@ -40,9 +40,9 @@ public class KsbTranAaaPresenter extends BasePresenter<KsbTranAaaView> {
         });
     }
 
-    public void intCal(int type){
+    public void intCal(String digitalCurrency,int type){
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                intCal(type)), new ApiCallback<DigitalIntCal>() {
+                intCal(digitalCurrency,type)), new ApiCallback<DigitalIntCal>() {
             @Override
             public void onSuccess(DigitalIntCal data) {
                 mvpView.setIntCal(data);

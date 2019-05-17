@@ -185,8 +185,19 @@
 
         <activity android:name="com.guochuang.mimedia.ui.activity.user.MyAAAActivity"/>
         <activity android:name="com.guochuang.mimedia.ui.activity.user.AAADetailedActivity"/>
+        <activity android:name="com.guochuang.mimedia.ui.activity.vote.InteractiveZoneActivity"/>
+        <activity android:name="com.guochuang.mimedia.ui.activity.vote.MyVoteActivity"/>
+        <activity android:name="com.guochuang.mimedia.ui.activity.vote.VoteDetailActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name="com.guochuang.mimedia.ui.activity.vote.ApplyActActivity"/>
+        <activity android:name="com.guochuang.mimedia.ui.activity.user.MySealActivity"/>
+        <activity android:name="com.guochuang.mimedia.ui.activity.user.SealTransferActivity"/>
+        <activity android:name="com.guochuang.mimedia.ui.activity.user.SealDetailedActivity"/>
+
         <!--我的qc-->
         <activity android:name="com.guochuang.mimedia.ui.activity.user.MyQCActivity"/>
+        <activity android:name="com.guochuang.mimedia.ui.activity.user.MyQCDetailsActivity"/>
+        <activity android:name="com.guochuang.mimedia.ui.activity.user.QCTranSEALctivity"/>
 
 
       <!--  // 广告信息获取service-->

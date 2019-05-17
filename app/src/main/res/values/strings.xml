@@ -82,7 +82,7 @@
     <string name="uninstall_this_app">未安装对应的app</string>
     <string name="report_success">举报成功</string>
     <string name="pls_select_report_content">请选择举报内容</string>
-    <string name="format_reading_awara">阅读资讯获得%sKSB</string>
+    <string name="format_reading_awara">阅读资讯获得%sSEAL</string>
 
     <string name="word_tip">红包发布24小时内，只有输入正确的口令才能收红包</string>
     <string name="word_item_name">口令</string>
@@ -146,7 +146,7 @@
     <string name="current_select_address">当前选择地址：</string>
 
     <string name="input_word_hint">请输入口令</string>
-    <string name="ksb">KSB</string>
+    <string name="ksb">SEAL</string>
     <string name="has_save_packet">已存入零钱</string>
     <string name="redbag_joined_left">已领取%s个，共%s个</string>
     <string name="redbag_joined_title">领取明细</string>
@@ -165,12 +165,12 @@
     <string name="receive_pay_code">收付款</string>
 
 
-    <string name="money_unit_ksb">KSB</string>
+    <string name="money_unit_ksb">SEAL</string>
     <string name="money_unit_yuan">元</string>
     <string name="recommend">推荐</string>
     <string name="fans">粉丝</string>
-    <string name="share_benefit">分润(KSB)</string>
-    <string name="today_ksb_price">今日KSB价(元)</string>
+    <string name="share_benefit">分润(SEAL)</string>
+    <string name="today_ksb_price">今日SEAL价(元)</string>
     <string name="equal_value">等值(元)</string>
     <string name="start_recommend">立即推荐赚收益</string>
 
@@ -184,15 +184,18 @@
     <string name="agent">代理</string>
     <string name="seller">商家</string>
     <string name="cant_open">暂未开放</string>
-    <string name="ksb_address">KSB地址</string>
+    <string name="ksb_address">SEAL地址</string>
     <string name="copy_address">复制</string>
-    <string name="ksb_transfer">KSB转换</string>
+    <string name="ksb_transfer">SEAL转换</string>
     <string name="ksb_transfer_type_title">选择收款账户</string>
     <string name="transfer">转赠</string>
     <string name="grant_success">转赠成功</string>
-    <string name="ksb_num">KSB数</string>
-    <string name="ksb_trend">KSB趋势</string>
-    <string name="my_ksb_title">我的KSB</string>
+    <string name="ksb_num">SEAL数</string>
+    <string name="ksb_trend">SEAL趋势</string>
+    <string name="my_ksb_title">我的SEAL</string>
+    <string name="qc_num">QC数</string>
+    <string name="my_qc_title">我的QC</string>
+    <string name="my_qc">我的QC</string>
     <string name="detail">明细</string>
     <string name="square">广场</string>
     <string name="city">城市</string>
@@ -217,16 +220,16 @@
     <string name="select_purchase_way">购买支付方式</string>
     <string name="alipay">支付宝</string>
     <string name="wxpay">微信支付</string>
-    <string name="format_ksb_pay">我的KSB(%sKSB)</string>
+    <string name="format_ksb_pay">我的SEAL(%sSEAL)</string>
     <string name="pay_amount">支付金额</string>
-    <string name="format_equal_ksb">等值%sKSB</string>
+    <string name="format_equal_ksb">等值%sSEAL</string>
     <string name="has_read_and_agree">我已阅读并同意</string>
     <string name="city_buy_agreement">《城主竞购协议》</string>
     <string name="agent_agreement">《代理商协议》</string>
     <string name="bug_agent">购买代理商</string>
     <string name="redbag_benefit">红包收益</string>
-    <string name="redbag_benefit_ksb">红包收益(KSB)</string>
-    <string name="format_ksb">%sKSB</string>
+    <string name="redbag_benefit_ksb">红包收益(SEAL)</string>
+    <string name="format_ksb">%sSEAL</string>
     <string name="all">全部</string>
     <string name="i_known">我知道了</string>
     <string name="check_all">查看全部</string>
@@ -247,14 +250,14 @@
     <string name="yesterday_increase">昨日新增</string>
     <string name="yesterday_active">昨日活跃</string>
     <string name="operation_center">运营中心</string>
-    <string name="unit_ksb">单位：KSB</string>
+    <string name="unit_ksb">单位：SEAL</string>
     <string name="agent_merchant">代理商</string>
-    <string name="sum_income_ksb">累计收入(KSB)</string>
-    <string name="total_income_ksb">总收入(KSB)</string>
-    <string name="today_income_ksb">今日收入(KSB)</string>
-    <string name="yesterday_income_ksb">昨日收入(KSB)</string>
-    <string name="my_ksb">我的KSB</string>
-    <string name="my_ksb_gu">我的KSB(股)</string>
+    <string name="sum_income_ksb">累计收入(SEAL)</string>
+    <string name="total_income_ksb">总收入(SEAL)</string>
+    <string name="today_income_ksb">今日收入(SEAL)</string>
+    <string name="yesterday_income_ksb">昨日收入(SEAL)</string>
+    <string name="my_ksb">我的SEAL</string>
+    <string name="my_ksb_gu">我的SEAL(股)</string>
     <string name="my_amount_yuan">我的余额(元)</string>
     <string name="income_type">收入类型</string>
     <string name="recent_seven_day">近7天</string>
@@ -275,7 +278,7 @@
     <string name="register_time">注册时间</string>
     <string name="upgrade_time">升级时间</string>
 
-    <string name="share_benefit_ksb">分润(KSB)</string>
+    <string name="share_benefit_ksb">分润(SEAL)</string>
     <string name="fans_detail">粉丝明细</string>
     <string name="recommend_detail">推荐明细</string>
     <string name="direct_agent">直招代理</string>
@@ -310,10 +313,10 @@
     <string name="send_redbag">发的红包</string>
     <string name="has_send_num">已发个数</string>
     <string name="has_receive_num">已收个数</string>
-    <string name="has_receive_ksb">已收KSB</string>
+    <string name="has_receive_ksb">已收SEAL</string>
     <string name="has_send_money">已发金额(元)</string>
     <string name="grab_redbag_num">抢红包人数</string>
-    <string name="format_get_ksb">获得%sKSB</string>
+    <string name="format_get_ksb">获得%sSEAL</string>
     <string name="redbag">红包</string>
     <string name="identification">实名认证</string>
     <string name="identity_custom">人工审核</string>
@@ -356,7 +359,7 @@
     <string name="pls_input_alipay_account">请输入支付宝账号</string>
     <string name="pls_set_identify">请先实名认证</string>
     <string name="pls_set_safe_code">请先设置安全码</string>
-    <string name="bind_wechat_notice">*请绑定自己的微信，否则将影响KSB转换</string>
+    <string name="bind_wechat_notice">*请绑定自己的微信，否则将影响SEAL转换</string>
     <string name="bind_wechat">未绑定微信，去绑定</string>
     <string name="delete_comment">删除评论</string>
     <string name="image_vertify_code">图形验证码</string>
@@ -394,13 +397,13 @@
     <string name="forget_safe_pass">忘记交易密码</string>
 
 
-    <string name="my_ksb_details_title">KSB明细</string>
-    <string name="my_ksb_details_num_all">KSB总和：</string>
+    <string name="my_ksb_details_title">SEAL明细</string>
+    <string name="my_ksb_details_num_all">SEAL总和：</string>
     <string name="my_ksb_details_price_add">+%s</string>
     <string name="my_ksb_details_price_subtract">-%s</string>
-    <string name="my_ksb_ksb_transfer_title">KSB转换</string>
+    <string name="my_ksb_ksb_transfer_title">SEAL转换</string>
     <string name="my_ksb_ksb_transfer_record">转换记录</string>
-    <string name="my_ksb_ksb_transfer_my">我的KSB</string>
+    <string name="my_ksb_ksb_transfer_my">我的SEAL</string>
     <string name="my_ksb_ksb_transfer_equivalence">等值</string>
     <string name="my_ksb_ksb_transfer_get_time">今日剩余转换次数</string>
     <string name="my_ksb_ksb_transfer_price_title">转换金额</string>
@@ -408,8 +411,8 @@
     <string name="my_ksb_ksb_transfer_price_all">全部转换</string>
     <string name="my_ksb_ksb_transfer_ksb_equivalence">转换等值</string>
     <string name="rmb">￥</string>
-    <string name="my_ksb_grant_your_title">对方KSB地址</string>
-    <string name="my_ksb_grant_your_hint">请输入对方的KSB地址</string>
+    <string name="my_ksb_grant_your_title">对方SEAL地址</string>
+    <string name="my_ksb_grant_your_hint">请输入对方的SEAL地址</string>
     <string name="my_ksb_grant_num_title">转赠数</string>
     <string name="my_ksb_grant_num_hint">请输入转赠数</string>
     <string name="my_ksb_grant_your_error">受赠人地址不可为空</string>
@@ -470,7 +473,7 @@
     <string name="params_error">参数错误</string>
     <string name="late_can_get">稍后可在个人中心领取</string>
     <string name="my_welfare">我的福利</string>
-    <string name="format_rob_ksb">抢得%sKSB</string>
+    <string name="format_rob_ksb">抢得%sSEAL</string>
     <string name="format_expire_time">有效期至%s</string>
     <string name="state_has_get">已领取</string>
     <string name="state_un_get">领取</string>
@@ -495,7 +498,7 @@
     <string name="empty_notice">空空如也</string>
     <string name="i_want_say">我要说两句</string>
     <string name="guide_start">点击进入</string>
-    <string name="format_pay_amount">支付金额%s元(%sKSB)</string>
+    <string name="format_pay_amount">支付金额%s元(%sSEAL)</string>
     <string name="can_get_order">无法获取订单信息</string>
     <string name="get_city_error">获取城市区域失败</string>
     <string name="pay_fail">支付失败</string>
@@ -723,7 +726,7 @@
     <string name="my_pay_code">我的收款码</string>
     <string name="save_pay_code">保存收款码</string>
     <string name="pay_code_record">收款记录</string>
-    <string name="pay_code_tip">该二维码仅支持KSB方式收款</string>
+    <string name="pay_code_tip">该二维码仅支持SEAL方式收款</string>
     <string name="identity_can_show_paycode">实名后领取收款码</string>
     <string name="scan_fail">解析失败</string>
     <string name="payment_amount">付款金额</string>
@@ -731,23 +734,23 @@
     <string name="pls_input_money">请输入金额</string>
     <string name="pls_input_remark">添加备注</string>
     <string name="pay_for">付款给</string>
-    <string name="ksb_pay_title">KSB付款</string>
-    <string name="ksb_pay_frame_title">推荐使用KSB支付</string>
-    <string name="ksb_payment">KSB支付</string>
+    <string name="ksb_pay_title">SEAL付款</string>
+    <string name="ksb_pay_frame_title">推荐使用SEAL支付</string>
+    <string name="ksb_payment">SEAL支付</string>
     <string name="scan_pay">扫码付款</string>
     <string name="get_camera_permission">请先设置相机权限</string>
     <string name="pls_inside_code">将二维码放入框内即可扫描</string>
     <string name="equivalence">等值</string>
     <string name="pls_set_money">请先设置金额</string>
-    <string name="ksb_loss">KSB不足</string>
+    <string name="ksb_loss">SEAL不足</string>
     <string name="pay_result_success">付款成功</string>
     <string name="payee_user">收款人</string>
     <string name="format_kuahao">(%s)</string>
     <string name="invite_friends_give_gifts">邀请好友得好礼</string>
     <string name="str_share">分享</string>
     <string name="scan_result">扫码结果</string>
-    <string name="scan_error">该收款码不是快收KSB收款码，请确定收款码后再试</string>
-    <string name="zhuan_zen_shuo_ming">由于计算时会丢失精度，不同单位输入同一个等值金额另外一个值可能会不同，以转赠KSB数为准</string>
+    <string name="scan_error">该收款码不是快收SEAL收款码，请确定收款码后再试</string>
+    <string name="zhuan_zen_shuo_ming">由于计算时会丢失精度，不同单位输入同一个等值金额另外一个值可能会不同，以转赠SEAL数为准</string>
 
     <string name="set_problem">请设置问题</string>
     <string name="tip_upload_video">上传视频</string>
@@ -808,19 +811,19 @@
     <string name="pls_ad_board">请输入公告板内容</string>
     <string name="transfer_aaa">转AAA</string>
     <string name="equal_aaa">等值AAA</string>
-    <string name="ksb_trans_aaa_amount">KSB转AAA数量</string>
-    <string name="pls_input_ksb_to_aaa">请输入KSB转到AAA数量</string>
+    <string name="ksb_trans_aaa_amount">SEAL转AAA数量</string>
+    <string name="pls_input_ksb_to_aaa">请输入SEAL转到AAA数量</string>
     <string name="miner_fee">矿工费</string>
     <string name="arrived_aaa">到账AAA</string>
-    <string name="ksb_price">KSB价格</string>
+    <string name="ksb_price">QC价格</string>
     <string name="aaa_price">AAA价格</string>
-    <string name="trans_aaa_notice">到账AAA是KSB转AAA数量扣去5%矿工费计算出来的数量</string>
-    <string name="ksb_trans_aaa">KSB转AAA</string>
+    <string name="trans_aaa_notice">到账AAA是SEAL转AAA数量扣去5%矿工费计算出来的数量</string>
+    <string name="ksb_trans_aaa">SEAL转AAA</string>
     <string name="my_aaa">我的AAA</string>
-    <string name="equal_ksb">等值KSB</string>
-    <string name="aaa_trans_ksb_title">AAA转KSB</string>
-    <string name="aaa_trans_ksb">AAA转化KSB数量</string>
-    <string name="pls_input_aaa_to_ksb">请输入AAA转到KSB数量</string>
+    <string name="equal_qc">等值QC</string>
+    <string name="aaa_trans_ksb_title">AAA转QC</string>
+    <string name="aaa_trans_ksb">AAA转化QC数量</string>
+    <string name="pls_input_aaa_to_ksb">请输入AAA转到SEAL数量</string>
     <string name="receive_my_aaa">我的AAA</string>
     <string name="my_aaa_str">我的AAA</string>
     <string name="aaa_number_str">AAA数</string>
@@ -828,7 +831,7 @@
     <string name="aaa_price_str">AAA价格（元）</string>
     <string name="aaa_update_price_str">(每1分钟更新一次）</string>
     <string name="ti_bi_str">提币</string>
-    <string name="transform_ksb">转KSB</string>
+    <string name="transform_ksb">转QC</string>
     <string name="aaa_des_str">充币地址禁止充值除AAA之外的其他资产，任何非AAA资产充值将不可找回。</string>
     <string name="copy_str">复制</string>
     <string name="aaa_address_str">AAA钱包地址</string>
@@ -836,8 +839,8 @@
     <string name="aaa_detailed_str">AAA明细</string>
     <string name="copyed">已复制</string>
     <string name="tip_createAAA">实名开通AAA钱包</string>
-    <string name="aaa2ksb">转KSB</string>
-    <string name="ksb2aaa">KSB转AAA</string>
+    <string name="aaa2ksb">转SEAL</string>
+    <string name="ksb2aaa">SEAL转AAA</string>
     <string name="extract_aaa">提币</string>
     <string name="fill_aaa">充币</string>
     <string name="aaa_number_fomat">数量：%s</string>
@@ -846,11 +849,11 @@
     <string name="servicefee_str">矿工费：</string>
     <string name="dengzhi_str">等值：</string>
     <string name="receiv_str">接收地址：%s</string>
-    <string name="coin_not_enouth">KSB余额不足</string>
-    <string name="format_min_ksb_to_aaa">KSB数量至少为%d</string>
-    <string name="ksb_to_aaa_success">KSB转AAA成功</string>
-    <string name="aaa_to_ksb_success">AAA转KSB成功</string>
-    <string name="digital_not_enouth">AAA不足</string>
+    <string name="coin_not_enouth">SEAL余额不足</string>
+    <string name="format_min_ksb_to_aaa">SEAL数量至少为%d</string>
+    <string name="ksb_to_aaa_success">SEAL转AAA成功</string>
+    <string name="aaa_to_ksb_success">AAA转SEAL成功</string>
+    <string name="digital_aaa_not_enouth">AAA不足</string>
     <string name="format_min_aaa_to_ksb">AAA数量至少为%d</string>
     <string name="aaa_transfer_title">AAA提币</string>
     <string name="transfer_address">接收地址</string>
@@ -864,14 +867,42 @@
     <string name="pls_input_aaa_amount">请输入AAA数量</string>
     <string name="pls_input_ksb_amount">请输入KSB数量</string>
     <string name="ksb2aaa_tip_str">输入数字过大或者数字格式错误</string>
-    <string name="KSB_str">KSB</string>
+    <string name="ksb_str">SEAL</string>
     <string name="receive_count">接收数量</string>
     <string name="transfer_ensure">提币确认</string>
     <string name="valide_trade_code">验证交易密码</string>
     <string name="symbol_">-</string>
+    <string name="my_seal">我的SEAL</string>
+    <string name="myseal_tip">平台SEAL价格计算方式\n每分钟获取一次交易所SEAL价格，然后计算近30分钟的平均值作为SEAL价格</string>
+    <string name="seal_detailed_str">SEAL明细</string>
+    <string name="seal_address_str">SEAL钱包地址</string>
+    <string name="tip_createSEAL">实名开通SEAL钱包</string>
+    <string name="seal_number_str">SEAL数</string>
+    <string name="seal_price_str">SEAL价格（元）</string>
+    <string name="seal_des_str">充币地址禁止充值除SEAL之外的其他资产，任何非SEAL资产充值将不可找回。</string>
+    <string name="receive_my_seal">我的SEAL</string>
+    <string name="seal_transfer_title">SEAL提币</string>
+    <string name="unit_seal">SEAL</string>
+    <string name="seal_address_empty">SEAL钱包地址不能为空</string>
+    <string name="pls_input_seal_amount">请输入SEAL数量</string>
+    <string name="digital_seal_not_enouth">SEAL不足</string>
+    <string name="format_min_seal_to_ksb">SEAL数量至少为%d</string>
+    <string name="seal_trans_ksb_title">SEAL转QC</string>
+    <string name="seal_trans_ksb">SEAL转化QC数量</string>
+    <string name="seal_price">SEAL价格</string>
+    <string name="pls_input_seal_to_qc">请输入SEAL转到QC数量</string>
+    <string name="tip_create_seal">实名开通SEAl钱包</string>
+
     <string name="mobile_has_bind">该手机号已绑定</string>
     <string name="transfer_sell">转SEAL</string>
     <string name="qc_price">价格(元)</string>
     <string name="transfer_ksb_detail">原KSB明细</string>
+    <string name="my_qc_details_title">QC明细</string>
+    <string name="qc_trans_seal">QC转SEAL</string>
+    <string name="my_qc_transfer_seal">我的QC</string>
+    <string name="equal_seal">等值SEAL</string>
+    <string name="qc_trans_seal_amount">QC转SEAL数量</string>
+    <string name="pls_input_qc_to_seal">请输入QC转SEAL数量</string>
+    <string name="arrived_seal">到账SEAL</string>
 
 </resources>

@@ -58,8 +58,8 @@ public class MyksbPresenter extends BasePresenter<MyksbView> {
             }
         });
     }
-    public void getMyAAA(){
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getMyAAA()), new ApiCallback<MyAAA>() {
+    public void getMyAAA(String digitalCurrency){
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getMyAAA(digitalCurrency)), new ApiCallback<MyAAA>() {
             @Override
             public void onSuccess(MyAAA data) {
                 mvpView.setMyAaa(data);

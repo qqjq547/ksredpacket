@@ -38,7 +38,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@mipmap/aaa_top_banckground"
+                    android:background="@drawable/aaa_top_banckground"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:paddingTop="@dimen/space15"

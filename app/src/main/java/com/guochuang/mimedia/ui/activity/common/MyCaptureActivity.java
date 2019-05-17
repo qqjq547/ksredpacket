@@ -69,13 +69,13 @@ public class MyCaptureActivity extends MvpActivity<MyCapturePresenter> implement
         public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
             if (!TextUtils.isEmpty(result)){
                 Uri uri=Uri.parse(result);
-                String uuid=uri.getQueryParameter("uuid");
-                if (!TextUtils.isEmpty(uuid)) {
-                    showLoadingDialog(null);
-                    mvpPresenter.queryUserInfoByAccountUuid(uuid);
-                    MyCaptureActivity.getActivity().finish();
-                    return;
-                }
+//                String uuid=uri.getQueryParameter("uuid");
+//                if (!TextUtils.isEmpty(uuid)) {
+//                    showLoadingDialog(null);
+//                    mvpPresenter.queryUserInfoByAccountUuid(uuid);
+//                    MyCaptureActivity.getActivity().finish();
+//                    return;
+//                }
                 String type=uri.getQueryParameter("type");
                 String address=uri.getQueryParameter("address");
                 if (TextUtils.equals(type,"2")&&!TextUtils.isEmpty(address)){

@@ -6,18 +6,20 @@ import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.AAARate;
 import com.guochuang.mimedia.mvp.model.MyAAA;
+import com.guochuang.mimedia.mvp.model.MySeal;
 import com.guochuang.mimedia.mvp.view.MyAAAAView;
+import com.guochuang.mimedia.mvp.view.MySealView;
 import com.guochuang.mimedia.tools.RxUtil;
 
-public class MyAAAAPresenter extends BasePresenter<MyAAAAView> {
-    public MyAAAAPresenter(MyAAAAView view) {
+public class MySealPresenter extends BasePresenter<MySealView> {
+    public MySealPresenter(MySealView view) {
         attachView(view);
     }
 
-    public void getMyAAA(String digitalCurrency) {
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getMyAAA(digitalCurrency)), new ApiCallback<MyAAA>() {
+    public void getMySeal() {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getMyKsb()), new ApiCallback<MySeal>() {
             @Override
-            public void onSuccess(MyAAA data) {
+            public void onSuccess(MySeal data) {
                 mvpView.setData(data);
             }
 

@@ -637,7 +637,7 @@ public interface ApiStore {
     Observable<HttpResponse<InviterUser>> getMyInviter();
 
     @GET("/api/v1/user/wallet/my_ksb")
-    Observable<HttpResponse<MyKsb>> getMyKsb();
+    Observable<HttpResponse<MySeal>> getMyKsb();
 
     //获取用户的币
     @GET("/api/v1/user/wallet/coin")
@@ -1424,7 +1424,9 @@ public interface ApiStore {
      * @return
      */
     @GET("/api/v1/exchange/user_digital_currency/my_digital")
-    Observable<HttpResponse<MyAAA>> getMyAAA();
+    Observable<HttpResponse<MyAAA>> getMyAAA(
+            @Query("digitalCurrency") String digitalCurrency
+    );
 
     /**
      * 获取AAA税率
@@ -1432,7 +1434,9 @@ public interface ApiStore {
      * @return
      */
     @GET("/api/v1/exchange/digi_currcy/rate")
-    Observable<HttpResponse<AAARate>> getMyAAARate();
+    Observable<HttpResponse<AAARate>> getMyAAARate(
+            @Query("digitalCurrency") String digitalCurrency
+    );
 
     /**
      * AAA明细列表
@@ -1442,11 +1446,17 @@ public interface ApiStore {
      * @return
      */
     @GET("/api/v1/exchange/digiccy_ex_detail/get_list")
-    Observable<HttpResponse<Page<AAADetail>>> getAAADetailedList(@Query("currentPage") int currentPage, @Query("pageSize") int pageSize,@Query("businessType") String businessType);
+    Observable<HttpResponse<Page<AAADetail>>> getAAADetailedList(
+            @Query("digitalCurrency") String digitalCurrency,
+            @Query("currentPage") int currentPage,
+            @Query("pageSize") int pageSize,
+            @Query("businessType") String businessType);
 
 
     @GET("/api/v1/exchange/digi_currcy/config")
-    Observable<HttpResponse<ExchangeConfig>> getExchangeConfig();
+    Observable<HttpResponse<ExchangeConfig>> getExchangeConfig(
+            @Query("digitalCurrency") String digitalCurrency
+    );
 
     @FormUrlEncoded
     @POST("/api/v1/exchange/digi_currcy/exchange")
@@ -1458,11 +1468,13 @@ public interface ApiStore {
 
     @GET("/api/v1/exchange/user_digital_currency/int_cal")
     Observable<HttpResponse<DigitalIntCal>> intCal(
+            @Query("digitalCurrency") String digitalCurrency,
             @Query("type") int type);
 
     @FormUrlEncoded
     @POST("/api/v1/exchange/digi_currcy/withdraw_coin")
     Observable<HttpResponse<Boolean>> withdrawCoin(
+            @Field("digitalCurrency") String digitalCurrency,
             @Field("address") String address,
             @Field("coin") double coin,
             @Field("safetyCode") String safetyCode);

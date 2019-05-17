@@ -22,9 +22,9 @@ public class AAADetailedPresenter extends BasePresenter<AAADetailedView> {
      * @param currentPage
      * @param pageSize
      */
-    public void getAAADetailedList(int currentPage, int pageSize,String type) {
+    public void getAAADetailedList(String digitalCurrency,int currentPage, int pageSize,String type) {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                getAAADetailedList(currentPage,pageSize,type)), new ApiCallback<Page<AAADetail>>() {
+                getAAADetailedList(digitalCurrency,currentPage,pageSize,type)), new ApiCallback<Page<AAADetail>>() {
             @Override
             public void onSuccess(Page<AAADetail> data) {
                 mvpView.setData(data);

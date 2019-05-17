@@ -100,7 +100,7 @@ public class MyKsbActivity extends MvpActivity<MyksbPresenter> implements MyksbV
         linechart.setValueSelectionEnabled(true);
         linechart.setValueTouchEnabled(true);
         CommonUtil.initH5WebView(this, wvDesp);
-        wvDesp.loadUrl(Constant.URL_RULE_KSB);
+        wvDesp.loadUrl(Constant.URL_RULE_QC);
         mvpPresenter.getMyKsb();
         mvpPresenter.getKsbTrend();
         if (getPref().getBoolean(PrefUtil.AAA_SWITCH,false)){
@@ -147,7 +147,7 @@ public class MyKsbActivity extends MvpActivity<MyksbPresenter> implements MyksbV
                     startActivityForResult(new Intent(this, TradePwdActivity.class), Constant.REFRESH);
                 }else {
                     showLoadingDialog(null);
-                    mvpPresenter.getMyAAA();
+                    mvpPresenter.getMyAAA(Constant.DIGITAL_CURRENCY_AAA);
                 }
                 break;
             case R.id.btn_transfer_aaa:
