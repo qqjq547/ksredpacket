@@ -15,7 +15,9 @@ import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.DictionaryType;
 import com.guochuang.mimedia.mvp.model.KsbRecord;
 import com.guochuang.mimedia.mvp.presenter.MyKsbDetailsPresenter;
+import com.guochuang.mimedia.mvp.presenter.MyQCDetailsPresenter;
 import com.guochuang.mimedia.mvp.view.MyKsbDetailsView;
+import com.guochuang.mimedia.mvp.view.MyQCDetailsView;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.DialogBuilder;
 import com.guochuang.mimedia.tools.KsbDetailsTypePop;
@@ -33,7 +35,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class MyQCDetailsActivity extends MvpActivity<MyKsbDetailsPresenter> implements MyKsbDetailsView {
+public class MyQCDetailsActivity extends MvpActivity<MyQCDetailsPresenter> implements MyQCDetailsView {
 
     @BindView(R.id.lin_title)
     LinearLayout linTitle;
@@ -54,17 +56,17 @@ public class MyQCDetailsActivity extends MvpActivity<MyKsbDetailsPresenter> impl
 
     KsbDetailsTypePop ksbDetailsTypePop;
     MyQCDetailsAdapter mMyQCDetailsAdapter;
-    List<KsbRecord> itemArr=new ArrayList<>();
-    List<DictionaryType> subjectArr=new ArrayList<>();
-    List<String> subjectName=new ArrayList<>();
-    String type="00";
-    String defaultIndex="0";
-    String startIndex=defaultIndex;
-    String defaultCode ="";
+    List<KsbRecord> itemArr = new ArrayList<>();
+    List<DictionaryType> subjectArr = new ArrayList<>();
+    List<String> subjectName = new ArrayList<>();
+    String type = "00";
+    String defaultIndex = "0";
+    String startIndex = defaultIndex;
+    String defaultCode = "";
 
     @Override
-    protected MyKsbDetailsPresenter createPresenter() {
-        return new MyKsbDetailsPresenter(this);
+    protected MyQCDetailsPresenter createPresenter() {
+        return new MyQCDetailsPresenter(this);
     }
 
     @Override
@@ -76,18 +78,18 @@ public class MyQCDetailsActivity extends MvpActivity<MyKsbDetailsPresenter> impl
     public void initViewAndData() {
         tvTitle.setText(getResources().getString(R.string.my_qc_details_title));
         tvText.setText(getResources().getString(R.string.all));
-        defaultCode =getIntent().getStringExtra(Constant.DEFAULT_CODE);
-        tvNumAll.setText(getPref().getString(PrefUtil.COIN,""));
+        defaultCode = getIntent().getStringExtra(Constant.DEFAULT_CODE);
+        tvNumAll.setText(getPref().getString(PrefUtil.COIN, ""));
         if (mMyQCDetailsAdapter != null) {
             return;
         }
         mMyQCDetailsAdapter = new MyQCDetailsAdapter(itemArr);
-        mMyQCDetailsAdapter.setEmptyView(getLayoutInflater().inflate(R.layout.layout_empty,null));
+        mMyQCDetailsAdapter.setEmptyView(getLayoutInflater().inflate(R.layout.layout_empty, null));
         mMyQCDetailsAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         mMyQCDetailsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                if (TextUtils.isEmpty(mMyQCDetailsAdapter.getData().get(position).getRemark())){
+                if (TextUtils.isEmpty(mMyQCDetailsAdapter.getData().get(position).getRemark())) {
                     return;
                 }
                 new DialogBuilder(MyQCDetailsActivity.this)
@@ -101,7 +103,7 @@ public class MyQCDetailsActivity extends MvpActivity<MyKsbDetailsPresenter> impl
             }
         });
         mMyQCDetailsAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
-        View emptyView=getLayoutInflater().inflate(R.layout.layout_empty,null);
+        View emptyView = getLayoutInflater().inflate(R.layout.layout_empty, null);
         mMyQCDetailsAdapter.setEmptyView(emptyView);
         rvKsb.setLayoutManager(new LinearLayoutManager(this, OrientationHelper.VERTICAL, false));
         rvKsb.setItemAnimator(new DefaultItemAnimator());
@@ -111,16 +113,17 @@ public class MyQCDetailsActivity extends MvpActivity<MyKsbDetailsPresenter> impl
         srlRefresh.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                mvpPresenter.getKsbRecord(type,startIndex,Constant.PAGE_SIZE);
+                mvpPresenter.getQCDetail(type, startIndex, Constant.PAGE_SIZE);
             }
 
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                startIndex=defaultIndex;
-                mvpPresenter.getKsbRecord(type,startIndex,Constant.PAGE_SIZE);
+                startIndex = defaultIndex;
+                mvpPresenter.getQCDetail(type, startIndex, Constant.PAGE_SIZE);
             }
         });
-        mvpPresenter.getSubject(Constant.TYPE_KSB_TYPE);
+        mvpPresenter.getSubject(Constant.TYPE_QC_TYPE);
+//        mvpPresenter.getQCDetail(type, startIndex, Constant.PAGE_SIZE);
     }
 
     @OnClick({R.id.iv_back, R.id.tv_text})
@@ -131,17 +134,17 @@ public class MyQCDetailsActivity extends MvpActivity<MyKsbDetailsPresenter> impl
                 break;
             case R.id.tv_text:
                 if (ksbDetailsTypePop == null) {
-                    ksbDetailsTypePop = new KsbDetailsTypePop(this,subjectName, new KsbDetailsTypePop.OnSelectItemListener() {
+                    ksbDetailsTypePop = new KsbDetailsTypePop(this, subjectName, new KsbDetailsTypePop.OnSelectItemListener() {
                         @Override
                         public void onSelectItem(int position) {
-                            String selectType=subjectArr.get(position).getCode();
-                            if (!TextUtils.equals(selectType,type)){
+                            String selectType = subjectArr.get(position).getCode();
+                            if (!TextUtils.equals(selectType, type)) {
                                 tvText.setText(subjectName.get(position));
-                                type=selectType;
+                                type = selectType;
                                 itemArr.clear();
                                 mMyQCDetailsAdapter.notifyDataSetChanged();
-                                startIndex=defaultIndex;
-                                mvpPresenter.getKsbRecord(type,startIndex,Constant.PAGE_SIZE);
+                                startIndex = defaultIndex;
+                                mvpPresenter.getQCDetail(type, startIndex, Constant.PAGE_SIZE);
                             }
                         }
                     });
@@ -155,40 +158,22 @@ public class MyQCDetailsActivity extends MvpActivity<MyKsbDetailsPresenter> impl
         }
     }
 
-    @Override
-    public void setData(List<KsbRecord> data) {
-        srlRefresh.finishRefresh();
-        srlRefresh.finishLoadmore();
-        if (startIndex.equals(defaultIndex)){
-            itemArr.clear();
-        }
-        if (data==null||data.size()<Constant.PAGE_SIZE){
-            startIndex=defaultIndex;
-            srlRefresh.setEnableLoadmore(false);
-            itemArr.addAll(data);
-        }else {
-            startIndex = data.get(data.size()-1).getStartIndex();
-            itemArr.addAll(data);
-            srlRefresh.setEnableLoadmore(true);
-        }
-        mMyQCDetailsAdapter.notifyDataSetChanged();
-    }
 
     @Override
     public void setSubject(List<DictionaryType> data) {
-        if (data!=null&&data.size()>0){
+        if (data != null && data.size() > 0) {
             subjectArr.addAll(data);
-            for (int i=0;i<subjectArr.size();i++){
+            for (int i = 0; i < subjectArr.size(); i++) {
                 subjectName.add(subjectArr.get(i).getName());
-                if (TextUtils.equals(defaultCode,subjectArr.get(i).getCode())){
+                if (TextUtils.equals(defaultCode, subjectArr.get(i).getCode())) {
                     type = data.get(i).getCode();
                     tvText.setText(subjectArr.get(i).getName());
-                    mvpPresenter.getKsbRecord(type, startIndex, Constant.PAGE_SIZE);
+                    mvpPresenter.getQCDetail(type, startIndex, Constant.PAGE_SIZE);
                 }
             }
             if (TextUtils.isEmpty(defaultCode)) {
                 type = data.get(0).getCode();
-                mvpPresenter.getKsbRecord(type, startIndex, Constant.PAGE_SIZE);
+                mvpPresenter.getQCDetail(type, startIndex, Constant.PAGE_SIZE);
             }
         }
     }
@@ -199,5 +184,24 @@ public class MyQCDetailsActivity extends MvpActivity<MyKsbDetailsPresenter> impl
         srlRefresh.finishRefresh();
         srlRefresh.finishLoadmore();
         showShortToast(msg);
+    }
+
+    @Override
+    public void setQCDetail(List<KsbRecord> data) {
+        srlRefresh.finishRefresh();
+        srlRefresh.finishLoadmore();
+        if (startIndex.equals(defaultIndex)) {
+            itemArr.clear();
+        }
+        if (data == null || data.size() < Constant.PAGE_SIZE) {
+            startIndex = defaultIndex;
+            srlRefresh.setEnableLoadmore(false);
+            itemArr.addAll(data);
+        } else {
+            startIndex = data.get(data.size() - 1).getStartIndex();
+            itemArr.addAll(data);
+            srlRefresh.setEnableLoadmore(true);
+        }
+        mMyQCDetailsAdapter.notifyDataSetChanged();
     }
 }

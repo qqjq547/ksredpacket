@@ -187,6 +187,7 @@ public class Constant {
     public static final String SYSTEM_CODE_ANDROID = "Android";
     public static final String TYPE_INFOMATION = "information";
     public static final String TYPE_KSB_TYPE = "KSB_type";
+    public static final String TYPE_QC_TYPE = "qc_type";
     public static final String TYPE_REGION_STATISTICS = "RegionStatisticsType";
 
     public static final String NATION_CODE = "86";
@@ -321,6 +322,7 @@ public class Constant {
     public static final String COUNTDOWN_GONE = "ISGONG";
     public static final String ACTION_CHANGE_AAA = "ACTION_CHANGE_AAA";
 
+
     //   视频红包与问卷红包 问题类型 0：单选 1：多选 2：填空题
     public static int SINGLESELECT = 0;
     public static int MORESELECT = 1;
@@ -343,4 +345,7 @@ public class Constant {
     public static final int KSB2AAA = 2;
     public static final int EXTRACT_AAA = 3;
     public static final int Fill_AAA = 4;
+
+
+    public static final String QC_DETAIL = "3";
 }
