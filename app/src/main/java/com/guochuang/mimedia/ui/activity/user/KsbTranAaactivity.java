@@ -64,7 +64,7 @@ public class KsbTranAaactivity extends MvpActivity<KsbTranAaaPresenter> implemen
 
     @Override
     public void initViewAndData() {
-       tvTitle.setText(R.string.ksb_trans_aaa);
+       tvTitle.setText(R.string.qc_trans_aaa);
        etTransKsb.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -130,7 +130,7 @@ public class KsbTranAaactivity extends MvpActivity<KsbTranAaaPresenter> implemen
             passDialog.dismiss();
         }
         sendBroadcast(new Intent(Constant.ACTION_CHANGE_AAA));
-        showShortToast(R.string.ksb_to_aaa_success);
+        showShortToast(R.string.qc_to_aaa_success);
         setResult(RESULT_OK);
         finish();
     }
@@ -153,7 +153,7 @@ public class KsbTranAaactivity extends MvpActivity<KsbTranAaaPresenter> implemen
             case R.id.tv_confirm:
                String amountStr=etTransKsb.getText().toString().trim();
                 if (TextUtils.isEmpty(amountStr)){
-                    showShortToast(R.string.pls_input_ksb_amount);
+                    showShortToast(R.string.pls_input_qc_amount);
                     return;
                 }
                 //超过Integer 最大值
@@ -165,11 +165,11 @@ public class KsbTranAaactivity extends MvpActivity<KsbTranAaaPresenter> implemen
                 }
 
                 if (intCal!=null&&amount>(int)Double.parseDouble(intCal.getKsbCoin())){
-                   showShortToast(R.string.coin_not_enouth);
+                   showShortToast(R.string.coin_qc_not_enouth);
                     return;
                 }
                 if (exchangeConfig!=null&&amount<exchangeConfig.getKsb2aaa().getMinLimit()){
-                    showShortToast(String.format(getString(R.string.format_min_ksb_to_aaa),exchangeConfig.getKsb2aaa().getMinLimit()));
+                    showShortToast(String.format(getString(R.string.format_min_qc_to_aaa),exchangeConfig.getKsb2aaa().getMinLimit()));
                     return;
                 }
                 if (passDialog == null) {

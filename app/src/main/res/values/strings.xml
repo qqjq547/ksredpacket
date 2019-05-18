@@ -908,5 +908,10 @@
     <string name="pls_input_qc_to_seal">请输入QC转SEAL数量</string>
     <string name="arrived_seal">到账SEAL</string>
     <string name="qc_to_seal_success">QC转SEAL成功</string>
+    <string name="qc_trans_aaa">QC转AAA</string>
+    <string name="qc_to_aaa_success">QC转AAA成功</string>
+    <string name="pls_input_qc_amount">请输入QC数量</string>
+    <string name="coin_qc_not_enouth">QC余额不足</string>
+    <string name="format_min_qc_to_aaa">QC数量至少为%d</string>
 
 </resources>
