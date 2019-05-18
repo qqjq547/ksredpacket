@@ -1512,4 +1512,12 @@ public interface ApiStore {
 
     @GET("/api/v1/user/qc/get")
     Observable<HttpResponse<MyQC>> getMyQC();
+
+    @GET("/api/v1/hbase/coin/getKsbDetailsList")
+    Observable<HttpResponse<List<KsbRecord>>> getCoinRecord(
+            @Query("type") String type,
+            @Query("coinType") String coinType,
+            @Query("startIndex") String startIndex,
+            @Query("pageSize") int pageSize
+    );
 }
