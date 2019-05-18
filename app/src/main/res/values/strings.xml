@@ -897,5 +897,16 @@
     <string name="mobile_has_bind">该手机号已绑定</string>
     <string name="my_seal_details_title">SEAL明细</string>
     <string name="my_seal_details_num_all">SEAL总和：</string>
+    <string name="transfer_sell">转SEAL</string>
+    <string name="qc_price">价格(元)</string>
+    <string name="transfer_ksb_detail">原KSB明细</string>
+    <string name="my_qc_details_title">QC明细</string>
+    <string name="qc_trans_seal">QC转SEAL</string>
+    <string name="my_qc_transfer_seal">我的QC</string>
+    <string name="equal_seal">等值SEAL</string>
+    <string name="qc_trans_seal_amount">QC转SEAL数量</string>
+    <string name="pls_input_qc_to_seal">请输入QC转SEAL数量</string>
+    <string name="arrived_seal">到账SEAL</string>
+    <string name="qc_to_seal_success">QC转SEAL成功</string>
 
 </resources>

@@ -17,6 +17,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.MyAAA;
 import com.guochuang.mimedia.mvp.model.MySeal;
+import com.guochuang.mimedia.mvp.model.MyQC;
 import com.guochuang.mimedia.mvp.model.NestAuctionMsg;
 import com.guochuang.mimedia.mvp.model.RegionCore;
 import com.guochuang.mimedia.tools.DialogBuilder;
@@ -30,6 +31,7 @@ import com.guochuang.mimedia.ui.activity.user.MyAAAActivity;
 import com.guochuang.mimedia.ui.activity.user.MyAddressActivity;
 import com.guochuang.mimedia.ui.activity.user.MyPayCodeActivity;
 import com.guochuang.mimedia.ui.activity.user.MySealActivity;
+import com.guochuang.mimedia.ui.activity.user.MyQCActivity;
 import com.guochuang.mimedia.ui.adapter.MyViewListAdapter;
 import com.guochuang.mimedia.ui.dialog.SheetDialog;
 import com.sz.gcyh.KSHongBao.R;
@@ -273,6 +275,9 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                     case R.drawable.ic_my_paycode:
                         startActivity(new Intent(getActivity(), MyPayCodeActivity.class));
                         break;
+                    case R.drawable.ic_my_qc:
+                        startActivity(new Intent(getActivity(), MyQCActivity.class));
+                        break;
                     case R.drawable.ic_my_seal:
                         startActivity(new Intent(getActivity(), MySealActivity.class));
                         break;
@@ -300,7 +305,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                     startActivity(new Intent(getActivity(), MySealActivity.class));
                     break;
                 case R.id.lin_my_qc:
-                    startActivity(new Intent(getActivity(), MyKsbActivity.class));
+                    startActivity(new Intent(getActivity(), MyQCActivity.class));
                     break;
                 case R.id.lin_my_operation_center:
                     startActivity(new Intent(getActivity(), OperationCenterActivity.class));
@@ -344,6 +349,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         super.onResume();
         setUpUser();
         mvpPresenter.getAuctionMsg();
+        mvpPresenter.getMyQC();
     }
 
     @OnClick({R.id.iv_setting,
@@ -518,6 +524,14 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                 mTvMyAaa.setText("0.0000");
             }
         }
+    }
+
+    @Override
+    public void setMyQC(MyQC data) {
+        //设置qc
+        tvMyQc.setText(data.getCoin());
+        tvQcBalance.setText(data.getMoney());
+
     }
 
     public void setMsgDotView() {

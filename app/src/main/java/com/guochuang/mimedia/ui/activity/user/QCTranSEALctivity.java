@@ -19,11 +19,12 @@ import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.DoubleUtil;
 import com.guochuang.mimedia.ui.dialog.PassDialog;
 import com.sz.gcyh.KSHongBao.R;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
 
-public class KsbTranAaactivity extends MvpActivity<KsbTranAaaPresenter> implements KsbTranAaaView {
+public class QCTranSEALctivity extends MvpActivity<KsbTranAaaPresenter> implements KsbTranAaaView {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
@@ -33,8 +34,6 @@ public class KsbTranAaactivity extends MvpActivity<KsbTranAaaPresenter> implemen
     TextView tvEqualAaa;
     @BindView(R.id.et_trans_ksb)
     EditText etTransKsb;
-    @BindView(R.id.tv_miner_fee)
-    TextView tvMinerFee;
     @BindView(R.id.tv_arrive_aaa)
     TextView tvArriveAaa;
     @BindView(R.id.tv_ksb_price)
@@ -59,12 +58,12 @@ public class KsbTranAaactivity extends MvpActivity<KsbTranAaaPresenter> implemen
 
     @Override
     public int getLayout() {
-        return R.layout.activity_ksb_tran_aaa;
+        return R.layout.activity_qc_tran_seal;
     }
 
     @Override
     public void initViewAndData() {
-       tvTitle.setText(R.string.ksb_trans_aaa);
+       tvTitle.setText(R.string.qc_trans_seal);
        etTransKsb.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -74,12 +73,10 @@ public class KsbTranAaactivity extends MvpActivity<KsbTranAaaPresenter> implemen
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (TextUtils.isEmpty(charSequence)){
-                    tvMinerFee.setText("0");
                     tvArriveAaa.setText(CommonUtil.formatDouble(0,4));
                 }else {
                     double input= CommonUtil.formatDouble(Double.parseDouble(charSequence.toString()));
                     if (exchangeConfig!=null){
-                        tvMinerFee.setText(CommonUtil.formatDouble(DoubleUtil.mul(input,exchangeConfig.getKsb2aaa().getServiceRate()),4));
                         if (intCal!=null){
                             double transKsb=input*(1-exchangeConfig.getKsb2aaa().getServiceRate());
                             double equalMoney=DoubleUtil.mul(transKsb,Double.parseDouble(intCal.getKsbRate()));
@@ -130,7 +127,7 @@ public class KsbTranAaactivity extends MvpActivity<KsbTranAaaPresenter> implemen
             passDialog.dismiss();
         }
         sendBroadcast(new Intent(Constant.ACTION_CHANGE_AAA));
-        showShortToast(R.string.ksb_to_aaa_success);
+        showShortToast(R.string.qc_to_seal_success);
         setResult(RESULT_OK);
         finish();
     }
@@ -188,9 +185,9 @@ public class KsbTranAaactivity extends MvpActivity<KsbTranAaaPresenter> implemen
                         public void onNumFull(String code) {
                             showLoadingDialog(null);
                             mvpPresenter.exchange(
-                                    Constant.DIGITAL_CURRENCY_AAA,
-                                    Constant.DIGITAL_CURRENCY_KSB,
-                                    Constant.DIGITAL_CURRENCY_AAA,
+                                    Constant.DIGITAL_CURRENCY_SEAL,
+                                    Constant.DIGITAL_CURRENCY_QC,
+                                    Constant.DIGITAL_CURRENCY_SEAL,
                                     amount,
                                     code);
 
