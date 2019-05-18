@@ -8,6 +8,7 @@ import com.guochuang.mimedia.mvp.model.DigitalIntCal;
 import com.guochuang.mimedia.mvp.model.ExchangeConfig;
 import com.guochuang.mimedia.mvp.view.AaaTranKsbView;
 import com.guochuang.mimedia.mvp.view.KsbTranAaaView;
+import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.RxUtil;
 
 public class AaaTranKsbPresenter extends BasePresenter<AaaTranKsbView> {
@@ -57,7 +58,7 @@ public class AaaTranKsbPresenter extends BasePresenter<AaaTranKsbView> {
     }
     public void exchange(String sourceDigitalCurrency,String targetDigitalCurrency,double coin,String safetyCode){
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                exchange(sourceDigitalCurrency,targetDigitalCurrency,coin,safetyCode)), new ApiCallback<String>() {
+                exchange(Constant.DIGITAL_CURRENCY_AAA,sourceDigitalCurrency,targetDigitalCurrency,coin,safetyCode)), new ApiCallback<String>() {
             @Override
             public void onSuccess(String data) {
                 mvpView.setData(data);

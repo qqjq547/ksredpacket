@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.MyAAA;
+import com.guochuang.mimedia.mvp.model.MyQC;
 import com.guochuang.mimedia.mvp.model.NestAuctionMsg;
 import com.guochuang.mimedia.mvp.model.RegionCore;
 import com.guochuang.mimedia.tools.DialogBuilder;
@@ -273,6 +274,9 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                     case R.drawable.ic_my_paycode:
                         startActivity(new Intent(getActivity(), MyPayCodeActivity.class));
                         break;
+                    case R.drawable.ic_my_qc:
+                        startActivity(new Intent(getActivity(), MyQCActivity.class));
+                        break;
                     case R.drawable.ic_my_seal:
                         startActivity(new Intent(getActivity(), MySealActivity.class));
                         break;
@@ -343,6 +347,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         super.onResume();
         setUpUser();
         mvpPresenter.getAuctionMsg();
+        mvpPresenter.getMyQC();
     }
 
     @OnClick({R.id.iv_setting,
@@ -509,6 +514,14 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                 mTvMyAaa.setText("0.0000");
             }
         }
+    }
+
+    @Override
+    public void setMyQC(MyQC data) {
+        //设置qc
+        tvMyQc.setText(data.getCoin());
+        tvQcBalance.setText(data.getMoney());
+
     }
 
     public void setMsgDotView() {

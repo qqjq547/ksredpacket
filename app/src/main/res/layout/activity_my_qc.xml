@@ -39,7 +39,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/ksb_num"
+                        android:text="@string/qc_num"
                         android:textColor="@color/text_black"
                         android:textSize="@dimen/textfont16" />
 
@@ -147,18 +147,30 @@
                 android:layout_marginLeft="@dimen/space15"
                 android:layout_marginTop="@dimen/space10"
                 android:layout_marginRight="@dimen/space15"
-              android:orientation="vertical">
+              android:orientation="horizontal">
 
 
                 <Button
                     android:id="@+id/btn_transfer_sell"
                     style="?android:attr/borderlessButtonStyle"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="@dimen/space45"
                     android:background="@drawable/bg_myksb_trasnfer"
                     android:text="@string/transfer_sell"
                     android:textColor="@color/text_white"
                     android:textSize="@dimen/textfont16" />
+              <Button
+                  android:id="@+id/btn_transfer_aaa"
+                  style="?android:attr/borderlessButtonStyle"
+                  android:layout_width="0dp"
+                  android:layout_weight="1"
+                  android:layout_marginLeft="@dimen/space45"
+                  android:layout_height="@dimen/space45"
+                  android:background="@drawable/bg_myksb_trasnfer"
+                  android:text="@string/transfer_aaa"
+                  android:textColor="@color/text_white"
+                  android:textSize="@dimen/textfont16" />
        </LinearLayout>
 
 

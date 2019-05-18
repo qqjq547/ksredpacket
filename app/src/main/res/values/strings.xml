@@ -904,5 +904,6 @@
     <string name="qc_trans_seal_amount">QC转SEAL数量</string>
     <string name="pls_input_qc_to_seal">请输入QC转SEAL数量</string>
     <string name="arrived_seal">到账SEAL</string>
+    <string name="qc_to_seal_success">QC转SEAL成功</string>
 
 </resources>

@@ -59,9 +59,9 @@ public class KsbTranAaaPresenter extends BasePresenter<KsbTranAaaView> {
             }
         });
     }
-    public void exchange(String sourceDigitalCurrency,String targetDigitalCurrency,double coin,String safetyCode){
+    public void exchange(String digi, String sourceDigitalCurrency,String targetDigitalCurrency,double coin,String safetyCode){
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                exchange(sourceDigitalCurrency,targetDigitalCurrency,coin,safetyCode)), new ApiCallback<String>() {
+                exchange(digi,sourceDigitalCurrency,targetDigitalCurrency,coin,safetyCode)), new ApiCallback<String>() {
             @Override
             public void onSuccess(String data) {
                 mvpView.setData(data);

@@ -38,6 +38,8 @@ public class QCTranSEALctivity extends MvpActivity<KsbTranAaaPresenter> implemen
     TextView tvArriveAaa;
     @BindView(R.id.tv_ksb_price)
     TextView tvKsbPrice;
+    @BindView(R.id.tv_aaa_price)
+    TextView tvAaaPrice;
     @BindView(R.id.tv_confirm)
     TextView tvConfirm;
     @BindView(R.id.tv_tip)
@@ -114,6 +116,7 @@ public class QCTranSEALctivity extends MvpActivity<KsbTranAaaPresenter> implemen
             tvKsbNum.setText(String.valueOf(data.getKsbCoin()));
             tvEqualAaa.setText(String.valueOf(data.getDigitalCoin()));
             tvKsbPrice.setText(String.valueOf(data.getKsbRate()));
+            tvAaaPrice.setText(String.valueOf(data.getDigitalRate()));
         }
     }
 
@@ -124,7 +127,7 @@ public class QCTranSEALctivity extends MvpActivity<KsbTranAaaPresenter> implemen
             passDialog.dismiss();
         }
         sendBroadcast(new Intent(Constant.ACTION_CHANGE_AAA));
-        showShortToast(R.string.ksb_to_aaa_success);
+        showShortToast(R.string.qc_to_seal_success);
         setResult(RESULT_OK);
         finish();
     }
@@ -182,8 +185,9 @@ public class QCTranSEALctivity extends MvpActivity<KsbTranAaaPresenter> implemen
                         public void onNumFull(String code) {
                             showLoadingDialog(null);
                             mvpPresenter.exchange(
-                                    Constant.DIGITAL_CURRENCY_KSB,
-                                    Constant.DIGITAL_CURRENCY_AAA,
+                                    Constant.DIGITAL_CURRENCY_SEAL,
+                                    Constant.DIGITAL_CURRENCY_QC,
+                                    Constant.DIGITAL_CURRENCY_SEAL,
                                     amount,
                                     code);
 

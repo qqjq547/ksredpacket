@@ -5,6 +5,7 @@ import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.MyAAA;
+import com.guochuang.mimedia.mvp.model.MyQC;
 import com.guochuang.mimedia.mvp.model.NestAuctionMsg;
 import com.guochuang.mimedia.mvp.model.RecommendData;
 import com.guochuang.mimedia.mvp.model.RegionCore;
@@ -95,4 +96,28 @@ public class MyPresenter extends BasePresenter<MyView> {
             }
         });
     }
+
+    /**
+     * 获取我的QC
+     */
+        public void getMyQC(){
+            addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getMyQC()), new ApiCallback<MyQC>() {
+                @Override
+                public void onSuccess(MyQC data) {
+                    mvpView.setMyQC(data);
+                }
+
+                @Override
+                public void onFailure(ApiException exception) {
+                    mvpView.setError(exception.getMessage());
+
+                }
+
+                @Override
+                public void onFinish() {
+
+                }
+            });
+        }
+
 }

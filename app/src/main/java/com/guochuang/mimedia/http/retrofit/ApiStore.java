@@ -1461,6 +1461,7 @@ public interface ApiStore {
     @FormUrlEncoded
     @POST("/api/v1/exchange/digi_currcy/exchange")
     Observable<HttpResponse<String>> exchange(
+            @Field("digitalCurrency") String digitalCurrency,
             @Field("sourceDigitalCurrency") String sourceDigitalCurrency,
             @Field("targetDigitalCurrency") String targetDigitalCurrency,
             @Field("coin") double coin,
@@ -1492,5 +1493,8 @@ public interface ApiStore {
      */
     @GET("/api/v1/user/account/mobile_existed")
     Observable<HttpResponse<Integer>> mobileExisted(@Query("mobile") String phone);
-    //{"code":1,"success":true,"message":"成功","response":0,"map":null}
+
+
+    @GET("/api/v1/user/qc/get")
+    Observable<HttpResponse<MyQC>> getMyQC();
 }

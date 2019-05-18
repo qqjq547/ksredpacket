@@ -9,22 +9,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.guochuang.mimedia.base.MvpActivity;
-import com.guochuang.mimedia.mvp.model.KsbTrend;
-import com.guochuang.mimedia.mvp.model.MyAAA;
-import com.guochuang.mimedia.mvp.model.MyKsb;
-import com.guochuang.mimedia.mvp.presenter.MyksbPresenter;
-import com.guochuang.mimedia.mvp.view.MyksbView;
+import com.guochuang.mimedia.mvp.model.MyQC;
+import com.guochuang.mimedia.mvp.presenter.MyQCPresenter;
+import com.guochuang.mimedia.mvp.view.MyQCView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.PrefUtil;
 import com.sz.gcyh.KSHongBao.R;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class MyQCActivity extends MvpActivity<MyksbPresenter> implements MyksbView {
+public class MyQCActivity extends MvpActivity<MyQCPresenter> implements MyQCView {
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.tv_title)
@@ -38,7 +34,10 @@ public class MyQCActivity extends MvpActivity<MyksbPresenter> implements MyksbVi
     @BindView(R.id.tv_equal_count)
     TextView tvEqualCount;
     @BindView(R.id.btn_transfer_sell)
+    Button btnTransferseal;
+    @BindView(R.id.btn_transfer_aaa)
     Button btnTransferAaa;
+
     @BindView(R.id.tv_qc_price)
     TextView mTvQcPrice;
     @BindView(R.id.wv_desp)
@@ -46,8 +45,8 @@ public class MyQCActivity extends MvpActivity<MyksbPresenter> implements MyksbVi
 
 
     @Override
-    protected MyksbPresenter createPresenter() {
-        return new MyksbPresenter(this);
+    protected MyQCPresenter createPresenter() {
+        return new MyQCPresenter(this);
     }
 
     @Override
@@ -59,19 +58,19 @@ public class MyQCActivity extends MvpActivity<MyksbPresenter> implements MyksbVi
     public void initViewAndData() {
         tvTitle.setText(R.string.my_qc_title);
         tvText.setText(R.string.detail);
+        btnTransferAaa.setVisibility(View.GONE);
+        if(getPref().getBoolean(PrefUtil.AAA_SWITCH,false)){
+            btnTransferAaa.setVisibility(View.VISIBLE);
+        }
+
         CommonUtil.initH5WebView(this, wvDesp);
         wvDesp.loadUrl(Constant.URL_RULE_QC);
-        mvpPresenter.getMyKsb();
-//        mvpPresenter.getKsbTrend();
-//        if (getPref().getBoolean(PrefUtil.AAA_SWITCH,false)){
-//            btnTransferAaa.setVisibility(View.VISIBLE);
-//        }else {
-//            btnTransferAaa.setVisibility(View.GONE);
-//        }
+        showLoadingDialog(null);
+        mvpPresenter.getMyQC();
     }
 
     @OnClick({R.id.iv_back, R.id.tv_text, R.id.lin_ksb, R.id.lin_share_benefit, R.id.lin_equal,
-            R.id.btn_transfer_sell,R.id.btn_ksb_detail})
+            R.id.btn_transfer_sell,R.id.btn_ksb_detail,R.id.btn_transfer_aaa})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -105,6 +104,19 @@ public class MyQCActivity extends MvpActivity<MyksbPresenter> implements MyksbVi
                 //原ksb 明细
                 startActivity(new Intent(this, MyKsbDetailsActivity.class));
                 break;
+            case R.id.btn_transfer_aaa:
+                //转aaa
+                if (getPref().getInt(PrefUtil.IDENTITY,0)==0) {
+                    showShortToast(R.string.pls_identity_first);
+                    startActivityForResult(new Intent(this, IdentifyActivity.class), Constant.REFRESH);
+                }else if(getPref().getInt(PrefUtil.SAFECODE,0)==0){
+                    showShortToast(R.string.pls_safecode_first);
+                    startActivityForResult(new Intent(this, TradePwdActivity.class), Constant.REFRESH);
+                }else {
+
+                    startActivityForResult(new Intent(this, KsbTranAaactivity.class),Constant.REQUEST_GRANT);
+                }
+                break;
 
         }
     }
@@ -112,30 +124,30 @@ public class MyQCActivity extends MvpActivity<MyksbPresenter> implements MyksbVi
 
 
 
-    @Override
-    public void setData(MyKsb data) {
-        if (data!=null){
-            tvKsbCount.setText(data.getCoin());
-            tvShareBenefit.setText(data.getKsbPrice());
-            tvEqualCount.setText(data.getMoney());
-            mTvQcPrice.setText(data.getKsbPrice());
-        }
-    }
+
+
+//    @Override
+//    public void setMyAaa(MyAAA data) {
+//        closeLoadingDialog();
+//        if (data!=null){
+//            startActivityForResult(new Intent(this, MyKsbGrantActivity.class),Constant.REQUEST_GRANT);
+//        }
+//    }
 
     @Override
-    public void setKsbTrend(List<KsbTrend> data) {
-    }
-
-    @Override
-    public void setMyAaa(MyAAA data) {
+    public void setMyQC(MyQC data) {
         closeLoadingDialog();
         if (data!=null){
-            startActivityForResult(new Intent(this, MyKsbGrantActivity.class),Constant.REQUEST_GRANT);
+            tvKsbCount.setText(data.getCoin());
+            tvShareBenefit.setText(data.getQcMoney());
+            tvEqualCount.setText(data.getMoney());
+            mTvQcPrice.setText(data.getQcMoney());
         }
     }
 
     @Override
     public void setError(String msg) {
+        closeLoadingDialog();
        showShortToast(msg);
     }
 
@@ -146,7 +158,7 @@ public class MyQCActivity extends MvpActivity<MyksbPresenter> implements MyksbVi
             switch (requestCode){
                 case Constant.REQUEST_TRANSFER:
                 case Constant.REQUEST_GRANT:
-                    mvpPresenter.getMyKsb();
+                    mvpPresenter.getMyQC();
                     break;
 
             }

@@ -188,6 +188,7 @@ public class KsbTranAaactivity extends MvpActivity<KsbTranAaaPresenter> implemen
                         public void onNumFull(String code) {
                             showLoadingDialog(null);
                             mvpPresenter.exchange(
+                                    Constant.DIGITAL_CURRENCY_AAA,
                                     Constant.DIGITAL_CURRENCY_KSB,
                                     Constant.DIGITAL_CURRENCY_AAA,
                                     amount,
