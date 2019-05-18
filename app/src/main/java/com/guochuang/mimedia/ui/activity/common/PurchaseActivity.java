@@ -99,7 +99,7 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
         nestLongitude=getIntent().getStringExtra(Constant.NESTLONGITUDE);
         if (purchaseType==Constant.TYPE_PURCHASE_REGION){
             tvTitle.setText(R.string.buy_city_owner);
-            tvAgreement.setText(R.string.city_buy_agreement);
+            tvAgreement.setText(R.string.city_buy_agreement);;
         }else if(purchaseType==Constant.TYPE_PURCHASE_AGENT){
             tvTitle.setText(R.string.bug_agent);
             tvAgreement.setText(R.string.agent_agreement);

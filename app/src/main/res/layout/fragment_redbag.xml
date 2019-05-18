@@ -24,7 +24,8 @@
       <TextView
           android:id="@+id/tv_title"
           android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
+          android:layout_height="@dimen/title_height"
+          android:gravity="center"
           android:layout_centerInParent="true"
           android:drawableLeft="@drawable/ic_ksb"
           android:drawablePadding="@dimen/space8"

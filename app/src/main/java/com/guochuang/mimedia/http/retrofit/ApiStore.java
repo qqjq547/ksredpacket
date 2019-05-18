@@ -496,6 +496,11 @@ public interface ApiStore {
             @Query("captcha") String captcha,
             @Query("uuid") String uuid);
 
+    @POST("/api/v1/user/sms/withdraw_coin")
+    Observable<HttpResponse<Boolean>> userSmsWithdrawCoin(
+            @Query("mobile") String mobile,
+            @Query("uuid") String uuid);
+
     // 绑定手机
     @POST("/api/v1/user/account/bind_mobile")
     Observable<HttpResponse<BindingPhone>> userBindPhone(
@@ -1479,6 +1484,16 @@ public interface ApiStore {
             @Field("coin") double coin,
             @Field("safetyCode") String safetyCode);
 
+    @FormUrlEncoded
+    @POST("/api/v1/exchange/digi_currcy/withdraw_coin")
+    Observable<HttpResponse<Boolean>> withdrawCoin(
+            @Field("digitalCurrency") String digitalCurrency,
+            @Field("address") String address,
+            @Field("coin") double coin,
+            @Field("safetyCode") String safetyCode,
+            @Field("mobile") String mobile,
+            @Field("captcha") String captcha);
+
     @GET("/api/v1/exchange/user_digital_currency/check_switch")
     Observable<HttpResponse<Boolean>> checkSwitch();
 
@@ -1492,5 +1507,4 @@ public interface ApiStore {
      */
     @GET("/api/v1/user/account/mobile_existed")
     Observable<HttpResponse<Integer>> mobileExisted(@Query("mobile") String phone);
-    //{"code":1,"success":true,"message":"成功","response":0,"map":null}
 }

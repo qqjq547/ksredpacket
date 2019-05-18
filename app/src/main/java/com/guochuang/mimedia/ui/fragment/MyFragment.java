@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.MyAAA;
+import com.guochuang.mimedia.mvp.model.MySeal;
 import com.guochuang.mimedia.mvp.model.NestAuctionMsg;
 import com.guochuang.mimedia.mvp.model.RegionCore;
 import com.guochuang.mimedia.tools.DialogBuilder;
@@ -287,6 +288,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         }
         mvpPresenter.getRecommendData();
         mvpPresenter.getRegionCore();
+        mvpPresenter.getMySeal();
 
     }
 
@@ -493,6 +495,14 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
     }
 
     @Override
+    public void setMySeal(MySeal data) {
+        if (data!=null){
+            tvMySeal.setText(data.getCoin());
+            tvSealBalance.setText(data.getMoney());
+        }
+    }
+
+    @Override
     public void setError(String msg) {
         closeLoadingDialog();
         showShortToast(msg);
@@ -535,6 +545,9 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
     }
 
     public void refreshMyAAA(){
+        mvpPresenter.getMyAAA(Constant.DIGITAL_CURRENCY_AAA);
+    }
+    public void refreshSeal(){
         mvpPresenter.getMyAAA(Constant.DIGITAL_CURRENCY_AAA);
     }
 

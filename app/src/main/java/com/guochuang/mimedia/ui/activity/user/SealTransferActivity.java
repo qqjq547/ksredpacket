@@ -10,23 +10,28 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.MvpActivity;
+import com.guochuang.mimedia.http.subscriber.CountDownSubscriber;
 import com.guochuang.mimedia.mvp.model.DigitalIntCal;
 import com.guochuang.mimedia.mvp.model.ExchangeConfig;
-import com.guochuang.mimedia.mvp.presenter.AaaTransferPresenter;
-import com.guochuang.mimedia.mvp.view.AaaTransferView;
+import com.guochuang.mimedia.mvp.presenter.SealTransferPresenter;
+import com.guochuang.mimedia.mvp.view.SealTransferView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.DialogBuilder;
 import com.guochuang.mimedia.tools.DoubleUtil;
+import com.guochuang.mimedia.tools.RxUtil;
+import com.guochuang.mimedia.tools.antishake.AntiShake;
 import com.guochuang.mimedia.ui.dialog.PassDialog;
 import com.sz.gcyh.KSHongBao.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.functions.Action0;
 
-public class SealTransferActivity extends MvpActivity<AaaTransferPresenter> implements AaaTransferView {
+public class SealTransferActivity extends MvpActivity<SealTransferPresenter> implements SealTransferView {
 
     @BindView(R.id.iv_back)
     ImageView ivBack;
@@ -38,6 +43,10 @@ public class SealTransferActivity extends MvpActivity<AaaTransferPresenter> impl
     EditText etTransAddress;
     @BindView(R.id.et_trans_count)
     EditText etTransCount;
+    @BindView(R.id.et_verify)
+    EditText etVerify;
+    @BindView(R.id.tv_verify)
+    TextView tvVerify;
     @BindView(R.id.tv_miner_fee)
     TextView tvMinerFee;
     @BindView(R.id.tv_confirm)
@@ -50,9 +59,12 @@ public class SealTransferActivity extends MvpActivity<AaaTransferPresenter> impl
     DigitalIntCal intCal;
     ExchangeConfig exchangeConfig;
     String address;
+    String mobile;
+    String uuid;
+    String captcha;
     @Override
-    protected AaaTransferPresenter createPresenter() {
-        return new AaaTransferPresenter(this);
+    protected SealTransferPresenter createPresenter() {
+        return new SealTransferPresenter(this);
     }
 
     @Override
@@ -63,6 +75,8 @@ public class SealTransferActivity extends MvpActivity<AaaTransferPresenter> impl
     @Override
     public void initViewAndData() {
         tvTitle.setText(R.string.seal_transfer_title);
+         mobile=App.getInstance().getUserInfo().getMobile();
+         uuid=App.getInstance().getUserInfo().getUserAccountUuid();
         address=getIntent().getStringExtra(Constant.ADDRESS);
         if (!TextUtils.isEmpty(address)){
             etTransAddress.setText(address);
@@ -97,15 +111,21 @@ public class SealTransferActivity extends MvpActivity<AaaTransferPresenter> impl
 
     }
 
-    @OnClick({R.id.iv_back, R.id.tv_confirm})
+    @OnClick({R.id.iv_back,R.id.tv_verify,R.id.tv_confirm})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
                 onBackPressed();
                 break;
+            case R.id.tv_verify:
+                if (AntiShake.check(view.getId()))
+                    return;
+                mvpPresenter.sendSmsCode(mobile,uuid);
+                break;
             case R.id.tv_confirm:
                 address=etTransAddress.getText().toString().trim();
                 String amountStr = etTransCount.getText().toString().trim();
+                captcha= etVerify.getText().toString().trim();
                 if (TextUtils.isEmpty(address)){
                     showShortToast(R.string.seal_address_empty);
                     return;
@@ -127,6 +147,10 @@ public class SealTransferActivity extends MvpActivity<AaaTransferPresenter> impl
                 }
                 if (exchangeConfig != null && amount < exchangeConfig.getWithdrawAAA().getMinLimit()) {
                     showShortToast(String.format(getString(R.string.format_min_seal_to_ksb),exchangeConfig.getWithdrawAAA().getMinLimit()));
+                    return;
+                }
+                if (TextUtils.isEmpty(captcha)) {
+                    showShortToast(R.string.pls_input_msg_vertify_code);
                     return;
                 }
                 View contentView=LayoutInflater.from(this).inflate(R.layout.layout_aaa_transfer_notice,null);
@@ -160,7 +184,9 @@ public class SealTransferActivity extends MvpActivity<AaaTransferPresenter> impl
                                                     Constant.DIGITAL_CURRENCY_SEAL,
                                                     address,
                                                     amount,
-                                                    code);
+                                                    code,
+                                                    mobile,
+                                                    captcha);
 
                                         }
                                     });
@@ -209,6 +235,12 @@ public class SealTransferActivity extends MvpActivity<AaaTransferPresenter> impl
     }
 
     @Override
+    public void setSmsCode(Boolean data) {
+        showShortToast(getResources().getString(R.string.type_login_verify_send_success));
+        sendCode();
+    }
+
+    @Override
     public void setError(String msg) {
         closeLoadingDialog();
         showShortToast(msg);
@@ -216,5 +248,40 @@ public class SealTransferActivity extends MvpActivity<AaaTransferPresenter> impl
             passDialog.clearCode();
         }
     }
+    private void sendCode() {
+        addSubscription(RxUtil.countdown(60)
+                .doOnSubscribe(new Action0() {
+                    @Override
+                    public void call() {
+                        tvVerify.setEnabled(false);
+                        tvVerify.setBackgroundResource(R.drawable.bg_btn_forget_verify_gray);
+                        tvVerify.setTextColor(getResources().getColor(R.color.text_white));
+                    }
+                })
+                .subscribe(new CountDownSubscriber<Integer>() {
+                    @Override
+                    public void onCompleted() {
+                        super.onCompleted();
+                        tvVerify.setText(getString(R.string.btn_login_reset_verify));
+                        tvVerify.setEnabled(true);
+                        tvVerify.setBackgroundResource(R.drawable.bg_btn_forget_verify_red);
+                        tvVerify.setTextColor(getResources().getColor(R.color.bg_btn_login_phone));
+                    }
 
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        tvVerify.setText(getString(R.string.btn_login_reset_verify));
+                        tvVerify.setEnabled(true);
+                        tvVerify.setBackgroundResource(R.drawable.bg_btn_forget_verify_red);
+                        tvVerify.setTextColor(getResources().getColor(R.color.bg_btn_login_phone));
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                        super.onNext(integer);
+                        tvVerify.setText(String.valueOf(integer));
+                    }
+                }));
+    }
 }

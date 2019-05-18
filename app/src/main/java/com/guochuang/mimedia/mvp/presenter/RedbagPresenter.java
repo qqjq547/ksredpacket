@@ -6,6 +6,7 @@ import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.HomeRegion;
 import com.guochuang.mimedia.mvp.model.MyKsb;
+import com.guochuang.mimedia.mvp.model.MySeal;
 import com.guochuang.mimedia.mvp.model.NestHomeAd;
 import com.guochuang.mimedia.mvp.model.PublishRedbagType;
 import com.guochuang.mimedia.mvp.model.Redbag;
@@ -132,9 +133,9 @@ public class RedbagPresenter extends BasePresenter<RedbagView> {
     }
     public void getWalletCoinAndMoney() {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                getMyKsb()), new ApiCallback<MyKsb>() {
+                getMyKsb()), new ApiCallback<MySeal>() {
             @Override
-            public void onSuccess(MyKsb data) {
+            public void onSuccess(MySeal data) {
                 mvpView.setCoinAndMoney(data);
 
             }

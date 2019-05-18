@@ -2,6 +2,7 @@ package com.guochuang.mimedia.ui.fragment;
 
 import android.content.Intent;
 import android.os.Build;
+import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -14,6 +15,7 @@ import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.ui.activity.city.CityActivity;
+import com.guochuang.mimedia.ui.activity.common.WebActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -24,6 +26,8 @@ public class CircleFragment extends MvpFragment {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
+    @BindView(R.id.tv_text)
+    TextView tvText;
     @BindView(R.id.srl_refresh)
     SmartRefreshLayout srlRefresh;
     @BindView(R.id.wv_circle)
@@ -42,7 +46,7 @@ public class CircleFragment extends MvpFragment {
 
     @Override
     public void initViewAndData() {
-        tvTitle.setText(R.string.tab_circle);
+        tvTitle.setText(R.string.tab_snatch);
         wvCircle.getSettings().setJavaScriptEnabled(true);
         wvCircle.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         wvCircle.getSettings().setLoadWithOverviewMode(true);
@@ -69,7 +73,7 @@ public class CircleFragment extends MvpFragment {
             }
         });
         wvCircle.addJavascriptInterface(new circleInterface(), "browserController");
-        wvCircle.loadUrl(CommonUtil.getTimeStampUrl(Constant.URL_TRADINGAREA));
+        wvCircle.loadUrl(CommonUtil.getTimeStampUrl(Constant.URL_DUOBAO_INDEX));
         srlRefresh.setEnableLoadmore(false);
         srlRefresh.setEnableRefresh(true);
         srlRefresh.setOnRefreshListener(new OnRefreshListener() {
@@ -93,6 +97,21 @@ public class CircleFragment extends MvpFragment {
         @JavascriptInterface
         public void openWin(String openUrl){
             IntentUtils.startWebActivity(getActivity(),"",openUrl);
+        }
+        @JavascriptInterface
+        public void rightTitle(final String title, final String url) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    tvText.setText(title);
+                    tvText.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            IntentUtils.startWebActivity(getActivity(), title, url);
+                        }
+                    });
+                }
+            });
         }
     }
 }

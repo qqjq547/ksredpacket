@@ -185,18 +185,12 @@
 
         <activity android:name="com.guochuang.mimedia.ui.activity.user.MyAAAActivity"/>
         <activity android:name="com.guochuang.mimedia.ui.activity.user.AAADetailedActivity"/>
-        <activity android:name="com.guochuang.mimedia.ui.activity.vote.InteractiveZoneActivity"/>
-        <activity android:name="com.guochuang.mimedia.ui.activity.vote.MyVoteActivity"/>
-        <activity android:name="com.guochuang.mimedia.ui.activity.vote.VoteDetailActivity"
-            android:windowSoftInputMode="stateHidden|adjustPan"/>
-        <activity android:name="com.guochuang.mimedia.ui.activity.vote.ApplyActActivity"/>
         <activity android:name="com.guochuang.mimedia.ui.activity.user.MySealActivity"/>
         <activity android:name="com.guochuang.mimedia.ui.activity.user.SealTransferActivity"/>
-        <activity android:name="com.guochuang.mimedia.ui.activity.user.SealDetailedActivity"/>
+        <activity android:name="com.guochuang.mimedia.ui.activity.user.MySealDetailsActivity"/>
 
 
-
-      <!--  // 广告信息获取service-->
+        <!--  // 广告信息获取service-->
         <service android:name="com.guochuang.mimedia.app.AdInfoService" />
 
         <!-- Android 7.0 文件共享配置，必须配置 -->

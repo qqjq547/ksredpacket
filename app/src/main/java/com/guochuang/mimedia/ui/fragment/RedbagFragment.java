@@ -38,6 +38,7 @@ import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.MvpFragment;
 import com.guochuang.mimedia.mvp.model.HomeRegion;
 import com.guochuang.mimedia.mvp.model.MyKsb;
+import com.guochuang.mimedia.mvp.model.MySeal;
 import com.guochuang.mimedia.mvp.model.NestHomeAd;
 import com.guochuang.mimedia.mvp.model.PublishRedbagType;
 import com.guochuang.mimedia.mvp.model.Redbag;
@@ -66,15 +67,12 @@ import com.guochuang.mimedia.view.HoneyCombView;
 import com.guochuang.mimedia.view.ScrollTextView;
 import com.sz.gcyh.KSHongBao.R;
 import com.tbruyelle.rxpermissions.RxPermissions;
-
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import rx.functions.Action1;
-import rx.internal.operators.CompletableOnSubscribeConcat;
 
 public class RedbagFragment extends MvpFragment<RedbagPresenter> implements RedbagView {
 
@@ -177,7 +175,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
         kilometre = getPref().getInt(PrefUtil.KILOMETRE, 1000);
         mvpPresenter.getWalletCoinAndMoney();
         mvpPresenter.getScrollBar();
-        mvpPresenter.getUserRole();
+//        mvpPresenter.getUserRole();
         onMarkerClickListener = new BaiduMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
@@ -474,7 +472,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     }
 
     @Override
-    public void setCoinAndMoney(MyKsb data) {
+    public void setCoinAndMoney(MySeal data) {
         tvTitle.setText(String.valueOf(data.getCoin()));
         getPref().setString(PrefUtil.COIN, String.valueOf(data.getCoin()));
         getPref().setString(PrefUtil.MONEY, String.valueOf(data.getMoney()));
@@ -504,11 +502,11 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     public void setUserRole(Integer data) {
         if (data != null) {
             getPref().setInt(PrefUtil.USER_ROLE, 0);
-            if (data.intValue() >= Constant.USER_ROLE_AGENT) {
-                linUpgradeAgent.setVisibility(View.GONE);
-            } else {
-                linUpgradeAgent.setVisibility(View.VISIBLE);
-            }
+//            if (data.intValue() >= Constant.USER_ROLE_AGENT) {
+//                linUpgradeAgent.setVisibility(View.GONE);
+//            } else {
+//                linUpgradeAgent.setVisibility(View.VISIBLE);
+//            }
         }
     }
 
