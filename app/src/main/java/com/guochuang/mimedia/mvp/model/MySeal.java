@@ -2,28 +2,26 @@ package com.guochuang.mimedia.mvp.model;
 
 public class MySeal {
 
+
     /**
-     * coin : 0
-     * ksbAddress : string
-     * ksbPrice : 0
-     * money : 0
+     * coin : 0.0000
+     * ksbPrice : 0.026241
+     * money : 0.00
+     * ksbAddress : 0xabd8d7725e660bab61c16069abf5fa805d9b5bca
+     * digitalCurrency : SEAL
+     * nameAuthentication : 1
+     * remark : 平台SEAL价格计算方式：\r\n\r\n每分钟获取一次交易所SEAL价格，然后计算近30分钟的平均值作为SEAL价格
+     * qrcodeUrlKey : http://sz-gcyh.oss-cn-shenzhen.aliyuncs.com/twoDimensional/ede080570dc74feb87e021ae70252530.png
      */
 
     private String coin;
-    private String ksbAddress;
     private String ksbPrice;
     private String money;
-    private String createDate;
-    private String createUser;
+    private String ksbAddress;
     private String digitalCurrency;
-    private String exchangeRate;
-    private String id;
     private int nameAuthentication;
+    private String remark;
     private String qrcodeUrlKey;
-    private String tenantCode;
-    private String updateDate;
-    private String updateUser;
-    private String walletAddress;
 
     public String getCoin() {
         return coin;
@@ -31,14 +29,6 @@ public class MySeal {
 
     public void setCoin(String coin) {
         this.coin = coin;
-    }
-
-    public String getKsbAddress() {
-        return ksbAddress;
-    }
-
-    public void setKsbAddress(String ksbAddress) {
-        this.ksbAddress = ksbAddress;
     }
 
     public String getKsbPrice() {
@@ -57,20 +47,12 @@ public class MySeal {
         this.money = money;
     }
 
-    public String getCreateDate() {
-        return createDate;
+    public String getKsbAddress() {
+        return ksbAddress;
     }
 
-    public void setCreateDate(String createDate) {
-        this.createDate = createDate;
-    }
-
-    public String getCreateUser() {
-        return createUser;
-    }
-
-    public void setCreateUser(String createUser) {
-        this.createUser = createUser;
+    public void setKsbAddress(String ksbAddress) {
+        this.ksbAddress = ksbAddress;
     }
 
     public String getDigitalCurrency() {
@@ -81,22 +63,6 @@ public class MySeal {
         this.digitalCurrency = digitalCurrency;
     }
 
-    public String getExchangeRate() {
-        return exchangeRate;
-    }
-
-    public void setExchangeRate(String exchangeRate) {
-        this.exchangeRate = exchangeRate;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public int getNameAuthentication() {
         return nameAuthentication;
     }
@@ -105,43 +71,19 @@ public class MySeal {
         this.nameAuthentication = nameAuthentication;
     }
 
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
     public String getQrcodeUrlKey() {
         return qrcodeUrlKey;
     }
 
     public void setQrcodeUrlKey(String qrcodeUrlKey) {
         this.qrcodeUrlKey = qrcodeUrlKey;
-    }
-
-    public String getTenantCode() {
-        return tenantCode;
-    }
-
-    public void setTenantCode(String tenantCode) {
-        this.tenantCode = tenantCode;
-    }
-
-    public String getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(String updateDate) {
-        this.updateDate = updateDate;
-    }
-
-    public String getUpdateUser() {
-        return updateUser;
-    }
-
-    public void setUpdateUser(String updateUser) {
-        this.updateUser = updateUser;
-    }
-
-    public String getWalletAddress() {
-        return walletAddress;
-    }
-
-    public void setWalletAddress(String walletAddress) {
-        this.walletAddress = walletAddress;
     }
 }

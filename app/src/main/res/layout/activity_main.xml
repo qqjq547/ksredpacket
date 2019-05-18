@@ -45,7 +45,7 @@
                 android:id="@+id/rbtn_circle"
                 style="@style/rdbtn_nav"
                 android:drawableTop="@drawable/tab_circle_selector"
-                android:text="@string/tab_circle"/>
+                android:text="@string/tab_snatch"/>
             <RadioButton
                 android:id="@+id/rbtn_user"
                 style="@style/rdbtn_nav"

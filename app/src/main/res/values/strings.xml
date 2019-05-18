@@ -8,6 +8,7 @@
     <string name="tab_game">蜜玩</string>
     <string name="tab_redbag">收红包</string>
     <string name="tab_circle">商圈</string>
+    <string name="tab_snatch">淘区块</string>
     <string name="tab_user">我的</string>
 
     <string name="network_error_and_late">网络异常，请稍后再试</string>
@@ -153,7 +154,7 @@
 
     <string name="text_my_operate_center">运营中心</string>
     <string name="text_my_recommend">我的推荐</string>
-    <string name="text_my_city">我的城市</string>
+    <string name="text_my_city">我的节点</string>
     <string name="text_my_order">我的订单</string>
     <string name="text_my_dynamic">红包动态</string>
     <string name="text_my_collection">我的收藏</string>
@@ -198,25 +199,25 @@
     <string name="my_qc">我的QC</string>
     <string name="detail">明细</string>
     <string name="square">广场</string>
-    <string name="city">城市</string>
+    <string name="city">节点</string>
     <string name="format_next_buy_time">下次竞购时间：%s</string>
-    <string name="buy_city_owner">竞购城主</string>
-    <string name="city_owner">城主</string>
+    <string name="buy_city_owner">竞购节点</string>
+    <string name="city_owner">节点</string>
     <string name="buy_record">竞购记录</string>
-    <string name="my_city">我的城市</string>
-    <string name="format_current_own_city">当前拥有%d个城市</string>
-    <string name="city_total_benfit">城市总收益</string>
+    <string name="my_city">我的节点</string>
+    <string name="format_current_own_city">当前拥有%d个节点</string>
+    <string name="city_total_benfit">节点总收益</string>
     <string name="redbag_benfit">红包收益</string>
     <string name="buy_price_benfit">竞购溢价</string>
     <string name="redbag_benfit_detail">红包收益>></string>
     <string name="bid_price_arrow">竞购溢价>></string>
     <string name="buy_hall">竞购大厅</string>
-    <string name="format_buy_city">竞购得%s城主</string>
+    <string name="format_buy_city">竞购得%s节点</string>
     <string name="cur_area">所在区域</string>
     <string name="next_buy_time">下次竞购时间</string>
     <string name="format_special_price">特惠：%d元</string>
-    <string name="immediately_buy_city">立即竞购城主</string>
-    <string name="city_owner_benefit_explain">城主收益说明</string>
+    <string name="immediately_buy_city">立即竞购节点</string>
+    <string name="city_owner_benefit_explain">节点收益说明</string>
     <string name="select_purchase_way">购买支付方式</string>
     <string name="alipay">支付宝</string>
     <string name="wxpay">微信支付</string>
@@ -224,7 +225,7 @@
     <string name="pay_amount">支付金额</string>
     <string name="format_equal_ksb">等值%sSEAL</string>
     <string name="has_read_and_agree">我已阅读并同意</string>
-    <string name="city_buy_agreement">《城主竞购协议》</string>
+    <string name="city_buy_agreement">《节点竞购协议》</string>
     <string name="agent_agreement">《代理商协议》</string>
     <string name="bug_agent">购买代理商</string>
     <string name="redbag_benefit">红包收益</string>
@@ -288,20 +289,20 @@
     <string name="city_bid_hall_title">竞购大厅</string>
     <string name="rule">规则</string>
     <string name="city_bid_hall_query_hint">请输入区域名称</string>
-    <string name="city_bid_hall_hot_city">最热城市</string>
+    <string name="city_bid_hall_hot_city">最热节点</string>
     <string name="city_bid_hall_no_land">无主之地</string>
     <string name="city_bid_hall_price">价格</string>
     <string name="city_bid_hall_bid_price">竞购价</string>
-    <string name="city_bid_hall_screen_city">筛选城市</string>
+    <string name="city_bid_hall_screen_city">筛选节点</string>
     <string name="city_bid_hall_now_price">现竞购价</string>
     <string name="city_bid_hall_original_price">原竞购价</string>
-    <string name="city_bid_hall_none_share_hint">享区域内发红包和抢红包分润抢城主溢价，还有其他新增项目收益。</string>
+    <string name="city_bid_hall_none_share_hint">享区域内发红包和抢红包分润抢节点溢价，还有其他新增项目收益。</string>
     <string name="insert_yuan">%s元</string>
     <string name="format_premium">%s元溢价</string>
     <string name="format_appointment_time">上任时间：%s</string>
 
-    <string name="my_city_title">我的城市</string>
-    <string name="my_city_income_rule">城主收益说明</string>
+    <string name="my_city_title">我的节点</string>
+    <string name="my_city_income_rule">节点收益说明</string>
     <string name="my_city_bid">拍卖</string>
     <string name="my_city_bid_price">竞购价</string>
     <string name="my_city_income_share_price">收益</string>
@@ -397,8 +398,8 @@
     <string name="forget_safe_pass">忘记交易密码</string>
 
 
-    <string name="my_ksb_details_title">SEAL明细</string>
-    <string name="my_ksb_details_num_all">SEAL总和：</string>
+    <string name="my_ksb_details_title">KSB明细</string>
+    <string name="my_ksb_details_num_all">KSB总和：</string>
     <string name="my_ksb_details_price_add">+%s</string>
     <string name="my_ksb_details_price_subtract">-%s</string>
     <string name="my_ksb_ksb_transfer_title">SEAL转换</string>
@@ -500,7 +501,7 @@
     <string name="guide_start">点击进入</string>
     <string name="format_pay_amount">支付金额%s元(%sSEAL)</string>
     <string name="can_get_order">无法获取订单信息</string>
-    <string name="get_city_error">获取城市区域失败</string>
+    <string name="get_city_error">获取节点区域失败</string>
     <string name="pay_fail">支付失败</string>
 
     <string name="transfer_no_ksb_num">请输入提现金额</string>
@@ -894,6 +895,8 @@
     <string name="tip_create_seal">实名开通SEAl钱包</string>
 
     <string name="mobile_has_bind">该手机号已绑定</string>
+    <string name="my_seal_details_title">SEAL明细</string>
+    <string name="my_seal_details_num_all">SEAL总和：</string>
     <string name="transfer_sell">转SEAL</string>
     <string name="qc_price">价格(元)</string>
     <string name="transfer_ksb_detail">原KSB明细</string>

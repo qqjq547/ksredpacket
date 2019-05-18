@@ -121,7 +121,7 @@ public class MySealActivity extends MvpActivity<MySealPresenter> implements MySe
                 onBackPressed();
                 break;
             case R.id.tv_text:
-                startActivity(new Intent(this, SealDetailedActivity.class));
+                startActivity(new Intent(this, MySealDetailsActivity.class));
                 break;
             case R.id.tv_tibi:
                 startActivityForResult(new Intent(this, SealTransferActivity.class), Constant.REFRESH);
@@ -162,7 +162,6 @@ public class MySealActivity extends MvpActivity<MySealPresenter> implements MySe
             selectShowView();
         }
 
-
     }
 
 
@@ -172,9 +171,9 @@ public class MySealActivity extends MvpActivity<MySealPresenter> implements MySe
     private void setContent() {
         tvAaaNumber.setText(mySeal.getCoin());
         tvMoney.setText(mySeal.getMoney());
-        tvAaaPrice.setText(mySeal.getExchangeRate());
+        tvAaaPrice.setText(mySeal.getKsbPrice());
         GlideImgManager.loadImage(this, mySeal.getQrcodeUrlKey(), ivCode);
-        tvAaaAddress.setText(mySeal.getWalletAddress());
+        tvAaaAddress.setText(mySeal.getKsbAddress());
         if (aaaRate!=null){
             tvMoney.setText(CommonUtil.formatDouble(aaaRate.getRate() * Double.valueOf(mySeal.getCoin()), 2));
         }
