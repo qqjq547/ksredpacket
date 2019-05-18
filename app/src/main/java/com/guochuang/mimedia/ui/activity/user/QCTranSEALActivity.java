@@ -24,7 +24,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 
-public class QCTranSEALctivity extends MvpActivity<KsbTranAaaPresenter> implements KsbTranAaaView {
+public class QCTranSEALActivity extends MvpActivity<KsbTranAaaPresenter> implements KsbTranAaaView {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;

@@ -96,7 +96,7 @@ public class MyQCActivity extends MvpActivity<MyQCPresenter> implements MyQCView
                     startActivityForResult(new Intent(this, TradePwdActivity.class), Constant.REFRESH);
                 }else {
 
-                    startActivityForResult(new Intent(this, QCTranSEALctivity.class),Constant.REQUEST_GRANT);
+                    startActivityForResult(new Intent(this, QCTranSEALActivity.class),Constant.REQUEST_GRANT);
                 }
                 break;
 
