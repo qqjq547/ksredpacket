@@ -190,6 +190,7 @@ public class Constant {
     public static final String TYPE_INFOMATION = "information";
     public static final String TYPE_KSB_TYPE = "KSB_type";
     public static final String TYPE_SEAL_TYPE = "seal_type";
+    public static final String TYPE_QC_TYPE = "qc_type";
     public static final String TYPE_REGION_STATISTICS = "RegionStatisticsType";
 
     public static final String NATION_CODE = "86";
@@ -222,7 +223,6 @@ public class Constant {
     public static final String SURVEYID = "surveyId";
     public static final String JPUSH_CHANNEL = "JPUSH_CHANNEL";
     public static final String CHANNEL_DEFAULT = "default";
-    public static final String COINTYPE ="coinType" ;
 
 
     public static final int STATE_HAS_GET = 1;
@@ -351,4 +351,7 @@ public class Constant {
     public static final int KSB2AAA = 2;
     public static final int EXTRACT_AAA = 3;
     public static final int Fill_AAA = 4;
+
+
+    public static final String QC_DETAIL = "3";
 }

@@ -873,7 +873,7 @@
     <string name="pls_input_aaa_amount">请输入AAA数量</string>
     <string name="pls_input_ksb_amount">请输入KSB数量</string>
     <string name="ksb2aaa_tip_str">输入数字过大或者数字格式错误</string>
-    <string name="ksb_str">KSB</string>
+    <string name="ksb_str">SEAL</string>
     <string name="receive_count">接收数量</string>
     <string name="transfer_ensure">提币确认</string>
     <string name="valide_trade_code">验证交易密码</string>
@@ -922,4 +922,10 @@
     <string name="format_receive_address">接收地址：%s</string>
     <string name="qc2seal">QC转SEAL</string>
     <string name="seal2qc">SEAL转QC</string>
+    <string name="qc_trans_aaa">QC转AAA</string>
+    <string name="qc_to_aaa_success">QC转AAA成功</string>
+    <string name="pls_input_qc_amount">请输入QC数量</string>
+    <string name="coin_qc_not_enouth">QC余额不足</string>
+    <string name="format_min_qc_to_aaa">QC数量至少为%d</string>
+
 </resources>

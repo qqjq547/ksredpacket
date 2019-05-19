@@ -24,7 +24,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 
-public class QCTranSEALctivity extends MvpActivity<KsbTranAaaPresenter> implements KsbTranAaaView {
+public class QCTranSEALActivity extends MvpActivity<KsbTranAaaPresenter> implements KsbTranAaaView {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
@@ -150,7 +150,7 @@ public class QCTranSEALctivity extends MvpActivity<KsbTranAaaPresenter> implemen
             case R.id.tv_confirm:
                String amountStr=etTransKsb.getText().toString().trim();
                 if (TextUtils.isEmpty(amountStr)){
-                    showShortToast(R.string.pls_input_ksb_amount);
+                    showShortToast(R.string.pls_input_qc_amount);
                     return;
                 }
                 //超过Integer 最大值
@@ -162,11 +162,11 @@ public class QCTranSEALctivity extends MvpActivity<KsbTranAaaPresenter> implemen
                 }
 
                 if (intCal!=null&&amount>(int)Double.parseDouble(intCal.getKsbCoin())){
-                   showShortToast(R.string.coin_not_enouth);
+                   showShortToast(R.string.coin_qc_not_enouth);
                     return;
                 }
                 if (exchangeConfig!=null&&amount<exchangeConfig.getKsb2aaa().getMinLimit()){
-                    showShortToast(String.format(getString(R.string.format_min_ksb_to_aaa),exchangeConfig.getKsb2aaa().getMinLimit()));
+                    showShortToast(String.format(getString(R.string.format_min_qc_to_aaa),exchangeConfig.getKsb2aaa().getMinLimit()));
                     return;
                 }
                 if (passDialog == null) {
