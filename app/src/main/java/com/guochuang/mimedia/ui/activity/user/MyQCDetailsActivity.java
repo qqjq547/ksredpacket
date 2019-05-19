@@ -14,6 +14,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.DictionaryType;
 import com.guochuang.mimedia.mvp.model.KsbRecord;
+import com.guochuang.mimedia.mvp.model.SealRecord;
 import com.guochuang.mimedia.mvp.presenter.MyKsbDetailsPresenter;
 import com.guochuang.mimedia.mvp.presenter.MyQCDetailsPresenter;
 import com.guochuang.mimedia.mvp.view.MyKsbDetailsView;
@@ -56,7 +57,7 @@ public class MyQCDetailsActivity extends MvpActivity<MyQCDetailsPresenter> imple
 
     KsbDetailsTypePop ksbDetailsTypePop;
     MyQCDetailsAdapter mMyQCDetailsAdapter;
-    List<KsbRecord> itemArr = new ArrayList<>();
+    List<SealRecord> itemArr = new ArrayList<>();
     List<DictionaryType> subjectArr = new ArrayList<>();
     List<String> subjectName = new ArrayList<>();
     String type = "00";
@@ -123,7 +124,6 @@ public class MyQCDetailsActivity extends MvpActivity<MyQCDetailsPresenter> imple
             }
         });
         mvpPresenter.getSubject(Constant.TYPE_QC_TYPE);
-//        mvpPresenter.getQCDetail(type, startIndex, Constant.PAGE_SIZE);
     }
 
     @OnClick({R.id.iv_back, R.id.tv_text})
@@ -187,7 +187,7 @@ public class MyQCDetailsActivity extends MvpActivity<MyQCDetailsPresenter> imple
     }
 
     @Override
-    public void setQCDetail(List<KsbRecord> data) {
+    public void setQCDetail(List<SealRecord> data) {
         srlRefresh.finishRefresh();
         srlRefresh.finishLoadmore();
         if (startIndex.equals(defaultIndex)) {
