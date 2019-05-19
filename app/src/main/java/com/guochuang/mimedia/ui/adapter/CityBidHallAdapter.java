@@ -29,16 +29,16 @@ public class CityBidHallAdapter extends BaseMultiItemQuickAdapter<CityBidHall, B
                 helper.setText(R.id.tv_buy_time, item.getCreateDate());
                 GlideImgManager.loadCircleImage(mContext, item.getCurrentAvatar(), (ImageView) helper.getView(R.id.iv_left_header));
                 helper.setText(R.id.tv_left_user_name, item.getCurrentNickName());
-                helper.setText(R.id.tv_left_price, String.format(mContext.getResources().getString(R.string.insert_yuan), item.getCurrentMoney()));
+                helper.setText(R.id.tv_left_price, String.format(mContext.getResources().getString(R.string.format_qc), item.getCurrentMoney()));
                 GlideImgManager.loadCircleImage(mContext, item.getFormerAvatar(), (ImageView) helper.getView(R.id.iv_right_header));
                 helper.setText(R.id.tv_right_user_name, item.getFormerNickName());
-                helper.setText(R.id.tv_right_price, String.format(mContext.getResources().getString(R.string.insert_yuan), item.getFormerMoney()));
+                helper.setText(R.id.tv_right_price, String.format(mContext.getResources().getString(R.string.format_qc), item.getFormerMoney()));
                 helper.setText(R.id.tv_premium, String.format(mContext.getResources().getString(R.string.format_premium), item.getPremium()));
                 helper.setText(R.id.tv_time_go, item.getAppointmentDate());
                 break;
             case CityBidHall.NONE:
                 helper.setText(R.id.tv_city_name, item.getWhereRegion());
-                helper.setText(R.id.tv_bid_price, String.format(mContext.getResources().getString(R.string.insert_yuan), item.getCurrentMoney()));
+                helper.setText(R.id.tv_bid_price, String.format(mContext.getResources().getString(R.string.format_qc), item.getCurrentMoney()));
                 break;
         }
     }

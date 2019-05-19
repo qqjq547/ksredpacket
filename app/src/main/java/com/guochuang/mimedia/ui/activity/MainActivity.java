@@ -115,9 +115,9 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
             CommonUtil.syncCookie(this,ApiClient.HTML_URL);
         }
         fragments[0] = new InfoFragment();
-        fragments[1] = new GameFragment();
+        fragments[1] = new CircleFragment();
         fragments[2] = new RedbagFragment();
-        fragments[3] = new CircleFragment();
+        fragments[3] = new GameFragment();
         fragments[4] = new MyFragment();
         rgroupMain.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -127,7 +127,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
                         setStatusBar(false);
                         selectTab(0);
                         break;
-                    case R.id.rbtn_game:
+                    case R.id.rbtn_circle:
                         setStatusBar(false);
                         selectTab(1);
                         break;
@@ -135,7 +135,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
                         setStatusBar(false);
                         selectTab(2);
                         break;
-                    case R.id.rbtn_circle:
+                    case R.id.rbtn_game:
                         setStatusBar(false);
                         selectTab(3);
                         break;
@@ -357,6 +357,9 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
                     break;
                 case Constant.ACTION_CHANGE_AAA:
                     ((MyFragment)fragments[4]).refreshMyAAA();
+                    break;
+                case Constant.ACTION_CHANGE_QC:
+                    ((MyFragment)fragments[4]).refreshMyQc();
                     break;
             }
         }

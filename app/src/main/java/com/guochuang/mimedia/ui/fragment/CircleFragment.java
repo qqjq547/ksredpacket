@@ -113,5 +113,9 @@ public class CircleFragment extends MvpFragment {
                 }
             });
         }
+        @JavascriptInterface
+        public void goTreasureExplain(){
+            IntentUtils.startWebActivity(getActivity(),"",Constant.URL_ACTIVE_RULE);
+        }
     }
 }

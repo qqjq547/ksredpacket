@@ -14,15 +14,14 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.DictionaryType;
 import com.guochuang.mimedia.mvp.model.KsbRecord;
-import com.guochuang.mimedia.mvp.presenter.MyKsbDetailsPresenter;
+import com.guochuang.mimedia.mvp.model.SealRecord;
 import com.guochuang.mimedia.mvp.presenter.MySealDetailsPresenter;
-import com.guochuang.mimedia.mvp.view.MyKsbDetailsView;
 import com.guochuang.mimedia.mvp.view.MySealDetailsView;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.DialogBuilder;
 import com.guochuang.mimedia.tools.KsbDetailsTypePop;
-import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.ui.adapter.MyKsbDetailsAdapter;
+import com.guochuang.mimedia.ui.adapter.MySealDetailsAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
@@ -50,15 +49,15 @@ public class MySealDetailsActivity extends MvpActivity<MySealDetailsPresenter> i
     SmartRefreshLayout srlRefresh;
 
     KsbDetailsTypePop ksbDetailsTypePop;
-    MyKsbDetailsAdapter myKsbDetailsAdapter;
-    List<KsbRecord> itemArr=new ArrayList<>();
+    MySealDetailsAdapter mySealDetailsAdapter;
+    List<SealRecord> itemArr=new ArrayList<>();
     List<DictionaryType> subjectArr=new ArrayList<>();
     List<String> subjectName=new ArrayList<>();
     String type="00";
     String defaultIndex="0";
     String startIndex=defaultIndex;
     String defaultCode ="";
-
+    private final String coinType="2";
     @Override
     protected MySealDetailsPresenter createPresenter() {
         return new MySealDetailsPresenter(this);
@@ -74,20 +73,20 @@ public class MySealDetailsActivity extends MvpActivity<MySealDetailsPresenter> i
         tvTitle.setText(getResources().getString(R.string.my_seal_details_title));
         tvText.setText(getResources().getString(R.string.all));
         defaultCode =getIntent().getStringExtra(Constant.DEFAULT_CODE);
-        if (myKsbDetailsAdapter != null) {
+        if (mySealDetailsAdapter != null) {
             return;
         }
-        myKsbDetailsAdapter = new MyKsbDetailsAdapter(itemArr);
-        myKsbDetailsAdapter.setEmptyView(getLayoutInflater().inflate(R.layout.layout_empty,null));
-        myKsbDetailsAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
-        myKsbDetailsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        mySealDetailsAdapter = new MySealDetailsAdapter(itemArr);
+        mySealDetailsAdapter.setEmptyView(getLayoutInflater().inflate(R.layout.layout_empty,null));
+        mySealDetailsAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        mySealDetailsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                if (TextUtils.isEmpty(myKsbDetailsAdapter.getData().get(position).getRemark())){
+                if (TextUtils.isEmpty(mySealDetailsAdapter.getData().get(position).getRemark())){
                     return;
                 }
                 new DialogBuilder(MySealDetailsActivity.this)
-                        .setMessage(myKsbDetailsAdapter.getData().get(position).getRemark())
+                        .setMessage(mySealDetailsAdapter.getData().get(position).getRemark())
                         .setPositiveButton(R.string.confirm, new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -96,27 +95,27 @@ public class MySealDetailsActivity extends MvpActivity<MySealDetailsPresenter> i
                         }).create().show();
             }
         });
-        myKsbDetailsAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        mySealDetailsAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         View emptyView=getLayoutInflater().inflate(R.layout.layout_empty,null);
-        myKsbDetailsAdapter.setEmptyView(emptyView);
+        mySealDetailsAdapter.setEmptyView(emptyView);
         rvKsb.setLayoutManager(new LinearLayoutManager(this, OrientationHelper.VERTICAL, false));
         rvKsb.setItemAnimator(new DefaultItemAnimator());
-        rvKsb.setAdapter(myKsbDetailsAdapter);
+        rvKsb.setAdapter(mySealDetailsAdapter);
         srlRefresh.setEnableRefresh(true);
         srlRefresh.setEnableLoadmore(true);
         srlRefresh.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                mvpPresenter.getKsbRecord(type,startIndex,Constant.PAGE_SIZE);
+                mvpPresenter.getCoinRecord(type,coinType,startIndex,Constant.PAGE_SIZE);
             }
 
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
                 startIndex=defaultIndex;
-                mvpPresenter.getKsbRecord(type,startIndex,Constant.PAGE_SIZE);
+                mvpPresenter.getCoinRecord(type,coinType,startIndex,Constant.PAGE_SIZE);
             }
         });
-        mvpPresenter.getSubject(Constant.TYPE_KSB_TYPE);
+        mvpPresenter.getSubject(Constant.TYPE_SEAL_TYPE);
     }
 
     @OnClick({R.id.iv_back, R.id.tv_text})
@@ -135,9 +134,9 @@ public class MySealDetailsActivity extends MvpActivity<MySealDetailsPresenter> i
                                 tvText.setText(subjectName.get(position));
                                 type=selectType;
                                 itemArr.clear();
-                                myKsbDetailsAdapter.notifyDataSetChanged();
+                                mySealDetailsAdapter.notifyDataSetChanged();
                                 startIndex=defaultIndex;
-                                mvpPresenter.getKsbRecord(type,startIndex,Constant.PAGE_SIZE);
+                                mvpPresenter.getCoinRecord(type,coinType,startIndex,Constant.PAGE_SIZE);
                             }
                         }
                     });
@@ -152,7 +151,7 @@ public class MySealDetailsActivity extends MvpActivity<MySealDetailsPresenter> i
     }
 
     @Override
-    public void setData(List<KsbRecord> data) {
+    public void setData(List<SealRecord> data) {
         srlRefresh.finishRefresh();
         srlRefresh.finishLoadmore();
         if (startIndex.equals(defaultIndex)){
@@ -167,7 +166,7 @@ public class MySealDetailsActivity extends MvpActivity<MySealDetailsPresenter> i
             itemArr.addAll(data);
             srlRefresh.setEnableLoadmore(true);
         }
-        myKsbDetailsAdapter.notifyDataSetChanged();
+        mySealDetailsAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -179,12 +178,12 @@ public class MySealDetailsActivity extends MvpActivity<MySealDetailsPresenter> i
                 if (TextUtils.equals(defaultCode,subjectArr.get(i).getCode())){
                     type = data.get(i).getCode();
                     tvText.setText(subjectArr.get(i).getName());
-                    mvpPresenter.getKsbRecord(type, startIndex, Constant.PAGE_SIZE);
+                    mvpPresenter.getCoinRecord(type, coinType,startIndex, Constant.PAGE_SIZE);
                 }
             }
             if (TextUtils.isEmpty(defaultCode)) {
                 type = data.get(0).getCode();
-                mvpPresenter.getKsbRecord(type, startIndex, Constant.PAGE_SIZE);
+                mvpPresenter.getCoinRecord(type, coinType,startIndex, Constant.PAGE_SIZE);
             }
         }
     }

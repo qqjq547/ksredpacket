@@ -32,20 +32,20 @@
                 android:drawableTop="@drawable/tab_info_selector"
                 android:text="@string/tab_info"/>
             <RadioButton
-                android:id="@+id/rbtn_game"
+                android:id="@+id/rbtn_circle"
                 style="@style/rdbtn_nav"
-                android:drawableTop="@drawable/tab_game_selector"
-                android:text="@string/tab_game"/>
+                android:drawableTop="@drawable/tab_circle_selector"
+                android:text="@string/tab_snatch"/>
             <RadioButton
                 android:id="@+id/rbtn_redbag"
                 style="@style/rdbtn_nav"
                 android:drawableTop="@drawable/tab_redbag_selector"
                 android:text="@string/tab_redbag"/>
             <RadioButton
-                android:id="@+id/rbtn_circle"
+                android:id="@+id/rbtn_game"
                 style="@style/rdbtn_nav"
-                android:drawableTop="@drawable/tab_circle_selector"
-                android:text="@string/tab_snatch"/>
+                android:drawableTop="@drawable/tab_game_selector"
+                android:text="@string/tab_game"/>
             <RadioButton
                 android:id="@+id/rbtn_user"
                 style="@style/rdbtn_nav"

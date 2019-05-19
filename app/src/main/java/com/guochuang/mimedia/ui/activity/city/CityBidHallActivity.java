@@ -205,7 +205,7 @@ public class CityBidHallActivity extends MvpActivity<CityBidHallPresenter> imple
                 onBackPressed();
                 break;
             case R.id.tv_text:
-                IntentUtils.startImageActivity(this, Constant.URL_REGION_RULE);
+                IntentUtils.startWebActivity(this,getString(R.string.rule), Constant.URL_REGION_RULE);
                 break;
             case R.id.tv_city_bid_hall_query_cancel:
                 if (provinceCityPop != null && provinceCityPop.isShowing()) {

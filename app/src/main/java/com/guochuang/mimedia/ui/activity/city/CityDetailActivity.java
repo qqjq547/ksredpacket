@@ -163,7 +163,7 @@ public class CityDetailActivity extends MvpActivity<CityDetailPresenter> impleme
                 flContent.setVisibility(View.GONE);
                 linCityNone.setVisibility(View.VISIBLE);
                 tvCityName.setText(data.getWhereRegion());
-                tvBidPrice.setText(String.format(getString(R.string.format_yuan),data.getBiddingPrice()));
+                tvBidPrice.setText(String.format(getString(R.string.format_qc),data.getBiddingPrice()));
                 return;
             }
             tvTitle.setText(R.string.city);
@@ -179,7 +179,7 @@ public class CityDetailActivity extends MvpActivity<CityDetailPresenter> impleme
             tvArea.setText(data.getWhereRegion());
             tvNextBuyTime.setText(data.getBiddingTime());
             tvNickname.setText(data.getNickName());
-            tvMoney.setText(String.format(getString(R.string.format_yuan),data.getBiddingPrice()));
+            tvMoney.setText(String.format(getString(R.string.format_qc),data.getBiddingPrice()));
             tvSummary.setText(data.getContent());
             if (data.isBidding()){
                 linNextBuyTime.setVisibility(View.INVISIBLE);

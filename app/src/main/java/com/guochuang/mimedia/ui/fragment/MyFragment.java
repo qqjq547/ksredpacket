@@ -205,7 +205,6 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         });
         setPageSelected(0);
         itemArr.add(new MyMenuItem(R.drawable.ic_my_qc, R.string.my_qc));
-        itemArr.add(new MyMenuItem(R.drawable.ic_my_seal, R.string.receive_my_seal));
 //        itemArr.add(new MyMenuItem(R.drawable.ic_my_paycode, R.string.receive_pay_code));
         if (getPref().getBoolean(PrefUtil.AAA_SWITCH,false)){
             itemArr.add(new MyMenuItem(R.drawable.ic_my_aaa, R.string.receive_my_aaa));
@@ -294,6 +293,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         mvpPresenter.getRecommendData();
         mvpPresenter.getRegionCore();
         mvpPresenter.getMySeal();
+        mvpPresenter.getMyQC();
 
     }
 
@@ -561,10 +561,9 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
     public void refreshMyAAA(){
         mvpPresenter.getMyAAA(Constant.DIGITAL_CURRENCY_AAA);
     }
-    public void refreshSeal(){
-        mvpPresenter.getMyAAA(Constant.DIGITAL_CURRENCY_AAA);
+    public void refreshMyQc(){
+        mvpPresenter.getMyQC();
     }
-
     public void openNestAd() {
         isShowNestAd = true;
         if (isAdded()) {

@@ -221,7 +221,7 @@ public class CityActivity extends MvpActivity<CityPresenter> implements CityView
                 tvText.setText(R.string.buy_hall);
             }
             tvCityName.setText(data.getWhereRegion());
-            tvBidPrice.setText(String.format(getString(R.string.format_yuan), data.getBiddingPrice()));
+            tvBidPrice.setText(String.format(getString(R.string.format_qc), data.getBiddingPrice()));
             tvAddress.setText(data.getWhereRegion());
             if (data.isBidding()) {
                 tvNextBuyTime.setVisibility(View.GONE);
@@ -237,7 +237,7 @@ public class CityActivity extends MvpActivity<CityPresenter> implements CityView
             }
             GlideImgManager.loadCircleImage(this, data.getAvatar(), ivAvatar);
             tvNickname.setText(data.getNickName());
-            tvMoney.setText(String.format(getString(R.string.format_yuan), data.getBiddingPrice()));
+            tvMoney.setText(String.format(getString(R.string.format_qc), data.getBiddingPrice()));
             tvSummary.setText(data.getContent());
             List<String> pictureArr = data.getPicture();
             if (pictureArr != null && pictureArr.size() > 0) {

@@ -146,7 +146,7 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
                     return;
                 }
                 if (exchangeConfig != null && amount < exchangeConfig.getWithdrawAAA().getMinLimit()) {
-                    showShortToast(String.format(getString(R.string.format_min_seal_to_ksb),exchangeConfig.getWithdrawAAA().getMinLimit()));
+                    showShortToast(String.format(getString(R.string.format_min_seal),exchangeConfig.getWithdrawAAA().getMinLimit()));
                     return;
                 }
                 if (TextUtils.isEmpty(captcha)) {
@@ -228,7 +228,7 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
         if (passDialog != null && passDialog.isShowing()) {
             passDialog.dismiss();
         }
-        sendBroadcast(new Intent(Constant.ACTION_CHANGE_AAA));
+        sendBroadcast(new Intent(Constant.ACTION_CHANGE_COIN));
         showShortToast(R.string.withdraw_coin_success);
         setResult(RESULT_OK);
         finish();

@@ -27,6 +27,7 @@ public class RedbagReceived {
     private String senderNickName;
     private String senderUuid;
     private String startIndex;
+    private String coinType;
 
     public String getCreateDate() {
         return createDate;
@@ -114,5 +115,13 @@ public class RedbagReceived {
 
     public void setStartIndex(String startIndex) {
         this.startIndex = startIndex;
+    }
+
+    public String getCoinType() {
+        return coinType;
+    }
+
+    public void setCoinType(String coinType) {
+        this.coinType = coinType;
     }
 }

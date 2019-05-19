@@ -215,7 +215,7 @@ public class IntentUtils {
         intent.putExtra(Constant.NESTLONGITUDE,nestLongitude);
         activity.startActivityForResult(intent,Constant.REQUEST_PURCHASE);
     }
-    public static void startRedbagJoinedActivity(Activity activity, String redPacketUuid,String avatar,String name,String ksb,String money,String areaType,String drawNumber,String total) {
+    public static void startRedbagJoinedActivity(Activity activity, String redPacketUuid,String avatar,String name,String ksb,String money,String areaType,String drawNumber,String total,String coinType) {
         Intent intent = new Intent(activity, RedbagJoinedActivity.class);
         intent.putExtra(Constant.RED_PACKET_UUID,redPacketUuid);
         intent.putExtra(Constant.AVATAR,avatar);
@@ -225,6 +225,7 @@ public class IntentUtils {
         intent.putExtra(Constant.AREATYPE,areaType);
         intent.putExtra(Constant.DRAWNUMBER,drawNumber);
         intent.putExtra(Constant.TOTAL,total);
+        intent.putExtra(Constant.COINTYPE,coinType);
         activity.startActivity(intent);
     }
     public static void startIncomeDetailActivity(Activity activity,long statisticsId, String income_type,String time_type, String startDate, String endDate, String parentType, String sonType) {

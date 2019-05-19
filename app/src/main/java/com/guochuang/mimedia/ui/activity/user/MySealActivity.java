@@ -114,7 +114,7 @@ public class MySealActivity extends MvpActivity<MySealPresenter> implements MySe
     }
 
 
-    @OnClick({R.id.iv_back, R.id.tv_text, R.id.tv_tibi, R.id.tv_copy, R.id.tv_goto_real_name, R.id.lin_price})
+    @OnClick({R.id.iv_back, R.id.tv_text, R.id.tv_tibi, R.id.tv_transform_qc,R.id.tv_copy, R.id.tv_goto_real_name, R.id.lin_price})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -125,6 +125,9 @@ public class MySealActivity extends MvpActivity<MySealPresenter> implements MySe
                 break;
             case R.id.tv_tibi:
                 startActivityForResult(new Intent(this, SealTransferActivity.class), Constant.REFRESH);
+                break;
+            case R.id.tv_transform_qc:
+                startActivityForResult(new Intent(this, SealTranQcActivity.class), Constant.REFRESH);
                 break;
             case R.id.tv_copy:
                 CommonUtil.copyMsg(this, tvAaaAddress.getText().toString());

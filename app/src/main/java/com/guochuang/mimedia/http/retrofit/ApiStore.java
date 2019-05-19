@@ -1514,7 +1514,7 @@ public interface ApiStore {
     Observable<HttpResponse<MyQC>> getMyQC();
 
     @GET("/api/v1/hbase/coin/getKsbDetailsList")
-    Observable<HttpResponse<List<KsbRecord>>> getCoinRecord(
+    Observable<HttpResponse<List<SealRecord>>> getCoinRecord(
             @Query("type") String type,
             @Query("coinType") String coinType,
             @Query("startIndex") String startIndex,

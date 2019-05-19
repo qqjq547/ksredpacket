@@ -136,7 +136,7 @@ public class Constant {
     //代理规则
     public static final String URL_AGENT_RULE = ApiClient.HTML_URL + "project/html/rule/agentRule.html";
     //城主规则
-    public static final String URL_REGION_RULE = ApiClient.HTML_URL + "html/rule/region/index.htm";
+    public static final String URL_REGION_RULE = ApiClient.HTML_URL + "project/html/rule/cityLordRule.html";
     //竞购协议
     public static final String URL_AGREEMENT = ApiClient.HTML_URL + "html/rule/region/agreement.htm";
     //客服二维码
@@ -173,6 +173,8 @@ public class Constant {
     public static final String URL_DUOBAO_TREASURE_NUMBER = ApiClient.HTML_URL+"project/html/fengwo/index.html#/treasureNumber?type=false&snatchRecordId=";
     //淘区块
     public static final String URL_DUOBAO_INDEX = ApiClient.HTML_URL+"project/html/fengwo/index.html#/treasureIndex";
+    //淘区块活动说明
+    public static final String URL_ACTIVE_RULE = ApiClient.HTML_URL+"project/html/rule/activeRule.html";
 
     public static final String REGEX_WEBURL = "http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?";
     public static final String COMPRESS_DIR_PATH = App.getInstance().getExternalCacheDir() + File.separator + "kshb";
@@ -187,6 +189,7 @@ public class Constant {
     public static final String SYSTEM_CODE_ANDROID = "Android";
     public static final String TYPE_INFOMATION = "information";
     public static final String TYPE_KSB_TYPE = "KSB_type";
+    public static final String TYPE_SEAL_TYPE = "seal_type";
     public static final String TYPE_REGION_STATISTICS = "RegionStatisticsType";
 
     public static final String NATION_CODE = "86";
@@ -219,6 +222,7 @@ public class Constant {
     public static final String SURVEYID = "surveyId";
     public static final String JPUSH_CHANNEL = "JPUSH_CHANNEL";
     public static final String CHANNEL_DEFAULT = "default";
+    public static final String COINTYPE ="coinType" ;
 
 
     public static final int STATE_HAS_GET = 1;
@@ -320,6 +324,9 @@ public class Constant {
     public static final int REQUEST_STARTPRE_FENGWOLINKWEB = 0x000147;
     public static final String COUNTDOWN_GONE = "ISGONG";
     public static final String ACTION_CHANGE_AAA = "ACTION_CHANGE_AAA";
+    public static final String ACTION_CHANGE_QC = "ACTION_CHANGE_QC";
+    public static final String COINTYPE_KSB ="1" ;
+    public static final String COINTYPE_SEAL ="2" ;
 
     //   视频红包与问卷红包 问题类型 0：单选 1：多选 2：填空题
     public static int SINGLESELECT = 0;
@@ -333,6 +340,7 @@ public class Constant {
 
     public static int INT_CAL_KSB_TO_AAA = 1;
     public static int INT_CAL_AAA_TO_KSB = 2;
+    public static int INT_CAL_SEAL_TO_QC = 2;
 
 
 

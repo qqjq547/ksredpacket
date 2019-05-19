@@ -77,11 +77,20 @@ public class MyCaptureActivity extends MvpActivity<MyCapturePresenter> implement
 //                    return;
 //                }
                 String type=uri.getQueryParameter("type");
+                String chain=uri.getQueryParameter("chain");
+                String digiCurrcy=uri.getQueryParameter("digiCurrcy");
                 String address=uri.getQueryParameter("address");
-                if (TextUtils.equals(type,"2")&&!TextUtils.isEmpty(address)){
-                    MyCaptureActivity.getActivity().finish();
-                    startActivity(new Intent(MyCaptureActivity.this,AaaTransferActivity.class).putExtra(Constant.ADDRESS,address));
-                    return;
+                //type=2表示钱包地址，chain=1表示外链
+                if (TextUtils.equals(type,"2")&&TextUtils.equals(chain,"1")&&!TextUtils.isEmpty(address)){
+                    if (TextUtils.equals(digiCurrcy,Constant.DIGITAL_CURRENCY_AAA)){
+                        MyCaptureActivity.getActivity().finish();
+                        startActivity(new Intent(MyCaptureActivity.this,AaaTransferActivity.class).putExtra(Constant.ADDRESS,address));
+                        return;
+                    }else if(TextUtils.equals(digiCurrcy,Constant.DIGITAL_CURRENCY_SEAL)){
+                        MyCaptureActivity.getActivity().finish();
+                        startActivity(new Intent(MyCaptureActivity.this,AaaTransferActivity.class).putExtra(Constant.ADDRESS,address));
+                        return;
+                    }
                 }
                 startActivity(new Intent(MyCaptureActivity.this,ScanResultActivity.class).putExtra(Constant.DATA,result));
                 finish();

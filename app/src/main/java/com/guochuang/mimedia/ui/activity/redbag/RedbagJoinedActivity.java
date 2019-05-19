@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,6 +13,7 @@ import com.guochuang.mimedia.mvp.model.RedbagUser;
 import com.guochuang.mimedia.mvp.presenter.RedbagJoinedPresenter;
 import com.guochuang.mimedia.mvp.view.RedbagJoinedView;
 import com.guochuang.mimedia.tools.Constant;
+import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -40,6 +42,8 @@ public class RedbagJoinedActivity extends MvpActivity<RedbagJoinedPresenter> imp
     TextView tvName;
     @BindView(R.id.tv_area)
     TextView tvArea;
+    @BindView(R.id.tv_unit)
+    TextView tvUnit;
     @BindView(R.id.tv_coin)
     TextView tvCoin;
     @BindView(R.id.tv_money)
@@ -79,6 +83,12 @@ public class RedbagJoinedActivity extends MvpActivity<RedbagJoinedPresenter> imp
          String drawNumber=getIntent().getStringExtra(Constant.DRAWNUMBER);
          String total=getIntent().getStringExtra(Constant.TOTAL);
          GlideImgManager.loadCircleImage(this,avatar,ivAvatar);
+         String coinType=getIntent().getStringExtra(Constant.COINTYPE);
+         if(TextUtils.equals(coinType,Constant.COINTYPE_KSB)){
+             tvUnit.setText(R.string.money_unit_ksb);
+         }else {
+             tvUnit.setText(R.string.money_unit_seal);
+         }
         tvName.setText(name);
         tvCoin.setText(ksb);
         tvMoney.setText(String.format(getString(R.string.format_add_yuan), money));

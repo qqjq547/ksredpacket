@@ -21,7 +21,7 @@ public class BuyHallAdapter extends BaseQuickAdapter<CurrentRegion.BiddingHallBe
     protected void convert(BaseViewHolder helper, CurrentRegion.BiddingHallBean item) {
         GlideImgManager.loadCircleImage(mContext,item.getAvatar(),(ImageView) helper.getView(R.id.iv_avatar));
         helper.setText(R.id.tv_name,item.getProsit()+item.getNickName());
-        helper.setText(R.id.tv_money,String.format(mContext.getString(R.string.format_yuan),item.getPrice()));
+        helper.setText(R.id.tv_money,String.format(mContext.getString(R.string.format_qc),item.getPrice()));
         helper.setText(R.id.tv_buy_result,item.getGrats());
     }
 }

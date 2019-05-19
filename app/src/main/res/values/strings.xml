@@ -166,7 +166,8 @@
     <string name="receive_pay_code">收付款</string>
 
 
-    <string name="money_unit_ksb">SEAL</string>
+    <string name="money_unit_ksb">KSB</string>
+    <string name="money_unit_seal">SEAL</string>
     <string name="money_unit_yuan">元</string>
     <string name="recommend">推荐</string>
     <string name="fans">粉丝</string>
@@ -215,7 +216,7 @@
     <string name="format_buy_city">竞购得%s节点</string>
     <string name="cur_area">所在区域</string>
     <string name="next_buy_time">下次竞购时间</string>
-    <string name="format_special_price">特惠：%d元</string>
+    <string name="format_special_price">特惠：%dQC</string>
     <string name="immediately_buy_city">立即竞购节点</string>
     <string name="city_owner_benefit_explain">节点收益说明</string>
     <string name="select_purchase_way">购买支付方式</string>
@@ -230,7 +231,9 @@
     <string name="bug_agent">购买代理商</string>
     <string name="redbag_benefit">红包收益</string>
     <string name="redbag_benefit_ksb">红包收益(SEAL)</string>
-    <string name="format_ksb">%sSEAL</string>
+    <string name="format_ksb">%sKSB</string>
+    <string name="format_seal">%sSEAL</string>
+    <string name="format_qc">%sQC</string>
     <string name="all">全部</string>
     <string name="i_known">我知道了</string>
     <string name="check_all">查看全部</string>
@@ -297,8 +300,8 @@
     <string name="city_bid_hall_now_price">现竞购价</string>
     <string name="city_bid_hall_original_price">原竞购价</string>
     <string name="city_bid_hall_none_share_hint">享区域内发红包和抢红包分润抢节点溢价，还有其他新增项目收益。</string>
-    <string name="insert_yuan">%s元</string>
-    <string name="format_premium">%s元溢价</string>
+    <string name="insert_yuan">%sQC</string>
+    <string name="format_premium">%sQC溢价</string>
     <string name="format_appointment_time">上任时间：%s</string>
 
     <string name="my_city_title">我的节点</string>
@@ -317,7 +320,8 @@
     <string name="has_receive_ksb">已收SEAL</string>
     <string name="has_send_money">已发金额(元)</string>
     <string name="grab_redbag_num">抢红包人数</string>
-    <string name="format_get_ksb">获得%sSEAL</string>
+    <string name="format_get_ksb">获得%sKSB</string>
+    <string name="format_get_seal">获得%sSEAL</string>
     <string name="redbag">红包</string>
     <string name="identification">实名认证</string>
     <string name="identity_custom">人工审核</string>
@@ -832,7 +836,8 @@
     <string name="aaa_price_str">AAA价格（元）</string>
     <string name="aaa_update_price_str">(每1分钟更新一次）</string>
     <string name="ti_bi_str">提币</string>
-    <string name="transform_ksb">转QC</string>
+    <string name="transform_ksb">转KSB</string>
+    <string name="transform_qc">转QC</string>
     <string name="aaa_des_str">充币地址禁止充值除AAA之外的其他资产，任何非AAA资产充值将不可找回。</string>
     <string name="copy_str">复制</string>
     <string name="aaa_address_str">AAA钱包地址</string>
@@ -868,7 +873,7 @@
     <string name="pls_input_aaa_amount">请输入AAA数量</string>
     <string name="pls_input_ksb_amount">请输入KSB数量</string>
     <string name="ksb2aaa_tip_str">输入数字过大或者数字格式错误</string>
-    <string name="ksb_str">SEAL</string>
+    <string name="ksb_str">KSB</string>
     <string name="receive_count">接收数量</string>
     <string name="transfer_ensure">提币确认</string>
     <string name="valide_trade_code">验证交易密码</string>
@@ -887,8 +892,8 @@
     <string name="seal_address_empty">SEAL钱包地址不能为空</string>
     <string name="pls_input_seal_amount">请输入SEAL数量</string>
     <string name="digital_seal_not_enouth">SEAL不足</string>
-    <string name="format_min_seal_to_ksb">SEAL数量至少为%d</string>
-    <string name="seal_trans_ksb_title">SEAL转QC</string>
+    <string name="format_min_seal">SEAL数量至少为%d</string>
+    <string name="seal_trans_qc_title">SEAL转QC</string>
     <string name="seal_trans_ksb">SEAL转化QC数量</string>
     <string name="seal_price">SEAL价格</string>
     <string name="pls_input_seal_to_qc">请输入SEAL转到QC数量</string>
@@ -908,5 +913,13 @@
     <string name="pls_input_qc_to_seal">请输入QC转SEAL数量</string>
     <string name="arrived_seal">到账SEAL</string>
     <string name="qc_to_seal_success">QC转SEAL成功</string>
-
+    <string name="seal_to_qc_success">SEAL转QC成功</string>
+    <string name="format_number">数量：%s</string>
+    <string name="format_arrival_acount_number">到账数量：%s</string>
+    <string name="target_address">对方：%s</string>
+    <string name="servicefee_">矿工费：</string>
+    <string name="equalvalue_">等值：</string>
+    <string name="format_receive_address">接收地址：%s</string>
+    <string name="qc2seal">QC转SEAL</string>
+    <string name="seal2qc">SEAL转QC</string>
 </resources>

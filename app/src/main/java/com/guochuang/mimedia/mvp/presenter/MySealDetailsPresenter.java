@@ -6,6 +6,7 @@ import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.DictionaryType;
 import com.guochuang.mimedia.mvp.model.KsbRecord;
+import com.guochuang.mimedia.mvp.model.SealRecord;
 import com.guochuang.mimedia.mvp.view.MyKsbDetailsView;
 import com.guochuang.mimedia.mvp.view.MySealDetailsView;
 import com.guochuang.mimedia.tools.RxUtil;
@@ -16,10 +17,10 @@ public class MySealDetailsPresenter extends BasePresenter<MySealDetailsView> {
     public MySealDetailsPresenter(MySealDetailsView view) {
         attachView(view);
     }
-    public void getKsbRecord(String type,String startIndex,int pageSize){
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getKsbRecord(type,startIndex,pageSize)), new ApiCallback<List<KsbRecord>>() {
+    public void getCoinRecord(String type,String coinType,String startIndex,int pageSize){
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getCoinRecord(type,coinType,startIndex,pageSize)), new ApiCallback<List<SealRecord>>() {
             @Override
-            public void onSuccess(List<KsbRecord> data) {
+            public void onSuccess(List<SealRecord> data) {
                 mvpView.setData(data);
 
             }

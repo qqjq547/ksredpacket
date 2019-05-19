@@ -155,6 +155,8 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
     FrameLayout flVideo;
     @BindView(R.id.iv_video_prev)
     ImageView ivVideoPrev;
+    @BindView(R.id.tv_unit)
+    TextView tvUnit;
 
     RedbagReplyAdapter redPacketReplyAdapter;
     List<RedPacketReply> replyList = new ArrayList<>();
@@ -173,6 +175,7 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
     BadgeView badgeView;
     int commentCount=0;
     FavoriteAndPraise favoriteAndPraise;
+    String coinType=Constant.COINTYPE_SEAL;
 
     private NativeExpressADView nativeExpressADView;
 
@@ -361,11 +364,11 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
             case R.id.rl_red_packet_details_header:
                 if (redbagDetail != null ) {
                     if (ivBack.getVisibility() == View.VISIBLE && ivJoinedArrow.getVisibility() == View.VISIBLE) {
-                        IntentUtils.startRedbagJoinedActivity(this, redPacketUuid, redbagDetail.getAvatar(), redbagDetail.getNickName(), redbagDetail.getCoin(), redbagDetail.getMoney(), redbagDetail.getAreaType(), redbagDetail.getDrawNumber(), String.valueOf(redbagDetail.getQuantity()));
+                        IntentUtils.startRedbagJoinedActivity(this, redPacketUuid, redbagDetail.getAvatar(), redbagDetail.getNickName(), redbagDetail.getCoin(), redbagDetail.getMoney(), redbagDetail.getAreaType(), redbagDetail.getDrawNumber(), String.valueOf(redbagDetail.getQuantity()),coinType);
                     }
                 } else if (redbagInfo != null) {
                     if (ivBack.getVisibility() == View.VISIBLE && ivJoinedArrow.getVisibility() == View.VISIBLE) {
-                        IntentUtils.startRedbagJoinedActivity(this, redPacketUuid, redbagInfo.getSenderAvatar(), redbagInfo.getSenderNickName(), redbagInfo.getDrawCoin(), redbagInfo.getMoney(), redbagInfo.getArea(), redbagInfo.getReceiveUserNum(), redbagInfo.getRedPacketTotal());
+                        IntentUtils.startRedbagJoinedActivity(this, redPacketUuid, redbagInfo.getSenderAvatar(), redbagInfo.getSenderNickName(), redbagInfo.getDrawCoin(), redbagInfo.getMoney(), redbagInfo.getArea(), redbagInfo.getReceiveUserNum(), redbagInfo.getRedPacketTotal(),coinType);
                     }
                 }
                 break;
@@ -616,6 +619,12 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
             tvNotice.setVisibility(View.GONE);
             rlValue.setVisibility(View.VISIBLE);
             tvScope.setText(data.getArea());
+            coinType=data.getCoinType();
+            if(TextUtils.equals(coinType,Constant.COINTYPE_KSB)){
+                tvUnit.setText(R.string.money_unit_ksb);
+            }else {
+                tvUnit.setText(R.string.money_unit_seal);
+            }
             tvReceiveNum.setText(String.format(getString(R.string.format_people_get_redbag), data.getReceiveUserNum()));
             if (data.getReceiveUserAvatar() != null) {
                 if (data.getReceiveUserAvatar().size() >= 1) {

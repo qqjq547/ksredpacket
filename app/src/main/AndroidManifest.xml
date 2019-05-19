@@ -188,6 +188,7 @@
         <activity android:name="com.guochuang.mimedia.ui.activity.user.MySealActivity"/>
         <activity android:name="com.guochuang.mimedia.ui.activity.user.SealTransferActivity"/>
         <activity android:name="com.guochuang.mimedia.ui.activity.user.MySealDetailsActivity"/>
+        <activity android:name="com.guochuang.mimedia.ui.activity.user.SealTranQcActivity"/>
 
         <!--我的qc-->
         <activity android:name="com.guochuang.mimedia.ui.activity.user.MyQCActivity"/>

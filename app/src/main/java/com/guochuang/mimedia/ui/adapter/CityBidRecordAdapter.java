@@ -24,12 +24,12 @@ public class CityBidRecordAdapter extends BaseQuickAdapter<CityBidRecord, BaseVi
          helper.setText(R.id.tv_buy_time,item.getCreateDate());
          GlideImgManager.loadCircleImage(mContext,item.getCurrentAvatar(),(ImageView) helper.getView(R.id.iv_left_header));
         helper.setText(R.id.tv_left_user_name,item.getCurrentNickName());
-        helper.setText(R.id.tv_left_price,String.format(mContext.getString(R.string.format_yuan),item.getCurrentMoney()));
+        helper.setText(R.id.tv_left_price,String.format(mContext.getString(R.string.format_qc),item.getCurrentMoney()));
         helper.setText(R.id.tv_premium,String.format(mContext.getString(R.string.format_premium),item.getPremium()));
 
         GlideImgManager.loadCircleImage(mContext,item.getFormerAvatar(),(ImageView) helper.getView(R.id.iv_right_header));
         helper.setText(R.id.tv_right_user_name,item.getFormerNickName());
-        helper.setText(R.id.tv_right_price,String.format(mContext.getString(R.string.format_yuan),item.getFormerMoney()));
+        helper.setText(R.id.tv_right_price,String.format(mContext.getString(R.string.format_qc),item.getFormerMoney()));
         helper.setText(R.id.tv_time_go,String.format(mContext.getString(R.string.format_appointment_time),item.getAppointmentDate()));
     }
 

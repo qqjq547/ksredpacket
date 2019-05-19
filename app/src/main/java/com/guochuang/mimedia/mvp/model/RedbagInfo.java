@@ -40,6 +40,7 @@ public class RedbagInfo {
     private String coverUrl;
     private String redPacketSubType;
     private String linkAddress;
+    private String coinType;
 
     public String getDrawCoin() {
         return drawCoin;
@@ -207,5 +208,13 @@ public class RedbagInfo {
 
     public void setLinkAddress(String linkAddress) {
         this.linkAddress = linkAddress;
+    }
+
+    public String getCoinType() {
+        return coinType;
+    }
+
+    public void setCoinType(String coinType) {
+        this.coinType = coinType;
     }
 }
