@@ -168,6 +168,7 @@
 
     <string name="money_unit_ksb">KSB</string>
     <string name="money_unit_seal">SEAL</string>
+    <string name="money_unit_qc">QC</string>
     <string name="money_unit_yuan">元</string>
     <string name="recommend">推荐</string>
     <string name="fans">粉丝</string>

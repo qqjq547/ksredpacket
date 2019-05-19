@@ -28,7 +28,6 @@ public class SealRecord implements MultiItemEntity {
     private String serviceFee;//旷工费
     private int status;//SEAL明细状态
     private String equivalence;//SEAL等值数量
-    private String sourceCoin;
 
 
     public String getCoin() {
@@ -127,13 +126,6 @@ public class SealRecord implements MultiItemEntity {
         this.equivalence = equivalence;
     }
 
-    public String getSourceCoin() {
-        return sourceCoin;
-    }
-
-    public void setSourceCoin(String sourceCoin) {
-        this.sourceCoin = sourceCoin;
-    }
 
     public static final int SIMPLE = 0;
     public static final int TRANSFER = 1;

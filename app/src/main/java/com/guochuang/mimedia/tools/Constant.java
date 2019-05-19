@@ -120,6 +120,8 @@ public class Constant {
     public static final String TYPE_NESTINFO_REPORT = "nestInfoReport";
     public static final String NESTAD = "nestAd";
     public static final String ISPREVIEW="isPreview";
+    public static final String COINTYPE="coinType";
+
 
     //用户协议
     public static final String URL_FANS_AGREEMENT = ApiClient.HTML_URL+"html/agreement/fans/index.htm";
@@ -325,6 +327,7 @@ public class Constant {
     public static final String COUNTDOWN_GONE = "ISGONG";
     public static final String ACTION_CHANGE_AAA = "ACTION_CHANGE_AAA";
     public static final String ACTION_CHANGE_QC = "ACTION_CHANGE_QC";
+
     public static final String COINTYPE_KSB ="1" ;
     public static final String COINTYPE_SEAL ="2" ;
 
