@@ -95,8 +95,8 @@ public class QCTranSEALActivity extends MvpActivity<KsbTranAaaPresenter> impleme
             }
         });
         showLoadingDialog(null);
-        mvpPresenter.intCal(Constant.DIGITAL_CURRENCY_AAA,Constant.INT_CAL_KSB_TO_AAA);
-        mvpPresenter.getExchangeConfig(Constant.DIGITAL_CURRENCY_AAA);
+        mvpPresenter.intCal(Constant.DIGITAL_CURRENCY_SEAL,Constant.QC_TO_OTHER);
+        mvpPresenter.getExchangeConfig(Constant.DIGITAL_CURRENCY_SEAL);
     }
 
     @Override

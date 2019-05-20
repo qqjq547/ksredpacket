@@ -345,6 +345,11 @@ public class Constant {
     public static int INT_CAL_AAA_TO_KSB = 2;
     public static int INT_CAL_SEAL_TO_QC = 2;
 
+    public static int QC_TO_OTHER = 1;
+    public static int OTHER_TO_QC = 2;
+
+
+
 
 
 
