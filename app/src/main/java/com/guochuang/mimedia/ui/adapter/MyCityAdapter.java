@@ -35,7 +35,7 @@ public class MyCityAdapter extends BaseQuickAdapter<MyRegion.MyRegionListDtoBean
 
         helper.addOnClickListener(R.id.iv_finger_pwd);
         GlideImgManager.loadCircleImage(mContext,item.getAvatar(), (ImageView) helper.getView(R.id.iv_left_header));
-        helper.setText(R.id.tv_bid_price,String.format(mContext.getString(R.string.format_yuan),item.getBiddingPrice()));
+        helper.setText(R.id.tv_bid_price,String.format(mContext.getString(R.string.format_qc),item.getBiddingPrice()));
         helper.setText(R.id.tv_income_share_price,String.format(mContext.getString(R.string.format_seal),item.getProfit()));
         helper.addOnClickListener(R.id.tv_notice_alter);
         helper.setText(R.id.tv_notice,item.getContent());

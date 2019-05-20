@@ -53,7 +53,7 @@ public class MySealDetailsActivity extends MvpActivity<MySealDetailsPresenter> i
     List<SealRecord> itemArr=new ArrayList<>();
     List<DictionaryType> subjectArr=new ArrayList<>();
     List<String> subjectName=new ArrayList<>();
-    String type="00";
+    String type="100";
     String defaultIndex="0";
     String startIndex=defaultIndex;
     String defaultCode ="";
@@ -116,7 +116,6 @@ public class MySealDetailsActivity extends MvpActivity<MySealDetailsPresenter> i
             }
         });
         mvpPresenter.getSubject(Constant.TYPE_SEAL_TYPE);
-        mvpPresenter.getCoinRecord(type, coinType,startIndex, Constant.PAGE_SIZE);
     }
 
     @OnClick({R.id.iv_back, R.id.tv_text})
@@ -184,6 +183,7 @@ public class MySealDetailsActivity extends MvpActivity<MySealDetailsPresenter> i
             }
             if (TextUtils.isEmpty(defaultCode)) {
                 type = data.get(0).getCode();
+                mvpPresenter.getCoinRecord(type, coinType,startIndex, Constant.PAGE_SIZE);
             }
         }
     }

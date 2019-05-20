@@ -475,11 +475,22 @@ public interface ApiStore {
             @Query("captcha") String captcha,
             @Query("uuid") String uuid);
 
+    // 短信验证码 重制密码
+    @POST("/api/v1/user/sms/reset_password")
+    Observable<HttpResponse<String>> userEmailResetPassword(
+            @Query("mobile") String mobile,
+            @Query("uuid") String uuid);
+
     // 短信验证码 注册
     @POST("/api/v1/user/sms/register")
     Observable<HttpResponse<String>> userSmsRegister(
             @Query("mobile") String mobile,
             @Query("captcha") String captcha,
+            @Query("uuid") String uuid);
+
+    @POST("/api/v1/user/email/register")
+    Observable<HttpResponse<String>> userEmailRegister(
+            @Query("email") String email,
             @Query("uuid") String uuid);
 
     // 短信验证码 绑定手机

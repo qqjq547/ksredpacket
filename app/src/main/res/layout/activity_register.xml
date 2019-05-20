@@ -2,208 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <include layout="@layout/layout_title" />
-
-    <LinearLayout
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tb_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/space25">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_login_phone_et_gray"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/space10"
-            android:paddingLeft="@dimen/space15"
-            android:paddingRight="@dimen/space15"
-            android:paddingTop="@dimen/space10">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_login_phone_phone" />
-
-            <View style="@style/centre_line" />
-
-            <EditText
-                android:id="@+id/et_register_phone"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/space15"
-                android:background="@null"
-                android:gravity="center_vertical"
-                android:maxLength="13"
-                android:hint="@string/hint_login_forget_phone"
-                android:textColor="@color/text_black"
-                android:textSize="@dimen/textfont16" />
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space15">
-
-            <LinearLayout
-                android:id="@+id/ll_register_ima_verify"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/iv_register_ima_verify"
-                android:background="@drawable/bg_login_phone_et_gray"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingBottom="@dimen/space10"
-                android:paddingLeft="@dimen/space15"
-                android:paddingRight="@dimen/space15"
-                android:paddingTop="@dimen/space10">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_login_phone_ima_verify" />
-
-                <View style="@style/centre_line" />
-
-                <EditText
-                    android:id="@+id/et_register_ima_verify"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/space15"
-                    android:background="@null"
-                    android:gravity="center_vertical"
-                    android:hint="@string/hint_login_forget_ima_verify"
-                    android:textColor="@color/text_black"
-                    android:textSize="@dimen/textfont16" />
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/iv_register_ima_verify"
-                android:layout_width="@dimen/space96"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/ll_register_ima_verify"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="@dimen/space10"
-                android:scaleType="fitXY" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space15">
-
-            <LinearLayout
-                android:id="@+id/ll_register_verify"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/tv_register_verify"
-                android:background="@drawable/bg_login_phone_et_gray"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingBottom="@dimen/space10"
-                android:paddingLeft="@dimen/space15"
-                android:paddingRight="@dimen/space15"
-                android:paddingTop="@dimen/space10">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_login_phone_verify" />
-
-                <View style="@style/centre_line" />
-
-                <EditText
-                    android:id="@+id/et_register_verify"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/space15"
-                    android:background="@null"
-                    android:gravity="center_vertical"
-                    android:hint="@string/hint_login_forget_verify"
-                    android:inputType="number"
-                    android:textColor="@color/text_black"
-                    android:textSize="@dimen/textfont16" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tv_register_verify"
-                android:layout_width="@dimen/space96"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/ll_register_verify"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="@dimen/space10"
-                android:background="@drawable/bg_btn_forget_verify_red"
-                android:gravity="center"
-                android:text="@string/btn_login_forget_verify"
-                android:textColor="@color/bg_btn_login_phone"
-                android:textSize="@dimen/space16" />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space15"
-            android:background="@drawable/bg_login_phone_et_gray"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/space10"
-            android:paddingLeft="@dimen/space15"
-            android:paddingRight="@dimen/space15"
-            android:paddingTop="@dimen/space10">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_login_phone_password" />
-
-            <View style="@style/centre_line" />
-
-            <EditText
-                android:id="@+id/et_register_password"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/space15"
-                android:background="@null"
-                android:digits="@string/input_password_type"
-                android:gravity="center_vertical"
-                android:maxLength="15"
-                android:hint="@string/hint_login_forget_password"
-                android:inputType="textPassword"
-                android:textColor="@color/text_black"
-                android:textSize="@dimen/textfont16" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tv_register_agreenment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/space15"
-            android:textSize="@dimen/space12" />
-
-        <TextView
-            android:id="@+id/tv_register_confirm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space15"
-            android:background="@drawable/bg_btn_login_phone_red"
-            android:gravity="center"
-            android:padding="@dimen/space15"
-            android:text="@string/type_login_register"
-            android:textColor="@color/text_white"
-            android:textSize="@dimen/textfont18" />
-    </LinearLayout>
+        android:layout_height="@dimen/tablayout_height"
+        app:tabPadding="@dimen/space10"
+        android:background="@color/bg_white"
+        android:layout_gravity="bottom"
+        app:layout_collapseMode="pin"
+        android:layout_marginLeft="@dimen/space50"
+        android:layout_marginRight="@dimen/space50"
+        app:tabMode="fixed"
+        app:layout_scrollFlags="scroll"
+        app:tabTextAppearance="@style/TabLayoutTextStyle"
+        app:tabIndicatorColor="@color/text_black"
+        app:tabIndicatorHeight="@dimen/space2"
+        app:tabSelectedTextColor="@color/text_black"
+        app:tabTextColor="@color/text_gray"/>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </android.support.v4.view.ViewPager>
 </LinearLayout>

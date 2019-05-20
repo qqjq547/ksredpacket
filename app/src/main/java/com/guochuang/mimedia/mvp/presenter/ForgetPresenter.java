@@ -89,4 +89,28 @@ public class ForgetPresenter extends BasePresenter<ForgetView> {
             }
         });
     }
+    public void getForgetEmailVerify(
+            String mobile,
+            String uuid
+    ) {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
+                userEmailResetPassword(mobile, uuid)), new ApiCallback<String>() {
+            @Override
+            public void onSuccess(String data) {
+                mvpView.setSmsData(data);
+
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setSmsError(exception.getMessage());
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
 }
