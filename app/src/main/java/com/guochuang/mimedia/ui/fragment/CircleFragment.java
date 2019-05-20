@@ -16,6 +16,7 @@ import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.ui.activity.city.CityActivity;
 import com.guochuang.mimedia.ui.activity.common.WebActivity;
+import com.guochuang.mimedia.ui.activity.treasure.MyTreasureActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -116,6 +117,11 @@ public class CircleFragment extends MvpFragment {
         @JavascriptInterface
         public void goTreasureExplain(){
             IntentUtils.startWebActivity(getActivity(),"",Constant.URL_ACTIVE_RULE);
+        }
+
+        @JavascriptInterface
+        public void goTreasure() {
+            startActivity(new Intent(getActivity(), MyTreasureActivity.class));
         }
     }
 }

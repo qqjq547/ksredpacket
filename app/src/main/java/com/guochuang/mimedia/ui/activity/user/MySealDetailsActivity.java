@@ -116,6 +116,7 @@ public class MySealDetailsActivity extends MvpActivity<MySealDetailsPresenter> i
             }
         });
         mvpPresenter.getSubject(Constant.TYPE_SEAL_TYPE);
+        mvpPresenter.getCoinRecord(type, coinType,startIndex, Constant.PAGE_SIZE);
     }
 
     @OnClick({R.id.iv_back, R.id.tv_text})
@@ -183,7 +184,6 @@ public class MySealDetailsActivity extends MvpActivity<MySealDetailsPresenter> i
             }
             if (TextUtils.isEmpty(defaultCode)) {
                 type = data.get(0).getCode();
-                mvpPresenter.getCoinRecord(type, coinType,startIndex, Constant.PAGE_SIZE);
             }
         }
     }
