@@ -126,7 +126,8 @@ public class QCTranSEALActivity extends MvpActivity<KsbTranAaaPresenter> impleme
         if (passDialog!=null&&passDialog.isShowing()){
             passDialog.dismiss();
         }
-        sendBroadcast(new Intent(Constant.ACTION_CHANGE_AAA));
+        sendBroadcast(new Intent(Constant.ACTION_CHANGE_COIN));
+        sendBroadcast(new Intent(Constant.ACTION_CHANGE_QC));
         showShortToast(R.string.qc_to_seal_success);
         setResult(RESULT_OK);
         finish();
