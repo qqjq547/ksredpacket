@@ -130,7 +130,7 @@ public class Constant {
     //推荐协议
     public static final String URL_RULE_RECOMMEND = ApiClient.HTML_URL + "html/rule/recommend/index.htm";
     //ksb协议
-    public static final String URL_RULE_QC = "https://www.guochuangyuanhe.com/html/rule/ksb/index.htm";
+    public static final String URL_RULE_QC =  ApiClient.HTML_URL + "project/html/rule/recommendedRule.html";
     //平台协议
     public static final String URL_SEND_REDBAG = ApiClient.HTML_URL + "html/platformRules.html";
     //疯狂规则
@@ -330,6 +330,10 @@ public class Constant {
 
     public static final String COINTYPE_KSB ="1" ;
     public static final String COINTYPE_SEAL ="2" ;
+    public static final String EMAIL_KEY = "email";
+    public static final int OPENT_BINDINGEMAILACTIVITY = 0x0125;
+    public static final String PHONE_KEY = "phone";
+    public static final int OPENT_BINDINGPHONEACITIVITY = 0x0124;
 
     //   视频红包与问卷红包 问题类型 0：单选 1：多选 2：填空题
     public static int SINGLESELECT = 0;

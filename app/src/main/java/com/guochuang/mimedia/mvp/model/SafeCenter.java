@@ -5,16 +5,35 @@ public class SafeCenter {
     /**
      * alipayAccountInfo : {"alipayAccount":"string","alipayRealName":"string"}
      * myBankCardCount : 0
+     *
      * nameAuthInfo : {"idCard":"string","idCardPicture":"string","realName":"string"}
      */
 
     private AlipayAccountInfoBean alipayAccountInfo;
     private int myBankCardCount;
     private int hasWechat;
+    private String  mobile;
+    private String email;
     private NameAuthInfoBean nameAuthInfo;
 
     public int getHasWechat() {
         return hasWechat;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setHasWechat(int hasWechat) {

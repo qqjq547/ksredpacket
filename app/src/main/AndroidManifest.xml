@@ -195,6 +195,12 @@
         <activity android:name="com.guochuang.mimedia.ui.activity.user.MyQCDetailsActivity"/>
         <activity android:name="com.guochuang.mimedia.ui.activity.user.QCTranSEALActivity"/>
 
+        <!--绑定邮箱-->
+        <activity android:name="com.guochuang.mimedia.ui.activity.user.BindingEmailActivity"/>
+
+
+
+
         <!--  // 广告信息获取service-->
         <service android:name="com.guochuang.mimedia.app.AdInfoService" />
 
