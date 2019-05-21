@@ -928,5 +928,12 @@
     <string name="pls_input_qc_amount">请输入QC数量</string>
     <string name="coin_qc_not_enouth">QC余额不足</string>
     <string name="format_min_qc_to_aaa">QC数量至少为%d</string>
+    <string name="my_phone">我的手机号</string>
+    <string name="my_email">我的邮箱</string>
+    <string name="hint_input_email">请输入邮箱</string>
+    <string name="title_email_binding">绑定邮箱</string>
+    <string name="input_email_tip">邮箱输入有误</string>
+    <string name="input_VerifyCode_tip">请输入验证码</string>
+    <string name="input_email_error">输入邮箱有误</string>
 
 </resources>

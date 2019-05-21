@@ -1,6 +1,7 @@
 package com.guochuang.mimedia.ui.activity.user;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
@@ -9,19 +10,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.guochuang.mimedia.tools.LogUtil;
-import com.guochuang.mimedia.tools.WxLogin;
-import com.guochuang.mimedia.tools.pay.AliPay;
-import com.guochuang.mimedia.tools.pay.AuthResult;
-import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.SafeCenter;
 import com.guochuang.mimedia.mvp.presenter.SafeCenterPresenter;
 import com.guochuang.mimedia.mvp.view.SafeCenterView;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.PrefUtil;
+import com.guochuang.mimedia.tools.WxLogin;
+import com.sz.gcyh.KSHongBao.R;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
@@ -61,6 +60,14 @@ public class SafeCenterActivity extends MvpActivity<SafeCenterPresenter> impleme
     @BindView(R.id.lin_update_gesture_pwd)
     LinearLayout linUpdateGesturePwd;
     SafeCenter safeCenter;
+    @BindView(R.id.tv_my_phone)
+    TextView tvMyPhone;
+    @BindView(R.id.lin_my_phone)
+    LinearLayout linMyPhone;
+    @BindView(R.id.tv_my_email)
+    TextView tvMyEmail;
+    @BindView(R.id.lin_my_email)
+    LinearLayout linMyEmail;
 
     @Override
     protected SafeCenterPresenter createPresenter() {
@@ -84,7 +91,7 @@ public class SafeCenterActivity extends MvpActivity<SafeCenterPresenter> impleme
         mvpPresenter.userInfoSecurityCenter();
     }
 
-    @OnClick({R.id.iv_back, R.id.lin_identity, R.id.lin_my_weixin, R.id.lin_my_zfb, R.id.lin_my_bankcard, R.id.lin_login_pwd, R.id.lin_trade_pwd, R.id.lin_update_gesture_pwd})
+    @OnClick({R.id.iv_back, R.id.lin_identity, R.id.lin_my_weixin, R.id.lin_my_zfb, R.id.lin_my_bankcard, R.id.lin_login_pwd, R.id.lin_trade_pwd, R.id.lin_update_gesture_pwd, R.id.lin_my_phone, R.id.lin_my_email})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -95,10 +102,10 @@ public class SafeCenterActivity extends MvpActivity<SafeCenterPresenter> impleme
                     if (safeCenter.getNameAuthInfo() == null) {
                         startActivityForResult(new Intent(this, IdentifyActivity.class), Constant.REFRESH);
                     } else {
-                        if (safeCenter.getNameAuthInfo().getAuditStatus()==Constant.STATUS_AUDIT_FAIL){
-                            String desp=safeCenter.getNameAuthInfo().getAuditDescription();
-                            startActivityForResult(new Intent(this, IdentifyActivity.class).putExtra(Constant.DESCRIPTION,desp), Constant.REFRESH);
-                        }else {
+                        if (safeCenter.getNameAuthInfo().getAuditStatus() == Constant.STATUS_AUDIT_FAIL) {
+                            String desp = safeCenter.getNameAuthInfo().getAuditDescription();
+                            startActivityForResult(new Intent(this, IdentifyActivity.class).putExtra(Constant.DESCRIPTION, desp), Constant.REFRESH);
+                        } else {
                             startActivity(new Intent(this, IdentifyResultActivity.class));
                         }
                     }
@@ -123,7 +130,7 @@ public class SafeCenterActivity extends MvpActivity<SafeCenterPresenter> impleme
                             }
                         });
                     } else {
-                        Intent intent =new Intent(this, MyWechatActivity.class).putExtra(Constant.WHO_OPEN_MYWECHATACTIVITY,getClass().getSimpleName());
+                        Intent intent = new Intent(this, MyWechatActivity.class).putExtra(Constant.WHO_OPEN_MYWECHATACTIVITY, getClass().getSimpleName());
                         startActivity(intent);
                     }
                 }
@@ -159,6 +166,19 @@ public class SafeCenterActivity extends MvpActivity<SafeCenterPresenter> impleme
                 break;
             case R.id.lin_update_gesture_pwd:
                 break;
+
+            case R.id.lin_my_phone:
+                //我的手机
+                if (!TextUtils.isEmpty(safeCenter.getMobile()))
+                    return;
+                startActivityForResult(new Intent(this, BindingPhoneAcitivity.class), Constant.OPENT_BINDINGPHONEACITIVITY);
+                break;
+            case R.id.lin_my_email:
+                if (!TextUtils.isEmpty(safeCenter.getEmail()))
+                    return;
+                //我的的邮箱
+                startActivityForResult(new Intent(this, BindingEmailActivity.class), Constant.OPENT_BINDINGEMAILACTIVITY);
+                break;
         }
     }
 
@@ -168,6 +188,26 @@ public class SafeCenterActivity extends MvpActivity<SafeCenterPresenter> impleme
         if (resultCode == RESULT_OK && requestCode == Constant.REFRESH) {
             mvpPresenter.userInfoSecurityCenter();
         }
+
+        if(resultCode == RESULT_OK && requestCode == Constant.OPENT_BINDINGEMAILACTIVITY) {
+            //设置
+            String email = data.getStringExtra(Constant.EMAIL_KEY);
+            tvMyEmail.setText(email);
+            if(safeCenter != null) {
+                safeCenter.setEmail(email);
+            }
+
+        }
+
+//        if(resultCode == RESULT_OK && requestCode == Constant.OPENT_BINDINGPHONEACITIVITY) {
+//            //设置
+//            String phone = data.getStringExtra(Constant.PHONE_KEY);
+//            tvMyPhone.setText(phone);
+//            if(safeCenter != null) {
+//                safeCenter.setMobile(phone);
+//            }
+//
+//        }
     }
 
     @Override
@@ -179,13 +219,13 @@ public class SafeCenterActivity extends MvpActivity<SafeCenterPresenter> impleme
             getPref().setInt(PrefUtil.IDENTITY, 0);
         } else {
             //审核中
-            if (safeCenter.getNameAuthInfo().getAuditStatus()==Constant.STATUS_AUDIT_FAIL){
+            if (safeCenter.getNameAuthInfo().getAuditStatus() == Constant.STATUS_AUDIT_FAIL) {
                 tvIdentity.setText(R.string.review_fail);
                 getPref().setInt(PrefUtil.IDENTITY, 0);
-            }else if(safeCenter.getNameAuthInfo().getAuditStatus()==Constant.STATUS_AUDIT_INREVIEW){
+            } else if (safeCenter.getNameAuthInfo().getAuditStatus() == Constant.STATUS_AUDIT_INREVIEW) {
                 tvIdentity.setText(R.string.in_review);
                 getPref().setInt(PrefUtil.IDENTITY, 0);
-            }else if(safeCenter.getNameAuthInfo().getAuditStatus()==Constant.STATUS_AUDIT_PASS){
+            } else if (safeCenter.getNameAuthInfo().getAuditStatus() == Constant.STATUS_AUDIT_PASS) {
                 tvIdentity.setText(R.string.has_identify);
                 getPref().setInt(PrefUtil.IDENTITY, 1);
             }
@@ -211,6 +251,10 @@ public class SafeCenterActivity extends MvpActivity<SafeCenterPresenter> impleme
         } else {
             tvMyWeixin.setText(R.string.has_bind);
         }
+
+        tvMyPhone.setText(TextUtils.isEmpty(data.getMobile()) ? getResources().getString(R.string.has_unbind) : data.getMobile());
+        tvMyEmail.setText(TextUtils.isEmpty(data.getEmail()) ? getResources().getString(R.string.has_unbind) : data.getEmail());
+
     }
 
     @Override
@@ -234,4 +278,6 @@ public class SafeCenterActivity extends MvpActivity<SafeCenterPresenter> impleme
         closeLoadingDialog();
         showShortToast(msg);
     }
+
+
 }

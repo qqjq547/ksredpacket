@@ -1520,4 +1520,14 @@ public interface ApiStore {
             @Query("startIndex") String startIndex,
             @Query("pageSize") int pageSize
     );
+
+    @FormUrlEncoded
+    @POST("/api/v1/user/email/bind_email_send")
+    Observable<HttpResponse<String>> getEmailVerify(@Field("emailAddress") String emailStr);
+
+    @FormUrlEncoded
+    @POST("/api/v1/user/account/bind_email")
+    Observable<HttpResponse<Email>> applyEmail(@Field("email") String emailStr_,
+                                                @Field("captcha") String verifyCode,
+                                                @Field("userAccountUuid") String pwd);
 }

@@ -183,18 +183,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/space15"
                 android:layout_marginTop="@dimen/space10"
+                android:layout_marginBottom="@dimen/space25"
                 android:layout_marginRight="@dimen/space15">
 
 
+             <!--   android:background="@drawable/bg_myksb_trasnfer"-->
                 <Button
                     android:id="@+id/btn_ksb_detail"
                     style="?android:attr/borderlessButtonStyle"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/space45"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_myksb_trasnfer"
                     android:text="@string/transfer_ksb_detail"
-                    android:textColor="@color/text_white"
+                    android:textColor="@color/text_blue"
+
                     android:textSize="@dimen/textfont16" />
             </LinearLayout>
         </LinearLayout>
