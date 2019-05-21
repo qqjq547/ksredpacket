@@ -1,11 +1,19 @@
 package com.guochuang.mimedia.ui.activity.user;
 
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.guochuang.mimedia.ui.adapter.MyFragmentPagerAdapter;
+import com.guochuang.mimedia.ui.fragment.ForgetEmailFragment;
+import com.guochuang.mimedia.ui.fragment.ForgetMobileFragment;
+import com.guochuang.mimedia.ui.fragment.TradePwdEmailFragment;
+import com.guochuang.mimedia.ui.fragment.TradePwdMobileFragment;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.BasePresenter;
@@ -20,38 +28,32 @@ import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.tools.RxUtil;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.objectbox.Box;
 import io.objectbox.BoxStore;
 import rx.functions.Action0;
 
-public class TradePwdActivity extends MvpActivity<TradePwdPresenter> implements TradePawView {
+public class TradePwdActivity extends MvpActivity {
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.tv_title)
     TextView tvTitle;
-    @BindView(R.id.tv_mobile)
-    TextView tvMobile;
-    @BindView(R.id.et_image_vertify_code)
-    EditText etImageVertifyCode;
-    @BindView(R.id.iv_image_vertify_code)
-    ImageView ivImageVertifyCode;
-    @BindView(R.id.et_msg_vertify_code)
-    EditText etMsgVertifyCode;
-    @BindView(R.id.tv_get_vertify_code)
-    TextView tvGetVertifyCode;
-    @BindView(R.id.et_new_trade_pwd)
-    EditText etNewTradePwd;
-    @BindView(R.id.tv_sure)
-    TextView tvSure;
+    @BindView(R.id.tb_list)
+    TabLayout tbList;
+    @BindView(R.id.vp_content)
+    ViewPager vpContent;
 
-    UserInfo userInfo;
-    Captcha captcha;
+
+    Fragment[] fragments = new Fragment[2];
 
     @Override
-    protected TradePwdPresenter createPresenter() {
-        return new TradePwdPresenter(this);
+    protected BasePresenter createPresenter() {
+        return null;
     }
 
     @Override
@@ -61,139 +63,34 @@ public class TradePwdActivity extends MvpActivity<TradePwdPresenter> implements 
 
     @Override
     public void initViewAndData() {
-        mvpPresenter.userSafeCodeImageVerify(Constant.SAFE_RESET_CAPTCHA_IMA);
         tvTitle.setText(R.string.trade_pwd);
-        userInfo = App.getInstance().getUserInfo();
-        StringBuffer sb = new StringBuffer(userInfo.getMobile());
-        sb.replace(3, 7, getResources().getString(R.string.star));
-        tvMobile.setText(sb.toString());
+        UserInfo userInfo=App.getInstance().getUserInfo();
+        List<Fragment> list=new ArrayList<>();
+        List<String> titleArr=new ArrayList<>();
+        if (!TextUtils.isEmpty(userInfo.getMobile())){
+            list.add(new TradePwdMobileFragment());
+            titleArr.add(getString(R.string.mobile));
+        }
+//        if (!TextUtils.isEmpty(userInfo.getEmail())){
+            list.add(new TradePwdEmailFragment());
+            titleArr.add(getString(R.string.email));
+//        }
+        fragments = list.toArray(new Fragment[0]);
+        String[] titles=titleArr.toArray(new String[0]);;
+        MyFragmentPagerAdapter redbagDynamicAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), fragments, titles);
+        vpContent.setAdapter(redbagDynamicAdapter);
+        tbList.setupWithViewPager(vpContent);
+        tbList.setTabIndicatorFullWidth(false);
     }
 
 
-    @OnClick({R.id.iv_back, R.id.iv_image_vertify_code, R.id.tv_get_vertify_code, R.id.tv_sure})
+    @OnClick({R.id.iv_back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
                 onBackPressed();
                 break;
-            case R.id.iv_image_vertify_code:
-                mvpPresenter.userSafeCodeImageVerify(Constant.SAFE_RESET_CAPTCHA_IMA);
-                break;
-            case R.id.tv_get_vertify_code:
-                if (TextUtils.isEmpty(etImageVertifyCode.getText())) {
-                    showShortToast(getResources().getString(R.string.input_verity_ima_error));
-                    return;
-                }
-                if (TextUtils.isEmpty(userInfo.getMobile())) {
-                    showShortToast(getResources().getString(R.string.input_phone_error));
-                    return;
-                }
-                mvpPresenter.userSendSms(
-                        userInfo.getMobile(),
-                        etImageVertifyCode.getText().toString(),
-                        captcha.getUuid()
-                );
-                break;
-            case R.id.tv_sure:
-                if (!doCheck()) {
-                    return;
-                }
-                showLoadingDialog(null);
-                mvpPresenter.userSafeReset(
-                        etMsgVertifyCode.getText().toString(),
-                        etNewTradePwd.getText().toString()
-                );
-                break;
         }
     }
 
-    private void sendCode() {
-        addSubscription(RxUtil.countdown(60)
-                .doOnSubscribe(new Action0() {
-                    @Override
-                    public void call() {
-                        tvGetVertifyCode.setEnabled(false);
-//                        tvGetVertifyCode.setBackgroundResource(R.drawable.bg_btn_forget_verify_gray);
-                        tvGetVertifyCode.setTextColor(getResources().getColor(R.color.text_gray));
-                    }
-                })
-                .subscribe(new CountDownSubscriber<Integer>() {
-                    @Override
-                    public void onCompleted() {
-                        super.onCompleted();
-                        tvGetVertifyCode.setText(getString(R.string.btn_login_forget_verify));
-                        tvGetVertifyCode.setEnabled(true);
-//                        tvGetVertifyCode.setBackgroundResource(R.drawable.bg_btn_forget_verify_red);
-                        tvGetVertifyCode.setTextColor(getResources().getColor(R.color.text_blue));
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        super.onError(e);
-                        tvGetVertifyCode.setText(getString(R.string.btn_login_forget_verify));
-                        tvGetVertifyCode.setEnabled(true);
-//                        tvGetVertifyCode.setBackgroundResource(R.drawable.bg_btn_forget_verify_red);
-                        tvGetVertifyCode.setTextColor(getResources().getColor(R.color.text_blue));
-                    }
-
-                    @Override
-                    public void onNext(Integer integer) {
-                        super.onNext(integer);
-                        tvGetVertifyCode.setText(String.valueOf(integer));
-                    }
-                }));
-    }
-
-    private boolean doCheck() {
-        if (userInfo.getMobile().length() < 11) {
-            showShortToast(getResources().getString(R.string.input_phone_error));
-            return false;
-        }
-        if (etMsgVertifyCode.getText().length() < 1) {
-            showShortToast(getResources().getString(R.string.input_verity_error));
-            return false;
-        }
-        if (etNewTradePwd.getText().length() < 6) {
-            showShortToast(getResources().getString(R.string.input_safe_password_error));
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public void setData(String data) {
-        closeLoadingDialog();
-        showShortToast(getResources().getString(R.string.setup_success));
-        getPref().setInt(PrefUtil.SAFECODE,1);
-        setResult(RESULT_OK);
-        finish();
-    }
-
-    @Override
-    public void setError(String msg) {
-        closeLoadingDialog();
-        showShortToast(msg);
-    }
-
-    @Override
-    public void setVerifyData(Captcha data) {
-        captcha = data;
-        GlideImgManager.loadCornerImage(this, data.getUrl(), ivImageVertifyCode, 8);
-    }
-
-    @Override
-    public void setVerifyError(String msg) {
-        showShortToast(msg);
-    }
-
-    @Override
-    public void setSmsData(String data) {
-        showShortToast(getResources().getString(R.string.type_login_verify_send_success));
-        sendCode();
-    }
-
-    @Override
-    public void setSmsError(String msg) {
-        showShortToast(msg);
-    }
 }

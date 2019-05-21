@@ -39,6 +39,31 @@ public class TradePwdPresenter extends BasePresenter<TradePawView> {
         });
     }
 
+    public void userSafeResetByEmail(
+            String captcha,
+            String safetyCode
+    ) {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
+                userSafeResetByEmail(captcha, safetyCode)), new ApiCallback<String>() {
+            @Override
+            public void onSuccess(String data) {
+                mvpView.setData(data);
+
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setError(exception.getMessage());
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
+
     public void userSafeCodeImageVerify(
             String tenantCode
     ) {
@@ -70,6 +95,30 @@ public class TradePwdPresenter extends BasePresenter<TradePawView> {
     ) {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
                 userSmsResetSafetyCode(mobile, captcha, uuid)), new ApiCallback<String>() {
+            @Override
+            public void onSuccess(String data) {
+                mvpView.setSmsData(data);
+
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setSmsError(exception.getMessage());
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
+    public void userSendEmail(
+            String email,
+            String uuid
+    ) {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
+                userEmailResetSafetyCode(email, uuid)), new ApiCallback<String>() {
             @Override
             public void onSuccess(String data) {
                 mvpView.setSmsData(data);

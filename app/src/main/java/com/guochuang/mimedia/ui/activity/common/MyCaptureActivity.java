@@ -13,6 +13,7 @@ import com.guochuang.mimedia.mvp.presenter.MyCapturePresenter;
 import com.guochuang.mimedia.mvp.view.MyCaptureView;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.ui.activity.user.AaaTransferActivity;
+import com.guochuang.mimedia.ui.activity.user.SealTransferActivity;
 import com.sz.gcyh.KSHongBao.R;
 import com.uuzuche.lib_zxing.activity.CaptureFragment;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
@@ -88,7 +89,7 @@ public class MyCaptureActivity extends MvpActivity<MyCapturePresenter> implement
                         return;
                     }else if(TextUtils.equals(digiCurrcy,Constant.DIGITAL_CURRENCY_SEAL)){
                         MyCaptureActivity.getActivity().finish();
-                        startActivity(new Intent(MyCaptureActivity.this,AaaTransferActivity.class).putExtra(Constant.ADDRESS,address));
+                        startActivity(new Intent(MyCaptureActivity.this,SealTransferActivity.class).putExtra(Constant.ADDRESS,address));
                         return;
                     }
                 }

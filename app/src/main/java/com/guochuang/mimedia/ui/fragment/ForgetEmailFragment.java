@@ -38,7 +38,6 @@ public class ForgetEmailFragment extends MvpFragment<ForgetPresenter> implements
 
     String email;
     String password;
-    String uuid;
 
     @Override
     protected ForgetPresenter createPresenter() {
@@ -141,8 +140,7 @@ public class ForgetEmailFragment extends MvpFragment<ForgetPresenter> implements
                 showShortToast(getResources().getString(R.string.email_format_error));
                 } else {
                     mvpPresenter.getForgetEmailVerify(
-                            email,
-                            uuid
+                            email
                     );
                 }
                 break;

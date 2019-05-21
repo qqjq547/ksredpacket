@@ -51,6 +51,7 @@ public class UserInfo {
     private String userAccountUuid;
     private String twoDimensional;
     private String inviteUrl;
+    private String email;
 
     public String getAlipayAccount() {
         return alipayAccount;
@@ -226,5 +227,13 @@ public class UserInfo {
 
     public void setInviteUrl(String inviteUrl) {
         this.inviteUrl = inviteUrl;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

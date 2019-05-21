@@ -934,4 +934,5 @@
     <string name="email_format_error">邮箱格式不正确</string>
     <string name="pls_iput_verify">请输入验证码</string>
     <string name="pls_iput_new_verify">请输入新登录密码</string>
+    <string name="email_verify_code">邮箱验证码</string>
 </resources>
