@@ -591,13 +591,13 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                 tvRedbagTip.setVisibility(View.GONE);
                 linVideoHead.setVisibility(View.VISIBLE);
                 btnOpenPacket.setText(R.string.watched_video_open_redbag);
-                tvWillGetKsb.setText(String.format(getString(R.string.format_ksb), redbagDetail.getCoin()));
+                tvWillGetKsb.setText(String.format(getString(R.string.format_seal), redbagDetail.getCoin()));
             }else if(redPacketType.equals(Constant.RED_PACKET_TYPE_SURVEY)){
                 rlValue.setVisibility(View.GONE);
                 tvRedbagTip.setVisibility(View.GONE);
                 linVideoHead.setVisibility(View.VISIBLE);
                 btnOpenPacket.setText(R.string.answer_open_redbag);
-                tvWillGetKsb.setText(String.format(getString(R.string.format_ksb), redbagDetail.getCoin()));
+                tvWillGetKsb.setText(String.format(getString(R.string.format_seal), redbagDetail.getCoin()));
             }else {
                 startAnim();
                 startCountDown(redbagDetail.getReadingSecond());

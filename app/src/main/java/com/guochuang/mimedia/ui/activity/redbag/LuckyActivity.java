@@ -167,7 +167,7 @@ public class LuckyActivity extends MvpActivity<LuckyPresenter> implements LuckyV
         if (data!=null) {
             linShake.setVisibility(View.GONE);
             linResult.setVisibility(View.VISIBLE);
-            tvResultCoin.setText(String.format(getString(R.string.format_ksb),data.getCoin()));
+            tvResultCoin.setText(String.format(getString(R.string.format_seal),data.getCoin()));
             tvResultMoney.setText(String.format(getString(R.string.format_yuan),data.getMoney()));
             CommonUtil.playRing(LuckyActivity.this, R.raw.gold);
             sendBroadcast(new Intent(Constant.ACTION_CHANGE_COIN));

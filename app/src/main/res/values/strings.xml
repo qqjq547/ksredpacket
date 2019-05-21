@@ -42,7 +42,7 @@
     <string name="type_login_verify_send_success">验证码已发送</string>
 
     <string name="title_login_phone">手机号登录</string>
-    <string name="hint_login_phone">请输入您的手机号</string>
+    <string name="hint_login_phone">请输入您的手机号或邮箱</string>
     <string name="hint_login_password">请输入登录密码</string>
     <string name="btn_login_register">没有账号，去注册</string>
     <string name="btn_login_forget_password">忘记密码</string>
@@ -936,4 +936,9 @@
     <string name="input_VerifyCode_tip">请输入验证码</string>
     <string name="input_email_error">输入邮箱有误</string>
 
+    <string name="email">邮箱</string>
+    <string name="pls_input_email">请输入邮箱</string>
+    <string name="email_format_error">邮箱格式不正确</string>
+    <string name="pls_iput_verify">请输入验证码</string>
+    <string name="pls_iput_new_verify">请输入新登录密码</string>
 </resources>

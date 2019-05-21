@@ -60,7 +60,7 @@ public class MyQCDetailsActivity extends MvpActivity<MyQCDetailsPresenter> imple
     List<SealRecord> itemArr = new ArrayList<>();
     List<DictionaryType> subjectArr = new ArrayList<>();
     List<String> subjectName = new ArrayList<>();
-    String type = "00";
+    String type = "100";
     String defaultIndex = "0";
     String startIndex = defaultIndex;
     String defaultCode = "";
@@ -124,6 +124,7 @@ public class MyQCDetailsActivity extends MvpActivity<MyQCDetailsPresenter> imple
             }
         });
         mvpPresenter.getSubject(Constant.TYPE_QC_TYPE);
+        mvpPresenter.getQCDetail(type, startIndex, Constant.PAGE_SIZE);
     }
 
     @OnClick({R.id.iv_back, R.id.tv_text})

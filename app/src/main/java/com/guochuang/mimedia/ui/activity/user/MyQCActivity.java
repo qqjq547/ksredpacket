@@ -64,7 +64,7 @@ public class MyQCActivity extends MvpActivity<MyQCPresenter> implements MyQCView
         }
 
         CommonUtil.initH5WebView(this, wvDesp);
-        wvDesp.loadUrl(Constant.URL_RULE_QC);
+        wvDesp.loadUrl(CommonUtil.getTimeStampUrl(Constant.URL_RULE_QC));
         showLoadingDialog(null);
         mvpPresenter.getMyQC();
     }

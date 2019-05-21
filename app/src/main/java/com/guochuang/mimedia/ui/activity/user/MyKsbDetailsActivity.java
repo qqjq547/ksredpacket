@@ -57,7 +57,7 @@ public class MyKsbDetailsActivity extends MvpActivity<MyKsbDetailsPresenter> imp
     List<KsbRecord> itemArr=new ArrayList<>();
     List<DictionaryType> subjectArr=new ArrayList<>();
     List<String> subjectName=new ArrayList<>();
-    String type="00";
+    String type="100";
     String defaultIndex="0";
     String startIndex=defaultIndex;
     String defaultCode ="";
@@ -121,6 +121,7 @@ public class MyKsbDetailsActivity extends MvpActivity<MyKsbDetailsPresenter> imp
             }
         });
         mvpPresenter.getSubject(Constant.TYPE_KSB_TYPE);
+        mvpPresenter.getKsbRecord(type, startIndex, Constant.PAGE_SIZE);
     }
 
     @OnClick({R.id.iv_back, R.id.tv_text})

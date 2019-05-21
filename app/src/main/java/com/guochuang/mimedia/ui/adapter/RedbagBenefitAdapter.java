@@ -22,6 +22,6 @@ public class RedbagBenefitAdapter extends BaseQuickAdapter<RedbagBenefit,BaseVie
     protected void convert(BaseViewHolder helper, RedbagBenefit item) {
        helper.setText(R.id.tv_name,item.getWhereRegion()+item.getType());
        helper.setText(R.id.tv_time,item.getCreateDate());
-       helper.setText(R.id.tv_ksb,item.getCoin()+mContext.getString(R.string.ksb));
+       helper.setText(R.id.tv_ksb,item.getCoin());
     }
 }
