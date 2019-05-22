@@ -405,7 +405,18 @@ public interface ApiStore {
     Observable<HttpResponse<Boolean>> userRegisterMobile(
             @Field("tenantCode") String tenantCode,
             @Field("nationCode") String nationCode,
-            @Field("mobile") String mobile,
+            @Field("account") String account,
+            @Field("captcha") String captcha,
+            @Field("password") String password,
+            @Field("registerSource") String registerSource,
+            @Field("inviteCode") String inviteCode);
+
+    @FormUrlEncoded
+    @POST("/api/v1/user/register/email")
+    Observable<HttpResponse<Boolean>> userRegisterEmail(
+            @Field("tenantCode") String tenantCode,
+            @Field("nationCode") String nationCode,
+            @Field("account") String account,
             @Field("captcha") String captcha,
             @Field("password") String password,
             @Field("registerSource") String registerSource,
@@ -448,6 +459,13 @@ public interface ApiStore {
             @Field("captcha") String captcha,
             @Field("password") String password);
 
+    @FormUrlEncoded
+    @POST("/api/v1/user/account/reset_password_email")
+    Observable<HttpResponse<String>> userEmailResetPassword(
+            @Field("email") String email,
+            @Field("captcha") String captcha,
+            @Field("password") String password);
+
     // 图形验证码 手机注册
     @POST("/api/v1/file/captcha/register")
     Observable<HttpResponse<Captcha>> userPhoneCaptcha(
@@ -476,10 +494,9 @@ public interface ApiStore {
             @Query("uuid") String uuid);
 
     // 短信验证码 重制密码
-    @POST("/api/v1/user/sms/reset_password")
+    @POST("/api/v1/user/email/password_email_send")
     Observable<HttpResponse<String>> userEmailResetPassword(
-            @Query("mobile") String mobile,
-            @Query("uuid") String uuid);
+            @Query("emailAddress") String emailAddress);
 
     // 短信验证码 注册
     @POST("/api/v1/user/sms/register")
@@ -505,6 +522,11 @@ public interface ApiStore {
     Observable<HttpResponse<String>> userSmsResetSafetyCode(
             @Query("mobile") String mobile,
             @Query("captcha") String captcha,
+            @Query("uuid") String uuid);
+
+    @POST("/api/v1/user/email/safe_email_send")
+    Observable<HttpResponse<String>> userEmailResetSafetyCode(
+            @Query("emailAddress") String emailAddress,
             @Query("uuid") String uuid);
 
     @POST("/api/v1/user/sms/withdraw_coin")
@@ -579,6 +601,11 @@ public interface ApiStore {
     // 安全码-重置&设置
     @POST("/api/v1/user/safe/reset")
     Observable<HttpResponse<String>> userSafeReset(
+            @Query("captcha") String captcha,
+            @Query("safetyCode") String safetyCode
+    );
+    @POST("/api/v1/user/safe/reset_by_email")
+    Observable<HttpResponse<String>> userSafeResetByEmail(
             @Query("captcha") String captcha,
             @Query("safetyCode") String safetyCode
     );

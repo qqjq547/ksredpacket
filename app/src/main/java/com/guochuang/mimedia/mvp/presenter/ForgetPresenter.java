@@ -39,6 +39,31 @@ public class ForgetPresenter extends BasePresenter<ForgetView> {
             }
         });
     }
+    public void getEmailForget(
+            String email,
+            String captcha,
+            String password
+    ) {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
+                userEmailResetPassword(email,captcha, password)), new ApiCallback<String>() {
+            @Override
+            public void onSuccess(String data) {
+                mvpView.setData(data);
+
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setError(exception.getMessage());
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
 
     public void getForgetImageVerify(
             String mobile
@@ -90,11 +115,10 @@ public class ForgetPresenter extends BasePresenter<ForgetView> {
         });
     }
     public void getForgetEmailVerify(
-            String mobile,
-            String uuid
+            String mobile
     ) {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                userEmailResetPassword(mobile, uuid)), new ApiCallback<String>() {
+                userEmailResetPassword(mobile)), new ApiCallback<String>() {
             @Override
             public void onSuccess(String data) {
                 mvpView.setSmsData(data);

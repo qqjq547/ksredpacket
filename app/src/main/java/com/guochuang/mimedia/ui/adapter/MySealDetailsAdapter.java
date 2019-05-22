@@ -76,6 +76,7 @@ public class MySealDetailsAdapter extends BaseMultiItemQuickAdapter<SealRecord, 
                     case SealRecord.TYPE_FILL://充币
                         helper.setText(R.id.tv_nuber, String.format(mContext.getString(R.string.format_number), item.getCoin()));
                         helper.setGone(R.id.tv_adrress, true);
+                        helper.setText(R.id.tv_adrress, String.format(mContext.getResources().getString(R.string.target_address), item.getTargetAddress()));
                         helper.setGone(R.id.tv_money, false);
                         break;
 

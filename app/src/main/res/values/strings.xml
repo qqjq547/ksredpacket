@@ -46,7 +46,7 @@
     <string name="hint_login_password">请输入登录密码</string>
     <string name="btn_login_register">没有账号，去注册</string>
     <string name="btn_login_forget_password">忘记密码</string>
-    <string name="hint_login_other_login">微信注册/登录</string>
+    <string name="hint_login_other_login">微信登录</string>
     <string name="input_password_type">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.@</string>
     <string name="input_phone_error">手机号不正确，请检查后重新输入</string>
     <string name="input_password_error">密码位数应在6-15位之间，请检查后重新输入</string>
@@ -148,7 +148,7 @@
 
     <string name="input_word_hint">请输入口令</string>
     <string name="ksb">SEAL</string>
-    <string name="has_save_packet">已存入零钱</string>
+    <string name="has_save_packet">已存入账户</string>
     <string name="redbag_joined_left">已领取%s个，共%s个</string>
     <string name="redbag_joined_title">领取明细</string>
 
@@ -941,4 +941,5 @@
     <string name="email_format_error">邮箱格式不正确</string>
     <string name="pls_iput_verify">请输入验证码</string>
     <string name="pls_iput_new_verify">请输入新登录密码</string>
+    <string name="email_verify_code">邮箱验证码</string>
 </resources>

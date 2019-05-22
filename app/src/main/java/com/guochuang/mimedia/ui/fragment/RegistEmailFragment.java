@@ -149,7 +149,7 @@ public class RegistEmailFragment extends MvpFragment<RegisterPresenter> implemen
             case R.id.tv_register_verify:
                 if (AntiShake.check(view.getId()))
                     return;
-                String email=etMail.getText().toString().trim();
+                 email=etMail.getText().toString().trim();
                 if (TextUtils.isEmpty(email)) {
                     showShortToast(getResources().getString(R.string.pls_input_email));
                 }else if (CommonUtil.isEmail(email)) {
@@ -176,7 +176,7 @@ public class RegistEmailFragment extends MvpFragment<RegisterPresenter> implemen
                 mvpPresenter.getRegisterMobile(
                         Constant.TENANTCODE,
                         Constant.NATION_CODE,
-                        GeneralUtil.removeAllSpace(etMail.getText().toString()),
+                        email,
                         etVerify.getText().toString(),
                         etPassword.getText().toString(),
                         CommonUtil.getAppMetaData(getActivity(),"JPUSH_CHANNEL"),
