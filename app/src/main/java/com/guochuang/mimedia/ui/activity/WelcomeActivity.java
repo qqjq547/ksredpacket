@@ -94,11 +94,11 @@ public class WelcomeActivity extends MvpActivity<WelcomePresenter> implements We
                 if (TextUtils.isEmpty(getPref().getUserToken())) {
                     startActivity(new Intent(WelcomeActivity.this, LoginActivity.class));
                 } else {
-                    if (TextUtils.isEmpty(getPref().getString(PrefUtil.MOBILE, null))) {
-                        startActivity(new Intent(WelcomeActivity.this, BindingPhoneAcitivity.class));
-                    } else {
+//                    if (TextUtils.isEmpty(getPref().getString(PrefUtil.MOBILE, null))) {
+//                        startActivity(new Intent(WelcomeActivity.this, BindingPhoneAcitivity.class));
+//                    } else {
                         startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
-                    }
+//                    }
                 }
             }
             finish();

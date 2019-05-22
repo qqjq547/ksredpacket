@@ -55,7 +55,7 @@ public class TradePwdEmailFragment extends MvpFragment<TradePwdPresenter> implem
     public void initViewAndData() {
         userInfo = App.getInstance().getUserInfo();
         uuid=userInfo.getUserAccountUuid();
-        tvEmail.setText(userInfo.getEmail());
+        tvEmail.setText(userInfo.getEmailAddress());
     }
 
 
@@ -63,14 +63,17 @@ public class TradePwdEmailFragment extends MvpFragment<TradePwdPresenter> implem
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_get_vertify_code:
-                if (!CommonUtil.isEmail(userInfo.getEmail())) {
+                String email=userInfo.getEmailAddress();
+                if (TextUtils.isEmpty(email)) {
+                    showShortToast(getResources().getString(R.string.pls_input_email));
+                    return;
+                }else if (!CommonUtil.isEmail(email)) {
                     showShortToast(getResources().getString(R.string.email_format_error));
                     return;
                 }
                 mvpPresenter.userSendEmail(
-                        userInfo.getEmail(),
+                        userInfo.getEmailAddress(),
                         uuid
-
                 );
                 break;
             case R.id.tv_sure:
@@ -121,7 +124,7 @@ public class TradePwdEmailFragment extends MvpFragment<TradePwdPresenter> implem
     }
 
     private boolean doCheck() {
-        if (!CommonUtil.isEmail(userInfo.getEmail())) {
+        if (!CommonUtil.isEmail(userInfo.getEmailAddress())) {
             showShortToast(getResources().getString(R.string.email_format_error));
             return false;
         }

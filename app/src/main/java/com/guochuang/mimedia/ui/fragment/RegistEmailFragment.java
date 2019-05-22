@@ -61,7 +61,6 @@ public class RegistEmailFragment extends MvpFragment<RegisterPresenter> implemen
 
     @Override
     public void initViewAndData() {
-        mvpPresenter.getRegisterImageVerify(Constant.REGISTER_CAPTCHA_IMA);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             tvAgreenment.setText(Html.fromHtml(getString(R.string.content_login_agreenment), Html.FROM_HTML_MODE_COMPACT));
         } else {
@@ -152,12 +151,11 @@ public class RegistEmailFragment extends MvpFragment<RegisterPresenter> implemen
                  email=etMail.getText().toString().trim();
                 if (TextUtils.isEmpty(email)) {
                     showShortToast(getResources().getString(R.string.pls_input_email));
-                }else if (CommonUtil.isEmail(email)) {
+                }else if (!CommonUtil.isEmail(email)) {
                     showShortToast(getResources().getString(R.string.email_format_error));
                 }else {
                     mvpPresenter.getEmailVerify(
-                            email,
-                            uuid
+                            email
                     );
                 }
                 break;
@@ -173,7 +171,7 @@ public class RegistEmailFragment extends MvpFragment<RegisterPresenter> implemen
                     return;
                 }
                 showLoadingDialog(null);
-                mvpPresenter.getRegisterMobile(
+                mvpPresenter.getRegisterEmail(
                         Constant.TENANTCODE,
                         Constant.NATION_CODE,
                         email,
@@ -192,7 +190,7 @@ public class RegistEmailFragment extends MvpFragment<RegisterPresenter> implemen
         if (TextUtils.isEmpty(email)) {
             showShortToast(R.string.pls_input_email);
             return false;
-        }else if (CommonUtil.isEmail(email)) {
+        }else if (!CommonUtil.isEmail(email)) {
             showShortToast(R.string.email_format_error);
             return false;
         }else if (etVerify.getText().length() < 1) {

@@ -494,7 +494,7 @@ public interface ApiStore {
             @Query("uuid") String uuid);
 
     // 短信验证码 重制密码
-    @POST("/api/v1/user/email/password_email_send")
+    @POST("/api/v1/user/email_captcha/password")
     Observable<HttpResponse<String>> userEmailResetPassword(
             @Query("emailAddress") String emailAddress);
 
@@ -505,10 +505,9 @@ public interface ApiStore {
             @Query("captcha") String captcha,
             @Query("uuid") String uuid);
 
-    @POST("/api/v1/user/email/register")
+    @POST("/api/v1/user/email_captcha/register")
     Observable<HttpResponse<String>> userEmailRegister(
-            @Query("email") String email,
-            @Query("uuid") String uuid);
+            @Query("emailAddress") String emailAddress);
 
     // 短信验证码 绑定手机
     @POST("/api/v1/user/sms/bind_mobile")
@@ -524,7 +523,7 @@ public interface ApiStore {
             @Query("captcha") String captcha,
             @Query("uuid") String uuid);
 
-    @POST("/api/v1/user/email/safe_email_send")
+    @POST("/api/v1/user/email_captcha/safe")
     Observable<HttpResponse<String>> userEmailResetSafetyCode(
             @Query("emailAddress") String emailAddress,
             @Query("uuid") String uuid);
@@ -553,6 +552,9 @@ public interface ApiStore {
             @Query("mobile") String mobile,
             @Query("name") String name,
             @Query("cardNumber") String cardNumber,
+
+
+
             @Query("type") String type,
             @Query("safetyCode") String safetyCode
     );
@@ -1560,12 +1562,12 @@ public interface ApiStore {
     );
 
     @FormUrlEncoded
-    @POST("/api/v1/user/email/bind_email_send")
+    @POST("/api/v1/user/email_captcha/bind")
     Observable<HttpResponse<String>> getEmailVerify(@Field("emailAddress") String emailStr);
 
     @FormUrlEncoded
     @POST("/api/v1/user/account/bind_email")
-    Observable<HttpResponse<Email>> applyEmail(@Field("email") String emailStr_,
+    Observable<HttpResponse<Email>> applyEmail(@Field("emailAddress") String emailAddress,
                                                 @Field("captcha") String verifyCode,
                                                 @Field("userAccountUuid") String pwd);
 }
