@@ -39,6 +39,7 @@
                 android:background="@null"
                 android:gravity="center_vertical"
                 android:maxLength="13"
+                android:inputType="number"
                 android:hint="@string/hint_login_forget_phone"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/textfont16" />
