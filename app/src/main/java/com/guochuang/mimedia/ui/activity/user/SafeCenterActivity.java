@@ -68,6 +68,11 @@ public class SafeCenterActivity extends MvpActivity<SafeCenterPresenter> impleme
     TextView tvMyEmail;
     @BindView(R.id.lin_my_email)
     LinearLayout linMyEmail;
+    @BindView(R.id.tv_my_email_arrow)
+    TextView tvMyEmailArrow;
+    @BindView(R.id.tv_my_phone_arrow)
+    TextView tvMyPhoneArrow;
+
 
     @Override
     protected SafeCenterPresenter createPresenter() {
@@ -193,8 +198,10 @@ public class SafeCenterActivity extends MvpActivity<SafeCenterPresenter> impleme
             //设置
             String email = data.getStringExtra(Constant.EMAIL_KEY);
             tvMyEmail.setText(email);
+            tvMyEmailArrow.setVisibility(View.GONE);
             if(safeCenter != null) {
                 safeCenter.setEmail(email);
+
             }
 
         }
@@ -254,7 +261,8 @@ public class SafeCenterActivity extends MvpActivity<SafeCenterPresenter> impleme
 
         tvMyPhone.setText(TextUtils.isEmpty(data.getMobile()) ? getResources().getString(R.string.has_unbind) : data.getMobile());
         tvMyEmail.setText(TextUtils.isEmpty(data.getEmail()) ? getResources().getString(R.string.has_unbind) : data.getEmail());
-
+        tvMyEmailArrow.setVisibility(TextUtils.isEmpty(data.getEmail()) ? View.VISIBLE:View.GONE);
+        tvMyPhoneArrow.setVisibility(TextUtils.isEmpty(data.getMobile()) ? View.VISIBLE:View.GONE);
     }
 
     @Override

@@ -57,6 +57,8 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
     LinearLayout linPassword;
     @BindView(R.id.et_password)
     EditText etPassword;
+
+
     String userAccountUuid;
     Captcha captcha;
 
