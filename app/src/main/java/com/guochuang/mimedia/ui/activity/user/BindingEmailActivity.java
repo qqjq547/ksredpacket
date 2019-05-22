@@ -12,6 +12,7 @@ import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.http.subscriber.CountDownSubscriber;
 import com.guochuang.mimedia.mvp.model.Email;
+import com.guochuang.mimedia.mvp.model.UserInfo;
 import com.guochuang.mimedia.mvp.presenter.BindingEmailPresenter;
 import com.guochuang.mimedia.mvp.view.BindingEmailView;
 import com.guochuang.mimedia.tools.Constant;
@@ -157,6 +158,8 @@ public class BindingEmailActivity extends MvpActivity<BindingEmailPresenter> imp
 
         Intent intent = getIntent();
         intent.putExtra(Constant.EMAIL_KEY, data.getEmail());
+        UserInfo userInfo=App.getInstance().getUserInfo();
+        userInfo.setEmailAddress(data.getEmail());
         setResult(RESULT_OK,intent);
         finish();
 

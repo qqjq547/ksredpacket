@@ -130,7 +130,7 @@
                 android:digits="@string/input_password_type"
                 android:gravity="center_vertical"
                 android:maxLength="15"
-                android:hint="@string/hint_login_forget_password"
+                android:hint="@string/hint_bind_password"
                 android:inputType="textPassword"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/textfont16" />

@@ -417,15 +417,15 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
         savePhone();
         UserLogin userLogin = new Gson().fromJson(CommonUtil.baseDecrypt(data.split("\\.")[1]), UserLogin.class);
         getPref().setString(PrefUtil.USER_TOKEN, data);
-        if (TextUtils.isEmpty(userLogin.getMobile())) {
-            Intent intent = new Intent(this, BindingPhoneAcitivity.class);
-            startActivity(intent);
-            finish();
-        } else {
+//        if (TextUtils.isEmpty(userLogin.getMobile())) {
+//            Intent intent = new Intent(this, BindingPhoneAcitivity.class);
+//            startActivity(intent);
+//            finish();
+//        } else {
             getPref().setString(PrefUtil.MOBILE, userLogin.getMobile());
             IntentUtils.startMainActivity(this, true);
             finish();
-        }
+//        }
     }
 
     private void savePhone() {

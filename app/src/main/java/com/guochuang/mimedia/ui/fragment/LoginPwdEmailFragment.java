@@ -1,6 +1,7 @@
 package com.guochuang.mimedia.ui.fragment;
 
 import android.app.Activity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -51,7 +52,7 @@ public class LoginPwdEmailFragment extends MvpFragment<ForgetPresenter> implemen
     @Override
     public void initViewAndData() {
         userInfo = App.getInstance().getUserInfo();
-        tvEmail.setText(userInfo.getEmail());
+        tvEmail.setText(userInfo.getEmailAddress());
     }
 
 
@@ -59,12 +60,16 @@ public class LoginPwdEmailFragment extends MvpFragment<ForgetPresenter> implemen
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_get_vertify_code:
-                if (!CommonUtil.isEmail(userInfo.getEmail())) {
+                String email=userInfo.getEmailAddress();
+                if (TextUtils.isEmpty(email)) {
+                    showShortToast(getResources().getString(R.string.pls_input_email));
+                    return;
+                }else if (!CommonUtil.isEmail(email)) {
                     showShortToast(getResources().getString(R.string.email_format_error));
                     return;
                 }
                     mvpPresenter.getForgetEmailVerify(
-                            userInfo.getEmail());
+                            userInfo.getEmailAddress());
                 break;
             case R.id.tv_sure:
                 if (!doCheck()) {
@@ -72,7 +77,7 @@ public class LoginPwdEmailFragment extends MvpFragment<ForgetPresenter> implemen
                 }
                 showLoadingDialog(null);
                 mvpPresenter.getEmailForget(
-                        userInfo.getEmail(),
+                        userInfo.getEmailAddress(),
                         etMsgVertifyCode.getText().toString().trim(),
                         etNewLoginPwd.getText().toString()
                 );
@@ -149,7 +154,7 @@ public class LoginPwdEmailFragment extends MvpFragment<ForgetPresenter> implemen
     }
 
     private boolean doCheck() {
-        if (!CommonUtil.isEmail(userInfo.getEmail())) {
+        if (!CommonUtil.isEmail(userInfo.getEmailAddress())) {
             showShortToast(getResources().getString(R.string.email_format_error));
             return false;
         }

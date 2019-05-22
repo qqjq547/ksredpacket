@@ -137,7 +137,7 @@ public class ForgetEmailFragment extends MvpFragment<ForgetPresenter> implements
                 if (TextUtils.isEmpty(email)) {
                     showShortToast(getResources().getString(R.string.pls_input_email));
                 } else if (!CommonUtil.isEmail(email)) {
-                showShortToast(getResources().getString(R.string.email_format_error));
+                    showShortToast(getResources().getString(R.string.email_format_error));
                 } else {
                     mvpPresenter.getForgetEmailVerify(
                             email
@@ -151,8 +151,7 @@ public class ForgetEmailFragment extends MvpFragment<ForgetPresenter> implements
                     return;
                 }
                 showLoadingDialog(null);
-                mvpPresenter.getForget(
-                        Constant.RESET_NATION_CODE,
+                mvpPresenter.getEmailForget(
                         email,
                         etVerify.getText().toString(),
                         password
