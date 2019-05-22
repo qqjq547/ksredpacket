@@ -74,8 +74,9 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
 
     @Override
     public void initViewAndData() {
-        UserLogin userLogin = new Gson().fromJson(CommonUtil.baseDecrypt(getPref().getUserToken().split("\\.")[1]), UserLogin.class);
-        userAccountUuid=userLogin.getSub();
+//        UserLogin userLogin = new Gson().fromJson(CommonUtil.baseDecrypt(getPref().getUserToken().split("\\.")[1]), UserLogin.class);
+//        userAccountUuid=userLogin.getSub();
+        userAccountUuid=App.getInstance().getUserInfo().getUserAccountUuid();
         mvpPresenter.userBindMobileCaptcha(Constant.BIND_PHONE_CAPTCHA_IMA);
         tvTitle.setText(getString(R.string.title_phone_binding));
         mvpPresenter.captchaIsEnabled();
@@ -158,12 +159,12 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        getPref().setString(PrefUtil.USER_TOKEN,"");
-        finish();
-        startActivity(new Intent(this,LoginActivity.class));
-    }
+//    @Override
+//    public void onBackPressed() {
+//        getPref().setString(PrefUtil.USER_TOKEN,"");
+//        finish();
+//        startActivity(new Intent(this,LoginActivity.class));
+//    }
 
     @Override
     public void setData(BindingPhone data) {
