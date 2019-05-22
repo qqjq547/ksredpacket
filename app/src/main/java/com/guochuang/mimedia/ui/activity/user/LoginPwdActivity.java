@@ -68,12 +68,17 @@ public class LoginPwdActivity extends MvpActivity {
             list.add(new LoginPwdMobileFragment());
             titleArr.add(getString(R.string.mobile));
         }
-//        if (!TextUtils.isEmpty(userInfo.getEmail())){
-        list.add(new LoginPwdEmailFragment());
-        titleArr.add(getString(R.string.email));
-//        }
+        if (!TextUtils.isEmpty(userInfo.getEmailAddress())){
+           list.add(new LoginPwdEmailFragment());
+           titleArr.add(getString(R.string.email));
+        }
         fragments = list.toArray(new Fragment[0]);
         String[] titles=titleArr.toArray(new String[0]);;
+        if (titles.length==1){
+            tbList.setVisibility(View.GONE);
+        }else {
+            tbList.setVisibility(View.VISIBLE);
+        }
         MyFragmentPagerAdapter redbagDynamicAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), fragments, titles);
         vpContent.setAdapter(redbagDynamicAdapter);
         tbList.setupWithViewPager(vpContent);

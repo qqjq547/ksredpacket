@@ -60,7 +60,7 @@ public class MySealDetailsAdapter extends BaseMultiItemQuickAdapter<SealRecord, 
                         helper.setText(R.id.tv_money, mContext.getString(R.string.equalvalue_)+item.getEquivalence() + mContext.getString(R.string.money_unit_qc));
                         break;
                     case SealRecord.TYPE_EXTRA://提币
-                        helper.setText(R.id.tv_nuber, String.format(mContext.getString(R.string.format_number), item.getCoin()));
+                        helper.setText(R.id.tv_nuber,  mContext.getString(R.string.symbol_)+String.format(mContext.getString(R.string.format_number), item.getCoin()));
                         helper.setGone(R.id.iv_status, true);
                         if (item.getStatus() == 0 ){
                             helper.setImageResource(R.id.iv_status,R.drawable.extract_doing);

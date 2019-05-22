@@ -61,7 +61,7 @@ public class RecommendAgentActivity extends MvpActivity {
     @Override
     public void initViewAndData() {
         tvTitle.setText(R.string.recommend);
-        tvText.setText(R.string.agent_rule);
+//        tvText.setText(R.string.agent_rule);
         data= (RecommendData)getIntent().getSerializableExtra(Constant.RECOMMENDDATA);
        if (data!=null){
            tvFansCount.setText(String.valueOf(data.getDirectUser()));
@@ -95,7 +95,7 @@ public class RecommendAgentActivity extends MvpActivity {
                 onBackPressed();
                 break;
             case R.id.tv_text:
-                IntentUtils.startImageActivity(this,Constant.URL_AGENT_RULE);
+//                IntentUtils.startImageActivity(this,Constant.URL_AGENT_RULE);
                 break;
             case R.id.lin_share_benefit:
                 startActivity(new Intent(this,ShareBenefitDetailActivity.class));

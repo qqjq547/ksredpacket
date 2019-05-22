@@ -1567,7 +1567,7 @@ public interface ApiStore {
 
     @FormUrlEncoded
     @POST("/api/v1/user/account/bind_email")
-    Observable<HttpResponse<Email>> applyEmail(@Field("emailAddress") String emailAddress,
+    Observable<HttpResponse<Email>> applyEmail(@Field("email") String email,
                                                 @Field("captcha") String verifyCode,
                                                 @Field("userAccountUuid") String pwd);
 }
