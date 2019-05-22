@@ -16,14 +16,43 @@ public class RegisterPresenter extends BasePresenter<RegisterView> {
     public void getRegisterMobile(
             String tenantCode,
             String nationCode,
-            String mobile,
+            String account,
             String captcha,
             String password,
             String registerSource,
             String inviteCode
     ) {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                userRegisterMobile(tenantCode, nationCode, mobile, captcha, password, registerSource, inviteCode)), new ApiCallback<Boolean>() {
+                userRegisterMobile(tenantCode, nationCode, account, captcha, password, registerSource, inviteCode)), new ApiCallback<Boolean>() {
+            @Override
+            public void onSuccess(Boolean data) {
+                mvpView.setData(data);
+
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setError(exception.getMessage());
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
+    public void getRegisterEmail(
+            String tenantCode,
+            String nationCode,
+            String account,
+            String captcha,
+            String password,
+            String registerSource,
+            String inviteCode
+    ) {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
+                userRegisterEmail(tenantCode, nationCode, account, captcha, password, registerSource, inviteCode)), new ApiCallback<Boolean>() {
             @Override
             public void onSuccess(Boolean data) {
                 mvpView.setData(data);

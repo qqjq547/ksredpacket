@@ -86,12 +86,12 @@ public class NestTimeInfo {
 
         private String auctionDate;
         private double dayCoin;
-        private int dayPrice;
+        private double dayPrice;
         private String endDate;
         private long nestLocationId;
         private String startDate;
-        private int totalCoin;
-        private int totalPrice;
+        private double totalCoin;
+        private double totalPrice;
         private String userAccountUuid;
         private String userAvatar;
         private String userMobile;
@@ -114,11 +114,11 @@ public class NestTimeInfo {
             this.dayCoin = dayCoin;
         }
 
-        public int getDayPrice() {
+        public double getDayPrice() {
             return dayPrice;
         }
 
-        public void setDayPrice(int dayPrice) {
+        public void setDayPrice(double dayPrice) {
             this.dayPrice = dayPrice;
         }
 
@@ -146,19 +146,19 @@ public class NestTimeInfo {
             this.startDate = startDate;
         }
 
-        public int getTotalCoin() {
+        public double getTotalCoin() {
             return totalCoin;
         }
 
-        public void setTotalCoin(int totalCoin) {
+        public void setTotalCoin(double totalCoin) {
             this.totalCoin = totalCoin;
         }
 
-        public int getTotalPrice() {
+        public double getTotalPrice() {
             return totalPrice;
         }
 
-        public void setTotalPrice(int totalPrice) {
+        public void setTotalPrice(double totalPrice) {
             this.totalPrice = totalPrice;
         }
 

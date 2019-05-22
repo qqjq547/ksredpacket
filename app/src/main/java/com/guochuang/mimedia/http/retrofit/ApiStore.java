@@ -405,7 +405,18 @@ public interface ApiStore {
     Observable<HttpResponse<Boolean>> userRegisterMobile(
             @Field("tenantCode") String tenantCode,
             @Field("nationCode") String nationCode,
-            @Field("mobile") String mobile,
+            @Field("account") String account,
+            @Field("captcha") String captcha,
+            @Field("password") String password,
+            @Field("registerSource") String registerSource,
+            @Field("inviteCode") String inviteCode);
+
+    @FormUrlEncoded
+    @POST("/api/v1/user/register/email")
+    Observable<HttpResponse<Boolean>> userRegisterEmail(
+            @Field("tenantCode") String tenantCode,
+            @Field("nationCode") String nationCode,
+            @Field("account") String account,
             @Field("captcha") String captcha,
             @Field("password") String password,
             @Field("registerSource") String registerSource,
