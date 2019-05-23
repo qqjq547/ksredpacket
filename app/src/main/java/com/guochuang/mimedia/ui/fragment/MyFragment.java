@@ -311,7 +311,9 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                     startActivity(new Intent(getActivity(), OperationCenterActivity.class));
                     break;
                 case R.id.lin_my_recommend:
+                    mvpPresenter.getRecommendData();
                     if (recommendData != null) {
+                        mvpPresenter.getRecommendData();
                         if (getPref().getInt(PrefUtil.USER_ROLE, Constant.USER_ROLE_FANS) > Constant.USER_ROLE_FANS) {
                             Intent intent = new Intent(getActivity(), RecommendAgentActivity.class);
                             intent.putExtra(Constant.RECOMMENDDATA, recommendData);
@@ -321,8 +323,6 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                             intent.putExtra(Constant.RECOMMENDDATA, recommendData);
                             startActivity(intent);
                         }
-                    } else {
-                        mvpPresenter.getRecommendData();
                     }
                     break;
 

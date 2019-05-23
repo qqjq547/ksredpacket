@@ -19,6 +19,7 @@ import com.guochuang.mimedia.mvp.view.MySealView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.DialogBuilder;
+import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.tools.RxUtil;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.sz.gcyh.KSHongBao.R;

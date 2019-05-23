@@ -6,6 +6,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.guochuang.mimedia.mvp.presenter.RecommendPresenter;
+import com.guochuang.mimedia.mvp.view.RecommendView;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.ui.activity.common.ShareActivity;
 import com.sz.gcyh.KSHongBao.R;
@@ -17,7 +19,7 @@ import com.guochuang.mimedia.tools.Constant;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class RecommendAgentActivity extends MvpActivity {
+public class RecommendAgentActivity extends MvpActivity<RecommendPresenter> implements RecommendView {
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.tv_title)
@@ -46,11 +48,11 @@ public class RecommendAgentActivity extends MvpActivity {
     TextView tvSellerCount;
     @BindView(R.id.lin_seller)
     LinearLayout linSeller;
-    RecommendData data;
+    RecommendData recommendData;
 
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    protected RecommendPresenter createPresenter() {
+        return new RecommendPresenter(this);
     }
 
     @Override
@@ -61,31 +63,9 @@ public class RecommendAgentActivity extends MvpActivity {
     @Override
     public void initViewAndData() {
         tvTitle.setText(R.string.recommend);
-//        tvText.setText(R.string.agent_rule);
-        data= (RecommendData)getIntent().getSerializableExtra(Constant.RECOMMENDDATA);
-       if (data!=null){
-           tvFansCount.setText(String.valueOf(data.getDirectUser()));
-           tvAgentCount.setText(String.valueOf(data.getDirectAgent()));
-           tvShareBenefit.setText(data.getCumulativeCoin());
-           tvEqualCount.setText(data.getCumulativeMoney());
-           switch (data.getRole()){
-               case Constant.USER_ROLE_FANS:
-                   tvRole.setText("");
-                   break;
-               case Constant.USER_ROLE_AGENT:
-                   tvRole.setText(R.string.agent);
-                   break;
-               case Constant.USER_ROLE_MANAGER:
-                   tvRole.setText(R.string.manager);
-                   break;
-               case Constant.USER_ROLE_CHIEF:
-                   tvRole.setText(R.string.inspector);
-                   break;
-               case Constant.USER_ROLE_STAR_CHIEF:
-                   tvRole.setText(R.string.star_inspector);
-                   break;
-           }
-       }
+        recommendData = (RecommendData)getIntent().getSerializableExtra(Constant.RECOMMENDDATA);
+        setData(recommendData);
+        mvpPresenter.getRecommend();
     }
 
     @OnClick({R.id.iv_back,R.id.tv_text, R.id.lin_share_benefit, R.id.lin_equal, R.id.lin_agent, R.id.lin_fans, R.id.btn_start})
@@ -103,18 +83,53 @@ public class RecommendAgentActivity extends MvpActivity {
             case R.id.lin_equal:
                 break;
             case R.id.lin_agent:
-                if (data!=null){
-                    IntentUtils.startRecommendDetailActivity(this,data,true);
+                if (recommendData!=null){
+                    IntentUtils.startRecommendDetailActivity(this,recommendData,true);
                 }
                 break;
             case R.id.lin_fans:
-                if (data!=null){
-                    IntentUtils.startRecommendDetailActivity(this,data,false);
+                if (recommendData!=null){
+                    IntentUtils.startRecommendDetailActivity(this,recommendData,false);
                 }
                 break;
             case R.id.btn_start:
                 startActivity(new Intent(this,ShareActivity.class));
                 break;
         }
+    }
+
+    @Override
+    public void setData(RecommendData data) {
+           closeLoadingDialog();
+           if (data!=null){
+               recommendData=data;
+               tvFansCount.setText(String.valueOf(data.getDirectUser()));
+               tvAgentCount.setText(String.valueOf(data.getDirectAgent()));
+               tvShareBenefit.setText(data.getCumulativeCoin());
+               tvEqualCount.setText(data.getCumulativeMoney());
+               switch (data.getRole()){
+                   case Constant.USER_ROLE_FANS:
+                       tvRole.setText("");
+                       break;
+                   case Constant.USER_ROLE_AGENT:
+                       tvRole.setText(R.string.agent);
+                       break;
+                   case Constant.USER_ROLE_MANAGER:
+                       tvRole.setText(R.string.manager);
+                       break;
+                   case Constant.USER_ROLE_CHIEF:
+                       tvRole.setText(R.string.inspector);
+                       break;
+                   case Constant.USER_ROLE_STAR_CHIEF:
+                       tvRole.setText(R.string.star_inspector);
+                       break;
+               }
+           }
+
+    }
+
+    @Override
+    public void setError(String msg) {
+
     }
 }

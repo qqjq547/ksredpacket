@@ -7,6 +7,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.guochuang.mimedia.mvp.presenter.RecommendPresenter;
+import com.guochuang.mimedia.mvp.view.RecommendView;
 import com.guochuang.mimedia.ui.activity.common.ShareActivity;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.BasePresenter;
@@ -18,7 +20,7 @@ import com.guochuang.mimedia.tools.Constant;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class RecommendFanActivity extends MvpActivity {
+public class RecommendFanActivity extends MvpActivity<RecommendPresenter> implements RecommendView {
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.tv_title)
@@ -40,9 +42,11 @@ public class RecommendFanActivity extends MvpActivity {
     @BindView(R.id.wv_summary)
     WebView wvSummary;
 
+    RecommendData recommendData;
+
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    protected RecommendPresenter createPresenter() {
+        return new RecommendPresenter(this);
     }
 
     @Override
@@ -55,12 +59,9 @@ public class RecommendFanActivity extends MvpActivity {
       tvTitle.setText(R.string.recommend);
       CommonUtil.initH5WebView(this,wvSummary);
       wvSummary.loadUrl(Constant.URL_RULE_RECOMMEND);
-        RecommendData data= (RecommendData)getIntent().getSerializableExtra(Constant.RECOMMENDDATA);
-        if (data!=null) {
-            tvFansCount.setText(String.valueOf(data.getDirectUser()));
-            tvShareBenefit.setText(data.getCumulativeCoin());
-            tvEqualCount.setText(data.getCumulativeMoney());
-        }
+        recommendData= (RecommendData)getIntent().getSerializableExtra(Constant.RECOMMENDDATA);
+        setData(recommendData);
+        mvpPresenter.getRecommend();
     }
 
     @OnClick({R.id.iv_back, R.id.lin_fans, R.id.lin_share_benefit, R.id.lin_equal, R.id.btn_start})
@@ -81,5 +82,19 @@ public class RecommendFanActivity extends MvpActivity {
                 startActivity(new Intent(this,ShareActivity.class));
                 break;
         }
+    }
+
+    @Override
+    public void setData(RecommendData data) {
+        if (data!=null) {
+            tvFansCount.setText(String.valueOf(data.getDirectUser()));
+            tvShareBenefit.setText(data.getCumulativeCoin());
+            tvEqualCount.setText(data.getCumulativeMoney());
+        }
+    }
+
+    @Override
+    public void setError(String msg) {
+
     }
 }

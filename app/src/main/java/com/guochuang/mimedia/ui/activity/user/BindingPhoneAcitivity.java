@@ -177,7 +177,7 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
     @Override
     public void onBackPressed() {
         //微信登录,后退就清除token信息，回到登录页面
-        if (App.getInstance().getUserInfo()==null){
+        if (App.getInstance().getUserInfo()==null||getPref().getUserToken()==null){
             getPref().setString(PrefUtil.USER_TOKEN,"");
             startActivity(new Intent(this,LoginActivity.class));
             finish();
