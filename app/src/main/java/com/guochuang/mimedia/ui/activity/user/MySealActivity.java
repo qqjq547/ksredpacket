@@ -56,6 +56,9 @@ public class MySealActivity extends MvpActivity<MySealPresenter> implements MySe
     TextView tvAaaAddress;
     @BindView(R.id.lin_content)
     LinearLayout linContent;
+    @BindView(R.id.tv_tip)
+    TextView tvTip;
+
 
     MySeal mySeal;
     AAARate aaaRate;
@@ -167,35 +170,26 @@ public class MySealActivity extends MvpActivity<MySealPresenter> implements MySe
 
     }
 
-
-    /**
-     * 设置文字内容
-     */
-    private void setContent() {
-        tvAaaNumber.setText(mySeal.getCoin());
-        tvMoney.setText(mySeal.getMoney());
-        tvAaaPrice.setText(mySeal.getKsbPrice());
-        GlideImgManager.loadImage(this, mySeal.getQrcodeUrlKey(), ivCode);
-        tvAaaAddress.setText(mySeal.getKsbAddress());
-        if (aaaRate!=null){
-            tvMoney.setText(CommonUtil.formatDouble(aaaRate.getRate() * Double.valueOf(mySeal.getCoin()), 2));
-        }
-    }
-
     /**
      * 是否实名 根据实名展示不同的界面
      *
      */
     private void selectShowView() {
+        tvAaaNumber.setText(mySeal.getCoin());
+        tvMoney.setText(mySeal.getMoney());
+        tvAaaPrice.setText(mySeal.getKsbPrice());
         if (mySeal.getNameAuthentication()==1) {
             linContent.setVisibility(View.VISIBLE);
             mTvGotoRealName.setVisibility(View.GONE);
             mLlRootView.setBackgroundColor(getResources().getColor(R.color.white));
-            setContent();
+            GlideImgManager.loadImage(this, mySeal.getQrcodeUrlKey(), ivCode);
+            tvAaaAddress.setText(mySeal.getKsbAddress());
+            tvTip.setText(R.string.seal_des_str);
         } else {
             mTvGotoRealName.setVisibility(View.VISIBLE);
             linContent.setVisibility(View.GONE);
             mLlRootView.setBackgroundColor(getResources().getColor(R.color.color_6a4bf1));
+            tvTip.setText(R.string.seal_des_str_not_name);
         }
     }
 

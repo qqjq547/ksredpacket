@@ -24,6 +24,7 @@ public class UserLogin {
     private int exp;
     private long iat;
     private String mobile;
+    private String email;
 
     public String getMobile() {
         return mobile;
@@ -71,5 +72,13 @@ public class UserLogin {
 
     public void setIat(long iat) {
         this.iat = iat;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

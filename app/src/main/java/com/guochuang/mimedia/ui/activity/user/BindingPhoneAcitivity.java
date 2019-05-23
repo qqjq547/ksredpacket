@@ -15,6 +15,7 @@ import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.mvp.model.UserInfo;
 import com.guochuang.mimedia.mvp.model.UserLogin;
 import com.guochuang.mimedia.tools.CommonUtil;
+import com.guochuang.mimedia.tools.GsonUtil;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.tools.antishake.AntiShake;
@@ -59,9 +60,10 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
     @BindView(R.id.et_password)
     EditText etPassword;
 
-
+    String mobile;
+    String smsCode;
+    String password;
     String userAccountUuid;
-    Captcha captcha;
 
     @Override
     protected BindingPhonePresenter createPresenter() {
@@ -75,17 +77,17 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
 
     @Override
     public void initViewAndData() {
-        if (App.getInstance().getUserInfo()!=null){
+        tvTitle.setText(getString(R.string.title_phone_binding));
+        if (App.getInstance().getUserInfo()==null){
             //用户未登录，说明是微信登录，没有绑定手机号
-            UserLogin userLogin = new Gson().fromJson(CommonUtil.baseDecrypt(getPref().getUserToken().split("\\.")[1]), UserLogin.class);
+            UserLogin userLogin = GsonUtil.GsonToBean(CommonUtil.baseDecrypt(getPref().getUserToken().split("\\.")[1]), UserLogin.class);
             userAccountUuid=userLogin.getSub();
             mvpPresenter.captchaIsEnabled();
+            mvpPresenter.userBindMobileCaptcha(Constant.BIND_PHONE_CAPTCHA_IMA);
         }else {
             //登录后才绑定手机
             userAccountUuid=App.getInstance().getUserInfo().getUserAccountUuid();
         }
-        mvpPresenter.userBindMobileCaptcha(Constant.BIND_PHONE_CAPTCHA_IMA);
-        tvTitle.setText(getString(R.string.title_phone_binding));
     }
 
     private void sendCode() {
@@ -137,12 +139,12 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
             case R.id.tv_binding_phone_verify:
                 if (AntiShake.check(view.getId()))
                     return;
-                if (rlImaVerify.getVisibility()==View.VISIBLE&&etBindingPhoneImaVerify.getText().length() < 1) {
-                    showShortToast(getResources().getString(R.string.input_verity_ima_error));
+                mobile=etPhone.getText().toString().trim();
+                if (rlImaVerify.getVisibility() == View.VISIBLE && etBindingPhoneImaVerify.getText().length() < 1) {
+                    showShortToast(getString(R.string.input_verity_ima_error));
                 } else {
-                    mvpPresenter.mobileExisted(etPhone.getText().toString());
+                    mvpPresenter.mobileExisted(mobile);
                 }
-
                 break;
             case R.id.iv_binding_phone_ima_verify:
                 if (AntiShake.check(view.getId()))
@@ -156,11 +158,18 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
                     return;
                 }
                 showLoadingDialog(null);
-                mvpPresenter.userBindPhone(
-                        etPhone.getText().toString().trim(),
-                        etVerify.getText().toString().trim(),
-                        userAccountUuid,
-                        etPassword.getText().toString().trim());
+                if (App.getInstance().getUserInfo() == null) {
+                    mvpPresenter.userBindPhone(
+                            mobile,
+                            smsCode,
+                            userAccountUuid,
+                            password);
+                } else {
+                    mvpPresenter.userSafeBindPhone(
+                            mobile,
+                            smsCode,
+                            userAccountUuid);
+                }
                 break;
         }
     }
@@ -172,7 +181,10 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
             getPref().setString(PrefUtil.USER_TOKEN,"");
             finish();
             startActivity(new Intent(this,LoginActivity.class));
+        }else {
+            super.onBackPressed();
         }
+
     }
 
     @Override
@@ -188,10 +200,19 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
             Intent intent = getIntent();
             intent.putExtra(Constant.PHONE_KEY, data.getMobile());
             UserInfo userInfo=App.getInstance().getUserInfo();
-            userInfo.setEmailAddress(data.getMobile());
+            userInfo.setMobile(data.getMobile());
             setResult(RESULT_OK,intent);
             finish();
         }
+    }
+
+    @Override
+    public void setSafeData(BindingPhone data) {
+        closeLoadingDialog();
+        getPref().setString(PrefUtil.MOBILE,mobile);
+        showShortToast(getResources().getString(R.string.bind_success));
+        finish();
+        IntentUtils.startMainActivity(this,true);
     }
 
     @Override
@@ -202,7 +223,6 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
 
     @Override
     public void setCaptchaData(Captcha data) {
-        this.captcha = data;
         GlideImgManager.loadCornerImage(this, data.getUrl(), ivBindingPhoneImaVerify, 8);
     }
 
@@ -239,11 +259,13 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
         if (data!=null) {
             if (data.intValue()==0) {
                 //不存在
-                linPassword.setVisibility(View.VISIBLE);
+                if (App.getInstance().getUserInfo()==null){
+                    linPassword.setVisibility(View.VISIBLE);
+                }
                 mvpPresenter.userSendSms(
                         etPhone.getText().toString(),
                         etBindingPhoneImaVerify.getText().toString(),
-                        captcha.getUuid()
+                        userAccountUuid
                 );
             } else if(data.intValue()==1){
                 //已存在,已绑定
@@ -255,22 +277,25 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
                 mvpPresenter.userSendSms(
                         etPhone.getText().toString(),
                         etBindingPhoneImaVerify.getText().toString(),
-                        captcha.getUuid()
+                        userAccountUuid
                 );
             }
         }
     }
 
     private boolean doCheck() {
-        if (etPhone.getText().length() < 11) {
+        mobile=etPhone.getText().toString().trim();
+        smsCode=etVerify.getText().toString().trim();
+        password=etPassword.getText().toString().trim();
+        if (mobile.length() < 11) {
             showShortToast(getResources().getString(R.string.input_phone_error));
             return false;
         }
-        if (etVerify.getText().length() < 1) {
+        if (smsCode.length() < 1) {
             showShortToast(getResources().getString(R.string.input_verity_error));
             return false;
         }
-        if (linPassword.getVisibility()==View.VISIBLE&&etPassword.getText().length() < 6) {
+        if (linPassword.getVisibility()==View.VISIBLE&&password.length() < 6) {
             showShortToast(getResources().getString(R.string.input_password_error));
             return false;
         }

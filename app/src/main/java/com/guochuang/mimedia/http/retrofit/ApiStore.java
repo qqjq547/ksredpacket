@@ -541,6 +541,13 @@ public interface ApiStore {
             @Query("userAccountUuid") String userAccountUuid,
             @Query("password") String password);
 
+    // 绑定手机
+    @POST("/api/v1/user/safe/bind_mobile")
+    Observable<HttpResponse<BindingPhone>> userSafeBindPhone(
+            @Query("mobile") String mobile,
+            @Query("captcha") String captcha,
+            @Query("userAccountUuid") String userAccountUuid);
+
     // 获取银行卡列表
     @GET("/api/v1/user/bank_card/list")
     Observable<HttpResponse<List<CardList>>> userBandCardList();

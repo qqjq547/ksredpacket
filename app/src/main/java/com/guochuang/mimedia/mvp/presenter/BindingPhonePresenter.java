@@ -40,6 +40,31 @@ public class BindingPhonePresenter extends BasePresenter<BindingPhoneView> {
             }
         });
     }
+    public void userSafeBindPhone(
+            String mobile,
+            String captcha,
+            String userAccountUuid
+    ) {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
+                userSafeBindPhone(mobile, captcha, userAccountUuid)), new ApiCallback<BindingPhone>() {
+            @Override
+            public void onSuccess(BindingPhone data) {
+                mvpView.setSafeData(data);
+
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setError(exception.getMessage());
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
 
     public void userSendSms(
             String mobile,

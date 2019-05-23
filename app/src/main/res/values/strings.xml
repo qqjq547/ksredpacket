@@ -887,6 +887,7 @@
     <string name="seal_number_str">SEAL数</string>
     <string name="seal_price_str">SEAL价格（元）</string>
     <string name="seal_des_str">充币地址禁止充值除SEAL之外的其他资产，任何非SEAL资产充值将不可找回。</string>
+    <string name="seal_des_str_not_name">开通SEAL钱包后，可进行充币和提币操作</string>
     <string name="receive_my_seal">我的SEAL</string>
     <string name="seal_transfer_title">SEAL提币</string>
     <string name="unit_seal">SEAL</string>

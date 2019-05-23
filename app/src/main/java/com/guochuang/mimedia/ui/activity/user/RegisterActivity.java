@@ -19,6 +19,7 @@ import com.guochuang.mimedia.mvp.presenter.LoginPresenter;
 import com.guochuang.mimedia.mvp.view.LoginView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.GeneralUtil;
+import com.guochuang.mimedia.tools.GsonUtil;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.tools.SystemUtil;
@@ -114,9 +115,10 @@ public class RegisterActivity extends MvpActivity<LoginPresenter> implements Log
     @Override
     public void setLoginData(String data) {
         closeLoadingDialog();
-        UserLogin userLogin = new Gson().fromJson(CommonUtil.baseDecrypt(data.split("\\.")[1]), UserLogin.class);
+        UserLogin userLogin = GsonUtil.GsonToBean(CommonUtil.baseDecrypt(data.split("\\.")[1]), UserLogin.class);
         getPref().setString(PrefUtil.USER_TOKEN, data);
         getPref().setString(PrefUtil.MOBILE, userLogin.getMobile());
+        getPref().setString(PrefUtil.EMAIL, userLogin.getEmail());
         IntentUtils.startMainActivity(this, true);
         finish();
     }

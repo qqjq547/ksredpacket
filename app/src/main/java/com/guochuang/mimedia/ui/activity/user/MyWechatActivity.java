@@ -14,6 +14,7 @@ import com.guochuang.mimedia.mvp.model.PhoneEntity;
 import com.guochuang.mimedia.mvp.model.UserLogin;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
+import com.guochuang.mimedia.tools.GsonUtil;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.tools.WxLogin;
@@ -170,9 +171,10 @@ public class MyWechatActivity extends MvpActivity<MyWechatPresenter> implements 
     public void setBindSuccessAndLoginData(String data) {
         closeLoadingDialog();
         savePhone();
-        UserLogin userLogin = new Gson().fromJson(CommonUtil.baseDecrypt(data.split("\\.")[1]), UserLogin.class);
+        UserLogin userLogin = GsonUtil.GsonToBean(CommonUtil.baseDecrypt(data.split("\\.")[1]), UserLogin.class);
         getPref().setString(PrefUtil.USER_TOKEN, data);
             getPref().setString(PrefUtil.MOBILE, userLogin.getMobile());
+            getPref().setString(PrefUtil.EMAIL, userLogin.getEmail());
             IntentUtils.startMainActivity(this, true);
             LoginActivity.closeActivity();
             finish();

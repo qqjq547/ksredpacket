@@ -12,6 +12,7 @@ import android.content.SharedPreferences.Editor;
 public class PrefUtil {
     public static final String USER_ROLE = "user_role";
     public static final String MOBILE = "mobile";
+    public static final String EMAIL = "mobile";
 
     private SharedPreferences sharedPreference;
     private static PrefUtil preference = null;
