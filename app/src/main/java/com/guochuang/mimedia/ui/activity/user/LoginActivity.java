@@ -28,7 +28,9 @@ import com.guochuang.mimedia.mvp.view.LoginView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.GeneralUtil;
+import com.guochuang.mimedia.tools.GsonUtil;
 import com.guochuang.mimedia.tools.IntentUtils;
+import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.tools.SoftKeyBoardListener;
 import com.guochuang.mimedia.tools.SystemUtil;
@@ -423,6 +425,7 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
 //            finish();
 //        } else {
             getPref().setString(PrefUtil.MOBILE, userLogin.getMobile());
+            getPref().setString(PrefUtil.EMAIL, userLogin.getEmail());
             IntentUtils.startMainActivity(this, true);
             finish();
 //        }
@@ -431,14 +434,16 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
     public void setWxLoginData(String data) {
         closeLoadingDialog();
         savePhone();
-        UserLogin userLogin = new Gson().fromJson(CommonUtil.baseDecrypt(data.split("\\.")[1]), UserLogin.class);
+        LogUtil.d(CommonUtil.baseDecrypt(data.split("\\.")[1]));
+        UserLogin userLogin = GsonUtil.GsonToBean(CommonUtil.baseDecrypt(data.split("\\.")[1]), UserLogin.class);
         getPref().setString(PrefUtil.USER_TOKEN, data);
-        if (TextUtils.isEmpty(userLogin.getMobile())) {
+        if (TextUtils.isEmpty(userLogin.getMobile())&&TextUtils.isEmpty(userLogin.getEmail())) {
             Intent intent = new Intent(this, BindingPhoneAcitivity.class);
             startActivity(intent);
             finish();
         } else {
         getPref().setString(PrefUtil.MOBILE, userLogin.getMobile());
+        getPref().setString(PrefUtil.EMAIL, userLogin.getEmail());
         IntentUtils.startMainActivity(this, true);
         finish();
         }

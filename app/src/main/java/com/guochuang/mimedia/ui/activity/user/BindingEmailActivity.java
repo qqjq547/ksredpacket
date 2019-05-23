@@ -155,11 +155,11 @@ public class BindingEmailActivity extends MvpActivity<BindingEmailPresenter> imp
     @Override
     public void setApplySuccess(Email data) {
         closeLoadingDialog();
-
         Intent intent = getIntent();
         intent.putExtra(Constant.EMAIL_KEY, data.getEmail());
         UserInfo userInfo=App.getInstance().getUserInfo();
         userInfo.setEmailAddress(data.getEmail());
+        App.getInstance().setUserInfo(userInfo);
         setResult(RESULT_OK,intent);
         finish();
 
