@@ -197,9 +197,9 @@ public class RegistMobileFragment extends MvpFragment<RegisterPresenter> impleme
     }
 
     private boolean doCheck() {
-        mobile=etPhone.getText().toString().trim();
+        mobile=GeneralUtil.removeAllSpace(etPhone.getText().toString().trim());
         password=etPassword.getText().toString().trim();
-        boolean isMobile = GeneralUtil.judgePhoneQual(GeneralUtil.removeAllSpace(mobile));
+        boolean isMobile = GeneralUtil.judgePhoneQual(mobile);
         if (!isMobile) {
             showShortToast(getResources().getString(R.string.input_phone_error));
             return false;

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.guochuang.mimedia.app.App;
+import com.guochuang.mimedia.mvp.model.UserInfo;
 import com.guochuang.mimedia.mvp.model.UserLogin;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.IntentUtils;
@@ -168,10 +169,13 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
     @Override
     public void setData(BindingPhone data) {
         closeLoadingDialog();
-        getPref().setString(PrefUtil.MOBILE,data.getMobile());
-        showShortToast(getResources().getString(R.string.bind_success));
+        Intent intent = getIntent();
+        intent.putExtra(Constant.PHONE_KEY, data.getMobile());
+        UserInfo userInfo=App.getInstance().getUserInfo();
+        userInfo.setEmailAddress(data.getMobile());
+        setResult(RESULT_OK,intent);
         finish();
-        IntentUtils.startMainActivity(this,true);
+//        IntentUtils.startMainActivity(this,true);
     }
 
     @Override

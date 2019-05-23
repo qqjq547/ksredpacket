@@ -66,7 +66,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:padding="@dimen/space25">
+                            android:padding="@dimen/space20">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -76,10 +76,10 @@
                                 android:focusableInTouchMode="false"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal"
-                                android:paddingBottom="@dimen/space10"
-                                android:paddingLeft="@dimen/space15"
-                                android:paddingRight="@dimen/space15"
-                                android:paddingTop="@dimen/space10">
+                                android:paddingLeft="@dimen/space10"
+                                android:paddingTop="@dimen/space10"
+                                android:paddingRight="@dimen/space10"
+                                android:paddingBottom="@dimen/space10">
 
                                 <ImageView
                                     android:layout_width="wrap_content"
@@ -91,28 +91,29 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:orientation="horizontal"
-                                    android:gravity="center_vertical">
-                                <EditText
-                                    android:id="@+id/et_login_phone"
-                                    android:layout_width="0dp"
-                                    android:layout_weight="1"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginLeft="@dimen/space15"
-                                    android:background="@null"
                                     android:gravity="center_vertical"
-                                    android:hint="@string/hint_login_phone"
-                                    android:maxLines="1"
-                                    android:lines="1"
-                                    android:textColor="@color/text_black"
-                                    android:textSize="@dimen/textfont15" />
+                                    android:orientation="horizontal">
+
+                                    <EditText
+                                        android:id="@+id/et_login_phone"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:paddingLeft="@dimen/space10"
+                                        android:layout_weight="1"
+                                        android:background="@null"
+                                        android:gravity="center_vertical"
+                                        android:hint="@string/hint_login_phone"
+                                        android:lines="1"
+                                        android:maxLines="1"
+                                        android:textColor="@color/text_black"
+                                        android:textSize="@dimen/textfont15" />
 
                                     <ImageView
                                         android:id="@+id/iv_select_phone"
                                         android:layout_width="wrap_content"
                                         android:layout_height="@dimen/space25"
                                         android:layout_alignParentRight="true"
-                                        android:src="@drawable/ic_pull"/>
+                                        android:src="@drawable/ic_pull" />
 
                                 </LinearLayout>
 
@@ -127,15 +128,15 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/space15"
+                                android:layout_marginTop="@dimen/space10"
                                 android:focusable="false"
                                 android:focusableInTouchMode="false"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal"
-                                android:paddingBottom="@dimen/space10"
-                                android:paddingLeft="@dimen/space15"
-                                android:paddingRight="@dimen/space15"
-                                android:paddingTop="@dimen/space30">
+                                android:paddingLeft="@dimen/space10"
+                                android:paddingTop="@dimen/space30"
+                                android:paddingRight="@dimen/space10"
+                                android:paddingBottom="@dimen/space10">
 
                                 <ImageView
                                     android:layout_width="wrap_content"
@@ -148,7 +149,7 @@
                                     android:id="@+id/et_login_password"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:layout_marginLeft="@dimen/space15"
+                                    android:paddingLeft="@dimen/space10"
                                     android:background="@null"
                                     android:digits="@string/input_password_type"
                                     android:gravity="center_vertical"
@@ -170,8 +171,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/space36"
-                                android:layout_marginRight="@dimen/space36"
                                 android:layout_marginTop="@dimen/space30"
+                                android:layout_marginRight="@dimen/space36"
                                 android:background="@drawable/bg_btn_login_phone_red"
                                 android:gravity="center"
                                 android:padding="@dimen/space10"
@@ -182,8 +183,8 @@
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginBottom="@dimen/space20"
-                                android:layout_marginTop="@dimen/space10">
+                                android:layout_marginTop="@dimen/space10"
+                                android:layout_marginBottom="@dimen/space20">
 
                                 <TextView
                                     android:id="@+id/tv_login_register"
@@ -195,7 +196,7 @@
                                     android:padding="@dimen/space10"
                                     android:text="@string/btn_login_register"
                                     android:textColor="@color/text_login_help"
-                                    android:textSize="@dimen/textfont10"/>
+                                    android:textSize="@dimen/textfont10" />
 
                                 <TextView
                                     android:id="@+id/tv_login_forget"
