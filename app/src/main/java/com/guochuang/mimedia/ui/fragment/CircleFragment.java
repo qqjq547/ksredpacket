@@ -30,8 +30,6 @@ public class CircleFragment extends MvpFragment {
     TextView tvTitle;
     @BindView(R.id.tv_text)
     TextView tvText;
-    @BindView(R.id.iv_back)
-    ImageView mIvBack;
     @BindView(R.id.srl_refresh)
     SmartRefreshLayout srlRefresh;
     @BindView(R.id.wv_circle)
@@ -50,7 +48,6 @@ public class CircleFragment extends MvpFragment {
 
     @Override
     public void initViewAndData() {
-        mIvBack.setVisibility(View.INVISIBLE);
         tvTitle.setText(R.string.tab_snatch);
         wvCircle.getSettings().setJavaScriptEnabled(true);
         wvCircle.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);

@@ -101,7 +101,6 @@ public class LoginPwdMobileFragment extends MvpFragment<ForgetPresenter> impleme
                     @Override
                     public void call() {
                         tvGetVertifyCode.setEnabled(false);
-//                        tvGetVertifyCode.setBackgroundResource(R.drawable.bg_btn_forget_verify_gray);
                         tvGetVertifyCode.setTextColor(getResources().getColor(R.color.text_gray));
                     }
                 })
@@ -111,7 +110,6 @@ public class LoginPwdMobileFragment extends MvpFragment<ForgetPresenter> impleme
                         super.onCompleted();
                         tvGetVertifyCode.setText(getString(R.string.btn_login_forget_verify));
                         tvGetVertifyCode.setEnabled(true);
-//                        tvGetVertifyCode.setBackgroundResource(R.drawable.bg_btn_forget_verify_red);
                         tvGetVertifyCode.setTextColor(getResources().getColor(R.color.text_blue));
                     }
 
@@ -120,7 +118,6 @@ public class LoginPwdMobileFragment extends MvpFragment<ForgetPresenter> impleme
                         super.onError(e);
                         tvGetVertifyCode.setText(getString(R.string.btn_login_forget_verify));
                         tvGetVertifyCode.setEnabled(true);
-//                        tvGetVertifyCode.setBackgroundResource(R.drawable.bg_btn_forget_verify_red);
                         tvGetVertifyCode.setTextColor(getResources().getColor(R.color.text_blue));
                     }
 

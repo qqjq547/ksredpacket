@@ -78,11 +78,11 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
     @Override
     public void initViewAndData() {
         tvTitle.setText(getString(R.string.title_phone_binding));
+        mvpPresenter.captchaIsEnabled();
         if (App.getInstance().getUserInfo()==null){
             //用户未登录，说明是微信登录，没有绑定手机号
             UserLogin userLogin = GsonUtil.GsonToBean(CommonUtil.baseDecrypt(getPref().getUserToken().split("\\.")[1]), UserLogin.class);
             userAccountUuid=userLogin.getSub();
-            mvpPresenter.captchaIsEnabled();
             mvpPresenter.userBindMobileCaptcha(Constant.BIND_PHONE_CAPTCHA_IMA);
         }else {
             //登录后才绑定手机
