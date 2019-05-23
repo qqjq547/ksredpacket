@@ -122,6 +122,11 @@ public class RegisterActivity extends MvpActivity<LoginPresenter> implements Log
     }
 
     @Override
+    public void setWxLoginData(String data) {
+
+    }
+
+    @Override
     public void setLoginError(String msg) {
         closeLoadingDialog();
         showShortToast(msg);

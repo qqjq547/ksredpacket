@@ -106,7 +106,7 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                         pushId)), new ApiCallback<String>() {
             @Override
             public void onSuccess(String data) {
-                mvpView.setLoginData(data);
+                mvpView.setWxLoginData(data);
 
             }
 
