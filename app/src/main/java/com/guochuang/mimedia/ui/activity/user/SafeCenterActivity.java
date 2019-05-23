@@ -206,15 +206,15 @@ public class SafeCenterActivity extends MvpActivity<SafeCenterPresenter> impleme
 
         }
 
-//        if(resultCode == RESULT_OK && requestCode == Constant.OPENT_BINDINGPHONEACITIVITY) {
-//            //设置
-//            String phone = data.getStringExtra(Constant.PHONE_KEY);
-//            tvMyPhone.setText(phone);
-//            if(safeCenter != null) {
-//                safeCenter.setMobile(phone);
-//            }
-//
-//        }
+        if(resultCode == RESULT_OK && requestCode == Constant.OPENT_BINDINGPHONEACITIVITY) {
+            //设置
+            String phone = data.getStringExtra(Constant.PHONE_KEY);
+            tvMyPhone.setText(phone);
+            if(safeCenter != null) {
+                safeCenter.setMobile(phone);
+            }
+
+        }
     }
 
     @Override

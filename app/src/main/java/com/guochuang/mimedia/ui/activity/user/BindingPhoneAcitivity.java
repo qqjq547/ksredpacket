@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.guochuang.mimedia.app.App;
+import com.guochuang.mimedia.mvp.model.UserInfo;
 import com.guochuang.mimedia.mvp.model.UserLogin;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.IntentUtils;
@@ -74,12 +75,17 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
 
     @Override
     public void initViewAndData() {
-//        UserLogin userLogin = new Gson().fromJson(CommonUtil.baseDecrypt(getPref().getUserToken().split("\\.")[1]), UserLogin.class);
-//        userAccountUuid=userLogin.getSub();
-        userAccountUuid=App.getInstance().getUserInfo().getUserAccountUuid();
+        if (App.getInstance().getUserInfo()!=null){
+            //用户未登录，说明是微信登录，没有绑定手机号
+            UserLogin userLogin = new Gson().fromJson(CommonUtil.baseDecrypt(getPref().getUserToken().split("\\.")[1]), UserLogin.class);
+            userAccountUuid=userLogin.getSub();
+            mvpPresenter.captchaIsEnabled();
+        }else {
+            //登录后才绑定手机
+            userAccountUuid=App.getInstance().getUserInfo().getUserAccountUuid();
+        }
         mvpPresenter.userBindMobileCaptcha(Constant.BIND_PHONE_CAPTCHA_IMA);
         tvTitle.setText(getString(R.string.title_phone_binding));
-        mvpPresenter.captchaIsEnabled();
     }
 
     private void sendCode() {
@@ -159,20 +165,33 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
         }
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        getPref().setString(PrefUtil.USER_TOKEN,"");
-//        finish();
-//        startActivity(new Intent(this,LoginActivity.class));
-//    }
+    @Override
+    public void onBackPressed() {
+        //微信登录,后退就清除token信息，回到登录页面
+        if (App.getInstance().getUserInfo()==null){
+            getPref().setString(PrefUtil.USER_TOKEN,"");
+            finish();
+            startActivity(new Intent(this,LoginActivity.class));
+        }
+    }
 
     @Override
     public void setData(BindingPhone data) {
         closeLoadingDialog();
-        getPref().setString(PrefUtil.MOBILE,data.getMobile());
-        showShortToast(getResources().getString(R.string.bind_success));
-        finish();
-        IntentUtils.startMainActivity(this,true);
+        if (App.getInstance().getUserInfo()==null){//微信登录绑定手机号码,直接进入主界面
+            getPref().setString(PrefUtil.MOBILE,data.getMobile());
+            showShortToast(getResources().getString(R.string.bind_success));
+            finish();
+            IntentUtils.startMainActivity(this,true);
+        }else {
+            //登录后绑定手机号码
+            Intent intent = getIntent();
+            intent.putExtra(Constant.PHONE_KEY, data.getMobile());
+            UserInfo userInfo=App.getInstance().getUserInfo();
+            userInfo.setEmailAddress(data.getMobile());
+            setResult(RESULT_OK,intent);
+            finish();
+        }
     }
 
     @Override

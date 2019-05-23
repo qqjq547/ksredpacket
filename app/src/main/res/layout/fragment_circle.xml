@@ -3,7 +3,40 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-  <include layout="@layout/layout_title_text"/>
+  <LinearLayout
+      android:id="@+id/lin_title"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/bg_title"
+      android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height">
+
+      <TextView
+          android:id="@+id/tv_title"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:lines="1"
+          android:layout_centerInParent="true"
+          android:textColor="@color/text_black"
+          android:textSize="@dimen/textfont18" />
+
+      <TextView
+          android:id="@+id/tv_text"
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:layout_alignParentRight="true"
+          android:gravity="center"
+          android:paddingLeft="@dimen/space15"
+          android:paddingRight="@dimen/space15"
+          android:textColor="@color/text_black"
+          android:textSize="@dimen/textfont14" />
+    </RelativeLayout>
+
+    <include layout="@layout/layout_divide_deep_line" />
+  </LinearLayout>
   <com.scwang.smartrefresh.layout.SmartRefreshLayout
       android:id="@+id/srl_refresh"
       android:layout_width="match_parent"
