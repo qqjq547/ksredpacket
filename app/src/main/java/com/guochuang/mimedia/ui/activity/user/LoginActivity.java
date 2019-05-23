@@ -150,7 +150,6 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
 
         mListPopupWindow = new ListPopupWindow(this);
 
-//        editTextAddTextChangLisenter(etPhone);
         phoneEntitys = mBox.getAll();
         mPhoneList.addAll(phoneEntitys);
         Collections.reverse(mPhoneList);
@@ -167,7 +166,7 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
 
         if (phoneEntitys.size() >= 5) {
             mListPopupWindow.setHeight(CommonUtil.getScreenH(this) / 5);
-        }
+    }
 
         mListPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
@@ -206,58 +205,6 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
 
     }
 
-
-    /**
-     * 给phone输入框添加 监听
-     *
-     * @param editText
-     */
-    private void editTextAddTextChangLisenter(final EditText editText) {
-        editText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, final int start, int before, int count) {
-                mPhoneList.clear();
-                mPhoneList.addAll(phoneEntitys);
-                Collections.reverse(mPhoneList);
-                if (mPhoneList != null) {
-                    int size = mPhoneList.size();
-                    for (int i = 0; i < size; i++) {
-                        PhoneEntity phoneEntity = mPhoneList.get(i);
-                        if (!phoneEntity.getPhone().startsWith(s.toString().trim())) {
-                            mPhoneList.remove(i);
-                            i--;
-                            size--;
-                        }
-                    }
-                }
-
-
-                if (mPhoneList.isEmpty() && mListPopupWindow.isShowing()) {
-                    mListPopupWindow.dismiss();
-                } else {
-                    if (!mListPopupWindow.isShowing() && !mPhoneList.isEmpty()) {
-                        mListPopupWindow.show();
-                    }
-                }
-
-                mSelectPhoneAdapter.notifyDataSetChanged();
-
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (etPhone.getText().toString().trim().length() == 11) {
-                    mListPopupWindow.dismiss();
-                }
-            }
-        });
-    }
 
     @OnClick({R.id.tv_login_confirm,
             R.id.tv_login_register,
@@ -430,10 +377,11 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
 
     private void savePhone() {
         String phone = etPhone.getText().toString().trim();
+        if(TextUtils.isEmpty(phone))return;
 
         List<PhoneEntity> phoneEntitys = mBox.getAll();
         for (int i = 0; i < phoneEntitys.size(); i++) {
-            if (phone.equals(phoneEntitys.get(i).phone)) {
+            if ( TextUtils.isEmpty(phoneEntitys.get(i).phone) || phone.equals(phoneEntitys.get(i).phone)) {
                 mBox.remove(phoneEntitys.get(i));
             }
         }
