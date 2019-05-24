@@ -49,7 +49,7 @@ public class BindingPhonePresenter extends BasePresenter<BindingPhoneView> {
                 userSafeBindPhone(mobile, captcha, userAccountUuid)), new ApiCallback<BindingPhone>() {
             @Override
             public void onSuccess(BindingPhone data) {
-                mvpView.setSafeData(data);
+                mvpView.setData(data);
 
             }
 

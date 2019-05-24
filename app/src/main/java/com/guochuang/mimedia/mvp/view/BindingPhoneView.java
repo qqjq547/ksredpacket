@@ -6,7 +6,6 @@ import com.guochuang.mimedia.mvp.model.Captcha;
 public interface BindingPhoneView {
 
     void setData(BindingPhone data);
-    void setSafeData(BindingPhone data);
     void setError(String msg);
     void setCaptchaData(Captcha data);
     void setCaptchaError(String msg);

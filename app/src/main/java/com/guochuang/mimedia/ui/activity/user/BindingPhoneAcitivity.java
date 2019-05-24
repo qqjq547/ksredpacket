@@ -208,15 +208,6 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
     }
 
     @Override
-    public void setSafeData(BindingPhone data) {
-        closeLoadingDialog();
-        getPref().setString(PrefUtil.MOBILE,mobile);
-        showShortToast(getResources().getString(R.string.bind_success));
-        finish();
-        IntentUtils.startMainActivity(this,true);
-    }
-
-    @Override
     public void setError(String msg) {
         closeLoadingDialog();
         showShortToast(msg);
