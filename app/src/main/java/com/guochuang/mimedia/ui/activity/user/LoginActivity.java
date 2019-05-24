@@ -279,8 +279,8 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
 
                 showLoadingDialog(null);
                 mvpPresenter.getLogin(
-                        etPhone.getText().toString(),
-                        etPassword.getText().toString(),
+                        etPhone.getText().toString().trim(),
+                        etPassword.getText().toString().trim(),
                         Constant.CAPTCHA,
                         Constant.SYSTEM_CODE,
                         Constant.LOGIN_TYPE,

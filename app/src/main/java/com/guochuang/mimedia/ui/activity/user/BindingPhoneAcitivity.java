@@ -17,6 +17,7 @@ import com.guochuang.mimedia.mvp.model.UserLogin;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.GsonUtil;
 import com.guochuang.mimedia.tools.IntentUtils;
+import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.tools.antishake.AntiShake;
 import com.sz.gcyh.KSHongBao.R;

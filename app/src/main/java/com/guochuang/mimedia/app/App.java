@@ -124,6 +124,7 @@ public class App extends Application {
             }
         }
         activityList.clear();
+        userInfo=null;
         App.getInstance().getBoxStore().boxFor(UserInfo.class).removeAll();
         String adConfig=PrefUtil.getInstance().getString(PrefUtil.ADVER_MESSAGE,"");
         PrefUtil.getInstance().clean();
