@@ -122,18 +122,6 @@ public class MyQCActivity extends MvpActivity<MyQCPresenter> implements MyQCView
     }
 
 
-
-
-
-
-//    @Override
-//    public void setMyAaa(MyAAA data) {
-//        closeLoadingDialog();
-//        if (data!=null){
-//            startActivityForResult(new Intent(this, MyKsbGrantActivity.class),Constant.REQUEST_GRANT);
-//        }
-//    }
-
     @Override
     public void setMyQC(MyQC data) {
         closeLoadingDialog();

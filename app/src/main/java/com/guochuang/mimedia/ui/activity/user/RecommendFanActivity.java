@@ -58,7 +58,7 @@ public class RecommendFanActivity extends MvpActivity<RecommendPresenter> implem
     public void initViewAndData() {
       tvTitle.setText(R.string.recommend);
       CommonUtil.initH5WebView(this,wvSummary);
-      wvSummary.loadUrl(Constant.URL_RULE_RECOMMEND);
+      wvSummary.loadUrl(CommonUtil.getTimeStampUrl(Constant.URL_RULE_RECOMMEND));
         recommendData= (RecommendData)getIntent().getSerializableExtra(Constant.RECOMMENDDATA);
         setData(recommendData);
         mvpPresenter.getRecommend();

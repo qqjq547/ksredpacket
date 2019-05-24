@@ -2,6 +2,7 @@ package com.guochuang.mimedia.ui.fragment;
 
 import android.content.Intent;
 import android.os.Build;
+import android.text.TextUtils;
 import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
@@ -98,7 +99,9 @@ public class CircleFragment extends MvpFragment {
         }
         @JavascriptInterface
         public void openWin(String openUrl){
-            IntentUtils.startWebActivity(getActivity(),"",openUrl);
+            if(!TextUtils.isEmpty(openUrl)) {
+                IntentUtils.startWebActivity(getActivity(), "", openUrl);
+            }
         }
         @JavascriptInterface
         public void rightTitle(final String title, final String url) {

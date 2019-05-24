@@ -155,7 +155,9 @@ public class WebActivity extends MvpActivity<WebPresenter> implements IntefaceWe
                 @Override
                 public void run() {
                     LogUtil.d("openUrl=" + openUrl);
-                    IntentUtils.startWebActivity(WebActivity.this, "", openUrl);
+                    if(!TextUtils.isEmpty(openUrl)) {
+                        IntentUtils.startWebActivity(WebActivity.this, "", openUrl);
+                    }
                 }
             });
 

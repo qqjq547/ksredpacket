@@ -128,7 +128,7 @@ public class Constant {
     //资讯详情
     public static final String URL_INFOMATION_DETAIL = ApiClient.HTML_URL+"information/detail/index.htm";
     //推荐协议
-    public static final String URL_RULE_RECOMMEND = ApiClient.HTML_URL + "html/rule/recommend/index.htm";
+    public static final String URL_RULE_RECOMMEND = ApiClient.HTML_URL + "project/html/rule/awardRule.html";
     //ksb协议
     public static final String URL_RULE_QC =  ApiClient.HTML_URL + "project/html/rule/recommendedRule.html";
     //平台协议
@@ -351,10 +351,6 @@ public class Constant {
 
     public static int QC_TO_OTHER = 1;
     public static int OTHER_TO_QC = 2;
-
-
-
-
 
 
    // 1-AAA转KSB，2-KSB转AAA，3-AAA提币，4-AAA充币
