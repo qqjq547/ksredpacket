@@ -144,7 +144,17 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
                 if (rlImaVerify.getVisibility() == View.VISIBLE && etBindingPhoneImaVerify.getText().length() < 1) {
                     showShortToast(getString(R.string.input_verity_ima_error));
                 } else {
-                    mvpPresenter.mobileExisted(mobile);
+                    if (App.getInstance().getUserInfo()==null){//未登录
+                        showLoadingDialog(null);
+                        mvpPresenter.mobileExisted(mobile);
+                    }else {//已登录
+                        mvpPresenter.userSendSms(
+                                etPhone.getText().toString(),
+                                etBindingPhoneImaVerify.getText().toString(),
+                                userAccountUuid
+                        );
+                    }
+
                 }
                 break;
             case R.id.iv_binding_phone_ima_verify:
@@ -226,12 +236,14 @@ public class BindingPhoneAcitivity extends MvpActivity<BindingPhonePresenter> im
 
     @Override
     public void setSmsData(String data) {
+        closeLoadingDialog();
         showShortToast(getResources().getString(R.string.type_login_verify_send_success));
         sendCode();
     }
 
     @Override
     public void setSmsError(String msg) {
+        closeLoadingDialog();
         showShortToast(msg);
     }
 
