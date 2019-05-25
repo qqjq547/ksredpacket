@@ -173,9 +173,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
         });
         setUserRole(getPref().getInt(PrefUtil.USER_ROLE, Constant.USER_ROLE_FANS));
         kilometre = getPref().getInt(PrefUtil.KILOMETRE, 1000);
-        mvpPresenter.getWalletCoinAndMoney();
         mvpPresenter.getScrollBar();
-//        mvpPresenter.getUserRole();
         onMarkerClickListener = new BaiduMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {

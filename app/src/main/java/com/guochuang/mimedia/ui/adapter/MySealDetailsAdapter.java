@@ -35,14 +35,6 @@ public class MySealDetailsAdapter extends BaseMultiItemQuickAdapter<SealRecord, 
     protected void convert(BaseViewHolder helper, SealRecord item) {
         switch (item.getItemType()) {
             case SealRecord.SIMPLE:
-                helper.setGone(R.id.tv_equivalence,false);
-                String ksbType = item.getKsbType();
-
-                if(SealRecord.TYPE_TQK.equals(ksbType) || SealRecord.TYPE_TQK_FY.equals(ksbType)
-                        || SealRecord.TYPE_TQK_SY.equals(ksbType)|| SealRecord.TYPE_TQK_.equals(ksbType))
-                    helper.setGone(R.id.tv_equivalence,true).setText(R.id.tv_equivalence,String.format(mContext.getString(R.string.equivalence_fomat_str),item.getMoney()));
-
-
                 helper.setText(R.id.tv_name, item.getTitle());
                 helper.setText(R.id.tv_time, item.getCreateDate());
                 if (TextUtils.isEmpty(item.getRemark())) {
@@ -57,12 +49,6 @@ public class MySealDetailsAdapter extends BaseMultiItemQuickAdapter<SealRecord, 
                     helper.setTextColor(R.id.tv_price, mContext.getResources().getColor(R.color.text_black));
                     helper.setText(R.id.tv_price, "-" + String.format(mContext.getString(R.string.format_seal), item.getCoin()));
                 }
-
-
-
-
-
-
                 break;
             case SealRecord.TRANSFER:
                 helper.setText(R.id.tv_type, item.getTitle());
@@ -74,6 +60,10 @@ public class MySealDetailsAdapter extends BaseMultiItemQuickAdapter<SealRecord, 
                 helper.setText(R.id.tv_nuber, String.format(mContext.getString(R.string.format_number), item.getCoin()));
                 helper.setText(R.id.tv_adrress, String.format(mContext.getResources().getString(R.string.format_receive_address), item.getTargetAddress()));
                 switch (item.getKsbType()) {
+                    case SealRecord.TYPE_TQK://qc转seal
+                        helper.setTextColor(R.id.tv_nuber, mContext.getResources().getColor(R.color.color_4498e0));
+                        helper.setText(R.id.tv_money, mContext.getString(R.string.equalvalue_) + item.getMoney() + mContext.getString(R.string.money_unit_yuan));
+                        break;
                     case SealRecord.TYPE_QC2SEAL://qc转seal
                         helper.setTextColor(R.id.tv_nuber, mContext.getResources().getColor(R.color.color_4498e0));
                         helper.setText(R.id.tv_money, mContext.getString(R.string.equalvalue_) + item.getEquivalence() + mContext.getString(R.string.money_unit_seal));
