@@ -35,6 +35,13 @@ public class MySealDetailsAdapter extends BaseMultiItemQuickAdapter<SealRecord, 
     protected void convert(BaseViewHolder helper, SealRecord item) {
         switch (item.getItemType()) {
             case SealRecord.SIMPLE:
+                helper.setGone(R.id.tv_equivalence,false);
+                String ksbType = item.getKsbType();
+
+                if(SealRecord.TYPE_TQK.equals(ksbType) || SealRecord.TYPE_TQK_FY.equals(ksbType) || SealRecord.TYPE_TQK_SY.equals(ksbType))
+                    helper.setGone(R.id.tv_equivalence,true).setText(R.id.tv_equivalence,String.format(mContext.getString(R.string.equivalence_fomat_str),item.getMoney()));
+
+
                 helper.setText(R.id.tv_name, item.getTitle());
                 helper.setText(R.id.tv_time, item.getCreateDate());
                 if (TextUtils.isEmpty(item.getRemark())) {
@@ -49,6 +56,7 @@ public class MySealDetailsAdapter extends BaseMultiItemQuickAdapter<SealRecord, 
                     helper.setTextColor(R.id.tv_price, mContext.getResources().getColor(R.color.text_black));
                     helper.setText(R.id.tv_price, "-" + String.format(mContext.getString(R.string.format_seal), item.getCoin()));
                 }
+
 
 
 

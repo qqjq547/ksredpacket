@@ -31,6 +31,24 @@ public class SealRecord implements MultiItemEntity {
     private String ksbType;
     private String money;
 
+
+
+    public String getKsbType() {
+        return ksbType;
+    }
+
+    public void setKsbType(String ksbType) {
+        this.ksbType = ksbType;
+    }
+
+    public String getMoney() {
+        return money;
+    }
+
+    public void setMoney(String money) {
+        this.money = money;
+    }
+
     public String getCoin() {
         return coin;
     }
