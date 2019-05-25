@@ -28,7 +28,7 @@ public class SealRecord implements MultiItemEntity {
     private String serviceFee;//旷工费
     private int status;//SEAL明细状态
     private String equivalence;//SEAL等值数量
-
+    private String ksbType;
 
     public String getCoin() {
         return coin;
@@ -126,6 +126,13 @@ public class SealRecord implements MultiItemEntity {
         this.equivalence = equivalence;
     }
 
+    public String getKsbType() {
+        return ksbType;
+    }
+
+    public void setKsbType(String ksbType) {
+        this.ksbType = ksbType;
+    }
 
     public static final int SIMPLE = 0;
     public static final int TRANSFER = 1;
@@ -138,7 +145,7 @@ public class SealRecord implements MultiItemEntity {
 
     @Override
     public int getItemType() {
-        switch (type){
+        switch (ksbType){
             case TYPE_QC2SEAL://QC转SEAL
             case TYPE_SEAL2QC://SEAL转QC
             case TYPE_EXTRA://提币

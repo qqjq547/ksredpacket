@@ -49,7 +49,7 @@ public class MySealDetailsAdapter extends BaseMultiItemQuickAdapter<SealRecord, 
                 helper.setText(R.id.tv_time, item.getCreateDate());
                 helper.setText(R.id.tv_nuber, String.format(mContext.getString(R.string.format_number), item.getCoin()));
                 helper.setText(R.id.tv_adrress, String.format(mContext.getResources().getString(R.string.format_receive_address), item.getTargetAddress()));
-                switch (item.getType()) {
+                switch (item.getKsbType()) {
                     case SealRecord.TYPE_QC2SEAL://qc转seal
                         helper.setTextColor(R.id.tv_nuber, mContext.getResources().getColor(R.color.color_4498e0));
                         helper.setText(R.id.tv_money, mContext.getString(R.string.equalvalue_) + item.getEquivalence() + mContext.getString(R.string.money_unit_seal));
