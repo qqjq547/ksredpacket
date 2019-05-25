@@ -54,9 +54,10 @@ public class SealTransferPresenter extends BasePresenter<SealTransferView> {
             }
         });
     }
-    public void withdrawCoin(String digitalCurrency,String address,double coin,String safetyCode,String mobile,String captcha){
+    public void withdrawCoin(String digitalCurrency,String address,
+                             double coin,String safetyCode,String mobile,String captcha,String safeType,String emailAddress){
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                withdrawCoin(digitalCurrency,address,coin,safetyCode, mobile, captcha)), new ApiCallback<Boolean>() {
+                withdrawCoin(digitalCurrency,address,coin,safetyCode, mobile, captcha,safeType,emailAddress)), new ApiCallback<Boolean>() {
             @Override
             public void onSuccess(Boolean data) {
                 mvpView.setData(data);
@@ -84,6 +85,30 @@ public class SealTransferPresenter extends BasePresenter<SealTransferView> {
             @Override
             public void onFailure(ApiException exception) {
                 mvpView.setError(exception.getMessage());
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
+    public void sendEmailCode(
+            String email,
+            String uuid
+    ) {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
+                userEmailResetSafetyCode(email, uuid)), new ApiCallback<String>() {
+            @Override
+            public void onSuccess(String data) {
+                mvpView.setEmailCode(data);
+
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setError(exception.getMessage());
+
             }
 
             @Override

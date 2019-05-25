@@ -58,6 +58,9 @@ import com.guochuang.mimedia.view.GridItemDecoration;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
 import java.io.File;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -166,6 +169,8 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
     String videoPath;
     String coverUrl;
     String videoUrl;
+    String amountStr;
+
     private ArrayList<ProblemBean> mProblemList = new ArrayList();
 
     @Override
@@ -428,7 +433,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                     }
                 }
                 password=etWord.getText().toString().trim();
-                String amountStr=etAmout.getText().toString().trim();
+                amountStr=etAmout.getText().toString().trim();
                 if(TextUtils.isEmpty(amountStr)){
                     money=0d;
                 }else {
@@ -660,7 +665,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
     }
     public void selectPayType(){
         picture=TextUtils.join(",",picUrlArr);
-        final PaySelectDialog paySelectDialog = new PaySelectDialog(this, String.valueOf(money));
+        final PaySelectDialog paySelectDialog = new PaySelectDialog(this,amountStr);
         paySelectDialog.setOnResultListener(new PaySelectDialog.OnResultListener() {
             @Override
             public void onSelectItem(int postion) {

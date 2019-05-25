@@ -1540,7 +1540,9 @@ public interface ApiStore {
             @Field("coin") double coin,
             @Field("safetyCode") String safetyCode,
             @Field("mobile") String mobile,
-            @Field("captcha") String captcha);
+            @Field("captcha") String captcha,
+            @Field("safeType") String safeType,
+            @Field("emailAddress") String emailAddress);
 
     @GET("/api/v1/exchange/user_digital_currency/check_switch")
     Observable<HttpResponse<Boolean>> checkSwitch();

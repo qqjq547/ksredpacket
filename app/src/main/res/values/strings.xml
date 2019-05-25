@@ -364,7 +364,7 @@
     <string name="pls_input_card_mobile">请输入预留手机号</string>
     <string name="pls_input_alipay_account">请输入支付宝账号</string>
     <string name="pls_set_identify">请先实名认证</string>
-    <string name="pls_set_safe_code">请先设置安全码</string>
+    <string name="pls_set_safe_code">请先设置交易密码</string>
     <string name="bind_wechat_notice">*请绑定自己的微信，否则将影响SEAL转换</string>
     <string name="bind_wechat">未绑定微信，去绑定</string>
     <string name="delete_comment">删除评论</string>
@@ -943,4 +943,6 @@
     <string name="pls_iput_verify">请输入验证码</string>
     <string name="pls_iput_new_verify">请输入新登录密码</string>
     <string name="email_verify_code">邮箱验证码</string>
+    <string name="verify_code">验证码</string>
+    <string name="mobile_verify_code">手机号验证码</string>
 </resources>

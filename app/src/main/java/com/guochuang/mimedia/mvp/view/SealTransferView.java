@@ -8,5 +8,6 @@ public interface SealTransferView {
     void setIntCal(DigitalIntCal data);
     void setData(Boolean data);
     void setSmsCode(Boolean data);
+    void setEmailCode(String data);
     void setError(String msg);
 }
