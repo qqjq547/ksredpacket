@@ -201,47 +201,6 @@ public class WebActivity extends MvpActivity<WebPresenter> implements IntefaceWe
                 mvpPresenter.getAdvertisement();
             }
             mOnclickBle = false;
-
-
-//            runOnUiThread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    if (adCollectionView!=null){
-//                        adCollectionView.showRewardVideoAD();
-//                        return;
-//                    }
-//                    showLoadingDialog(R.string.loading_video);
-//                    adCollectionView = new AdCollectionView(WebActivity.this, null);
-//                    adCollectionView.setAdVideoInitListener(new AdCollectionView.AdVideoInitListener() {
-//                        @Override
-//                        public void onInit() {
-//                            closeLoadingDialog();
-//                            adCollectionView.showRewardVideoAD();
-//                        }
-//
-//                        @Override
-//                        public void onError(String msg) {
-//                            closeLoadingDialog();
-//                            LogUtil.d("onError");
-//                        }
-//                    });
-//                    adCollectionView.setAdVideoListener(new AdCollectionView.AdVideoListener() {
-//                        @Override
-//                        public void onVideoFinish() {
-//                            //todo
-//
-//                            wvContent.loadUrl("javascript:slef.playFinished()");
-//                    }
-//
-//                        @Override
-//                        public void onVideoError(String msg) {
-//                            LogUtil.d("onVideoError");
-//                            showShortToast(msg);
-//                        }
-//                    });
-//                    adCollectionView.init(AdCollectionView.TYPE_VUNGLE, AdCollectionView.LOCATION_CELLULAR, null, null);
-//                }
-//            });
         }
 
         @JavascriptInterface

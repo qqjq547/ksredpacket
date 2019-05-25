@@ -179,16 +179,14 @@ public class MySealActivity extends MvpActivity<MySealPresenter> implements MySe
         tvAaaNumber.setText(mySeal.getCoin());
         tvMoney.setText(mySeal.getMoney());
         tvAaaPrice.setText(mySeal.getKsbPrice());
+        GlideImgManager.loadImage(this, mySeal.getQrcodeUrlKey(), ivCode);
+        tvAaaAddress.setText(mySeal.getKsbAddress());
         if (mySeal.getNameAuthentication()==1) {
-            linContent.setVisibility(View.VISIBLE);
             mTvGotoRealName.setVisibility(View.GONE);
             mLlRootView.setBackgroundColor(getResources().getColor(R.color.white));
-            GlideImgManager.loadImage(this, mySeal.getQrcodeUrlKey(), ivCode);
-            tvAaaAddress.setText(mySeal.getKsbAddress());
             tvTip.setText(R.string.seal_des_str);
         } else {
             mTvGotoRealName.setVisibility(View.VISIBLE);
-            linContent.setVisibility(View.GONE);
             mLlRootView.setBackgroundColor(getResources().getColor(R.color.color_6a4bf1));
             tvTip.setText(R.string.seal_des_str_not_name);
         }

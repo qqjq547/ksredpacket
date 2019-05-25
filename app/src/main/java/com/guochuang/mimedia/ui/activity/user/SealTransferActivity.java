@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.guochuang.mimedia.app.App;
@@ -15,6 +17,7 @@ import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.http.subscriber.CountDownSubscriber;
 import com.guochuang.mimedia.mvp.model.DigitalIntCal;
 import com.guochuang.mimedia.mvp.model.ExchangeConfig;
+import com.guochuang.mimedia.mvp.model.UserInfo;
 import com.guochuang.mimedia.mvp.presenter.SealTransferPresenter;
 import com.guochuang.mimedia.mvp.view.SealTransferView;
 import com.guochuang.mimedia.tools.CommonUtil;
@@ -29,6 +32,8 @@ import com.sz.gcyh.KSHongBao.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Observable;
+import rx.Subscription;
 import rx.functions.Action0;
 
 public class SealTransferActivity extends MvpActivity<SealTransferPresenter> implements SealTransferView {
@@ -54,14 +59,29 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
     @BindView(R.id.tv_tip)
     TextView tvTip;
 
+    @BindView(R.id.rg_type)
+    RadioGroup rgType;
+    @BindView(R.id.rbtn_mobile)
+    RadioButton rbtnMobile;
+    @BindView(R.id.rbtn_email)
+    RadioButton rbtnEmail;
+    @BindView(R.id.tv_type_name)
+    TextView tvTypeName;
+
     PassDialog passDialog;
     int amount = 0;
     DigitalIntCal intCal;
     ExchangeConfig exchangeConfig;
     String address;
     String mobile;
+    String emailAddress;
     String uuid;
     String captcha;
+    Subscription subscription;
+    static final String TYPE_MOBILE="1";
+    static final String TYPE_EMAIL="2";
+    String curType=TYPE_MOBILE;
+
     @Override
     protected SealTransferPresenter createPresenter() {
         return new SealTransferPresenter(this);
@@ -76,6 +96,7 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
     public void initViewAndData() {
         tvTitle.setText(R.string.seal_transfer_title);
          mobile=App.getInstance().getUserInfo().getMobile();
+        emailAddress=App.getInstance().getUserInfo().getEmailAddress();
          uuid=App.getInstance().getUserInfo().getUserAccountUuid();
         address=getIntent().getStringExtra(Constant.ADDRESS);
         if (!TextUtils.isEmpty(address)){
@@ -105,6 +126,42 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
 
             }
         });
+        rgType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if (subscription!=null&&!subscription.isUnsubscribed()){
+                    subscription.unsubscribe();
+                }
+                tvVerify.setText(getString(R.string.btn_login_reset_verify));
+                tvVerify.setEnabled(true);
+                tvVerify.setBackgroundResource(R.drawable.bg_btn_forget_verify_red);
+                tvVerify.setTextColor(getResources().getColor(R.color.bg_btn_login_phone));
+                etVerify.setText(null);
+                switch (i){
+                    case R.id.rbtn_mobile:
+                        curType=TYPE_MOBILE;
+                        break;
+                    case R.id.rbtn_email:
+                        curType=TYPE_EMAIL;
+                        break;
+                }
+            }
+        });
+        if (!TextUtils.isEmpty(mobile)&&!TextUtils.isEmpty(emailAddress)){
+            rgType.setVisibility(View.VISIBLE);
+            tvTypeName.setText(R.string.verify_code);
+            rbtnMobile.setChecked(true);
+            curType=TYPE_MOBILE;
+        }else {
+            rgType.setVisibility(View.GONE);
+            if (!TextUtils.isEmpty(mobile)){
+                tvTypeName.setHint(R.string.msg_vertify_code);
+                curType=TYPE_MOBILE;
+            }else {
+                tvTypeName.setHint(R.string.email_verify_code);
+                curType=TYPE_EMAIL;
+            }
+        }
         showLoadingDialog(null);
         mvpPresenter.intCal(Constant.DIGITAL_CURRENCY_SEAL,Constant.INT_CAL_AAA_TO_KSB);
         mvpPresenter.getExchangeConfig(Constant.DIGITAL_CURRENCY_SEAL);
@@ -120,7 +177,12 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
             case R.id.tv_verify:
                 if (AntiShake.check(view.getId()))
                     return;
-                mvpPresenter.sendSmsCode(mobile,uuid);
+                if (curType.equals(TYPE_MOBILE)){
+                    mvpPresenter.sendSmsCode(mobile,uuid);
+                }else {
+                    mvpPresenter.sendEmailCode(emailAddress,uuid);
+                }
+
                 break;
             case R.id.tv_confirm:
                 address=etTransAddress.getText().toString().trim();
@@ -186,7 +248,10 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
                                                     amount,
                                                     code,
                                                     mobile,
-                                                    captcha);
+                                                    captcha,
+                                                    curType,
+                                                    emailAddress
+                                                    );
 
                                         }
                                     });
@@ -241,6 +306,12 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
     }
 
     @Override
+    public void setEmailCode(String data) {
+        showShortToast(getResources().getString(R.string.type_login_verify_send_success));
+        sendCode();
+    }
+
+    @Override
     public void setError(String msg) {
         closeLoadingDialog();
         showShortToast(msg);
@@ -249,7 +320,7 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
         }
     }
     private void sendCode() {
-        addSubscription(RxUtil.countdown(60)
+        subscription=RxUtil.countdown(60)
                 .doOnSubscribe(new Action0() {
                     @Override
                     public void call() {
@@ -282,6 +353,7 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
                         super.onNext(integer);
                         tvVerify.setText(String.valueOf(integer));
                     }
-                }));
+                });
+        addSubscription(subscription);
     }
 }

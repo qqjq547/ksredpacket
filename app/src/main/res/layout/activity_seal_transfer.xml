@@ -125,14 +125,58 @@
    </LinearLayout>
 
 
-
+   <RadioGroup
+       android:id="@+id/rg_type"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="@dimen/space10"
+       android:gravity="center"
+       android:orientation="horizontal"
+       android:visibility="gone">
+    <RadioButton
+        android:id="@+id/rbtn_mobile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/space10"
+        android:paddingBottom="@dimen/space10"
+        android:lines="1"
+        android:ellipsize="end"
+        android:button="@null"
+        android:drawableLeft="@drawable/select_problem_type"
+        android:drawablePadding="@dimen/space10"
+        android:textColor="@color/orange_tab_text_selector"
+        android:textSize="@dimen/textfont14"
+        android:text="@string/mobile_verify_code"/>
+    <RadioButton
+        android:id="@+id/rbtn_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/space50"
+        android:paddingTop="@dimen/space10"
+        android:paddingBottom="@dimen/space10"
+        android:lines="1"
+        android:ellipsize="end"
+        android:button="@null"
+        android:drawableLeft="@drawable/select_problem_type"
+        android:drawablePadding="@dimen/space10"
+        android:textColor="@color/orange_tab_text_selector"
+        android:textSize="@dimen/textfont14"
+        android:text="@string/email_verify_code"/>
+   </RadioGroup>
  <LinearLayout
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
      android:layout_marginTop="@dimen/space10"
      android:orientation="horizontal"
      android:background="@color/bg_white">
-
+   <TextView
+       android:id="@+id/tv_type_name"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginLeft="@dimen/space15"
+       android:textSize="@dimen/textfont14"
+       android:textColor="@color/text_black"
+       android:text="@string/msg_vertify_code"/>
 
    <EditText
        android:id="@+id/et_verify"
