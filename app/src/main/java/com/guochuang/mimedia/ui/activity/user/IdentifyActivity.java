@@ -79,7 +79,7 @@ public class IdentifyActivity extends MvpActivity<IdentifyPresenter> implements 
             case R.id.tv_submit:
                 String realName = etInputName.getText().toString().trim();
                 String idCard = etInputIdcard.getText().toString().trim();
-                String cardNumber = GeneralUtil.removeAllSpace(etInputBanckCard.getText().toString().trim());
+//                String cardNumber = GeneralUtil.removeAllSpace(etInputBanckCard.getText().toString().trim());
                 String captchastr = etInputVerify.getText().toString().trim();
 
                 if (TextUtils.isEmpty(realName)) {
@@ -90,10 +90,10 @@ public class IdentifyActivity extends MvpActivity<IdentifyPresenter> implements 
                     showShortToast(R.string.pelase_input_idcard);
                     return;
                 }
-                if (TextUtils.isEmpty(cardNumber)) {
-                    showShortToast(R.string.please_banck_card);
-                    return;
-                }
+//                if (TextUtils.isEmpty(cardNumber)) {
+//                    showShortToast(R.string.please_banck_card);
+//                    return;
+//                }
 
                 if (TextUtils.isEmpty(captchastr)) {
                     showShortToast(R.string.pelase_input_verify);
@@ -101,7 +101,7 @@ public class IdentifyActivity extends MvpActivity<IdentifyPresenter> implements 
                 }
 
                 showLoadingDialog(null);
-                mvpPresenter.realName(realName, idCard, cardNumber, captcha.getUuid(), captchastr);
+                mvpPresenter.realName(realName, idCard, captcha.getUuid(), captchastr);
 
                 break;
             case R.id.tv_identity_custom:

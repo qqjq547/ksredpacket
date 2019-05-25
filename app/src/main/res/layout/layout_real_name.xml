@@ -63,13 +63,15 @@
 
     </LinearLayout>
 
-    <include layout="@layout/device_horizontal_line" />
+    <include layout="@layout/device_horizontal_line"
+        android:visibility="gone"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/space50"
         android:paddingTop="@dimen/dp_10"
         android:gravity="center_vertical"
+        android:visibility="gone"
         android:paddingBottom="@dimen/dp_10">
 
 
@@ -138,6 +140,9 @@
             android:layout_alignBottom="@+id/ll_register_ima_verify"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="@dimen/space10"
+            android:layout_marginTop="@dimen/space5"
+            android:layout_marginBottom="@dimen/space5"
+            android:layout_marginRight="@dimen/space15"
             android:scaleType="fitXY" />
     </RelativeLayout>
 

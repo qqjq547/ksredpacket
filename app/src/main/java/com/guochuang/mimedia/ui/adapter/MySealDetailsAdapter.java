@@ -14,6 +14,16 @@ import com.sz.gcyh.KSHongBao.R;
 
 import java.util.List;
 
+/**
+ * 黄家强:
+ * VALUE_24(124, "淘区块"),
+ *
+ * 黄家强:
+ * VALUE_26(126, "淘区块分润"),
+ *
+ * 黄家强:
+ * ALUE_37(137, "淘区块收益"),
+ */
 public class MySealDetailsAdapter extends BaseMultiItemQuickAdapter<SealRecord, BaseViewHolder> {
     public MySealDetailsAdapter(@Nullable List<SealRecord> data) {
         super(data);
@@ -39,6 +49,11 @@ public class MySealDetailsAdapter extends BaseMultiItemQuickAdapter<SealRecord, 
                     helper.setTextColor(R.id.tv_price, mContext.getResources().getColor(R.color.text_black));
                     helper.setText(R.id.tv_price, "-" + String.format(mContext.getString(R.string.format_seal), item.getCoin()));
                 }
+
+
+
+
+
                 break;
             case SealRecord.TRANSFER:
                 helper.setText(R.id.tv_type, item.getTitle());

@@ -28,7 +28,8 @@ public class SealRecord implements MultiItemEntity {
     private String serviceFee;//旷工费
     private int status;//SEAL明细状态
     private String equivalence;//SEAL等值数量
-
+    private String ksbType;
+    private String money;
 
     public String getCoin() {
         return coin;
@@ -135,10 +136,17 @@ public class SealRecord implements MultiItemEntity {
     public static final String TYPE_EXTRA = "134";
     public static final String TYPE_FILL = "135";
 
+    // 淘区块
+    public static final String TYPE_TQK = "124";
+    // 淘区块分润
+    public static final String TYPE_TQK_FY = "126";
+    //淘区块收益
+    public static final String TYPE_TQK_SY = "137";
+
 
     @Override
     public int getItemType() {
-        switch (type){
+        switch (type) {
             case TYPE_QC2SEAL://QC转SEAL
             case TYPE_SEAL2QC://SEAL转QC
             case TYPE_EXTRA://提币
