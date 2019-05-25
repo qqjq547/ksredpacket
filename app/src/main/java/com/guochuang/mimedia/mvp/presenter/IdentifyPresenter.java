@@ -48,14 +48,13 @@ public class IdentifyPresenter extends BasePresenter<IdentifyView> {
      * 实名认证
      * @param realName
      * @param idCard
-     * @param cardNumber
      * @param uuid
      * @param captchastr
      */
-    public void realName(String realName, String idCard, String cardNumber, String uuid, String captchastr) {
+    public void realName(String realName, String idCard, String uuid, String captchastr) {
 
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                realName(realName,idCard,cardNumber,uuid,captchastr)), new ApiCallback<String>() {
+                realName(realName,idCard,uuid,captchastr)), new ApiCallback<String>() {
             @Override
             public void onSuccess(String data) {
                 mvpView.setData(data);

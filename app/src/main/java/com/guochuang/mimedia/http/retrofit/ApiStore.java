@@ -1462,7 +1462,6 @@ public interface ApiStore {
     @POST("/api/v1/user/name_auth/auth")
     Observable<HttpResponse<String>> realName(@Query("realName") String realName,
                                               @Query("idCard") String idCard,
-                                              @Query("cardNumber") String cardNumber,
                                               @Query("uuid") String uuid,
                                               @Query("captcha") String captchastr);
 

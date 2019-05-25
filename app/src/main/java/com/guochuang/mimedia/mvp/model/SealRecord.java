@@ -29,6 +29,25 @@ public class SealRecord implements MultiItemEntity {
     private int status;//SEAL明细状态
     private String equivalence;//SEAL等值数量
     private String ksbType;
+    private String money;
+
+
+
+    public String getKsbType() {
+        return ksbType;
+    }
+
+    public void setKsbType(String ksbType) {
+        this.ksbType = ksbType;
+    }
+
+    public String getMoney() {
+        return money;
+    }
+
+    public void setMoney(String money) {
+        this.money = money;
+    }
 
     public String getCoin() {
         return coin;
@@ -126,13 +145,6 @@ public class SealRecord implements MultiItemEntity {
         this.equivalence = equivalence;
     }
 
-    public String getKsbType() {
-        return ksbType;
-    }
-
-    public void setKsbType(String ksbType) {
-        this.ksbType = ksbType;
-    }
 
     public static final int SIMPLE = 0;
     public static final int TRANSFER = 1;
@@ -141,6 +153,13 @@ public class SealRecord implements MultiItemEntity {
     public static final String TYPE_SEAL2QC = "136";
     public static final String TYPE_EXTRA = "134";
     public static final String TYPE_FILL = "135";
+
+    // 淘区块
+    public static final String TYPE_TQK = "124";
+    // 淘区块分润
+    public static final String TYPE_TQK_FY = "126";
+    //淘区块收益
+    public static final String TYPE_TQK_SY = "137";
 
 
     @Override
