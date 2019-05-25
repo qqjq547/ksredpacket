@@ -38,7 +38,8 @@ public class MySealDetailsAdapter extends BaseMultiItemQuickAdapter<SealRecord, 
                 helper.setGone(R.id.tv_equivalence,false);
                 String ksbType = item.getKsbType();
 
-                if(SealRecord.TYPE_TQK.equals(ksbType) || SealRecord.TYPE_TQK_FY.equals(ksbType) || SealRecord.TYPE_TQK_SY.equals(ksbType))
+                if(SealRecord.TYPE_TQK.equals(ksbType) || SealRecord.TYPE_TQK_FY.equals(ksbType)
+                        || SealRecord.TYPE_TQK_SY.equals(ksbType)|| SealRecord.TYPE_TQK_.equals(ksbType))
                     helper.setGone(R.id.tv_equivalence,true).setText(R.id.tv_equivalence,String.format(mContext.getString(R.string.equivalence_fomat_str),item.getMoney()));
 
 

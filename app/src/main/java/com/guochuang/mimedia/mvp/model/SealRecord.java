@@ -155,6 +155,8 @@ public class SealRecord implements MultiItemEntity {
     public static final String TYPE_FILL = "135";
 
     // 淘区块
+    // 淘区块
+    public static final String TYPE_TQK_ = "123";
     public static final String TYPE_TQK = "124";
     // 淘区块分润
     public static final String TYPE_TQK_FY = "126";
