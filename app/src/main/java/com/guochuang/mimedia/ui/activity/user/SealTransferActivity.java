@@ -132,7 +132,7 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
                 if (subscription!=null&&!subscription.isUnsubscribed()){
                     subscription.unsubscribe();
                 }
-                tvVerify.setText(getString(R.string.btn_login_reset_verify));
+                tvVerify.setText(getString(R.string.get_vertify_code));
                 tvVerify.setEnabled(true);
                 tvVerify.setBackgroundResource(R.drawable.bg_btn_forget_verify_red);
                 tvVerify.setTextColor(getResources().getColor(R.color.bg_btn_login_phone));
@@ -306,7 +306,7 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
     }
 
     @Override
-    public void setEmailCode(String data) {
+    public void setEmailCode(Boolean data) {
         showShortToast(getResources().getString(R.string.type_login_verify_send_success));
         sendCode();
     }

@@ -166,7 +166,7 @@ public class SealRecord implements MultiItemEntity {
 
     @Override
     public int getItemType() {
-        switch (type) {
+        switch (ksbType){
             case TYPE_QC2SEAL://QC转SEAL
             case TYPE_SEAL2QC://SEAL转QC
             case TYPE_EXTRA://提币

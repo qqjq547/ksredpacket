@@ -533,6 +533,11 @@ public interface ApiStore {
             @Query("mobile") String mobile,
             @Query("uuid") String uuid);
 
+    @POST("/api/v1/user/email_captcha/withdraw")
+    Observable<HttpResponse<Boolean>> userEmailWithdrawCoin(
+            @Query("emailAddress") String emailAddress,
+            @Query("uuid") String uuid);
+
     // 绑定手机
     @POST("/api/v1/user/account/bind_mobile")
     Observable<HttpResponse<BindingPhone>> userBindPhone(

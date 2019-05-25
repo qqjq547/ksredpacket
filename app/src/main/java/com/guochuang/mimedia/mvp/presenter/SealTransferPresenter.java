@@ -98,9 +98,9 @@ public class SealTransferPresenter extends BasePresenter<SealTransferView> {
             String uuid
     ) {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                userEmailResetSafetyCode(email, uuid)), new ApiCallback<String>() {
+                userEmailWithdrawCoin(email, uuid)), new ApiCallback<Boolean>() {
             @Override
-            public void onSuccess(String data) {
+            public void onSuccess(Boolean data) {
                 mvpView.setEmailCode(data);
 
             }
