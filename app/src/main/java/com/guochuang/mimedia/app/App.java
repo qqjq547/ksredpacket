@@ -8,6 +8,7 @@ import android.support.multidex.MultiDex;
 
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
+import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.MyObjectBox;
 import com.guochuang.mimedia.mvp.model.UserInfo;
 import com.guochuang.mimedia.tools.CommonUtil;

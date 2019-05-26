@@ -364,7 +364,11 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
             case R.id.rl_red_packet_details_header:
                 if (redbagDetail != null ) {
                     if (ivBack.getVisibility() == View.VISIBLE && ivJoinedArrow.getVisibility() == View.VISIBLE) {
-                        IntentUtils.startRedbagJoinedActivity(this, redPacketUuid, redbagDetail.getAvatar(), redbagDetail.getNickName(), redbagDetail.getCoin(), redbagDetail.getMoney(), redbagDetail.getAreaType(), redbagDetail.getDrawNumber(), String.valueOf(redbagDetail.getQuantity()),coinType);
+                        if (linVideoHead.getVisibility()== View.GONE) {//不显示开启红包的按钮
+                            IntentUtils.startRedbagJoinedActivity(this, redPacketUuid, redbagDetail.getAvatar(), redbagDetail.getNickName(), redbagDetail.getCoin(), redbagDetail.getMoney(), redbagDetail.getAreaType(), redbagDetail.getDrawNumber(), String.valueOf(redbagDetail.getQuantity()),coinType);
+                        } else {
+                            IntentUtils.startRedbagJoinedActivity(this, redPacketUuid, redbagDetail.getAvatar(), redbagDetail.getNickName(), "0", "0", redbagDetail.getAreaType(), redbagDetail.getDrawNumber(), String.valueOf(redbagDetail.getQuantity()),coinType);
+                        }
                     }
                 } else if (redbagInfo != null) {
                     if (ivBack.getVisibility() == View.VISIBLE && ivJoinedArrow.getVisibility() == View.VISIBLE) {

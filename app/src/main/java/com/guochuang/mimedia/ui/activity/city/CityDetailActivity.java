@@ -118,7 +118,7 @@ public class CityDetailActivity extends MvpActivity<CityDetailPresenter> impleme
             case R.id.tv_text:
                 if (detail!=null){
                     if (detail.isDereliction()){
-                        IntentUtils.startImageActivity(this,Constant.URL_REGION_RULE);
+                        IntentUtils.startWebActivity(this,getString(R.string.rule),Constant.URL_REGION_RULE);
                     }
                 }
                 break;

@@ -19,6 +19,7 @@ import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.GeneralUtil;
 import com.guochuang.mimedia.tools.IntentUtils;
+import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.tools.RxUtil;
 import com.guochuang.mimedia.tools.antishake.AntiShake;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
@@ -170,6 +171,7 @@ public class RegistMobileFragment extends MvpFragment<RegisterPresenter> impleme
             case R.id.tv_register_agreenment:
                 if (AntiShake.check(view.getId()))
                     return;
+                LogUtil.d(Constant.URL_FANS_AGREEMENT);
                 IntentUtils.startWebActivity(getActivity(),null,Constant.URL_FANS_AGREEMENT);
                 break;
             case R.id.iv_register_ima_verify:

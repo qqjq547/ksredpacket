@@ -330,6 +330,7 @@ public class Constant {
 
     public static final String COINTYPE_KSB ="1" ;
     public static final String COINTYPE_SEAL ="2" ;
+    public static final String COINTYPE_QC ="3" ;
     public static final String EMAIL_KEY = "email";
     public static final int OPENT_BINDINGEMAILACTIVITY = 0x0125;
     public static final String PHONE_KEY = "phone";
@@ -361,5 +362,4 @@ public class Constant {
     public static final int Fill_AAA = 4;
 
 
-    public static final String QC_DETAIL = "3";
 }
