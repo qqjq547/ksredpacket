@@ -119,10 +119,6 @@ public class CircleFragment extends MvpFragment {
                 }
             });
         }
-        @JavascriptInterface
-        public void goTreasureExplain(){
-            IntentUtils.startWebActivity(getActivity(),"",UrlConfig.getHtmlUrl(UrlConfig.URL_ACTIVE_RULE));
-        }
 
         @JavascriptInterface
         public void goTreasure() {

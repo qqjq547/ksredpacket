@@ -49,7 +49,7 @@ public class QCTranSEALActivity extends MvpActivity<KsbTranAaaPresenter> impleme
 
 
     PassDialog passDialog;
-    int amount=0;
+    double amount=0;
     ExchangeConfig exchangeConfig;
     DigitalIntCal intCal;
 
@@ -165,13 +165,13 @@ public class QCTranSEALActivity extends MvpActivity<KsbTranAaaPresenter> impleme
                 }
                 //超过Integer 最大值
                 try {
-                    amount=Integer.parseInt(amountStr);
+                    amount=Double.parseDouble(amountStr);
                 }catch (Exception e){
                     showShortToast(R.string.ksb2aaa_tip_str);
                     return;
                 }
 
-                if (intCal!=null&&amount>(int)Double.parseDouble(intCal.getKsbCoin())){
+                if (intCal!=null&&amount>Double.parseDouble(intCal.getKsbCoin())){
                    showShortToast(R.string.coin_qc_not_enouth);
                     return;
                 }

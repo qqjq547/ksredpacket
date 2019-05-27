@@ -45,7 +45,7 @@ public class SealTranQcActivity extends MvpActivity<SealTranQcPresenter> impleme
     TextView tvTip;
 
     PassDialog passDialog;
-    int amount=0;
+    double amount=0;
     DigitalIntCal intCal;
     ExchangeConfig exchangeConfig;
 
@@ -113,13 +113,13 @@ public class SealTranQcActivity extends MvpActivity<SealTranQcPresenter> impleme
                     return;
                 }
                 try {
-                    amount=Integer.parseInt(amountStr);
+                    amount=Double.parseDouble(amountStr);
                 }catch (Exception e){
                     showShortToast(getString(R.string.ksb2aaa_tip_str));
                     return;
                 }
 
-                if (intCal!=null&&amount>(int)Double.parseDouble(intCal.getDigitalCoin())){
+                if (intCal!=null&&amount>Double.parseDouble(intCal.getDigitalCoin())){
                     showShortToast(R.string.digital_seal_not_enouth);
                     return;
                 }

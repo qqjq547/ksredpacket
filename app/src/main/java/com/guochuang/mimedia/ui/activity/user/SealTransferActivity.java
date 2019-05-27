@@ -71,7 +71,7 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
     TextView tvTypeName;
 
     PassDialog passDialog;
-    int amount = 0;
+    double amount = 0;
     DigitalIntCal intCal;
     ExchangeConfig exchangeConfig;
     String address;
@@ -206,13 +206,13 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
                     return;
                 }
                 try {
-                    amount = Integer.parseInt(amountStr);
+                    amount = Double.parseDouble(amountStr);
                 }catch (Exception e){
                     showShortToast(R.string.ksb2aaa_tip_str);
                     return;
                 }
 
-                if (intCal != null && amount > (int) Double.parseDouble(intCal.getDigitalCoin())) {
+                if (intCal != null && amount > Double.parseDouble(intCal.getDigitalCoin())) {
                     showShortToast(R.string.digital_seal_not_enouth);
                     return;
                 }

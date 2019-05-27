@@ -55,8 +55,6 @@ public class UrlConfig {
     public static final String URL_DUOBAO_TREASURE_NUMBER = "project/html/fengwo/index.html#/treasureNumber?type=false&snatchRecordId=";
     //淘区块
     public static final String URL_DUOBAO_INDEX = "project/html/fengwo/index.html#/treasureIndex";
-    //淘区块活动说明
-    public static final String URL_ACTIVE_RULE = "project/html/rule/activeRule.html";
 
     public static String getHtmlUrl(String path){
         return ApiClient.HTML_URL+path;
