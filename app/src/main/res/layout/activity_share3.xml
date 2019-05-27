@@ -1,108 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:scrollbars="none">
+
     <FrameLayout
-        android:id="@+id/fl_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <ImageView
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/fl_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/bg_red_share" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space26"
-                android:src="@drawable/share_title"/>
+            android:layout_height="match_parent">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space22"
-                android:src="@drawable/share_taoqukuai"/>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bg_red_share" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/share_handle"/>
-       <!--     android:layout_width="200dp"
-            android:layout_height="240dp"-->
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:gravity="center_horizontal"
-                android:paddingBottom="@dimen/space13"
-                android:background="@drawable/bg_share_3_code">
+                android:orientation="vertical">
+
                 <ImageView
-                    android:id="@+id/iv_qrcode"
-                    android:layout_width="140dp"
-                    android:layout_height="140dp"
-                    android:layout_marginTop="@dimen/space25"
-                    android:layout_marginBottom="@dimen/space12"
-                    android:layout_marginLeft="@dimen/textfont16"
-                    android:layout_marginRight="@dimen/textfont16"
-                    android:scaleType="fitXY" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space26"
+                    android:src="@drawable/share_title" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space22"
+                    android:src="@drawable/share_taoqukuai" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/share_handle" />
+                <!--     android:layout_width="200dp"
+                     android:layout_height="240dp"-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_share_3_code"
+                    android:gravity="center_horizontal"
+                    android:paddingBottom="@dimen/space13">
+
+                    <ImageView
+                        android:id="@+id/iv_qrcode"
+                        android:layout_width="140dp"
+                        android:layout_height="140dp"
+                        android:layout_marginLeft="@dimen/textfont16"
+                        android:layout_marginTop="@dimen/space25"
+                        android:layout_marginRight="@dimen/textfont16"
+                        android:layout_marginBottom="@dimen/space12"
+                        android:scaleType="fitXY" />
+                </LinearLayout>
+
             </LinearLayout>
 
-        </LinearLayout>
 
+        </FrameLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="@dimen/space40"
+                android:layout_height="@dimen/space40"
+                android:layout_marginTop="@dimen/space20"
+                android:padding="@dimen/space10"
+                android:src="@drawable/ic_back_white"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_copy_link"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_btn_share3"
+                    android:gravity="center"
+                    android:text="@string/copy_share_link"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/textfont14" />
+
+                <TextView
+                    android:id="@+id/tv_share_friend"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_btn_share3"
+                    android:gravity="center"
+                    android:text="@string/share_friend"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/textfont14" />
+            </LinearLayout>
+        </RelativeLayout>
 
     </FrameLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/iv_back"
-            android:layout_width="@dimen/space40"
-            android:layout_height="@dimen/space40"
-            android:layout_marginTop="@dimen/space20"
-            android:padding="@dimen/space10"
-            android:visibility="gone"
-            android:src="@drawable/ic_back_white" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="15dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_copy_link"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_weight="1"
-                android:background="@drawable/bg_btn_share3"
-                android:gravity="center"
-                android:text="@string/copy_share_link"
-                android:textColor="@color/text_white"
-                android:textSize="@dimen/textfont14" />
-
-            <TextView
-                android:id="@+id/tv_share_friend"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_weight="1"
-                android:background="@drawable/bg_btn_share3"
-                android:gravity="center"
-                android:text="@string/share_friend"
-                android:textColor="@color/text_white"
-                android:textSize="@dimen/textfont14" />
-        </LinearLayout>
-    </RelativeLayout>
-
-</FrameLayout>
+</ScrollView>
