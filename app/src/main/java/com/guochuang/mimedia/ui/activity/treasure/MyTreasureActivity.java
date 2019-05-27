@@ -20,6 +20,7 @@ import com.guochuang.mimedia.mvp.view.MyTreasureView;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.DialogBuilder;
 import com.guochuang.mimedia.tools.IntentUtils;
+import com.guochuang.mimedia.tools.UrlConfig;
 import com.guochuang.mimedia.tools.pay.AliPay;
 import com.guochuang.mimedia.tools.pay.WxPay;
 import com.guochuang.mimedia.ui.activity.user.MyAddressActivity;
@@ -82,7 +83,7 @@ public class MyTreasureActivity extends MvpActivity<MyTreasurePresenter> impleme
                         startActivity(new Intent(MyTreasureActivity.this, ExpressInfoActivity.class).putExtra(Constant.SNATCHID, snatch.getSnatchId()));
                         break;
                     case R.id.lin_join_people_time:
-                        IntentUtils.startWebActivity(MyTreasureActivity.this,"",Constant.URL_DUOBAO_TREASURE_NUMBER+snatch.getSnatchRecordId());
+                        IntentUtils.startWebActivity(MyTreasureActivity.this,"",UrlConfig.getHtmlUrl(UrlConfig.URL_DUOBAO_TREASURE_NUMBER)+snatch.getSnatchRecordId());
                         break;
                     case R.id.tv_pay:
                         showLoadingDialog(null);
@@ -94,7 +95,7 @@ public class MyTreasureActivity extends MvpActivity<MyTreasurePresenter> impleme
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                IntentUtils.startWebActivity(MyTreasureActivity.this,"",Constant.URL_DUOBAO_DETAIL+dataArr.get(position).getSnatchId());
+                IntentUtils.startWebActivity(MyTreasureActivity.this,"",UrlConfig.getHtmlUrl(UrlConfig.URL_DUOBAO_DETAIL)+dataArr.get(position).getSnatchId());
             }
         });
         rvTreasure.setAdapter(adapter);

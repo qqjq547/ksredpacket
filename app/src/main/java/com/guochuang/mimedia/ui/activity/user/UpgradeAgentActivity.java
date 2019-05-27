@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.guochuang.mimedia.mvp.model.InviterUser;
 import com.guochuang.mimedia.mvp.presenter.UpgradeAgentPresenter;
 import com.guochuang.mimedia.mvp.view.UpgradeAgentView;
+import com.guochuang.mimedia.tools.UrlConfig;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.tools.Constant;
@@ -50,7 +51,7 @@ public class UpgradeAgentActivity extends MvpActivity<UpgradeAgentPresenter> imp
                 onBackPressed();
                 break;
             case R.id.tv_text:
-                IntentUtils.startImageActivity(this,Constant.URL_AGENT_RULE);
+                IntentUtils.startImageActivity(this,UrlConfig.getHtmlUrl(UrlConfig.URL_AGENT_RULE));
                 break;
             case R.id.tv_upgrade:
                   if (money>0){

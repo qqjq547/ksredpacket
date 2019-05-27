@@ -16,6 +16,7 @@ import com.guochuang.mimedia.base.MvpFragment;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.IntentUtils;
+import com.guochuang.mimedia.tools.UrlConfig;
 import com.guochuang.mimedia.ui.activity.city.CityActivity;
 import com.guochuang.mimedia.ui.activity.common.WebActivity;
 import com.guochuang.mimedia.ui.activity.treasure.MyTreasureActivity;
@@ -76,7 +77,7 @@ public class CircleFragment extends MvpFragment {
             }
         });
         wvCircle.addJavascriptInterface(new circleInterface(), "browserController");
-        wvCircle.loadUrl(CommonUtil.getTimeStampUrl(Constant.URL_DUOBAO_INDEX));
+        wvCircle.loadUrl(CommonUtil.getTimeStampUrl(UrlConfig.getHtmlUrl(UrlConfig.URL_DUOBAO_INDEX)));
         srlRefresh.setEnableLoadmore(false);
         srlRefresh.setEnableRefresh(true);
         srlRefresh.setOnRefreshListener(new OnRefreshListener() {
@@ -120,7 +121,7 @@ public class CircleFragment extends MvpFragment {
         }
         @JavascriptInterface
         public void goTreasureExplain(){
-            IntentUtils.startWebActivity(getActivity(),"",Constant.URL_ACTIVE_RULE);
+            IntentUtils.startWebActivity(getActivity(),"",UrlConfig.getHtmlUrl(UrlConfig.URL_ACTIVE_RULE));
         }
 
         @JavascriptInterface

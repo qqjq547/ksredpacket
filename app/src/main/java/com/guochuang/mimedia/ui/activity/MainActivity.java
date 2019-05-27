@@ -112,7 +112,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
         instance=this;
         setStatusbar(R.color.bg_white,true);
         if (getIntent().getBooleanExtra(Constant.FROMLOGIN,true)){
-            CommonUtil.syncCookie(this,ApiClient.HTML_URL);
+            CommonUtil.syncCookie(this,ApiClient.getDebuHtmlHost());
         }
         fragments[0] = new InfoFragment();
         fragments[1] = new CircleFragment();
@@ -194,7 +194,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
     @Override
     public void setUserInfo(UserInfo data) {
         App.getInstance().setUserInfo(data);
-        CommonUtil.syncCookie(this,ApiClient.HTML_URL);
+        CommonUtil.syncCookie(this,ApiClient.getDebuHtmlHost());
         ((MyFragment)fragments[4]).setUpUser();
     }
 
@@ -271,7 +271,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
     public void setMarketSwitch(Integer data) {
         if (data!=null){//1为开启开关
             getPref().setString(PrefUtil.MARKET_SWITCH,data.intValue()==1?Constant.SWITCH_HIDE:Constant.SWITCH_SHOW);
-            CommonUtil.syncCookie(this,ApiClient.HTML_URL);
+            CommonUtil.syncCookie(this,ApiClient.getDebuHtmlHost());
         }
     }
 

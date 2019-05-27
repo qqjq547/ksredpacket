@@ -15,6 +15,7 @@ import com.guochuang.mimedia.mvp.view.MyQCView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.PrefUtil;
+import com.guochuang.mimedia.tools.UrlConfig;
 import com.sz.gcyh.KSHongBao.R;
 
 import butterknife.BindView;
@@ -64,7 +65,7 @@ public class MyQCActivity extends MvpActivity<MyQCPresenter> implements MyQCView
         }
 
         CommonUtil.initH5WebView(this, wvDesp);
-        wvDesp.loadUrl(CommonUtil.getTimeStampUrl(Constant.URL_RULE_QC));
+        wvDesp.loadUrl(CommonUtil.getTimeStampUrl(UrlConfig.getHtmlUrl(UrlConfig.URL_RULE_QC)));
         showLoadingDialog(null);
         mvpPresenter.getMyQC();
     }

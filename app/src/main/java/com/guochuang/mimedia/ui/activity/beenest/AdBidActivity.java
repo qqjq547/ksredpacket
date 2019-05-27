@@ -42,6 +42,7 @@ import com.guochuang.mimedia.mvp.view.AdBidView;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.LogUtil;
+import com.guochuang.mimedia.tools.UrlConfig;
 import com.guochuang.mimedia.tools.antishake.AntiShake;
 import com.guochuang.mimedia.tools.glide.GlideApp;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
@@ -176,7 +177,7 @@ public class AdBidActivity extends MvpActivity<AdBidPresenter> implements AdBidV
                 onBackPressed();
                 break;
             case R.id.tv_text:
-                IntentUtils.startWebActivity(this,null,Constant.URL_FENGCHAO_JINGPAI);
+                IntentUtils.startWebActivity(this,null,UrlConfig.getHtmlUrl(UrlConfig.URL_FENGCHAO_JINGPAI));
                 break;
             case R.id.tv_my_ad:
                 startActivity(new Intent(this,MyAdActivity.class));

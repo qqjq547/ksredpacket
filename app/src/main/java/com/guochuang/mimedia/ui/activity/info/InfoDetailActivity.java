@@ -25,6 +25,7 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.tools.AdCollectionView;
+import com.guochuang.mimedia.tools.UrlConfig;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.http.response.Page;
@@ -234,7 +235,7 @@ public class InfoDetailActivity extends MvpActivity<InfoDetailPresenter> impleme
     };
 
     public void showShare(boolean isReport) {
-        ShareDialog shareDialog = new ShareDialog(this, detail.getTitle(), Constant.URL_INFOMATION_DETAIL + "?id=" + articleUuid+"&userAccountUuid="+App.getInstance().getUserInfo().getUserAccountUuid(), null);
+        ShareDialog shareDialog = new ShareDialog(this, detail.getTitle(), UrlConfig.getHtmlUrl(UrlConfig.URL_INFOMATION_DETAIL) + "?id=" + articleUuid+"&userAccountUuid="+App.getInstance().getUserInfo().getUserAccountUuid(), null);
         shareDialog.setOnShareResultListener(new ShareDialog.OnShareResultListener() {
             @Override
             public void onSuccess(String platform) {
@@ -342,7 +343,7 @@ public class InfoDetailActivity extends MvpActivity<InfoDetailPresenter> impleme
             ivCollect.setSelected(data.getIsFavorited() > 0);
             initWebView();
             initDotView(data.getCommentNumber());
-            String url = Constant.URL_INFOMATION_DETAIL + "?id=" + articleUuid + "&isApp=1";
+            String url = UrlConfig.getHtmlUrl(UrlConfig.URL_INFOMATION_DETAIL) + "?id=" + articleUuid + "&isApp=1";
 
             LogUtil.d(url);
             wvInfo.loadUrl(url);

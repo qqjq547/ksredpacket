@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.guochuang.mimedia.mvp.presenter.RecommendPresenter;
 import com.guochuang.mimedia.mvp.view.RecommendView;
+import com.guochuang.mimedia.tools.UrlConfig;
 import com.guochuang.mimedia.ui.activity.common.ShareActivity;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.BasePresenter;
@@ -58,7 +59,7 @@ public class RecommendFanActivity extends MvpActivity<RecommendPresenter> implem
     public void initViewAndData() {
       tvTitle.setText(R.string.recommend);
       CommonUtil.initH5WebView(this,wvSummary);
-      wvSummary.loadUrl(CommonUtil.getTimeStampUrl(Constant.URL_RULE_RECOMMEND));
+      wvSummary.loadUrl(CommonUtil.getTimeStampUrl(UrlConfig.getHtmlUrl(UrlConfig.URL_RULE_RECOMMEND)));
         recommendData= (RecommendData)getIntent().getSerializableExtra(Constant.RECOMMENDDATA);
         setData(recommendData);
         mvpPresenter.getRecommend();

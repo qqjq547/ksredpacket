@@ -190,5 +190,6 @@ public class ApiClient {
     }
     public static void changeEnv(){
         instances = new ApiClient();
+        HTML_URL= getDebuHtmlHost();
     }
 }

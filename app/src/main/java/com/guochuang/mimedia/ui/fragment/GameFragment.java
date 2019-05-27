@@ -16,6 +16,7 @@ import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.SystemUtil;
+import com.guochuang.mimedia.tools.UrlConfig;
 import com.guochuang.mimedia.ui.activity.city.CityActivity;
 import com.guochuang.mimedia.ui.activity.common.JuxiangwanActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -72,7 +73,7 @@ public class GameFragment extends MvpFragment<GamePresenter> implements GameView
             }
         });
         wvGame.addJavascriptInterface(new GameInterface(), "browserController");
-        wvGame.loadUrl(CommonUtil.getTimeStampUrl(Constant.URL_MIWAN));
+        wvGame.loadUrl(CommonUtil.getTimeStampUrl(UrlConfig.getHtmlUrl(UrlConfig.URL_MIWAN)));
         srlRefresh.setEnableLoadmore(false);
         srlRefresh.setEnableRefresh(true);
         srlRefresh.setOnRefreshListener(new OnRefreshListener() {

@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.guochuang.mimedia.tools.UrlConfig;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.http.response.Page;
@@ -205,7 +206,7 @@ public class CityBidHallActivity extends MvpActivity<CityBidHallPresenter> imple
                 onBackPressed();
                 break;
             case R.id.tv_text:
-                IntentUtils.startWebActivity(this,getString(R.string.rule), Constant.URL_REGION_RULE);
+                IntentUtils.startWebActivity(this,getString(R.string.rule), UrlConfig.getHtmlUrl(UrlConfig.URL_REGION_RULE));
                 break;
             case R.id.tv_city_bid_hall_query_cancel:
                 if (provinceCityPop != null && provinceCityPop.isShowing()) {

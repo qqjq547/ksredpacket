@@ -14,6 +14,7 @@ import com.guochuang.mimedia.mvp.model.MyAd;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.LogUtil;
+import com.guochuang.mimedia.tools.UrlConfig;
 import com.sz.gcyh.KSHongBao.R;
 
 import java.util.List;
@@ -94,6 +95,6 @@ public class MyAdAdapter extends BaseQuickAdapter<MyAd,BaseViewHolder> {
         }
         WebView wvMap=helper.getView(R.id.wv_map);
         CommonUtil.initH5WebView(mContext,wvMap);
-        wvMap.loadUrl(Constant.URL_BMAP_URL+"?lng="+item.getLng()+"&lat="+item.getLat());
+        wvMap.loadUrl(UrlConfig.getHtmlUrl(UrlConfig.URL_BMAP_URL)+"?lng="+item.getLng()+"&lat="+item.getLat());
     }
 }

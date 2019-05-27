@@ -1,15 +1,12 @@
 package com.guochuang.mimedia.ui.fragment;
 
-import android.content.Intent;
 import android.os.Build;
-import android.support.design.widget.TabLayout;
 import android.text.Html;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.base.MvpFragment;
 import com.guochuang.mimedia.http.subscriber.CountDownSubscriber;
 import com.guochuang.mimedia.mvp.model.Captcha;
@@ -21,9 +18,9 @@ import com.guochuang.mimedia.tools.GeneralUtil;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.tools.RxUtil;
+import com.guochuang.mimedia.tools.UrlConfig;
 import com.guochuang.mimedia.tools.antishake.AntiShake;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
-import com.guochuang.mimedia.ui.activity.user.MyWechatActivity;
 import com.guochuang.mimedia.ui.activity.user.RegisterActivity;
 import com.sz.gcyh.KSHongBao.R;
 
@@ -171,8 +168,8 @@ public class RegistMobileFragment extends MvpFragment<RegisterPresenter> impleme
             case R.id.tv_register_agreenment:
                 if (AntiShake.check(view.getId()))
                     return;
-                LogUtil.d(Constant.URL_FANS_AGREEMENT);
-                IntentUtils.startWebActivity(getActivity(),null,Constant.URL_FANS_AGREEMENT);
+                LogUtil.d(UrlConfig.getHtmlUrl(UrlConfig.URL_REGIST_AGREEMENT));
+                IntentUtils.startWebActivity(getActivity(),null,UrlConfig.getHtmlUrl(UrlConfig.URL_REGIST_AGREEMENT));
                 break;
             case R.id.iv_register_ima_verify:
                 if (AntiShake.check(view.getId()))
