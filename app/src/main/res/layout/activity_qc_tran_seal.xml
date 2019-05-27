@@ -90,7 +90,6 @@
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:gravity="center_vertical">
-
    <EditText
        android:id="@+id/et_trans_ksb"
        android:layout_width="0dp"
@@ -101,11 +100,20 @@
        android:gravity="center_vertical"
        android:hint="@string/pls_input_qc_to_seal"
        android:maxLines="1"
-       android:inputType="number"
        android:paddingTop="@dimen/space10"
        android:paddingBottom="@dimen/space10"
        android:textColorHint="@color/text_gray"
        android:textSize="@dimen/textfont16" />
+    <TextView
+        android:id="@+id/tv_all"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/space15"
+        android:paddingRight="@dimen/space15"
+        android:gravity="center"
+        android:textColor="@color/text_blue"
+        android:textSize="@dimen/textfont14"
+        android:text="@string/all"/>
    </LinearLayout>
 
 
