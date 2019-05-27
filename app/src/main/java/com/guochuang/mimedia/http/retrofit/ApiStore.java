@@ -893,6 +893,7 @@ public interface ApiStore {
             @Query("pageSize") int pageSize
     );
 
+
     @FormUrlEncoded
     @POST("/api/v1/user/region_notice/add")
     Observable<HttpResponse<Boolean>> addRegioNotice(

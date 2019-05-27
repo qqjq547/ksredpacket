@@ -24,6 +24,7 @@ import com.guochuang.mimedia.tools.AdCollectionView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.LogUtil;
+import com.guochuang.mimedia.tools.UrlConfig;
 import com.guochuang.mimedia.ui.activity.treasure.MyTreasureActivity;
 import com.guochuang.mimedia.ui.activity.user.TradePwdActivity;
 import com.guochuang.mimedia.ui.activity.user.UpgradeAgentActivity;
@@ -126,7 +127,7 @@ public class WebActivity extends MvpActivity<WebPresenter> implements IntefaceWe
                 break;
             case R.id.tv_text:
                 if ("rule".equals(headRightType)) {//蜂窝规则
-                    IntentUtils.startWebActivity(WebActivity.this, getString(R.string.hongycomb_agreement), Constant.URL_HONYCOMB_RULE);
+                    IntentUtils.startWebActivity(WebActivity.this, getString(R.string.hongycomb_agreement), UrlConfig.getHtmlUrl(UrlConfig.URL_HONYCOMB_RULE));
                 } else if ("share".equals(headRightType)) {//分享夺宝
                     wvContent.loadUrl("javascript:slef.shareDetails()");
                 }

@@ -22,6 +22,7 @@ import com.guochuang.mimedia.mvp.model.NestAuctionMsg;
 import com.guochuang.mimedia.mvp.model.RegionCore;
 import com.guochuang.mimedia.tools.DialogBuilder;
 import com.guochuang.mimedia.tools.IntentUtils;
+import com.guochuang.mimedia.tools.UrlConfig;
 import com.guochuang.mimedia.ui.activity.MainActivity;
 import com.guochuang.mimedia.ui.activity.beenest.AdBidActivity;
 import com.guochuang.mimedia.ui.activity.beenest.MyAdActivity;
@@ -248,7 +249,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                         startActivity(new Intent(getActivity(), CityActivity.class));
                         break;
                     case R.drawable.ic_my_order:
-                        IntentUtils.startWebActivity(getActivity(), getString(R.string.text_my_order), Constant.URL_MY_ORDER);
+                        IntentUtils.startWebActivity(getActivity(), getString(R.string.text_my_order), UrlConfig.getHtmlUrl(UrlConfig.URL_MY_ORDER));
                         break;
                     case R.drawable.ic_my_dynamic:
                         startActivity(new Intent(getActivity(), RedbagDynamicActivity.class));
@@ -266,7 +267,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                         startActivity(new Intent(getActivity(), MyAddressActivity.class));
                         break;
                     case R.drawable.ic_my_help:
-                        IntentUtils.startWebActivity(getActivity(), getString(R.string.help_center), Constant.URL_HELP_CENTER);
+                        IntentUtils.startWebActivity(getActivity(), getString(R.string.help_center), UrlConfig.getHtmlUrl(UrlConfig.URL_HELP_CENTER));
                         break;
                     case R.drawable.ic_my_welfare:
                         startActivity(new Intent(getActivity(), WelfareActivity.class));

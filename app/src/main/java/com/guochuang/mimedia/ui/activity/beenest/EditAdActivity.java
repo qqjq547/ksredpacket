@@ -28,6 +28,7 @@ import com.guochuang.mimedia.mvp.view.EditAdView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.IntentUtils;
+import com.guochuang.mimedia.tools.UrlConfig;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.guochuang.mimedia.ui.activity.common.MapPickActivity;
 import com.guochuang.mimedia.ui.adapter.PickImageAdapter;
@@ -244,7 +245,7 @@ public class EditAdActivity extends MvpActivity<EditAdPresenter> implements Edit
                 new BeeTempDialog(this).show();
                 break;
             case R.id.tv_rule:
-                IntentUtils.startWebActivity(this,null,Constant.URL_FENGCHAO_BANNER);
+                IntentUtils.startWebActivity(this,null,UrlConfig.getHtmlUrl(UrlConfig.URL_FENGCHAO_BANNER));
                 break;
             case R.id.btn_confirm:
                 isJumpPreview=false;

@@ -122,62 +122,6 @@ public class Constant {
     public static final String ISPREVIEW="isPreview";
     public static final String COINTYPE="coinType";
 
-
-    //用户协议
-    public static final String URL_FANS_AGREEMENT = ApiClient.HTML_URL+"html/agreement/fans/index.htm";
-    //资讯详情
-    public static final String URL_INFOMATION_DETAIL = ApiClient.HTML_URL+"information/detail/index.htm";
-    //推荐协议
-    public static final String URL_RULE_RECOMMEND = ApiClient.HTML_URL + "project/html/rule/awardRule.html";
-    //ksb协议
-    public static final String URL_RULE_QC =  ApiClient.HTML_URL + "project/html/rule/recommendedRule.html";
-    //平台协议
-    public static final String URL_SEND_REDBAG = ApiClient.HTML_URL + "html/platformRules.html";
-    //疯狂规则
-    public static final String URL_CRAZY_RULE = ApiClient.HTML_URL + "html/rule/crazy/index.htm";
-    //代理规则
-    public static final String URL_AGENT_RULE = ApiClient.HTML_URL + "project/html/rule/agentRule.html";
-    //城主规则
-    public static final String URL_REGION_RULE = ApiClient.HTML_URL + "project/html/rule/cityLordRule.html";
-    //竞购协议
-    public static final String URL_AGREEMENT = ApiClient.HTML_URL + "html/rule/region/agreement.htm";
-    //客服二维码
-    public static final String URL_SERVICEQR = ApiClient.HTML_URL + "html/qrcode/serviceqr/index.htm";
-    //疯狂广告公告
-    public static final String URL_CRAZY_NOTICE = ApiClient.HTML_URL + "html/notice/crazy/index.htm";
-    //代理商协议
-    public static final String URL_AGREEMENT_AGENT = ApiClient.HTML_URL + "html/agreement/agent/index.htm";
-    //公告消息
-    public static final String URL_NOTICE_DETAIL = ApiClient.HTML_URL+"project/html/notice.html";
-    //帮助中心
-    public static final String URL_HELP_CENTER = ApiClient.HTML_URL+"project/html/fengwo/index.html#/helpCenter";
-    //商圈
-    public static final String URL_TRADINGAREA = ApiClient.HTML_URL+"project/html/shangquan/index.html";
-    //蜜玩
-    public static final String URL_MIWAN = ApiClient.HTML_URL+"project/html/fengwo/index.html#miWan";
-    //我的订单
-    public static final String URL_MY_ORDER = ApiClient.HTML_URL+"project/html/fengwo/index.html#/myOrder";
-    //蜂窝规则
-    public static final String URL_HONYCOMB_RULE = ApiClient.HTML_URL+"project/html/rule/fengwoRule.html";
-    //广告投放协议
-    public static final String URL_FENGCHAO_BANNER = ApiClient.HTML_URL+"project/html/rule/fengchao/banner.html";
-    //竞购协议
-    public static final String URL_FENGCHAO_JINGGOU = ApiClient.HTML_URL+"project/html/rule/fengchao/jinggou.html";
-    //竞拍说明
-    public static final String URL_FENGCHAO_JINGPAI = ApiClient.HTML_URL+"project/html/rule/fengchao/jingpai.html";
-    //显示地图网页
-    public static final String URL_BMAP_URL = ApiClient.HTML_URL+"project/html/fengwo/index.html#/BMapComponent";
-    //夺宝规则
-    public static final String URL_DUOBAO_RULE = ApiClient.HTML_URL+"project/html/rule/duobaoRule.html";
-    //夺宝详情
-    public static final String URL_DUOBAO_DETAIL = ApiClient.HTML_URL+"project/html/fengwo/index.html#/treasureDetails?snatchId=";
-    //我的夺宝
-    public static final String URL_DUOBAO_TREASURE_NUMBER = ApiClient.HTML_URL+"project/html/fengwo/index.html#/treasureNumber?type=false&snatchRecordId=";
-    //淘区块
-    public static final String URL_DUOBAO_INDEX = ApiClient.HTML_URL+"project/html/fengwo/index.html#/treasureIndex";
-    //淘区块活动说明
-    public static final String URL_ACTIVE_RULE = ApiClient.HTML_URL+"project/html/rule/activeRule.html";
-
     public static final String REGEX_WEBURL = "http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?";
     public static final String COMPRESS_DIR_PATH = App.getInstance().getExternalCacheDir() + File.separator + "kshb";
     public static final String COMMON_PATH = Environment.getExternalStorageDirectory().getPath() + File.separator + "kshb";
@@ -330,6 +274,7 @@ public class Constant {
 
     public static final String COINTYPE_KSB ="1" ;
     public static final String COINTYPE_SEAL ="2" ;
+    public static final String COINTYPE_QC ="3" ;
     public static final String EMAIL_KEY = "email";
     public static final int OPENT_BINDINGEMAILACTIVITY = 0x0125;
     public static final String PHONE_KEY = "phone";
@@ -361,5 +306,4 @@ public class Constant {
     public static final int Fill_AAA = 4;
 
 
-    public static final String QC_DETAIL = "3";
 }

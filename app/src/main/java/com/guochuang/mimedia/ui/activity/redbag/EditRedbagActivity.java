@@ -34,6 +34,7 @@ import com.guochuang.mimedia.tools.BitmapUtils;
 import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.tools.OssManager;
 import com.guochuang.mimedia.tools.PrefUtil;
+import com.guochuang.mimedia.tools.UrlConfig;
 import com.guochuang.mimedia.ui.activity.common.MapPickActivity;
 import com.guochuang.mimedia.ui.adapter.PickVideoAdapter;
 import com.sz.gcyh.KSHongBao.R;
@@ -422,7 +423,7 @@ public class EditRedbagActivity extends MvpActivity<EditRedbagPresenter> impleme
                 });
                 break;
             case R.id.tv_rule:
-                IntentUtils.startWebActivity(this, tvRule.getText().toString(),Constant.URL_SEND_REDBAG);
+                IntentUtils.startWebActivity(this, tvRule.getText().toString(),UrlConfig.getHtmlUrl(UrlConfig.URL_SEND_REDBAG));
                 break;
             case R.id.btn_add:
                 content=etContent.getText().toString().trim();

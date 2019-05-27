@@ -29,7 +29,7 @@ public class MyQCDetailsPresenter extends BasePresenter<MyQCDetailsView> {
 //        @Query("startIndex") String startIndex,
 //        @Query("pageSize") int pageSize
 
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getCoinRecord(type,Constant.QC_DETAIL,startIndex,pageSize)), new ApiCallback<List<SealRecord>>() {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getCoinRecord(type,Constant.COINTYPE_QC,startIndex,pageSize)), new ApiCallback<List<SealRecord>>() {
             @Override
             public void onSuccess(List<SealRecord> data) {
                 mvpView.setQCDetail(data);

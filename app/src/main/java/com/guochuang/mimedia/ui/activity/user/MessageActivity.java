@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.guochuang.mimedia.tools.UrlConfig;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.http.response.Page;
@@ -90,10 +91,10 @@ public class MessageActivity extends MvpActivity<MessagePresenter> implements Me
                 Message message=messageArr.get(position);
                 switch (message.getType()){
                     case Constant.MSG_TYPE_NOTICE:
-                        IntentUtils.startWebActivity(MessageActivity.this,message.getTitle(),Constant.URL_NOTICE_DETAIL +"?id="+message.getId());
+                        IntentUtils.startWebActivity(MessageActivity.this,message.getTitle(),UrlConfig.getHtmlUrl(UrlConfig.URL_NOTICE_DETAIL) +"?id="+message.getId());
                         break;
                     case Constant.MSG_TYPE_SNATCHACTIVITY:
-                        IntentUtils.startWebActivity(MessageActivity.this,"",Constant.URL_DUOBAO_DETAIL+message.getSourceUuid());
+                        IntentUtils.startWebActivity(MessageActivity.this,"",UrlConfig.getHtmlUrl(UrlConfig.URL_DUOBAO_DETAIL)+message.getSourceUuid());
                         break;
                 }
             }

@@ -18,6 +18,7 @@ import com.guochuang.mimedia.mvp.model.PayConfig;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.DialogBuilder;
 import com.guochuang.mimedia.tools.GsonUtil;
+import com.guochuang.mimedia.tools.UrlConfig;
 import com.guochuang.mimedia.tools.pay.AliPay;
 import com.guochuang.mimedia.tools.pay.WxPay;
 import com.sz.gcyh.KSHongBao.R;
@@ -130,15 +131,16 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
                 break;
             case R.id.tv_agreement:
                 if (purchaseType==Constant.TYPE_PURCHASE_REGION){
-                    IntentUtils.startWebActivity(this,getString(R.string.city_buy_agreement),Constant.URL_AGREEMENT);
+                    IntentUtils.startWebActivity(this,getString(R.string.city_buy_agreement),UrlConfig.getHtmlUrl(UrlConfig.URL_AGREEMENT));
                 }else if(purchaseType==Constant.TYPE_PURCHASE_AGENT){
-                    IntentUtils.startWebActivity(this,getString(R.string.agent_agreement),Constant.URL_AGREEMENT_AGENT);
+                    IntentUtils.startWebActivity(this,getString(R.string.agent_agreement),UrlConfig.getHtmlUrl(UrlConfig.URL_AGREEMENT_AGENT));
                 }else if(purchaseType==Constant.TYPE_PURCHASE_HONEYCOMB){
-                    IntentUtils.startWebActivity(this,getString(R.string.hongycomb_agreement),Constant.URL_HONYCOMB_RULE);
+                    IntentUtils.startWebActivity(this,getString(R.string.hongycomb_agreement),UrlConfig.getHtmlUrl(UrlConfig.URL_HONYCOMB_RULE));
                 }else if(purchaseType==Constant.TYPE_PURCHASE_SNATCH){
-                    IntentUtils.startWebActivity(this,getString(R.string.snatch_agreement),Constant.URL_DUOBAO_RULE);
+                    IntentUtils.startWebActivity(this,getString(R.string.snatch_agreement),UrlConfig.getHtmlUrl(UrlConfig.URL_DUOBAO_RULE));
                 }else if(purchaseType==Constant.TYPE_PURCHASE_NESTAD){
-                    IntentUtils.startWebActivity(this,getString(R.string.brand_bid_agreement),Constant.URL_FENGCHAO_JINGGOU); }
+                    IntentUtils.startWebActivity(this,getString(R.string.brand_bid_agreement),UrlConfig.getHtmlUrl(UrlConfig.URL_FENGCHAO_JINGGOU));
+                }
                 break;
             case R.id.bt_ensure:
                 if (rbtnWxpay.isChecked()) {

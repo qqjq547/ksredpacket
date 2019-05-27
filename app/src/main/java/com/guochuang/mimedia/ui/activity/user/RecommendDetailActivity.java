@@ -63,8 +63,8 @@ public class RecommendDetailActivity extends MvpActivity<RecommendDetailPresente
     RecyclerView rvDetail;
     @BindView(R.id.srl_refresh)
     SmartRefreshLayout srlRefresh;
-    @BindView(R.id.iv_arrow)
-    ImageView ivArrow;
+//    @BindView(R.id.iv_arrow)
+//    ImageView ivArrow;
     @BindView(R.id.tv_head_time)
     TextView tvHeadTime;
 
@@ -146,20 +146,20 @@ public class RecommendDetailActivity extends MvpActivity<RecommendDetailPresente
                 setSelected(1);
                 break;
             case R.id.lin_benefit:
-                switch (sort){
-                    case Constant.SORT_DEFAULT:
-                        sort=Constant.SORT_DESC;
-                        ivArrow.setImageResource(R.drawable.ic_arrow_benefit_down);
-                        break;
-                    case Constant.SORT_DESC:
-                        sort=Constant.SORT_ASC;
-                        ivArrow.setImageResource(R.drawable.ic_arrow_benefit_up);
-                        break;
-                    case Constant.SORT_ASC:
-                        sort=Constant.SORT_DEFAULT;
-                        ivArrow.setImageResource(R.drawable.ic_arrow_benefit);
-                        break;
-                }
+//                switch (sort){
+//                    case Constant.SORT_DEFAULT:
+//                        sort=Constant.SORT_DESC;
+//                        ivArrow.setImageResource(R.drawable.ic_arrow_benefit_down);
+//                        break;
+//                    case Constant.SORT_DESC:
+//                        sort=Constant.SORT_ASC;
+//                        ivArrow.setImageResource(R.drawable.ic_arrow_benefit_up);
+//                        break;
+//                    case Constant.SORT_ASC:
+//                        sort=Constant.SORT_DEFAULT;
+//                        ivArrow.setImageResource(R.drawable.ic_arrow_benefit);
+//                        break;
+//                }
                 if (curTab==0) {
                     mvpPresenter.getDirectAgent(1, Constant.PAGE_SIZE,sort);
                 }else {

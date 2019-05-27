@@ -19,6 +19,7 @@ public class ShareBenefit {
     private String title;
     private String type;
     private String userAccountUuid;
+    private String coinType;
 
     public String getCoin() {
         return coin;
@@ -74,5 +75,13 @@ public class ShareBenefit {
 
     public void setUserAccountUuid(String userAccountUuid) {
         this.userAccountUuid = userAccountUuid;
+    }
+
+    public String getCoinType() {
+        return coinType;
+    }
+
+    public void setCoinType(String coinType) {
+        this.coinType = coinType;
     }
 }

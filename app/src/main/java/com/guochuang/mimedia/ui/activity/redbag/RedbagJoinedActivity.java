@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -54,6 +55,8 @@ public class RedbagJoinedActivity extends MvpActivity<RedbagJoinedPresenter> imp
     RecyclerView rvJoined;
     @BindView(R.id.srl_refresh)
     SmartRefreshLayout srlRefresh;
+    @BindView(R.id.tv_save_account)
+    TextView tvSaveAccount;
 
     List<RedbagUser> joinedArr=new ArrayList<>();
     RedbagJoinedAdapter joinedAdapter;
@@ -88,6 +91,11 @@ public class RedbagJoinedActivity extends MvpActivity<RedbagJoinedPresenter> imp
              tvUnit.setText(R.string.money_unit_ksb);
          }else {
              tvUnit.setText(R.string.money_unit_seal);
+         }
+         if (TextUtils.equals(ksb,"0")){
+             tvSaveAccount.setVisibility(View.INVISIBLE);
+         }else {
+             tvSaveAccount.setVisibility(View.VISIBLE);
          }
         tvName.setText(name);
         tvCoin.setText(ksb);

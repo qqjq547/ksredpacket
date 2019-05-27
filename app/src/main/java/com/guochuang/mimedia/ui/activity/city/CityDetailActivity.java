@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.guochuang.mimedia.tools.UrlConfig;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.RegionDetail;
@@ -118,7 +119,7 @@ public class CityDetailActivity extends MvpActivity<CityDetailPresenter> impleme
             case R.id.tv_text:
                 if (detail!=null){
                     if (detail.isDereliction()){
-                        IntentUtils.startImageActivity(this,Constant.URL_REGION_RULE);
+                        IntentUtils.startWebActivity(this,getString(R.string.rule), UrlConfig.getHtmlUrl(UrlConfig.URL_REGION_RULE));
                     }
                 }
                 break;

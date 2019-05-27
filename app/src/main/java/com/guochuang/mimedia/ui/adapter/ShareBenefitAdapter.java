@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.guochuang.mimedia.mvp.model.ShareBenefit;
+import com.guochuang.mimedia.tools.Constant;
 import com.sz.gcyh.KSHongBao.R;
 
 import java.util.List;
@@ -18,6 +19,16 @@ public class ShareBenefitAdapter extends BaseQuickAdapter<ShareBenefit,BaseViewH
     protected void convert(BaseViewHolder helper, ShareBenefit item) {
        helper.setText(R.id.tv_name,item.getTitle());
        helper.setText(R.id.tv_time,item.getCreateDate());
-       helper.setText(R.id.tv_ksb,String.format(mContext.getString(R.string.format_ksb),item.getCoin()));
+       switch (item.getCoinType()){
+           case Constant.COINTYPE_KSB:
+               helper.setText(R.id.tv_ksb,String.format(mContext.getString(R.string.format_ksb),item.getCoin()));
+               break;
+           case Constant.COINTYPE_SEAL:
+               helper.setText(R.id.tv_ksb,String.format(mContext.getString(R.string.format_seal),item.getCoin()));
+               break;
+           case Constant.COINTYPE_QC:
+               helper.setText(R.id.tv_ksb,String.format(mContext.getString(R.string.format_qc),item.getCoin()));
+               break;
+       }
     }
 }

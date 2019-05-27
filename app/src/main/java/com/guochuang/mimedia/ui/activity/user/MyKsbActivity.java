@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.guochuang.mimedia.mvp.model.MyAAA;
 import com.guochuang.mimedia.tools.PrefUtil;
+import com.guochuang.mimedia.tools.UrlConfig;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.KsbTrend;
@@ -100,7 +101,7 @@ public class MyKsbActivity extends MvpActivity<MyksbPresenter> implements MyksbV
         linechart.setValueSelectionEnabled(true);
         linechart.setValueTouchEnabled(true);
         CommonUtil.initH5WebView(this, wvDesp);
-        wvDesp.loadUrl(Constant.URL_RULE_QC);
+        wvDesp.loadUrl(UrlConfig.getHtmlUrl(UrlConfig.URL_RULE_QC));
         mvpPresenter.getMyKsb();
         mvpPresenter.getKsbTrend();
         if (getPref().getBoolean(PrefUtil.AAA_SWITCH,false)){
