@@ -58,6 +58,7 @@ import com.guochuang.mimedia.ui.activity.city.CityActivity;
 import com.guochuang.mimedia.ui.activity.MainActivity;
 import com.guochuang.mimedia.ui.activity.common.MyCaptureActivity;
 import com.guochuang.mimedia.ui.activity.common.ShareActivity;
+import com.guochuang.mimedia.ui.activity.common.ShareActivity3;
 import com.guochuang.mimedia.ui.activity.redbag.SquareActivity;
 import com.guochuang.mimedia.ui.activity.user.IdentifyActivity;
 import com.guochuang.mimedia.ui.activity.user.UpgradeAgentActivity;
@@ -344,7 +345,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                 }
                 break;
             case R.id.iv_share:
-                startActivity(new Intent(getActivity(), ShareActivity.class));
+                startActivity(new Intent(getActivity(), ShareActivity3.class));
                 break;
             case R.id.lin_upgrade_agent:
                 startActivity(new Intent(getActivity(), UpgradeAgentActivity.class));

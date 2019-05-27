@@ -10,6 +10,7 @@ import com.guochuang.mimedia.mvp.presenter.RecommendPresenter;
 import com.guochuang.mimedia.mvp.view.RecommendView;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.ui.activity.common.ShareActivity;
+import com.guochuang.mimedia.ui.activity.common.ShareActivity3;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
@@ -93,7 +94,7 @@ public class RecommendAgentActivity extends MvpActivity<RecommendPresenter> impl
                 }
                 break;
             case R.id.btn_start:
-                startActivity(new Intent(this,ShareActivity.class));
+                startActivity(new Intent(this, ShareActivity3.class));
                 break;
         }
     }

@@ -11,6 +11,7 @@ import com.guochuang.mimedia.mvp.presenter.RecommendPresenter;
 import com.guochuang.mimedia.mvp.view.RecommendView;
 import com.guochuang.mimedia.tools.UrlConfig;
 import com.guochuang.mimedia.ui.activity.common.ShareActivity;
+import com.guochuang.mimedia.ui.activity.common.ShareActivity3;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
@@ -80,7 +81,7 @@ public class RecommendFanActivity extends MvpActivity<RecommendPresenter> implem
             case R.id.lin_equal:
                 break;
             case R.id.btn_start:
-                startActivity(new Intent(this,ShareActivity.class));
+                startActivity(new Intent(this, ShareActivity3.class));
                 break;
         }
     }
