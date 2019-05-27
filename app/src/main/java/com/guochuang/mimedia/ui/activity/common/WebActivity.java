@@ -178,7 +178,7 @@ public class WebActivity extends MvpActivity<WebPresenter> implements IntefaceWe
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    startActivity(new Intent(WebActivity.this, ShareActivity.class));
+                    startActivity(new Intent(WebActivity.this, ShareActivity3.class));
                 }
             });
         }

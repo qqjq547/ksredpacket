@@ -31,6 +31,7 @@ import com.guochuang.mimedia.tools.DialogBuilder;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.guochuang.mimedia.ui.activity.common.ShareActivity;
+import com.guochuang.mimedia.ui.activity.common.ShareActivity3;
 import com.guochuang.mimedia.ui.adapter.RedbagReplyAdapter;
 import com.guochuang.mimedia.ui.dialog.InputDialog;
 import com.guochuang.mimedia.view.BadgeView;
@@ -139,7 +140,7 @@ public class SquareDetailActivity extends MvpActivity<SquareDetailPresenter> imp
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 if (replyList.get(position).getItemType()==RedPacketReply.OTHER){
-                    startActivity(new Intent(SquareDetailActivity.this,ShareActivity.class));
+                    startActivity(new Intent(SquareDetailActivity.this, ShareActivity3.class));
                 }
               }
            });

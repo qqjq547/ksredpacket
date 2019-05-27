@@ -129,6 +129,7 @@
             android:theme="@style/Transparent" />
         <activity android:name="com.guochuang.mimedia.ui.activity.common.ShareActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.common.ShareActivity2" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.common.ShareActivity3" />
         <activity android:name="com.guochuang.mimedia.ui.activity.operation.UserStatisticsActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.operation.IncreaseDetailActivity" />
         <activity
