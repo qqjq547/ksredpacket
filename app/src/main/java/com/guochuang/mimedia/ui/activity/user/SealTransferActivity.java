@@ -2,6 +2,7 @@ package com.guochuang.mimedia.ui.activity.user;
 
 import android.content.Intent;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import com.guochuang.mimedia.mvp.model.ExchangeConfig;
 import com.guochuang.mimedia.mvp.model.UserInfo;
 import com.guochuang.mimedia.mvp.presenter.SealTransferPresenter;
 import com.guochuang.mimedia.mvp.view.SealTransferView;
+import com.guochuang.mimedia.tools.CashierInputFilter;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.DialogBuilder;
@@ -102,6 +104,8 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
         if (!TextUtils.isEmpty(address)){
             etTransAddress.setText(address);
         }
+        InputFilter[] filters={new CashierInputFilter(4)};
+        etTransCount.setFilters(filters);
         etTransCount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -168,7 +172,7 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
 
     }
 
-    @OnClick({R.id.iv_back,R.id.tv_verify,R.id.tv_confirm})
+    @OnClick({R.id.iv_back,R.id.tv_verify,R.id.tv_all,R.id.tv_confirm})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -183,6 +187,11 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
                     mvpPresenter.sendEmailCode(emailAddress,uuid);
                 }
 
+                break;
+            case R.id.tv_all:
+                if (intCal!=null) {
+                    etTransCount.setText(String.valueOf(intCal.getDigitalCoin()));
+                }
                 break;
             case R.id.tv_confirm:
                 address=etTransAddress.getText().toString().trim();

@@ -196,7 +196,7 @@
                     android:layout_weight="1"
                     android:text="@string/transfer_ksb_detail"
                     android:textColor="@color/text_blue"
-
+                    android:visibility="gone"
                     android:textSize="@dimen/textfont16" />
             </LinearLayout>
         </LinearLayout>

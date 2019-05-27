@@ -13,7 +13,7 @@ public class CashierInputFilter implements InputFilter {
     //输入的最大金额    
     private static final int MAX_VALUE = Integer.MAX_VALUE;
     //小数点后的位数    
-    private static final int POINTER_LENGTH = 2;
+    private static int POINTER_LENGTH = 2;
 
     private static final String POINTER = ".";
 
@@ -21,6 +21,10 @@ public class CashierInputFilter implements InputFilter {
 
     public CashierInputFilter() {
         mPattern = Pattern.compile("([0-9]|\\.)*");
+    }
+    public CashierInputFilter(int pointLength) {
+        this();
+        POINTER_LENGTH=pointLength;
     }
 
     /**
@@ -79,9 +83,9 @@ public class CashierInputFilter implements InputFilter {
 
         //验证输入金额的大小  
         double sumText = Double.parseDouble(destText + sourceText);
-        if (sumText > MAX_VALUE) {
-            return dest.subSequence(dstart, dend);
-        }
+//        if (sumText > MAX_VALUE) {
+//            return dest.subSequence(dstart, dend);
+//        }
 
         return dest.subSequence(dstart, dend) + sourceText;
     }

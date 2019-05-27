@@ -2,6 +2,7 @@ package com.guochuang.mimedia.ui.activity.user;
 
 import android.content.Intent;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.guochuang.mimedia.mvp.presenter.AaaTranKsbPresenter;
 import com.guochuang.mimedia.mvp.presenter.SealTranQcPresenter;
 import com.guochuang.mimedia.mvp.view.AaaTranKsbView;
 import com.guochuang.mimedia.mvp.view.SealTranQcView;
+import com.guochuang.mimedia.tools.CashierInputFilter;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.DoubleUtil;
@@ -60,6 +62,8 @@ public class SealTranQcActivity extends MvpActivity<SealTranQcPresenter> impleme
     @Override
     public void initViewAndData() {
         tvTitle.setText(R.string.seal_trans_qc_title);
+        InputFilter[] filters={new CashierInputFilter(4)};
+        etTransKsb.setFilters(filters);
         etTransKsb.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -91,11 +95,16 @@ public class SealTranQcActivity extends MvpActivity<SealTranQcPresenter> impleme
 
     }
 
-    @OnClick({R.id.iv_back, R.id.tv_confirm})
+    @OnClick({R.id.iv_back, R.id.tv_all,R.id.tv_confirm})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
                 onBackPressed();
+                break;
+            case R.id.tv_all:
+                if (intCal!=null) {
+                    etTransKsb.setText(String.valueOf(intCal.getDigitalCoin()));
+                }
                 break;
             case R.id.tv_confirm:
                 String amountStr=etTransKsb.getText().toString().trim();
