@@ -16,7 +16,6 @@ import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.mvp.model.FengWoVideoOrLink;
 import com.guochuang.mimedia.mvp.presenter.WebPresenter;
 import com.guochuang.mimedia.mvp.view.IntefaceWebView;
@@ -179,7 +178,7 @@ public class WebActivity extends MvpActivity<WebPresenter> implements IntefaceWe
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    startActivity(new Intent(WebActivity.this, ShareActivity3.class));
+                    startActivity(new Intent(WebActivity.this, ShareActivity.class));
                 }
             });
         }

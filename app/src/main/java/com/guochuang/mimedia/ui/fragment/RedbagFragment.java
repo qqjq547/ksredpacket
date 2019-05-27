@@ -37,7 +37,6 @@ import com.baidu.mapapi.model.LatLng;
 import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.MvpFragment;
 import com.guochuang.mimedia.mvp.model.HomeRegion;
-import com.guochuang.mimedia.mvp.model.MyKsb;
 import com.guochuang.mimedia.mvp.model.MySeal;
 import com.guochuang.mimedia.mvp.model.NestHomeAd;
 import com.guochuang.mimedia.mvp.model.PublishRedbagType;
@@ -49,7 +48,6 @@ import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.LogUtil;
-import com.guochuang.mimedia.tools.OssManager;
 import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.tools.antishake.AntiShake;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
@@ -58,7 +56,6 @@ import com.guochuang.mimedia.ui.activity.city.CityActivity;
 import com.guochuang.mimedia.ui.activity.MainActivity;
 import com.guochuang.mimedia.ui.activity.common.MyCaptureActivity;
 import com.guochuang.mimedia.ui.activity.common.ShareActivity;
-import com.guochuang.mimedia.ui.activity.common.ShareActivity3;
 import com.guochuang.mimedia.ui.activity.redbag.SquareActivity;
 import com.guochuang.mimedia.ui.activity.user.IdentifyActivity;
 import com.guochuang.mimedia.ui.activity.user.UpgradeAgentActivity;
@@ -345,7 +342,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                 }
                 break;
             case R.id.iv_share:
-                startActivity(new Intent(getActivity(), ShareActivity3.class));
+                startActivity(new Intent(getActivity(), ShareActivity.class));
                 break;
             case R.id.lin_upgrade_agent:
                 startActivity(new Intent(getActivity(), UpgradeAgentActivity.class));

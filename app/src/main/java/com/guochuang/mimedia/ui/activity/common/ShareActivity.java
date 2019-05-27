@@ -8,7 +8,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.QrCode;
@@ -18,6 +17,7 @@ import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.guochuang.mimedia.ui.dialog.ShareDialog;
+import com.sz.gcyh.KSHongBao.R;
 
 import java.io.File;
 
@@ -70,15 +70,15 @@ public class ShareActivity extends MvpActivity<SharePresenter> implements ShareV
     @Override
     public void setData(QrCode data) {
         closeLoadingDialog();
-       if (data!=null){
-           GlideImgManager.loadImage(this,data.getUrl(),ivQrcode);
-       }
+        if (data!=null){
+            GlideImgManager.loadImage(this,data.getUrl(),ivQrcode);
+        }
     }
 
     @Override
     public void setError(String msg) {
-     closeLoadingDialog();
-     showShortToast(msg);
+        closeLoadingDialog();
+        showShortToast(msg);
     }
     private Bitmap getViewBitmap(View view) {
         Bitmap screenshot = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);

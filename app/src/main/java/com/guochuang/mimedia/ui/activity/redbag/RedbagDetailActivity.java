@@ -24,10 +24,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.mvp.model.PictureBean;
 import com.guochuang.mimedia.mvp.model.RedbagInfo;
 import com.guochuang.mimedia.tools.AdCollectionView;
-import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.ui.activity.common.ShareActivity;
-import com.guochuang.mimedia.ui.activity.common.ShareActivity3;
 import com.guochuang.mimedia.view.BadgeView;
 import com.qq.e.ads.nativ.NativeExpressADView;
 import com.sz.gcyh.KSHongBao.R;
@@ -59,7 +57,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import lecho.lib.hellocharts.model.Line;
 import rx.functions.Action0;
 
 public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> implements RedbagDetailView {
@@ -238,7 +235,7 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                     @Override
                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                         if (replyList.get(position).getItemType() == RedPacketReply.OTHER) {
-                            startActivity(new Intent(RedbagDetailActivity.this, ShareActivity3.class));
+                            startActivity(new Intent(RedbagDetailActivity.this, ShareActivity.class));
                         }
                     }
                 });
@@ -303,7 +300,7 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                 @Override
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                     if (replyList.get(position).getItemType() == RedPacketReply.OTHER) {
-                        startActivity(new Intent(RedbagDetailActivity.this, ShareActivity3.class));
+                        startActivity(new Intent(RedbagDetailActivity.this, ShareActivity.class));
                     }
                 }
             });
@@ -414,7 +411,7 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                         }).create().show();
                 break;
             case R.id.lin_redbag_share:
-                startActivity(new Intent(RedbagDetailActivity.this, ShareActivity3.class));
+                startActivity(new Intent(RedbagDetailActivity.this, ShareActivity.class));
                 break;
             case R.id.tv_reply:
                 parentId = 0;
