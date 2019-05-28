@@ -946,4 +946,5 @@
     <string name="verify_code">验证码</string>
     <string name="mobile_verify_code">手机号验证码</string>
     <string name="equivalence_fomat_str">等值：%s元</string>
+    <string name="myseal_str">我的SEAL</string>
 </resources>

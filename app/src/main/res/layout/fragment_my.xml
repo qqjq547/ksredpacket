@@ -2,140 +2,146 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_white"
-    >
-<android.support.v4.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:background="@color/bg_white">
 
-    <ImageView
+    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="fitXY"
-        android:src="@drawable/bg_red_oval" />
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingTop="@dimen/title_height">
-
-        <ImageView
-            android:id="@+id/iv_my_header"
-            android:layout_width="@dimen/space65"
-            android:layout_height="@dimen/space65"
-            android:layout_marginTop="@dimen/space22"
-            android:layout_gravity="center"
-             />
-
-        <TextView
-            android:id="@+id/tv_my_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/space10"
-            android:textColor="@color/text_white"
-            android:textSize="@dimen/textfont19" />
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/vp_my"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/space140"
-            android:layout_marginLeft="@dimen/space10"
-            android:layout_marginRight="@dimen/space10"
-            android:layout_marginTop="@dimen/space30"
-            android:nestedScrollingEnabled="false"/>
+            android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/ll_my_lamp"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/space10"
-            android:layout_marginTop="@dimen/space5"
-            android:layout_marginBottom="@dimen/space5"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/lin_nestad"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/space15"
-            android:layout_marginRight="@dimen/space15"
-            android:visibility="gone">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_red_oval" />
 
             <LinearLayout
-                android:id="@+id/lin_ad_bid"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:background="@drawable/bg_white_block"
-                android:paddingLeft="@dimen/space15"
-                android:paddingRight="@dimen/space15"
-                android:paddingTop="@dimen/space20"
-                android:paddingBottom="@dimen/space20">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/title_height">
+
                 <ImageView
+                    android:id="@+id/iv_my_header"
+                    android:layout_width="@dimen/space65"
+                    android:layout_height="@dimen/space65"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/space22" />
+
+                <TextView
+                    android:id="@+id/tv_my_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_my_ad_bid"/>
-                <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/space10"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/textfont19" />
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/vp_my"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space140"
+                    android:layout_marginLeft="@dimen/space10"
+                    android:layout_marginTop="@dimen/space30"
+                    android:layout_marginRight="@dimen/space10"
+                    android:nestedScrollingEnabled="false" />
+
+                <LinearLayout
+                    android:id="@+id/ll_my_lamp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space10"
+                    android:layout_marginTop="@dimen/space5"
+                    android:layout_marginBottom="@dimen/space5"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lin_nestad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/space15"
+                    android:layout_marginRight="@dimen/space15"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:id="@+id/lin_my_seal"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_white_block"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="@dimen/space15"
+                        android:paddingTop="@dimen/space20"
+                        android:paddingRight="@dimen/space15"
+                        android:paddingBottom="@dimen/space20">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_my_seal" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/space10"
+                            android:text="@string/myseal_str"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/textfont18" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lin_my_qc"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/space5"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_white_block"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="@dimen/space15"
+                        android:paddingTop="@dimen/space20"
+                        android:paddingRight="@dimen/space15"
+                        android:paddingBottom="@dimen/space20">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_my_qc" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/space10"
+                            android:text="@string/my_qc"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/textfont18" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_menu"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/space10"
-                    android:textSize="@dimen/textfont18"
-                    android:textColor="@color/text_black"
-                    android:text="@string/ad_bid"/>
+                    android:layout_marginRight="@dimen/space10"
+                    android:background="@drawable/bg_white_block"
+                    android:nestedScrollingEnabled="false"
+                    android:padding="@dimen/space15"></android.support.v7.widget.RecyclerView>
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/lin_my_ad"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:layout_marginLeft="@dimen/space5"
-                android:background="@drawable/bg_white_block"
-                android:paddingLeft="@dimen/space15"
-                android:paddingRight="@dimen/space15"
-                android:paddingTop="@dimen/space20"
-                android:paddingBottom="@dimen/space20">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_my_ad"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/space10"
-                    android:textSize="@dimen/textfont18"
-                    android:textColor="@color/text_black"
-                    android:text="@string/my_ad"/>
-            </LinearLayout>
-        </LinearLayout>
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_menu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/space10"
-            android:layout_marginRight="@dimen/space10"
-            android:background="@drawable/bg_white_block"
-            android:padding="@dimen/space15"
-            android:nestedScrollingEnabled="false">
-        </android.support.v7.widget.RecyclerView>
-    </LinearLayout>
+        </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
 
-</RelativeLayout>
-</android.support.v4.widget.NestedScrollView>
     <LinearLayout
         android:id="@+id/lin_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/title_height">
@@ -160,10 +166,10 @@
             <ImageView
                 android:id="@+id/iv_message"
                 android:layout_width="@dimen/title_height"
-                android:layout_alignParentRight="true"
                 android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_my_message"/>
+                android:src="@drawable/ic_my_message" />
         </RelativeLayout>
     </LinearLayout>
 </FrameLayout>

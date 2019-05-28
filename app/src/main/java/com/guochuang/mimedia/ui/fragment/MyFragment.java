@@ -205,17 +205,20 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
             }
         });
         setPageSelected(0);
-        itemArr.add(new MyMenuItem(R.drawable.ic_my_qc, R.string.my_qc));
+//        itemArr.add(new MyMenuItem(R.drawable.ic_my_qc, R.string.my_qc));
 //        itemArr.add(new MyMenuItem(R.drawable.ic_my_paycode, R.string.receive_pay_code));
         if (getPref().getBoolean(PrefUtil.AAA_SWITCH,false)){
             itemArr.add(new MyMenuItem(R.drawable.ic_my_aaa, R.string.receive_my_aaa));
             mvpPresenter.getMyAAA(Constant.DIGITAL_CURRENCY_AAA);
         }
-        itemArr.add(new MyMenuItem(R.drawable.ic_my_recommend, R.string.text_my_recommend));
+
         itemArr.add(new MyMenuItem(R.drawable.ic_my_city, R.string.text_my_city));
+        itemArr.add(new MyMenuItem(R.drawable.ic_my_dynamic, R.string.text_my_dynamic));
+        itemArr.add(new MyMenuItem(R.drawable.ic_my_ad_bid, R.string.ad_bid));
+        itemArr.add(new MyMenuItem(R.drawable.ic_my_ad, R.string.my_ad));
+        itemArr.add(new MyMenuItem(R.drawable.ic_my_recommend, R.string.text_my_recommend));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_order, R.string.text_my_order));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_welfare, R.string.text_my_welfare));
-        itemArr.add(new MyMenuItem(R.drawable.ic_my_dynamic, R.string.text_my_dynamic));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_collection, R.string.text_my_collection));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_comments, R.string.text_my_comments));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_safe, R.string.text_my_safe));
@@ -283,6 +286,19 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                         break;
                     case R.drawable.ic_my_aaa:
                         startActivity(new Intent(getActivity(), MyAAAActivity.class));
+                        break;
+                    case R.drawable.ic_my_ad_bid:
+                        //广告竞购
+                        ((MainActivity) getActivity()).clearMarker();
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                startActivity(new Intent(getActivity(), AdBidActivity.class));
+                            }
+                        }, 500);
+                        break;
+                    case R.drawable.ic_my_ad:
+                    startActivity(new Intent(getActivity(), MyAdActivity.class));
                         break;
                 }
             }
@@ -355,8 +371,8 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
 
     @OnClick({R.id.iv_setting,
             R.id.iv_message,
-            R.id.lin_ad_bid,
-            R.id.lin_my_ad,
+            R.id.lin_my_seal,
+            R.id.lin_my_qc,
             R.id.tv_title})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -366,17 +382,15 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
             case R.id.iv_message:
                 startActivity(new Intent(getActivity(), MessageActivity.class));
                 break;
-            case R.id.lin_ad_bid:
-                ((MainActivity) getActivity()).clearMarker();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        startActivity(new Intent(getActivity(), AdBidActivity.class));
-                    }
-                }, 500);
+            case R.id.lin_my_seal:
+
+
+                startActivity(new Intent(getActivity(), MySealActivity.class));
+
                 break;
-            case R.id.lin_my_ad:
-                startActivity(new Intent(getActivity(), MyAdActivity.class));
+            case R.id.lin_my_qc:
+
+                startActivity(new Intent(getActivity(), MyQCActivity.class));
                 break;
             case R.id.tv_title:
                 List<String> itemArr = new ArrayList<>();
@@ -471,9 +485,9 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
             tvTotalIncome.setText(data.getTotalIncome());
             tvYesterdayIncome.setText(data.getYesterDayIncome());
             tvProvince.setText(data.getWhereRegion());
-            int insertPos=1;
+            int insertPos=2;
             if(getPref().getBoolean(PrefUtil.AAA_SWITCH,false)){
-                insertPos=2;
+                insertPos=3;
             }
             itemArr.add(insertPos, new MyMenuItem(R.drawable.ic_my_operate_center, R.string.operation_center));
             menuAdapter.notifyItemInserted(insertPos);
