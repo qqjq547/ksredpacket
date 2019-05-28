@@ -246,7 +246,7 @@
                             android:paddingTop="@dimen/space12"
                             android:text=""
                             android:textColor="@color/color_999999"
-                            android:textSize="@dimen/textfont13" />
+                            android:textSize="@dimen/textfont12" />
 
                     </LinearLayout>
                 </LinearLayout>
