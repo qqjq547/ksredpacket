@@ -52,6 +52,8 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
     TextView tvAmount;
     @BindView(R.id.tv_equal_ksb)
     TextView tvEqualKsb;
+    @BindView(R.id.tv_unit)
+    TextView tvUnit;
     @BindView(R.id.cb_read)
     CheckBox cbRead;
     @BindView(R.id.tv_agreement)
@@ -101,6 +103,7 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
         if (purchaseType==Constant.TYPE_PURCHASE_REGION){
             tvTitle.setText(R.string.buy_city_owner);
             tvAgreement.setText(R.string.city_buy_agreement);;
+            tvUnit.setText(R.string.money_unit_qc);
         }else if(purchaseType==Constant.TYPE_PURCHASE_AGENT){
             tvTitle.setText(R.string.bug_agent);
             tvAgreement.setText(R.string.agent_agreement);
@@ -110,6 +113,7 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
         }else if(purchaseType==Constant.TYPE_PURCHASE_SNATCH){
             tvTitle.setText(R.string.buy_snatch);
             tvAgreement.setText(R.string.snatch_agreement);
+            tvUnit.setText(R.string.money_unit_qc);
         }else if(purchaseType==Constant.TYPE_PURCHASE_NESTAD){
             tvTitle.setText(R.string.buy_nestad);
             tvAgreement.setText(R.string.brand_bid_agreement);

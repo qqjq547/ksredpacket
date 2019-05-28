@@ -20,7 +20,7 @@ public class UrlConfig {
     //城主规则
     public static final String URL_REGION_RULE = "project/html/rule/cityLordRule.html";
     //竞购协议
-    public static final String URL_AGREEMENT = "html/rule/region/agreement.htm";
+    public static final String URL_AGREEMENT = "project/html/rule/nodeBidding.html";
     //客服二维码
     public static final String URL_SERVICEQR = "html/qrcode/serviceqr/index.htm";
     //疯狂广告公告
