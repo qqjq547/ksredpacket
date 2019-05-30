@@ -1,26 +1,21 @@
 package com.guochuang.mimedia.ui.activity;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-
 import com.allenliu.versionchecklib.v2.AllenVersionChecker;
 import com.allenliu.versionchecklib.v2.builder.UIData;
 import com.allenliu.versionchecklib.v2.callback.CustomDownloadingDialogListener;
 import com.guochuang.mimedia.app.AdInfoService;
 import com.guochuang.mimedia.app.App;
-import com.guochuang.mimedia.base.BaseActivity;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.VersionMsg;
 import com.guochuang.mimedia.mvp.presenter.WelcomePresenter;
 import com.guochuang.mimedia.mvp.view.WelcomeView;
-import com.guochuang.mimedia.tools.AdCollectionView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.IntentUtils;
@@ -36,11 +31,8 @@ import butterknife.ButterKnife;
 
 public class WelcomeActivity extends MvpActivity<WelcomePresenter> implements WelcomeView {
 
-
-    @BindView(R.id.ll_ad)
-    LinearLayout llAd;
     boolean finishUpdate=false;
-    boolean finishAd=false;
+    boolean finishCountDown=false;
 
     protected WelcomePresenter createPresenter() {
         return new WelcomePresenter(this);
@@ -64,29 +56,18 @@ public class WelcomeActivity extends MvpActivity<WelcomePresenter> implements We
     public void initViewAndData() {
         mvpPresenter.getVersion(Constant.SYSTEM_CODE_ANDROID, String.valueOf(CommonUtil.getVersionCode(this)));
         startService(new Intent(this, AdInfoService.class));
-        AdCollectionView adCollectionView = new AdCollectionView(this, llAd, new AdCollectionView.AdCollectionListener() {
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public void onAdDismissed() {
-                finishAd=true;
+            public void run() {
+                finishCountDown=true;
                 next();
             }
+        },2000);
 
-            @Override
-            public void onAdFailed(String s) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        finishAd=true;
-                        next();
-                    }
-                }, 2000);
-            }
-        });
-        adCollectionView.init(AdCollectionView.TYPE_BD, AdCollectionView.LOCATION_TAIL, null, null);
     }
 
     private void next() {
-        if (finishAd&&finishUpdate) {
+        if (finishCountDown&&finishUpdate) {
             if (getPref().getBoolean(PrefUtil.FIRSTOPEN, true)) {
                 startActivity(new Intent(WelcomeActivity.this, GuideActivity.class));
                 getPref().setBoolean(PrefUtil.FIRSTOPEN, false);

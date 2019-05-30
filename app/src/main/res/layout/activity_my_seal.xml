@@ -131,20 +131,18 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:background="@color/bg_gray">
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space15">
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:paddingLeft="@dimen/space15"
+                            android:paddingRight="@dimen/space15">
 
                             <TextView
                                 android:id="@+id/tv_tibi"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/space15"
+                                android:layout_marginRight="@dimen/space45"
                                 android:layout_weight="1"
                                 android:background="@drawable/shape_rect_yelle_btn"
                                 android:gravity="center"
@@ -157,8 +155,6 @@
                                 android:id="@+id/tv_transform_qc"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/space45"
-                                android:layout_marginRight="@dimen/space15"
                                 android:layout_weight="1"
                                 android:background="@drawable/shape_rect_yelle_btn"
                                 android:gravity="center"
@@ -168,18 +164,15 @@
                                 android:textSize="@dimen/textfont16" />
 
                         </LinearLayout>
-                        <TextView
-                            android:id="@+id/tv_goto_real_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="@dimen/space10"
-                            android:layout_marginRight="@dimen/space10"
-                            android:background="@color/white"
-                            android:gravity="center"
-                            android:text="@string/tip_create_seal"
-                            android:visibility="gone" />
-                    </FrameLayout>
-
+                    <TextView
+                        android:id="@+id/tv_goto_real_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/space10"
+                        android:gravity="center"
+                        android:textColor="@color/text_blue"
+                        android:text="@string/tip_create_seal"
+                        android:visibility="gone" />
                     <LinearLayout
                         android:id="@+id/lin_content"
                         android:layout_width="match_parent"

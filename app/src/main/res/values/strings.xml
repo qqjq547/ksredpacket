@@ -899,7 +899,7 @@
     <string name="seal_trans_ksb">SEAL转化QC数量</string>
     <string name="seal_price">SEAL价格</string>
     <string name="pls_input_seal_to_qc">请输入SEAL转到QC数量</string>
-    <string name="tip_create_seal">实名开通SEAl钱包</string>
+    <string name="tip_create_seal">实名后可进行提币操作</string>
 
     <string name="mobile_has_bind">该手机号已绑定</string>
     <string name="my_seal_details_title">SEAL明细</string>

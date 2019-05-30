@@ -89,18 +89,8 @@ public class MyQCActivity extends MvpActivity<MyQCPresenter> implements MyQCView
             case R.id.lin_equal:
                 break;
             case R.id.btn_transfer_sell:
-                if (getPref().getInt(PrefUtil.IDENTITY,0)==0) {
-                    showShortToast(R.string.pls_identity_first);
-                    startActivityForResult(new Intent(this, IdentifyActivity.class), Constant.REFRESH);
-                }else if(getPref().getInt(PrefUtil.SAFECODE,0)==0){
-                    showShortToast(R.string.pls_safecode_first);
-                    startActivityForResult(new Intent(this, TradePwdActivity.class), Constant.REFRESH);
-                }else {
-
-                    startActivityForResult(new Intent(this, QCTranSEALActivity.class),Constant.REQUEST_GRANT);
-                }
+                startActivityForResult(new Intent(this, QCTranSEALActivity.class),Constant.REQUEST_GRANT);
                 break;
-
             case R.id.btn_ksb_detail:
                 //原ksb 明细
                 startActivity(new Intent(this, MyKsbDetailsActivity.class));

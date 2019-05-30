@@ -60,41 +60,13 @@
                         android:paddingBottom="@dimen/space55"
                         android:background="@drawable/bg_share_3_code"
                         android:scaleType="fitXY" />
-                <LinearLayout
+                <View
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="140"
+                    android:layout_weight="100"
                     android:minHeight="40dp"
-                    android:layout_marginBottom="@dimen/space10"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
+                    android:layout_marginBottom="@dimen/space10" />
 
-                    <TextView
-                        android:id="@+id/tv_copy_link"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_btn_share3"
-                        android:gravity="center"
-                        android:text="@string/copy_share_link"
-                        android:textColor="@color/text_white"
-                        android:textSize="@dimen/textfont14" />
-
-                    <TextView
-                        android:id="@+id/tv_share_friend"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_btn_share3"
-                        android:gravity="center"
-                        android:text="@string/share_friend"
-                        android:textColor="@color/text_white"
-                        android:textSize="@dimen/textfont14" />
-                </LinearLayout>
             </LinearLayout>
 
 
@@ -112,6 +84,40 @@
             android:layout_marginTop="@dimen/space20"
             android:padding="@dimen/space10"
             android:src="@drawable/ic_back_white"
-            android:visibility="gone" />
+            android:visibility="visible" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/space10"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tv_copy_link"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_btn_share3"
+                android:gravity="center"
+                android:text="@string/copy_share_link"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/textfont14" />
+
+            <TextView
+                android:id="@+id/tv_share_friend"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_btn_share3"
+                android:gravity="center"
+                android:text="@string/share_friend"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/textfont14" />
+        </LinearLayout>
     </RelativeLayout>
     </FrameLayout>

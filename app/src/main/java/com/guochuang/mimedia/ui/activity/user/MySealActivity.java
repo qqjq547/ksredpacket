@@ -185,10 +185,12 @@ public class MySealActivity extends MvpActivity<MySealPresenter> implements MySe
             mTvGotoRealName.setVisibility(View.GONE);
             mLlRootView.setBackgroundColor(getResources().getColor(R.color.white));
             tvTip.setText(R.string.seal_des_str);
+            tvTibi.setVisibility(View.VISIBLE);
         } else {
             mTvGotoRealName.setVisibility(View.VISIBLE);
             mLlRootView.setBackgroundColor(getResources().getColor(R.color.color_6a4bf1));
             tvTip.setText(R.string.seal_des_str_not_name);
+            tvTibi.setVisibility(View.GONE);
         }
     }
 
