@@ -66,23 +66,23 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/space15"
                     android:layout_marginRight="@dimen/space15"
-                    android:visibility="gone">
+                    >
 
                     <LinearLayout
                         android:id="@+id/lin_my_seal"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@drawable/bg_white_block"
                         android:gravity="center_vertical"
                         android:paddingLeft="@dimen/space15"
                         android:paddingTop="@dimen/space20"
-                        android:paddingRight="@dimen/space15"
+                        android:paddingRight="@dimen/space5"
                         android:paddingBottom="@dimen/space20">
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
                             android:src="@drawable/ic_my_seal" />
 
                         <TextView
@@ -108,8 +108,8 @@
                         android:paddingBottom="@dimen/space20">
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
                             android:src="@drawable/ic_my_qc" />
 
                         <TextView

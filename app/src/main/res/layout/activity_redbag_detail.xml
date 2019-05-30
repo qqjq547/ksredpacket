@@ -445,6 +445,7 @@
                                 <!--android:visibility="gone" />-->
                         </LinearLayout>
                     </LinearLayout>
+                    <!--上面内容导致的-->
                     <include
                         android:layout_marginTop="@dimen/space10"
                         android:layout_width="match_parent"
