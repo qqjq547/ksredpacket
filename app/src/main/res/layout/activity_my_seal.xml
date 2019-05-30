@@ -240,11 +240,10 @@
                             android:id="@+id/tv_aaa_address"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/space15"
-                            android:layout_marginRight="@dimen/space15"
+                            android:layout_marginLeft="@dimen/space12"
+                            android:layout_marginRight="@dimen/space12"
                             android:gravity="right"
-                            android:paddingTop="@dimen/space12"
-                            android:text=""
+                            android:layout_marginTop="@dimen/space12"
                             android:textColor="@color/color_999999"
                             android:textSize="@dimen/textfont12" />
 

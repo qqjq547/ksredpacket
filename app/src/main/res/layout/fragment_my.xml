@@ -91,7 +91,7 @@
                             android:layout_marginLeft="@dimen/space10"
                             android:text="@string/myseal_str"
                             android:textColor="@color/text_black"
-                            android:textSize="@dimen/textfont18" />
+                            android:textSize="@dimen/textfont16" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -118,7 +118,7 @@
                             android:layout_marginLeft="@dimen/space10"
                             android:text="@string/my_qc"
                             android:textColor="@color/text_black"
-                            android:textSize="@dimen/textfont18" />
+                            android:textSize="@dimen/textfont16" />
                     </LinearLayout>
                 </LinearLayout>
 
