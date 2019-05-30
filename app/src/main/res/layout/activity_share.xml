@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:scrollbars="none">
-
-    <FrameLayout
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+    android:background="#d21826">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:fillViewport="true"
+        >
 
         <FrameLayout
             android:id="@+id/fl_content"
@@ -17,104 +18,100 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/bg_red_share" />
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_red_share"
+                android:adjustViewBounds="true"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="40"/>
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space26"
                     android:src="@drawable/share_title" />
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="35"/>
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space22"
                     android:src="@drawable/share_taoqukuai" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/share_handle" />
-                <!--     android:layout_width="200dp"
-                     android:layout_height="240dp"-->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_share_3_code"
-                    android:gravity="center_horizontal"
-                    android:paddingBottom="@dimen/space13">
-
                     <ImageView
                         android:id="@+id/iv_qrcode"
-                        android:layout_width="140dp"
-                        android:layout_height="140dp"
-                        android:layout_marginLeft="@dimen/textfont16"
-                        android:layout_marginTop="@dimen/space25"
-                        android:layout_marginRight="@dimen/textfont16"
-                        android:layout_marginBottom="@dimen/space12"
+                        android:layout_width="180dp"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="-30dp"
+                        android:paddingRight="@dimen/space30"
+                        android:paddingTop="@dimen/space25"
+                        android:paddingLeft="@dimen/space30"
+                        android:paddingBottom="@dimen/space55"
+                        android:background="@drawable/bg_share_3_code"
                         android:scaleType="fitXY" />
-                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="140"
+                    android:minHeight="40dp"
+                    android:layout_marginBottom="@dimen/space10"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
 
+                    <TextView
+                        android:id="@+id/tv_copy_link"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_btn_share3"
+                        android:gravity="center"
+                        android:text="@string/copy_share_link"
+                        android:textColor="@color/text_white"
+                        android:textSize="@dimen/textfont14" />
+
+                    <TextView
+                        android:id="@+id/tv_share_friend"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_btn_share3"
+                        android:gravity="center"
+                        android:text="@string/share_friend"
+                        android:textColor="@color/text_white"
+                        android:textSize="@dimen/textfont14" />
+                </LinearLayout>
             </LinearLayout>
 
 
         </FrameLayout>
+    </ScrollView>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/iv_back"
-                android:layout_width="@dimen/space40"
-                android:layout_height="@dimen/space40"
-                android:layout_marginTop="@dimen/space20"
-                android:padding="@dimen/space10"
-                android:src="@drawable/ic_back_white"
-                android:visibility="gone" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="15dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_copy_link"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_btn_share3"
-                    android:gravity="center"
-                    android:text="@string/copy_share_link"
-                    android:textColor="@color/text_white"
-                    android:textSize="@dimen/textfont14" />
-
-                <TextView
-                    android:id="@+id/tv_share_friend"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_btn_share3"
-                    android:gravity="center"
-                    android:text="@string/share_friend"
-                    android:textColor="@color/text_white"
-                    android:textSize="@dimen/textfont14" />
-            </LinearLayout>
-        </RelativeLayout>
-
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/space40"
+            android:layout_height="@dimen/space40"
+            android:layout_marginTop="@dimen/space20"
+            android:padding="@dimen/space10"
+            android:src="@drawable/ic_back_white"
+            android:visibility="gone" />
+    </RelativeLayout>
     </FrameLayout>
-</ScrollView>
