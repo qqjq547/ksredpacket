@@ -5,6 +5,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -547,11 +548,7 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
             setLongClick();
             if (TextUtils.equals(roleType,Constant.ROLETYPE_SYSTEM)) {
                 tvReceiveNum.setText(String.format(getString(R.string.format_people_get_redbag_money), redbagDetail.getDrawNumber()));
-                if (redbagDetail.getSystemAd() != null && redbagDetail.getSystemAd().size() != 0) {
-                    AdCollectionView adCollectionView = new AdCollectionView(this, linAd);
-                    adCollectionView.init(AdCollectionView.TYPE_SYSTEM, AdCollectionView.LOCATION_REDBAG, redbagDetail.getSystemAd().get(0).getPicture(), redbagDetail.getSystemAd().get(0).getJumpUrl());
-                    nativeExpressADView = adCollectionView.getNativeExpressADView();
-                }
+
             } else {
                 tvReceiveNum.setText(String.format(getString(R.string.format_people_get_redbag), redbagDetail.getDrawNumber()));
                 tvContent.setText(redbagDetail.getContent());
@@ -819,6 +816,19 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                         linTitleCenter.setVisibility(View.VISIBLE);
                         tvTitle.setText(redbagDetail.getCoin());
                         tvTitle.setTextColor(getResources().getColor(R.color.text_white));
+                        linContent.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (TextUtils.equals(roleType,Constant.ROLETYPE_SYSTEM)){
+                                    if (redbagDetail.getSystemAd() != null && redbagDetail.getSystemAd().size() != 0) {
+                                        AdCollectionView adCollectionView = new AdCollectionView(RedbagDetailActivity.this, linAd);
+                                        adCollectionView.init(AdCollectionView.TYPE_SYSTEM, AdCollectionView.LOCATION_REDBAG, redbagDetail.getSystemAd().get(0).getPicture(), redbagDetail.getSystemAd().get(0).getJumpUrl());
+                                        nativeExpressADView = adCollectionView.getNativeExpressADView();
+                                    }
+                                }
+                            }
+                        });
+
                     }
 
                     @Override
