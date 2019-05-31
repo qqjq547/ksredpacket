@@ -279,7 +279,7 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
             linComment.setVisibility(View.GONE);
             linReply.setVisibility(View.GONE);
             ivJoinedArrow.setVisibility(View.GONE);
-            linRedbagShare.setVisibility(View.VISIBLE);
+            linRedbagShare.setVisibility(View.GONE);
             srlRefresh.setEnableRefresh(false);
             srlRefresh.setEnableLoadmore(false);
             setRedbagDetail(redbagDetail);
@@ -825,6 +825,7 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                                         adCollectionView.init(AdCollectionView.TYPE_SYSTEM, AdCollectionView.LOCATION_REDBAG, redbagDetail.getSystemAd().get(0).getPicture(), redbagDetail.getSystemAd().get(0).getJumpUrl());
                                         nativeExpressADView = adCollectionView.getNativeExpressADView();
                                     }
+                                    linRedbagShare.setVisibility(View.VISIBLE);
                                 }
                             }
                         });

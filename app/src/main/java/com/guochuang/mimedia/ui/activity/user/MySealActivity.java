@@ -141,10 +141,12 @@ public class MySealActivity extends MvpActivity<MySealPresenter> implements MySe
                 startActivityForResult(new Intent(this, IdentifyActivity.class), Constant.REFRESH);
                 break;
             case R.id.lin_price:
-                new DialogBuilder(this)
-                        .setMessage(getString(R.string.myseal_tip))
-                        .setPositiveButton(R.string.i_known, null)
-                        .create().show();
+                if (mySeal!=null) {
+                    new DialogBuilder(this)
+                            .setMessage(mySeal.getRemark())
+                            .setPositiveButton(R.string.i_known, null)
+                            .create().show();
+                }
                 break;
 
         }
