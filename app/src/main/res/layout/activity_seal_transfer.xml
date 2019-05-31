@@ -6,6 +6,13 @@
     android:orientation="vertical">
 
  <include layout="@layout/layout_title" />
+ <android.support.v4.widget.NestedScrollView
+     android:layout_width="match_parent"
+     android:layout_height="match_parent">
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
 
   <RelativeLayout
       android:layout_width="match_parent"
@@ -273,5 +280,6 @@
      android:layout_marginRight="@dimen/space15"
      android:textSize="12sp"
      android:textColor="@color/text_gray" />
-
+  </LinearLayout>
+ </android.support.v4.widget.NestedScrollView>
   </LinearLayout>
