@@ -124,7 +124,6 @@ public class MyQCDetailsActivity extends MvpActivity<MyQCDetailsPresenter> imple
             }
         });
         mvpPresenter.getSubject(Constant.TYPE_QC_TYPE);
-        mvpPresenter.getQCDetail(type, startIndex, Constant.PAGE_SIZE);
     }
 
     @OnClick({R.id.iv_back, R.id.tv_text})
