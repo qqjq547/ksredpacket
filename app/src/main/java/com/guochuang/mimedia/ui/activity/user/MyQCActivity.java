@@ -79,7 +79,6 @@ public class MyQCActivity extends MvpActivity<MyQCPresenter> implements MyQCView
                 break;
             case R.id.tv_text:
                 startActivity(new Intent(this, MyQCDetailsActivity.class));
-
                 break;
             case R.id.lin_ksb:
                 break;
