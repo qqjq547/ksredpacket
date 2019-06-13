@@ -84,6 +84,7 @@
                     android:layout_gravity="right"
                     android:src="@drawable/ic_get_award"/>
                 <LinearLayout
+                    android:id="@+id/lin_lucky_result"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom">
@@ -177,6 +178,7 @@
                 android:textSize="@dimen/textfont12"
                 android:textColor="@color/text_red" />
             <TextView
+                android:id="@+id/tv_people_unit"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/space24"
                 android:gravity="center"

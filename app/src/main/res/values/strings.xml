@@ -656,7 +656,7 @@
     <string name="pls_select_area">请选择所在区域</string>
     <string name="setup_default_address">设为默认地址</string>
     <string name="default_address">默认</string>
-    <string name="my_treasure">我的淘区块</string>
+    <string name="my_treasure">参与记录</string>
     <string name="has_sell_all">人次已满，幸运号生成中..</string>
     <string name="progress">进度：</string>
     <string name="perfect_address">完善收货地址</string>
