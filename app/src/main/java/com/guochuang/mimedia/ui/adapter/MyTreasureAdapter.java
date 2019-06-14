@@ -154,9 +154,9 @@ public class MyTreasureAdapter extends BaseQuickAdapter<Snatch,BaseViewHolder> {
                }
                break;
            case 6://6到期未满
-                   helper.setGone(R.id.tv_pay,false);
-                   helper.setGone(R.id.iv_arrow,true);
-                   helper.addOnClickListener(R.id.lin_join_people_time);
+               helper.setGone(R.id.tv_pay,false);
+               helper.setGone(R.id.iv_arrow,true);
+               helper.addOnClickListener(R.id.lin_join_people_time);
                helper.setImageResource(R.id.iv_award,R.drawable.ic_dateline_unsale);
                helper.setGone(R.id.tv_address,false);
                helper.setGone(R.id.lin_comment,false);
