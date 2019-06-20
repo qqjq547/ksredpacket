@@ -384,10 +384,6 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
     }
 
     private boolean doCheck() {
-        if (etPhone.getText().length() < 11) {
-            showShortToast(getResources().getString(R.string.input_phone_error));
-            return false;
-        }
         if (etPassword.getText().length() < 6) {
             showShortToast(getResources().getString(R.string.input_password_error));
             return false;

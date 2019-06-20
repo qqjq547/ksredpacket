@@ -40,7 +40,8 @@
         android:layout_marginLeft="@dimen/space10">
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/space80"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/space80"
             android:paddingTop="@dimen/space10"
             android:paddingBottom="@dimen/space10">
             <LinearLayout
@@ -65,6 +66,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/space25"
                     android:layout_gravity="bottom"
+                    android:layout_marginTop="@dimen/space10"
                     android:paddingLeft="@dimen/space15"
                     android:paddingRight="@dimen/space15"
                     android:gravity="center"

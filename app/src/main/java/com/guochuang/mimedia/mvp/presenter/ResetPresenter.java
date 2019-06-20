@@ -8,12 +8,12 @@ import com.guochuang.mimedia.mvp.model.Captcha;
 import com.guochuang.mimedia.mvp.view.ForgetView;
 import com.guochuang.mimedia.tools.RxUtil;
 
-public class ForgetPresenter extends BasePresenter<ForgetView> {
-    public ForgetPresenter(ForgetView view) {
+public class ResetPresenter extends BasePresenter<ForgetView> {
+    public ResetPresenter(ForgetView view) {
         attachView(view);
     }
 
-    public void getForget(
+    public void getReset(
             String nationCode,
             String mobile,
             String captcha,
@@ -39,13 +39,13 @@ public class ForgetPresenter extends BasePresenter<ForgetView> {
             }
         });
     }
-    public void getEmailForget(
+    public void getEmailReset(
             String email,
             String captcha,
             String password
     ) {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                userEmailForgetPassword(email,captcha, password)), new ApiCallback<String>() {
+                userEmailResetPassword(email,captcha, password)), new ApiCallback<String>() {
             @Override
             public void onSuccess(String data) {
                 mvpView.setData(data);
@@ -114,13 +114,11 @@ public class ForgetPresenter extends BasePresenter<ForgetView> {
             }
         });
     }
-    public void getForgetEmailVerify(
-            String mobile,
-            String captcha,
-            String uuid
+    public void getForgetEmailVerifyRestPwd(
+            String emailAddress
     ) {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                userEmailForget_Password(mobile, captcha, uuid)), new ApiCallback<String>() {
+                userEmailReset_Password(emailAddress)), new ApiCallback<String>() {
             @Override
             public void onSuccess(String data) {
                 mvpView.setSmsData(data);
@@ -139,4 +137,5 @@ public class ForgetPresenter extends BasePresenter<ForgetView> {
             }
         });
     }
+
 }

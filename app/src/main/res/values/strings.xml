@@ -53,6 +53,7 @@
     <string name="input_safe_password_error">密码位数应为6位之间，请检查后重新输入</string>
     <string name="input_verity_error">验证码不正确，请检查后重新输入</string>
     <string name="input_verity_ima_error">图形验证码不正确，请检查后重新输入</string>
+    <string name="verity_ima_empty">图形验证码为空</string>
     <string name="input_name_error">姓名不可为空</string>
     <string name="input_bank_error">银行卡号不可为空</string>
     <string name="input_alipay_name_error">姓名不可为空</string>

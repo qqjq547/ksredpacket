@@ -155,7 +155,9 @@ public class RegistMobileFragment extends MvpFragment<RegisterPresenter> impleme
             case R.id.tv_register_verify:
                 if (AntiShake.check(view.getId()))
                     return;
-                if (etRegisterImaVerify.getText().length() < 1) {
+                if (captcha==null){
+                    showShortToast(R.string.verity_ima_empty);
+                }else if (etRegisterImaVerify.getText().length() < 1) {
                     showShortToast(getResources().getString(R.string.input_verity_ima_error));
                 } else {
                     mvpPresenter.getForgetSmsVerify(

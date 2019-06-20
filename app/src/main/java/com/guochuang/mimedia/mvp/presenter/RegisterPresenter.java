@@ -124,9 +124,11 @@ public class RegisterPresenter extends BasePresenter<RegisterView> {
     }
 
     public void getEmailVerify(
-            String email) {
+            String email,
+            String captcha,
+            String uuid) {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                userEmailRegister(email)), new ApiCallback<String>() {
+                userEmailRegister(email,captcha, uuid)), new ApiCallback<String>() {
             @Override
             public void onSuccess(String data) {
                 mvpView.setSmsData(data);

@@ -466,6 +466,13 @@ public interface ApiStore {
             @Field("captcha") String captcha,
             @Field("password") String password);
 
+    @FormUrlEncoded
+    @POST("/api/v1/user/account/forget_password_email")
+    Observable<HttpResponse<String>> userEmailForgetPassword(
+            @Field("email") String email,
+            @Field("captcha") String captcha,
+            @Field("password") String password);
+
     // 图形验证码 手机注册
     @POST("/api/v1/file/captcha/register")
     Observable<HttpResponse<Captcha>> userPhoneCaptcha(
@@ -493,10 +500,17 @@ public interface ApiStore {
             @Query("captcha") String captcha,
             @Query("uuid") String uuid);
 
-    // 短信验证码 重制密码
-    @POST("/api/v1/user/email_captcha/password")
-    Observable<HttpResponse<String>> userEmailResetPassword(
+
+    @POST("/api/v1/user/email_captcha/reset_password")
+    Observable<HttpResponse<String>> userEmailReset_Password(
             @Query("emailAddress") String emailAddress);
+
+    // 短信验证码 重制密码
+    @POST("/api/v1/user/email_captcha/forget_password")
+    Observable<HttpResponse<String>> userEmailForget_Password(
+            @Query("emailAddress") String emailAddress,
+            @Query("captcha") String captcha,
+            @Query("uuid") String uuid);
 
     // 短信验证码 注册
     @POST("/api/v1/user/sms/register")
@@ -507,7 +521,9 @@ public interface ApiStore {
 
     @POST("/api/v1/user/email_captcha/register")
     Observable<HttpResponse<String>> userEmailRegister(
-            @Query("emailAddress") String emailAddress);
+            @Query("emailAddress") String emailAddress,
+            @Query("captcha") String captcha,
+            @Query("uuid") String uuid);
 
     // 短信验证码 绑定手机
     @POST("/api/v1/user/sms/bind_mobile")
