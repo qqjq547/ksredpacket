@@ -567,6 +567,7 @@ public interface ApiStore {
     Observable<HttpResponse<BindingPhone>> userSafeBindPhone(
             @Query("mobile") String mobile,
             @Query("captcha") String captcha,
+            @Query("emailCaptcha") String emailCaptcha,
             @Query("userAccountUuid") String userAccountUuid);
 
     // 获取银行卡列表
@@ -1560,10 +1561,9 @@ public interface ApiStore {
             @Field("address") String address,
             @Field("coin") double coin,
             @Field("safetyCode") String safetyCode,
-            @Field("mobile") String mobile,
             @Field("captcha") String captcha,
             @Field("safeType") String safeType,
-            @Field("emailAddress") String emailAddress);
+            @Field("cardNo") String cardNo);
 
     @GET("/api/v1/exchange/user_digital_currency/check_switch")
     Observable<HttpResponse<Boolean>> checkSwitch();
@@ -1590,14 +1590,23 @@ public interface ApiStore {
             @Query("startIndex") String startIndex,
             @Query("pageSize") int pageSize
     );
-
+    //绑定邮箱，邮箱验证码
     @FormUrlEncoded
     @POST("/api/v1/user/email_captcha/bind")
     Observable<HttpResponse<String>> getEmailVerify(@Field("emailAddress") String emailStr);
 
+    //绑定邮箱
     @FormUrlEncoded
     @POST("/api/v1/user/account/bind_email")
-    Observable<HttpResponse<Email>> applyEmail(@Field("email") String email,
-                                                @Field("captcha") String verifyCode,
-                                                @Field("userAccountUuid") String pwd);
+    Observable<HttpResponse<Email>> bindEmail(@Field("email") String email,
+                                                @Field("captcha") String captcha,
+                                                @Field("mobileCaptcha") String mobileCaptcha,
+                                                @Field("userAccountUuid") String userAccountUuid);
+    //绑定手机，发送邮箱验证码
+    @POST("/api/v1/user/email_captcha/bindMobile")
+    Observable<HttpResponse<String>> getBindMobileEmailVerify();
+
+    //绑定邮箱，发送手机验证码
+    @POST("/api/v1/user/sms/bind_email_sms")
+    Observable<HttpResponse<String>> getBindEmailMobileVerify();
 }

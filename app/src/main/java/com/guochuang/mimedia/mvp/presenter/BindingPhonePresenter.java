@@ -14,23 +14,16 @@ public class BindingPhonePresenter extends BasePresenter<BindingPhoneView> {
         attachView(view);
     }
 
-    public void userBindPhone(
-            String mobile,
-            String captcha,
-            String userAccountUuid,
-            String userBindPhone
-    ) {
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                userBindPhone(mobile, captcha, userAccountUuid, userBindPhone)), new ApiCallback<BindingPhone>() {
+    public void getEmailVerify() {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getBindMobileEmailVerify()), new ApiCallback<String>() {
             @Override
-            public void onSuccess(BindingPhone data) {
-                mvpView.setData(data);
-
+            public void onSuccess(String data) {
+                mvpView.setEmailCaptchaData(data);
             }
 
             @Override
             public void onFailure(ApiException exception) {
-                mvpView.setError(exception.getMessage());
+                mvpView.setEmailCaptchaError(exception.getMessage());
 
             }
 
@@ -43,10 +36,11 @@ public class BindingPhonePresenter extends BasePresenter<BindingPhoneView> {
     public void userSafeBindPhone(
             String mobile,
             String captcha,
+            String emailCaptcha,
             String userAccountUuid
     ) {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                userSafeBindPhone(mobile, captcha, userAccountUuid)), new ApiCallback<BindingPhone>() {
+                userSafeBindPhone(mobile, captcha,emailCaptcha, userAccountUuid)), new ApiCallback<BindingPhone>() {
             @Override
             public void onSuccess(BindingPhone data) {
                 mvpView.setData(data);
@@ -66,7 +60,7 @@ public class BindingPhonePresenter extends BasePresenter<BindingPhoneView> {
         });
     }
 
-    public void userSendSms(
+    public void getMobileVertify(
             String mobile,
             String captcha,
             String uuid
@@ -83,74 +77,6 @@ public class BindingPhonePresenter extends BasePresenter<BindingPhoneView> {
             public void onFailure(ApiException exception) {
                 mvpView.setSmsError(exception.getMessage());
 
-            }
-
-            @Override
-            public void onFinish() {
-
-            }
-        });
-    }
-
-    public void userBindMobileCaptcha(
-            String mobile
-    ) {
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                userBindMobileCaptcha(mobile)), new ApiCallback<Captcha>() {
-            @Override
-            public void onSuccess(Captcha data) {
-                mvpView.setCaptchaData(data);
-
-            }
-
-            @Override
-            public void onFailure(ApiException exception) {
-                mvpView.setCaptchaError(exception.getMessage());
-
-            }
-
-            @Override
-            public void onFinish() {
-
-            }
-        });
-    }
-
-    public void captchaIsEnabled(){
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                captchaIsEnabled()), new ApiCallback<Boolean>() {
-            @Override
-            public void onSuccess(Boolean data) {
-                mvpView.setCaptchaIsEnabled(data);
-            }
-
-            @Override
-            public void onFailure(ApiException exception) {
-                mvpView.setError(exception.getMessage());
-            }
-
-            @Override
-            public void onFinish() {
-
-            }
-        });
-    }
-
-    /**
-     * 判断是否存在手机号
-     * @param phone
-     */
-    public void mobileExisted(String phone) {
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                mobileExisted(phone)), new ApiCallback<Integer>() {
-            @Override
-            public void onSuccess(Integer data) {
-                mvpView.mobileExisted(data);
-            }
-
-            @Override
-            public void onFailure(ApiException exception) {
-                mvpView.setError(exception.getMessage());
             }
 
             @Override

@@ -4,68 +4,35 @@ import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
-import com.guochuang.mimedia.mvp.model.DigitalIntCal;
-import com.guochuang.mimedia.mvp.model.ExchangeConfig;
-import com.guochuang.mimedia.mvp.view.SealTransferView;
+import com.guochuang.mimedia.mvp.model.BindingPhone;
+import com.guochuang.mimedia.mvp.model.Captcha;
+import com.guochuang.mimedia.mvp.view.BindingPhoneView;
+import com.guochuang.mimedia.mvp.view.SetMobileView;
 import com.guochuang.mimedia.tools.RxUtil;
 
-public class SealTransferPresenter extends BasePresenter<SealTransferView> {
-
-    public SealTransferPresenter(SealTransferView view) {
+public class SetMobilePresenter extends BasePresenter<SetMobileView> {
+    public SetMobilePresenter(SetMobileView view) {
         attachView(view);
     }
 
-    public void getExchangeConfig(String digitalCurrency){
+    public void userBindPhone(
+            String mobile,
+            String captcha,
+            String userAccountUuid,
+            String userBindPhone
+    ) {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                getExchangeConfig(digitalCurrency)), new ApiCallback<ExchangeConfig>() {
+                userBindPhone(mobile, captcha, userAccountUuid, userBindPhone)), new ApiCallback<BindingPhone>() {
             @Override
-            public void onSuccess(ExchangeConfig data) {
-                mvpView.setConfig(data);
-            }
-
-            @Override
-            public void onFailure(ApiException exception) {
-                mvpView.setError(exception.getMessage());
-            }
-
-            @Override
-            public void onFinish() {
-
-            }
-        });
-    }
-
-    public void intCal(String digitalCurrency,int type){
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                intCal(digitalCurrency,type)), new ApiCallback<DigitalIntCal>() {
-            @Override
-            public void onSuccess(DigitalIntCal data) {
-                mvpView.setIntCal(data);
-            }
-
-            @Override
-            public void onFailure(ApiException exception) {
-                mvpView.setError(exception.getMessage());
-            }
-
-            @Override
-            public void onFinish() {
-
-            }
-        });
-    }
-    public void withdrawCoin(String digitalCurrency,String address,
-                             double coin,String safetyCode,String captcha,String safeType,String cardNo){
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                withdrawCoin(digitalCurrency,address,coin,safetyCode, captcha,safeType,cardNo)), new ApiCallback<Boolean>() {
-            @Override
-            public void onSuccess(Boolean data) {
+            public void onSuccess(BindingPhone data) {
                 mvpView.setData(data);
+
             }
 
             @Override
             public void onFailure(ApiException exception) {
                 mvpView.setError(exception.getMessage());
+
             }
 
             @Override
@@ -74,40 +41,23 @@ public class SealTransferPresenter extends BasePresenter<SealTransferView> {
             }
         });
     }
-    public void sendSmsCode(String mobile,String uuid){
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                userSmsWithdrawCoin(mobile,uuid)), new ApiCallback<Boolean>() {
-            @Override
-            public void onSuccess(Boolean data) {
-                mvpView.setSmsCode(data);
-            }
 
-            @Override
-            public void onFailure(ApiException exception) {
-                mvpView.setError(exception.getMessage());
-            }
-
-            @Override
-            public void onFinish() {
-
-            }
-        });
-    }
-    public void sendEmailCode(
-            String email,
+    public void userSendSms(
+            String mobile,
+            String captcha,
             String uuid
     ) {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                userEmailWithdrawCoin(email, uuid)), new ApiCallback<Boolean>() {
+                userSmsBindMobile(mobile, captcha, uuid)), new ApiCallback<String>() {
             @Override
-            public void onSuccess(Boolean data) {
-                mvpView.setEmailCode(data);
+            public void onSuccess(String data) {
+                mvpView.setSmsData(data);
 
             }
 
             @Override
             public void onFailure(ApiException exception) {
-                mvpView.setError(exception.getMessage());
+                mvpView.setSmsError(exception.getMessage());
 
             }
 
@@ -117,4 +67,73 @@ public class SealTransferPresenter extends BasePresenter<SealTransferView> {
             }
         });
     }
+
+    public void userBindMobileCaptcha(
+            String mobile
+    ) {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
+                userBindMobileCaptcha(mobile)), new ApiCallback<Captcha>() {
+            @Override
+            public void onSuccess(Captcha data) {
+                mvpView.setCaptchaData(data);
+
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setCaptchaError(exception.getMessage());
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
+
+    public void captchaIsEnabled(){
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
+                captchaIsEnabled()), new ApiCallback<Boolean>() {
+            @Override
+            public void onSuccess(Boolean data) {
+                mvpView.setCaptchaIsEnabled(data);
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setError(exception.getMessage());
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
+
+    /**
+     * 判断是否存在手机号
+     * @param phone
+     */
+    public void mobileExisted(String phone) {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
+                mobileExisted(phone)), new ApiCallback<Integer>() {
+            @Override
+            public void onSuccess(Integer data) {
+                mvpView.mobileExisted(data);
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setError(exception.getMessage());
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
+
 }

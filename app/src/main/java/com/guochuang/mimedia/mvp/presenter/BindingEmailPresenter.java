@@ -14,6 +14,28 @@ public class BindingEmailPresenter extends BasePresenter<BindingEmailView> {
 
     }
 
+    public void getMobileVerify(
+    ) {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
+                getBindEmailMobileVerify()), new ApiCallback<String>() {
+            @Override
+            public void onSuccess(String data) {
+                mvpView.setMobileVerifyData(data);
+
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setMobileVerifyError(exception.getMessage());
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
     public void getEmailVerify(String emailStr) {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getEmailVerify(emailStr)), new ApiCallback<String>() {
             @Override
@@ -34,8 +56,8 @@ public class BindingEmailPresenter extends BasePresenter<BindingEmailView> {
         });
     }
 
-    public void applyEmail(String emailStr_, String verifyCode, String uuid) {
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().applyEmail(emailStr_,verifyCode,uuid)), new ApiCallback<Email>() {
+    public void bindEmail(String email, String captcha, String mobileCaptcha,String userAccountUuid) {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().bindEmail(email,captcha,mobileCaptcha,userAccountUuid)), new ApiCallback<Email>() {
             @Override
             public void onSuccess(Email data) {
                 mvpView.setApplySuccess(data);

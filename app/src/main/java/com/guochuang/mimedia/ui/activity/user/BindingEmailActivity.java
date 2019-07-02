@@ -1,11 +1,13 @@
 package com.guochuang.mimedia.ui.activity.user;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.guochuang.mimedia.app.App;
@@ -22,6 +24,7 @@ import com.guochuang.mimedia.tools.antishake.AntiShake;
 import com.sz.gcyh.KSHongBao.R;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.functions.Action0;
 
@@ -30,8 +33,12 @@ public class BindingEmailActivity extends MvpActivity<BindingEmailPresenter> imp
     ImageView ivBack;
     @BindView(R.id.tv_title)
     TextView tvTitle;
-    @BindView(R.id.lin_title)
-    LinearLayout linTitle;
+    @BindView(R.id.et_binding_mobile_verify)
+    EditText etBindingMobileVerify;
+    @BindView(R.id.tv_binding_mobile_verify)
+    TextView tvBindingMobileVerify;
+    @BindView(R.id.rl_mobile_verify)
+    RelativeLayout rlMobileVerify;
     @BindView(R.id.et_binding_email)
     EditText etBindingEmail;
     @BindView(R.id.et_binding_email_verify)
@@ -47,6 +54,12 @@ public class BindingEmailActivity extends MvpActivity<BindingEmailPresenter> imp
     @BindView(R.id.tv_binding_email_confirm)
     TextView tvBindingEmailConfirm;
 
+    String userAccountUuid;
+    String email;
+    String captcha;
+    String mobileCaptcha;
+
+
     @Override
     protected BindingEmailPresenter createPresenter() {
         return new BindingEmailPresenter(this);
@@ -60,17 +73,26 @@ public class BindingEmailActivity extends MvpActivity<BindingEmailPresenter> imp
     @Override
     public void initViewAndData() {
         tvTitle.setText(getString(R.string.title_email_binding));
+        userAccountUuid = App.getInstance().getUserInfo().getUserAccountUuid();
     }
 
 
-    @OnClick({R.id.iv_back, R.id.tv_binding_email_confirm, R.id.tv_binding_email_verify})
+    @OnClick({R.id.iv_back,
+            R.id.tv_binding_mobile_verify,
+            R.id.tv_binding_email_confirm,
+            R.id.tv_binding_email_verify})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
                 onBackPressed();
                 break;
+            case R.id.tv_binding_mobile_verify:
+                if (AntiShake.check(view.getId()))
+                    return;
+//                验证手机
+                mvpPresenter.getMobileVerify();
+                break;
             case R.id.tv_binding_email_verify:
-
                 if (AntiShake.check(view.getId()))
                     return;
 //                验证邮箱
@@ -82,19 +104,49 @@ public class BindingEmailActivity extends MvpActivity<BindingEmailPresenter> imp
                 mvpPresenter.getEmailVerify(emailStr);
                 break;
             case R.id.tv_binding_email_confirm:
-                if (!doCheck()) return;
-
-                String emailStr_ = etBindingEmail.getText().toString().trim();
-                String VerifyCode = etBindingEmailVerify.getText().toString().trim();
-//                String pwd = etPassword.getText().toString().trim();
-
+                if (!doCheck())
+                    return;
                 showLoadingDialog(null);
-
-                mvpPresenter.applyEmail(emailStr_, VerifyCode, App.getInstance().getUserInfo().getUserAccountUuid());
+                mvpPresenter.bindEmail(email, captcha, mobileCaptcha,userAccountUuid);
                 break;
         }
     }
+    private void sendMobileCode() {
+        addSubscription(RxUtil.countdown(60)
+                .doOnSubscribe(new Action0() {
+                    @Override
+                    public void call() {
+                        tvBindingMobileVerify.setEnabled(false);
+                        tvBindingMobileVerify.setBackgroundResource(R.drawable.bg_btn_forget_verify_gray);
+                        tvBindingMobileVerify.setTextColor(getResources().getColor(R.color.text_white));
+                    }
+                })
+                .subscribe(new CountDownSubscriber<Integer>() {
+                    @Override
+                    public void onCompleted() {
+                        super.onCompleted();
+                        tvBindingMobileVerify.setText(getString(R.string.btn_login_forget_verify));
+                        tvBindingMobileVerify.setEnabled(true);
+                        tvBindingMobileVerify.setBackgroundResource(R.drawable.bg_btn_forget_verify_red);
+                        tvBindingMobileVerify.setTextColor(getResources().getColor(R.color.bg_btn_login_phone));
+                    }
 
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        tvBindingMobileVerify.setText(getString(R.string.btn_login_forget_verify));
+                        tvBindingMobileVerify.setEnabled(true);
+                        tvBindingMobileVerify.setBackgroundResource(R.drawable.bg_btn_forget_verify_red);
+                        tvBindingMobileVerify.setTextColor(getResources().getColor(R.color.bg_btn_login_phone));
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                        super.onNext(integer);
+                        tvBindingMobileVerify.setText(String.valueOf(integer));
+                    }
+                }));
+    }
 
     private void sendCode() {
         addSubscription(RxUtil.countdown(60)
@@ -147,8 +199,21 @@ public class BindingEmailActivity extends MvpActivity<BindingEmailPresenter> imp
     }
 
     @Override
+    public void setMobileVerifyData(String data) {
+        showShortToast(getResources().getString(R.string.type_login_verify_send_success));
+        sendMobileCode();
+    }
+
+    @Override
+    public void setMobileVerifyError(String message) {
+        closeLoadingDialog();
+        showShortToast(message);
+    }
+
+    @Override
     public void setEmailVerifyError(String message) {
         //获取验证码失败
+        closeLoadingDialog();
         showShortToast(message);
     }
 
@@ -157,28 +222,30 @@ public class BindingEmailActivity extends MvpActivity<BindingEmailPresenter> imp
         closeLoadingDialog();
         Intent intent = getIntent();
         intent.putExtra(Constant.EMAIL_KEY, data.getEmail());
-        UserInfo userInfo=App.getInstance().getUserInfo();
+        UserInfo userInfo = App.getInstance().getUserInfo();
         userInfo.setEmailAddress(data.getEmail());
         App.getInstance().setUserInfo(userInfo);
-        setResult(RESULT_OK,intent);
+        setResult(RESULT_OK, intent);
         finish();
 
     }
 
     private boolean doCheck() {
-        String emailStr_ = etBindingEmail.getText().toString().trim();
-        if (!GeneralUtil.judgeEmailQual(emailStr_)) {
+        email = etBindingEmail.getText().toString().trim();
+        captcha = etBindingEmailVerify.getText().toString().trim();
+        mobileCaptcha = etBindingMobileVerify.getText().toString().trim();
+        if (TextUtils.isEmpty(mobileCaptcha)) {
+            showShortToast(getResources().getString(R.string.pls_iput_mobile_verify));
+            return false;
+        }
+        if (!GeneralUtil.judgeEmailQual(email)) {
             showShortToast(getResources().getString(R.string.input_email_error));
             return false;
         }
-        if (etBindingEmailVerify.getText().length() < 1) {
-            showShortToast(getResources().getString(R.string.input_verity_error));
+        if (TextUtils.isEmpty(captcha)) {
+            showShortToast(getResources().getString(R.string.pls_iput_mail_verify));
             return false;
         }
-//        if (etPassword.getText().length() < 6) {
-//            showShortToast(getResources().getString(R.string.input_password_error));
-//            return false;
-//        }
         return true;
     }
 

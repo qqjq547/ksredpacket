@@ -949,5 +949,8 @@
     <string name="equivalence_fomat_str">等值：%s元</string>
     <string name="myseal_str">我的SEAL</string>
     <string name="seal_transfer">请输入接收地址(谨慎核对后输入,否则后果自负)</string>
+    <string name="seal_transfer_identity_number">请输入实名身份证号码</string>
+    <string name="pls_iput_mobile_verify">请输入手机验证码</string>
+    <string name="pls_iput_mail_verify">请输入邮箱验证码</string>
 
 </resources>

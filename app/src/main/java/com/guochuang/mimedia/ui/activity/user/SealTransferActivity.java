@@ -48,6 +48,8 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
     TextView tvAaaNum;
     @BindView(R.id.et_trans_address)
     EditText etTransAddress;
+    @BindView(R.id.et_trans_identity)
+    EditText etTransIdentity;
     @BindView(R.id.et_trans_count)
     EditText etTransCount;
     @BindView(R.id.et_verify)
@@ -75,6 +77,7 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
     DigitalIntCal intCal;
     ExchangeConfig exchangeConfig;
     String address;
+    String identity;
     String mobile;
     String emailAddress;
     String uuid;
@@ -97,9 +100,9 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
     @Override
     public void initViewAndData() {
         tvTitle.setText(R.string.seal_transfer_title);
-         mobile=App.getInstance().getUserInfo().getMobile();
+        mobile=App.getInstance().getUserInfo().getMobile();
         emailAddress=App.getInstance().getUserInfo().getEmailAddress();
-         uuid=App.getInstance().getUserInfo().getUserAccountUuid();
+        uuid=App.getInstance().getUserInfo().getUserAccountUuid();
         address=getIntent().getStringExtra(Constant.ADDRESS);
         if (!TextUtils.isEmpty(address)){
             etTransAddress.setText(address);
@@ -195,12 +198,18 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
                 break;
             case R.id.tv_confirm:
                 address=etTransAddress.getText().toString().trim();
+                identity=etTransIdentity.getText().toString().trim();
                 String amountStr = etTransCount.getText().toString().trim();
                 captcha= etVerify.getText().toString().trim();
                 if (TextUtils.isEmpty(address)){
                     showShortToast(R.string.seal_address_empty);
                     return;
                 }
+                if (TextUtils.isEmpty(identity)){
+                    showShortToast(R.string.seal_transfer_identity_number);
+                    return;
+                }
+
                 if (TextUtils.isEmpty(amountStr)){
                     showShortToast(R.string.pls_input_seal_amount);
                     return;
@@ -256,10 +265,9 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
                                                     address,
                                                     amount,
                                                     code,
-                                                    mobile,
                                                     captcha,
                                                     curType,
-                                                    emailAddress
+                                                    identity
                                                     );
 
                                         }
