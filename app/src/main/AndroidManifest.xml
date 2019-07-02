@@ -197,6 +197,7 @@
 
         <!--绑定邮箱-->
         <activity android:name="com.guochuang.mimedia.ui.activity.user.BindingEmailActivity"/>
+        <activity android:name="com.guochuang.mimedia.ui.activity.user.SetMobileAcitivity"/>
 
 
 

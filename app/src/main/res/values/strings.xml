@@ -53,6 +53,7 @@
     <string name="input_safe_password_error">密码位数应为6位之间，请检查后重新输入</string>
     <string name="input_verity_error">验证码不正确，请检查后重新输入</string>
     <string name="input_verity_ima_error">图形验证码不正确，请检查后重新输入</string>
+    <string name="verity_ima_empty">图形验证码为空</string>
     <string name="input_name_error">姓名不可为空</string>
     <string name="input_bank_error">银行卡号不可为空</string>
     <string name="input_alipay_name_error">姓名不可为空</string>
@@ -656,7 +657,7 @@
     <string name="pls_select_area">请选择所在区域</string>
     <string name="setup_default_address">设为默认地址</string>
     <string name="default_address">默认</string>
-    <string name="my_treasure">我的淘区块</string>
+    <string name="my_treasure">参与记录</string>
     <string name="has_sell_all">人次已满，幸运号生成中..</string>
     <string name="progress">进度：</string>
     <string name="perfect_address">完善收货地址</string>
@@ -948,5 +949,8 @@
     <string name="equivalence_fomat_str">等值：%s元</string>
     <string name="myseal_str">我的SEAL</string>
     <string name="seal_transfer">请输入接收地址(谨慎核对后输入,否则后果自负)</string>
+    <string name="seal_transfer_identity_number">请输入实名身份证号码</string>
+    <string name="pls_iput_mobile_verify">请输入手机验证码</string>
+    <string name="pls_iput_mail_verify">请输入邮箱验证码</string>
 
 </resources>

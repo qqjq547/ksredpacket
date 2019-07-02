@@ -61,6 +61,8 @@ public class Snatch implements Serializable {
     private long snatchRecordId;
     private long orderId;
     private String refundDate;
+    private int snatchType;
+    private String snathPrice;
 
     public String getAddress() {
         return address;
@@ -292,5 +294,21 @@ public class Snatch implements Serializable {
 
     public void setRefundDate(String refundDate) {
         this.refundDate = refundDate;
+    }
+
+    public String getSnathPrice() {
+        return snathPrice;
+    }
+
+    public void setSnathPrice(String snathPrice) {
+        this.snathPrice = snathPrice;
+    }
+
+    public int getSnatchType() {
+        return snatchType;
+    }
+
+    public void setSnatchType(int snatchType) {
+        this.snatchType = snatchType;
     }
 }

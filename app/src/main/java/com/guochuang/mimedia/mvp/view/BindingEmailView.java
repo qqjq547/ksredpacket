@@ -7,6 +7,10 @@ public interface BindingEmailView {
 
     void setError(String message);
 
+    void setMobileVerifyData(String data);
+
+    void setMobileVerifyError(String message);
+
     void setEmailVerifyError(String message);
 
     void setApplySuccess(Email data);

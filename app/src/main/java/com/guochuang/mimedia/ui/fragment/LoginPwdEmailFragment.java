@@ -13,6 +13,7 @@ import com.guochuang.mimedia.http.subscriber.CountDownSubscriber;
 import com.guochuang.mimedia.mvp.model.Captcha;
 import com.guochuang.mimedia.mvp.model.UserInfo;
 import com.guochuang.mimedia.mvp.presenter.ForgetPresenter;
+import com.guochuang.mimedia.mvp.presenter.ResetPresenter;
 import com.guochuang.mimedia.mvp.view.ForgetView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
@@ -24,7 +25,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import rx.functions.Action0;
 
-public class LoginPwdEmailFragment extends MvpFragment<ForgetPresenter> implements ForgetView {
+public class LoginPwdEmailFragment extends MvpFragment<ResetPresenter> implements ForgetView {
 
     @BindView(R.id.tv_email)
     TextView tvEmail;
@@ -40,8 +41,8 @@ public class LoginPwdEmailFragment extends MvpFragment<ForgetPresenter> implemen
     UserInfo userInfo;
 
     @Override
-    protected ForgetPresenter createPresenter() {
-        return new ForgetPresenter(this);
+    protected ResetPresenter createPresenter() {
+        return new ResetPresenter(this);
     }
 
     @Override
@@ -68,7 +69,7 @@ public class LoginPwdEmailFragment extends MvpFragment<ForgetPresenter> implemen
                     showShortToast(getResources().getString(R.string.email_format_error));
                     return;
                 }
-                    mvpPresenter.getForgetEmailVerify(
+                    mvpPresenter.getForgetEmailVerifyRestPwd(
                             userInfo.getEmailAddress());
                 break;
             case R.id.tv_sure:
@@ -76,7 +77,7 @@ public class LoginPwdEmailFragment extends MvpFragment<ForgetPresenter> implemen
                     return;
                 }
                 showLoadingDialog(null);
-                mvpPresenter.getEmailForget(
+                mvpPresenter.getEmailReset(
                         userInfo.getEmailAddress(),
                         etMsgVertifyCode.getText().toString().trim(),
                         etNewLoginPwd.getText().toString()

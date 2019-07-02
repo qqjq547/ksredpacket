@@ -55,9 +55,9 @@ public class SealTransferPresenter extends BasePresenter<SealTransferView> {
         });
     }
     public void withdrawCoin(String digitalCurrency,String address,
-                             double coin,String safetyCode,String mobile,String captcha,String safeType,String emailAddress){
+                             double coin,String safetyCode,String captcha,String safeType,String cardNo){
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                withdrawCoin(digitalCurrency,address,coin,safetyCode, mobile, captcha,safeType,emailAddress)), new ApiCallback<Boolean>() {
+                withdrawCoin(digitalCurrency,address,coin,safetyCode, captcha,safeType,cardNo)), new ApiCallback<Boolean>() {
             @Override
             public void onSuccess(Boolean data) {
                 mvpView.setData(data);

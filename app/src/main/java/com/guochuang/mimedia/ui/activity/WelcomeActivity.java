@@ -20,14 +20,12 @@ import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.PrefUtil;
-import com.guochuang.mimedia.ui.activity.user.BindingPhoneAcitivity;
 import com.guochuang.mimedia.ui.activity.user.LoginActivity;
+import com.guochuang.mimedia.ui.activity.user.SetMobileAcitivity;
 import com.guochuang.mimedia.ui.dialog.UpgradeDialog;
 import com.guochuang.mimedia.ui.dialog.VersionUpdateDialog;
 import com.sz.gcyh.KSHongBao.R;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class WelcomeActivity extends MvpActivity<WelcomePresenter> implements WelcomeView {
 
@@ -78,7 +76,7 @@ public class WelcomeActivity extends MvpActivity<WelcomePresenter> implements We
                     if (TextUtils.isEmpty(getPref().getString(PrefUtil.MOBILE, null))
                             &&TextUtils.isEmpty(getPref().getString(PrefUtil.EMAIL, null))
                             &&App.getInstance().getUserInfo()==null) {
-                        startActivity(new Intent(WelcomeActivity.this, BindingPhoneAcitivity.class));
+                        startActivity(new Intent(WelcomeActivity.this, SetMobileAcitivity.class));
                     } else {
                         startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
                     }

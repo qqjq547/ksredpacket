@@ -35,7 +35,12 @@ public class ForgetEmailFragment extends MvpFragment<ForgetPresenter> implements
     EditText etPassword;
     @BindView(R.id.tv_login_forget_confirm)
     TextView tvConfirm;
+    @BindView(R.id.et_login_forget_ima_verify)
+    EditText etLoginForgetImaVerify;
+    @BindView(R.id.iv_login_forget_ima_verify)
+    ImageView ivLoginForgetImaVerify;
 
+    Captcha captcha;
     String email;
     String password;
 
@@ -107,6 +112,8 @@ public class ForgetEmailFragment extends MvpFragment<ForgetPresenter> implements
 
     @Override
     public void setVerifyData(Captcha data) {
+        this.captcha = data;
+        GlideImgManager.loadCornerImage(getActivity(), data.getUrl(), ivLoginForgetImaVerify, 8);
     }
 
     @Override
@@ -126,22 +133,36 @@ public class ForgetEmailFragment extends MvpFragment<ForgetPresenter> implements
     }
 
     @OnClick({
+            R.id.iv_login_forget_ima_verify,
             R.id.tv_login_forget_verify,
             R.id.tv_login_forget_confirm})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.iv_login_forget_ima_verify:
+                if (AntiShake.check(view.getId()))
+                    return;
+                mvpPresenter.getForgetImageVerify(Constant.FORGET_RESET_CAPTCHA_IMA);
+                break;
             case R.id.tv_login_forget_verify:
                 if (AntiShake.check(view.getId()))
                     return;
                 email=etEmail.getText().toString().trim();
-                if (TextUtils.isEmpty(email)) {
+                if (captcha==null){
+                    showShortToast(R.string.verity_ima_empty);
+                }else if (TextUtils.isEmpty(email)) {
                     showShortToast(getResources().getString(R.string.pls_input_email));
                 } else if (!CommonUtil.isEmail(email)) {
                     showShortToast(getResources().getString(R.string.email_format_error));
                 } else {
-                    mvpPresenter.getForgetEmailVerify(
-                            email
-                    );
+                    if (etLoginForgetImaVerify.getText().length() < 1) {
+                        showShortToast(getResources().getString(R.string.input_verity_ima_error));
+                    } else {
+                        mvpPresenter.getForgetEmailVerify(
+                                email,
+                                etLoginForgetImaVerify.getText().toString(),
+                                captcha.getUuid()
+                        );
+                    }
                 }
                 break;
             case R.id.tv_login_forget_confirm:

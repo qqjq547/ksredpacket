@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+
+    <include layout="@layout/layout_title" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,45 +16,48 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_login_phone_et_gray"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
             android:gravity="center_vertical"
             android:orientation="horizontal"
+            android:layout_marginTop="@dimen/space15"
             android:paddingBottom="@dimen/space10"
             android:paddingLeft="@dimen/space15"
-            android:paddingRight="@dimen/space15"
+            android:paddingRight="@dimen/space25"
             android:paddingTop="@dimen/space10">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_login_email" />
+                android:src="@drawable/ic_login_phone_phone" />
 
             <View style="@style/centre_line" />
 
             <EditText
-                android:id="@+id/et_email"
+                android:id="@+id/et_binding_phone_phone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/space15"
                 android:background="@null"
                 android:gravity="center_vertical"
-                android:inputType="textEmailAddress"
+                android:hint="@string/hint_login_forget_phone"
+                android:inputType="number"
+                android:maxLength="11"
                 android:maxLines="1"
-                android:hint="@string/pls_input_email"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/textfont16" />
         </LinearLayout>
+
         <RelativeLayout
+            android:id="@+id/rl_ima_verify"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space15">
+            android:layout_marginTop="@dimen/space15"
+            android:visibility="gone">
 
             <LinearLayout
-                android:id="@+id/ll_register_ima_verify"
+                android:id="@+id/ll_binding_phone_ima_verify"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/iv_register_ima_verify"
+                android:layout_toLeftOf="@+id/iv_binding_phone_ima_verify"
                 android:background="@drawable/bg_login_phone_et_gray"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
@@ -72,22 +76,25 @@
                 <View style="@style/centre_line" />
 
                 <EditText
-                    android:id="@+id/et_register_ima_verify"
+                    android:id="@+id/et_binding_phone_ima_verify"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/space15"
                     android:background="@null"
                     android:gravity="center_vertical"
                     android:hint="@string/hint_login_forget_ima_verify"
+                    android:inputType="text"
+                    android:maxLength="10"
+                    android:maxLines="1"
                     android:textColor="@color/text_black"
                     android:textSize="@dimen/textfont16" />
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/iv_register_ima_verify"
+                android:id="@+id/iv_binding_phone_ima_verify"
                 android:layout_width="@dimen/space96"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/ll_register_ima_verify"
+                android:layout_alignBottom="@+id/ll_binding_phone_ima_verify"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="@dimen/space10"
@@ -100,18 +107,17 @@
             android:layout_marginTop="@dimen/space15">
 
             <LinearLayout
-                android:id="@+id/ll_register_verify"
-                android:layout_width="match_parent"
+                android:id="@+id/ll_binding_phone_verify"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/tv_register_verify"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/tv_binding_phone_verify"
                 android:background="@drawable/bg_login_phone_et_gray"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingBottom="@dimen/space10"
                 android:paddingLeft="@dimen/space15"
-                android:paddingRight="@dimen/space15"
+                android:paddingRight="@dimen/space25"
                 android:paddingTop="@dimen/space10">
 
                 <ImageView
@@ -122,23 +128,26 @@
                 <View style="@style/centre_line" />
 
                 <EditText
-                    android:id="@+id/et_register_verify"
+                    android:id="@+id/et_binding_phone_verify"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/space15"
                     android:background="@null"
+                    android:digits="@string/input_password_type"
                     android:gravity="center_vertical"
                     android:hint="@string/hint_login_forget_verify"
                     android:inputType="number"
+                    android:maxLength="10"
+                    android:maxLines="1"
                     android:textColor="@color/text_black"
                     android:textSize="@dimen/textfont16" />
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tv_register_verify"
+                android:id="@+id/tv_binding_phone_verify"
                 android:layout_width="@dimen/space96"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/ll_register_verify"
+                android:layout_alignBottom="@+id/ll_binding_phone_verify"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="@dimen/space10"
@@ -150,6 +159,7 @@
         </RelativeLayout>
 
         <LinearLayout
+            android:id="@+id/lin_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space15"
@@ -161,7 +171,8 @@
             android:paddingBottom="@dimen/space10"
             android:paddingLeft="@dimen/space15"
             android:paddingRight="@dimen/space15"
-            android:paddingTop="@dimen/space10">
+            android:paddingTop="@dimen/space10"
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -171,37 +182,30 @@
             <View style="@style/centre_line" />
 
             <EditText
-                android:id="@+id/et_register_password"
+                android:id="@+id/et_password"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/space15"
                 android:background="@null"
                 android:digits="@string/input_password_type"
                 android:gravity="center_vertical"
-                android:maxLength="15"
                 android:hint="@string/hint_bind_password"
                 android:inputType="textPassword"
+                android:maxLength="15"
+                android:maxLines="1"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/textfont16" />
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_register_agreenment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/space15"
-            android:textSize="@dimen/space12" />
-
-        <TextView
-            android:id="@+id/tv_register_confirm"
+            android:id="@+id/tv_binding_phone_confirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space15"
+            android:layout_marginTop="@dimen/space30"
             android:background="@drawable/bg_btn_login_phone_red"
             android:gravity="center"
             android:padding="@dimen/space15"
-            android:text="@string/type_login_register"
+            android:text="@string/confirm"
             android:textColor="@color/text_white"
             android:textSize="@dimen/textfont18" />
     </LinearLayout>

@@ -4,25 +4,27 @@ import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
+import com.guochuang.mimedia.mvp.model.BindingPhone;
 import com.guochuang.mimedia.mvp.model.Captcha;
-import com.guochuang.mimedia.mvp.view.ForgetView;
+import com.guochuang.mimedia.mvp.view.BindingPhoneView;
+import com.guochuang.mimedia.mvp.view.SetMobileView;
 import com.guochuang.mimedia.tools.RxUtil;
 
-public class ForgetPresenter extends BasePresenter<ForgetView> {
-    public ForgetPresenter(ForgetView view) {
+public class SetMobilePresenter extends BasePresenter<SetMobileView> {
+    public SetMobilePresenter(SetMobileView view) {
         attachView(view);
     }
 
-    public void getForget(
-            String nationCode,
+    public void userBindPhone(
             String mobile,
             String captcha,
-            String password
+            String userAccountUuid,
+            String userBindPhone
     ) {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                userResetPassword(nationCode, mobile, captcha, password)), new ApiCallback<String>() {
+                userBindPhone(mobile, captcha, userAccountUuid, userBindPhone)), new ApiCallback<BindingPhone>() {
             @Override
-            public void onSuccess(String data) {
+            public void onSuccess(BindingPhone data) {
                 mvpView.setData(data);
 
             }
@@ -39,22 +41,23 @@ public class ForgetPresenter extends BasePresenter<ForgetView> {
             }
         });
     }
-    public void getEmailForget(
-            String email,
+
+    public void userSendSms(
+            String mobile,
             String captcha,
-            String password
+            String uuid
     ) {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                userEmailForgetPassword(email,captcha, password)), new ApiCallback<String>() {
+                userSmsBindMobile(mobile, captcha, uuid)), new ApiCallback<String>() {
             @Override
             public void onSuccess(String data) {
-                mvpView.setData(data);
+                mvpView.setSmsData(data);
 
             }
 
             @Override
             public void onFailure(ApiException exception) {
-                mvpView.setError(exception.getMessage());
+                mvpView.setSmsError(exception.getMessage());
 
             }
 
@@ -65,20 +68,20 @@ public class ForgetPresenter extends BasePresenter<ForgetView> {
         });
     }
 
-    public void getForgetImageVerify(
+    public void userBindMobileCaptcha(
             String mobile
     ) {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                userResetPasswordCaptcha(mobile)), new ApiCallback<Captcha>() {
+                userBindMobileCaptcha(mobile)), new ApiCallback<Captcha>() {
             @Override
             public void onSuccess(Captcha data) {
-                mvpView.setVerifyData(data);
+                mvpView.setCaptchaData(data);
 
             }
 
             @Override
             public void onFailure(ApiException exception) {
-                mvpView.setVerifyError(exception.getMessage());
+                mvpView.setCaptchaError(exception.getMessage());
 
             }
 
@@ -89,23 +92,17 @@ public class ForgetPresenter extends BasePresenter<ForgetView> {
         });
     }
 
-    public void getForgetSmsVerify(
-            String mobile,
-            String captcha,
-            String uuid
-    ) {
+    public void captchaIsEnabled(){
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                userSmsResetPassword(mobile, captcha, uuid)), new ApiCallback<String>() {
+                captchaIsEnabled()), new ApiCallback<Boolean>() {
             @Override
-            public void onSuccess(String data) {
-                mvpView.setSmsData(data);
-
+            public void onSuccess(Boolean data) {
+                mvpView.setCaptchaIsEnabled(data);
             }
 
             @Override
             public void onFailure(ApiException exception) {
-                mvpView.setSmsError(exception.getMessage());
-
+                mvpView.setError(exception.getMessage());
             }
 
             @Override
@@ -114,23 +111,22 @@ public class ForgetPresenter extends BasePresenter<ForgetView> {
             }
         });
     }
-    public void getForgetEmailVerify(
-            String mobile,
-            String captcha,
-            String uuid
-    ) {
+
+    /**
+     * 判断是否存在手机号
+     * @param phone
+     */
+    public void mobileExisted(String phone) {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                userEmailForget_Password(mobile, captcha, uuid)), new ApiCallback<String>() {
+                mobileExisted(phone)), new ApiCallback<Integer>() {
             @Override
-            public void onSuccess(String data) {
-                mvpView.setSmsData(data);
-
+            public void onSuccess(Integer data) {
+                mvpView.mobileExisted(data);
             }
 
             @Override
             public void onFailure(ApiException exception) {
-                mvpView.setSmsError(exception.getMessage());
-
+                mvpView.setError(exception.getMessage());
             }
 
             @Override
@@ -139,4 +135,5 @@ public class ForgetPresenter extends BasePresenter<ForgetView> {
             }
         });
     }
+
 }

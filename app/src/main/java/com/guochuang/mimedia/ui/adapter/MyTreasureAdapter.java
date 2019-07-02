@@ -27,6 +27,27 @@ public class MyTreasureAdapter extends BaseQuickAdapter<Snatch,BaseViewHolder> {
         helper.setText(R.id.tv_award_number,item.getLuckNum());
         helper.setText(R.id.tv_people_time,String.valueOf(item.getPayNum()));
         helper.setText(R.id.tv_joined_time,item.getPayDate());
+        if (item.getSnatchType()==2){//只要参与即中奖，奖励模式
+            helper.setGone(R.id.iv_arrow,true);
+            helper.addOnClickListener(R.id.lin_join_people_time);
+            helper.setGone(R.id.tv_address,false);
+            helper.setGone(R.id.tv_pay,false);
+            helper.setGone(R.id.lin_comment,false);
+            helper.setGone(R.id.fl_award,true);
+            helper.setGone(R.id.lin_progress,false);
+            helper.setGone(R.id.tv_has_selle_all,false);
+            helper.setGone(R.id.tv_waiting_send,false);
+            helper.setGone(R.id.iv_out_date,false);
+            helper.setGone(R.id.tv_refund_time,true);
+            helper.setText(R.id.tv_refund_time,item.getRefundDate()+mContext.getString(R.string.retire_fund));
+
+            helper.setGone(R.id.lin_lucky_result,false);
+            helper.setGone(R.id.iv_award,true);
+            helper.setImageResource(R.id.iv_award,R.drawable.ic_get_award);
+            helper.setText(R.id.tv_people_time,String.valueOf(item.getSnathPrice()));
+            helper.setText(R.id.tv_people_unit,R.string.money_unit_qc);
+            return;
+        }
        switch (item.getStatus()){
            case 1://1售卖中
                if (item.getIsPay()==0){//未支付
@@ -133,9 +154,9 @@ public class MyTreasureAdapter extends BaseQuickAdapter<Snatch,BaseViewHolder> {
                }
                break;
            case 6://6到期未满
-                   helper.setGone(R.id.tv_pay,false);
-                   helper.setGone(R.id.iv_arrow,true);
-                   helper.addOnClickListener(R.id.lin_join_people_time);
+               helper.setGone(R.id.tv_pay,false);
+               helper.setGone(R.id.iv_arrow,true);
+               helper.addOnClickListener(R.id.lin_join_people_time);
                helper.setImageResource(R.id.iv_award,R.drawable.ic_dateline_unsale);
                helper.setGone(R.id.tv_address,false);
                helper.setGone(R.id.lin_comment,false);

@@ -13,6 +13,7 @@ import com.guochuang.mimedia.http.subscriber.CountDownSubscriber;
 import com.guochuang.mimedia.mvp.model.Captcha;
 import com.guochuang.mimedia.mvp.model.UserInfo;
 import com.guochuang.mimedia.mvp.presenter.ForgetPresenter;
+import com.guochuang.mimedia.mvp.presenter.ResetPresenter;
 import com.guochuang.mimedia.mvp.view.ForgetView;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.RxUtil;
@@ -23,7 +24,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import rx.functions.Action0;
 
-public class LoginPwdMobileFragment extends MvpFragment<ForgetPresenter> implements ForgetView {
+public class LoginPwdMobileFragment extends MvpFragment<ResetPresenter> implements ForgetView {
 
     @BindView(R.id.tv_mobile)
     TextView tvMobile;
@@ -44,8 +45,8 @@ public class LoginPwdMobileFragment extends MvpFragment<ForgetPresenter> impleme
     UserInfo userInfo;
 
     @Override
-    protected ForgetPresenter createPresenter() {
-        return new ForgetPresenter(this);
+    protected ResetPresenter createPresenter() {
+        return new ResetPresenter(this);
     }
 
     @Override
@@ -85,7 +86,7 @@ public class LoginPwdMobileFragment extends MvpFragment<ForgetPresenter> impleme
                     return;
                 }
                 showLoadingDialog(null);
-                mvpPresenter.getForget(
+                mvpPresenter.getReset(
                         Constant.RESET_NATION_CODE,
                         userInfo.getMobile(),
                         etMsgVertifyCode.getText().toString(),

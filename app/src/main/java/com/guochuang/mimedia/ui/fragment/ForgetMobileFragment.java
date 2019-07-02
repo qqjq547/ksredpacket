@@ -141,8 +141,10 @@ public class ForgetMobileFragment extends MvpFragment<ForgetPresenter> implement
             case R.id.tv_login_forget_verify:
                 if (AntiShake.check(view.getId()))
                     return;
-                if (etLoginForgetImaVerify.getText().length() < 1) {
-                    showShortToast(getResources().getString(R.string.input_verity_ima_error));
+                if (captcha==null){
+                    showShortToast(R.string.verity_ima_empty);
+                }else if (etLoginForgetImaVerify.getText().length() < 1) {
+                    showShortToast(R.string.input_verity_ima_error);
                 } else {
                     mvpPresenter.getForgetSmsVerify(
                             etPhone.getText().toString(),
