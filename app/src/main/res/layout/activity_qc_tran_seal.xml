@@ -60,7 +60,7 @@
        android:textSize="@dimen/textfont14"
        android:text="@string/equal_seal"/>
    <TextView
-       android:id="@+id/tv_equal_aaa"
+       android:id="@+id/tv_equal_seal"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:layout_alignParentRight="true"
@@ -150,7 +150,7 @@
       android:layout_height="wrap_content"
       android:layout_weight="1"/>
   <TextView
-      android:id="@+id/tv_arrive_aaa"
+      android:id="@+id/tv_arrive_seal"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginLeft="@dimen/space5"
@@ -201,7 +201,7 @@
       android:textSize="@dimen/textfont14"
       android:text="@string/seal_price"/>
   <TextView
-      android:id="@+id/tv_aaa_price"
+      android:id="@+id/tv_seal_price"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginLeft="@dimen/space5"

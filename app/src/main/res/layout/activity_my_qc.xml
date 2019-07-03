@@ -156,17 +156,6 @@
                     android:text="@string/transfer_sell"
                     android:textColor="@color/text_white"
                     android:textSize="@dimen/textfont16" />
-              <Button
-                  android:id="@+id/btn_transfer_aaa"
-                  style="?android:attr/borderlessButtonStyle"
-                  android:layout_width="0dp"
-                  android:layout_weight="1"
-                  android:layout_marginLeft="@dimen/space45"
-                  android:layout_height="@dimen/space45"
-                  android:background="@drawable/bg_myksb_trasnfer"
-                  android:text="@string/transfer_aaa"
-                  android:textColor="@color/text_white"
-                  android:textSize="@dimen/textfont16" />
        </LinearLayout>
 
 

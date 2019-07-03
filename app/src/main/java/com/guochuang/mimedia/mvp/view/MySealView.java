@@ -1,7 +1,6 @@
 package com.guochuang.mimedia.mvp.view;
 
-import com.guochuang.mimedia.mvp.model.AAARate;
-import com.guochuang.mimedia.mvp.model.MyAAA;
+import com.guochuang.mimedia.mvp.model.SealRate;
 import com.guochuang.mimedia.mvp.model.MySeal;
 
 public interface MySealView {
@@ -9,5 +8,5 @@ public interface MySealView {
 
     void setData(MySeal data);
 
-    void setAAARate(AAARate data);
+    void setAAARate(SealRate data);
 }

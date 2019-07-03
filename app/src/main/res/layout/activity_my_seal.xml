@@ -38,7 +38,7 @@
                     android:textSize="@dimen/textfont18" />
 
                 <TextView
-                    android:id="@+id/tv_aaa_number"
+                    android:id="@+id/tv_seal_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space25"
@@ -100,7 +100,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/tv_aaa_price"
+                        android:id="@+id/tv_seal_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
@@ -112,12 +112,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/space5"
                         android:src="@drawable/ic_tip_remark" />
-                    <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginTop="@dimen/space3"-->
-                    <!--android:text="@string/aaa_update_price_str"-->
-                    <!--android:textColor="@color/color_666666" />-->
                 </LinearLayout>
 
 
@@ -190,7 +184,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space20"
                             android:gravity="center"
-                            android:text="@string/add_aaa_address"
+                            android:text="@string/add_coin_address"
                             android:textColor="@color/color_f45e4d"
                             android:textSize="@dimen/textfont16" />
 
@@ -231,7 +225,7 @@
                         </LinearLayout>
 
                         <TextView
-                            android:id="@+id/tv_aaa_address"
+                            android:id="@+id/tv_seal_address"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/space12"

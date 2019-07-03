@@ -18,7 +18,6 @@ import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.http.subscriber.CountDownSubscriber;
 import com.guochuang.mimedia.mvp.model.DigitalIntCal;
 import com.guochuang.mimedia.mvp.model.ExchangeConfig;
-import com.guochuang.mimedia.mvp.model.UserInfo;
 import com.guochuang.mimedia.mvp.presenter.SealTransferPresenter;
 import com.guochuang.mimedia.mvp.view.SealTransferView;
 import com.guochuang.mimedia.tools.CashierInputFilter;
@@ -34,7 +33,6 @@ import com.sz.gcyh.KSHongBao.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import rx.Observable;
 import rx.Subscription;
 import rx.functions.Action0;
 
@@ -44,8 +42,8 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
     ImageView ivBack;
     @BindView(R.id.tv_title)
     TextView tvTitle;
-    @BindView(R.id.tv_aaa_num)
-    TextView tvAaaNum;
+    @BindView(R.id.tv_seal_num)
+    TextView tvSealNum;
     @BindView(R.id.et_trans_address)
     EditText etTransAddress;
     @BindView(R.id.et_trans_identity)
@@ -217,7 +215,7 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
                 try {
                     amount = Double.parseDouble(amountStr);
                 }catch (Exception e){
-                    showShortToast(R.string.ksb2aaa_tip_str);
+                    showShortToast(R.string.coin_tip_str);
                     return;
                 }
 
@@ -233,7 +231,7 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
                     showShortToast(R.string.pls_input_msg_vertify_code);
                     return;
                 }
-                View contentView=LayoutInflater.from(this).inflate(R.layout.layout_aaa_transfer_notice,null);
+                View contentView=LayoutInflater.from(this).inflate(R.layout.layout_transfer_notice,null);
                 TextView tvAddress= ButterKnife.findById(contentView,R.id.tv_address);
                 TextView tvCount= ButterKnife.findById(contentView,R.id.tv_count);
                 tvAddress.setText(address);
@@ -299,7 +297,7 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
         closeLoadingDialog();
         if (data != null) {
             intCal = data;
-            tvAaaNum.setText(String.valueOf(data.getDigitalCoin()));
+            tvSealNum.setText(String.valueOf(data.getDigitalCoin()));
         }
     }
 

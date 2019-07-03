@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
-import com.guochuang.mimedia.mvp.model.MyAAA;
 import com.guochuang.mimedia.mvp.model.MySeal;
 import com.guochuang.mimedia.mvp.model.MyQC;
 import com.guochuang.mimedia.mvp.model.NestAuctionMsg;
@@ -28,7 +27,6 @@ import com.guochuang.mimedia.ui.activity.beenest.AdBidActivity;
 import com.guochuang.mimedia.ui.activity.beenest.MyAdActivity;
 import com.guochuang.mimedia.ui.activity.city.CityActivity;
 import com.guochuang.mimedia.ui.activity.redbag.RedbagDynamicActivity;
-import com.guochuang.mimedia.ui.activity.user.MyAAAActivity;
 import com.guochuang.mimedia.ui.activity.user.MyAddressActivity;
 import com.guochuang.mimedia.ui.activity.user.MyPayCodeActivity;
 import com.guochuang.mimedia.ui.activity.user.MySealActivity;
@@ -51,7 +49,6 @@ import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.guochuang.mimedia.ui.activity.user.MessageActivity;
 import com.guochuang.mimedia.ui.activity.user.MyCollectActivity;
 import com.guochuang.mimedia.ui.activity.user.MyCommentActivity;
-import com.guochuang.mimedia.ui.activity.user.MyKsbActivity;
 import com.guochuang.mimedia.ui.activity.operation.OperationCenterActivity;
 import com.guochuang.mimedia.ui.activity.user.RecommendAgentActivity;
 import com.guochuang.mimedia.ui.activity.user.RecommendFanActivity;
@@ -99,14 +96,13 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
     TextView tvAgent;
     TextView tvFans;
     TextView tvRecommendTotalIncome;
-    TextView mTvMyAaa;
     LinearLayout linAgent;
 
     List<MyMenuItem> itemArr = new ArrayList<>();
     MyMenuAdapter menuAdapter;
 
     List<View> viewArr=new ArrayList<>();
-    View sealView,qcView, regionCoreView, recommendView,aaaView;
+    View sealView,qcView, regionCoreView, recommendView;
     MyViewListAdapter pagerAdapter;
     UserInfo userInfo;
     BadgeView badgeView;
@@ -159,12 +155,6 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         recommendView.setOnClickListener(pageOnClickListener);
         viewArr.add(sealView);
         viewArr.add(qcView);
-        if (getPref().getBoolean(PrefUtil.AAA_SWITCH,false)){
-            aaaView = inflater.inflate(R.layout.layout_my_aaa, null);
-            aaaView.setOnClickListener(pageOnClickListener);
-            mTvMyAaa = ButterKnife.findById(aaaView, R.id.tv_my_aaa);
-            viewArr.add(aaaView);
-        }
         viewArr.add(recommendView);
 
 
@@ -207,11 +197,6 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         setPageSelected(0);
 //        itemArr.add(new MyMenuItem(R.drawable.ic_my_qc, R.string.my_qc));
 //        itemArr.add(new MyMenuItem(R.drawable.ic_my_paycode, R.string.receive_pay_code));
-        if (getPref().getBoolean(PrefUtil.AAA_SWITCH,false)){
-            itemArr.add(new MyMenuItem(R.drawable.ic_my_aaa, R.string.receive_my_aaa));
-            mvpPresenter.getMyAAA(Constant.DIGITAL_CURRENCY_AAA);
-        }
-
         itemArr.add(new MyMenuItem(R.drawable.ic_my_city, R.string.text_my_city));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_dynamic, R.string.text_my_dynamic));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_ad_bid, R.string.ad_bid));
@@ -284,9 +269,6 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                     case R.drawable.ic_my_seal:
                         startActivity(new Intent(getActivity(), MySealActivity.class));
                         break;
-                    case R.drawable.ic_my_aaa:
-                        startActivity(new Intent(getActivity(), MyAAAActivity.class));
-                        break;
                     case R.drawable.ic_my_ad_bid:
                         //广告竞购
                         ((MainActivity) getActivity()).clearMarker();
@@ -343,9 +325,6 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                     }
                     break;
 
-                case R.id.lin_my_aaa:
-                    startActivity(new Intent(getActivity(),MyAAAActivity.class));
-                    break;
             }
 
         }
@@ -486,9 +465,6 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
             tvYesterdayIncome.setText(data.getYesterDayIncome());
             tvProvince.setText(data.getWhereRegion());
             int insertPos=2;
-            if(getPref().getBoolean(PrefUtil.AAA_SWITCH,false)){
-                insertPos=3;
-            }
             itemArr.add(insertPos, new MyMenuItem(R.drawable.ic_my_operate_center, R.string.operation_center));
             menuAdapter.notifyItemInserted(insertPos);
             viewArr.add(insertPos,regionCoreView);
@@ -528,19 +504,6 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         closeLoadingDialog();
         showShortToast(msg);
     }
-
-    @Override
-    public void setMyAAA(MyAAA data) {
-        //显示小数点四位
-        if (data!=null){
-            if (!TextUtils.isEmpty(data.getCoin())){
-                mTvMyAaa.setText(CommonUtil.formatDouble(Double.parseDouble(data.getCoin()),4));
-            }else {
-                mTvMyAaa.setText("0.0000");
-            }
-        }
-    }
-
     @Override
     public void setMyQC(MyQC data) {
         //设置qc
@@ -573,9 +536,6 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
         }
     }
 
-    public void refreshMyAAA(){
-        mvpPresenter.getMyAAA(Constant.DIGITAL_CURRENCY_AAA);
-    }
     public void refreshMyQc(){
         mvpPresenter.getMyQC();
     }

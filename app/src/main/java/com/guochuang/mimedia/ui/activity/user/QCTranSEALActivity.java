@@ -13,8 +13,8 @@ import android.widget.TextView;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.DigitalIntCal;
 import com.guochuang.mimedia.mvp.model.ExchangeConfig;
-import com.guochuang.mimedia.mvp.presenter.KsbTranAaaPresenter;
-import com.guochuang.mimedia.mvp.view.KsbTranAaaView;
+import com.guochuang.mimedia.mvp.presenter.QcTranSealPresenter;
+import com.guochuang.mimedia.mvp.view.QcTranSealView;
 import com.guochuang.mimedia.tools.CashierInputFilter;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
@@ -26,22 +26,22 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 
-public class QCTranSEALActivity extends MvpActivity<KsbTranAaaPresenter> implements KsbTranAaaView {
+public class QCTranSEALActivity extends MvpActivity<QcTranSealPresenter> implements QcTranSealView {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.tv_ksb_num)
     TextView tvKsbNum;
-    @BindView(R.id.tv_equal_aaa)
-    TextView tvEqualAaa;
+    @BindView(R.id.tv_equal_seal)
+    TextView tvEqualSeal;
     @BindView(R.id.et_trans_ksb)
     EditText etTransKsb;
-    @BindView(R.id.tv_arrive_aaa)
-    TextView tvArriveAaa;
+    @BindView(R.id.tv_arrive_seal)
+    TextView tvArriveSeal;
     @BindView(R.id.tv_ksb_price)
     TextView tvKsbPrice;
-    @BindView(R.id.tv_aaa_price)
-    TextView tvAaaPrice;
+    @BindView(R.id.tv_seal_price)
+    TextView tvSealPrice;
     @BindView(R.id.tv_confirm)
     TextView tvConfirm;
     @BindView(R.id.tv_tip)
@@ -54,8 +54,8 @@ public class QCTranSEALActivity extends MvpActivity<KsbTranAaaPresenter> impleme
     DigitalIntCal intCal;
 
     @Override
-    protected KsbTranAaaPresenter createPresenter() {
-        return new KsbTranAaaPresenter(this);
+    protected QcTranSealPresenter createPresenter() {
+        return new QcTranSealPresenter(this);
     }
 
     @Override
@@ -77,15 +77,15 @@ public class QCTranSEALActivity extends MvpActivity<KsbTranAaaPresenter> impleme
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (TextUtils.isEmpty(charSequence)){
-                    tvArriveAaa.setText(CommonUtil.formatDouble(0,4));
+                    tvArriveSeal.setText(CommonUtil.formatDouble(0,4));
                 }else {
                     double input= CommonUtil.formatDouble(Double.parseDouble(charSequence.toString()));
                     if (exchangeConfig!=null){
                         if (intCal!=null){
                             double transKsb=input*(1-exchangeConfig.getKsb2aaa().getServiceRate());
                             double equalMoney=DoubleUtil.mul(transKsb,Double.parseDouble(intCal.getKsbRate()));
-                            double equalAaa=DoubleUtil.divide(equalMoney,Double.parseDouble(intCal.getDigitalRate()));
-                            tvArriveAaa.setText(CommonUtil.formatDouble(equalAaa,4));
+                            double equalSeal=DoubleUtil.divide(equalMoney,Double.parseDouble(intCal.getDigitalRate()));
+                            tvArriveSeal.setText(CommonUtil.formatDouble(equalSeal,4));
                         }
                     }
 
@@ -118,9 +118,9 @@ public class QCTranSEALActivity extends MvpActivity<KsbTranAaaPresenter> impleme
         if (data!=null){
             intCal=data;
             tvKsbNum.setText(String.valueOf(data.getKsbCoin()));
-            tvEqualAaa.setText(String.valueOf(data.getDigitalCoin()));
+            tvEqualSeal.setText(String.valueOf(data.getDigitalCoin()));
             tvKsbPrice.setText(String.valueOf(data.getKsbRate()));
-            tvAaaPrice.setText(String.valueOf(data.getDigitalRate()));
+            tvSealPrice.setText(String.valueOf(data.getDigitalRate()));
         }
     }
 
@@ -167,7 +167,7 @@ public class QCTranSEALActivity extends MvpActivity<KsbTranAaaPresenter> impleme
                 try {
                     amount=Double.parseDouble(amountStr);
                 }catch (Exception e){
-                    showShortToast(R.string.ksb2aaa_tip_str);
+                    showShortToast(R.string.coin_tip_str);
                     return;
                 }
 
@@ -176,7 +176,7 @@ public class QCTranSEALActivity extends MvpActivity<KsbTranAaaPresenter> impleme
                     return;
                 }
                 if (exchangeConfig!=null&&amount<exchangeConfig.getKsb2aaa().getMinLimit()){
-                    showShortToast(String.format(getString(R.string.format_min_qc_to_aaa),exchangeConfig.getKsb2aaa().getMinLimit()));
+                    showShortToast(String.format(getString(R.string.format_min_qc),exchangeConfig.getKsb2aaa().getMinLimit()));
                     return;
                 }
                 if (passDialog == null) {

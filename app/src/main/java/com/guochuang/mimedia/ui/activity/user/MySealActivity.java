@@ -6,20 +6,17 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.http.subscriber.CountDownSubscriber;
-import com.guochuang.mimedia.mvp.model.AAARate;
+import com.guochuang.mimedia.mvp.model.SealRate;
 import com.guochuang.mimedia.mvp.model.MySeal;
-import com.guochuang.mimedia.mvp.presenter.MyAAAAPresenter;
 import com.guochuang.mimedia.mvp.presenter.MySealPresenter;
 import com.guochuang.mimedia.mvp.view.MySealView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.DialogBuilder;
-import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.tools.RxUtil;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.sz.gcyh.KSHongBao.R;
@@ -41,20 +38,20 @@ public class MySealActivity extends MvpActivity<MySealPresenter> implements MySe
     LinearLayout linTitle;
     @BindView(R.id.tv_goto_real_name)
     TextView mTvGotoRealName;
-    @BindView(R.id.tv_aaa_number)
-    TextView tvAaaNumber;
+    @BindView(R.id.tv_seal_number)
+    TextView tvSealNumber;
     @BindView(R.id.tv_money)
     TextView tvMoney;
-    @BindView(R.id.tv_aaa_price)
-    TextView tvAaaPrice;
+    @BindView(R.id.tv_seal_price)
+    TextView tvSealPrice;
     @BindView(R.id.tv_tibi)
     TextView tvTibi;
     @BindView(R.id.iv_code)
     ImageView ivCode;
     @BindView(R.id.tv_copy)
     TextView tvCopy;
-    @BindView(R.id.tv_aaa_address)
-    TextView tvAaaAddress;
+    @BindView(R.id.tv_seal_address)
+    TextView tvSealAddress;
     @BindView(R.id.lin_content)
     LinearLayout linContent;
     @BindView(R.id.tv_tip)
@@ -62,7 +59,7 @@ public class MySealActivity extends MvpActivity<MySealPresenter> implements MySe
 
 
     MySeal mySeal;
-    AAARate aaaRate;
+    SealRate sealRate;
 
     @Override
     protected MySealPresenter createPresenter() {
@@ -134,7 +131,7 @@ public class MySealActivity extends MvpActivity<MySealPresenter> implements MySe
                 startActivityForResult(new Intent(this, SealTranQcActivity.class), Constant.REFRESH);
                 break;
             case R.id.tv_copy:
-                CommonUtil.copyMsg(this, tvAaaAddress.getText().toString());
+                CommonUtil.copyMsg(this, tvSealAddress.getText().toString());
                 showShortToast(getResources().getString(R.string.copyed));
                 break;
             case R.id.tv_goto_real_name:
@@ -178,11 +175,11 @@ public class MySealActivity extends MvpActivity<MySealPresenter> implements MySe
      *
      */
     private void selectShowView() {
-        tvAaaNumber.setText(mySeal.getCoin());
+        tvSealNumber.setText(mySeal.getCoin());
         tvMoney.setText(mySeal.getMoney());
-        tvAaaPrice.setText(mySeal.getKsbPrice());
+        tvSealPrice.setText(mySeal.getKsbPrice());
         GlideImgManager.loadImage(this, mySeal.getQrcodeUrlKey(), ivCode);
-        tvAaaAddress.setText(mySeal.getKsbAddress());
+        tvSealAddress.setText(mySeal.getKsbAddress());
         if (mySeal.getNameAuthentication()==1) {
             mTvGotoRealName.setVisibility(View.GONE);
             mLlRootView.setBackgroundColor(getResources().getColor(R.color.white));
@@ -197,13 +194,13 @@ public class MySealActivity extends MvpActivity<MySealPresenter> implements MySe
     }
 
     @Override
-    public void setAAARate(AAARate data) {
+    public void setAAARate(SealRate data) {
         if (data!=null){
-            aaaRate=data;
-            tvAaaPrice.setText(String.valueOf(data.getRate()));
-            //更新等值
+            sealRate =data;
+            tvSealPrice.setText(String.valueOf(data.getRate()));
+            //更新更新等值等值
             if (mySeal !=null&&!TextUtils.isEmpty(mySeal.getCoin())){
-                tvMoney.setText(CommonUtil.formatDouble(aaaRate.getRate() * Double.valueOf(mySeal.getCoin()), 2));
+                tvMoney.setText(CommonUtil.formatDouble(sealRate.getRate() * Double.valueOf(mySeal.getCoin()), 2));
             }
         }
     }

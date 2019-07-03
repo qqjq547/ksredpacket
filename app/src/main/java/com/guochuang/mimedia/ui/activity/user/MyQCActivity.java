@@ -36,8 +36,6 @@ public class MyQCActivity extends MvpActivity<MyQCPresenter> implements MyQCView
     TextView tvEqualCount;
     @BindView(R.id.btn_transfer_sell)
     Button btnTransferseal;
-    @BindView(R.id.btn_transfer_aaa)
-    Button btnTransferAaa;
 
     @BindView(R.id.tv_qc_price)
     TextView mTvQcPrice;
@@ -59,11 +57,6 @@ public class MyQCActivity extends MvpActivity<MyQCPresenter> implements MyQCView
     public void initViewAndData() {
         tvTitle.setText(R.string.my_qc_title);
         tvText.setText(R.string.detail);
-        btnTransferAaa.setVisibility(View.GONE);
-        if(getPref().getBoolean(PrefUtil.AAA_SWITCH,false)){
-            btnTransferAaa.setVisibility(View.VISIBLE);
-        }
-
         CommonUtil.initH5WebView(this, wvDesp);
         wvDesp.loadUrl(CommonUtil.getTimeStampUrl(UrlConfig.getHtmlUrl(UrlConfig.URL_RULE_QC)));
         showLoadingDialog(null);
@@ -71,7 +64,7 @@ public class MyQCActivity extends MvpActivity<MyQCPresenter> implements MyQCView
     }
 
     @OnClick({R.id.iv_back, R.id.tv_text, R.id.lin_ksb, R.id.lin_share_benefit, R.id.lin_equal,
-            R.id.btn_transfer_sell,R.id.btn_ksb_detail,R.id.btn_transfer_aaa})
+            R.id.btn_transfer_sell,R.id.btn_ksb_detail})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -94,19 +87,6 @@ public class MyQCActivity extends MvpActivity<MyQCPresenter> implements MyQCView
             case R.id.btn_ksb_detail:
                 //原ksb 明细
                 startActivity(new Intent(this, MyKsbDetailsActivity.class));
-                break;
-            case R.id.btn_transfer_aaa:
-                //转aaa
-                if (getPref().getInt(PrefUtil.IDENTITY,0)==0) {
-                    showShortToast(R.string.pls_identity_first);
-                    startActivityForResult(new Intent(this, IdentifyActivity.class), Constant.REFRESH);
-                }else if(getPref().getInt(PrefUtil.SAFECODE,0)==0){
-                    showShortToast(R.string.pls_safecode_first);
-                    startActivityForResult(new Intent(this, TradePwdActivity.class), Constant.REFRESH);
-                }else {
-
-                    startActivityForResult(new Intent(this, KsbTranAaactivity.class),Constant.REQUEST_GRANT);
-                }
                 break;
 
         }

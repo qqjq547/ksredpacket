@@ -6,9 +6,7 @@ import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.DigitalIntCal;
 import com.guochuang.mimedia.mvp.model.ExchangeConfig;
-import com.guochuang.mimedia.mvp.view.AaaTranKsbView;
 import com.guochuang.mimedia.mvp.view.SealTranQcView;
-import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.RxUtil;
 
 public class SealTranQcPresenter extends BasePresenter<SealTranQcView> {

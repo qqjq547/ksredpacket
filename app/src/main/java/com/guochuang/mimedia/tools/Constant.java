@@ -269,7 +269,6 @@ public class Constant {
     public static final int REQUEST_STARTPREVIDEO_CODE = 0x000146;
     public static final int REQUEST_STARTPRE_FENGWOLINKWEB = 0x000147;
     public static final String COUNTDOWN_GONE = "ISGONG";
-    public static final String ACTION_CHANGE_AAA = "ACTION_CHANGE_AAA";
     public static final String ACTION_CHANGE_QC = "ACTION_CHANGE_QC";
 
     public static final String COINTYPE_KSB ="1" ;
@@ -286,7 +285,6 @@ public class Constant {
     public static int FILL_IN_PROBLEM = 2;
 
     public static final String DIGITAL_CURRENCY_KSB = "KSB";
-    public static final String DIGITAL_CURRENCY_AAA = "AAA";
     public static final String DIGITAL_CURRENCY_SEAL = "SEAL";
     public static final String DIGITAL_CURRENCY_QC = "QC";
 

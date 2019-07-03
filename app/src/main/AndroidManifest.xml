@@ -114,9 +114,6 @@
         <activity android:name="com.guochuang.mimedia.ui.activity.common.KsbPayActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.common.ScanResultActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.redbag.LinkRedbagDetailActivity" />
-        <activity android:name="com.guochuang.mimedia.ui.activity.user.KsbTranAaactivity" />
-        <activity android:name="com.guochuang.mimedia.ui.activity.user.AaaTranKsbActivity" />
-        <activity android:name="com.guochuang.mimedia.ui.activity.user.AaaTransferActivity"/>
 
         <activity
             android:name="com.guochuang.mimedia.ui.activity.common.MyCaptureActivity"
@@ -183,8 +180,6 @@
 
         <activity android:name="com.guochuang.mimedia.ui.activity.FengWoLinkWebViewActivity"/>
 
-        <activity android:name="com.guochuang.mimedia.ui.activity.user.MyAAAActivity"/>
-        <activity android:name="com.guochuang.mimedia.ui.activity.user.AAADetailedActivity"/>
         <activity android:name="com.guochuang.mimedia.ui.activity.user.MySealActivity"/>
         <activity android:name="com.guochuang.mimedia.ui.activity.user.SealTransferActivity"/>
         <activity android:name="com.guochuang.mimedia.ui.activity.user.MySealDetailsActivity"/>

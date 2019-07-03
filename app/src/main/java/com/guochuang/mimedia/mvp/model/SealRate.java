@@ -1,6 +1,6 @@
 package com.guochuang.mimedia.mvp.model;
 
-public class AAARate {
+public class SealRate {
 
     /**
      * coinMoney : 0.10

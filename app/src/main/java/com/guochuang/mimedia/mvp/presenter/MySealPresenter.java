@@ -4,10 +4,8 @@ import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
-import com.guochuang.mimedia.mvp.model.AAARate;
-import com.guochuang.mimedia.mvp.model.MyAAA;
+import com.guochuang.mimedia.mvp.model.SealRate;
 import com.guochuang.mimedia.mvp.model.MySeal;
-import com.guochuang.mimedia.mvp.view.MyAAAAView;
 import com.guochuang.mimedia.mvp.view.MySealView;
 import com.guochuang.mimedia.tools.RxUtil;
 
@@ -39,9 +37,9 @@ public class MySealPresenter extends BasePresenter<MySealView> {
      * 获取AAA 的税率
      */
     public void getMyAAARate(String digitalCurrency) {
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getMyAAARate(digitalCurrency)), new ApiCallback<AAARate>() {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getMySealRate(digitalCurrency)), new ApiCallback<SealRate>() {
             @Override
-            public void onSuccess(AAARate data) {
+            public void onSuccess(SealRate data) {
                 mvpView.setAAARate(data);
             }
 

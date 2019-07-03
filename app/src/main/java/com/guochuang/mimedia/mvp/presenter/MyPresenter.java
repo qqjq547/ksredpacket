@@ -4,7 +4,6 @@ import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
-import com.guochuang.mimedia.mvp.model.MyAAA;
 import com.guochuang.mimedia.mvp.model.MyQC;
 import com.guochuang.mimedia.mvp.model.MySeal;
 import com.guochuang.mimedia.mvp.model.NestAuctionMsg;
@@ -76,27 +75,6 @@ public class MyPresenter extends BasePresenter<MyView> {
         });
     }
 
-    /**
-     * 获取我的aaa
-     */
-    public void getMyAAA(String digitalCurrency) {
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getMyAAA(digitalCurrency)), new ApiCallback<MyAAA>() {
-            @Override
-            public void onSuccess(MyAAA data) {
-                mvpView.setMyAAA(data);
-            }
-
-            @Override
-            public void onFailure(ApiException exception) {
-                mvpView.setError(exception.getMessage());
-            }
-
-            @Override
-            public void onFinish() {
-
-            }
-        });
-    }
     public void getMySeal() {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getMyKsb()), new ApiCallback<MySeal>() {
             @Override

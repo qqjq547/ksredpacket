@@ -11,8 +11,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.guochuang.mimedia.mvp.model.MyAAA;
 import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.tools.UrlConfig;
 import com.sz.gcyh.KSHongBao.R;
@@ -23,10 +21,8 @@ import com.guochuang.mimedia.mvp.presenter.MyksbPresenter;
 import com.guochuang.mimedia.mvp.view.MyksbView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 import lecho.lib.hellocharts.gesture.ContainerScrollType;
@@ -67,8 +63,6 @@ public class MyKsbActivity extends MvpActivity<MyksbPresenter> implements MyksbV
     Button btnKsbTransfer;
     @BindView(R.id.btn_transfer)
     Button btnTransfer;
-    @BindView(R.id.btn_transfer_aaa)
-    Button btnTransferAaa;
     @BindView(R.id.tv_today_ksb_price)
     TextView tvTodayKsbPrice;
     @BindView(R.id.linechart)
@@ -104,15 +98,10 @@ public class MyKsbActivity extends MvpActivity<MyksbPresenter> implements MyksbV
         wvDesp.loadUrl(UrlConfig.getHtmlUrl(UrlConfig.URL_RULE_QC));
         mvpPresenter.getMyKsb();
         mvpPresenter.getKsbTrend();
-        if (getPref().getBoolean(PrefUtil.AAA_SWITCH,false)){
-            btnTransferAaa.setVisibility(View.VISIBLE);
-        }else {
-            btnTransferAaa.setVisibility(View.GONE);
-        }
+
     }
 
-    @OnClick({R.id.iv_back, R.id.tv_text, R.id.lin_ksb, R.id.lin_share_benefit, R.id.lin_equal, R.id.btn_ksb_transfer, R.id.btn_transfer,
-            R.id.btn_transfer_aaa,R.id.tv_copy})
+    @OnClick({R.id.iv_back, R.id.tv_text, R.id.lin_ksb, R.id.lin_share_benefit, R.id.lin_equal, R.id.btn_ksb_transfer, R.id.btn_transfer,R.id.tv_copy})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -147,20 +136,7 @@ public class MyKsbActivity extends MvpActivity<MyksbPresenter> implements MyksbV
                     showShortToast(R.string.pls_safecode_first);
                     startActivityForResult(new Intent(this, TradePwdActivity.class), Constant.REFRESH);
                 }else {
-                    showLoadingDialog(null);
-                    mvpPresenter.getMyAAA(Constant.DIGITAL_CURRENCY_AAA);
-                }
-                break;
-            case R.id.btn_transfer_aaa:
-                if (getPref().getInt(PrefUtil.IDENTITY,0)==0) {
-                    showShortToast(R.string.pls_identity_first);
-                    startActivityForResult(new Intent(this, IdentifyActivity.class), Constant.REFRESH);
-                }else if(getPref().getInt(PrefUtil.SAFECODE,0)==0){
-                    showShortToast(R.string.pls_safecode_first);
-                    startActivityForResult(new Intent(this, TradePwdActivity.class), Constant.REFRESH);
-                }else {
-
-                    startActivityForResult(new Intent(this, KsbTranAaactivity.class),Constant.REQUEST_GRANT);
+                    startActivityForResult(new Intent(this, MyKsbGrantActivity.class),Constant.REQUEST_GRANT);
                 }
                 break;
             case R.id.tv_copy:
@@ -266,14 +242,6 @@ public class MyKsbActivity extends MvpActivity<MyksbPresenter> implements MyksbV
             generateData();
             linechart.setViewportCalculationEnabled(false);
             resetViewport();
-        }
-    }
-
-    @Override
-    public void setMyAaa(MyAAA data) {
-        closeLoadingDialog();
-        if (data!=null){
-            startActivityForResult(new Intent(this, MyKsbGrantActivity.class),Constant.REQUEST_GRANT);
         }
     }
 

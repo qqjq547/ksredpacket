@@ -32,7 +32,7 @@
         android:textSize="@dimen/textfont14" />
 
     <TextView
-        android:id="@+id/tv_aaa_num"
+        android:id="@+id/tv_seal_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

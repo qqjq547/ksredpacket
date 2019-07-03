@@ -1492,15 +1492,6 @@ public interface ApiStore {
     @GET("/api/v1/activity/beehiveBonus/randomQueryOne")
     Observable<HttpResponse<FengWoVideoOrLink>> getAdvertisement();
 
-    /**
-     * 我的AAA
-     *
-     * @return
-     */
-    @GET("/api/v1/exchange/user_digital_currency/my_digital")
-    Observable<HttpResponse<MyAAA>> getMyAAA(
-            @Query("digitalCurrency") String digitalCurrency
-    );
 
     /**
      * 获取AAA税率
@@ -1508,23 +1499,10 @@ public interface ApiStore {
      * @return
      */
     @GET("/api/v1/exchange/digi_currcy/rate")
-    Observable<HttpResponse<AAARate>> getMyAAARate(
+    Observable<HttpResponse<SealRate>> getMySealRate(
             @Query("digitalCurrency") String digitalCurrency
     );
 
-    /**
-     * AAA明细列表
-     *
-     * @param currentPage
-     * @param pageSize
-     * @return
-     */
-    @GET("/api/v1/exchange/digiccy_ex_detail/get_list")
-    Observable<HttpResponse<Page<AAADetail>>> getAAADetailedList(
-            @Query("digitalCurrency") String digitalCurrency,
-            @Query("currentPage") int currentPage,
-            @Query("pageSize") int pageSize,
-            @Query("businessType") String businessType);
 
 
     @GET("/api/v1/exchange/digi_currcy/config")

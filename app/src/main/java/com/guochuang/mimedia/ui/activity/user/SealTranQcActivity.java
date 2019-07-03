@@ -12,9 +12,7 @@ import android.widget.TextView;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.DigitalIntCal;
 import com.guochuang.mimedia.mvp.model.ExchangeConfig;
-import com.guochuang.mimedia.mvp.presenter.AaaTranKsbPresenter;
 import com.guochuang.mimedia.mvp.presenter.SealTranQcPresenter;
-import com.guochuang.mimedia.mvp.view.AaaTranKsbView;
 import com.guochuang.mimedia.mvp.view.SealTranQcView;
 import com.guochuang.mimedia.tools.CashierInputFilter;
 import com.guochuang.mimedia.tools.CommonUtil;
@@ -29,16 +27,16 @@ import butterknife.OnClick;
 public class SealTranQcActivity extends MvpActivity<SealTranQcPresenter> implements SealTranQcView {
     @BindView(R.id.tv_title)
     TextView tvTitle;
-    @BindView(R.id.tv_aaa_num)
-    TextView tvAaaNum;
+    @BindView(R.id.tv_seal_num)
+    TextView tvSealNum;
     @BindView(R.id.tv_equal_ksb)
     TextView tvEqualKsb;
     @BindView(R.id.et_trans_ksb)
     EditText etTransKsb;
     @BindView(R.id.tv_arrive_ksb)
     TextView tvArriveKsb;
-    @BindView(R.id.tv_aaa_price)
-    TextView tvAaaPrice;
+    @BindView(R.id.tv_seal_price)
+    TextView tvSealPrice;
     @BindView(R.id.tv_confirm)
     TextView tvConfirm;
     @BindView(R.id.tv_tip)
@@ -115,7 +113,7 @@ public class SealTranQcActivity extends MvpActivity<SealTranQcPresenter> impleme
                 try {
                     amount=Double.parseDouble(amountStr);
                 }catch (Exception e){
-                    showShortToast(getString(R.string.ksb2aaa_tip_str));
+                    showShortToast(getString(R.string.coin_tip_str));
                     return;
                 }
 
@@ -176,9 +174,9 @@ public class SealTranQcActivity extends MvpActivity<SealTranQcPresenter> impleme
         closeLoadingDialog();
         if (data!=null){
             intCal=data;
-            tvAaaNum.setText(String.valueOf(data.getDigitalCoin()));
+            tvSealNum.setText(String.valueOf(data.getDigitalCoin()));
             tvEqualKsb.setText(String.valueOf(data.getKsbCoin()));
-            tvAaaPrice.setText(String.valueOf(data.getDigitalRate()));
+            tvSealPrice.setText(String.valueOf(data.getDigitalRate()));
         }
     }
 

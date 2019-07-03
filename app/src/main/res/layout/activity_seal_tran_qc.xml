@@ -22,7 +22,6 @@
   <RelativeLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-
       android:padding="@dimen/space15">
 
    <TextView
@@ -33,7 +32,7 @@
        android:textColor="@color/text_drak_black"
        android:textSize="@dimen/textfont14" />
    <TextView
-       android:id="@+id/tv_aaa_num"
+       android:id="@+id/tv_seal_num"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:layout_alignParentRight="true"
@@ -171,7 +170,7 @@
       android:textSize="@dimen/textfont14"
       android:text="@string/seal_price"/>
   <TextView
-      android:id="@+id/tv_aaa_price"
+      android:id="@+id/tv_seal_price"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginLeft="@dimen/space5"
