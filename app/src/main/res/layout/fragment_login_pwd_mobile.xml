@@ -121,7 +121,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/transparent"
-                    android:hint="@string/pls_input_new_login_pwd"
+                    android:hint="@string/input_password_hint"
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:paddingBottom="@dimen/space10"

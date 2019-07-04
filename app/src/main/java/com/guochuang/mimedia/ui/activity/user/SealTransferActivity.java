@@ -203,10 +203,10 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
                     showShortToast(R.string.seal_address_empty);
                     return;
                 }
-                if (TextUtils.isEmpty(identity)){
-                    showShortToast(R.string.seal_transfer_identity_number);
-                    return;
-                }
+//                if (TextUtils.isEmpty(identity)){
+//                    showShortToast(R.string.seal_transfer_identity_number);
+//                    return;
+//                }
 
                 if (TextUtils.isEmpty(amountStr)){
                     showShortToast(R.string.pls_input_seal_amount);

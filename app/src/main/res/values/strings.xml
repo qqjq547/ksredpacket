@@ -50,6 +50,7 @@
     <string name="input_password_type">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.@</string>
     <string name="input_phone_error">手机号不正确，请检查后重新输入</string>
     <string name="input_password_error">密码位数应在6-15位之间，请检查后重新输入</string>
+    <string name="input_password_hint">请输入6~15位数字与字母组合的密码</string>
     <string name="input_safe_password_error">密码位数应为6位之间，请检查后重新输入</string>
     <string name="input_verity_error">验证码不正确，请检查后重新输入</string>
     <string name="input_verity_ima_error">图形验证码不正确，请检查后重新输入</string>
