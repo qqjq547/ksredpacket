@@ -1,12 +1,9 @@
 package com.guochuang.mimedia.ui.fragment;
 
 import android.os.Build;
-import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -28,9 +25,7 @@ import com.guochuang.mimedia.ui.activity.user.RegisterActivity;
 import com.sz.gcyh.KSHongBao.R;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import rx.functions.Action0;
 
 public class RegistEmailFragment extends MvpFragment<RegisterPresenter> implements RegisterView {

@@ -6,19 +6,15 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.view.DragView;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.mvp.model.Redbag;
-import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 

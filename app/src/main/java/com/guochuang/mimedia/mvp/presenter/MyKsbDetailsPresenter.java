@@ -6,13 +6,10 @@ import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.DictionaryType;
 import com.guochuang.mimedia.mvp.model.KsbRecord;
-import com.guochuang.mimedia.mvp.model.RegionDetail;
 import com.guochuang.mimedia.mvp.view.MyKsbDetailsView;
 import com.guochuang.mimedia.tools.RxUtil;
 
 import java.util.List;
-
-import retrofit2.http.Query;
 
 public class MyKsbDetailsPresenter extends BasePresenter<MyKsbDetailsView> {
     public MyKsbDetailsPresenter(MyKsbDetailsView view) {

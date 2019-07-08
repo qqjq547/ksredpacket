@@ -1,27 +1,19 @@
 package com.guochuang.mimedia.ui.activity.redbag;
 
-import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.base.MvpActivity;
-import com.guochuang.mimedia.mvp.model.AnswerFrom;
 import com.guochuang.mimedia.mvp.model.LookVideoResult;
-import com.guochuang.mimedia.mvp.model.RedbagDetail;
-import com.guochuang.mimedia.mvp.presenter.AnswerPresenter;
 import com.guochuang.mimedia.mvp.presenter.CheckQuestionPresenter;
-import com.guochuang.mimedia.mvp.view.AnswerView;
 import com.guochuang.mimedia.mvp.view.CheckQuestionView;
 import com.guochuang.mimedia.tools.Constant;
-import com.guochuang.mimedia.tools.LogUtil;
-import com.guochuang.mimedia.ui.adapter.AnswerAdapter;
 import com.guochuang.mimedia.ui.adapter.CheckQuestionAdapter;
 import com.sz.gcyh.KSHongBao.R;
 

@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 

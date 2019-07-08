@@ -1,6 +1,5 @@
 package com.guochuang.mimedia.ui.activity.city;
 
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
@@ -15,7 +14,6 @@ import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.http.response.Page;
 import com.guochuang.mimedia.mvp.model.CityBidRecord;
-import com.guochuang.mimedia.mvp.model.RainRecord;
 import com.guochuang.mimedia.mvp.presenter.CityBidRecordPresenter;
 import com.guochuang.mimedia.mvp.view.CityBidRecordView;
 import com.guochuang.mimedia.tools.Constant;
@@ -27,7 +25,6 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class CityBidRecordActivity extends MvpActivity<CityBidRecordPresenter> implements CityBidRecordView {

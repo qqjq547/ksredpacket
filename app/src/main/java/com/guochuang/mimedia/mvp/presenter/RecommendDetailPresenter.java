@@ -6,9 +6,7 @@ import com.guochuang.mimedia.http.response.Page;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.RecommedUser;
-import com.guochuang.mimedia.mvp.model.RecommendDetail;
 import com.guochuang.mimedia.mvp.view.RecommendDetailView;
-import com.guochuang.mimedia.mvp.view.WelcomeView;
 import com.guochuang.mimedia.tools.RxUtil;
 
 /**

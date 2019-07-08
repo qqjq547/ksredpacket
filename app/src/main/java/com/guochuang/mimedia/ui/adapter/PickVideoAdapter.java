@@ -7,16 +7,13 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.glide.GlideApp;
-import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.guochuang.mimedia.tools.glide.RadiusTransformation;
 import com.sz.gcyh.KSHongBao.R;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 

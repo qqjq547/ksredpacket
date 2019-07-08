@@ -5,10 +5,7 @@ import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.FengWoVideoOrLink;
-import com.guochuang.mimedia.mvp.model.UserStatistics;
 import com.guochuang.mimedia.mvp.view.IntefaceWebView;
-import com.guochuang.mimedia.mvp.view.WelcomeView;
-import com.guochuang.mimedia.mvp.view.WelfareView;
 import com.guochuang.mimedia.tools.RxUtil;
 
 public class WebPresenter extends BasePresenter<IntefaceWebView> {

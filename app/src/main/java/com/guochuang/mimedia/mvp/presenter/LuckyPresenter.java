@@ -2,12 +2,9 @@ package com.guochuang.mimedia.mvp.presenter;
 
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.http.exception.ApiException;
-import com.guochuang.mimedia.http.response.Page;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
-import com.guochuang.mimedia.mvp.model.BidPrice;
 import com.guochuang.mimedia.mvp.model.LuckyResult;
-import com.guochuang.mimedia.mvp.view.BidPriceView;
 import com.guochuang.mimedia.mvp.view.LuckyView;
 import com.guochuang.mimedia.tools.RxUtil;
 

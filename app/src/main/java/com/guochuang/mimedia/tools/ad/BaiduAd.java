@@ -1,9 +1,7 @@
 package com.guochuang.mimedia.tools.ad;
 
 import android.content.Context;
-import android.util.DisplayMetrics;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 
 import com.baidu.mobads.AdView;
 import com.baidu.mobads.AdViewListener;

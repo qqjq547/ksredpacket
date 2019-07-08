@@ -5,38 +5,23 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.guochuang.mimedia.ui.adapter.MyFragmentPagerAdapter;
-import com.guochuang.mimedia.ui.fragment.ForgetEmailFragment;
-import com.guochuang.mimedia.ui.fragment.ForgetMobileFragment;
 import com.guochuang.mimedia.ui.fragment.TradePwdEmailFragment;
 import com.guochuang.mimedia.ui.fragment.TradePwdMobileFragment;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
-import com.guochuang.mimedia.http.subscriber.CountDownSubscriber;
-import com.guochuang.mimedia.mvp.model.Captcha;
 import com.guochuang.mimedia.mvp.model.UserInfo;
-import com.guochuang.mimedia.mvp.presenter.TradePwdPresenter;
-import com.guochuang.mimedia.mvp.view.TradePawView;
-import com.guochuang.mimedia.tools.Constant;
-import com.guochuang.mimedia.tools.PrefUtil;
-import com.guochuang.mimedia.tools.RxUtil;
-import com.guochuang.mimedia.tools.glide.GlideImgManager;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.objectbox.Box;
-import io.objectbox.BoxStore;
-import rx.functions.Action0;
 
 public class TradePwdActivity extends MvpActivity {
     @BindView(R.id.iv_back)

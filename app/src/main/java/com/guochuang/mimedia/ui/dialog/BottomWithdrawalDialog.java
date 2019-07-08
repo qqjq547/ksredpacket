@@ -3,7 +3,6 @@ package com.guochuang.mimedia.ui.dialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
@@ -20,7 +19,6 @@ import com.guochuang.mimedia.view.VerticalDecoration;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.ui.adapter.BottomWithdrawalAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;

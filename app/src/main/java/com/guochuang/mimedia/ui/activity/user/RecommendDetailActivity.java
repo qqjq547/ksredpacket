@@ -1,6 +1,5 @@
 package com.guochuang.mimedia.ui.activity.user;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
@@ -13,16 +12,12 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.mvp.model.RecommendData;
 import com.sz.gcyh.KSHongBao.R;
-import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.http.response.Page;
 import com.guochuang.mimedia.mvp.model.RecommedUser;
-import com.guochuang.mimedia.mvp.model.RecommendDetail;
 import com.guochuang.mimedia.mvp.presenter.RecommendDetailPresenter;
 import com.guochuang.mimedia.mvp.view.RecommendDetailView;
-import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
-import com.guochuang.mimedia.ui.adapter.FansDetailAdapter;
 import com.guochuang.mimedia.ui.adapter.RecommendDetailAdapter;
 import com.guochuang.mimedia.view.VerticalDecoration;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -33,7 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class RecommendDetailActivity extends MvpActivity<RecommendDetailPresenter> implements RecommendDetailView {

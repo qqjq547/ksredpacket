@@ -26,7 +26,6 @@ import com.guochuang.mimedia.mvp.model.RegionCoreHome;
 import com.guochuang.mimedia.mvp.presenter.OperationCenterPresenter;
 import com.guochuang.mimedia.mvp.view.OperationCenterView;
 import com.guochuang.mimedia.tools.GeoHasher;
-import com.guochuang.mimedia.tools.LogUtil;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.tools.Constant;

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.guochuang.mimedia.app.App;
@@ -12,13 +11,10 @@ import com.guochuang.mimedia.base.MvpFragment;
 import com.guochuang.mimedia.http.subscriber.CountDownSubscriber;
 import com.guochuang.mimedia.mvp.model.Captcha;
 import com.guochuang.mimedia.mvp.model.UserInfo;
-import com.guochuang.mimedia.mvp.presenter.ForgetPresenter;
 import com.guochuang.mimedia.mvp.presenter.ResetPresenter;
 import com.guochuang.mimedia.mvp.view.ForgetView;
 import com.guochuang.mimedia.tools.CommonUtil;
-import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.RxUtil;
-import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.sz.gcyh.KSHongBao.R;
 
 import butterknife.BindView;

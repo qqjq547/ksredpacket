@@ -1,7 +1,5 @@
 package com.guochuang.mimedia.ui.adapter;
 
-import android.app.backup.BackupHelper;
-import android.media.Image;
 import android.support.annotation.Nullable;
 import android.widget.ImageView;
 

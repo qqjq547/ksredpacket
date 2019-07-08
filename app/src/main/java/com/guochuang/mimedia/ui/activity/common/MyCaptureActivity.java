@@ -2,7 +2,6 @@ package com.guochuang.mimedia.ui.activity.common;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.text.TextUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -12,7 +11,6 @@ import com.guochuang.mimedia.mvp.model.PayeeUser;
 import com.guochuang.mimedia.mvp.presenter.MyCapturePresenter;
 import com.guochuang.mimedia.mvp.view.MyCaptureView;
 import com.guochuang.mimedia.tools.Constant;
-import com.guochuang.mimedia.ui.activity.user.SealTransferActivity;
 import com.sz.gcyh.KSHongBao.R;
 import com.uuzuche.lib_zxing.activity.CaptureFragment;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
@@ -68,28 +66,10 @@ public class MyCaptureActivity extends MvpActivity<MyCapturePresenter> implement
         @Override
         public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
             if (!TextUtils.isEmpty(result)){
-                Uri uri=Uri.parse(result);
-//                String uuid=uri.getQueryParameter("uuid");
-//                if (!TextUtils.isEmpty(uuid)) {
-//                    showLoadingDialog(null);
-//                    mvpPresenter.queryUserInfoByAccountUuid(uuid);
-//                    MyCaptureActivity.getActivity().finish();
-//                    return;
-//                }
-                String type=uri.getQueryParameter("type");
-                String chain=uri.getQueryParameter("chain");
-                String digiCurrcy=uri.getQueryParameter("digiCurrcy");
-                String address=uri.getQueryParameter("address");
-                //type=2表示钱包地址，chain=1表示外链
-                if (TextUtils.equals(type,"2")&&TextUtils.equals(chain,"1")&&!TextUtils.isEmpty(address)){
-                    if(TextUtils.equals(digiCurrcy,Constant.DIGITAL_CURRENCY_SEAL)){
-                        MyCaptureActivity.getActivity().finish();
-                        startActivity(new Intent(MyCaptureActivity.this,SealTransferActivity.class).putExtra(Constant.ADDRESS,address));
-                        return;
-                    }
-                }
-                startActivity(new Intent(MyCaptureActivity.this,ScanResultActivity.class).putExtra(Constant.DATA,result));
-                finish();
+                Intent intent=getIntent();
+                intent.putExtra(Constant.ADDRESS,result);
+                setResult(RESULT_OK,intent);
+                MyCaptureActivity.getActivity().finish();
             }
         }
 

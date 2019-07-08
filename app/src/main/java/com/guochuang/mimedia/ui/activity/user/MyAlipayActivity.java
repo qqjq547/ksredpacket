@@ -1,6 +1,5 @@
 package com.guochuang.mimedia.ui.activity.user;
 
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -8,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sz.gcyh.KSHongBao.R;
-import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.AlipayAccout;
 import com.guochuang.mimedia.mvp.presenter.MyAlipayPresenter;
@@ -17,7 +15,6 @@ import com.guochuang.mimedia.tools.DialogBuilder;
 import com.guochuang.mimedia.ui.dialog.PassDialog;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MyAlipayActivity extends MvpActivity<MyAlipayPresenter> implements MyAlipayView {

@@ -1,24 +1,18 @@
 package com.guochuang.mimedia.base;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.pm.ActivityInfo;
-import android.os.Bundle;
 import android.support.annotation.LayoutRes;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
-import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.app.App;
-import com.guochuang.mimedia.mvp.view.MainView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.CustomProDialog;
 import com.guochuang.mimedia.tools.PrefUtil;
-import com.guochuang.mimedia.tools.SystemUtil;
 import com.gyf.barlibrary.ImmersionBar;
 
 import butterknife.ButterKnife;

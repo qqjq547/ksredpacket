@@ -1,6 +1,5 @@
 package com.guochuang.mimedia.ui.adapter;
 
-import android.media.Image;
 import android.support.annotation.Nullable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;

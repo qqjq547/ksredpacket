@@ -1,40 +1,27 @@
 package com.guochuang.mimedia.ui.activity.user;
 
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.guochuang.mimedia.ui.adapter.MyFragmentPagerAdapter;
 import com.guochuang.mimedia.ui.fragment.LoginPwdEmailFragment;
 import com.guochuang.mimedia.ui.fragment.LoginPwdMobileFragment;
-import com.guochuang.mimedia.ui.fragment.TradePwdEmailFragment;
-import com.guochuang.mimedia.ui.fragment.TradePwdMobileFragment;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
-import com.guochuang.mimedia.http.subscriber.CountDownSubscriber;
-import com.guochuang.mimedia.mvp.model.Captcha;
 import com.guochuang.mimedia.mvp.model.UserInfo;
-import com.guochuang.mimedia.mvp.presenter.ForgetPresenter;
-import com.guochuang.mimedia.mvp.view.ForgetView;
-import com.guochuang.mimedia.tools.Constant;
-import com.guochuang.mimedia.tools.RxUtil;
-import com.guochuang.mimedia.tools.glide.GlideImgManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import rx.functions.Action0;
 
 public class LoginPwdActivity extends MvpActivity {
     @BindView(R.id.iv_back)
@@ -73,7 +60,7 @@ public class LoginPwdActivity extends MvpActivity {
            titleArr.add(getString(R.string.email));
         }
         fragments = list.toArray(new Fragment[0]);
-        String[] titles=titleArr.toArray(new String[0]);;
+        String[] titles=titleArr.toArray(new String[0]);
         if (titles.length==1){
             tbList.setVisibility(View.GONE);
         }else {

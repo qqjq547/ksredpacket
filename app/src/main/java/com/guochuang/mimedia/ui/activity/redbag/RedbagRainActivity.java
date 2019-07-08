@@ -1,20 +1,12 @@
 package com.guochuang.mimedia.ui.activity.redbag;
 
-import android.content.Intent;
 import android.text.TextUtils;
-import android.view.View;
-import android.widget.Toast;
 
 import com.sz.gcyh.KSHongBao.R;
-import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.presenter.RedbagRainPresenter;
 import com.guochuang.mimedia.mvp.view.RedbagRainView;
-import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
-import com.guochuang.mimedia.tools.DialogBuilder;
-import com.guochuang.mimedia.tools.LogUtil;
-import com.guochuang.mimedia.ui.dialog.RainNoticeDialog;
 import com.guochuang.mimedia.ui.dialog.RainResultDialog;
 import com.guochuang.mimedia.view.rain.MeteorShowerSurface;
 

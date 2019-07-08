@@ -15,7 +15,7 @@ public class NestTimeInfo {
     private int currentPrice;
     private int maxPrice;
     private String rate;
-    private String ksb;;
+    private String ksb;
     private String startDate;
     private List<BuyListBean> buyList;
 

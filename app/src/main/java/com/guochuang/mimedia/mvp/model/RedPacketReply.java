@@ -1,7 +1,6 @@
 package com.guochuang.mimedia.mvp.model;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
-import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 

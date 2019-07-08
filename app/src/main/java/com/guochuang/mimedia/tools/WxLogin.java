@@ -1,10 +1,7 @@
 package com.guochuang.mimedia.tools;
 
-import com.google.gson.Gson;
 import com.guochuang.mimedia.app.App;
-import com.guochuang.mimedia.tools.pay.WxPayElement;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
-import com.tencent.mm.opensdk.modelpay.PayReq;
 
 public class WxLogin {
     static WxLogin wxLogin;

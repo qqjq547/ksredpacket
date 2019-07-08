@@ -4,7 +4,6 @@ import com.guochuang.mimedia.mvp.model.MySeal;
 import com.guochuang.mimedia.mvp.model.NestAuctionMsg;
 import com.guochuang.mimedia.mvp.model.RecommendData;
 import com.guochuang.mimedia.mvp.model.RegionCore;
-import com.guochuang.mimedia.mvp.model.UserInfo;
 
 public interface MyView {
     void setRecommendData(RecommendData data);

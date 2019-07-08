@@ -1,6 +1,5 @@
 package com.guochuang.mimedia.ui.fragment;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.view.View;
@@ -8,7 +7,6 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.view.recycleview.WrapEmptyRecyclerView;
-import com.guochuang.mimedia.view.recycleview.adapter.OnItemClickListener;
 import com.guochuang.mimedia.mvp.model.RedbagRecord;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.ui.adapter.SendRedbagAdapter;

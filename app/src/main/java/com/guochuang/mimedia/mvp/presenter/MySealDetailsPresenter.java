@@ -5,9 +5,7 @@ import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.DictionaryType;
-import com.guochuang.mimedia.mvp.model.KsbRecord;
 import com.guochuang.mimedia.mvp.model.SealRecord;
-import com.guochuang.mimedia.mvp.view.MyKsbDetailsView;
 import com.guochuang.mimedia.mvp.view.MySealDetailsView;
 import com.guochuang.mimedia.tools.RxUtil;
 

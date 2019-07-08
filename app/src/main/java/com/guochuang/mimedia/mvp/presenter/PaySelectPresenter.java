@@ -7,7 +7,6 @@ import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.CalValue;
 import com.guochuang.mimedia.mvp.model.PayConfig;
 import com.guochuang.mimedia.mvp.view.PaySelectView;
-import com.guochuang.mimedia.mvp.view.WelcomeView;
 import com.guochuang.mimedia.tools.RxUtil;
 
 /**

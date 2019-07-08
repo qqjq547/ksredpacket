@@ -5,7 +5,6 @@ import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.LookSurevyResult;
-import com.guochuang.mimedia.mvp.model.LookVideoPBResult;
 import com.guochuang.mimedia.mvp.view.LookVideoProblemView;
 import com.guochuang.mimedia.tools.RxUtil;
 

@@ -1,6 +1,5 @@
 package com.guochuang.mimedia.ui.activity.user;
 
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -8,7 +7,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.sz.gcyh.KSHongBao.R;
-import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.presenter.CardAddPresenter;
 import com.guochuang.mimedia.mvp.view.CardAddView;
@@ -16,7 +14,6 @@ import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.ui.dialog.PassDialog;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class CardAddActivity extends MvpActivity<CardAddPresenter> implements CardAddView {

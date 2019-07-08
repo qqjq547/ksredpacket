@@ -3,9 +3,6 @@ package com.guochuang.mimedia.ui.activity.city;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,7 +13,6 @@ import com.guochuang.mimedia.mvp.presenter.BidPricePresenter;
 import com.guochuang.mimedia.mvp.view.BidPriceView;
 import com.guochuang.mimedia.tools.Constant;
 import com.sz.gcyh.KSHongBao.R;
-import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.ui.adapter.BuyPriceAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;

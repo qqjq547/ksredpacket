@@ -7,9 +7,7 @@ import android.widget.ImageView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.sz.gcyh.KSHongBao.R;
-import com.guochuang.mimedia.mvp.model.MyCity;
 import com.guochuang.mimedia.mvp.model.MyRegion;
-import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 
 import java.util.List;

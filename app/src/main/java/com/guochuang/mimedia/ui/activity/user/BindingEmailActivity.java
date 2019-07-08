@@ -1,7 +1,6 @@
 package com.guochuang.mimedia.ui.activity.user;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -24,7 +23,6 @@ import com.guochuang.mimedia.tools.antishake.AntiShake;
 import com.sz.gcyh.KSHongBao.R;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.functions.Action0;
 

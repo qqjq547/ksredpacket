@@ -46,7 +46,7 @@ public abstract class BaseSprite {
 
     public void recycle(){
         recycleBmp(srcBmp);
-    };
+    }
 
     protected int[] newPosition(boolean isRandom,int x,int y){
         int[] point = new int[2];
@@ -78,7 +78,7 @@ public abstract class BaseSprite {
     public boolean isContains(float x, float y){
         return this.point[0]-dif < x && this.point[0]+dif + width > x
                 && this.point[1]-dif< y && this.point[1]+dif +height>y;
-    };
+    }
 
     protected void recycleBmp(Bitmap bitmap){
         if (bitmap!= null && !bitmap.isRecycled()){

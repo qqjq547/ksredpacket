@@ -1,20 +1,14 @@
 package com.guochuang.mimedia.ui.activity.beenest;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.text.Editable;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.text.style.ForegroundColorSpan;
-import android.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,14 +23,12 @@ import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.DoubleUtil;
 import com.guochuang.mimedia.tools.IntentUtils;
-import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.tools.calendar.CaledarAdapter;
 import com.guochuang.mimedia.tools.calendar.CalendarBean;
 import com.guochuang.mimedia.tools.calendar.CalendarDateView;
 import com.guochuang.mimedia.tools.calendar.CalendarFactory;
 import com.guochuang.mimedia.tools.calendar.CalendarView;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
-import com.guochuang.mimedia.ui.activity.MainActivity;
 import com.sz.gcyh.KSHongBao.R;
 
 import java.text.SimpleDateFormat;

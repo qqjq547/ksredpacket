@@ -54,10 +54,8 @@ import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.guochuang.mimedia.ui.activity.beenest.AdBidActivity;
 import com.guochuang.mimedia.ui.activity.city.CityActivity;
 import com.guochuang.mimedia.ui.activity.MainActivity;
-import com.guochuang.mimedia.ui.activity.common.MyCaptureActivity;
 import com.guochuang.mimedia.ui.activity.common.ShareActivity;
 import com.guochuang.mimedia.ui.activity.redbag.SquareActivity;
-import com.guochuang.mimedia.ui.activity.user.IdentifyActivity;
 import com.guochuang.mimedia.ui.activity.user.UpgradeAgentActivity;
 import com.guochuang.mimedia.ui.dialog.OpenRedbagDialog;
 import com.guochuang.mimedia.ui.dialog.RedbagTypeDialog;
@@ -76,8 +74,6 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
 
     @BindView(R.id.tv_start)
     ImageView tvStart;
-    @BindView(R.id.iv_scan)
-    ImageView ivScan;
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.tv_text)
@@ -268,25 +264,9 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
         mvRedbag.onDestroy();
     }
 
-    @OnClick({R.id.iv_scan, R.id.tv_text, R.id.lin_city_owner, R.id.iv_city_owner_avatar, R.id.tv_start, R.id.iv_share, R.id.iv_refresh, R.id.lin_upgrade_agent})
+    @OnClick({R.id.tv_text, R.id.lin_city_owner, R.id.iv_city_owner_avatar, R.id.tv_start, R.id.iv_share, R.id.iv_refresh, R.id.lin_upgrade_agent})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.iv_scan:
-                new RxPermissions(getActivity()).request(Manifest.permission.CAMERA).subscribe(new Action1<Boolean>() {
-                    @Override
-                    public void call(Boolean aBoolean) {
-                        if (aBoolean) {
-                            if (getPref().getInt(PrefUtil.IDENTITY,0)==0){
-                                startActivity(new Intent(getActivity(), IdentifyActivity.class));
-                            }else{
-                                startActivity(new Intent(getActivity(), MyCaptureActivity.class));
-                            }
-                        } else {
-                            showShortToast(R.string.get_camera_permission);
-                        }
-                    }
-                });
-                break;
             case R.id.tv_text:
                 startActivity(new Intent(getActivity(), SquareActivity.class));
                 break;

@@ -11,7 +11,6 @@ import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.Address;
 import com.guochuang.mimedia.mvp.presenter.AddAddressPresenter;
 import com.guochuang.mimedia.mvp.view.AddAddressView;
-import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.DialogBuilder;
 import com.guochuang.mimedia.ui.dialog.SelectAreaDialog;

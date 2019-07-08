@@ -1,6 +1,5 @@
 package com.guochuang.mimedia.mvp.view;
 
-import com.guochuang.mimedia.mvp.model.BoardDetail;
 import com.guochuang.mimedia.mvp.model.SnatchShow;
 import com.guochuang.mimedia.mvp.model.UploadFile;
 

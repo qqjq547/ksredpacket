@@ -6,12 +6,8 @@ import com.guochuang.mimedia.http.response.Page;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.Address;
-import com.guochuang.mimedia.mvp.model.CardList;
-import com.guochuang.mimedia.mvp.view.CardListView;
 import com.guochuang.mimedia.mvp.view.MyAddressView;
 import com.guochuang.mimedia.tools.RxUtil;
-
-import java.util.List;
 
 public class MyAddressPresenter extends BasePresenter<MyAddressView> {
     public MyAddressPresenter(MyAddressView view) {

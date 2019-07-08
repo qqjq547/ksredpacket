@@ -1,15 +1,12 @@
 package com.guochuang.mimedia.ui.activity.treasure;
 
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
-import com.guochuang.mimedia.mvp.model.Snatch;
 import com.guochuang.mimedia.mvp.model.SnatchAddress;
 import com.guochuang.mimedia.mvp.presenter.ExpressInfoPresenter;
 import com.guochuang.mimedia.mvp.view.ExpressInfoView;
@@ -19,7 +16,6 @@ import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.sz.gcyh.KSHongBao.R;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class ExpressInfoActivity extends MvpActivity<ExpressInfoPresenter> implements ExpressInfoView {

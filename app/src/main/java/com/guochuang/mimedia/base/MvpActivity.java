@@ -2,8 +2,6 @@ package com.guochuang.mimedia.base;
 
 import android.os.Bundle;
 
-import com.guochuang.mimedia.mvp.view.MainView;
-
 
 public abstract class MvpActivity<P extends BasePresenter> extends BaseActivity {
     protected P mvpPresenter;

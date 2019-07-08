@@ -2,7 +2,6 @@ package com.guochuang.mimedia.mvp.view;
 
 import com.guochuang.mimedia.http.response.Page;
 import com.guochuang.mimedia.mvp.model.BenefitType;
-import com.guochuang.mimedia.mvp.model.BidPrice;
 import com.guochuang.mimedia.mvp.model.RedbagBenefit;
 
 import java.util.List;

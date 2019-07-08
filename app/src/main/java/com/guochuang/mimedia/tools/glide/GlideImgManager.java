@@ -3,8 +3,6 @@ package com.guochuang.mimedia.tools.glide;
 import android.content.Context;
 import android.widget.ImageView;
 
-import com.sz.gcyh.KSHongBao.R;
-
 import java.io.File;
 
 /**

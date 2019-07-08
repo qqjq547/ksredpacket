@@ -1,7 +1,6 @@
 package com.guochuang.mimedia.ui.activity;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -10,23 +9,17 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.IdRes;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-import com.allenliu.versionchecklib.v2.AllenVersionChecker;
-import com.allenliu.versionchecklib.v2.builder.UIData;
-import com.allenliu.versionchecklib.v2.callback.CustomDownloadingDialogListener;
+
 import com.guochuang.mimedia.mvp.model.Remind;
 import com.guochuang.mimedia.tools.LogUtil;
-import com.guochuang.mimedia.tools.OssManager;
 import com.guochuang.mimedia.ui.dialog.RemindDialog;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.app.App;
@@ -35,33 +28,23 @@ import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.NameAuthAndSafety;
 import com.guochuang.mimedia.mvp.model.RainMsg;
 import com.guochuang.mimedia.mvp.model.UserInfo;
-import com.guochuang.mimedia.mvp.model.VersionMsg;
 import com.guochuang.mimedia.mvp.presenter.MainPresenter;
 import com.guochuang.mimedia.mvp.view.MainView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.PrefUtil;
-import com.guochuang.mimedia.tools.pay.AliPay;
 import com.guochuang.mimedia.ui.dialog.RainNoticeDialog;
-import com.guochuang.mimedia.ui.dialog.UpgradeDialog;
-import com.guochuang.mimedia.ui.dialog.VersionUpdateDialog;
 import com.guochuang.mimedia.ui.fragment.CircleFragment;
 import com.guochuang.mimedia.ui.fragment.GameFragment;
 import com.guochuang.mimedia.ui.fragment.InfoFragment;
 import com.guochuang.mimedia.ui.fragment.MyFragment;
 import com.guochuang.mimedia.ui.fragment.RedbagFragment;
 import com.guochuang.mimedia.view.BadgeView;
-import com.uuzuche.lib_zxing.activity.CodeUtils;
 
-import java.io.File;
-import java.util.Calendar;
 import java.util.Date;
 
 import butterknife.BindView;
-import cn.jpush.android.api.JPushInterface;
-import io.objectbox.Box;
-import rx.Subscriber;
 
 public class MainActivity extends MvpActivity<MainPresenter> implements MainView {
 

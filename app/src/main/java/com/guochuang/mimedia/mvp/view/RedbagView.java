@@ -1,7 +1,6 @@
 package com.guochuang.mimedia.mvp.view;
 
 import com.guochuang.mimedia.mvp.model.HomeRegion;
-import com.guochuang.mimedia.mvp.model.MyKsb;
 import com.guochuang.mimedia.mvp.model.MySeal;
 import com.guochuang.mimedia.mvp.model.NestHomeAd;
 import com.guochuang.mimedia.mvp.model.PublishRedbagType;

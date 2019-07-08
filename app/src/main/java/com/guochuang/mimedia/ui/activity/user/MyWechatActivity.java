@@ -1,15 +1,11 @@
 package com.guochuang.mimedia.ui.activity.user;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.guochuang.mimedia.mvp.model.PhoneEntity;
 import com.guochuang.mimedia.mvp.model.UserLogin;
 import com.guochuang.mimedia.tools.CommonUtil;
@@ -20,10 +16,8 @@ import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.tools.WxLogin;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.app.App;
-import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.MyWechat;
-import com.guochuang.mimedia.mvp.model.UserInfo;
 import com.guochuang.mimedia.mvp.presenter.MyWechatPresenter;
 import com.guochuang.mimedia.mvp.view.MyWechatView;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
@@ -31,7 +25,6 @@ import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.objectbox.Box;
 import io.objectbox.BoxStore;

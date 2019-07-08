@@ -4,7 +4,6 @@ import android.os.Environment;
 
 import com.sz.gcyh.KSHongBao.BuildConfig;
 import com.guochuang.mimedia.app.App;
-import com.guochuang.mimedia.http.retrofit.ApiClient;
 
 import java.io.File;
 
@@ -52,6 +51,8 @@ public class Constant {
     public static final int REQUEST_ANSWER = 20;
     public static final int REQUEST_PICK_VIDEO = 21;
     public static final int REQUEST_EDIT_QUESTION = 22;
+    public static final int REQUEST_EDIT_COIN_ADDRESS = 23;
+    public static final int REQUEST_CAPTURE = 24;
 
     public static final String TITLE = "title";
     public static final String ARTICLEUUID = "articleUuid";
@@ -278,6 +279,10 @@ public class Constant {
     public static final int OPENT_BINDINGEMAILACTIVITY = 0x0125;
     public static final String PHONE_KEY = "phone";
     public static final int OPENT_BINDINGPHONEACITIVITY = 0x0124;
+    public static final String ISADD = "isAdd" ;
+    public static final String COIN_ADDRESS = "coin_address";
+    public static final int CHAIN_TYPE_ETH = 1;
+
 
     //   视频红包与问卷红包 问题类型 0：单选 1：多选 2：填空题
     public static int SINGLESELECT = 0;
@@ -295,13 +300,6 @@ public class Constant {
     public static int QC_TO_OTHER = 1;
     public static int OTHER_TO_QC = 2;
 
-
-   // 1-AAA转KSB，2-KSB转AAA，3-AAA提币，4-AAA充币
-   public static final String ALL_AAA_DETAILED = "0";
-    public static final int AAA2KSB = 1;
-    public static final int KSB2AAA = 2;
-    public static final int EXTRACT_AAA = 3;
-    public static final int Fill_AAA = 4;
 
 
 }

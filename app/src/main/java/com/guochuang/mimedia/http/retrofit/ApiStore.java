@@ -3,6 +3,7 @@ package com.guochuang.mimedia.http.retrofit;
 import com.guochuang.mimedia.http.response.HttpResponse;
 import com.guochuang.mimedia.http.response.Page;
 import com.guochuang.mimedia.mvp.model.*;
+import com.guochuang.mimedia.mvp.view.CoinAddress;
 
 
 import java.util.List;
@@ -1167,6 +1168,7 @@ public interface ApiStore {
             @Field("buyCount") int buyCount,
             @Field("longitude") String longitude,
             @Field("latitude") String latitude,
+            @Field("lockDay") int lockDay,
             @Field("safetyCode") String safetyCode
     );
 
@@ -1411,8 +1413,6 @@ public interface ApiStore {
             @Query("versionCode") String versionCode
     );
 
-    @GET("/api/v1/user/qrcodeReceipt/queryQrcode")
-    Observable<HttpResponse<PayCode>> queryQrcode();
 
     @GET("/api/v1/user/qrcodeReceipt/queryUserInfoByAccountUuid")
     Observable<HttpResponse<PayeeUser>> queryUserInfoByAccountUuid(
@@ -1587,4 +1587,33 @@ public interface ApiStore {
     //绑定邮箱，发送手机验证码
     @POST("/api/v1/user/sms/bind_email_sms")
     Observable<HttpResponse<String>> getBindEmailMobileVerify();
+
+    @GET("/api/v1/exchange/address_book/get")
+    Observable<HttpResponse<List<CoinAddress>>> getCoinAddress();
+
+    @POST("/api/v1/exchange/address_book/delete")
+    @FormUrlEncoded
+    Observable<HttpResponse<Boolean>> deleteCoinAddress(
+            @Field("addressBookId") long addressBookId,
+            @Field("chainAddress") String chainAddress
+    );
+
+    @POST("/api/v1/exchange/address_book/add")
+    @FormUrlEncoded
+    Observable<HttpResponse<Boolean>> addCoinAddress(
+            @Field("chainType") int chainType,
+            @Field("chainAddress") String chainAddress,
+            @Field("alias") String alias,
+            @Field("remark") String remark
+    );
+
+    @POST("/api/v1/exchange/address_book/edit")
+    @FormUrlEncoded
+    Observable<HttpResponse<Boolean>> editCoinAddress(
+            @Field("addressBookId") long addressBookId,
+            @Field("chainAddress") String chainAddress,
+            @Field("alias") String alias,
+            @Field("remark") String remark
+    );
+
 }

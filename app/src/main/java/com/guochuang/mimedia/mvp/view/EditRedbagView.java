@@ -1,7 +1,6 @@
 package com.guochuang.mimedia.mvp.view;
 
 import com.guochuang.mimedia.mvp.model.EditRedbagConfig;
-import com.guochuang.mimedia.mvp.model.LookSurevyResult;
 import com.guochuang.mimedia.mvp.model.LookVideoResult;
 import com.guochuang.mimedia.mvp.model.LuckyConfig;
 import com.guochuang.mimedia.mvp.model.RedBagConfig;

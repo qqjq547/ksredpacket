@@ -1,7 +1,6 @@
 package com.guochuang.mimedia.ui.activity.user;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
@@ -20,7 +19,6 @@ import com.guochuang.mimedia.tools.WxLogin;
 import com.sz.gcyh.KSHongBao.R;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 

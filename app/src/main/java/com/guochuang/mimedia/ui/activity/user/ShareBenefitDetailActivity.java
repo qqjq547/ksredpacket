@@ -7,16 +7,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.guochuang.mimedia.http.response.Page;
-import com.guochuang.mimedia.mvp.model.KsbRecord;
 import com.guochuang.mimedia.mvp.model.ShareBenefit;
 import com.guochuang.mimedia.mvp.presenter.ShareBenefitDetailPresenter;
 import com.guochuang.mimedia.mvp.view.ShareBenefitDetailView;
 import com.guochuang.mimedia.tools.Constant;
 import com.sz.gcyh.KSHongBao.R;
-import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
-import com.guochuang.mimedia.ui.adapter.BuyPriceAdapter;
 import com.guochuang.mimedia.ui.adapter.ShareBenefitAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;

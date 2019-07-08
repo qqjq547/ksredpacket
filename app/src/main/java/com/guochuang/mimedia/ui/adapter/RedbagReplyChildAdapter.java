@@ -1,14 +1,10 @@
 package com.guochuang.mimedia.ui.adapter;
 
 import android.support.annotation.Nullable;
-import android.widget.ImageView;
 
-import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.sz.gcyh.KSHongBao.R;
-import com.guochuang.mimedia.mvp.model.RedPacketReply;
-import com.guochuang.mimedia.tools.glide.GlideImgManager;
 
 import java.util.List;
 

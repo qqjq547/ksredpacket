@@ -4,9 +4,7 @@ import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
-import com.guochuang.mimedia.mvp.model.IncomeStatistics;
 import com.guochuang.mimedia.mvp.model.UserStatistics;
-import com.guochuang.mimedia.mvp.view.IncomeStatisticsView;
 import com.guochuang.mimedia.mvp.view.UserStatisticsView;
 import com.guochuang.mimedia.tools.RxUtil;
 

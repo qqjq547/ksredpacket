@@ -6,7 +6,6 @@ import com.guochuang.mimedia.http.response.Page;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.NestHistory;
-import com.guochuang.mimedia.mvp.view.BidHistoryView;
 import com.guochuang.mimedia.mvp.view.HistoryPutView;
 import com.guochuang.mimedia.tools.RxUtil;
 

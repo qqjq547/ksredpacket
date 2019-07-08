@@ -7,13 +7,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sz.gcyh.KSHongBao.R;
-import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.MvpActivity;
-import com.guochuang.mimedia.mvp.model.UserInfo;
 import com.guochuang.mimedia.mvp.presenter.SetInviterPresenter;
-import com.guochuang.mimedia.mvp.presenter.SetNickNamePresenter;
 import com.guochuang.mimedia.mvp.view.SetInviterView;
-import com.guochuang.mimedia.mvp.view.SetNickNameView;
 import com.guochuang.mimedia.tools.Constant;
 
 import butterknife.BindView;

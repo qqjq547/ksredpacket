@@ -2,10 +2,7 @@ package com.guochuang.mimedia.tools.ad;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.DisplayMetrics;
-import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 
 import com.qq.e.ads.banner.ADSize;
 import com.qq.e.ads.banner.AbstractBannerADListener;
@@ -13,10 +10,8 @@ import com.qq.e.ads.banner.BannerView;
 import com.qq.e.ads.cfg.VideoOption;
 import com.qq.e.ads.nativ.NativeExpressAD;
 import com.qq.e.ads.nativ.NativeExpressADView;
-import com.qq.e.ads.nativ.NativeExpressMediaListener;
 import com.qq.e.ads.splash.SplashAD;
 import com.qq.e.ads.splash.SplashADListener;
-import com.qq.e.comm.constants.AdPatternType;
 import com.qq.e.comm.util.AdError;
 
 import java.util.List;

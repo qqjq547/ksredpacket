@@ -4,7 +4,6 @@ import com.guochuang.mimedia.mvp.model.NameAuthAndSafety;
 import com.guochuang.mimedia.mvp.model.RainMsg;
 import com.guochuang.mimedia.mvp.model.Remind;
 import com.guochuang.mimedia.mvp.model.UserInfo;
-import com.guochuang.mimedia.mvp.model.VersionMsg;
 
 /**
  * Created by Administrator on 2017-11-28 0028.

@@ -5,16 +5,12 @@ import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.DictionaryType;
-import com.guochuang.mimedia.mvp.model.KsbRecord;
-import com.guochuang.mimedia.mvp.model.MyQC;
 import com.guochuang.mimedia.mvp.model.SealRecord;
 import com.guochuang.mimedia.mvp.view.MyQCDetailsView;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.RxUtil;
 
 import java.util.List;
-
-import retrofit2.http.Query;
 
 public class MyQCDetailsPresenter extends BasePresenter<MyQCDetailsView> {
     public MyQCDetailsPresenter(MyQCDetailsView view) {

@@ -1,6 +1,5 @@
 package com.guochuang.mimedia.ui.adapter;
 
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;

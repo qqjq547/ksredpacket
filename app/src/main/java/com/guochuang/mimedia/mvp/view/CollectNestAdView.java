@@ -1,8 +1,6 @@
 package com.guochuang.mimedia.mvp.view;
 
 import com.guochuang.mimedia.http.response.Page;
-import com.guochuang.mimedia.mvp.model.CommentRedbag;
-import com.guochuang.mimedia.mvp.model.NestAd;
 import com.guochuang.mimedia.mvp.model.NestFavorite;
 
 /**

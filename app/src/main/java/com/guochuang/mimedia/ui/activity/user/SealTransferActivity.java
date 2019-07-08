@@ -1,6 +1,7 @@
 package com.guochuang.mimedia.ui.activity.user;
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
@@ -27,6 +28,7 @@ import com.guochuang.mimedia.tools.DialogBuilder;
 import com.guochuang.mimedia.tools.DoubleUtil;
 import com.guochuang.mimedia.tools.RxUtil;
 import com.guochuang.mimedia.tools.antishake.AntiShake;
+import com.guochuang.mimedia.ui.activity.common.MyCaptureActivity;
 import com.guochuang.mimedia.ui.dialog.PassDialog;
 import com.sz.gcyh.KSHongBao.R;
 
@@ -173,11 +175,17 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
 
     }
 
-    @OnClick({R.id.iv_back,R.id.tv_verify,R.id.tv_all,R.id.tv_confirm})
+    @OnClick({R.id.iv_back,R.id.iv_scan,R.id.iv_menu,R.id.tv_verify,R.id.tv_all,R.id.tv_confirm})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
                 onBackPressed();
+                break;
+            case R.id.iv_scan:
+                startActivityForResult(new Intent(this,MyCaptureActivity.class),Constant.REQUEST_CAPTURE);
+                break;
+            case R.id.iv_menu:
+                startActivity(new Intent(this,CoinAddressActivity.class));
                 break;
             case R.id.tv_verify:
                 if (AntiShake.check(view.getId()))
@@ -371,4 +379,15 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
                 });
         addSubscription(subscription);
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==RESULT_OK){
+            if (requestCode==Constant.REQUEST_CAPTURE){
+                String address=data.getStringExtra(Constant.ADDRESS);
+                etTransAddress.setText(address);
+            }
+        }
+    }
+
 }

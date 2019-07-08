@@ -1,7 +1,6 @@
 package com.guochuang.mimedia.ui.activity.redbag;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
@@ -11,32 +10,19 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.baidu.mapapi.NetworkUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.guochuang.mimedia.app.App;
-import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.AnswerFrom;
 import com.guochuang.mimedia.mvp.model.LookVideoResult;
 import com.guochuang.mimedia.mvp.model.RedbagDetail;
 import com.guochuang.mimedia.mvp.presenter.AnswerPresenter;
 import com.guochuang.mimedia.mvp.view.AnswerView;
-import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.LogUtil;
-import com.guochuang.mimedia.tools.NetWorkUtils;
-import com.guochuang.mimedia.tools.SystemUtil;
-import com.guochuang.mimedia.ui.adapter.AddressAdapter;
 import com.guochuang.mimedia.ui.adapter.AnswerAdapter;
 import com.sz.gcyh.KSHongBao.R;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;

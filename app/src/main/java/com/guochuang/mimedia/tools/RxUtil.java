@@ -1,9 +1,8 @@
 package com.guochuang.mimedia.tools;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.view.View;
+
 import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.response.HttpResponse;

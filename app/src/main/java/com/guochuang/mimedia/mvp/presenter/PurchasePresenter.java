@@ -8,7 +8,6 @@ import com.guochuang.mimedia.mvp.model.CalValue;
 import com.guochuang.mimedia.mvp.model.Order;
 import com.guochuang.mimedia.mvp.model.PayConfig;
 import com.guochuang.mimedia.mvp.view.PurchaseView;
-import com.guochuang.mimedia.mvp.view.WelcomeView;
 import com.guochuang.mimedia.tools.RxUtil;
 
 /**
@@ -95,8 +94,8 @@ public class PurchasePresenter extends BasePresenter<PurchaseView> {
             }
         });
     }
-    public void createSnatchOrder(String channelCode,int payType,long snatchId,int unitPrice,int buyCount,String longitude,String latitude,String safetyCode){
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().createSnatchOrder(channelCode,payType,snatchId,unitPrice,buyCount,longitude,latitude,safetyCode)), new ApiCallback<Order>() {
+    public void createSnatchOrder(String channelCode,int payType,long snatchId,int unitPrice,int buyCount,String longitude,String latitude,int lockDay,String safetyCode){
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().createSnatchOrder(channelCode,payType,snatchId,unitPrice,buyCount,longitude,latitude,lockDay,safetyCode)), new ApiCallback<Order>() {
             @Override
             public void onSuccess(Order data) {
                 mvpView.setSnatch(data);

@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.DictionaryType;
-import com.guochuang.mimedia.mvp.model.InfoDetail;
 import com.guochuang.mimedia.mvp.model.NestAd;
 import com.guochuang.mimedia.mvp.model.NestRandomAd;
 import com.guochuang.mimedia.mvp.presenter.BeeNestPresenter;

@@ -50,8 +50,6 @@ import cn.jpush.android.api.JPushInterface;
 import io.objectbox.Box;
 import io.objectbox.BoxStore;
 
-import static com.guochuang.mimedia.ui.activity.common.MyCaptureActivity.getActivity;
-
 public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginView {
 
     @BindView(R.id.re_root)

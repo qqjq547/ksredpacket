@@ -1,15 +1,10 @@
 package com.guochuang.mimedia.ui.adapter;
 
 import android.support.annotation.Nullable;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.TextUtils;
-import android.text.style.ForegroundColorSpan;
 import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.guochuang.mimedia.mvp.model.InfoItem;
 import com.guochuang.mimedia.mvp.model.NestFavorite;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;

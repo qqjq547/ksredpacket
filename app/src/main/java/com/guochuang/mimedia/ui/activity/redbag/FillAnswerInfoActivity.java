@@ -1,6 +1,5 @@
 package com.guochuang.mimedia.ui.activity.redbag;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.widget.TextView;
 

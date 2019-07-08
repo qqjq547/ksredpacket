@@ -20,7 +20,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import lecho.lib.hellocharts.model.Line;
 
 public class InfoFragment extends MvpFragment<InfoPresenter> implements InfoView {
 

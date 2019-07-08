@@ -8,15 +8,11 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.base.MvpActivity;
-import com.guochuang.mimedia.http.response.Page;
 import com.guochuang.mimedia.mvp.model.NestAuctionRecord;
 import com.guochuang.mimedia.mvp.presenter.BidHistoryPresenter;
 import com.guochuang.mimedia.mvp.view.BidHistoryView;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.ui.adapter.BidRecordAdapter;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
 import com.sz.gcyh.KSHongBao.R;
 
 import java.util.ArrayList;

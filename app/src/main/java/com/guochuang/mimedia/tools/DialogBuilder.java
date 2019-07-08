@@ -13,7 +13,6 @@ import com.sz.gcyh.KSHongBao.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import lecho.lib.hellocharts.model.Line;
 
 public class DialogBuilder {
 

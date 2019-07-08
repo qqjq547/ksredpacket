@@ -4,14 +4,9 @@ import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
-import com.guochuang.mimedia.mvp.model.NestLocation;
 import com.guochuang.mimedia.mvp.model.RecommendData;
-import com.guochuang.mimedia.mvp.model.RecommendDetail;
-import com.guochuang.mimedia.mvp.view.AdBidView;
 import com.guochuang.mimedia.mvp.view.RecommendView;
 import com.guochuang.mimedia.tools.RxUtil;
-
-import java.util.List;
 
 public class RecommendPresenter extends BasePresenter<RecommendView> {
 

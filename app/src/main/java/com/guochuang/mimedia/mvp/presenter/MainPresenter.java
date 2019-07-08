@@ -8,7 +8,6 @@ import com.guochuang.mimedia.mvp.model.NameAuthAndSafety;
 import com.guochuang.mimedia.mvp.model.RainMsg;
 import com.guochuang.mimedia.mvp.model.Remind;
 import com.guochuang.mimedia.mvp.model.UserInfo;
-import com.guochuang.mimedia.mvp.model.VersionMsg;
 import com.guochuang.mimedia.mvp.view.MainView;
 import com.guochuang.mimedia.tools.RxUtil;
 

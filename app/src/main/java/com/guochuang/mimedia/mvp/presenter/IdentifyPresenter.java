@@ -5,15 +5,8 @@ import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.Captcha;
-import com.guochuang.mimedia.mvp.model.UploadFile;
 import com.guochuang.mimedia.mvp.view.IdentifyView;
 import com.guochuang.mimedia.tools.RxUtil;
-
-import java.io.File;
-
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 
 public class IdentifyPresenter extends BasePresenter<IdentifyView> {
     public IdentifyPresenter(IdentifyView view) {

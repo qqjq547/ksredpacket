@@ -1,7 +1,6 @@
 package com.guochuang.mimedia.mvp.model;
 
 import com.guochuang.mimedia.tools.Constant;
-import com.sz.gcyh.KSHongBao.R;
 
 public class ShareBg {
     int image;

@@ -5,7 +5,6 @@ import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.MyWechat;
-import com.guochuang.mimedia.mvp.view.MyView;
 import com.guochuang.mimedia.mvp.view.MyWechatView;
 import com.guochuang.mimedia.tools.RxUtil;
 

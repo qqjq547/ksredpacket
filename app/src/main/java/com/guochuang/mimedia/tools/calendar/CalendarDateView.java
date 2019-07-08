@@ -2,21 +2,16 @@ package com.guochuang.mimedia.tools.calendar;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.sz.gcyh.KSHongBao.R;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.LinkedList;
 
 /**
  * Created by codbking on 2016/12/18.

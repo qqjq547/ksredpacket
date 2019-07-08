@@ -1,14 +1,12 @@
 package com.guochuang.mimedia.ui.adapter;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.guochuang.mimedia.mvp.model.BenefitType;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.view.flowtag.OnInitSelectedPosition;
 

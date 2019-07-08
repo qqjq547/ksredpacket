@@ -1,9 +1,7 @@
 package com.guochuang.mimedia.ui.adapter;
 
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -12,7 +10,6 @@ import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.view.flowtag.FlowTagLayout;
 import com.guochuang.mimedia.view.flowtag.OnTagClickListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CityBenefitAdapter extends BaseQuickAdapter<BenefitType,BaseViewHolder> {

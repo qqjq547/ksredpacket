@@ -1,7 +1,6 @@
 package com.guochuang.mimedia.tools;
 
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 

@@ -6,11 +6,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.guochuang.mimedia.mvp.model.RedbagBenefit;
 import com.sz.gcyh.KSHongBao.R;
-import com.guochuang.mimedia.tools.CommonUtil;
-import com.guochuang.mimedia.tools.glide.GlideImgManager;
-import com.guochuang.mimedia.view.SquareImageView;
 
-import java.io.Serializable;
 import java.util.List;
 
 public class RedbagBenefitAdapter extends BaseQuickAdapter<RedbagBenefit,BaseViewHolder> {

@@ -22,7 +22,6 @@ import android.view.View;
 
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.tools.CommonUtil;
-import com.guochuang.mimedia.tools.LogUtil;
 
 import java.util.Timer;
 import java.util.TimerTask;

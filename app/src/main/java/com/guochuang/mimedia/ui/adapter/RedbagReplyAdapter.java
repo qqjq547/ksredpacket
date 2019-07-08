@@ -10,7 +10,6 @@ import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.mvp.model.RedPacketReply;
-import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 
 import java.util.List;

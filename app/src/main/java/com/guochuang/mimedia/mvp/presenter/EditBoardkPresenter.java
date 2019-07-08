@@ -7,7 +7,6 @@ import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.BoardDetail;
 import com.guochuang.mimedia.mvp.model.UploadFile;
 import com.guochuang.mimedia.mvp.view.EditBoardView;
-import com.guochuang.mimedia.mvp.view.FeedbackView;
 import com.guochuang.mimedia.tools.RxUtil;
 
 import java.io.File;
@@ -15,7 +14,6 @@ import java.io.File;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import retrofit2.http.Field;
 
 /**
  * Created by Administrator on 2017-11-28 0028.

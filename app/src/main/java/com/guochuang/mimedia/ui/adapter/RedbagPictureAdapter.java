@@ -6,8 +6,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.guochuang.mimedia.mvp.model.PictureBean;
 import com.sz.gcyh.KSHongBao.R;
-import com.guochuang.mimedia.mvp.model.RedbagDetail;
-import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.guochuang.mimedia.view.SquareImageView;
 

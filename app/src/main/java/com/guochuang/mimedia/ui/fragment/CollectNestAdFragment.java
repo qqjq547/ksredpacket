@@ -1,7 +1,6 @@
 package com.guochuang.mimedia.ui.fragment;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
@@ -11,16 +10,11 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.base.MvpFragment;
 import com.guochuang.mimedia.http.response.Page;
-import com.guochuang.mimedia.mvp.model.InfoItem;
 import com.guochuang.mimedia.mvp.model.NestFavorite;
-import com.guochuang.mimedia.mvp.presenter.CollectInfoPresenter;
 import com.guochuang.mimedia.mvp.presenter.CollectNestAdPresenter;
 import com.guochuang.mimedia.mvp.view.CollectNestAdView;
-import com.guochuang.mimedia.mvp.view.InfoListView;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.IntentUtils;
-import com.guochuang.mimedia.ui.activity.beenest.BeeNestActivity;
-import com.guochuang.mimedia.ui.adapter.InfoAdapter;
 import com.guochuang.mimedia.ui.adapter.NestFavoriteAdapter;
 import com.guochuang.mimedia.view.VerticalDecoration;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;

@@ -1,13 +1,11 @@
 package com.guochuang.mimedia.ui.activity.user;
 
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sz.gcyh.KSHongBao.R;
-import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.NameAuthGet;
 import com.guochuang.mimedia.mvp.presenter.IdentifyResultPresenter;

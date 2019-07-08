@@ -6,15 +6,11 @@ import com.guochuang.mimedia.http.response.Page;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.BenefitType;
-import com.guochuang.mimedia.mvp.model.BidPrice;
 import com.guochuang.mimedia.mvp.model.RedbagBenefit;
-import com.guochuang.mimedia.mvp.view.BidPriceView;
 import com.guochuang.mimedia.mvp.view.RedbagBenefitView;
 import com.guochuang.mimedia.tools.RxUtil;
 
 import java.util.List;
-
-import retrofit2.http.Query;
 
 /**
  * Created by Administrator on 2017-11-28 0028.

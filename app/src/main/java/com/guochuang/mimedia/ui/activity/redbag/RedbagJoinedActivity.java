@@ -1,6 +1,5 @@
 package com.guochuang.mimedia.ui.activity.redbag;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
@@ -14,13 +13,11 @@ import com.guochuang.mimedia.mvp.model.RedbagUser;
 import com.guochuang.mimedia.mvp.presenter.RedbagJoinedPresenter;
 import com.guochuang.mimedia.mvp.view.RedbagJoinedView;
 import com.guochuang.mimedia.tools.Constant;
-import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
 import com.sz.gcyh.KSHongBao.R;
-import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.ui.adapter.RedbagJoinedAdapter;
 import com.guochuang.mimedia.view.VerticalDecoration;
@@ -29,7 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class RedbagJoinedActivity extends MvpActivity<RedbagJoinedPresenter> implements RedbagJoinedView {

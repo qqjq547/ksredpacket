@@ -2,16 +2,12 @@ package com.guochuang.mimedia.mvp.presenter;
 
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.http.exception.ApiException;
-import com.guochuang.mimedia.http.response.Page;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.DictionaryType;
-import com.guochuang.mimedia.mvp.model.InfoDetail;
 import com.guochuang.mimedia.mvp.model.NestAd;
 import com.guochuang.mimedia.mvp.model.NestRandomAd;
-import com.guochuang.mimedia.mvp.model.Reply;
 import com.guochuang.mimedia.mvp.view.BeeNestView;
-import com.guochuang.mimedia.mvp.view.InfoDetailView;
 import com.guochuang.mimedia.tools.RxUtil;
 
 import java.util.List;

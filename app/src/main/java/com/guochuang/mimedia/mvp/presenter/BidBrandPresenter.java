@@ -8,8 +8,6 @@ import com.guochuang.mimedia.mvp.model.NestTimeInfo;
 import com.guochuang.mimedia.mvp.view.BidBrandView;
 import com.guochuang.mimedia.tools.RxUtil;
 
-import java.util.List;
-
 public class BidBrandPresenter extends BasePresenter<BidBrandView> {
 
     public BidBrandPresenter(BidBrandView view) {

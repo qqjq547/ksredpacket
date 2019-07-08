@@ -73,6 +73,7 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
     int price;//单价
     String startDate="";
     int days=0;
+    int lockDay=10;
     String nestLatitude;
     String nestLongitude;
     PassDialog passDialog;
@@ -102,7 +103,7 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
         nestLongitude=getIntent().getStringExtra(Constant.NESTLONGITUDE);
         if (purchaseType==Constant.TYPE_PURCHASE_REGION){
             tvTitle.setText(R.string.buy_city_owner);
-            tvAgreement.setText(R.string.city_buy_agreement);;
+            tvAgreement.setText(R.string.city_buy_agreement);
             tvUnit.setText(R.string.money_unit_qc);
         }else if(purchaseType==Constant.TYPE_PURCHASE_AGENT){
             tvTitle.setText(R.string.bug_agent);
@@ -194,7 +195,7 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
         }else if(purchaseType==Constant.TYPE_PURCHASE_HONEYCOMB){
             mvpPresenter.appCreateOrder(Constant.CHANNEL_CODE_ANDROID,payNumber,payType,getPref().getLongitude(),getPref().getLatitude(),safetyCode);
         }else if(purchaseType==Constant.TYPE_PURCHASE_SNATCH){
-            mvpPresenter.createSnatchOrder(Constant.CHANNEL_CODE_ANDROID,payType,snatchId,price,payNumber,getPref().getLongitude(),getPref().getLatitude(),safetyCode);
+            mvpPresenter.createSnatchOrder(Constant.CHANNEL_CODE_ANDROID,payType,snatchId,price,payNumber,getPref().getLongitude(),getPref().getLatitude(),lockDay,safetyCode);
         }else if(purchaseType==Constant.TYPE_PURCHASE_NESTAD){
             mvpPresenter.buyNestAd(Constant.CHANNEL_CODE_ANDROID,payType,nestLocationId,price,startDate,days,getPref().getLatitude(),getPref().getLongitude(),nestLatitude,nestLongitude,safetyCode);
         }

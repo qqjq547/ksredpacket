@@ -110,7 +110,6 @@
         <activity android:name="com.guochuang.mimedia.ui.activity.beenest.AdBidActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.beenest.MyBidActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.common.JuxiangwanActivity" />
-        <activity android:name="com.guochuang.mimedia.ui.activity.user.MyPayCodeActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.common.KsbPayActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.common.ScanResultActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.redbag.LinkRedbagDetailActivity" />
@@ -193,6 +192,8 @@
         <!--绑定邮箱-->
         <activity android:name="com.guochuang.mimedia.ui.activity.user.BindingEmailActivity"/>
         <activity android:name="com.guochuang.mimedia.ui.activity.user.SetMobileAcitivity"/>
+        <activity android:name="com.guochuang.mimedia.ui.activity.user.CoinAddressActivity"/>
+        <activity android:name="com.guochuang.mimedia.ui.activity.user.EditCoinAddressActivity"/>
 
 
 

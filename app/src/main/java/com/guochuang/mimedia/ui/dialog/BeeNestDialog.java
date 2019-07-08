@@ -2,38 +2,18 @@ package com.guochuang.mimedia.ui.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
-import com.guochuang.mimedia.tools.LogUtil;
-import com.guochuang.mimedia.tools.glide.GlideApp;
 import com.sz.gcyh.KSHongBao.R;
-
-import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.jiguang.share.android.api.JShareInterface;
-import cn.jiguang.share.android.api.PlatActionListener;
-import cn.jiguang.share.android.api.Platform;
-import cn.jiguang.share.android.api.ShareParams;
-import cn.jiguang.share.qqmodel.QQ;
-import cn.jiguang.share.qqmodel.QZone;
-import cn.jiguang.share.wechat.Wechat;
-import cn.jiguang.share.wechat.WechatMoments;
-import cn.jiguang.share.weibo.SinaWeibo;
 
 
 /**

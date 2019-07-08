@@ -7,7 +7,6 @@ import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.FavoriteAndPraise;
 import com.guochuang.mimedia.mvp.model.RedPacketReply;
-import com.guochuang.mimedia.mvp.model.RedbagDetail;
 import com.guochuang.mimedia.mvp.model.RedbagInfo;
 import com.guochuang.mimedia.mvp.view.RedbagDetailView;
 import com.guochuang.mimedia.tools.RxUtil;

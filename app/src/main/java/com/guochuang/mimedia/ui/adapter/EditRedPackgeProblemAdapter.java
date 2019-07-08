@@ -1,16 +1,12 @@
 package com.guochuang.mimedia.ui.adapter;
 
-import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.guochuang.mimedia.mvp.model.ProblemBean;
-import com.guochuang.mimedia.view.recycleview.adapter.CommonRecyclerAdapter;
-import com.guochuang.mimedia.view.recycleview.adapter.ViewHolder;
 import com.sz.gcyh.KSHongBao.R;
 
 import java.util.List;

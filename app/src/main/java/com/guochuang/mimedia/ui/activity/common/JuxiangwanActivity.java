@@ -3,8 +3,6 @@ package com.guochuang.mimedia.ui.activity.common;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
-import android.text.TextUtils;
 import android.webkit.DownloadListener;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -12,7 +10,6 @@ import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.JxwUserInfoUrl;
 import com.guochuang.mimedia.mvp.presenter.JuxiangwanPresenter;
@@ -27,7 +24,6 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.sz.gcyh.KSHongBao.R;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class JuxiangwanActivity extends MvpActivity<JuxiangwanPresenter> implements JuxiangwanView {

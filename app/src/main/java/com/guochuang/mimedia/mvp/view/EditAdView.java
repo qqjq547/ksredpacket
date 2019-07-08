@@ -1,12 +1,8 @@
 package com.guochuang.mimedia.mvp.view;
 
-import com.guochuang.mimedia.mvp.model.LuckyConfig;
 import com.guochuang.mimedia.mvp.model.NestAd;
 import com.guochuang.mimedia.mvp.model.NestInfoLimit;
-import com.guochuang.mimedia.mvp.model.RedbagTemp;
 import com.guochuang.mimedia.mvp.model.UploadFile;
-
-import java.util.List;
 
 /**
  * Created by Administrator on 2017-11-28 0028.

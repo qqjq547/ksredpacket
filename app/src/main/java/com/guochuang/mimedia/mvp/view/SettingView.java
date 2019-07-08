@@ -1,10 +1,7 @@
 package com.guochuang.mimedia.mvp.view;
 
-import com.guochuang.mimedia.mvp.model.Category;
 import com.guochuang.mimedia.mvp.model.SetUpUser;
 import com.guochuang.mimedia.mvp.model.UploadFile;
-
-import java.util.List;
 
 /**
  * Created by Administrator on 2017-11-28 0028.

@@ -6,7 +6,6 @@ import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.UploadFile;
 import com.guochuang.mimedia.mvp.view.IdentifyCustomView;
-import com.guochuang.mimedia.mvp.view.IdentifyView;
 import com.guochuang.mimedia.tools.RxUtil;
 
 import java.io.File;

@@ -4,12 +4,8 @@ import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
-import com.guochuang.mimedia.mvp.model.JxwUserInfoUrl;
-import com.guochuang.mimedia.mvp.view.GameView;
 import com.guochuang.mimedia.mvp.view.JuxiangwanView;
 import com.guochuang.mimedia.tools.RxUtil;
-
-import java.io.Serializable;
 
 public class JuxiangwanPresenter extends BasePresenter<JuxiangwanView> {
 

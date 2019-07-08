@@ -1,6 +1,5 @@
 package com.guochuang.mimedia.ui.activity.common;
 
-import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -10,7 +9,6 @@ import com.guochuang.mimedia.tools.Constant;
 import com.sz.gcyh.KSHongBao.R;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class ScanResultActivity extends MvpActivity {

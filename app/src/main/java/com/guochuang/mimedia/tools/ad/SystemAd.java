@@ -12,22 +12,9 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
-import com.baidu.mobads.AdView;
-import com.baidu.mobads.AdViewListener;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.guochuang.mimedia.mvp.model.AdInfo;
 import com.guochuang.mimedia.tools.glide.GlideApp;
-import com.qq.e.ads.cfg.VideoOption;
-import com.qq.e.ads.nativ.NativeExpressAD;
-import com.qq.e.ads.nativ.NativeExpressADView;
-import com.qq.e.ads.nativ.NativeExpressMediaListener;
-import com.qq.e.comm.constants.AdPatternType;
-import com.qq.e.comm.util.AdError;
-
-import org.json.JSONObject;
-
-import java.util.List;
 
 public class SystemAd {
     public Context context;

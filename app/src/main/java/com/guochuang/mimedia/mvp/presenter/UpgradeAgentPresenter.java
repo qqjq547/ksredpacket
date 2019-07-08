@@ -6,7 +6,6 @@ import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.InviterUser;
 import com.guochuang.mimedia.mvp.view.UpgradeAgentView;
-import com.guochuang.mimedia.mvp.view.WelcomeView;
 import com.guochuang.mimedia.tools.RxUtil;
 
 /**

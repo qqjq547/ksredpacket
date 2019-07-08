@@ -1,13 +1,9 @@
 package com.guochuang.mimedia.ui.adapter;
 
-import android.content.Context;
 import android.support.annotation.Nullable;
-import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.guochuang.mimedia.view.recycleview.adapter.CommonRecyclerAdapter;
-import com.guochuang.mimedia.view.recycleview.adapter.ViewHolder;
 import com.guochuang.mimedia.mvp.model.LookSurevyResult;
 import com.guochuang.mimedia.view.CustomProgress;
 import com.sz.gcyh.KSHongBao.R;

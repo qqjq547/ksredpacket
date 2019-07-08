@@ -3,7 +3,6 @@ package com.guochuang.mimedia.tools;
 import android.app.Activity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -14,7 +13,6 @@ import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.ui.adapter.KsbDetailsTypeAdapter;
 import com.guochuang.mimedia.view.GridItemDecoration;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;

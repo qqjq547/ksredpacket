@@ -1,43 +1,28 @@
 package com.guochuang.mimedia.mvp.presenter;
 
-import android.util.Log;
-
-import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.AddReqDtoListBean;
-import com.guochuang.mimedia.mvp.model.LookSurevyResult;
 import com.guochuang.mimedia.mvp.model.LookVideoResult;
 import com.guochuang.mimedia.mvp.model.EditRedbagConfig;
 import com.guochuang.mimedia.mvp.model.LuckyConfig;
-import com.guochuang.mimedia.mvp.model.Order;
 import com.guochuang.mimedia.mvp.model.QuestionOpt;
 import com.guochuang.mimedia.mvp.model.RedBagConfig;
-import com.guochuang.mimedia.mvp.model.RedbagDetail;
-import com.guochuang.mimedia.mvp.model.RedbagInfo;
 import com.guochuang.mimedia.mvp.model.RedbagTemp;
 import com.guochuang.mimedia.mvp.model.UploadFile;
 import com.guochuang.mimedia.mvp.view.EditRedbagView;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.GsonUtil;
-import com.guochuang.mimedia.tools.OssManager;
-import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.tools.RxUtil;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import retrofit2.http.Field;
 
 /**
  * Created by Administrator on 2017-11-28 0028.

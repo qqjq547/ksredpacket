@@ -1,7 +1,6 @@
 package com.guochuang.mimedia.ui.activity.common;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
@@ -14,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.guochuang.mimedia.app.App;
-import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.PayeeUser;
 import com.guochuang.mimedia.mvp.model.PaymentResult;
@@ -24,17 +22,11 @@ import com.guochuang.mimedia.tools.CashierInputFilter;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.DoubleUtil;
-import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
-import com.guochuang.mimedia.tools.pay.PayResult;
 import com.guochuang.mimedia.ui.dialog.PassDialog;
 import com.sz.gcyh.KSHongBao.R;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class KsbPayActivity extends MvpActivity<KsbPayPresenter> implements KsbPayView {

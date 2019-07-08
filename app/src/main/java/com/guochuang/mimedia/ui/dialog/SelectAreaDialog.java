@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
@@ -13,13 +12,11 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.mvp.model.LocalArea;
 import com.guochuang.mimedia.tools.GsonUtil;
-import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.ui.adapter.TextAdapter;
 import com.sz.gcyh.KSHongBao.R;
 
@@ -30,7 +27,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class SelectAreaDialog extends Dialog {
     @BindView(R.id.tb_title)

@@ -1,7 +1,6 @@
 package com.guochuang.mimedia.mvp.view;
 
 import com.guochuang.mimedia.mvp.model.BindingPhone;
-import com.guochuang.mimedia.mvp.model.Captcha;
 
 public interface BindingPhoneView {
 

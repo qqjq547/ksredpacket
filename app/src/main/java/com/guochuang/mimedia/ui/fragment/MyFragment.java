@@ -28,7 +28,6 @@ import com.guochuang.mimedia.ui.activity.beenest.MyAdActivity;
 import com.guochuang.mimedia.ui.activity.city.CityActivity;
 import com.guochuang.mimedia.ui.activity.redbag.RedbagDynamicActivity;
 import com.guochuang.mimedia.ui.activity.user.MyAddressActivity;
-import com.guochuang.mimedia.ui.activity.user.MyPayCodeActivity;
 import com.guochuang.mimedia.ui.activity.user.MySealActivity;
 import com.guochuang.mimedia.ui.activity.user.MyQCActivity;
 import com.guochuang.mimedia.ui.adapter.MyViewListAdapter;
@@ -195,8 +194,6 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
             }
         });
         setPageSelected(0);
-//        itemArr.add(new MyMenuItem(R.drawable.ic_my_qc, R.string.my_qc));
-//        itemArr.add(new MyMenuItem(R.drawable.ic_my_paycode, R.string.receive_pay_code));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_city, R.string.text_my_city));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_dynamic, R.string.text_my_dynamic));
         itemArr.add(new MyMenuItem(R.drawable.ic_my_ad_bid, R.string.ad_bid));
@@ -259,12 +256,6 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                         break;
                     case R.drawable.ic_my_welfare:
                         startActivity(new Intent(getActivity(), WelfareActivity.class));
-                        break;
-                    case R.drawable.ic_my_paycode:
-                        startActivity(new Intent(getActivity(), MyPayCodeActivity.class));
-                        break;
-                    case R.drawable.ic_my_qc:
-                        startActivity(new Intent(getActivity(), MyQCActivity.class));
                         break;
                     case R.drawable.ic_my_seal:
                         startActivity(new Intent(getActivity(), MySealActivity.class));

@@ -14,7 +14,6 @@ import com.guochuang.mimedia.mvp.presenter.MyQCPresenter;
 import com.guochuang.mimedia.mvp.view.MyQCView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
-import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.tools.UrlConfig;
 import com.sz.gcyh.KSHongBao.R;
 

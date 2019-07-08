@@ -914,5 +914,11 @@
     <string name="pls_iput_mail_verify">请输入邮箱验证码</string>
     <string name="coin_tip_str">输入数字过大或者数字格式错误</string>
     <string name="format_min_qc">QC数量至少为%d</string>
+    <string name="add_out_address">添加提币地址</string>
+    <string name="edit_out_address">添加提币地址</string>
+    <string name="out_address">提币地址</string>
+    <string name="address_area_name">地址域名</string>
+    <string name="input_address_area_name">请输入地址域名</string>
+    <string name="input_out_address">请输入提币地址</string>
 
 </resources>

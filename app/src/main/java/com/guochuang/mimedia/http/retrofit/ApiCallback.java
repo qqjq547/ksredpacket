@@ -1,7 +1,6 @@
 package com.guochuang.mimedia.http.retrofit;
 
 import android.net.ParseException;
-import android.util.Log;
 
 import com.google.gson.JsonParseException;
 import com.sz.gcyh.KSHongBao.R;

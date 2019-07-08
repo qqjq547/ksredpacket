@@ -4,8 +4,6 @@ import com.google.gson.Gson;
 import com.guochuang.mimedia.app.App;
 import com.sz.gcyh.KSHongBao.R;
 import com.tencent.mm.opensdk.modelpay.PayReq;
-import com.tencent.mm.opensdk.openapi.IWXAPI;
-import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 public class WxPay {
     static WxPay wxPay;

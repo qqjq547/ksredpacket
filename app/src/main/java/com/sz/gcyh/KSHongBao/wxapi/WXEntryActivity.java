@@ -14,7 +14,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.guochuang.mimedia.app.App;
-import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.tools.WxLogin;
 import com.sz.gcyh.KSHongBao.R;
 import com.tencent.mm.opensdk.modelbase.BaseReq;

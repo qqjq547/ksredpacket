@@ -4,9 +4,7 @@ import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
-import com.guochuang.mimedia.mvp.model.CurrentRegion;
 import com.guochuang.mimedia.mvp.model.MyRegion;
-import com.guochuang.mimedia.mvp.model.RegionDetail;
 import com.guochuang.mimedia.mvp.view.MyCityView;
 import com.guochuang.mimedia.tools.RxUtil;
 

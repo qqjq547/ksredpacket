@@ -4,11 +4,8 @@ import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
-import com.guochuang.mimedia.mvp.model.AdInfo;
 import com.guochuang.mimedia.mvp.model.NestLocation;
 import com.guochuang.mimedia.mvp.view.AdBidView;
-import com.guochuang.mimedia.mvp.view.AdInfoView;
-import com.guochuang.mimedia.tools.GsonUtil;
 import com.guochuang.mimedia.tools.RxUtil;
 
 import java.util.List;

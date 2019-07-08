@@ -123,7 +123,7 @@ public class SpriteManager {
             BaseSprite baseSpite = mSprites.get(i);
             if (baseSpite.isContains(x,y)&& baseSpite.clickable){
                 return baseSpite;
-            };
+            }
         }
         return null;
     }

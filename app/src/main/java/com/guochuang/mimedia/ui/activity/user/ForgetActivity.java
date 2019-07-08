@@ -4,12 +4,10 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.guochuang.mimedia.base.BasePresenter;
-import com.guochuang.mimedia.tools.antishake.AntiShake;
 import com.guochuang.mimedia.ui.adapter.MyFragmentPagerAdapter;
 import com.guochuang.mimedia.ui.fragment.ForgetEmailFragment;
 import com.guochuang.mimedia.ui.fragment.ForgetMobileFragment;
@@ -17,7 +15,6 @@ import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.MvpActivity;
 import butterknife.BindView;
 import butterknife.OnClick;
-import rx.functions.Action0;
 
 public class ForgetActivity extends MvpActivity  {
 

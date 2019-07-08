@@ -4,9 +4,7 @@ import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
-import com.guochuang.mimedia.mvp.model.Snatch;
 import com.guochuang.mimedia.mvp.model.SnatchAddress;
-import com.guochuang.mimedia.mvp.view.AddAddressView;
 import com.guochuang.mimedia.mvp.view.ExpressInfoView;
 import com.guochuang.mimedia.tools.RxUtil;
 

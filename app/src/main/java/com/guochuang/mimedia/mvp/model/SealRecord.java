@@ -1,7 +1,5 @@
 package com.guochuang.mimedia.mvp.model;
 
-import android.text.TextUtils;
-
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 
 public class SealRecord implements MultiItemEntity {

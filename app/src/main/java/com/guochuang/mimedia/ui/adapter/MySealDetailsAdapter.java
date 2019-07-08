@@ -4,12 +4,8 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.guochuang.mimedia.mvp.model.CityBidHall;
-import com.guochuang.mimedia.mvp.model.KsbRecord;
 import com.guochuang.mimedia.mvp.model.SealRecord;
-import com.guochuang.mimedia.tools.Constant;
 import com.sz.gcyh.KSHongBao.R;
 
 import java.util.List;

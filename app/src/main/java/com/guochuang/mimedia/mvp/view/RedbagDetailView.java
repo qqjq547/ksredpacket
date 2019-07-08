@@ -5,9 +5,6 @@ import com.guochuang.mimedia.mvp.model.FavoriteAndPraise;
 import com.guochuang.mimedia.mvp.model.RedPacketReply;
 import com.guochuang.mimedia.mvp.model.RedbagDetail;
 import com.guochuang.mimedia.mvp.model.RedbagInfo;
-import com.guochuang.mimedia.mvp.model.Reply;
-
-import java.util.List;
 
 public interface RedbagDetailView {
     void setRedbagDetail(RedbagDetail redbagDetail);

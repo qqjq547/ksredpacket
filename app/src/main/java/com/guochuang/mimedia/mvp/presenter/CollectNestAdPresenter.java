@@ -5,10 +5,8 @@ import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.response.Page;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
-import com.guochuang.mimedia.mvp.model.InfoItem;
 import com.guochuang.mimedia.mvp.model.NestFavorite;
 import com.guochuang.mimedia.mvp.view.CollectNestAdView;
-import com.guochuang.mimedia.mvp.view.InfoListView;
 import com.guochuang.mimedia.tools.RxUtil;
 
 /**

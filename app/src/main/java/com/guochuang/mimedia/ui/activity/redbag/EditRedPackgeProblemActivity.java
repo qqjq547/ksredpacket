@@ -31,7 +31,6 @@ import com.guochuang.mimedia.ui.adapter.EditRedPackgeProblemAdapter;
 import com.guochuang.mimedia.ui.adapter.ProblemDialogInAdapter;
 import com.sz.gcyh.KSHongBao.R;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

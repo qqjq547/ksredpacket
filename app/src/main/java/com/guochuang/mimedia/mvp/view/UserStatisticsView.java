@@ -1,6 +1,5 @@
 package com.guochuang.mimedia.mvp.view;
 
-import com.guochuang.mimedia.mvp.model.IncomeStatistics;
 import com.guochuang.mimedia.mvp.model.UserStatistics;
 
 /**

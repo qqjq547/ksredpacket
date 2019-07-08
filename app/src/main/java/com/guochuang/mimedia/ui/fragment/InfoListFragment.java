@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import io.objectbox.Box;
 
 public class InfoListFragment extends MvpFragment<InfoListPresenter> implements InfoListView {
     @BindView(R.id.srl_refresh)

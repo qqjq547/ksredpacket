@@ -1,7 +1,6 @@
 package com.guochuang.mimedia.tools;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.text.Layout;
 import android.text.SpannableString;
 import android.text.Spanned;

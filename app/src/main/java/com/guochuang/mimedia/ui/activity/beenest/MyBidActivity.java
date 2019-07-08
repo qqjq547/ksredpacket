@@ -1,6 +1,5 @@
 package com.guochuang.mimedia.ui.activity.beenest;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
@@ -9,19 +8,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.http.response.Page;
 import com.guochuang.mimedia.mvp.model.NestAuctionRecord;
-import com.guochuang.mimedia.mvp.model.NestHistory;
-import com.guochuang.mimedia.mvp.model.Square;
 import com.guochuang.mimedia.mvp.presenter.MyBidPresenter;
 import com.guochuang.mimedia.mvp.view.MyBidView;
-import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.ui.adapter.MyBidAdapter;
-import com.guochuang.mimedia.ui.adapter.PictureVerticalAdapter;
-import com.guochuang.mimedia.view.VerticalDecoration;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
@@ -31,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MyBidActivity extends MvpActivity<MyBidPresenter> implements MyBidView {
