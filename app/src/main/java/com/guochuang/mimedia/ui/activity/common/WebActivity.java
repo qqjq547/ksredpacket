@@ -231,11 +231,11 @@ public class WebActivity extends MvpActivity<WebPresenter> implements IntefaceWe
         }
 
         @JavascriptInterface
-        public void payment(final double money, final int number, final long snatchId, final int unitPrice) {
+        public void payment(final double money, final int number, final long snatchId, final int unitPrice,final String lockDay) {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    IntentUtils.startPurchaseActivity(WebActivity.this, Constant.TYPE_PURCHASE_SNATCH, snatchId, unitPrice, number, String.valueOf(money));
+                    IntentUtils.startPurchaseActivity(WebActivity.this, Constant.TYPE_PURCHASE_SNATCH, snatchId, unitPrice, number, String.valueOf(money),Integer.parseInt(lockDay));
                 }
             });
         }

@@ -1,5 +1,6 @@
 package com.guochuang.mimedia.ui.activity.user;
 
+import android.Manifest;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -14,9 +15,11 @@ import com.guochuang.mimedia.mvp.view.EditCoinAddressView;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.ui.activity.common.MyCaptureActivity;
 import com.sz.gcyh.KSHongBao.R;
+import com.tbruyelle.rxpermissions.RxPermissions;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import rx.functions.Action1;
 
 public class EditCoinAddressActivity extends MvpActivity<EditCoinAddressPresenter> implements EditCoinAddressView {
     @BindView(R.id.tv_title)
@@ -50,7 +53,6 @@ public class EditCoinAddressActivity extends MvpActivity<EditCoinAddressPresente
             btnDelete.setVisibility(View.GONE);
         }else {
             tvTitle.setText(R.string.edit_out_address);
-            btnDelete.setVisibility(View.VISIBLE);
             coinAddress=(CoinAddress)getIntent().getSerializableExtra(Constant.COIN_ADDRESS);
             etName.setText(coinAddress.getAlias());
             etAddress.setText(coinAddress.getChainAddress());
@@ -65,7 +67,16 @@ public class EditCoinAddressActivity extends MvpActivity<EditCoinAddressPresente
                 onBackPressed();
                 break;
             case R.id.iv_scan:
-                startActivityForResult(new Intent(this,MyCaptureActivity.class),Constant.REQUEST_CAPTURE);
+                new RxPermissions(this).request(Manifest.permission.CAMERA).subscribe(new Action1<Boolean>() {
+                    @Override
+                    public void call(Boolean aBoolean) {
+                        if (aBoolean) {
+                            startActivityForResult(new Intent(EditCoinAddressActivity.this,MyCaptureActivity.class),Constant.REQUEST_CAPTURE);
+                        } else {
+                            showShortToast(R.string.get_camera_permission);
+                        }
+                    }
+                });
                 break;
             case R.id.btn_delete:
                 if (coinAddress!=null) {

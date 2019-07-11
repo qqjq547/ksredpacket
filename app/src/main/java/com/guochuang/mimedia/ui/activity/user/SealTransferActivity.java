@@ -1,5 +1,6 @@
 package com.guochuang.mimedia.ui.activity.user;
 
+import android.Manifest;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.text.Editable;
@@ -26,17 +27,20 @@ import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.DialogBuilder;
 import com.guochuang.mimedia.tools.DoubleUtil;
+import com.guochuang.mimedia.tools.PrefUtil;
 import com.guochuang.mimedia.tools.RxUtil;
 import com.guochuang.mimedia.tools.antishake.AntiShake;
 import com.guochuang.mimedia.ui.activity.common.MyCaptureActivity;
 import com.guochuang.mimedia.ui.dialog.PassDialog;
 import com.sz.gcyh.KSHongBao.R;
+import com.tbruyelle.rxpermissions.RxPermissions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Subscription;
 import rx.functions.Action0;
+import rx.functions.Action1;
 
 public class SealTransferActivity extends MvpActivity<SealTransferPresenter> implements SealTransferView {
 
@@ -182,10 +186,19 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
                 onBackPressed();
                 break;
             case R.id.iv_scan:
-                startActivityForResult(new Intent(this,MyCaptureActivity.class),Constant.REQUEST_CAPTURE);
+                new RxPermissions(this).request(Manifest.permission.CAMERA).subscribe(new Action1<Boolean>() {
+                    @Override
+                    public void call(Boolean aBoolean) {
+                        if (aBoolean) {
+                            startActivityForResult(new Intent(SealTransferActivity.this,MyCaptureActivity.class),Constant.REQUEST_CAPTURE);
+                        } else {
+                            showShortToast(R.string.get_camera_permission);
+                        }
+                    }
+                });
                 break;
             case R.id.iv_menu:
-                startActivity(new Intent(this,CoinAddressActivity.class));
+                startActivityForResult(new Intent(this,CoinAddressActivity.class),Constant.REQUEST_PICK_COIN_ADDRESS);
                 break;
             case R.id.tv_verify:
                 if (AntiShake.check(view.getId()))
@@ -383,9 +396,15 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode==RESULT_OK){
-            if (requestCode==Constant.REQUEST_CAPTURE){
-                String address=data.getStringExtra(Constant.ADDRESS);
-                etTransAddress.setText(address);
+            switch (requestCode){
+                case Constant.REQUEST_CAPTURE:
+                    String address=data.getStringExtra(Constant.ADDRESS);
+                    etTransAddress.setText(address);
+                    break;
+                case Constant.REQUEST_PICK_COIN_ADDRESS:
+                    String coinAddress=data.getStringExtra(Constant.COIN_ADDRESS);
+                    etTransAddress.setText(coinAddress);
+                    break;
             }
         }
     }

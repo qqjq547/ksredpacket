@@ -5,7 +5,7 @@ import com.guochuang.mimedia.mvp.model.Order;
 import com.guochuang.mimedia.mvp.model.Snatch;
 
 
-public interface MyTreasureView {
-    void setVendor(Order data);
+public interface TreasureView {
+    void setData(Page<Snatch> data);
     void setError(String msg);
 }

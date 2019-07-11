@@ -55,7 +55,7 @@ public class CoinAddressActivity extends MvpActivity<CoinAddressPresenter> imple
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent=getIntent();
-                intent.putExtra(Constant.COIN_ADDRESS,addressArr.get(position));
+                intent.putExtra(Constant.COIN_ADDRESS,addressArr.get(position).getChainAddress());
                 setResult(RESULT_OK,intent);
                 finish();
             }

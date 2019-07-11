@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.mvp.model.UserLogin;
 import com.guochuang.mimedia.mvp.presenter.LoginPresenter;
 import com.guochuang.mimedia.mvp.view.LoginView;
@@ -26,7 +27,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cn.jpush.android.api.JPushInterface;
 
-public class RegisterActivity extends MvpActivity<LoginPresenter> implements LoginView {
+public class RegisterActivity extends MvpActivity {
 
     @BindView(R.id.iv_back)
     ImageView ivBack;
@@ -41,8 +42,8 @@ public class RegisterActivity extends MvpActivity<LoginPresenter> implements Log
     Fragment[] fragments = new Fragment[2];
 
     @Override
-    protected LoginPresenter createPresenter() {
-        return new LoginPresenter(this);
+    protected BasePresenter createPresenter() {
+        return null;
     }
 
     @Override
@@ -63,25 +64,7 @@ public class RegisterActivity extends MvpActivity<LoginPresenter> implements Log
     }
 
     public void login(String userName,String password){
-        showLoadingDialog(null);
-        mvpPresenter.getLogin(
-                userName,
-                password,
-                Constant.CAPTCHA,
-                Constant.SYSTEM_CODE,
-                Constant.LOGIN_TYPE,
-                SystemUtil.getAPNType(),
-                SystemUtil.getDeviceId(),
-                SystemUtil.getAndroidId(),
-                SystemUtil.getSystemModel(),
-                SystemUtil.getSystemModel(),
-                SystemUtil.getDeviceBrand(),
-                SystemUtil.getSystemVersion(),
-                SystemUtil.getAppVersion(),
-                SystemUtil.getDeviceResolution(),
-                SystemUtil.getDeviceId(),
-                JPushInterface.getRegistrationID(RegisterActivity.this)
-        );
+        onBackPressed();
     }
     @OnClick({R.id.iv_back})
     public void onViewClicked(View view) {
@@ -91,33 +74,5 @@ public class RegisterActivity extends MvpActivity<LoginPresenter> implements Log
                 break;
 
         }
-    }
-
-    @Override
-    public void setLoginData(String data) {
-        closeLoadingDialog();
-        UserLogin userLogin = GsonUtil.GsonToBean(CommonUtil.baseDecrypt(data.split("\\.")[1]), UserLogin.class);
-        getPref().setString(PrefUtil.USER_TOKEN, data);
-        getPref().setString(PrefUtil.MOBILE, userLogin.getMobile());
-        getPref().setString(PrefUtil.EMAIL, userLogin.getEmail());
-        IntentUtils.startMainActivity(this, true);
-        finish();
-    }
-
-    @Override
-    public void setWxLoginData(String data) {
-
-    }
-
-    @Override
-    public void setLoginError(String msg) {
-        closeLoadingDialog();
-        showShortToast(msg);
-        finish();
-    }
-
-    @Override
-    public void goToAplayWeixin() {
-
     }
 }

@@ -398,7 +398,8 @@ public interface ApiStore {
             @Field("appVersion") String appVersion,
             @Field("deviceResolution") String deviceResolution,
             @Field("imei") String imei,
-            @Field("pushId") String pushId);
+            @Field("pushId") String pushId,
+            @Field("uniqueFlag") String uniqueFlag);
 
     // 手机注册
     @FormUrlEncoded
@@ -1130,7 +1131,9 @@ public interface ApiStore {
     @GET("/api/v1/activity/snatchRecord/pageSnatchRecordlist")
     Observable<HttpResponse<Page<Snatch>>> getSnatchRecordlist(
             @Query("currentPage") int currentPage,
-            @Query("pageSize") int pageSize
+            @Query("pageSize") int pageSize,
+            @Query("isWin") boolean isWin
+
     );
 
     @FormUrlEncoded
@@ -1615,5 +1618,17 @@ public interface ApiStore {
             @Field("alias") String alias,
             @Field("remark") String remark
     );
+
+    @POST("/api/v1/file/slide/captcha/get")
+    Observable<HttpResponse<SlideVerifyData>> getSlideCaptcha();
+
+    @POST("/api/v1/file/slide/captcha/verify")
+    @FormUrlEncoded
+    Observable<HttpResponse<Boolean>> verifySlideCaptcha(
+            @Field("uniqueFlag") String uniqueFlag,
+            @Field("xPercent") String xPercent,
+            @Field("timeStamp") String timeStamp
+    );
+
 
 }

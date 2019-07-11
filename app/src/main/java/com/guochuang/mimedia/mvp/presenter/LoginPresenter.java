@@ -28,7 +28,8 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                          String appVersion,
                          String deviceResolution,
                          String imei,
-                         String pushId) {
+                         String pushId,
+                         String uniqueFlag) {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().userAccoutLogin(
                 username,
                 password,
@@ -45,7 +46,8 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                 appVersion,
                 deviceResolution,
                 imei,
-                pushId
+                pushId,
+                uniqueFlag
         )), new ApiCallback<String>() {
             @Override
             public void onSuccess(String data) {

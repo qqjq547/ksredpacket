@@ -909,7 +909,7 @@
     <string name="equivalence_fomat_str">等值：%s元</string>
     <string name="myseal_str">我的SEAL</string>
     <string name="seal_transfer">请输入接收地址(谨慎核对后输入,否则后果自负)</string>
-    <string name="seal_transfer_identity_number">请输入实名身份证号码</string>
+    <string name="seal_transfer_identity_number">请输入实名身份证号码(快速提币通道，非必填)</string>
     <string name="pls_iput_mobile_verify">请输入手机验证码</string>
     <string name="pls_iput_mail_verify">请输入邮箱验证码</string>
     <string name="coin_tip_str">输入数字过大或者数字格式错误</string>
@@ -920,5 +920,12 @@
     <string name="address_area_name">地址域名</string>
     <string name="input_address_area_name">请输入地址域名</string>
     <string name="input_out_address">请输入提币地址</string>
+    <string-array name="treasure_nav">
+        <item>全部</item>
+        <item>获奖</item>
+    </string-array>
+    <string name="buy_city_tips">请确认您是否确定在此区域发展业务，此区域节点的淘区块权益是周期性，请您谨慎竞购</string>
+    <string name="verify_success">验证成功</string>
+    <string name="verify_fail">验证失败</string>
 
 </resources>

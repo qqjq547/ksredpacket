@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/space15"
+        android:background="@drawable/bg_input_stroke">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.guochuang.mimedia.view.VerifyView
+            android:id="@+id/verify"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space200" />
+        <ImageView
+            android:id="@+id/iv_refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_margin="@dimen/space10"
+            android:src="@drawable/ic_verify_refresh"/>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/space1"
+        android:layout_marginTop="@dimen/space10"
+        android:layout_marginBottom="@dimen/space10"
+        android:background="@drawable/bg_slide_seekbar">
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space40"
+        android:progressDrawable="@null"
+        android:thumb="@drawable/ic_verify_arrow"
+        android:progress="0"
+        android:clickable="false"
+        android:paddingLeft="@dimen/space2"
+        android:paddingRight="@dimen/space2"
+         />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space10"
+        android:gravity="center_vertical">
+        <TextView
+            android:id="@+id/tv_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_red"
+            android:textSize="@dimen/textfont15" />
+
+    </LinearLayout>
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/iv_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space20"
+        android:src="@drawable/ic_verify_close"
+        android:background="@color/bg_trans"/>
+</LinearLayout>

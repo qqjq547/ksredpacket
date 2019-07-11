@@ -73,7 +73,7 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
     int price;//单价
     String startDate="";
     int days=0;
-    int lockDay=10;
+    int lockDay=0;
     String nestLatitude;
     String nestLongitude;
     PassDialog passDialog;
@@ -101,6 +101,7 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
         days=getIntent().getIntExtra(Constant.DAYS,0);
         nestLatitude=getIntent().getStringExtra(Constant.NESTLATITUDE);
         nestLongitude=getIntent().getStringExtra(Constant.NESTLONGITUDE);
+        lockDay=getIntent().getIntExtra(Constant.LOCKDAY,0);
         if (purchaseType==Constant.TYPE_PURCHASE_REGION){
             tvTitle.setText(R.string.buy_city_owner);
             tvAgreement.setText(R.string.city_buy_agreement);
@@ -159,27 +160,66 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
                     return;
                 }
                 if (cbRead.isChecked()){
-                    if (payType == Constant.PAY_TYPE_KSB) {
-                        passDialog=new PassDialog(PurchaseActivity.this, new PassDialog.OnPassDialogListener() {
-                            @Override
-                            public void close() {
+                    if (purchaseType==Constant.TYPE_PURCHASE_REGION){
+                        new DialogBuilder(this)
+                                .setTitle(R.string.tip)
+                                .setMessage(R.string.buy_city_tips)
+                                .setPositiveButton(R.string.cancel, new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
 
-                            }
+                                    }
+                                })
+                                .setPositiveButton(R.string.ensure, new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        if (payType == Constant.PAY_TYPE_KSB) {
+                                            passDialog=new PassDialog(PurchaseActivity.this, new PassDialog.OnPassDialogListener() {
+                                                @Override
+                                                public void close() {
 
-                            @Override
-                            public void go() {
+                                                }
 
-                            }
+                                                @Override
+                                                public void go() {
 
-                            @Override
-                            public void onNumFull(String code) {
-                                startPay(code);
-                            }
-                        });
-                         passDialog.setBackVisible(false).show();
-                        return;
+                                                }
+
+                                                @Override
+                                                public void onNumFull(String code) {
+                                                    startPay(code);
+                                                }
+                                            });
+                                            passDialog.setBackVisible(false).show();
+                                            return;
+                                        }
+                                        startPay(null);
+                                    }
+                                })
+                                .create().show();
+                    }else{
+                        if (payType == Constant.PAY_TYPE_KSB) {
+                            passDialog=new PassDialog(PurchaseActivity.this, new PassDialog.OnPassDialogListener() {
+                                @Override
+                                public void close() {
+
+                                }
+
+                                @Override
+                                public void go() {
+
+                                }
+
+                                @Override
+                                public void onNumFull(String code) {
+                                    startPay(code);
+                                }
+                            });
+                            passDialog.setBackVisible(false).show();
+                            return;
+                        }
+                        startPay(null);
                     }
-                    startPay(null);
                 }else {
                     showShortToast(R.string.pls_select_agreement);
                 }

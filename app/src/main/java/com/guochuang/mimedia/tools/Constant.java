@@ -53,6 +53,7 @@ public class Constant {
     public static final int REQUEST_EDIT_QUESTION = 22;
     public static final int REQUEST_EDIT_COIN_ADDRESS = 23;
     public static final int REQUEST_CAPTURE = 24;
+    public static final int REQUEST_PICK_COIN_ADDRESS = 25;
 
     public static final String TITLE = "title";
     public static final String ARTICLEUUID = "articleUuid";
@@ -170,6 +171,7 @@ public class Constant {
     public static final String SURVEYID = "surveyId";
     public static final String JPUSH_CHANNEL = "JPUSH_CHANNEL";
     public static final String CHANNEL_DEFAULT = "default";
+    public static final String LOCKDAY = "lockDay";
 
 
     public static final int STATE_HAS_GET = 1;

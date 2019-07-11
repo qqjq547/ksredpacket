@@ -1,18 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
    <include layout="@layout/layout_title"/>
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/srl_refresh"
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tb_list"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tablayout_height"
+        android:layout_marginLeft="@dimen/space15"
+        android:layout_marginRight="@dimen/space15"
+        app:tabPadding="@dimen/space10"
+        android:background="@color/bg_white"
+        android:layout_gravity="bottom"
+        app:layout_collapseMode="pin"
+        app:tabMode="fixed"
+        app:layout_scrollFlags="scroll"
+        app:tabTextAppearance="@style/TabLayoutTextStyle"
+        app:tabIndicatorColor="@color/bg_red"
+        app:tabIndicatorHeight="@dimen/space2"
+        app:tabSelectedTextColor="@color/text_red"
+        app:tabTextColor="@color/text_black"/>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_treasure"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/space10"
-            android:layout_marginRight="@dimen/space10">
-        </android.support.v7.widget.RecyclerView>
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    </android.support.v4.view.ViewPager>
+
 </LinearLayout>

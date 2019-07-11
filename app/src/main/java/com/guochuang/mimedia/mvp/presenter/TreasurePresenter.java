@@ -8,19 +8,20 @@ import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.Order;
 import com.guochuang.mimedia.mvp.model.Snatch;
 import com.guochuang.mimedia.mvp.view.MyTreasureView;
+import com.guochuang.mimedia.mvp.view.TreasureView;
 import com.guochuang.mimedia.tools.RxUtil;
 
-public class MyTreasurePresenter extends BasePresenter<MyTreasureView> {
-    public MyTreasurePresenter(MyTreasureView view) {
+public class TreasurePresenter extends BasePresenter<TreasureView> {
+    public TreasurePresenter(TreasureView view) {
         attachView(view);
     }
 
-    public void getOrderVendor(long orderId) {
+    public void getRecordList(int currentPage,int pageSize,boolean isWin) {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                getOrderVendor(orderId)), new ApiCallback<Order>() {
+                getSnatchRecordlist(currentPage,pageSize,isWin)), new ApiCallback<Page<Snatch>>() {
             @Override
-            public void onSuccess(Order data) {
-                mvpView.setVendor(data);
+            public void onSuccess(Page<Snatch> data) {
+                mvpView.setData(data);
             }
 
             @Override

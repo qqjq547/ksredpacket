@@ -2,6 +2,8 @@ package com.guochuang.mimedia.ui.activity.treasure;
 
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
@@ -24,7 +26,9 @@ import com.guochuang.mimedia.tools.UrlConfig;
 import com.guochuang.mimedia.tools.pay.AliPay;
 import com.guochuang.mimedia.tools.pay.WxPay;
 import com.guochuang.mimedia.ui.activity.user.MyAddressActivity;
+import com.guochuang.mimedia.ui.adapter.MyFragmentPagerAdapter;
 import com.guochuang.mimedia.ui.adapter.MyTreasureAdapter;
+import com.guochuang.mimedia.ui.fragment.TreasureFragment;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
@@ -41,14 +45,14 @@ public class MyTreasureActivity extends MvpActivity<MyTreasurePresenter> impleme
     ImageView ivBack;
     @BindView(R.id.tv_title)
     TextView tvTitle;
-    @BindView(R.id.rv_treasure)
-    RecyclerView rvTreasure;
-    @BindView(R.id.srl_refresh)
-    SmartRefreshLayout srlRefresh;
+    @BindView(R.id.tb_list)
+    TabLayout tbList;
+    @BindView(R.id.vp_content)
+    ViewPager vpContent;
 
-    MyTreasureAdapter adapter;
-    List<Snatch> dataArr=new ArrayList<>();
-    int curPage=1;
+    MyFragmentPagerAdapter pagerAdapter;
+    TreasureFragment[] fragments=new TreasureFragment[2];
+
     @Override
     protected MyTreasurePresenter createPresenter() {
         return new MyTreasurePresenter(this);
@@ -62,80 +66,25 @@ public class MyTreasureActivity extends MvpActivity<MyTreasurePresenter> impleme
     @Override
     public void initViewAndData() {
         tvTitle.setText(R.string.my_treasure);
-        rvTreasure.setLayoutManager(new LinearLayoutManager(this,OrientationHelper.VERTICAL,false));
-        adapter=new MyTreasureAdapter(dataArr);
-        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
-        adapter.setEmptyView(getLayoutInflater().inflate(R.layout.layout_empty,null));
-        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                Snatch snatch=dataArr.get(position);
-                switch (view.getId()){
-                    case R.id.tv_address:
-                        if (snatch.getShowAddress()==1) {
-                            startActivityForResult(new Intent(MyTreasureActivity.this, MyAddressActivity.class).putExtra(Constant.SNATCHID,snatch.getSnatchId()), Constant.REQUEST_PICK_ADDRESS);
-                        }
-                        break;
-                    case R.id.tv_comment:
-                        startActivityForResult(new Intent(MyTreasureActivity.this, ShowListActivity.class).putExtra(Constant.SNATCH,snatch),Constant.REQUEST_SET_SHOWLIST);
-                        break;
-                    case R.id.tv_express:
-                        startActivity(new Intent(MyTreasureActivity.this, ExpressInfoActivity.class).putExtra(Constant.SNATCHID, snatch.getSnatchId()));
-                        break;
-                    case R.id.lin_join_people_time:
-                        IntentUtils.startWebActivity(MyTreasureActivity.this,"",UrlConfig.getHtmlUrl(UrlConfig.URL_DUOBAO_TREASURE_NUMBER)+snatch.getSnatchRecordId());
-                        break;
-                    case R.id.tv_pay:
-                        showLoadingDialog(null);
-                        mvpPresenter.getOrderVendor(snatch.getOrderId());
-                        break;
-                }
-            }
-        });
-        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                IntentUtils.startWebActivity(MyTreasureActivity.this,"",UrlConfig.getHtmlUrl(UrlConfig.URL_DUOBAO_DETAIL)+dataArr.get(position).getSnatchId());
-            }
-        });
-        rvTreasure.setAdapter(adapter);
-        srlRefresh.setEnableRefresh(true);
-        srlRefresh.setEnableLoadmore(true);
-        srlRefresh.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
-            @Override
-            public void onLoadmore(RefreshLayout refreshlayout) {
-               mvpPresenter.getRecordList(curPage+1,Constant.PAGE_SIZE);
-            }
+        String[] titleArr = getResources().getStringArray(R.array.treasure_nav);
+        fragments[0]=new TreasureFragment();
+        fragments[0].setWin(false);
+        fragments[1]=new TreasureFragment();
+        fragments[1].setWin(true);
+        pagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), fragments, titleArr);
+        vpContent.setAdapter(pagerAdapter);
+        tbList.setupWithViewPager(vpContent);
 
-            @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-                mvpPresenter.getRecordList(1,Constant.PAGE_SIZE);
-            }
-        });
-        mvpPresenter.getRecordList(1,Constant.PAGE_SIZE);
     }
     @OnClick(R.id.iv_back)
     public void onViewClicked() {
         onBackPressed();
     }
 
-    @Override
-    public void setData(Page<Snatch> data) {
-        srlRefresh.finishRefresh();
-        srlRefresh.finishLoadmore();
-        curPage = data.getCurrentPage();
-        if (curPage == 1) {
-            dataArr.clear();
-        }
-        if (data.getDataList() != null) {
-            dataArr.addAll(data.getDataList());
-        }
-        adapter.notifyDataSetChanged();
-        if (data.getCurrentPage() >= data.getTotalPage()) {
-            srlRefresh.setEnableLoadmore(false);
-        } else {
-            srlRefresh.setEnableLoadmore(true);
-        }
+
+    public void getOrder(long orderId){
+        showLoadingDialog(null);
+        mvpPresenter.getOrderVendor(orderId);
     }
 
     @Override
@@ -148,8 +97,6 @@ public class MyTreasureActivity extends MvpActivity<MyTreasurePresenter> impleme
 
     @Override
     public void setError(String msg) {
-        srlRefresh.finishRefresh();
-        srlRefresh.finishLoadmore();
         closeLoadingDialog();
         showShortToast(msg);
     }
@@ -158,7 +105,8 @@ public class MyTreasureActivity extends MvpActivity<MyTreasurePresenter> impleme
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode==RESULT_OK){
-            srlRefresh.autoRefresh();
+            fragments[0].autoRefresh();
+            fragments[1].autoRefresh();
         }
     }
     public void payResult(Order order,int payType){
@@ -197,7 +145,8 @@ public class MyTreasureActivity extends MvpActivity<MyTreasurePresenter> impleme
                     .setPositiveButton(R.string.confirm, new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            srlRefresh.autoRefresh();
+                            fragments[0].autoRefresh();
+                            fragments[1].autoRefresh();
                         }
                     }).create().show();
         }else {

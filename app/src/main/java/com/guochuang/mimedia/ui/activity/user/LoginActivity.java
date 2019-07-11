@@ -38,6 +38,7 @@ import com.guochuang.mimedia.tools.WxLogin;
 import com.guochuang.mimedia.tools.antishake.AntiShake;
 import com.guochuang.mimedia.ui.adapter.SelectPhoneAdapter;
 import com.guochuang.mimedia.ui.dialog.SheetDialog;
+import com.guochuang.mimedia.ui.dialog.SlideVerifyDialog;
 import com.sz.gcyh.KSHongBao.R;
 
 import java.util.ArrayList;
@@ -274,26 +275,33 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
                     return;
                 }
 
-
-                showLoadingDialog(null);
-                mvpPresenter.getLogin(
-                        etPhone.getText().toString().trim(),
-                        etPassword.getText().toString().trim(),
-                        Constant.CAPTCHA,
-                        Constant.SYSTEM_CODE,
-                        Constant.LOGIN_TYPE,
-                        SystemUtil.getAPNType(),
-                        SystemUtil.getDeviceId(),
-                        SystemUtil.getAndroidId(),
-                        SystemUtil.getSystemModel(),
-                        SystemUtil.getSystemModel(),
-                        SystemUtil.getDeviceBrand(),
-                        SystemUtil.getSystemVersion(),
-                        SystemUtil.getAppVersion(),
-                        SystemUtil.getDeviceResolution(),
-                        SystemUtil.getDeviceId(),
-                        JPushInterface.getRegistrationID(LoginActivity.this)
-                );
+                SlideVerifyDialog slideVerifyDialog=new SlideVerifyDialog(this);
+                slideVerifyDialog.setOnResultListener(new SlideVerifyDialog.OnResultListener() {
+                    @Override
+                    public void onResult(String flag) {
+                        showLoadingDialog(null);
+                        mvpPresenter.getLogin(
+                                etPhone.getText().toString().trim(),
+                                etPassword.getText().toString().trim(),
+                                Constant.CAPTCHA,
+                                Constant.SYSTEM_CODE,
+                                Constant.LOGIN_TYPE,
+                                SystemUtil.getAPNType(),
+                                SystemUtil.getDeviceId(),
+                                SystemUtil.getAndroidId(),
+                                SystemUtil.getSystemModel(),
+                                SystemUtil.getSystemModel(),
+                                SystemUtil.getDeviceBrand(),
+                                SystemUtil.getSystemVersion(),
+                                SystemUtil.getAppVersion(),
+                                SystemUtil.getDeviceResolution(),
+                                SystemUtil.getDeviceId(),
+                                JPushInterface.getRegistrationID(LoginActivity.this),
+                                flag
+                        );
+                    }
+                });
+                slideVerifyDialog.show();
                 break;
             case R.id.tv_login_register:
                 startActivity(new Intent(this, RegisterActivity.class));
