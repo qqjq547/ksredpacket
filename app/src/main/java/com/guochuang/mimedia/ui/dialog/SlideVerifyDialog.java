@@ -40,7 +40,7 @@ import cn.jiguang.share.android.api.JShareInterface;
  * Created by Administrator on 2017-06-24 0024.
  */
 
-public class SlideVerifyDialog extends Dialog implements SlideVerifyView {
+public abstract class SlideVerifyDialog extends Dialog implements SlideVerifyView {
 
     Context mContext;
 
@@ -55,9 +55,10 @@ public class SlideVerifyDialog extends Dialog implements SlideVerifyView {
     @BindView(R.id.iv_refresh)
     ImageView ivRefresh;
 
-    OnResultListener onResultListener;
     SlideVerifyPresenter presenter;
     SlideVerifyData slideVerifyData;
+
+    public abstract void onResult(String flag);
 
     @Override
     public void setData(final SlideVerifyData data) {
@@ -94,10 +95,8 @@ public class SlideVerifyDialog extends Dialog implements SlideVerifyView {
     @Override
     public void setVerifyData(Boolean data) {
         if (data){
-//            Toast.makeText(getContext(),R.string.verify_success,Toast.LENGTH_SHORT).show();
             dismiss();
-            if (onResultListener!=null)
-                onResultListener.onResult(slideVerifyData.getUniqueFlag());
+            onResult(slideVerifyData.getUniqueFlag());
         }else {
             setVerifyError(getContext().getString(R.string.verify_fail));
         }
@@ -113,10 +112,6 @@ public class SlideVerifyDialog extends Dialog implements SlideVerifyView {
 
     public interface OnResultListener {
         void onResult(String flag);
-    }
-
-    public void setOnResultListener(OnResultListener onResultListener) {
-        this.onResultListener = onResultListener;
     }
 
     public SlideVerifyDialog(@NonNull Context context) {

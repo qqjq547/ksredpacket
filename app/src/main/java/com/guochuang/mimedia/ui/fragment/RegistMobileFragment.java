@@ -2,9 +2,11 @@ package com.guochuang.mimedia.ui.fragment;
 
 import android.os.Build;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.guochuang.mimedia.base.MvpFragment;
@@ -22,6 +24,7 @@ import com.guochuang.mimedia.tools.UrlConfig;
 import com.guochuang.mimedia.tools.antishake.AntiShake;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.guochuang.mimedia.ui.activity.user.RegisterActivity;
+import com.guochuang.mimedia.ui.dialog.SlideVerifyDialog;
 import com.sz.gcyh.KSHongBao.R;
 
 import butterknife.BindView;
@@ -42,6 +45,8 @@ public class RegistMobileFragment extends MvpFragment<RegisterPresenter> impleme
     TextView tvAgreenment;
     @BindView(R.id.tv_register_confirm)
     TextView tvConfirm;
+    @BindView(R.id.rl_ima_verify)
+    RelativeLayout rlImaVerify;
     @BindView(R.id.et_register_ima_verify)
     EditText etRegisterImaVerify;
     @BindView(R.id.iv_register_ima_verify)
@@ -50,6 +55,9 @@ public class RegistMobileFragment extends MvpFragment<RegisterPresenter> impleme
     Captcha captcha;
     String mobile;
     String password;
+    String imaVerify;
+    String verify;
+    int captchaType=0;
 
     @Override
     protected RegisterPresenter createPresenter() {
@@ -64,11 +72,11 @@ public class RegistMobileFragment extends MvpFragment<RegisterPresenter> impleme
     @Override
     public void initViewAndData() {
         GeneralUtil.phoneAddSpace(etPhone);
-        mvpPresenter.getRegisterImageVerify(Constant.REGISTER_CAPTCHA_IMA);
+        mvpPresenter.getCaptchaType();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             tvAgreenment.setText(Html.fromHtml(getString(R.string.content_login_agreenment), Html.FROM_HTML_MODE_COMPACT));
         } else {
-            tvAgreenment.setText(Html.fromHtml(getResources().getString(R.string.content_login_agreenment)));
+            tvAgreenment.setText(Html.fromHtml(getString(R.string.content_login_agreenment)));
         }
 
     }
@@ -136,12 +144,37 @@ public class RegistMobileFragment extends MvpFragment<RegisterPresenter> impleme
 
     @Override
     public void setSmsData(String data) {
-        showShortToast(getResources().getString(R.string.type_login_verify_send_success));
+        showShortToast(R.string.type_login_verify_send_success);
         sendCode();
     }
 
     @Override
     public void setSmsError(String msg) {
+        showShortToast(msg);
+    }
+
+    @Override
+    public void setCaptchaType(Integer data) {
+       //0   无验证码  1 图形验证码 2 滑块验证码 3 文字点选
+        if (data!=null){
+            captchaType=data.intValue();
+           switch (captchaType){
+               case 0:
+                   rlImaVerify.setVisibility(View.GONE);
+                   break;
+               case 1:
+                   rlImaVerify.setVisibility(View.VISIBLE);
+                   mvpPresenter.getRegisterImageVerify(Constant.REGISTER_CAPTCHA_IMA);
+                   break;
+               case 2:
+                   rlImaVerify.setVisibility(View.GONE);
+                   break;
+           }
+        }
+    }
+
+    @Override
+    public void setCaptchaTypeError(String msg) {
         showShortToast(msg);
     }
 
@@ -155,16 +188,46 @@ public class RegistMobileFragment extends MvpFragment<RegisterPresenter> impleme
             case R.id.tv_register_verify:
                 if (AntiShake.check(view.getId()))
                     return;
-                if (captcha==null){
-                    showShortToast(R.string.verity_ima_empty);
-                }else if (etRegisterImaVerify.getText().length() < 1) {
-                    showShortToast(getResources().getString(R.string.input_verity_ima_error));
-                } else {
+                mobile=GeneralUtil.removeAllSpace(etPhone.getText().toString().trim());
+                imaVerify=etRegisterImaVerify.getText().toString().trim();
+                if (TextUtils.isEmpty(mobile)||!GeneralUtil.judgePhoneQual(mobile)) {
+                    showShortToast(R.string.input_phone_error);
+                    return;
+                }
+                switch (captchaType){
+                    case 0: //0   无验证码
                     mvpPresenter.getForgetSmsVerify(
-                            GeneralUtil.removeAllSpace(etPhone.getText().toString()),
-                            etRegisterImaVerify.getText().toString(),
-                            captcha.getUuid()
+                            mobile,
+                            "",
+                            ""
                     );
+                    break;
+                    case 1://1 图形验证码
+                        if (captcha==null){
+                            showShortToast(R.string.verity_ima_empty);
+                        }else if (TextUtils.isEmpty(imaVerify)) {
+                            showShortToast(R.string.input_verity_ima_error);
+                        } else {
+                            mvpPresenter.getForgetSmsVerify(
+                                    mobile,
+                                    imaVerify,
+                                    captcha.getUuid()
+                            );
+                        }
+                        break;
+                    case 2://2 滑块验证码
+                        new SlideVerifyDialog(getActivity()){
+
+                            @Override
+                            public void onResult(String flag) {
+                                mvpPresenter.getForgetSmsVerify(
+                                        mobile,
+                                        "",
+                                        flag
+                                );
+                            }
+                        }.show();
+                        break;
                 }
                 break;
             case R.id.tv_register_agreenment:
@@ -188,9 +251,9 @@ public class RegistMobileFragment extends MvpFragment<RegisterPresenter> impleme
                 mvpPresenter.getRegisterMobile(
                         Constant.TENANTCODE,
                         Constant.NATION_CODE,
-                        GeneralUtil.removeAllSpace(etPhone.getText().toString()),
-                        etVerify.getText().toString(),
-                        etPassword.getText().toString(),
+                        mobile,
+                        verify,
+                        password,
                         CommonUtil.getAppMetaData(getActivity(),"JPUSH_CHANNEL"),
                         "");
                 break;
@@ -200,17 +263,17 @@ public class RegistMobileFragment extends MvpFragment<RegisterPresenter> impleme
     private boolean doCheck() {
         mobile=GeneralUtil.removeAllSpace(etPhone.getText().toString().trim());
         password=etPassword.getText().toString().trim();
-        boolean isMobile = GeneralUtil.judgePhoneQual(mobile);
-        if (!isMobile) {
-            showShortToast(getResources().getString(R.string.input_phone_error));
+        verify=etVerify.getText().toString().trim();
+        if (TextUtils.isEmpty(mobile)||!GeneralUtil.judgePhoneQual(mobile)) {
+            showShortToast(R.string.input_phone_error);
             return false;
         }
-        if (etVerify.getText().length() < 1) {
-            showShortToast(getResources().getString(R.string.input_verity_error));
+        if (rlImaVerify.getVisibility()==View.VISIBLE&&TextUtils.isEmpty(verify)) {
+            showShortToast(R.string.input_verity_error);
             return false;
         }
         if (password.length() < 6) {
-            showShortToast(getResources().getString(R.string.input_password_error));
+            showShortToast(R.string.input_password_error);
             return false;
         }
         return true;

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.guochuang.mimedia.base.MvpFragment;
@@ -16,12 +17,14 @@ import com.guochuang.mimedia.mvp.presenter.RegisterPresenter;
 import com.guochuang.mimedia.mvp.view.RegisterView;
 import com.guochuang.mimedia.tools.CommonUtil;
 import com.guochuang.mimedia.tools.Constant;
+import com.guochuang.mimedia.tools.GeneralUtil;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.RxUtil;
 import com.guochuang.mimedia.tools.UrlConfig;
 import com.guochuang.mimedia.tools.antishake.AntiShake;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.guochuang.mimedia.ui.activity.user.RegisterActivity;
+import com.guochuang.mimedia.ui.dialog.SlideVerifyDialog;
 import com.sz.gcyh.KSHongBao.R;
 
 import butterknife.BindView;
@@ -42,6 +45,8 @@ public class RegistEmailFragment extends MvpFragment<RegisterPresenter> implemen
     TextView tvAgreenment;
     @BindView(R.id.tv_register_confirm)
     TextView tvConfirm;
+    @BindView(R.id.rl_ima_verify)
+    RelativeLayout rlImaVerify;
     @BindView(R.id.et_register_ima_verify)
     EditText etRegisterImaVerify;
     @BindView(R.id.ll_register_ima_verify)
@@ -52,6 +57,9 @@ public class RegistEmailFragment extends MvpFragment<RegisterPresenter> implemen
     Captcha captcha;
     String email;
     String password;
+    String imaVerify;
+    String verify;
+    int captchaType=0;
 
     @Override
     protected RegisterPresenter createPresenter() {
@@ -65,11 +73,11 @@ public class RegistEmailFragment extends MvpFragment<RegisterPresenter> implemen
 
     @Override
     public void initViewAndData() {
-        mvpPresenter.getRegisterImageVerify(Constant.REGISTER_CAPTCHA_IMA);
+        mvpPresenter.getCaptchaType();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             tvAgreenment.setText(Html.fromHtml(getString(R.string.content_login_agreenment), Html.FROM_HTML_MODE_COMPACT));
         } else {
-            tvAgreenment.setText(Html.fromHtml(getResources().getString(R.string.content_login_agreenment)));
+            tvAgreenment.setText(Html.fromHtml(getString(R.string.content_login_agreenment)));
         }
 
     }
@@ -137,12 +145,37 @@ public class RegistEmailFragment extends MvpFragment<RegisterPresenter> implemen
 
     @Override
     public void setSmsData(String data) {
-        showShortToast(getResources().getString(R.string.type_login_verify_send_success));
+        showShortToast(R.string.type_login_verify_send_success);
         sendCode();
     }
 
     @Override
     public void setSmsError(String msg) {
+        showShortToast(msg);
+    }
+
+    @Override
+    public void setCaptchaType(Integer data) {
+        //0   无验证码  1 图形验证码 2 滑块验证码 3 文字点选
+        if (data!=null){
+            captchaType=data.intValue();
+            switch (captchaType){
+                case 0:
+                    rlImaVerify.setVisibility(View.GONE);
+                    break;
+                case 1:
+                    rlImaVerify.setVisibility(View.VISIBLE);
+                    mvpPresenter.getRegisterImageVerify(Constant.REGISTER_CAPTCHA_IMA);
+                    break;
+                case 2:
+                    rlImaVerify.setVisibility(View.GONE);
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public void setCaptchaTypeError(String msg) {
         showShortToast(msg);
     }
 
@@ -157,22 +190,50 @@ public class RegistEmailFragment extends MvpFragment<RegisterPresenter> implemen
                 if (AntiShake.check(view.getId()))
                     return;
                 email = etMail.getText().toString().trim();
-                if (captcha==null){
-                    showShortToast(R.string.verity_ima_empty);
-                }else if (TextUtils.isEmpty(email)) {
-                    showShortToast(getResources().getString(R.string.pls_input_email));
+                imaVerify=etRegisterImaVerify.getText().toString().trim();
+                if (TextUtils.isEmpty(email)) {
+                    showShortToast(R.string.pls_input_email);
+                    return;
                 } else if (!CommonUtil.isEmail(email)) {
-                    showShortToast(getResources().getString(R.string.email_format_error));
-                } else {
-                    if (etRegisterImaVerify.getText().length() < 1) {
-                        showShortToast(getResources().getString(R.string.input_verity_ima_error));
-                    } else {
+                    showShortToast(R.string.email_format_error);
+                    return;
+                }
+                switch (captchaType){
+                    case 0:
                         mvpPresenter.getEmailVerify(
                                 email,
-                                etRegisterImaVerify.getText().toString(),
-                                captcha.getUuid()
+                                "",
+                                ""
                         );
-                    }
+                        break;
+                    case 1:
+                        if (captcha==null){
+                            showShortToast(R.string.verity_ima_empty);
+                        }else {
+                            if (TextUtils.isEmpty(imaVerify)) {
+                                showShortToast(R.string.input_verity_ima_error);
+                            } else {
+                                mvpPresenter.getEmailVerify(
+                                        email,
+                                        imaVerify,
+                                        captcha.getUuid()
+                                );
+                            }
+                        }
+                        break;
+                    case 2:
+                            new SlideVerifyDialog(getActivity()) {
+
+                                @Override
+                                public void onResult(String flag) {
+                                    mvpPresenter.getEmailVerify(
+                                            email,
+                                            "",
+                                            flag
+                                    );
+                                }
+                            }.show();
+                        break;
                 }
                 break;
             case R.id.iv_register_ima_verify:
@@ -196,8 +257,8 @@ public class RegistEmailFragment extends MvpFragment<RegisterPresenter> implemen
                         Constant.TENANTCODE,
                         Constant.NATION_CODE,
                         email,
-                        etVerify.getText().toString(),
-                        etPassword.getText().toString(),
+                        verify,
+                        password,
                         CommonUtil.getAppMetaData(getActivity(), "JPUSH_CHANNEL"),
                         "");
                 break;
@@ -207,13 +268,14 @@ public class RegistEmailFragment extends MvpFragment<RegisterPresenter> implemen
     private boolean doCheck() {
         email = etMail.getText().toString().trim();
         password = etPassword.getText().toString().trim();
+        verify=etVerify.getText().toString().trim();
         if (TextUtils.isEmpty(email)) {
             showShortToast(R.string.pls_input_email);
             return false;
         } else if (!CommonUtil.isEmail(email)) {
             showShortToast(R.string.email_format_error);
             return false;
-        } else if (etVerify.getText().length() < 1) {
+        } else if (rlImaVerify.getVisibility()==View.VISIBLE&&TextUtils.isEmpty(verify)) {
             showShortToast(R.string.input_verity_error);
             return false;
         }

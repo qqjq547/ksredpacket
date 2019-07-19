@@ -174,7 +174,7 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
             }
         }
         showLoadingDialog(null);
-        mvpPresenter.intCal(Constant.DIGITAL_CURRENCY_SEAL,Constant.INT_CAL_AAA_TO_KSB);
+        mvpPresenter.intCal(Constant.DIGITAL_CURRENCY_SEAL,Constant.INT_CAL_SEAL_TO_QC);
         mvpPresenter.getExchangeConfig(Constant.DIGITAL_CURRENCY_SEAL);
 
     }
@@ -245,7 +245,7 @@ public class SealTransferActivity extends MvpActivity<SealTransferPresenter> imp
                     return;
                 }
                 if (exchangeConfig != null && amount < exchangeConfig.getWithdrawAAA().getMinLimit()) {
-                    showShortToast(String.format(getString(R.string.format_min_seal),exchangeConfig.getWithdrawAAA().getMinLimit()));
+                    showShortToast(String.format(getString(R.string.format_min_seal),String.valueOf(exchangeConfig.getWithdrawAAA().getMinLimit())));
                     return;
                 }
                 if (TextUtils.isEmpty(captcha)) {

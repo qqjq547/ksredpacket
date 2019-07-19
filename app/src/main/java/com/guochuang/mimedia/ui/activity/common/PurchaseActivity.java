@@ -63,8 +63,7 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
 
     int purchaseType=0;
     String money;
-    String ksb;
-    String acountKsb;
+    String acountQc;
     long regionId=0;
     int payType=0;
     int payNumber=0;
@@ -92,7 +91,7 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
         purchaseType=getIntent().getIntExtra(Constant.PURCHASE_TYPE,0);
         money=getIntent().getStringExtra(Constant.MONEY);
         regionId=getIntent().getLongExtra(Constant.REGIONID,0);
-        acountKsb=getPref().getString(PrefUtil.COIN,"");
+        acountQc =getPref().getString(PrefUtil.MONEY,"");
         payNumber=getIntent().getIntExtra(Constant.PAYNUMBER,0);
         snatchId=getIntent().getLongExtra(Constant.SNATCHID,0);
         nestLocationId=getIntent().getLongExtra(Constant.NESTLOCATIONID,0);
@@ -105,7 +104,6 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
         if (purchaseType==Constant.TYPE_PURCHASE_REGION){
             tvTitle.setText(R.string.buy_city_owner);
             tvAgreement.setText(R.string.city_buy_agreement);
-            tvUnit.setText(R.string.money_unit_qc);
         }else if(purchaseType==Constant.TYPE_PURCHASE_AGENT){
             tvTitle.setText(R.string.bug_agent);
             tvAgreement.setText(R.string.agent_agreement);
@@ -115,15 +113,13 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
         }else if(purchaseType==Constant.TYPE_PURCHASE_SNATCH){
             tvTitle.setText(R.string.buy_snatch);
             tvAgreement.setText(R.string.snatch_agreement);
-            tvUnit.setText(R.string.money_unit_qc);
         }else if(purchaseType==Constant.TYPE_PURCHASE_NESTAD){
             tvTitle.setText(R.string.buy_nestad);
             tvAgreement.setText(R.string.brand_bid_agreement);
         }
         tvAmount.setText(String.valueOf(money));
-        rbtnKsbpay.setText(String.format(getString(R.string.format_yuan),String.valueOf(money)));
         showLoadingDialog(null);
-        mvpPresenter.calValue(Double.parseDouble(money),Constant.CAL_TYPE_COIN);
+        mvpPresenter.calValue(Double.parseDouble(money),Constant.CAL_TYPE_MONEY);
         mvpPresenter.getPayType(CommonUtil.getTypeParams(purchaseType));
 
     }
@@ -241,31 +237,31 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
         }
     }
     public void setKsbText(){
-        String title = String.format(getString(R.string.format_equal_ksb), ksb);
-        SpannableStringBuilder builder = new SpannableStringBuilder(title);
-        int ksbIndex = title.lastIndexOf(ksb);
-        builder.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.text_city_yellow)), ksbIndex, ksbIndex + ksb.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        tvEqualKsb.setText(builder);
-        double ksbDouble = Double.parseDouble(ksb);
+//        String title = String.format(getString(R.string.format_equal_ksb), coin);
+//        SpannableStringBuilder builder = new SpannableStringBuilder(title);
+//        int ksbIndex = title.lastIndexOf(coin);
+//        builder.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.text_city_yellow)), ksbIndex, ksbIndex + coin.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        tvEqualKsb.setText(builder);
+        double ksbDouble = Double.parseDouble(money);
         double accountKsbDouble=0;
-        if (!TextUtils.isEmpty(acountKsb)){
-            accountKsbDouble = Double.parseDouble(acountKsb);
+        if (!TextUtils.isEmpty(acountQc)){
+            accountKsbDouble = Double.parseDouble(acountQc);
         }
         if (ksbDouble <= accountKsbDouble) {
             Drawable drawable=getResources().getDrawable(R.drawable.ic_ksbpay);
             drawable.setBounds( 0, 0, drawable.getMinimumWidth(),drawable.getMinimumHeight());
             rbtnKsbpay.setCompoundDrawables(drawable, null, rbtnKsbpay.getCompoundDrawables()[2], null);
-            String myKsb = String.format(getString(R.string.format_ksb_pay), acountKsb);
+            String myKsb = String.format(getString(R.string.format_ksb_pay), acountQc);
             SpannableStringBuilder builder1 = new SpannableStringBuilder(myKsb);
-            int accountIndex = myKsb.indexOf(acountKsb);
-            builder1.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.text_city_yellow)), accountIndex, accountIndex + acountKsb.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            int accountIndex = myKsb.indexOf(acountQc);
+            builder1.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.text_city_yellow)), accountIndex, accountIndex + acountQc.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             rbtnKsbpay.setText(builder1);
             rbtnKsbpay.setEnabled(true);
         } else {
             Drawable drawable=getResources().getDrawable(R.drawable.ic_ksbpay_gray);
             drawable.setBounds( 0, 0, drawable.getMinimumWidth(),drawable.getMinimumHeight());
             rbtnKsbpay.setCompoundDrawables(drawable, null, null, null);
-            String myKsb = String.format(getString(R.string.format_ksb_pay), acountKsb);
+            String myKsb = String.format(getString(R.string.format_ksb_pay), acountQc);
             rbtnKsbpay.setText(myKsb);
             rbtnKsbpay.setTextColor(getResources().getColor(R.color.text_gray));
             rbtnKsbpay.setEnabled(false);
@@ -421,8 +417,7 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
     @Override
     public void setPayResult(CalValue data) {
         closeLoadingDialog();
-        ksb=data.getCoinByMoney();
-        acountKsb=data.getCoin();
+        acountQc =data.getQc();
         setKsbText();
     }
 

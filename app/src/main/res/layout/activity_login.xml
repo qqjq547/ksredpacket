@@ -42,7 +42,6 @@
                     android:textColor="@color/text_red"
                     android:visibility="gone"/>
                 <RelativeLayout
-                    android:id="@+id/rl_login_body_content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/iv_login_header"

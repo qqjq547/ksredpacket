@@ -176,7 +176,7 @@ public class QCTranSEALActivity extends MvpActivity<QcTranSealPresenter> impleme
                     return;
                 }
                 if (exchangeConfig!=null&&amount<exchangeConfig.getKsb2aaa().getMinLimit()){
-                    showShortToast(String.format(getString(R.string.format_min_qc),exchangeConfig.getKsb2aaa().getMinLimit()));
+                    showShortToast(String.format(getString(R.string.format_min_qc),String.valueOf(exchangeConfig.getKsb2aaa().getMinLimit())));
                     return;
                 }
                 if (passDialog == null) {

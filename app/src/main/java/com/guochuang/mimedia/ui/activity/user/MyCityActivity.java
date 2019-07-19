@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.ui.activity.city.BidPriceActivity;
 import com.guochuang.mimedia.ui.activity.city.EditBoardActivity;
-import com.guochuang.mimedia.ui.activity.redbag.RedbagBenefitActivity;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.MyRegion;
@@ -46,8 +45,6 @@ public class MyCityActivity extends MvpActivity<MyCityPresenter> implements MyCi
     TextView tvText;
     @BindView(R.id.tv_city_income)
     TextView tvCityIncome;
-    @BindView(R.id.tv_red_bag)
-    TextView tvRedBag;
     @BindView(R.id.tv_bid_run)
     TextView tvBidRun;
     @BindView(R.id.tv_city_num)
@@ -120,7 +117,6 @@ public class MyCityActivity extends MvpActivity<MyCityPresenter> implements MyCi
 
     @OnClick({R.id.iv_back,
               R.id.tv_text,
-              R.id.lin_red_bag,
               R.id.lin_bid_run})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -131,9 +127,6 @@ public class MyCityActivity extends MvpActivity<MyCityPresenter> implements MyCi
                 if (myRegion!=null&&!TextUtils.isEmpty(myRegion.getExplain())) {
                     new CityBenefitExplainDialog(this,myRegion.getExplain()).show();
                 }
-                break;
-            case R.id.lin_red_bag:
-                startActivity(new Intent(this,RedbagBenefitActivity.class));
                 break;
             case R.id.lin_bid_run:
                 startActivity(new Intent(this,BidPriceActivity.class));
@@ -151,7 +144,6 @@ public class MyCityActivity extends MvpActivity<MyCityPresenter> implements MyCi
             if (data.getRegionStatisticsDto()!=null){
                 regionNumber = data.getRegionStatisticsDto().getRegionNumber();
                 tvCityIncome.setText(data.getRegionStatisticsDto().getTotalIncome());
-                tvRedBag.setText(data.getRegionStatisticsDto().getRedPacketIncome());
                 tvBidRun.setText(data.getRegionStatisticsDto().getCompensate());
             }
             String numStr = String.format(getString(R.string.format_current_own_city), regionNumber);

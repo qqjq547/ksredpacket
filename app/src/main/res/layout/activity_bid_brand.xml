@@ -261,37 +261,37 @@
                     android:textSize="@dimen/textfont14"
                     android:text="@string/unit_yuan_day"/>
             </LinearLayout>
-            <include layout="@layout/layout_divide_deep_line"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/space45"
-                android:gravity="center_vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/text_black"
-                    android:textSize="@dimen/textfont14"
-                    android:text="@string/equal_bid"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/text_black"
-                    android:textSize="@dimen/textfont14"
-                    android:text="@string/ksb"/>
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"/>
-                <TextView
-                    android:id="@+id/tv_equal_ksb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/space5"
-                    android:layout_marginRight="@dimen/space5"
-                    android:gravity="center"
-                    android:textColor="@color/text_city_yellow"
-                    android:textSize="@dimen/textfont14" />
-            </LinearLayout>
+            <!--<include layout="@layout/layout_divide_deep_line"/>-->
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/space45"-->
+                <!--android:gravity="center_vertical">-->
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textColor="@color/text_black"-->
+                    <!--android:textSize="@dimen/textfont14"-->
+                    <!--android:text="@string/equal_bid"/>-->
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textColor="@color/text_black"-->
+                    <!--android:textSize="@dimen/textfont14"-->
+                    <!--android:text="@string/ksb"/>-->
+                <!--<Space-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_weight="1"/>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_equal_ksb"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="@dimen/space5"-->
+                    <!--android:layout_marginRight="@dimen/space5"-->
+                    <!--android:gravity="center"-->
+                    <!--android:textColor="@color/text_city_yellow"-->
+                    <!--android:textSize="@dimen/textfont14" />-->
+            <!--</LinearLayout>-->
                 <include layout="@layout/layout_divide_deep_line"/>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -302,7 +302,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/text_black"
                         android:textSize="@dimen/textfont14"
-                        android:text="@string/my_ksb"/>
+                        android:text="@string/my_qc"/>
                     <Space
                         android:layout_width="0dp"
                         android:layout_height="match_parent"

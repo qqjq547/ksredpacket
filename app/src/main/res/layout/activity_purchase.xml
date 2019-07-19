@@ -73,7 +73,7 @@
                 android:paddingRight="@dimen/space5"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/textfont14"
-                android:text="@string/my_ksb"/>
+                android:text="@string/my_qc"/>
         </RadioGroup>
         <LinearLayout
             android:layout_width="match_parent"
@@ -106,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_city_yellow"
                 android:textSize="@dimen/textfont14"
-                android:text="@string/yuan"/>
+                android:text="@string/money_unit_qc"/>
         </LinearLayout>
         <TextView
             android:id="@+id/tv_equal_ksb"
@@ -116,7 +116,8 @@
             android:layout_marginTop="@dimen/space10"
             android:layout_marginRight="@dimen/space15"
             android:textSize="@dimen/textfont14"
-            android:textColor="@color/text_black" />
+            android:textColor="@color/text_black"
+            android:visibility="gone"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -16,8 +16,17 @@ public class NestTimeInfo {
     private int maxPrice;
     private String rate;
     private String ksb;
+    private String qc;
     private String startDate;
     private List<BuyListBean> buyList;
+
+    public String getQc() {
+        return qc;
+    }
+
+    public void setQc(String qc) {
+        this.qc = qc;
+    }
 
     public String getRate() {
         return rate;

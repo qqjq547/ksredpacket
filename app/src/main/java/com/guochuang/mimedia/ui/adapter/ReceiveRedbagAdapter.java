@@ -39,8 +39,10 @@ public class ReceiveRedbagAdapter extends BaseQuickAdapter<RedbagReceived,BaseVi
         }
         if (TextUtils.equals(item.getCoinType(),Constant.COINTYPE_KSB)){
             helper.setText(R.id.tv_reward,String.format(mContext.getString(R.string.format_get_ksb),item.getDrawCoin()));
-        }else {
+        }else if(TextUtils.equals(item.getCoinType(),Constant.COINTYPE_SEAL)){
             helper.setText(R.id.tv_reward,String.format(mContext.getString(R.string.format_get_seal),item.getDrawCoin()));
+        }else {
+            helper.setText(R.id.tv_reward,String.format(mContext.getString(R.string.format_get_qc),item.getDrawCoin()));
         }
 
     }

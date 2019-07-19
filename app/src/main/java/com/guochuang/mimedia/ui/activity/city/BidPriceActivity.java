@@ -54,7 +54,7 @@ public class BidPriceActivity extends MvpActivity<BidPricePresenter> implements 
     @Override
     public void initViewAndData() {
         tvTitle.setText(R.string.bid_price);
-        tvText.setText(R.string.unit_ksb);
+        tvText.setText(R.string.unit_qc);
         rvRecord.setLayoutManager(new LinearLayoutManager(this,OrientationHelper.VERTICAL,false));
         adapter=new BuyPriceAdapter(itemArr);
         adapter.setEmptyView(getLayoutInflater().inflate(R.layout.layout_empty,null));

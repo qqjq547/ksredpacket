@@ -291,12 +291,10 @@ public class Constant {
     public static int MORESELECT = 1;
     public static int FILL_IN_PROBLEM = 2;
 
-    public static final String DIGITAL_CURRENCY_KSB = "KSB";
     public static final String DIGITAL_CURRENCY_SEAL = "SEAL";
     public static final String DIGITAL_CURRENCY_QC = "QC";
 
-    public static int INT_CAL_KSB_TO_AAA = 1;
-    public static int INT_CAL_AAA_TO_KSB = 2;
+    public static int INT_CAL_QC_TO_SEAL = 1;
     public static int INT_CAL_SEAL_TO_QC = 2;
 
     public static int QC_TO_OTHER = 1;

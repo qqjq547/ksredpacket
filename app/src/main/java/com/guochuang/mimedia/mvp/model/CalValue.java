@@ -15,6 +15,7 @@ public class CalValue {
     private String money;
     private String moneyByCoin;
     private int type;
+    private String qc;
 
     public String getCoin() {
         return coin;
@@ -54,5 +55,13 @@ public class CalValue {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public String getQc() {
+        return qc;
+    }
+
+    public void setQc(String qc) {
+        this.qc = qc;
     }
 }

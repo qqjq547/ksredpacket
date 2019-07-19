@@ -50,8 +50,7 @@ public class PaySelectDialog extends Dialog implements PaySelectView {
     RadioGroup rgroupPay;
 
     String money;
-    String ksb;
-    String acountKsb;
+    String acountQc;
     PaySelectPresenter presenter;
 
     public interface OnResultListener {
@@ -81,7 +80,7 @@ public class PaySelectDialog extends Dialog implements PaySelectView {
     @Override
     public void show() {
         super.show();
-        presenter.calValue(Double.parseDouble(money),Constant.CAL_TYPE_COIN);
+        presenter.calValue(Double.parseDouble(money),Constant.CAL_TYPE_MONEY);
     }
 
     @Override
@@ -116,35 +115,34 @@ public class PaySelectDialog extends Dialog implements PaySelectView {
     @Override
     public void setData(CalValue data) {
       if (data!=null){
-          ksb= data.getCoinByMoney();
-          acountKsb=data.getCoin();
-          String title = String.format(getContext().getString(R.string.format_pay_amount), money, ksb);
+          acountQc=data.getQc();
+          String title = String.format(getContext().getString(R.string.format_pay_amount), money, money);
           SpannableStringBuilder builder = new SpannableStringBuilder(title);
           int moneyIndex = title.indexOf(money);
           builder.setSpan(new TextAppearanceSpan(getContext(), R.style.span_yellow_style), moneyIndex, moneyIndex + money.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-          int ksbIndex = title.lastIndexOf(ksb);
-          builder.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.text_city_yellow)), ksbIndex, ksbIndex + ksb.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+          int ksbIndex = title.lastIndexOf(money);
+          builder.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.text_city_yellow)), ksbIndex, ksbIndex + money.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
           tvTitle.setText(builder);
-          double ksbDouble = Double.parseDouble(ksb);
-          double accountKsbDouble=0;
-          if (!TextUtils.isEmpty(acountKsb)){
-              accountKsbDouble = Double.parseDouble(acountKsb);
+          double qcDouble = Double.parseDouble(money);
+          double accountQcouble=0;
+          if (!TextUtils.isEmpty(acountQc)){
+              accountQcouble = Double.parseDouble(acountQc);
           }
-          if (ksbDouble <= accountKsbDouble) {
+          if (qcDouble <= accountQcouble) {
               Drawable drawable=getContext().getResources().getDrawable(R.drawable.ic_ksbpay);
               drawable.setBounds( 0, 0, drawable.getMinimumWidth(),drawable.getMinimumHeight());
               rbtnKsbpay.setCompoundDrawables(drawable, null, rbtnKsbpay.getCompoundDrawables()[2], null);
-              String myKsb = String.format(getContext().getString(R.string.format_ksb_pay), acountKsb);
+              String myKsb = String.format(getContext().getString(R.string.format_ksb_pay), acountQc);
               SpannableStringBuilder builder1 = new SpannableStringBuilder(myKsb);
-              int accountIndex = myKsb.indexOf(acountKsb);
-              builder1.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.text_city_yellow)), accountIndex, accountIndex + acountKsb.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+              int accountIndex = myKsb.indexOf(acountQc);
+              builder1.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.text_city_yellow)), accountIndex, accountIndex + acountQc.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
               rbtnKsbpay.setText(builder1);
               rbtnKsbpay.setEnabled(true);
           } else {
               Drawable drawable=getContext().getResources().getDrawable(R.drawable.ic_ksbpay_gray);
               drawable.setBounds( 0, 0, drawable.getMinimumWidth(),drawable.getMinimumHeight());
               rbtnKsbpay.setCompoundDrawables(drawable, null, null, null);
-              String myKsb = String.format(getContext().getString(R.string.format_ksb_pay), acountKsb);
+              String myKsb = String.format(getContext().getString(R.string.format_ksb_pay), acountQc);
               rbtnKsbpay.setText(myKsb);
               rbtnKsbpay.setTextColor(getContext().getResources().getColor(R.color.text_gray));
               rbtnKsbpay.setEnabled(false);

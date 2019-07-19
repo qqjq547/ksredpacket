@@ -88,7 +88,7 @@ public class RecommendFanActivity extends MvpActivity<RecommendPresenter> implem
     public void setData(RecommendData data) {
         if (data!=null) {
             tvFansCount.setText(String.valueOf(data.getDirectUser()));
-            tvShareBenefit.setText(data.getCumulativeCoin());
+            tvShareBenefit.setText(data.getCumulativeMoney());
             tvEqualCount.setText(data.getCumulativeMoney());
         }
     }

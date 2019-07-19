@@ -518,7 +518,7 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
             GlideImgManager.loadCircleImage(this, redbagDetail.getAvatar(), ivHeader);
             tvName.setText(redbagDetail.getNickName());
             if (redbagDetail.isDrawSuccess()) {
-                tvKsb.setText(redbagDetail.getCoin());
+                tvKsb.setText(redbagDetail.getMoney());
                 tvMoney.setText(String.format(getString(R.string.format_add_yuan), redbagDetail.getMoney()));
                 tvMoney.setVisibility(View.VISIBLE);
                 tvNotice.setVisibility(View.GONE);
@@ -611,17 +611,19 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
             redPacketType=data.getRedPacketSubType();
             GlideImgManager.loadCircleImage(this, data.getSenderAvatar(), ivHeader);
             tvName.setText(data.getSenderNickName());
-            tvKsb.setText(data.getDrawCoin());
+            tvKsb.setText(data.getMoney());
             tvMoney.setText(String.format(getString(R.string.format_add_yuan), data.getMoney()));
             tvMoney.setVisibility(View.VISIBLE);
             tvNotice.setVisibility(View.GONE);
             rlValue.setVisibility(View.VISIBLE);
             tvScope.setText(data.getArea());
             coinType=data.getCoinType();
-            if(TextUtils.equals(coinType,Constant.COINTYPE_KSB)){
+            if(TextUtils.equals(coinType,Constant.COINTYPE_KSB)) {
                 tvUnit.setText(R.string.money_unit_ksb);
-            }else {
+            }else if(TextUtils.equals(coinType,Constant.COINTYPE_SEAL)){
                 tvUnit.setText(R.string.money_unit_seal);
+            }else {
+                tvUnit.setText(R.string.money_unit_qc);
             }
             tvReceiveNum.setText(String.format(getString(R.string.format_people_get_redbag), data.getReceiveUserNum()));
             if (data.getReceiveUserAvatar() != null) {
@@ -813,7 +815,7 @@ public class RedbagDetailActivity extends MvpActivity<RedbagDetailPresenter> imp
                         linContent.setTranslationY(0);
                         llTopLl.setVisibility(View.GONE);
                         linTitleCenter.setVisibility(View.VISIBLE);
-                        tvTitle.setText(redbagDetail.getCoin());
+                        tvTitle.setText(redbagDetail.getMoney());
                         tvTitle.setTextColor(getResources().getColor(R.color.text_white));
                         linContent.post(new Runnable() {
                             @Override

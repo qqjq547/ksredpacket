@@ -59,7 +59,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/ksb"
+                    android:text="@string/money_unit_qc"
                     android:textColor="@color/text_white"
                     android:textSize="@dimen/textfont12" />
             </LinearLayout>
@@ -178,7 +178,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space8"
-                        android:text="@string/money_unit_seal"
+                        android:text="@string/money_unit_qc"
                         android:textColor="@color/text_black"
                         android:textSize="@dimen/textfont12" />
                 </LinearLayout>

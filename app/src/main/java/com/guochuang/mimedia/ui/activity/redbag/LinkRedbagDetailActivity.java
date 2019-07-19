@@ -60,7 +60,7 @@ public class LinkRedbagDetailActivity extends MvpActivity<LinkRedbagDetailPresen
         }
         redPacketUuid = getIntent().getStringExtra(Constant.RED_PACKET_UUID);
         redPacketType=getIntent().getStringExtra(Constant.RED_PACKET_TYPE);
-        tvTitle.setText(redbagDetail.getCoin()+getString(R.string.ksb));
+        tvTitle.setText(redbagDetail.getMoney()+getString(R.string.money_unit_qc));
         CommonUtil.initH5WebView(this, wvContent);
         wvContent.loadUrl(redbagDetail.getLinkAddress());
         startCountDown(redbagDetail.getReadingSecond());
@@ -106,7 +106,7 @@ public class LinkRedbagDetailActivity extends MvpActivity<LinkRedbagDetailPresen
     public void setInfo(RedbagInfo data) {
         closeLoadingDialog();
        if (data!=null){
-           tvTitle.setText(data.getDrawCoin()+getString(R.string.ksb));
+           tvTitle.setText(data.getMoney()+getString(R.string.money_unit_qc));
            CommonUtil.initH5WebView(this, wvContent);
            wvContent.loadUrl(data.getLinkAddress());
        }

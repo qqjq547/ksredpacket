@@ -9,4 +9,6 @@ public interface RegisterView {
     void setVerifyError(String msg);
     void setSmsData(String data);
     void setSmsError(String msg);
+    void setCaptchaType(Integer data);
+    void setCaptchaTypeError(String msg);
 }

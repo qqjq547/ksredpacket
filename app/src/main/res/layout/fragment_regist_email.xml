@@ -45,6 +45,7 @@
                 android:textSize="@dimen/textfont16" />
         </LinearLayout>
         <RelativeLayout
+            android:id="@+id/rl_ima_verify"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space15">

@@ -1630,5 +1630,9 @@ public interface ApiStore {
             @Field("timeStamp") String timeStamp
     );
 
+    @GET("/api/v1/file/captcha/type")
+    Observable<HttpResponse<Integer>> getCaptchaType();
+
+
 
 }

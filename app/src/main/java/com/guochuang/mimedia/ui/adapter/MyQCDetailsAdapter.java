@@ -14,7 +14,7 @@ import java.util.List;
 
 public class MyQCDetailsAdapter extends BaseQuickAdapter<SealRecord, BaseViewHolder> {
     public MyQCDetailsAdapter(@Nullable List<SealRecord> data) {
-        super(R.layout.item_my_ksb_details, data);
+        super(R.layout.item_my_qc_details, data);
     }
 
     @Override

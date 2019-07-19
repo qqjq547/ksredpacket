@@ -122,7 +122,7 @@ public class SealTranQcActivity extends MvpActivity<SealTranQcPresenter> impleme
                     return;
                 }
                 if (exchangeConfig!=null&&amount<exchangeConfig.getAaa2ksb().getMinLimit()){
-                    showShortToast(String.format(getString(R.string.format_min_seal),exchangeConfig.getAaa2ksb().getMinLimit()));
+                    showShortToast(String.format(getString(R.string.format_min_seal),String.valueOf(exchangeConfig.getAaa2ksb().getMinLimit())));
                     return;
                 }
                 if (passDialog == null) {

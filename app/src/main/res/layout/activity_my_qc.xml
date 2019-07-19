@@ -52,7 +52,6 @@
 
 
                 <LinearLayout
-                    android:id="@+id/lin_qc_price"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -72,36 +71,6 @@
 
                     <TextView
                         android:id="@+id/tv_qc_price"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space30"
-                        android:textColor="@color/text_black"
-                        android:textSize="@dimen/textfont18" />
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:id="@+id/lin_share_benefit"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:paddingLeft="@dimen/space10"
-                    android:paddingTop="@dimen/space35"
-                    android:paddingRight="@dimen/space10"
-                    android:paddingBottom="@dimen/space35"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/today_ksb_price"
-                        android:textColor="@color/text_black"
-                        android:textSize="@dimen/textfont16" />
-
-                    <TextView
-                        android:id="@+id/tv_share_benefit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space30"
@@ -153,7 +122,7 @@
                     android:layout_weight="1"
                     android:layout_height="@dimen/space45"
                     android:background="@drawable/bg_myksb_trasnfer"
-                    android:text="@string/transfer_sell"
+                    android:text="@string/qc_transfer_title"
                     android:textColor="@color/text_white"
                     android:textSize="@dimen/textfont16" />
        </LinearLayout>
@@ -175,18 +144,6 @@
                 android:layout_marginBottom="@dimen/space25"
                 android:layout_marginRight="@dimen/space15">
 
-
-             <!--   android:background="@drawable/bg_myksb_trasnfer"-->
-                <Button
-                    android:id="@+id/btn_ksb_detail"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/space45"
-                    android:layout_weight="1"
-                    android:text="@string/transfer_ksb_detail"
-                    android:textColor="@color/text_blue"
-                    android:visibility="gone"
-                    android:textSize="@dimen/textfont16" />
             </LinearLayout>
         </LinearLayout>
 

@@ -70,8 +70,8 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
     EditText etBidPrice;
     @BindView(R.id.tv_my_ksb)
     TextView tvMyKsb;
-    @BindView(R.id.tv_equal_ksb)
-    TextView tvEqualKsb;
+//    @BindView(R.id.tv_equal_ksb)
+//    TextView tvEqualKsb;
     @BindView(R.id.lin_edit)
     LinearLayout linEdit;
     @BindView(R.id.iv_avatar)
@@ -145,20 +145,20 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
 
             @Override
             public void afterTextChanged(Editable editable) {
-                String text = etBidPrice.getText().toString().trim();
-                if (TextUtils.isEmpty(text)) {
-                    tvEqualKsb.setText(null);
-                    return;
-                }
-                if (timeInfo == null) {
-                    return;
-                }
-                double money=Double.parseDouble(text);
-                if (money > timeInfo.getMaxPrice()) {
-                    etBidPrice.setText(String.valueOf(timeInfo.getMaxPrice()));
-                    return;
-                }
-                tvEqualKsb.setText(String.valueOf(DoubleUtil.divide(money*selectDayCount,rate)));
+//                String text = etBidPrice.getText().toString().trim();
+//                if (TextUtils.isEmpty(text)) {
+//                    tvEqualKsb.setText(null);
+//                    return;
+//                }
+//                if (timeInfo == null) {
+//                    return;
+//                }
+//                double money=Double.parseDouble(text);
+//                if (money > timeInfo.getMaxPrice()) {
+//                    etBidPrice.setText(String.valueOf(timeInfo.getMaxPrice()));
+//                    return;
+//                }
+//                tvEqualKsb.setText(String.valueOf(DoubleUtil.divide(money*selectDayCount,rate)));
             }
         });
         rGroupDate.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -313,7 +313,7 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
             linResult.setVisibility(View.GONE);
             linRnsure.setVisibility(View.VISIBLE);
             tvCurrentPrice.setText(String.valueOf(data.getCurrentPrice()));
-            tvMyKsb.setText(String.valueOf(timeInfo.getKsb()));
+            tvMyKsb.setText(String.valueOf(timeInfo.getQc()));
         }
     }
     public void setSelect(int dayCount){
@@ -325,11 +325,11 @@ public class BidBrandActivity extends MvpActivity<BidBrandPresenter> implements 
         tvBuyTime.setText(String.format(getString(R.string.format_time_to_time), currentSelectArr.get(0), currentSelectArr.get(currentSelectArr.size()-1)));
         tvBuyDayCount.setText(String.format(getString(R.string.format_day_count), currentSelectArr.size()));
         cdvMonth.update();
-        String text = etBidPrice.getText().toString().trim();
-        if (!TextUtils.isEmpty(text)){
-            double money=Double.parseDouble(text);
-            tvEqualKsb.setText(String.valueOf(DoubleUtil.divide(money*selectDayCount,rate)));
-        }
+//        String text = etBidPrice.getText().toString().trim();
+//        if (!TextUtils.isEmpty(text)){
+//            double money=Double.parseDouble(text);
+//            tvEqualKsb.setText(String.valueOf(DoubleUtil.divide(money*selectDayCount,rate)));
+//        }
     }
 
     @Override

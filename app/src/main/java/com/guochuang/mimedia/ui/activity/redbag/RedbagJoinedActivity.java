@@ -83,18 +83,20 @@ public class RedbagJoinedActivity extends MvpActivity<RedbagJoinedPresenter> imp
          String total=getIntent().getStringExtra(Constant.TOTAL);
          GlideImgManager.loadCircleImage(this,avatar,ivAvatar);
          String coinType=getIntent().getStringExtra(Constant.COINTYPE);
-         if(TextUtils.equals(coinType,Constant.COINTYPE_KSB)){
-             tvUnit.setText(R.string.money_unit_ksb);
-         }else {
-             tvUnit.setText(R.string.money_unit_seal);
-         }
+        if(TextUtils.equals(coinType,Constant.COINTYPE_KSB)) {
+            tvUnit.setText(R.string.money_unit_ksb);
+        }else if(TextUtils.equals(coinType,Constant.COINTYPE_SEAL)){
+            tvUnit.setText(R.string.money_unit_seal);
+        }else {
+            tvUnit.setText(R.string.money_unit_qc);
+        }
          if (TextUtils.equals(ksb,"0")){
              tvSaveAccount.setVisibility(View.INVISIBLE);
          }else {
              tvSaveAccount.setVisibility(View.VISIBLE);
          }
         tvName.setText(name);
-        tvCoin.setText(ksb);
+        tvCoin.setText(money);
         tvMoney.setText(String.format(getString(R.string.format_add_yuan), money));
         tvArea.setText(areaType);
         tvHasGet.setText(String.format(getString(R.string.redbag_joined_left),drawNumber,total));

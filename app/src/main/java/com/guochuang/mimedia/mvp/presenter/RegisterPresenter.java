@@ -148,5 +148,29 @@ public class RegisterPresenter extends BasePresenter<RegisterView> {
         });
 
     }
+    public void getCaptchaType() {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
+                getCaptchaType()), new ApiCallback<Integer>() {
+            @Override
+            public void onSuccess(Integer data) {
+                mvpView.setCaptchaType(data);
+
+            }
+
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setCaptchaTypeError(exception.getMessage());
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+
+    }
+
+
 
 }

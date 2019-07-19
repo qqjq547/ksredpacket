@@ -104,7 +104,7 @@ public class RecommendAgentActivity extends MvpActivity<RecommendPresenter> impl
                recommendData=data;
                tvFansCount.setText(String.valueOf(data.getDirectUser()));
                tvAgentCount.setText(String.valueOf(data.getDirectAgent()));
-               tvShareBenefit.setText(data.getCumulativeCoin());
+               tvShareBenefit.setText(data.getCumulativeMoney());
                tvEqualCount.setText(data.getCumulativeMoney());
                switch (data.getRole()){
                    case Constant.USER_ROLE_FANS:

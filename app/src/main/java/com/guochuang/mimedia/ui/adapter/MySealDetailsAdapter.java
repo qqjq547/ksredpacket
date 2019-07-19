@@ -10,16 +10,7 @@ import com.sz.gcyh.KSHongBao.R;
 
 import java.util.List;
 
-/**
- * 黄家强:
- * VALUE_24(124, "淘区块"),
- *
- * 黄家强:
- * VALUE_26(126, "淘区块分润"),
- *
- * 黄家强:
- * ALUE_37(137, "淘区块收益"),
- */
+
 public class MySealDetailsAdapter extends BaseMultiItemQuickAdapter<SealRecord, BaseViewHolder> {
     public MySealDetailsAdapter(@Nullable List<SealRecord> data) {
         super(data);

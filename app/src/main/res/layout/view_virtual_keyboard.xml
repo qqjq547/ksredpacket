@@ -8,7 +8,6 @@
 
 
         <RelativeLayout
-            android:id="@+id/layoutBack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/space10">

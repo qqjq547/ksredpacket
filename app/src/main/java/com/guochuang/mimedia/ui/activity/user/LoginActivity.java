@@ -275,8 +275,7 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
                     return;
                 }
 
-                SlideVerifyDialog slideVerifyDialog=new SlideVerifyDialog(this);
-                slideVerifyDialog.setOnResultListener(new SlideVerifyDialog.OnResultListener() {
+                new SlideVerifyDialog(this){
                     @Override
                     public void onResult(String flag) {
                         showLoadingDialog(null);
@@ -300,8 +299,7 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
                                 flag
                         );
                     }
-                });
-                slideVerifyDialog.show();
+                }.show();
                 break;
             case R.id.tv_login_register:
                 startActivity(new Intent(this, RegisterActivity.class));

@@ -42,10 +42,6 @@ public class MyQCDetailsActivity extends MvpActivity<MyQCDetailsPresenter> imple
     TextView tvTitle;
     @BindView(R.id.tv_text)
     TextView tvText;
-    @BindView(R.id.lin_sum)
-    LinearLayout linSum;
-    @BindView(R.id.tv_num_all)
-    TextView tvNumAll;
     @BindView(R.id.rv_ksb)
     RecyclerView rvKsb;
     @BindView(R.id.srl_refresh)
@@ -76,7 +72,6 @@ public class MyQCDetailsActivity extends MvpActivity<MyQCDetailsPresenter> imple
         tvTitle.setText(getResources().getString(R.string.my_qc_details_title));
         tvText.setText(getResources().getString(R.string.all));
         defaultCode = getIntent().getStringExtra(Constant.DEFAULT_CODE);
-        tvNumAll.setText(getPref().getString(PrefUtil.COIN, ""));
         if (mMyQCDetailsAdapter != null) {
             return;
         }

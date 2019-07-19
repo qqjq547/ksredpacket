@@ -59,12 +59,10 @@
         <activity android:name="com.guochuang.mimedia.ui.activity.redbag.RedbagJoinedActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.user.RecommendFanActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.user.RecommendAgentActivity" />
-        <activity android:name="com.guochuang.mimedia.ui.activity.user.MyKsbActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.redbag.SquareActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.city.CityActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.city.CityDetailActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.common.PurchaseActivity" />
-        <activity android:name="com.guochuang.mimedia.ui.activity.redbag.RedbagBenefitActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.city.BidPriceActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.operation.OperationCenterActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.operation.IncomeStatisticsActivity" />
@@ -110,14 +108,12 @@
         <activity android:name="com.guochuang.mimedia.ui.activity.beenest.AdBidActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.beenest.MyBidActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.common.JuxiangwanActivity" />
-        <activity android:name="com.guochuang.mimedia.ui.activity.common.KsbPayActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.common.ScanResultActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.redbag.LinkRedbagDetailActivity" />
 
         <activity
             android:name="com.guochuang.mimedia.ui.activity.common.MyCaptureActivity"
             android:theme="@style/TransTheme" />
-        <activity android:name="com.guochuang.mimedia.ui.activity.common.PayResultActivity"/>
 
         <activity android:name="com.guochuang.mimedia.ui.activity.redbag.AnswerActivity" />
         <activity
@@ -162,11 +158,6 @@
         <activity android:name="com.guochuang.mimedia.ui.activity.city.CityBidHallActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.user.MyCityActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.city.CityBidRecordActivity" />
-        <activity android:name="com.guochuang.mimedia.ui.activity.user.MyKsbTransferActivity" />
-        <activity android:name="com.guochuang.mimedia.ui.activity.user.MyKsbDetailsActivity" />
-        <activity android:name="com.guochuang.mimedia.ui.activity.user.MyKsbTransRecActivity" />
-        <activity android:name="com.guochuang.mimedia.ui.activity.user.MyKsbGrantActivity" />
-        <activity android:name="com.guochuang.mimedia.ui.activity.user.MyKsbGrantRecActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.redbag.EditRedPackgeProblemActivity"
             android:theme="@style/fitsSystemWindow"/>
         <activity android:name="com.guochuang.mimedia.ui.activity.redbag.VideoPreviewActivity2"
@@ -194,6 +185,7 @@
         <activity android:name="com.guochuang.mimedia.ui.activity.user.SetMobileAcitivity"/>
         <activity android:name="com.guochuang.mimedia.ui.activity.user.CoinAddressActivity"/>
         <activity android:name="com.guochuang.mimedia.ui.activity.user.EditCoinAddressActivity"/>
+        <activity android:name="com.guochuang.mimedia.ui.activity.user.QcTransferActivity"/>
 
 
 

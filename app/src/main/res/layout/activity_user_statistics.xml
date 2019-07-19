@@ -57,7 +57,6 @@
         android:padding="@dimen/space10"
         android:background="@drawable/bg_white_block">
         <LinearLayout
-            android:id="@+id/lin_total_user"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -83,7 +82,6 @@
                 android:textColor="@color/text_black" />
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/lin_today_increase"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -109,7 +107,6 @@
                 android:textColor="@color/text_black" />
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/lin_yesterday_increase"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

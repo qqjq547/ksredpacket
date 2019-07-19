@@ -29,8 +29,6 @@ public class MyQCActivity extends MvpActivity<MyQCPresenter> implements MyQCView
     TextView tvText;
     @BindView(R.id.tv_ksb_count)
     TextView tvKsbCount;
-    @BindView(R.id.tv_share_benefit)
-    TextView tvShareBenefit;
     @BindView(R.id.tv_equal_count)
     TextView tvEqualCount;
     @BindView(R.id.btn_transfer_sell)
@@ -62,8 +60,8 @@ public class MyQCActivity extends MvpActivity<MyQCPresenter> implements MyQCView
         mvpPresenter.getMyQC();
     }
 
-    @OnClick({R.id.iv_back, R.id.tv_text, R.id.lin_ksb, R.id.lin_share_benefit, R.id.lin_equal,
-            R.id.btn_transfer_sell,R.id.btn_ksb_detail})
+    @OnClick({R.id.iv_back, R.id.tv_text, R.id.lin_ksb, R.id.lin_equal,
+            R.id.btn_transfer_sell})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -71,21 +69,13 @@ public class MyQCActivity extends MvpActivity<MyQCPresenter> implements MyQCView
                 break;
             case R.id.tv_text:
                 startActivity(new Intent(this, MyQCDetailsActivity.class));
-
                 break;
             case R.id.lin_ksb:
-                break;
-            case R.id.lin_share_benefit:
-                startActivity(new Intent(this, ShareBenefitDetailActivity.class));
                 break;
             case R.id.lin_equal:
                 break;
             case R.id.btn_transfer_sell:
-                startActivityForResult(new Intent(this, QCTranSEALActivity.class),Constant.REQUEST_GRANT);
-                break;
-            case R.id.btn_ksb_detail:
-                //原ksb 明细
-                startActivity(new Intent(this, MyKsbDetailsActivity.class));
+                startActivityForResult(new Intent(this, QcTransferActivity.class),Constant.REQUEST_GRANT);
                 break;
 
         }
@@ -97,7 +87,6 @@ public class MyQCActivity extends MvpActivity<MyQCPresenter> implements MyQCView
         closeLoadingDialog();
         if (data!=null){
             tvKsbCount.setText(data.getCoin());
-            tvShareBenefit.setText(data.getQcMoney());
             tvEqualCount.setText(data.getMoney());
             mTvQcPrice.setText(data.getQcMoney());
         }

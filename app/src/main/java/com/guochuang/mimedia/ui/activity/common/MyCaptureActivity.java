@@ -6,6 +6,8 @@ import android.text.TextUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.guochuang.mimedia.base.BasePresenter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.PayeeUser;
 import com.guochuang.mimedia.mvp.presenter.MyCapturePresenter;
@@ -17,7 +19,7 @@ import com.uuzuche.lib_zxing.activity.CodeUtils;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class MyCaptureActivity extends MvpActivity<MyCapturePresenter> implements MyCaptureView {
+public class MyCaptureActivity extends MvpActivity {
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.tv_title)
@@ -27,8 +29,8 @@ public class MyCaptureActivity extends MvpActivity<MyCapturePresenter> implement
 
     public static MyCaptureActivity activity;
   @Override
-  protected MyCapturePresenter createPresenter() {
-    return new MyCapturePresenter(this);
+  protected BasePresenter createPresenter() {
+    return null;
 }
     @Override
     public int getLayout() {
@@ -79,19 +81,4 @@ public class MyCaptureActivity extends MvpActivity<MyCapturePresenter> implement
         }
     };
 
-
-    @Override
-    public void setData(PayeeUser data) {
-        closeLoadingDialog();
-        if (data!=null){
-            startActivity(new Intent(MyCaptureActivity.this, KsbPayActivity.class).putExtra(Constant.PAYEE_USER, data));
-            finish();
-        }
-    }
-
-    @Override
-    public void setError(String msg) {
-      closeLoadingDialog();
-      showShortToast(msg);
-    }
 }

@@ -10,15 +10,9 @@
     <color name="text_theme">#dd2828</color>
     <color name="text_gray_drak">#666666</color>
     <color name="text_gray">#999999</color>
-    <color name="text_white_hint">#90ffffff</color>
-    <color name="text_summary">#dbdbdb</color>
     <color name="text_red">#ff3b3b</color>
     <color name="text_hint">#bebebe</color>
     <color name="text_yellow">#fdba06</color>
-    <color name="text_home_indicate">#f85b28</color>
-    <color name="text_green_light">#05ceb0</color>
-    <color name="text_share">#6f73df</color>
-    <color name="text_circle_topic">#31b2e9</color>
     <color name="text_login_help">#959595</color>
     <color name="text_city_bid_hall_left_price">#615c4e</color>
     <color name="text_rain_red">#e83c47</color>
@@ -30,26 +24,16 @@
     <color name="text_has_get_redbag">#ccb083</color>
     <color name="text_time">#353535</color>
     <color name="text_city_yellow">#ff7519</color>
-    <color name="text_redbag_name">#ffc518</color>
-    <color name="text_share_btn">#8015cf</color>
     <color name="bg_sky_blue">#3097d2</color>
 
     <color name="bg_theme">#ffffff</color>
     <color name="bg_gray">#eeeeee</color>
-    <color name="bg_gray_light">#f9f9f9</color>
     <color name="bg_white">#ffffff</color>
     <color name="bg_black">#000000</color>
     <color name="bg_trans">#75000000</color>
     <color name="bg_trans_light">#30000000</color>
     <color name="bg_title">#ffffff</color>
-    <color name="bg_tag">#cce03c47</color>
     <color name="bg_divide">#dbdbdb</color>
-    <color name="bg_follow">#ff344b</color>
-    <color name="bg_msg_dot">#ff344b</color>
-    <color name="bg_speed_select">#cc000000</color>
-    <color name="bg_edit_panel">#242730</color>
-    <color name="bg_playing">#05ceb0</color>
-    <color name="bg_reply">#f3f3f3</color>
     <color name="bg_frame_color">#999999</color>
     <color name="bg_btn_login_phone">#ff3b3b</color>
     <color name="bg_line_login">#e5e5e5</color>
@@ -61,43 +45,27 @@
     <color name="bg_center_green">#23d6c3</color>
     <color name="bg_center_purple">#aea9ff</color>
     <color name="bg_green">#96c160</color>
-    <color name="bg_city_bid_hall_right_gray">#bfbdbd</color>
     <color name="bg_rain">#e84047</color>
     <color name="bg_active">#86e0de</color>
     <color name="bg_trans_white">#e6ffffff</color>
 
     <color name="record_progress_bg">#47000000</color> <!-- 40%不透明度 -->
-    <color name="record_progress">#fb792b</color>
     <color name="transparent">#00000000</color>
     <!--动态滤镜的颜色-->
-    <color name="spirit_out_color_press">#AA8059fe</color>
-    <color name="screen_split_press">#AAfe666b</color>
-    <color name="light_wave_press">#AAe559fe</color>
-    <color name="dark_illusion_press">#AA5a5d66</color>
 
-    <color name="btn_cancel_color">#999999</color>
-    <color name="btn_confirm_color">#303F9F</color>
-    <color name="scan_bg">#7f000000</color>
     <color name="white">#ffffff</color>
     <color name="color_999999">#999999</color>
     <color name="color_d2d3d5">#d2d3d5</color>
-    <color name="color_ff999999">#ff999999</color>
     <color name="color_333333">#333333</color>
     <color name="color_ff7519">#ff7519</color>
     <color name="color_666666">#666666</color>
     <color name="color_000000">#000000</color>
-    <color name="bg_pay_code">#f45e4d</color>
-    <color name="text_pay_code">#f45e4d</color>
-    <color name="bg_content">#eeeeee</color>
     <color name="color_eeeeee">#eeeeee</color>
-    <color name="color_96c160">#96c160</color>
-    <color name="color_ff3b3b">#ff3b3b</color>
     <color name="color_cc000000">#CC000000</color>
     <color name="text_gold">#ebcd9a</color>
     <color name="color_f9b42f">#f9b42f</color>
     <color name="color_f45e4d">#f45e4d</color>
     <color name="color_002a64">#002a64</color>
-    <color name="color_7f7f7f">#557f7f7f</color>
     <color name="color_6a4bf1">#6a4bf1</color>
     <color name="color_4498e0">#4498e0</color>
 
