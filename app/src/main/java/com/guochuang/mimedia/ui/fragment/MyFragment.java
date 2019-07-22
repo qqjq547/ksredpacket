@@ -257,9 +257,6 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                     case R.drawable.ic_my_welfare:
                         startActivity(new Intent(getActivity(), WelfareActivity.class));
                         break;
-                    case R.drawable.ic_my_seal:
-                        startActivity(new Intent(getActivity(), MySealActivity.class));
-                        break;
                     case R.drawable.ic_my_ad_bid:
                         //广告竞购
                         ((MainActivity) getActivity()).clearMarker();
@@ -353,10 +350,7 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
                 startActivity(new Intent(getActivity(), MessageActivity.class));
                 break;
             case R.id.lin_my_seal:
-
-
                 startActivity(new Intent(getActivity(), MySealActivity.class));
-
                 break;
             case R.id.lin_my_qc:
 
