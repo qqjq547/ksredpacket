@@ -243,12 +243,13 @@
                 android:id="@+id/tv_tip"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/space20"
-                android:layout_marginTop="@dimen/space15"
-                android:layout_marginBottom="@dimen/space11"
+                android:layout_marginLeft="@dimen/space15"
+                android:layout_marginRight="@dimen/space15"
+                android:layout_marginTop="@dimen/space10"
+                android:layout_marginBottom="@dimen/space10"
                 android:text="@string/seal_des_str"
-                android:textColor="@color/color_999999"
-                android:textSize="@dimen/textfont8" />
+                android:textColor="@color/text_red"
+                android:textSize="@dimen/textfont12" />
         </LinearLayout>
     </ScrollView>
 

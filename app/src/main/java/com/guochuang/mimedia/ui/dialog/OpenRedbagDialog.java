@@ -92,10 +92,6 @@ public class OpenRedbagDialog extends Dialog {
                 ivOpen.setVisibility(View.GONE);
                 etWord.setVisibility(View.GONE);
             }
-
-
-
-
         }else {
             if (redbag.getType().equals(Constant.RED_PACKET_TYPE_PASSWORD)){
                 if (TextUtils.isEmpty(redbag.getPassword())){
