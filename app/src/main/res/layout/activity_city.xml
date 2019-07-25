@@ -11,6 +11,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/lin_current"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -230,6 +231,33 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/lin_redbag_benfit"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/space20"
+                        android:paddingTop="@dimen/space20">
+
+                        <TextView
+                            android:id="@+id/tv_redbag_benfit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/textfont18"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space20"
+                            android:text="@string/redbag_benfit"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/textfont14" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:id="@+id/lin_buy_price_benfit"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -256,6 +284,15 @@
                             android:textSize="@dimen/textfont14" />
                     </LinearLayout>
                 </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/space5"
+                    android:text="@string/unit_ksb"
+                    android:textColor="@color/text_gray"
+                    android:textSize="@dimen/textfont12" />
             </LinearLayout>
 
             <LinearLayout

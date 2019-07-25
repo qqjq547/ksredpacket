@@ -73,6 +73,10 @@ public class CityActivity extends MvpActivity<CityPresenter> implements CityView
     TextView tvCityTotalBenfit;
     @BindView(R.id.lin_city_total_benfit)
     LinearLayout linCityTotalBenfit;
+    @BindView(R.id.tv_redbag_benfit)
+    TextView tvRedbagBenfit;
+    @BindView(R.id.lin_redbag_benfit)
+    LinearLayout linRedbagBenfit;
     @BindView(R.id.tv_buy_price_benfit)
     TextView tvBuyPriceBenfit;
     @BindView(R.id.lin_buy_price_benfit)
@@ -264,6 +268,7 @@ public class CityActivity extends MvpActivity<CityPresenter> implements CityView
                 span.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.text_city_yellow)), index, index + String.valueOf(data.getRegionStatisticsDto().getRegionNumber()).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 tvOwnCityNum.setText(span);
                 tvCityTotalBenfit.setText(data.getRegionStatisticsDto().getTotalIncome());
+                tvRedbagBenfit.setText(data.getRegionStatisticsDto().getRedPacketIncome());
                 tvBuyPriceBenfit.setText(data.getRegionStatisticsDto().getCompensate());
             }
             if (data != null && data.getBiddingHall().size() > 0) {

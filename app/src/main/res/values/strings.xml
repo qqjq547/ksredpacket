@@ -185,10 +185,11 @@
     <string name="buy_record">竞购记录</string>
     <string name="my_city">我的节点</string>
     <string name="format_current_own_city">当前拥有%d个节点</string>
-    <string name="city_total_benfit">分润QC</string>
-    <string name="city_total_benfit_arrow">分润QC>></string>
-    <string name="buy_price_benfit">溢价QC</string>
-    <string name="bid_price_arrow">溢价QC>></string>
+    <string name="city_total_benfit">节点总收益</string>
+    <string name="redbag_benfit">红包收益</string>
+    <string name="buy_price_benfit">竞购溢价</string>
+    <string name="redbag_benfit_detail">收益明细>></string>
+    <string name="bid_price_arrow">竞购溢价>></string>
     <string name="buy_hall">竞购大厅</string>
     <string name="cur_area">所在区域</string>
     <string name="next_buy_time">下次竞购时间</string>
@@ -211,7 +212,7 @@
     <string name="i_known">我知道了</string>
     <string name="check_all">查看全部</string>
     <string name="format_yuan">%s元</string>
-    <string name="bid_price">溢价QC</string>
+    <string name="bid_price">竞购溢价</string>
     <string name="income_statistics">收入统计</string>
     <string name="today_income">今日收入</string>
     <string name="yesterday_income">昨日收入</string>
@@ -794,4 +795,8 @@
     <string name="qc_transfer_count">QC转SEAL提币数量</string>
     <string name="pls_input_qc_transfer_count">请输入QC转SEAL提币数量</string>
     <string name="digital_qc_not_enouth">账户QC数量不足</string>
+    <string name="redbag_benefit">红包收益</string>
+    <string name="redbag_benefit_ksb">红包收益(SEAL)</string>
+    <string name="arrive_account">到账</string>
+    <string name="equalvalue">等值</string>
 </resources>

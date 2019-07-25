@@ -63,6 +63,7 @@
         <activity android:name="com.guochuang.mimedia.ui.activity.city.CityActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.city.CityDetailActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.common.PurchaseActivity" />
+        <activity android:name="com.guochuang.mimedia.ui.activity.redbag.RedbagBenefitActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.city.BidPriceActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.operation.OperationCenterActivity" />
         <activity android:name="com.guochuang.mimedia.ui.activity.operation.IncomeStatisticsActivity" />

@@ -17,6 +17,7 @@
     <dimen name="textfont19">19sp</dimen>
     <dimen name="textfont20">20sp</dimen>
     <dimen name="textfont22">22sp</dimen>
+    <dimen name="textfont24">24sp</dimen>
     <dimen name="textfont30">30sp</dimen>
     <dimen name="space0">0dp</dimen>
     <dimen name="space1">1dp</dimen>
