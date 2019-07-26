@@ -1,6 +1,7 @@
 package com.guochuang.mimedia.ui.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -11,16 +12,23 @@ import android.os.Handler;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-
+import com.allenliu.versionchecklib.v2.AllenVersionChecker;
+import com.allenliu.versionchecklib.v2.builder.UIData;
+import com.allenliu.versionchecklib.v2.callback.CustomDownloadingDialogListener;
 import com.guochuang.mimedia.mvp.model.Remind;
+import com.guochuang.mimedia.mvp.model.VersionMsg;
 import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.ui.dialog.RemindDialog;
+import com.guochuang.mimedia.ui.dialog.UpgradeDialog;
+import com.guochuang.mimedia.ui.dialog.VersionUpdateDialog;
 import com.sz.gcyh.KSHongBao.R;
 import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.MvpActivity;
@@ -137,7 +145,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
         registerReceiver(mainReceiver,filter);
         mvpPresenter.getUserInfo();
         mvpPresenter.getRainMsg();
-
+        mvpPresenter.getVersion(Constant.SYSTEM_CODE_ANDROID, String.valueOf(CommonUtil.getVersionCode(this)));
         mvpPresenter.messageIsNews();
         mvpPresenter.isNameAuthAndSafetyCode();
         mvpPresenter.getRemind();
@@ -208,7 +216,35 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
         showShortToast(R.string.late_can_get);
     }
 
+    @Override
+    public void setVersion(final VersionMsg data) {
+        mvpPresenter.getRemind();
+       if (data!=null){
+           final boolean isForce=data.getIsForce()>0;
+           long time=getPref().getLong(PrefUtil.UPGRADE_NOTICE,0);
+           if (isForce||(System.currentTimeMillis()-time>data.getRemindIntervalMinute()*60*1000)){
+               String content=data.getTitle()+"\n"+data.getDescription();
+               content=content.replace("\\n", "\n");
+               final VersionUpdateDialog versionUpdateDialog=new VersionUpdateDialog(this,content,isForce);
+               versionUpdateDialog.setOnResultListener(new VersionUpdateDialog.OnResultListener() {
+                   @Override
+                   public void onRefuse() {
 
+                   }
+                   @Override
+                   public void onUpdate() {
+                       if (!isForce) {
+                           versionUpdateDialog.dismiss();
+                       }
+                       startUpgrade(data.getUrl());
+                   }
+               });
+               versionUpdateDialog.setCancelable(false);
+               versionUpdateDialog.show();
+               getPref().setLong(PrefUtil.UPGRADE_NOTICE,System.currentTimeMillis());
+           }
+       }
+    }
 
 
     @Override
@@ -307,7 +343,33 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
             setStatusbar(R.color.bg_white,true);
         }
     }
-
+    private void startUpgrade(String downloadUrl) {
+        if(TextUtils.isEmpty(downloadUrl)){
+            return;
+        }
+        if (downloadUrl.endsWith(".apk")){
+            AllenVersionChecker
+                    .getInstance()
+                    .downloadOnly(UIData.create().setDownloadUrl(downloadUrl))
+                    .setDirectDownload(true)
+                    .setForceRedownload(true)
+                    .setCustomDownloadingDialogListener(new CustomDownloadingDialogListener() {
+                        @Override
+                        public Dialog getCustomDownloadingDialog(Context context, int progress, UIData versionBundle) {
+                            UpgradeDialog downloadDialog=new UpgradeDialog(context);
+                            return downloadDialog;
+                        }
+                        @Override
+                        public void updateUI(Dialog dialog, int progress, UIData versionBundle) {
+                            ProgressBar progressBar = dialog.findViewById(R.id.pb_upgrade);
+                            progressBar.setProgress(progress);
+                        }
+                    })
+                    .executeMission(this);
+        }else if(downloadUrl.contains(".html")){
+            IntentUtils.startOutWebActivity(this,downloadUrl);
+        }
+    }
     public void setMsgDotView(){
         if (badgeView==null)
         badgeView= new BadgeView(this,vFakeUser);
