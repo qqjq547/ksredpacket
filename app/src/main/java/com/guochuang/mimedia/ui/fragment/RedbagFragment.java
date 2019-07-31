@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +35,7 @@ import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.Stroke;
 import com.baidu.mapapi.model.LatLng;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.MvpFragment;
 import com.guochuang.mimedia.mvp.model.HomeRegion;
@@ -59,9 +61,9 @@ import com.guochuang.mimedia.ui.activity.redbag.SquareActivity;
 import com.guochuang.mimedia.ui.activity.user.UpgradeAgentActivity;
 import com.guochuang.mimedia.ui.dialog.OpenRedbagDialog;
 import com.guochuang.mimedia.ui.dialog.RedbagTypeDialog;
-import com.guochuang.mimedia.ui.dialog.SlideVerifyDialog;
+import com.guochuang.mimedia.view.AutoPollAdapter;
+import com.guochuang.mimedia.view.AutoPollRecyclerView;
 import com.guochuang.mimedia.view.HoneyCombView;
-import com.guochuang.mimedia.view.ScrollTextView;
 import com.sz.gcyh.KSHongBao.R;
 import com.tbruyelle.rxpermissions.RxPermissions;
 import java.util.ArrayList;
@@ -83,8 +85,8 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     MapView mvRedbag;
     @BindView(R.id.lin_notice)
     LinearLayout linNotice;
-    @BindView(R.id.stv_notice)
-    ScrollTextView stvNotice;
+    @BindView(R.id.rv_notice)
+    AutoPollRecyclerView rvNotice;
     @BindView(R.id.lin_fl_head)
     LinearLayout linFlHead;
     @BindView(R.id.tv_city_owner)
@@ -129,6 +131,9 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
             }
         }
     };
+
+    List<String> scrollArr=new ArrayList<>();
+    AutoPollAdapter adapter;
 
     @Override
     protected RedbagPresenter createPresenter() {
@@ -457,22 +462,30 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
 
     @Override
     public void setScrollbar(List<String> data) {
-        if (data == null || data.size() == 0) {
-            linNotice.setVisibility(View.GONE);
-            return;
+//        if (data == null || data.size() == 0) {
+//            linNotice.setVisibility(View.GONE);
+//            return;
+//        }
+        scrollArr.add("111111111111111111fksnkfakldlslflsflsnflsfalnfslfna;nsnfslanf");
+//        scrollArr.add("22222222222222222ssssskfnksfksjfkskfsjfjsljfklsfklak ");
+//        scrollArr.add("333333333ssfsflsmflmlmflksfnksfksjfsfsfsjkfsjkkkskjkfjskfksfk卡美能达福克斯卡夫卡首付款");
+        if (adapter==null){
+            adapter = new AutoPollAdapter(getActivity(),scrollArr);
+            adapter.setOnTextClickListener(new AutoPollAdapter.OnTextClickListener() {
+                @Override
+                public void onTextClick(int position) {
+                    showShortToast("点击位置："+position);
+                }
+            });
+            LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+            layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            rvNotice.setLayoutManager(layoutManager);
+            rvNotice.setAdapter(adapter);
+            rvNotice.start();
+        }else {
+            adapter.notifyDataSetChanged();
         }
-        stvNotice.setScroll(true);
-        stvNotice.setTextSpeed(5);
-        stvNotice.setTextSize(CommonUtil.sp2px(getContext(), 13));
-        stvNotice.setTextColor(getResources().getColor(R.color.text_notice));
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < data.size(); i++) {
-            builder.append(data.get(i));
-            for (int j = 0; j < 30; j++) {
-                builder.append("  ");
-            }
-        }
-        stvNotice.setText(builder.toString());
+
     }
 
     @Override

@@ -1506,12 +1506,21 @@ public interface ApiStore {
     Observable<HttpResponse<MyQC>> getMyQC();
 
     @GET("/api/v1/hbase/coin/getKsbDetailsList")
-    Observable<HttpResponse<List<SealRecord>>> getCoinRecord(
+    Observable<HttpResponse<List<SealRecord>>> getSealRecord(
             @Query("type") String type,
             @Query("coinType") String coinType,
             @Query("startIndex") String startIndex,
             @Query("pageSize") int pageSize
     );
+
+    @GET("/api/v1/hbase/coin/getKsbDetailsList")
+    Observable<HttpResponse<List<QcRecord>>> getQcRecord(
+            @Query("type") String type,
+            @Query("coinType") String coinType,
+            @Query("startIndex") String startIndex,
+            @Query("pageSize") int pageSize
+    );
+
     //绑定邮箱，邮箱验证码
     @FormUrlEncoded
     @POST("/api/v1/user/email_captcha/bind")

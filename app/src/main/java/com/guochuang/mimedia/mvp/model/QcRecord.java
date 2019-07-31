@@ -2,7 +2,7 @@ package com.guochuang.mimedia.mvp.model;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 
-public class SealRecord implements MultiItemEntity {
+public class QcRecord implements MultiItemEntity {
 
     /**
      * coin : string
@@ -161,11 +161,11 @@ public class SealRecord implements MultiItemEntity {
     @Override
     public int getItemType() {
         switch (ksbType){
-            case TYPE_TQK://淘区块
-            case TYPE_QC2SEAL://QC转SEAL
-            case TYPE_SEAL2QC://SEAL转QC
-            case TYPE_EXTRA://提币
-            case TYPE_FILL://充币
+//            case TYPE_TQK://淘区块
+//            case TYPE_QC2SEAL://QC转SEAL
+//            case TYPE_SEAL2QC://SEAL转QC
+//            case TYPE_EXTRA://提币
+//            case TYPE_FILL://充币
             case TYPE_QC_EXTRA://qc提币
                 return TRANSFER;
         }

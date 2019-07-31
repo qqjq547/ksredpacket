@@ -16,7 +16,7 @@ public class MySealDetailsPresenter extends BasePresenter<MySealDetailsView> {
         attachView(view);
     }
     public void getCoinRecord(String type,String coinType,String startIndex,int pageSize){
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getCoinRecord(type,coinType,startIndex,pageSize)), new ApiCallback<List<SealRecord>>() {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getSealRecord(type,coinType,startIndex,pageSize)), new ApiCallback<List<SealRecord>>() {
             @Override
             public void onSuccess(List<SealRecord> data) {
                 mvpView.setData(data);

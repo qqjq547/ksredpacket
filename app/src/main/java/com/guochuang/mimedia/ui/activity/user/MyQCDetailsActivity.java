@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.base.MvpActivity;
 import com.guochuang.mimedia.mvp.model.DictionaryType;
+import com.guochuang.mimedia.mvp.model.QcRecord;
 import com.guochuang.mimedia.mvp.model.SealRecord;
 import com.guochuang.mimedia.mvp.presenter.MyQCDetailsPresenter;
 import com.guochuang.mimedia.mvp.view.MyQCDetailsView;
@@ -49,7 +50,7 @@ public class MyQCDetailsActivity extends MvpActivity<MyQCDetailsPresenter> imple
 
     KsbDetailsTypePop ksbDetailsTypePop;
     MyQCDetailsAdapter mMyQCDetailsAdapter;
-    List<SealRecord> itemArr = new ArrayList<>();
+    List<QcRecord> itemArr = new ArrayList<>();
     List<DictionaryType> subjectArr = new ArrayList<>();
     List<String> subjectName = new ArrayList<>();
     String type = "100";
@@ -178,7 +179,7 @@ public class MyQCDetailsActivity extends MvpActivity<MyQCDetailsPresenter> imple
     }
 
     @Override
-    public void setQCDetail(List<SealRecord> data) {
+    public void setQCDetail(List<QcRecord> data) {
         srlRefresh.finishRefresh();
         srlRefresh.finishLoadmore();
         if (startIndex.equals(defaultIndex)) {

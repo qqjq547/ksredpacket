@@ -5,6 +5,7 @@ import com.guochuang.mimedia.http.exception.ApiException;
 import com.guochuang.mimedia.http.retrofit.ApiCallback;
 import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.DictionaryType;
+import com.guochuang.mimedia.mvp.model.QcRecord;
 import com.guochuang.mimedia.mvp.model.SealRecord;
 import com.guochuang.mimedia.mvp.view.MyQCDetailsView;
 import com.guochuang.mimedia.tools.Constant;
@@ -19,15 +20,9 @@ public class MyQCDetailsPresenter extends BasePresenter<MyQCDetailsView> {
     }
 
     public void getQCDetail(String type, String startIndex, int pageSize) {
-
-//        @Query("type") String type,
-//        @Query("coinType") String coinType,
-//        @Query("startIndex") String startIndex,
-//        @Query("pageSize") int pageSize
-
-        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getCoinRecord(type,Constant.COINTYPE_QC,startIndex,pageSize)), new ApiCallback<List<SealRecord>>() {
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().getQcRecord(type,Constant.COINTYPE_QC,startIndex,pageSize)), new ApiCallback<List<QcRecord>>() {
             @Override
-            public void onSuccess(List<SealRecord> data) {
+            public void onSuccess(List<QcRecord> data) {
                 mvpView.setQCDetail(data);
             }
 

@@ -173,27 +173,21 @@
               android:background="@color/bg_trans_white"
               android:orientation="horizontal"
               android:paddingLeft="@dimen/space15"
-              android:paddingTop="@dimen/space4"
               android:paddingRight="@dimen/space15"
-              android:paddingBottom="@dimen/space4">
-
+              >
               <ImageView
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
+                  android:paddingTop="@dimen/space4"
+                  android:paddingBottom="@dimen/space4"
                   android:layout_gravity="center_vertical"
                   android:layout_marginRight="@dimen/space4"
                   android:src="@drawable/ic_redbag_notice" />
-
-              <com.guochuang.mimedia.view.ScrollTextView
-                  android:id="@+id/stv_notice"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_gravity="center_vertical"
-                  android:ellipsize="marquee"
-                  android:marqueeRepeatLimit="marquee_forever"
-                  android:singleLine="true"
-                  android:textColor="@color/text_notice"
-                  android:textSize="@dimen/textfont14" />
+               <com.guochuang.mimedia.view.AutoPollRecyclerView
+                   android:id="@+id/rv_notice"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content">
+               </com.guochuang.mimedia.view.AutoPollRecyclerView>
           </LinearLayout>
           <com.guochuang.mimedia.view.HoneyCombView
               android:id="@+id/hcv_ad"

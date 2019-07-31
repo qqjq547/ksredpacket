@@ -5,7 +5,12 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.TextView;
+
+import com.guochuang.mimedia.tools.CommonUtil;
+import com.guochuang.mimedia.tools.LogUtil;
 
 
 public class ScrollTextView extends TextView {
@@ -22,6 +27,15 @@ public class ScrollTextView extends TextView {
     private float mCoordinateY;//Draw the starting point of the Y coordinate
     private float mTextWidth; //This is text width
     private int mViewWidth; //This is View width
+    private onTextClickListener onTextClickListener;
+
+    public interface onTextClickListener{
+        void onTextClick(String text);
+    }
+
+    public void setOnTextClickListener(onTextClickListener onTextClickListener) {
+        this.onTextClickListener = onTextClickListener;
+    }
 
     public ScrollTextView(Context context) {
         super(context);
@@ -65,6 +79,29 @@ public class ScrollTextView extends TextView {
         }
         requestLayout();
         invalidate();
+    }
+
+
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        LogUtil.d("onTouchEvent");
+        switch (event.getAction()){
+            case MotionEvent.ACTION_MOVE:
+            case MotionEvent.ACTION_DOWN:
+                //获取屏幕上点击的坐标
+                float x=event.getX();
+                float y = event.getY();
+                //如果坐标在我们的文字区域内，则将点击的文字改颜色
+                if (x>mCoordinateX&&x<(mCoordinateX+mTextWidth)){
+                    if (onTextClickListener!=null){
+                        onTextClickListener.onTextClick(mText);
+                    }
+                }
+                break;
+        }
+        //这句话不要修改
+        return super.onTouchEvent(event);
     }
 
     /**
@@ -120,7 +157,6 @@ public class ScrollTextView extends TextView {
         //If you do not call this method, will be thrown "IllegalStateException"
         setMeasuredDimension(mViewWidth, mViewHeight);
     }
-
 
     private int measureWidth(int measureSpec) {
         int result = 0;

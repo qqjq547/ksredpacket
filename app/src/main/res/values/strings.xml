@@ -799,4 +799,7 @@
     <string name="redbag_benefit_ksb">红包收益(SEAL)</string>
     <string name="arrive_account">到账</string>
     <string name="equalvalue">等值</string>
+    <string name="equalvalue_seal">等值SEAL：</string>
+    <string name="servicefee_seal">SEAL矿工费：</string>
+    <string name="format_qc_number">QC数量：%s</string>
 </resources>
