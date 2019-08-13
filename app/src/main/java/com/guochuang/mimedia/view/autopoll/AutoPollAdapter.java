@@ -1,4 +1,4 @@
-package com.guochuang.mimedia.view;
+package com.guochuang.mimedia.view.autopoll;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,13 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.guochuang.mimedia.mvp.model.Notice;
 import com.sz.gcyh.KSHongBao.R;
 
 import java.util.List;
 
 public class AutoPollAdapter extends RecyclerView.Adapter<BaseViewHolder> {
  private final Context mContext;
- private final List<String> mData;
+ private final List<Notice> mData;
  private OnTextClickListener onTextClickListener;
 
  public interface OnTextClickListener{
@@ -24,7 +25,7 @@ public class AutoPollAdapter extends RecyclerView.Adapter<BaseViewHolder> {
   this.onTextClickListener = onTextClickListener;
  }
 
- public AutoPollAdapter(Context context, List<String> list) {
+ public AutoPollAdapter(Context context, List<Notice> list) {
   this.mContext = context;
   this.mData = list;
  }
@@ -37,8 +38,8 @@ public class AutoPollAdapter extends RecyclerView.Adapter<BaseViewHolder> {
  @Override
  public void onBindViewHolder(BaseViewHolder holder, int position) {
   final int realPos=position%mData.size();
-  String data = mData.get(realPos);
-  holder.setText(R.id.tv_content,data);
+  Notice data = mData.get(realPos);
+  holder.setText(R.id.tv_content,data.getDescription());
   if (onTextClickListener!=null){
    holder.itemView.setOnClickListener(new View.OnClickListener() {
     @Override

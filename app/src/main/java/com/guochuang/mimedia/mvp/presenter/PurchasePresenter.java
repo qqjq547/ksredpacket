@@ -10,6 +10,8 @@ import com.guochuang.mimedia.mvp.model.PayConfig;
 import com.guochuang.mimedia.mvp.view.PurchaseView;
 import com.guochuang.mimedia.tools.RxUtil;
 
+import retrofit2.http.Field;
+
 /**
  * Created by Administrator on 2017-11-28 0028.
  */
@@ -164,6 +166,25 @@ public class PurchasePresenter extends BasePresenter<PurchaseView> {
 
             }
 
+            @Override
+            public void onFailure(ApiException exception) {
+                mvpView.setError(exception.getMessage());
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
+    public void mallNodePay(long qc,int type,long mallRegionId,int nodeNumber,String channelCode,long payType,String safetyCode,String payLongitude,String payLatitude){
+        addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores()
+                .mallNodePay(qc,type,mallRegionId,nodeNumber,channelCode,payType,safetyCode,payLongitude,payLatitude)), new ApiCallback<String>() {
+            @Override
+            public void onSuccess(String data) {
+                mvpView.setBidMallNode(data);
+            }
             @Override
             public void onFailure(ApiException exception) {
                 mvpView.setError(exception.getMessage());

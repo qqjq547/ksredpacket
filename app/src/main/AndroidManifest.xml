@@ -188,6 +188,10 @@
         <activity android:name="com.guochuang.mimedia.ui.activity.user.EditCoinAddressActivity"/>
         <activity android:name="com.guochuang.mimedia.ui.activity.user.QcTransferActivity"/>
 
+        <!--节点预购-->
+        <activity android:name="com.guochuang.mimedia.ui.activity.city.CityPreBuyActivity"/>
+        <activity android:name="com.guochuang.mimedia.ui.activity.city.MyMallActivity"/>
+
 
 
 

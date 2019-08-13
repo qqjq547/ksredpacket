@@ -802,4 +802,7 @@
     <string name="equalvalue_seal">等值SEAL：</string>
     <string name="servicefee_seal">SEAL矿工费：</string>
     <string name="format_qc_number">QC数量：%s</string>
+    <string name="node_bid">节点竞拍</string>
+    <string name="bid_agreement">竞拍协议</string>
 </resources>
+

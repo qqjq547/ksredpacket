@@ -162,10 +162,12 @@
           android:layout_marginBottom="@dimen/space12"
           android:layout_marginRight="@dimen/space15"
           android:src="@drawable/ic_redbag_refresh"/>
+
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:orientation="vertical">
+
           <LinearLayout
               android:id="@+id/lin_notice"
               android:layout_width="match_parent"
@@ -173,28 +175,28 @@
               android:background="@color/bg_trans_white"
               android:orientation="horizontal"
               android:paddingLeft="@dimen/space15"
-              android:paddingRight="@dimen/space15"
-              >
+              android:paddingRight="@dimen/space15">
+
               <ImageView
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:paddingTop="@dimen/space4"
-                  android:paddingBottom="@dimen/space4"
                   android:layout_gravity="center_vertical"
                   android:layout_marginRight="@dimen/space4"
+                  android:paddingTop="@dimen/space4"
+                  android:paddingBottom="@dimen/space4"
                   android:src="@drawable/ic_redbag_notice" />
-               <com.guochuang.mimedia.view.AutoPollRecyclerView
-                   android:id="@+id/rv_notice"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content">
-               </com.guochuang.mimedia.view.AutoPollRecyclerView>
+
+              <com.guochuang.mimedia.view.autopoll.AutoPollRecyclerView
+                  android:id="@+id/rv_notice"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"></com.guochuang.mimedia.view.autopoll.AutoPollRecyclerView>
           </LinearLayout>
+
           <com.guochuang.mimedia.view.HoneyCombView
               android:id="@+id/hcv_ad"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:visibility="gone">
-          </com.guochuang.mimedia.view.HoneyCombView>
+              android:visibility="gone"></com.guochuang.mimedia.view.HoneyCombView>
 
       </LinearLayout>
   </FrameLayout>

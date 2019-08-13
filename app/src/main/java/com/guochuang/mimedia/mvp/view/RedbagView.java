@@ -3,6 +3,7 @@ package com.guochuang.mimedia.mvp.view;
 import com.guochuang.mimedia.mvp.model.HomeRegion;
 import com.guochuang.mimedia.mvp.model.MySeal;
 import com.guochuang.mimedia.mvp.model.NestHomeAd;
+import com.guochuang.mimedia.mvp.model.Notice;
 import com.guochuang.mimedia.mvp.model.PublishRedbagType;
 import com.guochuang.mimedia.mvp.model.Redbag;
 import com.guochuang.mimedia.mvp.model.RedbagDetail;
@@ -18,7 +19,7 @@ public interface RedbagView {
     void setLocationRedbag(List<Redbag> data);
     void setRedbagDetail(RedbagDetail redbagDetail);
     void setCoinAndMoney(MySeal data);
-    void setScrollbar(List<String> data);
+    void setScrollbar(List<Notice> data);
     void setUserRole(Integer data);
     void setHomeRegion(HomeRegion data);
     void setKilometre(Integer data);

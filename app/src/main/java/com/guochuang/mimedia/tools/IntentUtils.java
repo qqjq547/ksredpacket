@@ -216,6 +216,16 @@ public class IntentUtils {
         intent.putExtra(Constant.NESTLONGITUDE,nestLongitude);
         activity.startActivityForResult(intent,Constant.REQUEST_PURCHASE);
     }
+
+    public static void startPurchaseActivity(Activity activity, int purchaseType,String money,int bidType,long mallRegionId,int nodeNumber) {
+        Intent intent = new Intent(activity, PurchaseActivity.class);
+        intent.putExtra(Constant.PURCHASE_TYPE,purchaseType);
+        intent.putExtra(Constant.MONEY,money);
+        intent.putExtra(Constant.BIDTYPE,bidType);
+        intent.putExtra(Constant.MALLREGIONID,mallRegionId);
+        intent.putExtra(Constant.NODENUMBER,nodeNumber);
+        activity.startActivityForResult(intent,Constant.REQUEST_PURCHASE);
+    }
     public static void startRedbagJoinedActivity(Activity activity, String redPacketUuid,String avatar,String name,String ksb,String money,String areaType,String drawNumber,String total,String coinType) {
         Intent intent = new Intent(activity, RedbagJoinedActivity.class);
         intent.putExtra(Constant.RED_PACKET_UUID,redPacketUuid);

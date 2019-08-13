@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="@dimen/space30"
+    android:background="@drawable/bg_dialog_area">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height">
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/title_height"
+            android:layout_height="match_parent"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_mall_arrow" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:layout_centerInParent="true"
+            android:textColor="@color/text_mall_light"
+            android:textSize="@dimen/textfont18"
+            android:text="请选择节点"/>
+
+    </RelativeLayout>
+    <com.guochuang.mimedia.view.LoopView
+        android:id="@+id/loop_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space170"
+        app:canLoop="true"
+        app:centerTextColor="@color/white"
+        app:drawItemCount="7"
+        app:initPosition="3"
+        app:lineColor="@color/transparent"
+        app:textSize="@dimen/textfont18"
+        app:topBottomTextColor="@color/text_mall"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <ImageButton
+            android:id="@+id/btn_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/space10"
+            android:layout_gravity="center"
+            android:src="@drawable/bg_node_next"
+            android:background="@drawable/bg_mall_btn"/>
+        <ImageButton
+            android:id="@+id/btn_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/space10"
+            android:layout_marginLeft="@dimen/space20"
+            android:layout_gravity="center"
+            android:src="@drawable/bg_node_next"
+            android:background="@drawable/bg_mall_btn"/>
+    </LinearLayout>
+
+</LinearLayout>

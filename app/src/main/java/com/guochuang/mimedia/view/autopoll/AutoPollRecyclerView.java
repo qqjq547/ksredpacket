@@ -1,4 +1,4 @@
-package com.guochuang.mimedia.view;
+package com.guochuang.mimedia.view.autopoll;
 
 import android.content.Context;
 import android.support.annotation.Nullable;

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
+    android:background="@color/bg_theme">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_white"
+        android:layout_marginTop="@dimen/space20"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/space10"
+        android:paddingRight="@dimen/space20"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/textfont15"
+            android:text="竞拍区域"/>
+        <EditText
+            android:id="@+id/et_bid_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:padding="@dimen/space15"
+            android:textSize="@dimen/textfont14"
+            android:textColor="@color/text_city_yellow"
+            android:hint="出价在3000~10000之间"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/space10"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/textfont15"
+            android:text="@string/money_unit_qc"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_white"
+        android:layout_marginTop="@dimen/space10"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/space20"
+        android:paddingRight="@dimen/space20"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/textfont15"
+            android:text="我的QC"/>
+        <TextView
+            android:id="@+id/tv_my_qc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="@dimen/space15"
+            android:gravity="right"
+            android:textSize="@dimen/textfont14"
+            android:textColor="@color/text_city_yellow"
+            android:textStyle="bold"
+            android:hint="340"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/space10"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/textfont15"
+            android:text="@string/money_unit_qc"/>
+
+    </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/cb_agreement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/space20"
+        android:button="@null"
+        android:drawableLeft="@drawable/ic_check_selector"
+        android:drawablePadding="@dimen/space10"
+        android:padding="@dimen/space3"
+        android:text="我已阅读并同意节点竞购协议"
+        android:textColor="@color/text_gray"
+        android:textSize="@dimen/textfont13" />
+
+    <TextView
+        android:id="@+id/tv_ensure"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space40"
+        android:layout_marginTop="@dimen/space20"
+        android:layout_marginBottom="@dimen/space20"
+        android:layout_marginLeft="@dimen/space50"
+        android:layout_marginRight="@dimen/space50"
+        android:gravity="center"
+        android:background="@drawable/bg_btn_red"
+        android:textColor="@color/text_white"
+        android:textSize="@dimen/textfont14"
+        android:text="确定竞拍"/>
+</LinearLayout>

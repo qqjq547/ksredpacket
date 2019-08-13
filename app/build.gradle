@@ -96,6 +96,7 @@ dependencies {
     implementation project(path: ':mediapicker')
     implementation 'com.aliyun.dpa:oss-android-sdk:+'
 
+
     implementation project(':jjdxm-ijkplayer')
     //    根据需要支持去拓展，在jjdxm-ijkplayer中默认加入了armv7a的了
     implementation 'com.dou361.ijkplayer-armv7a:jjdxm-ijkplayer-armv7a:1.0.0'

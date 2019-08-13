@@ -76,6 +76,10 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
     String nestLatitude;
     String nestLongitude;
     PassDialog passDialog;
+    int bidType=0;
+    long mallRegionId=0;
+    int nodeNumber=0;
+
     @Override
     protected PurchasePresenter createPresenter() {
         return new PurchasePresenter(this);
@@ -116,6 +120,13 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
         }else if(purchaseType==Constant.TYPE_PURCHASE_NESTAD){
             tvTitle.setText(R.string.buy_nestad);
             tvAgreement.setText(R.string.brand_bid_agreement);
+        }else if(purchaseType==Constant.TYPE_PURCHASE_MALLNODE){
+            tvTitle.setText(R.string.node_bid);
+            tvAgreement.setText(R.string.bid_agreement);
+            bidType=getIntent().getIntExtra(Constant.BIDTYPE,0);
+            mallRegionId=getIntent().getLongExtra(Constant.MALLREGIONID,0);
+            nodeNumber=getIntent().getIntExtra(Constant.NODENUMBER,0);
+            price=Integer.parseInt(money);
         }
         tvAmount.setText(String.valueOf(money));
         showLoadingDialog(null);
@@ -234,6 +245,8 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
             mvpPresenter.createSnatchOrder(Constant.CHANNEL_CODE_ANDROID,payType,snatchId,price,payNumber,getPref().getLongitude(),getPref().getLatitude(),lockDay,safetyCode);
         }else if(purchaseType==Constant.TYPE_PURCHASE_NESTAD){
             mvpPresenter.buyNestAd(Constant.CHANNEL_CODE_ANDROID,payType,nestLocationId,price,startDate,days,getPref().getLatitude(),getPref().getLongitude(),nestLatitude,nestLongitude,safetyCode);
+        }else if(purchaseType==Constant.TYPE_PURCHASE_MALLNODE){
+            mvpPresenter.mallNodePay(price,bidType,mallRegionId,nodeNumber,Constant.CHANNEL_CODE_ANDROID,100001,safetyCode,getPref().getLatitude(),getPref().getLongitude());
         }
     }
     public void setKsbText(){
@@ -419,6 +432,15 @@ public class PurchaseActivity extends MvpActivity<PurchasePresenter> implements 
         closeLoadingDialog();
         acountQc =data.getQc();
         setKsbText();
+    }
+
+    @Override
+    public void setBidMallNode(String data) {
+        closeLoadingDialog();
+        if (passDialog!=null&&passDialog.isShowing()){
+            passDialog.dismiss();
+        }
+        showPayResult(true,null);
     }
 
     @Override

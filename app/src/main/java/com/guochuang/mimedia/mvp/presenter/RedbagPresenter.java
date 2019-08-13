@@ -7,6 +7,7 @@ import com.guochuang.mimedia.http.retrofit.ApiClient;
 import com.guochuang.mimedia.mvp.model.HomeRegion;
 import com.guochuang.mimedia.mvp.model.MySeal;
 import com.guochuang.mimedia.mvp.model.NestHomeAd;
+import com.guochuang.mimedia.mvp.model.Notice;
 import com.guochuang.mimedia.mvp.model.PublishRedbagType;
 import com.guochuang.mimedia.mvp.model.Redbag;
 import com.guochuang.mimedia.mvp.model.RedbagDetail;
@@ -153,9 +154,9 @@ public class RedbagPresenter extends BasePresenter<RedbagView> {
     }
     public void getScrollBar() {
         addSubscription(RxUtil.createHttpObservable(ApiClient.getInstance().getApiStores().
-                getScrollBar()), new ApiCallback<List<String>>() {
+                getScrollBar()), new ApiCallback<List<Notice>>() {
             @Override
-            public void onSuccess(List<String> data) {
+            public void onSuccess(List<Notice> data) {
                 mvpView.setScrollbar(data);
 
             }

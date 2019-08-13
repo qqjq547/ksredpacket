@@ -733,7 +733,7 @@ public interface ApiStore {
     Observable<HttpResponse<MyWechat>> getWechatInfo();
 
     @GET("/api/v1/common/notice/get_scroll_bar")
-    Observable<HttpResponse<List<String>>> getScrollBar();
+    Observable<HttpResponse<List<Notice>>> getScrollBar();
 
     @GET("/api/v1/common/region/get_two")
     Observable<HttpResponse<List<Area>>> getRegion();
@@ -1583,6 +1583,56 @@ public interface ApiStore {
     @GET("/api/v1/file/captcha/type")
     Observable<HttpResponse<Integer>> getCaptchaType();
 
+    @POST("api/v1/nest/mallNode/pay")
+    @FormUrlEncoded
+    Observable<HttpResponse<String>> mallNodePay(
+            @Field("qc") long qc,
+            @Field("type") int type,
+            @Field("mallRegionId") long mallRegionId,
+            @Field("nodeNumber") int nodeNumber,
+            @Field("channelCode") String channelCode,
+            @Field("payType") long payType,
+            @Field("safetyCode") String safetyCode,
+            @Field("payLongitude") String payLongitude,
+            @Field("payLatitude") String payLatitude
+    );
 
+    @GET("api/v1/nest/mall_region/all")
+    Observable<HttpResponse<List<MallRegionAll>>> mallRegionAll();
+
+    @GET("api/v1/nest/mall_region/get")
+    Observable<HttpResponse<MallRegionInfo>> mallRegionGet(
+            @Query("code") String code,
+            @Query("level") int level
+    );
+
+    @GET("api/v1/nest/mall_region/get_region")
+    Observable<HttpResponse<MallRegionDetail>> mallRegionGetRegion(
+            @Query("regionId") long regionId
+    );
+
+    @POST("api/v1/nest/mallNode/my_mall_stat")
+    Observable<HttpResponse<MyMallStat>> myMallStat();
+
+    @POST("api/v1/nest/mallNode/my_mall_list")
+    @FormUrlEncoded
+    Observable<HttpResponse<Page<MyMallRecord>>> myMallList(
+            @Field("currentPage") int currentPage,
+            @Field("pageSize") int pageSize
+    );
+
+    @POST("api/v1/nest/mallNode/mall_node_result")
+    @FormUrlEncoded
+    Observable<HttpResponse<MallNodeResult>> mallNodeResult(
+            @Field("mallRegionId") long mallRegionId,
+            @Field("nodeNumber") int nodeNumber
+    );
+
+    @POST("api/v1/nest/mallNode/mall_node_order_list")
+    @FormUrlEncoded
+    Observable<HttpResponse<List<MallBidRecord>>> mallNodeOrderList(
+            @Field("mallRegionId") long mallRegionId,
+            @Field("nodeNumber") int nodeNumber
+    );
 
 }

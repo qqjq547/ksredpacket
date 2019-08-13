@@ -172,7 +172,10 @@ public class Constant {
     public static final String JPUSH_CHANNEL = "JPUSH_CHANNEL";
     public static final String CHANNEL_DEFAULT = "default";
     public static final String LOCKDAY = "lockDay";
-
+    public static final String BIDTYPE = "bidType";
+    public static final String MALLREGIONID = "mallRegionId";
+    public static final String NODENUMBER = "nodeNumber";
+    public static final String TYPE = "type";
 
     public static final int STATE_HAS_GET = 1;
     public static final int STATE_UN_GET = 2;
@@ -184,6 +187,7 @@ public class Constant {
     public static final int TYPE_PURCHASE_HONEYCOMB = 3;
     public static final int TYPE_PURCHASE_SNATCH = 4;
     public static final int TYPE_PURCHASE_NESTAD = 5;
+    public static final int TYPE_PURCHASE_MALLNODE = 6;
 
     public static final String RAIN_DURATION = "duration";
     public static final String RAIN_COUNT = "count";
@@ -204,6 +208,7 @@ public class Constant {
     public static final int PAY_TYPE_WXPAY = 11;
     public static final int PAY_TYPE_ALIPAY = 101;
     public static final int PAY_TYPE_KSB = 10001;
+    public static final int PAY_TYPE_QC = 100001;
 
     public static final String BUSSINESSTYPE_RED_PACKET = "redpacket";
     public static final String BUSSINESSTYPE_RED_AVATAR = "avatar";
@@ -299,6 +304,9 @@ public class Constant {
 
     public static int QC_TO_OTHER = 1;
     public static int OTHER_TO_QC = 2;
+
+    public static final String NOTICE_NOTICE = "notice";
+    public static final String NOTICE_SNATCH_ACTIVITY = "snatchActivity";
 
 
 

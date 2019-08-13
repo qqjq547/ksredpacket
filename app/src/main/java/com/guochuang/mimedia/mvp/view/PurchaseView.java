@@ -16,6 +16,7 @@ public interface PurchaseView {
     void setSnatch(Order data);
     void setBuyNestAd(Order data);
     void setPayResult(CalValue data);
+    void setBidMallNode(String data);
     void setError(String msg);
 
 }

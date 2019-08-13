@@ -35,12 +35,12 @@ import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.Stroke;
 import com.baidu.mapapi.model.LatLng;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guochuang.mimedia.app.App;
 import com.guochuang.mimedia.base.MvpFragment;
 import com.guochuang.mimedia.mvp.model.HomeRegion;
 import com.guochuang.mimedia.mvp.model.MySeal;
 import com.guochuang.mimedia.mvp.model.NestHomeAd;
+import com.guochuang.mimedia.mvp.model.Notice;
 import com.guochuang.mimedia.mvp.model.PublishRedbagType;
 import com.guochuang.mimedia.mvp.model.Redbag;
 import com.guochuang.mimedia.mvp.model.RedbagDetail;
@@ -51,18 +51,19 @@ import com.guochuang.mimedia.tools.Constant;
 import com.guochuang.mimedia.tools.IntentUtils;
 import com.guochuang.mimedia.tools.LogUtil;
 import com.guochuang.mimedia.tools.PrefUtil;
+import com.guochuang.mimedia.tools.UrlConfig;
 import com.guochuang.mimedia.tools.antishake.AntiShake;
 import com.guochuang.mimedia.tools.glide.GlideImgManager;
 import com.guochuang.mimedia.ui.activity.beenest.AdBidActivity;
 import com.guochuang.mimedia.ui.activity.city.CityActivity;
 import com.guochuang.mimedia.ui.activity.MainActivity;
+import com.guochuang.mimedia.ui.activity.city.CityPreBuyActivity;
 import com.guochuang.mimedia.ui.activity.common.ShareActivity;
-import com.guochuang.mimedia.ui.activity.redbag.SquareActivity;
 import com.guochuang.mimedia.ui.activity.user.UpgradeAgentActivity;
 import com.guochuang.mimedia.ui.dialog.OpenRedbagDialog;
 import com.guochuang.mimedia.ui.dialog.RedbagTypeDialog;
-import com.guochuang.mimedia.view.AutoPollAdapter;
-import com.guochuang.mimedia.view.AutoPollRecyclerView;
+import com.guochuang.mimedia.view.autopoll.AutoPollAdapter;
+import com.guochuang.mimedia.view.autopoll.AutoPollRecyclerView;
 import com.guochuang.mimedia.view.HoneyCombView;
 import com.sz.gcyh.KSHongBao.R;
 import com.tbruyelle.rxpermissions.RxPermissions;
@@ -132,7 +133,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
         }
     };
 
-    List<String> scrollArr=new ArrayList<>();
+    List<Notice> scrollArr=new ArrayList<>();
     AutoPollAdapter adapter;
 
     @Override
@@ -243,6 +244,7 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
             onHiddenChanged(false);
         }
         mvpPresenter.getKilometre();
+        mvpPresenter.getScrollBar();
     }
 
     @Override
@@ -274,7 +276,8 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_text:
-                startActivity(new Intent(getActivity(), SquareActivity.class));
+//                startActivity(new Intent(getActivity(), SquareActivity.class));
+                startActivity(new Intent(getActivity(),CityPreBuyActivity.class));
                 break;
             case R.id.lin_city_owner:
             case R.id.iv_city_owner_avatar:
@@ -461,20 +464,27 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     }
 
     @Override
-    public void setScrollbar(List<String> data) {
-//        if (data == null || data.size() == 0) {
-//            linNotice.setVisibility(View.GONE);
-//            return;
-//        }
-        scrollArr.add("111111111111111111fksnkfakldlslflsflsnflsfalnfslfna;nsnfslanf");
-//        scrollArr.add("22222222222222222ssssskfnksfksjfkskfsjfjsljfklsfklak ");
-//        scrollArr.add("333333333ssfsflsmflmlmflksfnksfksjfsfsfsjkfsjkkkskjkfjskfksfk卡美能达福克斯卡夫卡首付款");
+    public void setScrollbar(List<Notice> data) {
+        if (data == null || data.size() == 0) {
+            linNotice.setVisibility(View.GONE);
+            return;
+        }
+        scrollArr.clear();
+        scrollArr.addAll(data);
         if (adapter==null){
             adapter = new AutoPollAdapter(getActivity(),scrollArr);
             adapter.setOnTextClickListener(new AutoPollAdapter.OnTextClickListener() {
                 @Override
                 public void onTextClick(int position) {
-                    showShortToast("点击位置："+position);
+                    Notice notice=scrollArr.get(position);
+                    switch (notice.getType()){
+                        case Constant.MSG_TYPE_NOTICE:
+                            IntentUtils.startWebActivity(getActivity(),"",UrlConfig.getHtmlUrl(UrlConfig.URL_NOTICE_DETAIL) +"?id="+notice.getSourceId());
+                            break;
+                        case Constant.MSG_TYPE_SNATCHACTIVITY:
+                            IntentUtils.startWebActivity(getActivity(),"",UrlConfig.getHtmlUrl(UrlConfig.URL_DUOBAO_DETAIL)+notice.getSourceId());
+                            break;
+                    }
                 }
             });
             LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -492,11 +502,6 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     public void setUserRole(Integer data) {
         if (data != null) {
             getPref().setInt(PrefUtil.USER_ROLE, 0);
-//            if (data.intValue() >= Constant.USER_ROLE_AGENT) {
-//                linUpgradeAgent.setVisibility(View.GONE);
-//            } else {
-//                linUpgradeAgent.setVisibility(View.VISIBLE);
-//            }
         }
     }
 
@@ -523,12 +528,6 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
     @Override
     public void setHomeAd(List<NestHomeAd> data) {
         FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) linFlHead.getLayoutParams();
-//        for (int i=0;i<30;i++){
-//            NestHomeAd ad=new NestHomeAd();
-//            ad.setCoverPicture("https://upload.jianshu.io/users/upload_avatars/4174308/540285e2-5be5-483a-9259-db485564a4b0.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96");
-//            ad.setShortMsg("name="+(i+1));
-//            data.add(ad);
-//        }
         if (data != null && data.size() > 0) {
             lp.topMargin = CommonUtil.dip2px(getContext(), 140);
             sethoneyData(data);
@@ -652,7 +651,6 @@ public class RedbagFragment extends MvpFragment<RedbagPresenter> implements Redb
                         startActivity(new Intent(getActivity(), AdBidActivity.class));
                     }
                 }, 500);
-//                startActivity(new Intent(getActivity(),AdBidActivity.class))    ;
             }
         });
     }
